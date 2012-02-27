@@ -1,0 +1,13 @@
+
+Build the test apps, by entering each test app directory and run make. E.g.
+  cd hello_world
+  make
+  ./hello_world.bin
+
+
+To cross compile the apps (build on a different PC to the R-Pi), run 
+  . cross_compile
+
+to set the environment variables necessary, then follow instructions for building on the R-Pi.
+SDKSTAGE should point to a root fs containing the include files and libraries from thr R-Pi.
+CC should point to an ARM gcc compiler (e.g. bcm2708-gcc).
