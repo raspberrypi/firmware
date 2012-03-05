@@ -1,0 +1,279 @@
+#!/bin/sh
+
+# edit this file only at <vc4>\makefiles\cmake\scripts\install_vmcs
+# update (via root staging area) using cmake {args} <vc4>, etc.
+
+cmd="$0"
+cmd_dir="`dirname -- "$cmd"`"
+cmd_dir=`(cd "$cmd_dir">/dev/null;pwd)`
+cmd_name="`basename -- $cmd`"
+
+# this command should be run as root from ${dir_install}/sbin
+
+dir_install="`dirname -- "$cmd_dir"`"
+dir_data="$dir_install/share/install"
+dir_sd="/sd"
+
+do_force=false
+
+# install contents of $dir_data into the system
+
+if [ "`whoami`" != "root" ]; then
+    echo "$cmd_name: you need to be root to execute this command">&2
+    exit 1
+fi
+
+[ "_$1" = "_-f" -o "_$1" = "_--force" ] && { do_force=true; shift; }
+
+
+# Uninstall script
+
+#################################
+#################################
+
+create_uninstall()
+{  cat <<'EOF'
+#!/bin/sh
+
+####
+#### WARNING: this script is written and overwritten by $cmd - don't edit
+####
+
+cmd="$0"
+cmd_dir="`dirname -- "$cmd"`"
+cmd_dir=`(cd "$cmd_dir">/dev/null;pwd)`
+cmd_name="`basename -- "$cmd"`"
+
+# this command should be run from <dir_install>/sbin
+
+if [ "`whoami`" != "root" ]; then
+    echo "$cmd_name: you need to be root to execute this command">&2
+    exit 1
+fi
+
+# uninstall the new libraries
+
+if [ -f /etc/ld.so.conf.d/vmcs.conf ]; then
+    rm /etc/ld.so.conf.d/vmcs.conf
+    ldconfig 
+fi
+
+vcfiled=/etc/init.d/vcfiled
+if [ -x $vcfiled ]; then
+    $vcfiled stop
+    if update-rc.d -f vcfiled remove; then
+        rm -f $vcfiled
+    else
+        echo "$cmd_name: failed to install $vcfiled, sorry">&2
+    fi
+fi
+
+EOF
+}
+
+
+#################################
+#################################
+
+rc=0
+
+# install un-installation script
+
+if [ -f "$cmd_dir/uninstall_vmcs" ]; then
+    if mv -f "$cmd_dir/uninstall_vmcs" "$cmd_dir/uninstall_last_vmcs"; then
+        echo "$cmd_name: previous installation's uninstallation script saved in">&2
+        echo "$cmd_name: $cmd_dir/uninstall_last_vmcs">&2
+    else
+        echo "$cmd_name: failed to rename previous installation's uninstallation script">&2
+    fi
+fi
+create_uninstall > "$cmd_dir/uninstall_vmcs"
+chmod +x "$cmd_dir/uninstall_vmcs"
+
+# install the new libraries
+
+if $do_force || [ -d /etc/ld.so.conf.d ]; then
+    if $do_force || [ ! -f /etc/ld.so.conf.d/vmcs.conf ]; then
+        if [ ! -f "$dir_data/vmcs.conf" ]; then
+            echo "$cmd_name: expected file missing in $dir_data/vmcs.conf">&2
+            rc=1
+        else
+            mkdir -p /etc/ld.so.conf.d
+            cp -af "$dir_data/vmcs.conf" /etc/ld.so.conf.d/vmcs.conf
+            ldconfig 
+        fi
+    fi
+else
+    echo "$cmd_name: don't know how to install libraries, sorry">&2
+    rc=2
+fi
+
+# install VC file daemon
+
+if $do_force || [ ! -f /etc/init.d/vcfiled ]; then
+    if [ ! -f "$dir_data/vcfiled" ]; then
+        echo "$cmd_name: expected file missing in $dir_data/vcfiled">&2
+        rc=3
+    else
+        cp -af "$dir_data/vcfiled" /etc/init.d/vcfiled
+        if ! update-rc.d vcfiled defaults 16; then
+            echo "$cmd_name: don't know how to install new /etc/init.d/vcfiled, sorry">&2
+            rc=4
+        elif ! update-rc.d vcfiled enable; then
+            echo "$cmd_name: failed to enable new /etc/init.d/vcfiled, sorry">&2
+            rc=5
+        fi
+    fi
+fi
+
+# make sure vchiq device finder is installed 
+
+if $do_force || [ ! -f /etc/init.d/vchiq ]; then
+    if [ ! -f "$dir_data/vchiq" ]; then
+        echo "$cmd_name: expected file missing in $dir_data/vchiq">&2
+    else
+        cp -af "$dir_data/vchiq" /etc/init.d/vchiq
+        if ! update-rc.d vchiq defaults 12; then
+            echo "$cmd_name: don't know how to install new /etc/init.d/vchiq, sorry">&2
+            rc=6
+        elif ! update-rc.d vchiq enable; then
+            echo "$cmd_name: failed to enable new /etc/init.d/vchiq, sorry">&2
+            rc=7
+        fi
+    fi
+fi
+
+# set up a module directory from SD card if possible
+
+current_moddir=/lib/modules
+pkg_moddir=${dir_install}$current_moddir
+sd_moddir=/boot$current_moddir
+
+if [ -h "$pkg_moddir" ]; then
+    # this should never have been made into a symbolic link - it will mean
+    # different things on the ARM and the build machines
+    # Unfortunately a previous version of this script made it symbolic
+    rm "$pkg_moddir"
+    echo "------------------------"
+    echo "$cmd_name: Damage to $pkg_moddir caused by previous script version has"
+    echo "$cmd_name: been corrected.  Sorry, but you have to re-build the "
+    echo "$cmd_name: vchiq module now"
+    echo "------------------------"
+fi
+
+if $do_force || [ ! -f "$pkg_moddir" ]; then
+    if [ -d "$sd_moddir" ]; then
+        echo "$cmd_name: Installing any newer modules from SD card"
+        cp -auT "$sd_moddir" "$current_moddir"
+    fi
+fi
+
+# install the vchiq module from install dir (if present)
+
+current_mod=${current_moddir}/`uname -r`/extra/vchiq.ko
+pkg_mod=${dir_install}$current_mod
+
+if [ -f "$pkg_mod" ]; then
+    if $do_force || \
+       [ ! -f "$current_mod" ] || \
+       [ "$pkg_mod" -nt "$current_mod" ]; then
+        mkdir -p "`dirname -- "$current_mod"`"
+        # copy new vchiq module over - try to keep same date for debugging
+        if cp -af "$pkg_mod" "$current_mod"; then
+            echo "$cmd_name: updated vchiq module taken from $pkg_moddir">&2
+        else
+            echo "$cmd_name: couldn't overwrite $current_mod">&2
+            rc=8
+        fi
+    fi
+fi
+
+if [ ! -f "$current_mod" ]; then
+    echo "$cmd_name: no vchiq module found for this kernel (`uname -r`)">&2
+    rc=9
+else
+    # make sure the module is loaded automatically when we reboot
+    # before the vcqhiq script runs by placing its name in /etc/modules
+    # (This is suppose to have been done already in mklinux)
+    if ! grep "^vchiq$" /etc/modules>/dev/null; then
+        echo vchiq >> /etc/modules
+    fi
+fi
+
+if $do_force || [ ! -f "${current_moddir}/`uname -r`/modules.dep" ]; then
+    depmod
+fi
+    
+# install vlls
+
+if $do_force || [ ! -f "$dir_sd/vlls" ]; then
+    if [ -d /boot/vlls/ ]; then
+        # remove $dir_sd/vlls assuming it is a symbolic link
+        rm -f "$dir_sd/vlls"
+        ln -s /boot/vlls "$dir_sd/vlls"
+    else
+        echo "$cmd_name: Warning - no VLLs in $dir_sd/vlls">&2
+        echo "$cmd_name: installation would normally link this location to /boot/vlls"
+        echo "$cmd_name: ensure VLLs are present in /boot/vlls (probably the "
+        echo "$cmd_name: DOS partition of your SD card), and rerun this "
+        echo "$cmd_name: installation">&2 
+    fi
+fi
+
+# warn about empty media files ... player X needs some
+
+if [ -d "$dir_install/mediafiles/" -a ! -d "$dir_sd/mediafiles" ]; then
+    rm -f "$dir_sd/mediafiles"
+    ln -s "$dir_install/mediafiles" "$dir_sd/mediafiles"
+elif [ ! -d "$dir_sd/mediafiles/" ]; then
+    echo "$cmd_name: warning - $dir_sd/mediafiles does not exist, some applications require this">&2
+else
+    filecount=`ls "$dir_sd/mediafiles/" | wc -l`
+    if [ -z "$filecount" -o $filecount -eq 0 ]; then
+        echo "$cmd_name: warning - /sd/mediafiles is empty, some apps need content">&2
+    fi
+fi
+
+
+# start up anything we rely on
+
+if [ -x /sbin/modprobe -a -f /proc/modules ]; then
+    modprobe -q vchiq
+fi
+
+if [ -x /etc/init.d/vchiq ]; then
+    if ! /etc/init.d/vchiq start; then
+        echo "$cmd_name: /etc/init.d/vchiq failed - rc $?"
+        rc=10
+    fi
+else
+    echo "$cmd_name: couldn't find expected file - /etc/init.d/vchiq">&2
+    rc=11
+fi
+
+if [ -x /etc/init.d/vcfiled ]; then
+    if ! /etc/init.d/vcfiled start; then
+        echo "$cmd_name: /etc/init.d/vcfiled failed - rc $?"
+        rc=12
+    elif ! pidof vcfiled>/dev/null; then
+        echo "$cmd_name: vcfiled daemon not started"
+        if [ ! -x "${dir_install}/sbin/vcfiled" ]; then
+            echo "$cmd_name: ${dir_install}/sbin/vcfiled missing or bad?"
+            rc=13
+        elif ! head -0 /dev/vchiq >/dev/null; then
+            echo "$cmd_name: /dev/vchiq bad?"
+            echo "$cmd_name: vchiq module file information -"
+            ls -l "$current_mod"
+            rc=14
+        else
+            echo "$cmd_name: /etc/init.d/vcfiled bad?"
+            rc=15
+        fi
+    fi
+else
+    echo "$cmd_name: couldn't find expected file - /etc/init.d/vcfiled">&2
+    rc=16
+fi
+
+exit $rc
+

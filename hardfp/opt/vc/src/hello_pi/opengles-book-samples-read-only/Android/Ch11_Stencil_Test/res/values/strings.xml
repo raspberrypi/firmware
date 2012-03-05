@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, StencilTest!</string>
+    <string name="app_name">Ch11_Stencil_Test</string>
+</resources>

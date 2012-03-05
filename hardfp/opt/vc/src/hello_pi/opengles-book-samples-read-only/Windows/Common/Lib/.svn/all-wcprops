@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/4/trunk/Windows/Common/Lib
+END
+esUtil.lib
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/4/trunk/Windows/Common/Lib/esUtil.lib
+END
+esUtil_d.lib
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4/trunk/Windows/Common/Lib/esUtil_d.lib
+END

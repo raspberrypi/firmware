@@ -1,0 +1,35 @@
+#!/bin/sh
+
+####
+#### WARNING: this script is written and overwritten by $cmd - don't edit
+####
+
+cmd="$0"
+cmd_dir="`dirname -- "$cmd"`"
+cmd_dir=`(cd "$cmd_dir">/dev/null;pwd)`
+cmd_name="`basename -- "$cmd"`"
+
+# this command should be run from <dir_install>/sbin
+
+if [ "`whoami`" != "root" ]; then
+    echo "$cmd_name: you need to be root to execute this command">&2
+    exit 1
+fi
+
+# uninstall the new libraries
+
+if [ -f /etc/ld.so.conf.d/vmcs.conf ]; then
+    rm /etc/ld.so.conf.d/vmcs.conf
+    ldconfig 
+fi
+
+vcfiled=/etc/init.d/vcfiled
+if [ -x $vcfiled ]; then
+    $vcfiled stop
+    if update-rc.d -f vcfiled remove; then
+        rm -f $vcfiled
+    else
+        echo "$cmd_name: failed to install $vcfiled, sorry">&2
+    fi
+fi
+

@@ -1,0 +1,2 @@
+export SDKSTAGE=/opt/bcm-rootfs
+export CC=bcm2708-gcc

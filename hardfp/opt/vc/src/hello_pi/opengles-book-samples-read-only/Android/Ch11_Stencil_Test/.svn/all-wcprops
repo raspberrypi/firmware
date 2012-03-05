@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test
+END
+default.properties
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test/default.properties
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test/.classpath
+END
+proguard.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test/proguard.cfg
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test/.project
+END
+AndroidManifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/47/trunk/Android/Ch11_Stencil_Test/AndroidManifest.xml
+END

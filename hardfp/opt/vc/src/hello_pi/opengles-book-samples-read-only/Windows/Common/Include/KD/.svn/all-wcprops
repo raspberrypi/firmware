@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/4/trunk/Windows/Common/Include/KD
+END
+kd.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4/trunk/Windows/Common/Include/KD/kd.h
+END
+KHR_thread_storage.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4/trunk/Windows/Common/Include/KD/KHR_thread_storage.h
+END
+kdplatform.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/4/trunk/Windows/Common/Include/KD/kdplatform.h
+END
