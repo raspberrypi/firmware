@@ -352,10 +352,6 @@ typedef enum {
    HDMI_DMT_OFF = 0xff
 } HDMI_DMT_RES_CODE_T;
 
-
-void *eglCreateImageKHR (void *dpy, void *ctx, int target, void *buffer, void *attr_list);
-int eglDestroyImageKHR (void *dpy, void *image);
-
 VCHPRE_ DISPMANX_DISPLAY_HANDLE_T VCHPOST_ vc_dispmanx_display_open( uint32_t device );
 VCHPRE_ DISPMANX_UPDATE_HANDLE_T VCHPOST_ vc_dispmanx_update_start( int32_t priority );
 VCHPRE_ DISPMANX_ELEMENT_HANDLE_T VCHPOST_ vc_dispmanx_element_add ( DISPMANX_UPDATE_HANDLE_T update, DISPMANX_DISPLAY_HANDLE_T display,
@@ -374,8 +370,6 @@ VCHPRE_ int VCHPOST_ vc_dispmanx_display_get_info( DISPMANX_DISPLAY_HANDLE_T dis
 
 VCHPRE_ int VCHPOST_ vc_dispmanx_display_set_background( DISPMANX_UPDATE_HANDLE_T update, DISPMANX_DISPLAY_HANDLE_T display,
                                                                        uint8_t red, uint8_t green, uint8_t blue );
-
-void main_set_tv_mode( int video_width, int video_height, int video_frame_interval, int tv_mode );
 
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best(uint32_t width, uint32_t height, uint32_t frame_rate,
                                              HDMI_INTERLACED_T scan_mode, EDID_MODE_MATCH_FLAG_T match_flags);
