@@ -1,8 +1,0 @@
-//
-// Prefix header for all source files of the 'Simple_Texture2D' target in the 'Simple_Texture2D' project
-//
-
-#ifdef __OBJC__
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#endif

@@ -1,58 +1,0 @@
-10
-
-dir
-57
-http://opengles-book-samples.googlecode.com/svn/trunk/Android
-http://opengles-book-samples.googlecode.com/svn
-
-
-
-2011-08-07T17:01:39.710233Z
-52
-dan.r.ginsburg@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bc68607d-36aa-8edf-32bc-8d312f3cc4ac
-
-Ch8_Simple_VertexShader
-dir
-
-Ch9_Simple_Texture2D
-dir
-
-Ch2_Hello_Triangle
-dir
-
-Ch10_MultiTexture
-dir
-
-Ch13_ParticleSystem
-dir
-
-Common
-dir
-
-Ch9_Simple_TextureCubemap
-dir
-
-Ch9_MipMap2D
-dir
-
-Ch11_Stencil_Test
-dir
-
-Ch9_TextureWrap
-dir
-

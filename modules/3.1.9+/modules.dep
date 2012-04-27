@@ -83,7 +83,6 @@ kernel/drivers/block/cryptoloop.ko:
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko:
 kernel/drivers/misc/iwmc3200top/iwmc3200top.ko:
 kernel/drivers/nfc/pn533.ko: kernel/net/nfc/nfc.ko
-kernel/drivers/scsi/sd_mod.ko:
 kernel/drivers/scsi/sr_mod.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/scsi/scsi_wait_scan.ko:
 kernel/drivers/net/usb/catc.ko:
@@ -164,7 +163,6 @@ kernel/drivers/net/netconsole.ko:
 kernel/drivers/net/wimax/i2400m/i2400m.ko: kernel/net/wimax/wimax.ko
 kernel/drivers/net/wimax/i2400m/i2400m-usb.ko: kernel/drivers/net/wimax/i2400m/i2400m.ko kernel/net/wimax/wimax.ko
 kernel/drivers/cdrom/cdrom.ko:
-kernel/drivers/usb/storage/uas.ko:
 kernel/drivers/usb/storage/ums-alauda.ko:
 kernel/drivers/usb/storage/ums-cypress.ko:
 kernel/drivers/usb/storage/ums-datafab.ko:

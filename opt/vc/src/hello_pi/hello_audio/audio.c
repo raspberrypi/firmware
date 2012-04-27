@@ -69,10 +69,10 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
 {
    uint32_t bytes_per_sample = (bit_depth * num_channels) >> 3;
    int32_t ret = -1;
- 
+
    *handle = NULL;
 
-   // basic sanity check on arguments   
+   // basic sanity check on arguments
    if(sample_rate >= 8000 && sample_rate <= 96000 &&
       (num_channels == 1 || num_channels == 2 || num_channels == 4 || num_channels == 8) &&
       (bit_depth == 16 || bit_depth == 32) &&
@@ -107,13 +107,13 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
          assert(st->client != NULL);
 
          ilclient_set_empty_buffer_done_callback(st->client, input_buffer_callback, st);
-         
+
          error = OMX_Init();
-         assert(error == OMX_ErrorNone);            
-         
+         assert(error == OMX_ErrorNone);
+
          ilclient_create_component(st->client, &st->audio_render, "audio_render", ILCLIENT_ENABLE_INPUT_BUFFERS | ILCLIENT_DISABLE_ALL_PORTS);
          assert(st->audio_render != NULL);
-         
+
          st->list[0] = st->audio_render;
 
          // set up the number/size of buffers
@@ -121,10 +121,10 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
          param.nSize = sizeof(OMX_PARAM_PORTDEFINITIONTYPE);
          param.nVersion.nVersion = OMX_VERSION;
          param.nPortIndex = 100;
-         
+
          error = OMX_GetParameter(ILC_GET_HANDLE(st->audio_render), OMX_IndexParamPortDefinition, &param);
          assert(error == OMX_ErrorNone);
-         
+
          param.nBufferSize = size;
          param.nBufferCountActual = num_buffers;
 
@@ -182,9 +182,9 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
 
             error = OMX_Deinit();
             assert(error == OMX_ErrorNone);
-            
+
             ilclient_destroy(st->client);
-            
+
             sem_destroy(&st->sema);
             free(st);
             *handle = NULL;
@@ -280,12 +280,12 @@ int32_t audioplay_play_buffer(AUDIOPLAY_STATE_T *st,
       hdr->pAppPrivate = NULL;
       hdr->nOffset = 0;
       hdr->nFilledLen = length;
-     
+
       error = OMX_EmptyThisBuffer(ILC_GET_HANDLE(st->audio_render), hdr);
-      assert(error == OMX_ErrorNone);   
+      assert(error == OMX_ErrorNone);
    }
 
-   return ret;   
+   return ret;
 }
 
 int32_t audioplay_set_dest(AUDIOPLAY_STATE_T *st, const char *name)
@@ -392,7 +392,7 @@ void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
       assert(ret == 0);
    }
 
-   audioplay_delete(st);   
+   audioplay_delete(st);
 }
 
 int main (int argc, char **argv)
@@ -409,7 +409,9 @@ int main (int argc, char **argv)
 
    if (argc > 1)
       audio_dest = atoi(argv[1]);
- 
+
+   printf("Outputting audio to %s\n", audio_dest==0 ? "analogue":"hdmi");
+
    play_api_test(samplerate, bitdepth, channels, audio_dest);
    return 0;
 }
