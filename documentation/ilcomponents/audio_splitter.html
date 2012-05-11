@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>audio_splitter</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.audio_splitter</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="260" bgcolor="yellow">260</td></tr>
+<tr><td border="1" port="261" bgcolor="green">261</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">audio_splitter</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="262" bgcolor="green">262</td></tr>
+<tr><td border="1" port="263" bgcolor="green">263</td></tr>
+<tr><td border="1" port="264" bgcolor="green">264</td></tr>
+<tr><td border="1" port="265" bgcolor="green">265</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+The conformant audio_splitter component accepts audio frames and
+forwards these onto enabled output ports.  The audio input port should
+be configured with the correct port and PCM settings, and then
+enabled.  At this point the port and PCM settings are copied to all
+output ports and a port settings changed message is sent on all output
+ports.
+<p>
+This component has basic functionality, but is more a placeholder for
+future development.  Plans for the future include providing logic to
+discard data on output ports that fail to provide a buffer to accept
+the data within a reasonable timeframe, provided a clock is connected.
+There is some support for output ports having different buffer sizes
+than the input port, but this is not yet fully available to an IL
+client.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="1">260<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameters for the clock port.  Currently this
+  port is not advertised so should not be used.
+ <tr valign="top"><td rowspan="2">261<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameters for the audio input stream, which must
+  be PCM non-encoded audio.  <tt>nBufferSize</tt> must be at least 256 and
+  defaults to 32768, and must be a multiple of 32.
+  <tt>nBufferAlignment</tt> must be at least 32.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query / set the PCM parameters of the audio input stream.
+ <tr valign="top"><td rowspan="2">262  263  264  265<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query the port parameters for output ports.  
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query the PCM parameters of the audio output stream.  
+ <tr valign="top"><td rowspan="1">261  262  263  264  265<td><tt>OMX_IndexParamAudioPortFormat</tt>
+<td> Query / set the port format used on audio ports.  Currently this
+  component only supports raw PCM on all audio ports.
+ </table>
+
+
+</table>
+</body>
+</html>

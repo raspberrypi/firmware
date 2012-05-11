@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>audio_mixer</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.audio_mixer</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="230" bgcolor="yellow">230</td></tr>
+<tr><td border="1" port="232" bgcolor="green">232</td></tr>
+<tr><td border="1" port="233" bgcolor="green">233</td></tr>
+<tr><td border="1" port="234" bgcolor="green">234</td></tr>
+<tr><td border="1" port="235" bgcolor="green">235</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">audio_mixer</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="231" bgcolor="green">231</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+The conformant audio_mixer component accepts raw PCM audio frames from
+enabled input ports sums these onto frames emitted from the output
+port.
+<p>
+If necessary, input data is converted to match the PCM configuration of the output port at 
+the mixdown stage (see the supported PCM formats). The mixer will perform sampling rate 
+conversions, bitrate scaling and channel downmixing. However, at the moment, downmixing
+from 8 channels to 4 channels is not supported and only stereo input can be resampled (SW-3833).
+<p>
+The mixer provides a clock input port that can be used to ensure constant rate 
+output regardless of input ports that fail to provide buffers in time to keep up
+with the output port frame rate.
+<p>
+The mixer output port can buffer up mixed output to be used for gapless and crossfaded 
+audio track changes between input ports.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="4">231  232  233  234  235<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameters for the audio input/output streams. 
+  The audio format must not be encoded. <tt>nBufferSize</tt> must be a multiple 
+  of 32 and and equal to or larger than 1024. <tt>nBufferAlignment</tt> must be 
+  equal to or larger than 32.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> <tt>nChannels</tt> must be 1, 2, 4, or 8. 5.1 audio can be carried
+  inside 8 channels, with the last two channels advertised as blank.
+  <tt>eNumData</tt> must be <tt>OMX_NumericalDataSigned</tt>.
+  <tt>eEndian</tt> must be <tt>OMX_EndianLittle</tt>.
+  <tt>bInterleaved</tt> must be <tt>OMX_TRUE</tt>.
+  <tt>nBitPerSample</tt> must be 16 or 32.
+  <tt>nSamplingRate</tt> must be less or equal to 96000.
+  <tt>ePCMMode</tt> must be <tt>OMX_AUDIO_PCMModeLinear</tt>.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPortFormat</tt>
+<td> Query / set the audio port used on the port.  Audio ports currently
+  only support PCM format audio.
+ <tr valign="top"><td><tt>OMX_IndexConfigAudioMute</tt>
+<td> Query / set the mute status of the port.
+ <tr valign="top"><td rowspan="4">232  233  234  235<td><tt>OMX_IndexConfigAudioVolume</tt>
+<td> Query / set the volume control for the input ports. This controls the 
+  software volume scaling that occurs prior to mixdown.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioTrackChangeControl">OMX_IndexConfigBrcmAudioTrackChangeControl</a></tt>
+<td> Configure a gapless or an overlapping crossfaded track change from one input
+  port to another using the output buffering mechanism in the mixer.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioTrackChangeCount">OMX_IndexConfigBrcmAudioTrackChangeCount</a></tt>
+<td> Query the number of times the port has completed a track change. A track change
+  is complete for an input port when a buffer flagged with <tt>OMX_BUFFERFLAG_EOS</tt> 
+  has been fully mixed into output port buffers as is ready to be returned or flushed
+  from the input port. This configuration value can be monitored via 
+  <tt>OMX_IndexConfigRequestCallback</tt>.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigRequestCallback">OMX_IndexConfigRequestCallback</a></tt>
+<td> Set whether we enable a callback to the client when the value of an index 
+  structure changes.  Only supported for the index <tt>OMX_IndexConfigBrcmAudioTrackChangeCount</tt>.
+ <tr valign="top"><td rowspan="2">230<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameter for the clock port.  Only the number of
+  buffers can be modified on this port.
+ <tr valign="top"><td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> Query / set the port format for this clock port.  This port currently
+  only supports the time format.
+ <tr valign="top"><td rowspan="1">&nbsp;<td><tt><a href="prop.html#OMX_IndexConfigBrcmMinimumProcessingLatency">OMX_IndexConfigBrcmMinimumProcessingLatency</a></tt>
+<td> Query/set the difference between the actual media time and when the
+  mixer receives request fulfillments for media time requests.
+ </table>
+
+
+</table>
+</body>
+</html>

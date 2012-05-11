@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>image_fx</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.image_fx</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="190" bgcolor="pink">190</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">image_fx</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="191" bgcolor="pink">191</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+A conformant image processing stage for applying an effect to a YUV
+image or video.
+<p>
+YUV_UV input and output are only currently handled using proprietary
+communication.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="1">190<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Set this to control the input size of the image. Typically this is
+  called by the component itself when this port is tunnelled with an
+  appropriate output port.  YUV420 packed planar and YUV422 packed
+  planar image formats are supported.  <tt>nSliceHeight</tt> must be a
+  multiple of 16.  <tt>nStride</tt> must be a multiple of 32 and equal to
+  or larger than <tt>nFrameWidth</tt>.  Port 190 also supports being
+  connected to an output port of video domain, by setting the port
+  definition type with a structure of <tt>OMX_PortDomainVideo</tt>.
+ <tr valign="top"><td rowspan="5">191<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query this to show what the output size will be. Set to alter the
+  number of buffers to be used, or change the
+  <tt>nSliceHeight</tt>. <tt>nSliceHeight</tt> must be a multiple of 16,
+  including 0 which indicates no preference. Other parameters must be
+  unchanged.
+ <tr valign="top"><td><tt>OMX_IndexConfigCommonImageFilter</tt>
+<td> Query / set the current image filter applied.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCommonImageFilterParameters">OMX_IndexConfigCommonImageFilterParameters</a></tt>
+<td> Query / set optional parameters for some image filters.
+ <tr valign="top"><td><tt>OMX_IndexConfigCommonColorEnhancement</tt>
+<td> Query / set the colour enhancement. This overwrites the U/V planes
+  with a constant value, and is applied after any currently selected
+  filter.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolDisplayFunction">OMX_IndexParamImagePoolDisplayFunction</a></tt>
+<td> Used to set up proprietary communication with the next component.
+ <tr valign="top"><td rowspan="1">190  191<td><tt>OMX_IndexParamImagePortFormat</tt>
+<td> Query / set the image port format used.  Both ports
+  support non-compressed images of a small number of image formats.
+ <tr valign="top"><td rowspan="2">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+<td> Query / set the location of an externally allocated image pool to use
+  for output frames. Defaults to NULL, causing the component to allocate
+  a pool when active.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolSize">OMX_IndexParamImagePoolSize</a></tt>
+<td> Sets the size of the image pool to be allocated by the
+  component. Defaults to the output port frame size.
+ </table>
+
+</table>
+</body>
+</html>

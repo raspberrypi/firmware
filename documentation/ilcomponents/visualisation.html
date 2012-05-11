@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>visualisation</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.visualisation</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="140" bgcolor="green">140</td></tr>
+<tr><td border="1" port="143" bgcolor="yellow">143</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">visualisation</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="141" bgcolor="green">141</td></tr>
+<tr><td border="1" port="142" bgcolor="red">142</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+This conformant component passes through raw PCM audio samples from an
+input port to an output port, and can also create output video frames
+using a visualisation plug-in. It accepts a clock input to attach
+correct time stamps to output video frames.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="2">140<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the incoming audio port for raw PCM
+  audio. <tt>nBufferSize</tt> must be a multiple of 32, and have a value
+  of at least 256 - it will default to a value of 1024.
+  <tt>nBufferAlignment</tt> must be equal to or larger than 32. Setting
+  this will also replicate the port definition to the audio output port.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query / set the PCM properties for the incoming audio. Setting this
+  will replicate the settings to the audio output port.
+  <tt>nChannels</tt> must be 1, 2, 4, or 8. 5.1 audio can be embedded in 8
+  channel audio.  <tt>eNumData</tt> must be
+  <tt>OMX_NumericalDataSigned</tt>.  <tt>eEndian</tt> must be
+  <tt>OMX_EndianLittle</tt>.  <tt>bInterleaved</tt> must be <tt>OMX_TRUE</tt>.
+  <tt>nBitPerSample</tt> must be 16 or 32.  <tt>ePCMMode</tt> must be
+  <tt>OMX_AUDIO_PCMModeLinear</tt>.
+ <tr valign="top"><td rowspan="2">141<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the output audio port definition. Setting only allows the
+  number, size and alignment of output buffers to be changed.
+  <tt>nBufferSize</tt> must be at least 256 and will default to 1024.
+  <tt>nBufferAlignment</tt> must be at least 32.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query the PCM properties.
+ <tr valign="top"><td rowspan="1">140  141<td><tt>OMX_IndexParamAudioPortFormat</tt>
+<td> Query / set the audio port format.  Both audio ports only support
+  PCM format.
+ <tr valign="top"><td rowspan="4">142<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Once the first visualisation frame is produced this can be queried for
+  the output video format.  The size and number of buffers can be
+  increased from the default sizes.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigVisualisation">OMX_IndexConfigVisualisation</a></tt>
+<td> Query / set the visualisation plug-in library and properties to
+  control the visualisation used.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolDisplayFunction">OMX_IndexParamImagePoolDisplayFunction</a></tt>
+<td> Used to set up proprietary communication with the next component.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoPortFormat</tt>
+<td> Query / set the video port format.  The video output port currently
+  supports only <tt>RGB565</tt> output.
+ <tr valign="top"><td rowspan="2">143<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Supports connecting to a port on a clock component.
+ <tr valign="top"><td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> Query / set the other port format.  This clock port only supports the
+  time format.
+ <tr valign="top"><td rowspan="2">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+<td> Query / set the location of an externally allocated image pool to use
+  for output frames.  Defaults to NULL, causing the component to
+  allocate a pool when active.  For this case, image_pool2 and
+  image_pool3 must be NULL.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolSize">OMX_IndexParamImagePoolSize</a></tt>
+<td> Set the size of the image pool to be allocated by the component.
+ </table>
+
+</table>
+</body>
+</html>

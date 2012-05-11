@@ -1,0 +1,246 @@
+<html>
+<head>
+<title>read_media</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.read_media</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="113" bgcolor="yellow">113</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">read_media</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="110" bgcolor="green">110</td></tr>
+<tr><td border="1" port="111" bgcolor="red">111</td></tr>
+<tr><td border="1" port="112" bgcolor="cyan">112</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+A media file demultiplexer, which extracts raw codec frames from a
+media file. It extracts audio, video and text data, reading directly
+from a file. All output ports require setting port streams, since the
+file may contain multiple streams on any domain.  This component
+supports metadata extraction using standard OpenMAX IL metadata
+interfaces, see \autoref{sec:metadata} for a description of how
+metadata extraction is used. It also supports Broadcom-specific
+configurations to allow extra play modes.  It also supports a clock
+input port.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="14">&nbsp;<td><tt>OMX_IndexParamContentURI</tt>
+<td> The filename containing the media file can be specified using this
+  parameter. Currently the format of the URI is assumed to be a file
+  that the component can directly access using the file system. However,
+  the file system can support remote mounted file systems.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimePosition</tt>
+<td> Set the media time position, causing a seek in the file.  Some file
+  formats only support a seek to the start of the file, setting a
+  different time position in one of these files will return an error.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeSeekMode</tt>
+<td> Query / set the seek mode. If the file format does not support
+  seeking, trying to set the seek mode will return a bad parameter
+  error. 
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigPlayMode">OMX_IndexConfigPlayMode</a></tt>
+<td> Query / set whether we should return all frames, only IDR frames, or
+  only IDR frames in reverse order.  This can be both got and set on
+  this component.
+ <tr valign="top"><td><tt>OMX_IndexConfigMetadataItemCount</tt>
+<td> Query the number of metadata items at a particular scope level (All,
+  Top, Node, or Port).
+ <tr valign="top"><td><tt>OMX_IndexConfigMetadataItem</tt>
+<td> Query the value for a particular metadata item. The item can be
+  specified by index, or searched for by name.
+ <tr valign="top"><td><tt>OMX_IndexParamMetadataFilterType</tt>
+<td> Not implemented.
+ <tr valign="top"><td><tt>OMX_IndexConfigContainerNodeCount</tt>
+<td> Query the number of metadata items within a particular container.
+ <tr valign="top"><td><tt>OMX_IndexConfigCounterNodeID</tt>
+<td> Retrieve the Nth node within a particular container
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigDrmView">OMX_IndexConfigDrmView</a></tt>
+<td> This config parameter serves as a notification for DivX DRM protected
+  rental files.  Clients should detect any changes in this parameter
+  using <tt>OMX_IndexConfigRequestCallback</tt>.  It will be populated with the
+  current view count and the maximum permissable view count if a DivX
+  DRM rental file is opened.  Clients should respond by setting
+  <tt>OMX_IndexConfigConfirmView</tt> config parameter.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigRequestCallback">OMX_IndexConfigRequestCallback</a></tt>
+<td> Set whether we enable a callback to the client when the value of this
+  index structure changes.  Only supported for the 
+  index <tt>OMX_IndexConfigDrmView</tt>.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigConfirmView">OMX_IndexConfigConfirmView</a></tt>
+<td> It is only applicable to DivX DRM rental files. This is a boolean
+  config parameter.  Setting this to TRUE will continue the playback of
+  a rental file, while setting to FALSE has no effect, and the host
+  application is expected to stop the playback afterwards.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigDrmView">OMX_IndexConfigDrmView</a></tt>
+<td> This config parameter serves as a notification for DivX DRM protected rental files.
+  Host applications should detect any changes in this parameter.
+  It has two members, nCurrentView and nMaxView, which will be populated with
+  the current view count and the maximum permissable view count if a DivX DRM rental
+  file is opened. Host applications should respond by setting <tt>OMX_IndexConfigConfirmView</tt>
+  config parameter.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamComponentName">OMX_IndexParamComponentName</a></tt>
+<td> Sets the component name to be used in internal logging messages.
+ <tr valign="top"><td rowspan="5">110  111  112<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> These are populated with the correct data when the port stream for the
+  port has been chosen. Only the number of output buffers is allowed to
+  be set.
+ <tr valign="top"><td><tt>OMX_IndexParamNumAvailableStreams</tt>
+<td> When the file has been opened, we can query for the number of streams
+  available on each port.
+ <tr valign="top"><td><tt>OMX_IndexParamActiveStream</tt>
+<td> Query / set the active port stream.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDataUnit">OMX_IndexParamBrcmDataUnit</a></tt>
+<td> Query the data format being delivered. This indicates whether we
+  believe the data to be correctly framed in the file format. This
+  parameter is read-only on this component.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCodecConfig">OMX_IndexParamCodecConfig</a></tt>
+<td> Query for codec-specific information. This is current used to transfer
+  information such as aspect ratio, cropping, and codec-specific header
+  bytes. This is currently only supported for VideoCore based components
+  to query.  It is read-only on this component.
+ <tr valign="top"><td rowspan="15">110<td><tt>OMX_IndexParamAudioPortFormat</tt>
+<td> Query / set the audio port format.  This port supports several audio
+  formats, although doesn't support any conversion so the audio format
+  will be set when the stream has been inspected.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioAmr</tt>
+<td> Query the AMR properties. Currently eAMRBandMode is supported, and
+  used to distinguish between different variants of AMR.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioAac</tt>
+<td> Query AAC format parameters.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioMp3</tt>
+<td> Query MP3 format parameters.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamAudioDdp">OMX_IndexParamAudioDdp</a></tt>
+<td> Query DDP format parameters. Currently eBitStreamId is used to 
+  distinguish between different variants of DDP.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query PCM audio parameter. Currently support sampling rate and no. of channels.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioEvrc</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioG726</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioMidi</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioQcelp13</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioQcelp8</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioRa</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioVorbis</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioWma</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioTrackGaplessPlayback">OMX_IndexConfigBrcmAudioTrackGaplessPlayback</a></tt>
+<td> Query encoder delay and padding information for gapless audio playback.
+ <tr valign="top"><td rowspan="8">111<td><tt>OMX_IndexParamVideoPortFormat</tt>
+<td> Query / set the video port format.  This port supports several video
+  formats, although doesn't support any conversion so the video format
+  will be set when the stream has been inspected.
+ <tr valign="top"><td><tt>OMX_IndexParamNalStreamFormat</tt>
+<td> Query the format of NAL units that will be output by the reader
+  (<tt>OMX_NaluFormatStartCodes</tt> or <tt>OMX_NaluFormatOneNaluPerBuffer</tt>).
+  A value of 0 means that the type can be found by looking at the codec configuration
+  data. This is parameter is currently only relevant for AVC streams.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoAvc</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoH263</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoMpeg2</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoMpeg4</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoRv</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoWmv</tt>
+<td> This parameter is handled but not filled in by the component.  A query will
+  return all zero values and a set must have all zero values.
+ <tr valign="top"><td rowspan="1">112<td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> Query / set the other port format.  This port supports several text subtitle
+  formats, although doesn't support any conversion so the format
+  will be set when the stream has been inspected.
+ </table>
+
+
+<h2>Supported Metadata Tree</h2>
+
+<table border="1" cellspacing="0" cellpadding="2">
+<tr><td>protocol<td>&nbsp;<td>&nbsp;
+<tr><td>duration<td>&nbsp;<td>&nbsp;
+<tr><td>num_stream<td>&nbsp;<td>&nbsp;
+
+<tr><td rowspan="2">#audXX<td>type, bit_rate, sample_rate, num_channels<td>&nbsp;
+<tr><td>title, artist, album, year, genre, track, lyrics, hasimage
+<td>Present for MP3 files with ID3 tags. Only those tags present in the
+file are created when the file is parsed.
+
+<tr><td rowspan="2">#vidXX<td>type, bit_rate, height, width<td>&nbsp;
+<tr><td>level<td>Present for MP4 files with a video stream.
+</table>
+
+Some handlers support multiple streams. A metadata
+container will be created for each stream, starting with #aud00, then
+#aud01 for audio streams, and #vid00, #vid01 etc for video
+streams. A port-level query for an item will return that item for the
+currently selected stream of that type.
+
+</table>
+</body>
+</html>

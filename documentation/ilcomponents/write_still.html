@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>write_still</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.write_still</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="30" bgcolor="pink">30</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">write_still</td>  </tr></table><p>
+<p>
+A conformant image sink component, which takes pixel data on the single input
+port and writes out an image file.  Multiple data formats are
+accepted, but not all image codecs accept all data formats.  The image
+codec is determined by the filename suffix.  YUV420 and YUV422 are
+supported by the JPEG codec.  Various RGB formats are supported by
+other image codecs.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="8">30<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Setting this controls the size of the image that will be given to the
+  component. <tt>eColorFormat</tt> should be YUV420 packed planar, YUV422
+  packed planar, RGB565, RGB888, or RGBA32. <tt>nSliceHeight</tt> should
+  be 16, or <tt>nFrameHeight</tt> rounded up to the next multiple of
+  16. <tt>nStride</tt> should be a multiple of 32 for YUV formats.  For
+  RGB formats, the width should first be rounded up to a multiple of 16,
+  then multiplied by the bytes per pixel to calculate <tt>nStride</tt>.
+  This port supports setting the port definition to both image and video
+  domains, although it will convert video domain parameters to the
+  advertised image domain.
+ <tr valign="top"><td><tt>OMX_IndexParamImagePortFormat</tt>
+<td> Query / set the image port form.  This port supports a few
+  uncompressed pixel formats. 
+ <tr valign="top"><td><tt>OMX_IndexParamQFactor</tt>
+<td> Query / set the quality factor for the encoded image.  This is only
+  supported by the JPEG codec.
+ <tr valign="top"><td><tt>OMX_IndexConfigMetadataItem</tt>
+<td> Set metadata to be included in the output file. Currently only the
+  JPEG codec supports including metadata.  The component must be in
+  loaded state. <tt>eScopeMode</tt> must be
+  <tt>OMX_MetadataScopePortLevel</tt>. <tt>nScopeSpecifier</tt> must be
+  30. <tt>eKeyCharset</tt> must be <tt>ASCII</tt>, <tt>Binary</tt>, or
+  <tt>unknown</tt>.  <tt>nKey</tt> must start with <tt>"EXIF."</tt>,
+  <tt>"IFD0."</tt> or <tt>"GPS."</tt> and be a valid EXIF property allowed
+  within that table.  Supported tags are listed in the component
+  documentation for the <tt>image_decode</tt> component.
+  Some exif tags may be added with image capture data from a directly
+  connected camera component if they have not already been set.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmSyncOutput">OMX_IndexConfigBrcmSyncOutput</a></tt>
+<td> Forces a pause until any pending output has been flushed to the SD card.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmRetainMemory">OMX_IndexParamBrcmRetainMemory</a></tt>
+<td> Controls memory allocation during state transitions.  EXIF should
+  always be disabled when using this option, as the size of the EXIF
+  tags can change unpredictably.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDisableEXIF">OMX_IndexParamBrcmDisableEXIF</a></tt>
+<td> Disables generation of EXIF tags.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmThumbnail">OMX_IndexParamBrcmThumbnail</a></tt>
+<td> Sets the properties for the thumbnail generation. The component must
+  be in loaded state. Currently only the JPEG codec supports this and
+  only if EXIF generation is also enabled.
+ <tr valign="top"><td rowspan="6">&nbsp;<td><tt>OMX_IndexParamContentURI</tt>
+<td> Setting this parameter supplies a filename to the component, to which
+  it will write the file. Currently the format of the URI is assumed to
+  be a file that the component can directly access using the file
+  system. However, the file system can support remote mounted file
+  systems.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmRetainMemory">OMX_IndexParamBrcmRetainMemory</a></tt>
+<td> If enabled, the component will hold on to any memory allocated, even
+  when going from IDLE to LOADED.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmEnableIJGTableScaling">OMX_IndexParamBrcmEnableIJGTableScaling</a></tt>
+<td> Query / set whether we use standard IJG quality tables when using the
+  JPG encoder.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamAsynchronousOutput">OMX_IndexParamAsynchronousOutput</a></tt>
+<td> Query / set whether this component can write files asynchronously.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigAsynchronousFailureURI">OMX_IndexConfigAsynchronousFailureURI</a></tt>
+<td> Query for the URI being used when an asynchronous error was generated.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmIOPerfStats">OMX_IndexConfigBrcmIOPerfStats</a></tt>
+<td> Query for statistics about I/O (e.g. file media) performance. Set whether or not
+  this component captures these statistics (off by default) by changing the
+  <tt>bEnabled</tt> field. Other fields are read-only and will be ignored upon set.
+ </table>
+
+</table>
+</body>
+</html>

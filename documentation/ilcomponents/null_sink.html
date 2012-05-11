@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>null_sink</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.null_sink</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="240" bgcolor="red">240</td></tr>
+<tr><td border="1" port="241" bgcolor="pink">241</td></tr>
+<tr><td border="1" port="242" bgcolor="green">242</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">null_sink</td>  </tr></table><p>
+<p>
+This component is for testing. It accepts input buffers and
+immediately discards them, counting how many it receives.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="5">240 241 242<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Set the port format.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmPortStats">OMX_IndexConfigBrcmPortStats</a></tt>
+<td> Returns statistics about the input ports.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmPortBufferStats">OMX_IndexConfigBrcmPortBufferStats</a></tt>
+<td> Returns statistics about buffers recently seen 
+  at the input ports.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigRequestCallback">OMX_IndexConfigRequestCallback</a></tt>
+<td> Query / set whether an <tt>OMX_EventParamOrConfigChanged</tt> event
+  should be generated when parameters change state within the component.
+  Currently supported for <tt>OMX_IndexConfigBrcmPortBufferStats</tt>.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmCRC">OMX_IndexParamBrcmCRC</a></tt>
+<td> Query for the latest CRC for input data on this port.
+ <tr valign="top"><td rowspan="4">240<td><tt>OMX_IndexConfigVideoFramerate</tt>
+<td> Sets the expected framerate (16.16 format). If set, the component will assert if any
+  frames arrive late (where "late" is one or more frame intervals later than expected).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmMaxFrameSkips">OMX_IndexParamBrcmMaxFrameSkips</a></tt>
+<td> Sets the maximum number of times we allow an image to arrive 'late' (see
+  <tt>OMX_IndexConfigVideoFramerate</tt>). The default value is zero.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
+<td> Sets the expected pixel aspect ratio (represented by the standard 
+  <tt>OMX_CONFIG_POINTTYPE</tt> structure, <tt>nY</tt> must not be 0, use e.g. 0/1 to 
+  represent 0 or unknown ratio.). If set, the component will assert if it receives 
+  video frames that do not match the expected aspect ratio.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmMaxCorruptMBs">OMX_IndexParamBrcmMaxCorruptMBs</a></tt>
+<td> Sets the maximum number of corrupt macroblocks allowed. The default value is zero.
+ <tr valign="top"><td rowspan="2">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamBrcmThreadAffinity">OMX_IndexParamBrcmThreadAffinity</a></tt>
+<td> Query / set which core this component should execute on.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmCRCEnable">OMX_IndexParamBrcmCRCEnable</a></tt>
+<td> Query / set whether this component should calcualte CRCs on all input
+  data received.  Setting this index resets CRCs on all ports to zero.
+  CRC calculation defaults to off.
+ </table>
+
+</table>
+</body>
+</html>

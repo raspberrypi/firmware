@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>video_splitter</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.video_splitter</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="250" bgcolor="red">250</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">video_splitter</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="251" bgcolor="red">251</td></tr>
+<tr><td border="1" port="252" bgcolor="red">252</td></tr>
+<tr><td border="1" port="253" bgcolor="red">253</td></tr>
+<tr><td border="1" port="254" bgcolor="red">254</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+The conformant video_splitter component accepts video frames, either
+in buffers or using proprietary communication, and forwards these onto
+enabled video output ports again, either in buffers or using
+proprietary communication. Proprietary communication is efficient
+through the use of zero copy reference counting of images.
+<p>
+When using buffers on the input port, the buffer size of the output ports will 
+match the input port settings. Encoded video data is also accepted.
+<p>
+When using proprietary communication on the input port, a single still image can
+be captured at one of the image output ports. The image is supplied as stripes via
+buffers on the output port. The image will be captured every time the port transitions
+from IDLE to EXECUTING.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="3">250<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameters for the video input stream. When using proprietary 
+  communication, the image format must not be encoded.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
+<td> Forces use of proprietary tunnelling on the input port.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraPoolToEncoderFunction">OMX_IndexParamCameraPoolToEncoderFunction</a></tt>
+<td> Used to set up proprietary communication on an input port.
+ <tr valign="top"><td rowspan="5">251  252  253  254<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameters for output video ports.  These ports only
+  support proprietary communication, so all format fields may be
+  invalid.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolDisplayFunction">OMX_IndexParamImagePoolDisplayFunction</a></tt>
+<td> Used to set up proprietary communication with the next component.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigSingleStep">OMX_IndexConfigSingleStep</a></tt>
+<td> Enable single-stepping the deliver of images on the output. Instead of delivering
+  a stream of images, the given number of images are sent (typically <tt>nU32</tt>=1 for stills
+  capture) after which no more images are sent until this config value is resent. Setting
+  the value to zero resets the output to continuous output.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDisableProprietaryTunnels">OMX_IndexParamBrcmDisableProprietaryTunnels</a></tt>
+<td> Tells the component not to use proprietary communication for the selected
+  output port.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmBufferFlagFilter">OMX_IndexConfigBrcmBufferFlagFilter</a></tt>
+<td> Allows an output port to request that only buffers where the buffer
+  flags match any or all of the specified buffer flags are forwarded.
+  Default is 0xFFFFFFFF to allow all buffers through. 0x0 will allow no
+  buffers through.
+ <tr valign="top"><td rowspan="7">250  251  252  253  254<td><tt>OMX_IndexParamVideoPortFormat</tt>
+<td> Query / set the format of this port.  This component supports ports with a variety
+  of compressed and uncompressed formats.  This component does not support format
+  conversion, so output ports will default to the same format as the input port.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoMpeg4</tt>
+<td> Query / set the Mpeg4 parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoAvc</tt>
+<td> Query / set the AVC parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoWmv</tt>
+<td> Query / set the WMV parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoH263</tt>
+<td> Query / set the H263 parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoMpeg2</tt>
+<td> Query / set the Mpeg2 parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoRv</tt>
+<td> Query / set the Rv parameters.  This component does not yet support
+  populating this structure with details of the stream being decoded.
+ <tr valign="top"><td rowspan="1">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolSize">OMX_IndexParamImagePoolSize</a></tt>
+<td> Sets the size of the image pool to be allocated by the component, when
+  incoming data is copied into a pool before serving on output ports.
+  This component only allows the number of frames to be determined by
+  this index, all other values should be zero, and will be set to the
+  size of the input data.
+ </table>
+
+
+</table>
+</body>
+</html>

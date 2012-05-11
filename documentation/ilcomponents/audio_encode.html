@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>audio_encode</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.audio_encode</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="160" bgcolor="green">160</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">audio_encode</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="161" bgcolor="green">161</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+This conformant component accepts raw PCM audio samples, and can
+encode them using a number of formats to produce compressed audio
+frames. This component will buffer a small number of PCM samples to
+allow re-packetisation depending on the frame size of the encoded
+format. It also buffers encoded frames to allow for latency in the
+multiplexer file writing.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="2">160<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameter. Must be set to PCM audio.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
+<td> Query / set the port PCM format for the input port.
+  <tt>nChannels</tt> must be 1, 2, 4, or 8. 5.1 audio can be carried
+  inside 8 channels, with the last two channels advertise as blank.
+  <tt>nBitPerSample</tt> must be 16 or 32.
+  <tt>eNumData</tt> must be <tt>OMX_NumericalDataSigned</tt>.
+  <tt>eEndian</tt> must be <tt>OMX_EndianLittle</tt>.
+  <tt>bInterleaved</tt> must be <tt>OMX_TRUE</tt>.
+  <tt>ePCMMode</tt> must be <tt>OMX_AUDIO_PCMModeLinear</tt>.
+ <tr valign="top"><td rowspan="6">161<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameter. The encoder to be used is specified by
+  setting the <tt>format.audio.eEncoding</tt> field.  When encoding
+  starts, if the maximum size of encoded frame is larger than the
+  <tt>nBufferSize</tt> value then the <tt>nBufferSize</tt> is increased to
+  this value and an <tt>OMX_EventPortSettingsChanged</tt> event is
+  signalled.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioMp3</tt>
+<td> Query / set the MP3 parameters for the encoded bitstream. Only the
+  <tt>nBitRate</tt> and <tt>nChannels</tt> (must be 1 or 2) fields are 
+  considered; other parameters are copied through from the PCM input 
+  port.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioAac</tt>
+<td> Query / set the AAC parameters for the encoded bitstream. The fields
+  <tt>nBitRate</tt>, <tt>eAACStreamFormat</tt>, <tt>nSampleRate</tt> and 
+  <tt>nChannels</tt> (must be 1 or 2) are respected; other parameters 
+  are copied through from the PCM input port. Stream formats supported 
+  are the default value of <tt>MP2ADTS</tt>, and <tt>RAW</tt>.
+ <tr valign="top"><td><tt>OMX_IndexParamAudioAmr</tt>
+<td> Query / set the AMR parameters for the encoded bitstream.
+  The field <tt>nChannels</tt> must be 1 (mono).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCodecConfig">OMX_IndexParamCodecConfig</a></tt>
+<td> Query for codec-specific information.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDataUnit">OMX_IndexParamBrcmDataUnit</a></tt>
+<td> Query the type of data delivery for the encoded data.  This port emits
+  <tt>OMX_DataUnitCodedPicture</tt> format data.
+ <tr valign="top"><td rowspan="2">160  161<td><tt>OMX_IndexParamAudioPortFormat</tt>
+<td> Query / set the audio port format used on this port.  The input port
+  supports PCM only, the output port supports a number of encoded audio
+  formats.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamILFifoConfig">OMX_IndexParamILFifoConfig</a></tt>
+<td> Set the internal fifo size for both input and output ports.  The input
+  port fifo is used to buffer enough PCM audio samples for the encoder
+  to consume a whole frame.  The output fifo needs to buffer enough
+  encoded frames to cope with variations of writing speed through the
+  filesystem.  Both input and output fifos will default to a sensible
+  size if this index is not set, the primary use for this index is in
+  testing.
+ </table>
+
+</table>
+</body>
+</html>

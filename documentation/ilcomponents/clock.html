@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>clock</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.clock</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td bgcolor="grey" border="1">clock</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="80" bgcolor="yellow">80</td></tr>
+<tr><td border="1" port="81" bgcolor="yellow">81</td></tr>
+<tr><td border="1" port="82" bgcolor="yellow">82</td></tr>
+<tr><td border="1" port="83" bgcolor="yellow">83</td></tr>
+<tr><td border="1" port="84" bgcolor="yellow">84</td></tr>
+<tr><td border="1" port="85" bgcolor="yellow">85</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+A conformant clock component, designed to be compatible with a
+standard clock component. It currently supports 6 output clock ports.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="13">80  81  82  83  84  85<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> The port definition can be used to connect each port to a clock port
+  on another component.
+ <tr valign="top"><td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> This param is used to confirm that this port supports clock messages.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeScale</tt>
+<td> We support setting the timescale to achieve slow motion, fast forward,
+  paused, and rewind playback. To achieve rewind and fast forward, note the
+  extra playmode config in the read_media.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeClockState</tt>
+<td> Query / set current clock state.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeCurrentWallTime</tt>
+<td> Query current wall time.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeActiveRefClock</tt>
+<td> Query / set the active reference clock.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeCurrentMediaTime</tt>
+<td> Query current media time.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeClientStartTime</tt>
+<td> Set the start time of a client stream, typically used by
+  a tunneled component.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigTimeInvalidStartTime">OMX_IndexConfigTimeInvalidStartTime</a></tt>
+<td> Notification that a client will not be sending a start time.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeCurrentAudioReference</tt>
+<td> Set the instantaneous audio reference clock value.  Time values
+  received are filtered to remove jitter.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeCurrentVideoReference</tt>
+<td> Set the instantaneous video reference clock value.
+ <tr valign="top"><td><tt>OMX_IndexConfigTimeMediaTimeRequest</tt>
+<td> Make a media time request.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmClockMissCount">OMX_IndexConfigBrcmClockMissCount</a></tt>
+<td> Return a count of the number of media time requests that were missed, because they
+  arrived too late (after the requested time).
+ <tr valign="top"><td rowspan="3">&nbsp;<td><tt><a href="prop.html#OMX_IndexConfigSingleStep">OMX_IndexConfigSingleStep</a></tt>
+<td> Advance a paused clock through the next set of requested media times.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigClockAdjustment">OMX_IndexConfigClockAdjustment</a></tt>
+<td> Get the total amount that the clock media time has shifted due to
+  clock reference time updates since the clock started running.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigLatencyTarget">OMX_IndexConfigLatencyTarget</a></tt>
+<td> Query / set the filter values used when tracking offset between media time
+  and reference clock source by applying small changes to media time speed.
+ </table>
+
+</table>
+</body>
+</html>

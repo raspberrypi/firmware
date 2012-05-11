@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>resize</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.resize</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="60" bgcolor="pink">60</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">resize</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="61" bgcolor="pink">61</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+A conformant image processing stage for resizing YUV420, RGB565 and
+RGBA32 images.  Using proprietary communication other image formats
+can also be used as inputs.  This component performs a resize, with
+the output size determined by the input size and a custom resize
+parameter or by directly setting the output port parameter.  The input
+images can either be stripes or full frames, in general stripes are
+preferred for large images or for some image formats including RGB565.
+The input image can also be cropped prior to resizing.  Output images
+can either be full frames or stripes, and may be a different colour
+format from the input image.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="2">60<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Set this to control the input size of the image. Typically this is
+  called by the component itself when this port is tunnelled with an
+  appropriate output port.  The stripe height must be 16, or the frame
+  height rounded up to the next multiple of 16.  YUV420 packed planar
+  image format is supported with even image dimensions.  RGB565 and
+  RGBA32 formats are also supported, RGB565 input only supports 16 high
+  striped input.  Other internal formats such as YUV_UV are also handled
+  when using prioritary communication on this port.
+ <tr valign="top"><td><tt>OMX_IndexConfigCommonInputCrop</tt>
+<td> Allows cropping at the input. Cropping can be changed at any time.
+ <tr valign="top"><td rowspan="2">61<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query this to show what the output size will be. Set to alter the
+  number of buffers to be used, or change the size of the output image
+  if the custom resize setting is not being used. YUV image dimensions
+  must be even. <tt>nSliceHeight</tt> must be a multiple of 16, or 0 which
+  indicates no preference. <tt>nStride</tt> must be a multiple of 32, or a
+  multiple of 64 for RGBA32 format.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamResize">OMX_IndexParamResize</a></tt>
+<td> As an alternative to setting the output size directly through the port
+  definition, set this parameter to control how the resize operates.
+ <tr valign="top"><td rowspan="1">60  61<td><tt>OMX_IndexParamImagePortFormat</tt>
+<td> Set / query the image port format used.  These ports support RGB565,
+  RGBA32 or YUV420 raw bitmap formats.
+ </table>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>text_scheduler</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.text_scheduler</h1>
+<table cellspacing="0" cellpadding="2"><tr>
+  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="150" bgcolor="cyan">150</td></tr>
+<tr><td border="1" port="152" bgcolor="yellow">152</td></tr>
+</table></td>
+<td bgcolor="grey" border="1">text_scheduler</td>  <td cellpadding="0">
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td border="1" port="151" bgcolor="cyan">151</td></tr>
+</table></td>
+</tr></table><p>
+<p>
+This conformant component accepts text streams from the read_media
+component, and outputs the data with timed delivery using an attached
+clock component. This is used for subtitle information in movie
+playback, or timed lyrics in audio files. The expectation is that the
+client will receive text buffers from the output port, and perform
+host-side rendering of the text information.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="1">150<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameter to text format, typically set when
+  tunnelling to the read_media component.
+ <tr valign="top"><td rowspan="1">151<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query the port parameter for the output text format.
+ <tr valign="top"><td rowspan="1">150  151<td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> Query / set the port format.  These two ports only support the
+  <tt>OMX_OTHER_FormatText</tt> type.
+ <tr valign="top"><td rowspan="2">152<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query / set the port parameter to connect to a clock component output
+  port.
+ <tr valign="top"><td><tt>OMX_IndexParamOtherPortFormat</tt>
+<td> Query / set the port format.  This port only supports the
+  <tt>OMX_OTHER_FormatTime</tt> type.
+ </table>
+
+</table>
+</body>
+</html>

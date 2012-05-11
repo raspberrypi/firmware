@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Metadata Extraction</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="image_read.html">image_read</a><br>
+<a href="image_write.html">image_write</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<a href="write_still.html">write_still</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="read_media.html">read_media</a><br>
+<a href="write_media.html">write_media</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>Metadata Extraction</h1>
+Metadata is represented within a tree of container nodes, starting at the root node of OMX_ALL. Each container node can encompass any number of child nodes, which in themselves may be container/parent nodes, but each node can only have a single parent.  There are two anticipated use cases for extracting metadata from a component -- reading all the metadata tags into a client-side structure, or searching for a specific metadata key within the metadata items.<p>
+
+<h2>Extracting the entire tree</h2>
+To extract the entire tree:<p>
+
+<ol> <li> Issue a <tt>OMX_IndexConfigContainerNodeCount</tt> query with <tt>nParentNodeID</tt> as the root node (<tt>OMX_ALL</tt>) to obtain the number of nodes for that parent.  <li> For the reported number of nodes, query for <tt>OMX_IndexConfigCounterNodeID</tt> to obtain the node ID for each of these nodes. This query also returns <tt>bIsLeaf</tt> to identify nodes that are themselves parents.  <li> For nodes where <tt>bIsLeaf</tt> is <tt>OMX_TRUE</tt>, issue an <tt>OMX_IndexConfigMetadataItem</tt> query with <tt>eSearchMode</tt> as <tt>OMX_MetadataSearchItemByIndex</tt> to retrieve the actual metadata item value.  <li> For nodes where <tt>bIsLeaf</tt> is <tt>OMX_FALSE</tt> (ie a parent to other nodes), repeat from step 1 using the obtained node number as <tt>nParentNodeID</tt>. </ol><p>
+
+<h2>Extracting a specific metadata item by key</h2>
+To extract a node from the tree, each level of the tree must be queried in turn to obtain the relevant node IDs. <ol> <li> Issue an OMX_IndexConfigMetadataItem query with <ul> <li> <tt>eSearchMode</tt> as <tt>OMX_MetadataSearchNextItemByKey</tt> <li> <tt>nScopeSpecifier</tt> as the parent node (start with <tt>OMX_ALL</tt>) <li> <tt>nScopeMode</tt> as <tt>OMX_MetadataScopeNodeLevel</tt> <li> <tt>nKey</tt> set to the text of the node name. <li> {nKeySizeUsed} set to the length of the node name text. </ul>  Obtain the nMetadataItemIndex for this node.  <li>Repeat step 1 for each level of the query, amending <tt>nScopeSpecifier</tt> to be the value of <tt>nMetadataItemIndex</tt> from the previous query. </ol><p>
+
+When each level of the metadata specifiers have been followed, the resulting metadata value should be in <tt>nValue</tt>, and the length in <tt>nValueSize</tt>.<p>
+
+As an alternative where the metadata for the currently selected stream is on a specific port, <tt>nScopeSpecifier</tt> can be set to <tt>OMX_MetadataScopePortLevel</tt>, <tt>nScopeSpecifier</tt> set to the port number to which the metadata key refers, and <tt>nKey</tt> / <tt>nKeySize</tt> set appropriately for the lowest level key name (ie ignoring all the container levels). Assuming the name is unique within the scope of that port, it will return the metadata information for the currently-selected stream on the specified port (assuming the component supports port streams, and a stream is selected).<p>
+
+</table>
+</body>
+</html>
