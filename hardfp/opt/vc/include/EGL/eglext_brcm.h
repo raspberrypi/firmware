@@ -1,0 +1,187 @@
+/*
+ * Copyright (c) 2012 Broadcom Europe Ltd
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ * Broadcom specific EGL extensions
+ */
+
+#ifndef EGLEXT_BRCM_H
+#define EGLEXT_BRCM_H
+
+#include "begl_dispplatform.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define EGL_NATIVE_PIXMAP_CLIENT_SIDE_BRCM 0x99930B0	/* eglCreateImageKHR server-side target */
+#define EGL_IMAGE_FROM_SURFACE_BRCM 0x99930B1 /* eglCreateImageKHR server-side target */
+/* Multimedia target - created by gralloc */
+#define EGL_IMAGE_BRCM_MULTIMEDIA         0x99930B2
+#define EGL_IMAGE_BRCM_DUPLICATE         0x99930B3 /* a new EGL Image pointing at the same underlying object */
+#define EGL_IMAGE_BRCM_RAW_PIXELS        0x99930B4 /* Raw YUV multimedia pixels */
+#ifndef EGL_BRCM_sane_choose_config
+#define EGL_BRCM_sane_choose_config 1
+#endif
+#if EGL_BRCM_sane_choose_config
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI EGLBoolean EGLAPIENTRY eglSaneChooseConfigBRCM(EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
+#endif /* EGL_EGLEXT_PROTOTYPES */
+typedef EGLBoolean (EGLAPIENTRYP PFNEGLSANECHOOSECONFIGBRCM)(EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
+#endif
+
+#ifndef EGL_BRCM_global_image
+#define EGL_BRCM_global_image 1
+#endif
+#if EGL_BRCM_global_image
+#define EGL_PIXEL_FORMAT_ARGB_8888_PRE_BRCM 0
+#define EGL_PIXEL_FORMAT_ARGB_8888_BRCM     1
+#define EGL_PIXEL_FORMAT_XRGB_8888_BRCM     2
+#define EGL_PIXEL_FORMAT_RGB_565_BRCM       3
+#define EGL_PIXEL_FORMAT_A_8_BRCM           4
+#define EGL_PIXEL_FORMAT_RENDER_GL_BRCM     (1 << 3)
+#define EGL_PIXEL_FORMAT_RENDER_GLES_BRCM   (1 << 4)
+#define EGL_PIXEL_FORMAT_RENDER_GLES2_BRCM  (1 << 5)
+#define EGL_PIXEL_FORMAT_RENDER_VG_BRCM     (1 << 6)
+#define EGL_PIXEL_FORMAT_RENDER_MASK_BRCM   0x78
+#define EGL_PIXEL_FORMAT_VG_IMAGE_BRCM      (1 << 7)
+#define EGL_PIXEL_FORMAT_GLES_TEXTURE_BRCM  (1 << 8)
+#define EGL_PIXEL_FORMAT_GLES2_TEXTURE_BRCM (1 << 9)
+#define EGL_PIXEL_FORMAT_TEXTURE_MASK_BRCM  0x380
+#define EGL_PIXEL_FORMAT_USAGE_MASK_BRCM    0x3f8
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI void EGLAPIENTRY eglCreateGlobalImageBRCM(EGLint width, EGLint height, EGLint pixel_format, const void *data, EGLint data_stride, EGLint *id);
+EGLAPI void EGLAPIENTRY eglCreateCopyGlobalImageBRCM(const EGLint *src_id, EGLint *id);
+EGLAPI EGLBoolean EGLAPIENTRY eglDestroyGlobalImageBRCM(const EGLint *id);
+EGLAPI EGLBoolean EGLAPIENTRY eglQueryGlobalImageBRCM(const EGLint *id, EGLint *width_height_pixel_format);
+#endif /* EGL_EGLEXT_PROTOTYPES */
+typedef void (EGLAPIENTRYP PFNEGLCREATEGLOBALIMAGEBRCMPROC)(EGLint width, EGLint height, EGLint pixel_format, const void *data, EGLint data_stride, EGLint *id);
+typedef void (EGLAPIENTRYP PFNEGLCREATECOPYGLOBALIMAGEBRCMPROC)(const EGLint *src_id, EGLint *id);
+typedef EGLBoolean (EGLAPIENTRYP PFNEGLDESTROYGLOBALIMAGEBRCMPROC)(const EGLint *id);
+typedef EGLBoolean (EGLAPIENTRYP PFNEGLQUERYGLOBALIMAGEBRCMPROC)(const EGLint *id, EGLint *width_height_pixel_format);
+#endif
+
+#ifndef EGL_BRCM_perf_monitor
+#define EGL_BRCM_perf_monitor 0
+#endif
+#if EGL_BRCM_perf_monitor
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI EGLBoolean EGLAPIENTRY eglInitPerfMonitorBRCM(EGLDisplay display);
+EGLAPI EGLBoolean EGLAPIENTRY eglTermPerfMonitorBRCM(EGLDisplay display);
+#endif /* EGL_EGLEXT_PROTOTYPES */
+typedef void (EGLAPIENTRYP PFNEGLINITPERFMONITORBRCMPROC)(EGLDisplay display);
+typedef void (EGLAPIENTRYP PFNEGLTERMPERFMONITORBRCMPROC)(EGLDisplay display);
+#endif
+
+#ifndef EGL_BRCM_driver_monitor
+#define EGL_BRCM_driver_monitor 1
+#endif
+#if EGL_BRCM_driver_monitor
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI EGLBoolean EGLAPIENTRY eglInitDriverMonitorBRCM(EGLDisplay display, EGLint hw_bank, EGLint l3c_bank);
+EGLAPI void EGLAPIENTRY eglGetDriverMonitorXMLBRCM(EGLDisplay display, EGLint bufSize, EGLint *length, char *xmlStats);
+EGLAPI EGLBoolean EGLAPIENTRY eglTermDriverMonitorBRCM(EGLDisplay display);
+#endif /* EGL_EGLEXT_PROTOTYPES */
+typedef void (EGLAPIENTRYP PFNEGLINITDRIVERMONITORBRCMPROC)(EGLDisplay display, EGLint hw_bank, EGLint l3c_bank);
+typedef void (EGLAPIENTRYP PFNEGLGETDRIVERMONITORXMLBRCMPROC)(EGLDisplay display, EGLint bufSize, EGLint *length, char *xmlStats);
+typedef void (EGLAPIENTRYP PFNEGLTERMDRIVERMONITORBRCMPROC)(EGLDisplay display);
+#endif
+
+#ifndef EGL_BRCM_perf_stats
+#define EGL_BRCM_perf_stats 0
+#endif
+#if EGL_BRCM_perf_stats
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI void eglPerfStatsResetBRCM(void);
+EGLAPI void eglPerfStatsGetBRCM(char *buffer, EGLint buffer_len, EGLBoolean reset);
+#endif
+typedef void (EGLAPIENTRYP PFNEGLPERFSTATSRESETBRCM) (void);
+typedef void (EGLAPIENTRYP PFNEGLPERFSTATSGETBRCM) (char *buffer, EGLint buffer_len, EGLBoolean reset);
+#endif
+
+#ifndef EGL_proc_state_valid
+#define EGL_proc_state_valid 1
+#endif
+#if EGL_proc_state_valid
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI void EGLAPIENTRY eglProcStateValid( EGLDisplay dpy, EGLBoolean *result );
+#endif
+typedef void (EGLAPIENTRYP PFNEGLPROCSTATEVALID) ( EGLDisplay dpy, EGLBoolean *valid );
+#endif
+
+#ifndef EGL_BRCM_flush
+#define EGL_BRCM_flush 1
+#endif
+#if EGL_BRCM_flush
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI void EGLAPIENTRY eglFlushBRCM(void);
+#endif /* EGL_EGLEXT_PROTOTYPES */
+typedef void (EGLAPIENTRYP PFNEGLFLUSHBRCMPROC)(void);
+#endif
+
+#ifndef EGL_BRCM_image_wrap
+#define EGL_BRCM_image_wrap 1
+#define EGL_IMAGE_WRAP_BRCM 0x9993140
+#endif
+
+#ifndef EGL_BRCM_image_wrap_bcg
+#define EGL_BRCM_image_wrap_bcg 0
+#define EGL_IMAGE_WRAP_BRCM_BCG 0x9993141
+
+#if EGL_BRCM_image_wrap_bcg
+typedef struct {
+   BEGL_BufferFormat format;
+
+   uint16_t width;
+   uint16_t height;
+
+   int32_t stride; /* in bytes */
+
+   void *storage;
+} EGL_IMAGE_WRAP_BRCM_BCG_IMAGE_T;
+#endif
+
+#endif
+
+#ifndef EGL_BRCM_mem_usage
+#define EGL_BRCM_mem_usage 0
+#endif
+#if EGL_BRCM_mem_usage
+#ifdef EGL_EGLEXT_PROTOTYPES
+EGLAPI void eglProcessMemUsageGetBRCM(uint32_t id_0, uint32_t id_1, char *buffer, uint32_t buffer_len);
+#endif
+typedef void (EGLAPIENTRYP PFNEGLPROCESSMEMUSAGEGETBRCM) (uint32_t id_0, uint32_t id_1, char *buffer, uint32_t buffer_len);
+#endif
+
+/*
+Only enable this #define if the application (or wrapper layer) is going to call eglDirectRenderingPointer
+when appropriate (i.e. the first time eglMakeCurrent is called, and then at eglSwapBuffers)
+
+Only used for testing purposes on 2763
+*/
+//#define DIRECT_RENDERING
+
+#ifdef DIRECT_RENDERING
+EGLAPI EGLBoolean EGLAPIENTRY eglDirectRenderingPointer(EGLDisplay dpy, EGLSurface surf, void *image /* KHRN_IMAGE_WRAP_T */);
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
