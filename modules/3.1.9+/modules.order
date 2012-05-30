@@ -519,6 +519,12 @@ kernel/sound/usb/misc/snd-ua101.ko
 kernel/sound/usb/caiaq/snd-usb-caiaq.ko
 kernel/sound/usb/6fire/snd-usb-6fire.ko
 kernel/net/core/pktgen.ko
+kernel/net/ipv4/tunnel4.ko
+kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/xfrm6_mode_transport.ko
+kernel/net/ipv6/xfrm6_mode_tunnel.ko
+kernel/net/ipv6/xfrm6_mode_beet.ko
+kernel/net/ipv6/sit.ko
 kernel/net/wireless/cfg80211.ko
 kernel/net/wireless/lib80211.ko
 kernel/net/wireless/lib80211_crypt_wep.ko

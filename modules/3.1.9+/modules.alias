@@ -4392,6 +4392,11 @@ alias usb:v17CCp4711d*dc*dsc*dp*ic*isc*ip* snd_usb_caiaq
 alias usb:v17CCp1940d*dc*dsc*dp*ic*isc*ip* snd_usb_caiaq
 alias usb:v17CCp1969d*dc*dsc*dp*ic*isc*ip* snd_usb_caiaq
 alias usb:v0CCDp0080d*dc*dsc*dp*ic*isc*ip* snd_usb_6fire
+alias net-pf-10 ipv6
+alias xfrm-mode-10-0 xfrm6_mode_transport
+alias xfrm-mode-10-1 xfrm6_mode_tunnel
+alias xfrm-mode-10-4 xfrm6_mode_beet
+alias netdev-sit0 sit
 alias net-pf-15 af_key
 alias net-pf-23 irda
 alias char-major-161-* ircomm_tty
