@@ -150,7 +150,6 @@ alias symbol:rt2x00mac_bss_info_changed rt2x00lib
 alias symbol:gameport_stop_polling gameport
 alias symbol:snd_pcm_hw_constraint_msbits snd_pcm
 alias symbol:v4l2_device_register_subdev_nodes videodev
-alias symbol:snd_pci_quirk_lookup_id snd
 alias symbol:snd_card_create snd
 alias symbol:snd_midi_event_reset_encode snd_seq_midi_event
 alias symbol:irias_add_string_attrib irda
@@ -267,7 +266,6 @@ alias symbol:snd_timer_open snd_timer
 alias symbol:rt2800_wait_wpdma_ready rt2800lib
 alias symbol:v9fs_get_trans_by_name 9pnet
 alias symbol:serio_unregister_driver serio
-alias symbol:rtl_pci_resume rtlwifi
 alias symbol:rc_repeat rc_core
 alias symbol:snd_unregister_oss_device snd
 alias symbol:gameport_start_polling gameport
@@ -371,7 +369,6 @@ alias symbol:cdrom_get_media_event cdrom
 alias symbol:phy_device_free libphy
 alias symbol:ath9k_hw_puttxbuf ath9k_hw
 alias symbol:ath9k_hw_putrxbuf ath9k_hw
-alias symbol:rtl_pci_disconnect rtlwifi
 alias symbol:hostap_set_hostapd hostap
 alias symbol:irlap_open irda
 alias symbol:iriap_open irda
@@ -504,7 +501,6 @@ alias symbol:snd_ctl_boolean_stereo_info snd
 alias symbol:__ieee80211_get_assoc_led_name mac80211
 alias symbol:ieee80211_ctstoself_duration mac80211
 alias symbol:ath9k_hw_btcoex_set_weight ath9k_hw
-alias symbol:rtl_pci_suspend rtlwifi
 alias symbol:fuse_request_send fuse
 alias symbol:v4l2_ctrl_new_custom videodev
 alias symbol:wimax_dev_init wimax
@@ -517,7 +513,6 @@ alias symbol:rtl92c_phy_set_bw_mode rtl8192c_common
 alias symbol:vb2_reqbufs videobuf2_core
 alias symbol:ieee80211_ready_on_channel mac80211
 alias symbol:v9fs_register_trans 9pnet
-alias symbol:rtl_pci_probe rtlwifi
 alias symbol:snd_timer_stop snd_timer
 alias symbol:ath9k_hw_stopdmarecv ath9k_hw
 alias symbol:cfg80211_ready_on_channel cfg80211
@@ -620,7 +615,6 @@ alias symbol:p9_client_getlock_dotl 9pnet
 alias symbol:hostap_add_interface hostap
 alias symbol:ieee80211_start_tx_ba_session mac80211
 alias symbol:v4l2_fh_is_singular videodev
-alias symbol:ssb_pcicore_dev_irqvecs_enable ssb
 alias symbol:rndis_rx_fixup rndis_host
 alias symbol:cfg80211_connect_result cfg80211
 alias symbol:usb_serial_handle_sysrq_char usbserial
@@ -838,7 +832,6 @@ alias symbol:rc_core_debug rc_core
 alias symbol:icmpv6_err_convert ipv6
 alias symbol:vb2_plane_vaddr videobuf2_core
 alias symbol:rt2800_write_beacon rt2800lib
-alias symbol:ssb_bus_pcibus_register ssb
 alias symbol:videobuf_streamoff videobuf_core
 alias symbol:ad714x_remove ad714x
 alias symbol:hostap_init_data hostap
@@ -968,7 +961,6 @@ alias symbol:ieee80211_chswitch_done mac80211
 alias symbol:rc_register_device rc_core
 alias symbol:rt2x00usb_disconnect rt2x00usb
 alias symbol:fl6_sock_lookup ipv6
-alias symbol:snd_pci_quirk_lookup snd
 alias symbol:snd_info_free_entry snd
 alias symbol:ath9k_hw_reset_calvalid ath9k_hw
 alias symbol:ieee80211_get_tkip_p2k mac80211
@@ -1219,7 +1211,6 @@ alias symbol:snd_register_device_for_dev snd
 alias symbol:rtl_ps_disable_nic rtlwifi
 alias symbol:cfg80211_wext_giwrange cfg80211
 alias symbol:ip6_dst_lookup ipv6
-alias symbol:ssb_pcihost_register ssb
 alias symbol:lbs_debug libertas
 alias symbol:ieee80211_free_hw mac80211
 alias symbol:hci_resume_dev bluetooth

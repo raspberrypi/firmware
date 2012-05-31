@@ -417,8 +417,10 @@ kernel/drivers/media/video/gspca/gspca_zc3xx.ko: kernel/drivers/media/video/gspc
 kernel/drivers/media/video/gspca/m5602/gspca_m5602.ko: kernel/drivers/media/video/gspca/gspca_main.ko kernel/drivers/media/video/videodev.ko
 kernel/drivers/media/video/gspca/stv06xx/gspca_stv06xx.ko: kernel/drivers/media/video/gspca/gspca_main.ko kernel/drivers/media/video/videodev.ko
 kernel/drivers/media/video/gspca/gl860/gspca_gl860.ko: kernel/drivers/media/video/gspca/gspca_main.ko kernel/drivers/media/video/videodev.ko
+kernel/drivers/media/video/hdpvr/hdpvr.ko: kernel/drivers/media/video/v4l2-common.ko kernel/drivers/media/video/videodev.ko
 kernel/drivers/media/video/s2255drv.ko: kernel/drivers/media/video/videobuf-vmalloc.ko kernel/drivers/media/video/videobuf-core.ko kernel/drivers/media/video/v4l2-common.ko kernel/drivers/media/video/videodev.ko
 kernel/drivers/media/video/uvc/uvcvideo.ko: kernel/drivers/media/video/videodev.ko
+kernel/drivers/watchdog/bcm2708_wdog.ko:
 kernel/drivers/leds/ledtrig-timer.ko:
 kernel/drivers/leds/ledtrig-heartbeat.ko:
 kernel/drivers/leds/ledtrig-default-on.ko:
@@ -509,6 +511,7 @@ kernel/sound/drivers/snd-serial-u16550.ko: kernel/sound/core/snd-rawmidi.ko kern
 kernel/sound/drivers/snd-mtpav.ko: kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
 kernel/sound/drivers/mpu401/snd-mpu401-uart.ko: kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
 kernel/sound/drivers/mpu401/snd-mpu401.ko: kernel/sound/drivers/mpu401/snd-mpu401-uart.ko kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
+kernel/sound/arm/snd-bcm2835.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/core/snd-page-alloc.ko
 kernel/sound/usb/snd-usb-audio.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd-page-alloc.ko kernel/sound/core/snd-hwdep.ko kernel/sound/usb/snd-usbmidi-lib.ko kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
 kernel/sound/usb/snd-usbmidi-lib.ko: kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
 kernel/sound/usb/misc/snd-ua101.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd-page-alloc.ko kernel/sound/usb/snd-usbmidi-lib.ko kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd.ko
