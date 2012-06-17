@@ -41,6 +41,8 @@ kernel/fs/binfmt_misc.ko
 kernel/fs/reiserfs/reiserfs.ko
 kernel/fs/squashfs/squashfs.ko
 kernel/fs/isofs/isofs.ko
+kernel/fs/hfsplus/hfsplus.ko
+kernel/fs/hfs/hfs.ko
 kernel/fs/cifs/cifs.ko
 kernel/fs/ntfs/ntfs.ko
 kernel/fs/fuse/fuse.ko
