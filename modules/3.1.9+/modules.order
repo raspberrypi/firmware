@@ -43,6 +43,7 @@ kernel/fs/squashfs/squashfs.ko
 kernel/fs/isofs/isofs.ko
 kernel/fs/hfsplus/hfsplus.ko
 kernel/fs/hfs/hfs.ko
+kernel/fs/nfsd/nfsd.ko
 kernel/fs/cifs/cifs.ko
 kernel/fs/ntfs/ntfs.ko
 kernel/fs/fuse/fuse.ko
@@ -434,6 +435,10 @@ kernel/drivers/media/video/uvc/uvcvideo.ko
 kernel/drivers/media/radio/si470x/radio-usb-si470x.ko
 kernel/drivers/media/radio/dsbr100.ko
 kernel/drivers/media/radio/radio-mr800.ko
+kernel/drivers/media/dvb/dvb-core/dvb-core.ko
+kernel/drivers/media/dvb/siano/smsmdtv.ko
+kernel/drivers/media/dvb/siano/smsdvb.ko
+kernel/drivers/media/dvb/siano/smsusb.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko
 kernel/drivers/md/raid1.ko
 kernel/drivers/md/raid456.ko
