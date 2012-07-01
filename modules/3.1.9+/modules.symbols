@@ -725,6 +725,7 @@ alias symbol:dm_table_get_mode dm_mod
 alias symbol:rt2x00mac_remove_interface rt2x00lib
 alias symbol:ieee80211_start_tx_ba_cb_irqsafe mac80211
 alias symbol:irlmp_service_to_hint irda
+alias symbol:garp_request_join garp
 alias symbol:ieee80211_sta_block_awake mac80211
 alias symbol:nf_conntrack_find_get nf_conntrack
 alias symbol:snd_rawmidi_transmit_ack snd_rawmidi
@@ -933,6 +934,7 @@ alias symbol:set_h245_addr_hook nf_conntrack_h323
 alias symbol:seq_print_acct nf_conntrack
 alias symbol:stp_proto_register stp
 alias symbol:inet6_csk_bind_conflict ipv6
+alias symbol:garp_register_application garp
 alias symbol:ieee80211_rts_duration mac80211
 alias symbol:cfg80211_del_sta cfg80211
 alias symbol:ip6_route_output ipv6
@@ -1075,6 +1077,7 @@ alias symbol:snd_seq_event_port_detach snd_seq
 alias symbol:ssb_device_enable ssb
 alias symbol:phy_ethtool_sset libphy
 alias symbol:phy_ethtool_gset libphy
+alias symbol:garp_unregister_application garp
 alias symbol:hci_find_ltk bluetooth
 alias symbol:btmrvl_interrupt btmrvl
 alias symbol:snd_ctl_remove snd
@@ -1090,6 +1093,7 @@ alias symbol:lirc_dev_fop_ioctl lirc_dev
 alias symbol:nfc_register_device nfc
 alias symbol:eeprom_93cx6_multiread eeprom_93cx6
 alias symbol:irlmp_update_client irda
+alias symbol:garp_uninit_applicant garp
 alias symbol:usb_serial_generic_disconnect usbserial
 alias symbol:slhc_toss slhc
 alias symbol:fuse_conn_init fuse
@@ -1356,6 +1360,7 @@ alias symbol:snd_midi_event_free snd_seq_midi_event
 alias symbol:i2400m_bm_cmd_prepare i2400m
 alias symbol:lbtf_debug libertas_tf
 alias symbol:llc_sap_close llc
+alias symbol:garp_request_leave garp
 alias symbol:ad714x_probe ad714x
 alias symbol:mdiobus_unregister libphy
 alias symbol:p9_payload_gup 9pnet
@@ -1835,6 +1840,7 @@ alias symbol:usb_ftdi_elan_edset_flush ftdi_elan
 alias symbol:snd_pcm_lib_writev snd_pcm
 alias symbol:irlmp_get_discoveries irda
 alias symbol:__nf_ct_expect_find nf_conntrack
+alias symbol:garp_init_applicant garp
 alias symbol:usbnet_generic_cdc_bind cdc_ether
 alias symbol:ipv6_find_hdr ip6_tables
 alias symbol:hashbin_new irda

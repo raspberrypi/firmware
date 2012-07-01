@@ -559,6 +559,7 @@ kernel/net/core/pktgen.ko
 kernel/net/802/p8022.ko
 kernel/net/802/psnap.ko
 kernel/net/802/stp.ko
+kernel/net/802/garp.ko
 kernel/net/netfilter/nfnetlink.ko
 kernel/net/netfilter/nfnetlink_queue.ko
 kernel/net/netfilter/nfnetlink_log.ko
@@ -703,6 +704,7 @@ kernel/net/ipv6/xfrm6_mode_transport.ko
 kernel/net/ipv6/xfrm6_mode_tunnel.ko
 kernel/net/ipv6/xfrm6_mode_beet.ko
 kernel/net/ipv6/sit.ko
+kernel/net/8021q/8021q.ko
 kernel/net/wireless/cfg80211.ko
 kernel/net/wireless/lib80211.ko
 kernel/net/wireless/lib80211_crypt_wep.ko

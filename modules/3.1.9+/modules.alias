@@ -4759,6 +4759,7 @@ alias xfrm-mode-10-0 xfrm6_mode_transport
 alias xfrm-mode-10-1 xfrm6_mode_tunnel
 alias xfrm-mode-10-4 xfrm6_mode_beet
 alias netdev-sit0 sit
+alias rtnl-link-vlan 8021q
 alias net-pf-15 af_key
 alias rtnl-link-bridge bridge
 alias net-pf-23 irda
