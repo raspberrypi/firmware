@@ -25,6 +25,7 @@ alias usb:v04CCp2533d*dc*dsc*dp*ic*isc*ip* pn533
 alias scsi:t-0x04* sr_mod
 alias scsi:t-0x05* sr_mod
 alias block-major-11-* sr_mod
+alias platform:bcm2708_spi spi_bcm2708
 alias usb:v08D1p0001d*dc*dsc*dp*ic*isc*ip* catc
 alias usb:v0423p000Cd*dc*dsc*dp*ic*isc*ip* catc
 alias usb:v0423p000Ad*dc*dsc*dp*ic*isc*ip* catc
@@ -3321,6 +3322,12 @@ alias usb:v0710p0001d*dc*dsc*dp*ic*isc*ip* whiteheat
 alias usb:v0710p8001d*dc*dsc*dp*ic*isc*ip* whiteheat
 alias usb:v1D5Fp1004d*dc*dsc*dp*ic*isc*ip* vivopay_serial
 alias usb:v1CBEp0103d*dc*dsc*dp*ic*isc*ip* zio
+alias i2c:ad7148_captouch ad714x_i2c
+alias i2c:ad7147a_captouch ad714x_i2c
+alias i2c:ad7147_captouch ad714x_i2c
+alias i2c:ad7143_captouch ad714x_i2c
+alias i2c:ad7142_captouch ad714x_i2c
+alias i2c:adxl34x adxl34x_i2c
 alias usb:v0BC7p0006d*dc*dsc*dp*ic*isc*ip* ati_remote
 alias usb:v0BC7p0005d*dc*dsc*dp*ic*isc*ip* ati_remote
 alias usb:v0BC7p0004d*dc*dsc*dp*ic*isc*ip* ati_remote
@@ -3343,6 +3350,7 @@ alias input:b*v*p*e*-e*3,*k*r*a*6,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*8,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*0,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*k*r*a*m*l*s*f*w* evdev
+alias platform:bcm2708_i2c i2c_bcm2708
 alias char-major-81-* videodev
 alias usb:v06D6p003Dd*dc*dsc*dp*ic*isc*ip* zr364xx
 alias usb:v08CAp2102d*dc*dsc*dp*ic*isc*ip* zr364xx
@@ -3875,6 +3883,7 @@ alias usb:v06E1pA155d*dc*dsc*dp*ic03isc00ip00* radio_usb_si470x
 alias usb:v10C4p818Ad*dc*dsc*dp*ic03isc00ip00* radio_usb_si470x
 alias usb:v04B4p1002d*dc*dsc*dp*ic*isc*ip* dsbr100
 alias usb:v07CApB800d*dc*dsc*dp*ic03isc00ip00* radio_mr800
+alias i2c:au8522 au8522
 alias usb:v2040pC090d*dc*dsc*dp*ic*isc*ip* smsusb
 alias usb:v2040pC080d*dc*dsc*dp*ic*isc*ip* smsusb
 alias usb:v2040pC010d*dc*dsc*dp*ic*isc*ip* smsusb

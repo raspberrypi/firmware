@@ -43,6 +43,7 @@ kernel/drivers/block/loop.ko
 kernel/drivers/char/raw.ko
 kernel/drivers/hid/hid.ko
 kernel/drivers/hid/usbhid/usbhid.ko
+kernel/drivers/i2c/i2c-core.ko
 kernel/drivers/input/input-core.ko
 kernel/drivers/input/mousedev.ko
 kernel/drivers/leds/leds-gpio.ko
