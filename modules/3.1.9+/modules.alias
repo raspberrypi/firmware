@@ -22,6 +22,10 @@ alias aes aes_generic
 alias sdio:c*v0089d1404* iwmc3200top
 alias usb:v04E6p5591d*dc*dsc*dp*ic*isc*ip* pn533
 alias usb:v04CCp2533d*dc*dsc*dp*ic*isc*ip* pn533
+alias scsi:t-0x01* st
+alias char-major-9-* st
+alias scsi:t-0x01* osst
+alias char-major-206-* osst
 alias scsi:t-0x04* sr_mod
 alias scsi:t-0x05* sr_mod
 alias block-major-11-* sr_mod

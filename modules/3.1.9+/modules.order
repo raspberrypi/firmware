@@ -91,6 +91,8 @@ kernel/drivers/block/cryptoloop.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/iwmc3200top/iwmc3200top.ko
 kernel/drivers/nfc/pn533.ko
+kernel/drivers/scsi/st.ko
+kernel/drivers/scsi/osst.ko
 kernel/drivers/scsi/sr_mod.ko
 kernel/drivers/scsi/scsi_wait_scan.ko
 kernel/drivers/spi/spi-bcm2708.ko
