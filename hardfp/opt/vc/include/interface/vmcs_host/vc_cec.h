@@ -93,7 +93,7 @@ typedef enum CEC_DeviceTypes{
    CEC_DeviceType_Switch       = 6, /**<CEC switch */
    CEC_DeviceType_VidProc      = 7, /**<Video processor */
 
-   CEC_DeviceType_Invalid      = 0xF, //RESERVED - DO NOT USE
+   CEC_DeviceType_Invalid      = 0xF //RESERVED - DO NOT USE
 } CEC_DEVICE_TYPE_T;
 
 /**
@@ -393,7 +393,7 @@ typedef enum {
    VC_CEC_REMOTE_PRESSED  = (1 << 4), /**<<Vendor Remote Button Down> */
    VC_CEC_REMOTE_RELEASE  = (1 << 5), /**<<Vendor Remote Button Up> */
    VC_CEC_LOGICAL_ADDR    = (1 << 6), /**<New logical address allocated or released */
-   VC_CEC_TOPOLOGY        = (1 << 7), /**<Topology is available */
+   VC_CEC_TOPOLOGY        = (1 << 7)  /**<Topology is available */
 } VC_CEC_NOTIFY_T;
 
 
