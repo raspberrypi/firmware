@@ -1,7 +1,7 @@
 
 To build the test apps, first build the libs:
-make -C hello_pi/libs/ilclient
-make -C hello_pi/libs/vgfont
+make -C libs/ilclient
+make -C libs/vgfont
 
 then by entering each test app directory and run make. E.g.
   cd hello_world
