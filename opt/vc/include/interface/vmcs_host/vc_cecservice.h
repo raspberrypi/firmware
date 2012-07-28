@@ -25,9 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// CEC service host API, 
-// See vc_cec.h and vc_cecservice_defs.h for related constants
-
+/*
+ * CEC service host API, 
+ * See vc_cec.h and vc_cecservice_defs.h for related constants
+ */
 
 #ifndef _VC_CECSERVICE_H_
 #define _VC_CECSERVICE_H_
@@ -43,6 +44,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * This API defines the controls for CEC. HDMI must be powered on before
  * CEC is available (subject to CEC support in TV). 
  *
+ * In general, a zero return value indicates success; a negative return
+ * value indicates error in VCHI layer; a positive return value indicates
+ * alternative return value from the server
  */
 
 /**
@@ -298,7 +302,8 @@ VCHPRE_ int VCHPOST_ vc_cec_get_vendor_id(const CEC_AllDevices_T logical_address
  *
  * @param logical address
  *
- * @return the default device type
+ * @return the default device type, if there is any error, the return device
+ *         type will be CEC_DeviceType_Invalid
  *
  ************************************************************/
 VCHPRE_ CEC_DEVICE_TYPE_T VCHPOST_ vc_cec_device_type(const CEC_AllDevices_T logical_address);
@@ -319,6 +324,74 @@ VCHPRE_ int VCHPOST_ vc_cec_send_message2(const VC_CEC_MESSAGE_T *message);
 VCHPRE_ int VCHPOST_ vc_cec_param2message( const uint32_t reason, const uint32_t param1, 
                                            const uint32_t param2, const uint32_t param3,
                                            const uint32_t param4, VC_CEC_MESSAGE_T *message);
+
+//Extra API if CEC is running in passive mode
+//If CEC is not in passive mode the following 3 functions always
+//return failure
+/**
+ * <DFN> vc_cec_poll_address </DFN> sets and polls a particular address to find out
+ * its availability in the CEC network. Only available when CEC is running in passive
+ * mode. The host can only call this function during logical address allocation stage.
+ *
+ * @param logical address to try
+ *
+ * @return 0 if poll is successful (address is occupied)
+ *        >0 if poll is unsuccessful (Error code is in VC_CEC_ERROR_T in vc_cec.h)
+ *        <0 VCHI errors
+ */
+VCHPRE_ int VCHPOST_ vc_cec_poll_address(const CEC_AllDevices_T logical_address);
+
+/**
+ * <DFN> vc_cec_set_logical_address </DFN> sets the logical address, device type
+ * and vendor ID to be in use. Only available when CEC is running in passive
+ * mode. It is the responsibility of the host to make sure the logical address
+ * is actually free to be used. Physical address will be what is read from EDID.
+ *
+ * @param logical address
+ *
+ * @param device type
+ *
+ * @param vendor ID
+ *
+ * @return 0 if successful, non-zero otherwise
+ */
+VCHPRE_ int VCHPOST_ vc_cec_set_logical_address(const CEC_AllDevices_T logical_address,
+                                                const CEC_DEVICE_TYPE_T device_type,
+                                                const uint32_t vendor_id);
+
+/**
+ * <DFN> vc_cec_add_device </DFN> adds a new device to topology. 
+ * Only available when CEC is running in passive mode. Device will be
+ * automatically removed from topology if a failed xmit is detected.
+ * If last_device is true, it will trigger a topology computation
+ * (and may trigger a topology callback).
+ *
+ * @param logical address
+ * 
+ * @param physical address
+ *
+ * @param device type
+ *
+ * @param true if this is the last device, false otherwise
+ *
+ * @return 0 if successful, non-zero otherwise
+ */
+VCHPRE_ int VCHPOST_ vc_cec_add_device(const CEC_AllDevices_T logical_address,
+                                       const uint16_t physical_address,
+                                       const CEC_DEVICE_TYPE_T device_type,
+                                       bool_t last_device);
+
+/**
+ * <DFN> vc_cec_set_passive </DFN> enables and disables passive mode.
+ * Call this function first (with VC_TRUE as the argument) to enable
+ * passive mode before calling any of the above passive API functions
+ *
+ * @param TRUE to enable passive mode, FALSE to disable
+ * 
+ * @return 0 if successful, non-zero otherwise
+ */
+VCHPRE_ int VCHPOST_ vc_cec_set_passive(bool_t enabled);
+
 
 //API for some common CEC messages
 /** 

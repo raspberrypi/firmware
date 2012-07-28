@@ -25,10 +25,18 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// CEC related constants - shared by both host and vc.
+/*
+ * CEC related constants - shared by both host and vc.
+ */
 
 #ifndef _VC_CEC_H_
 #define _VC_CEC_H_
+
+#ifndef STRINGIFY
+#define STRINGIFY(x) #x
+#define TOSTRING(x)  STRINGIFY(x)
+#endif
+
 //Broadcast address and TV logical address
 #define CEC_BROADCAST_ADDR       0x0F
 #define CEC_TV_ADDRESS           0x00
@@ -482,4 +490,18 @@ typedef void (*CEC_CALLBACK_T)(void *client_p, uint32_t reason, uint32_t param1,
 #define CEC_CB_OPCODE(x) (((x) >> 8) & 0xFF) /** Get the opcode from first parameter */
 #define CEC_CB_OPERAND1(x) (((x) >> 16) & 0xFF) /** Get the button code from <User Control Pressed> or the first operand of the opcode */
 #define CEC_CB_OPERAND2(x) (((x) >> 24) & 0xFF) /** Get the second operand of opcode */
+
+//CEC service return code
+typedef enum {
+   VC_CEC_SUCCESS                = 0, /** OK */
+   VC_CEC_ERROR_NO_ACK           = 1, /** No acknowledgement */
+   VC_CEC_ERROR_SHUTDOWN         = 2, /** In the process of shutting down */
+   VC_CEC_ERROR_BUSY             = 3, /** block is busy */
+   VC_CEC_ERROR_NO_LA            = 4, /** No logical address */
+   VC_CEC_ERROR_NO_PA            = 5, /** No physical address */
+   VC_CEC_ERROR_NO_TOPO          = 6, /** No topology */
+   VC_CEC_ERROR_INVALID_FOLLOWER = 7, /** Invalid follower */
+   VC_CEC_ERROR_INVALID_ARGUMENT = 8  /** Invalid arguments */
+} VC_CEC_ERROR_T;
+
 #endif

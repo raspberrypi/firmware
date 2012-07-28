@@ -25,13 +25,38 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// CEC service command enumeration.
+/*
+ * CEC service command enumeration and parameter types.
+ */
+
+/**
+ * \file
+ * This file contains definition shared by host side and
+ * Videocore side CEC service:
+ *
+ * In general, a zero return value indicates success of the function
+ * A non-zero value indicates VCHI error
+ * A positive value indicates alternative return value (for some functions).
+ *
+ */
+
 
 #ifndef _VC_CECSERVICE_DEFS_H_
 #define _VC_CECSERVICE_DEFS_H_
 #include "vcinclude/common.h"
+#include "interface/vcos/vcos.h"
+#include "interface/vcos/vcos_logging.h"
 #include "interface/vchi/message_drivers/message.h"
 
+//CEC VCOS logging stuff
+#define CECHOST_LOG_CATEGORY (&cechost_log_category)
+#define vc_cec_log_trace(...) _VCOS_LOG_X(CECHOST_LOG_CATEGORY, VCOS_LOG_TRACE, __VA_ARGS__)
+#define vc_cec_log_warn(...)  _VCOS_LOG_X(CECHOST_LOG_CATEGORY, VCOS_LOG_WARN, __VA_ARGS__)
+#define vc_cec_log_error(...) _VCOS_LOG_X(CECHOST_LOG_CATEGORY, VCOS_LOG_ERROR, __VA_ARGS__)
+#define vc_cec_log_info(...)  _VCOS_LOG_X(CECHOST_LOG_CATEGORY, VCOS_LOG_INFO, __VA_ARGS__)
+extern VCOS_LOG_CAT_T cechost_log_category; //The actual object lives in CEC host side service code
+
+#define VC_CECSERVICE_VER 1
 #define CECSERVICE_MSGFIFO_SIZE 1024
 #define CECSERVICE_CLIENT_NAME MAKE_FOURCC("CECS")
 #define CECSERVICE_NOTIFY_NAME MAKE_FOURCC("CECN")
@@ -51,6 +76,14 @@ typedef enum {
    VC_CEC_SET_OSD_NAME,
    VC_CEC_GET_PHYSICAL_ADDR,
    VC_CEC_GET_VENDOR_ID,
+
+   //The following 3 commands are used when CEC middleware is 
+   //running in passive mode (i.e. it does not allocate 
+   //logical address automatically)
+   VC_CEC_POLL_ADDR,
+   VC_CEC_SET_LOGICAL_ADDR,
+   VC_CEC_ADD_DEVICE,
+   VC_CEC_SET_PASSIVE,
    //Add more commands here
    VC_CEC_END_OF_LIST
 } VC_CEC_CMD_CODE_T;
@@ -111,4 +144,39 @@ typedef struct {
 //Parameter: logical address (CEC_AllDevices_T sent as uint32_t)
 //Reply: (uint32_t vendor id)
 
-#endif
+//POLL_LOGICAL_ADDR (only for passive mode)
+//Used by host to test a logical address to see if it is available for use
+//Only available if CEC is compiled in passive mode and while the host
+//is testing the availability of a logical address
+//Parameter: logical address
+//Reply: 
+
+//SET_LOGICAL_ADDR [(only for passive mode) This will be changed when we support multiple logical addresses]
+//Set the logical address used 
+//Only available if CEC is compiled in passive mode
+//Parameter: logical address, device type, vendor ID
+//Reply: (int32_t - zero means success, non-zero otherwise)
+//This function will result in a VC_CEC_LOGICAL_ADDR callback
+typedef struct {
+   uint32_t logical_address;
+   uint32_t device_type;
+   uint32_t vendor_id;
+} CEC_SET_LOGICAL_ADDR_PARAM_T;
+   
+//ADD_DEVICE (only for passive mode)
+//Only available if CEC is compiled in passive mode
+//Parameter: logical address, physical address, device type, last device?
+//Reply: (int32_t - zero means success, non-zero otherwise)
+typedef struct {
+   uint32_t logical_address;  /**<logical address */
+   uint32_t physical_address; /**<16-bit packed physical address in big endian */
+   uint32_t device_type;      /**<CEC_DEVICE_TYPE_T */
+   uint32_t last_device;      /**<True (non-zero) or false (zero) */
+} CEC_ADD_DEVICE_PARAM_T;
+
+//SET PASSIVE (only for passive mode)
+//Enable/disable passive mode
+//Parameter: non-zero to enable passive mode, zero to disable
+//Reply: (int32_t - zero means success, non-zero otherwise, non zero will be VCHI errors)
+
+#endif //#ifndef _VC_CECSERVICE_DEFS_H_

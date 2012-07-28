@@ -25,7 +25,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// TV service command enumeration
+/*
+ * TV service command enumeration and parameter types.
+ */
 
 #ifndef _VC_TVSERVICE_DEFS_H_
 #define _VC_TVSERVICE_DEFS_H_
@@ -45,9 +47,7 @@ typedef enum {
    VC_TV_HDMI_ON_PREFERRED,
    VC_TV_HDMI_ON_BEST,
    VC_TV_HDMI_ON_EXPLICIT,
-   #ifndef PLATFORM_NO_VEC
    VC_TV_SDTV_ON,
-   #endif
    VC_TV_OFF,
    VC_TV_QUERY_SUPPORTED_MODES,
    VC_TV_QUERY_MODE_SUPPORT,
@@ -123,7 +123,6 @@ typedef struct {
    uint32_t mode;
 } TV_HDMI_ON_EXPLICIT_PARAM_T;
 
-#ifndef PLATFORM_NO_VEC
 //SDTV_ON
 //Parameters: SDTV mode, aspect ratio
 //Reply: Same as above
@@ -131,7 +130,6 @@ typedef struct {
    uint32_t mode;
    uint32_t aspect;
 } TV_SDTV_ON_PARAM_T;
-#endif
 
 //TV_OFF
 //Parameters: none

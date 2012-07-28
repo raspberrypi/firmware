@@ -25,14 +25,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// SDTV common host header for TV service
-
+/*
+ * SDTV common host header for TV service
+ */
+ 
 #ifndef _VC_SDTV_H_
 #define _VC_SDTV_H_
-//If this is defined, we can't use VEC. Make sure this file is not included
-#ifdef PLATFORM_NO_VEC
-#error "No VEC present for SDTV!"
-#endif
 
 /** Different SDTV modes */
 /** colour */
