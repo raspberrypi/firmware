@@ -402,6 +402,7 @@ typedef enum {
    VC_CEC_REMOTE_RELEASE  = (1 << 5), /**<<Vendor Remote Button Up> */
    VC_CEC_LOGICAL_ADDR    = (1 << 6), /**<New logical address allocated or released */
    VC_CEC_TOPOLOGY        = (1 << 7), /**<Topology is available */
+   VC_CEC_LOGICAL_ADDR_LOST = (1 << 15) /**<Only for passive mode, if the logical address is lost for whatever reason, this will be triggered */
 } VC_CEC_NOTIFY_T;
 
 
@@ -439,6 +440,8 @@ typedef enum {
  * VC_CEC_TOPOLOGY         topology bit 
  *                         mask                                                      New topology is avaiable
  *
+ *VC_CEC_LOGICAL_ADDR_LOST Last log addr   Phy addr                                  "Last log addr" is no longer available
+ *
  * Notes: 
  * VC_CEC_BUTTON_RELEASE and VC_CEC_REMOTE_RELEASE (<User Control Release> and <Vendor Remote Button Up> messages respectively)
  * returns the code from the most recent <User Control pressed> <Vendor Remote button up> respectively.
@@ -455,6 +458,9 @@ typedef enum {
  * must explicitly retrieve the entire topology if it wants to know how devices are connected. The bit mask includes our
  * own logical address.
  *
+ * If CEC is running in passive mode, the host will get a VC_CEC_LOGICAL_ADDR_LOST callback if the logical address is
+ * lost (e.g. HDMI mode change). In this case the host should try a new logical address. The physical address returned may 
+ * also change, so the host should check this.
  */
 
 /**
