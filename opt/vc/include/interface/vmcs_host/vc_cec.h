@@ -101,7 +101,7 @@ typedef enum CEC_DeviceTypes{
    CEC_DeviceType_Switch       = 6, /**<CEC switch */
    CEC_DeviceType_VidProc      = 7, /**<Video processor */
 
-   CEC_DeviceType_Invalid      = 0xF, //RESERVED - DO NOT USE
+   CEC_DeviceType_Invalid      = 0xF  //RESERVED - DO NOT USE
 } CEC_DEVICE_TYPE_T;
 
 /**

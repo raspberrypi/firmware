@@ -152,7 +152,7 @@ typedef struct {
  */
 typedef enum {
    HDMI_PIXEL_CLOCK_TYPE_PAL  = 0, /**< Use norminal pixel clock */
-   HDMI_PIXEL_CLOCK_TYPE_NTSC = 1, /**< Multiply norminal pixel clock by 1000/1001 to get the alternative frame rate e.g. 59.94Hz rather than 60, not applicable to all formats */
+   HDMI_PIXEL_CLOCK_TYPE_NTSC = 1  /**< Multiply norminal pixel clock by 1000/1001 to get the alternative frame rate e.g. 59.94Hz rather than 60, not applicable to all formats */
 } HDMI_PIXEL_CLOCK_TYPE_T;
 
 /**
@@ -371,7 +371,7 @@ typedef enum {
    EDID_AUDIO_CHAN_UNSUPPORTED   = (1 << 1), /**<max. no. of channels exceeded */
    EDID_AUDIO_FS_UNSUPPORTED     = (1 << 2), /**<no support for that sampling frequency */
    EDID_AUDIO_BR_UNSUPPORTED     = (1 << 3), /**<max. bitrate exceeded */
-   EDID_AUDIO_SAMP_UNSUPPORTED   = (1 << 4), /**sample size unsupported (pcm only) */
+   EDID_AUDIO_SAMP_UNSUPPORTED   = (1 << 4)  /**sample size unsupported (pcm only) */
 } EDID_AUDIO_SUPPORT_FLAG_T;
 
 /**
@@ -472,7 +472,7 @@ typedef enum {
    VC_HDMI_HDCP_AUTH          = (1 << 5),  /**<HDCP is active */
    VC_HDMI_HDCP_KEY_DOWNLOAD  = (1 << 6),  /**<HDCP key download successful/fail */
    VC_HDMI_HDCP_SRM_DOWNLOAD  = (1 << 7),  /**<HDCP revocation list download successful/fail */
-   VC_HDMI_CHANGING_MODE      = (1 << 8),  /**<HDMI is starting to change mode, clock has not yet been set */
+   VC_HDMI_CHANGING_MODE      = (1 << 8)   /**<HDMI is starting to change mode, clock has not yet been set */
 
 } VC_HDMI_NOTIFY_T;
 
