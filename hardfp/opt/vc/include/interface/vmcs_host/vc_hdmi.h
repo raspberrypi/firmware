@@ -25,12 +25,15 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// HDMI common host header for TV service, defines resolution code which host applications should
-// use for power up command for HDMI
-
+/*
+ * HDMI common host header for TV service, defines resolution code which host applications should
+ * use for power up command for HDMI
+ */
 
 #ifndef _VC_HDMI_H_
 #define _VC_HDMI_H_
+
+#include "vc_hdmi_property.h" /**< All HDMI related properties have been moved to here */
 
 typedef int VC_HDMI_BOOL_T;
 
@@ -100,19 +103,6 @@ typedef enum {
 } HDMI_MODE_T;
 
 /**
- * HDMI output pixel encoding
- */
-typedef enum {
-   HDMI_PIXEL_ENCODING_RGB_LIMITED,
-   HDMI_PIXEL_ENCODING_RGB_FULL,
-   HDMI_PIXEL_ENCODING_YCbCr444_LIMITED,
-   HDMI_PIXEL_ENCODING_YCbCr444_FULL,
-   /** YCbCr 422 are not used at the moment */
-   HDMI_PIXEL_ENCODING_YCbCr422_LIMITED,
-   HDMI_PIXEL_ENCODING_YCbCr422_FULL
-} HDMI_PIXEL_ENCODING_T;
-
-/**
  * Possible values for the Source Product Description type code (in SPD infoframe).
  * Taken from the CEA-861 spec.
  */
@@ -141,29 +131,6 @@ typedef struct {
    char  *description;         /**< Product name (up to 16 characters) */
    HDMI_SPD_TYPE_CODE_T type;  /**< Product type */
 } HDMI_SPD_DATA_T;
-
-/**
- * Properties settings for HDMI, which can be set prior to powering up HDMI. 
- * These properties will persist once set.
- */
-
-/**
- * Pixel clock nudge factor
- */
-typedef enum {
-   HDMI_PIXEL_CLOCK_TYPE_PAL  = 0, /**< Use norminal pixel clock */
-   HDMI_PIXEL_CLOCK_TYPE_NTSC = 1, /**< Multiply norminal pixel clock by 1000/1001 to get the alternative frame rate e.g. 59.94Hz rather than 60, not applicable to all formats */
-} HDMI_PIXEL_CLOCK_TYPE_T;
-
-/**
- * Property type
- */
-typedef enum {
-   HDMI_PROPERTY_PIXEL_ENCODING = 0,   /**< Set pixel encoding, value of property is HDMI_PIXEL_ENCODING_T, default is RGB full range (unless it is not supported) */
-   HDMI_PROPERTY_PIXEL_CLOCK_TYPE = 1, /**< See HDMI_PIXEL_CLOCK_TYPE_T, default is HDMI_PIXEL_CLOCK_TYPE_PAL */
-   HDMI_PROPERTY_CONTENT_TYPE = 2      /**< Set content type flag EDID_ContentType_T */
-   //More properties later...
-} HDMI_PROPERTY_T;
 
 /**
  * These are CEA mode numbers (sent in AVI infoframe) for different resolutions as define in CEA-861
@@ -446,18 +413,6 @@ typedef enum {
 } EDID_AudioLFEFB;
 
 /**
- * Content type: the enum is the actual value in AVI infoframe + 1
- * because NODATA and Graphics both have value zero
- */
-typedef enum {
-   EDID_ContentType_NODATA   = 0x0, /**<Content type none */
-   EDID_ContentType_Graphics = 0x1, /**<Graphics, ITC must be set to 1 */
-   EDID_ContentType_Photo    = 0x2, /**<Photo */
-   EDID_ContentType_Cinema   = 0x3, /**<Cinema */
-   EDID_ContentType_Game     = 0x4  /**<Game */
-} EDID_ContentType_T;
-
-/**
  * HDMI notifications (defined as a bit mask to be conveniently returned as a state),
  * make sure this does not clash with the values in vc_sdtv.h
  * SDTV notifications start at bit 16.
@@ -517,5 +472,20 @@ typedef enum {
  * @return void
  */
 typedef void (*HDMI_CALLBACK_T)(void *client_p, VC_HDMI_NOTIFY_T reason, uint32_t param1, uint32_t param2);
+
+//TV service error return code
+typedef enum {
+   VC_HDMI_SUCCESS                  = 0, /** OK */
+   VC_HDMI_ERROR_FORMAT_UNSUPPORTED = 1, /** format not supported */
+   VC_HDMI_ERROR_INVALID_FORMAT     = 2, /** invalid format */
+   VC_HDMI_ERROR_INVALID_PROPERTY   = 3, /** invalid property */
+   VC_HDMI_ERROR_OUT_OF_RANGE       = 4, /** invalid values passed to set property */
+   VC_HDMI_ERROR_INVALID_INFOFRAME  = 5, /** invalid infoframe */
+} VC_HDMI_ERROR_T;
+
+ //Defines for backward code compatibilty (these were originally in hdmi.h)
+typedef VC_HDMI_ERROR_T HDMI_RESULT_T;
+#define HDMI_RESULT_SUCCESS (VC_HDMI_SUCCESS)
+#define HDMI_RESULT_FAILED  (VC_HDMI_ERROR_FORMAT_UNSUPPORTED)
 
 #endif
