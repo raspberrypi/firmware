@@ -54,7 +54,7 @@ typedef enum
 typedef enum {
    VCHI_CRC_NOTHING = -1,
    VCHI_CRC_PER_SERVICE = 0,
-   VCHI_CRC_EVERYTHING = 1,
+   VCHI_CRC_EVERYTHING = 1
 } VCHI_CRC_CONTROL_T;
 
 //callback reasons when an event occurs on a service
