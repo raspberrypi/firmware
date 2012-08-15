@@ -69,7 +69,9 @@ kernel/crypto/sha256_generic.ko
 kernel/crypto/sha512_generic.ko
 kernel/crypto/wp512.ko
 kernel/crypto/tgr192.ko
+kernel/crypto/gf128mul.ko
 kernel/crypto/ecb.ko
+kernel/crypto/xts.ko
 kernel/crypto/aes_generic.ko
 kernel/crypto/cast5.ko
 kernel/crypto/arc4.ko

@@ -104,6 +104,7 @@ alias symbol:arpt_alloc_initial_table arp_tables
 alias symbol:v4l2_subdev_queryctrl videodev
 alias symbol:zlib_inflateIncomp zlib_inflate
 alias symbol:ax25_listen_register ax25
+alias symbol:gf128mul_lle gf128mul
 alias symbol:flexcop_pass_dmx_packets b2c2_flexcop
 alias symbol:dib0070_wbd_offset dib0070
 alias symbol:adxl34x_probe adxl34x
@@ -668,6 +669,8 @@ alias symbol:cfg80211_wext_giwtxpower cfg80211
 alias symbol:ip6_xmit ipv6
 alias symbol:w1_remove_master_device wire
 alias symbol:o2nm_get_node_by_ip ocfs2_nodemanager
+alias symbol:gf128mul_init_64k_lle gf128mul
+alias symbol:gf128mul_init_64k_bbe gf128mul
 alias symbol:xt_find_match x_tables
 alias symbol:dvb_usb_device_exit dvb_usb
 alias symbol:rtl_ps_enable_nic rtlwifi
@@ -822,6 +825,8 @@ alias symbol:nf_nat_icmp_reply_translation nf_nat
 alias symbol:ct_sip_get_sdp_header nf_conntrack_sip
 alias symbol:net_ipv6_ctl_path ipv6
 alias symbol:rt2800_link_stats rt2800lib
+alias symbol:gf128mul_init_4k_lle gf128mul
+alias symbol:gf128mul_init_4k_bbe gf128mul
 alias symbol:raid5_set_cache_size raid456
 alias symbol:macvlan_dellink macvlan
 alias symbol:usbnet_cdc_status cdc_ether
@@ -1043,6 +1048,7 @@ alias symbol:dvb_unregister_frontend dvb_core
 alias symbol:async_syndrome_val async_pq
 alias symbol:ieee80211_stop_queues mac80211
 alias symbol:nf_ct_expect_unregister_notifier nf_conntrack
+alias symbol:gf128mul_free_64k gf128mul
 alias symbol:stv090x_set_gpio stv090x
 alias symbol:ieee80211_enable_dyn_ps mac80211
 alias symbol:simple_tuner_attach tuner_simple
@@ -1064,6 +1070,8 @@ alias symbol:ax25_display_timer ax25
 alias symbol:v4l2_prio_close videodev
 alias symbol:ip_set_test ip_set
 alias symbol:ezusb_writememory usbserial
+alias symbol:gf128mul_64k_lle gf128mul
+alias symbol:gf128mul_64k_bbe gf128mul
 alias symbol:ieee80211_stop_rx_ba_session mac80211
 alias symbol:p9_idpool_get 9pnet
 alias symbol:cfg80211_send_deauth cfg80211
@@ -1113,6 +1121,8 @@ alias symbol:ath9k_cmn_get_curchannel ath9k_common
 alias symbol:rt2x00mac_flush rt2x00lib
 alias symbol:ieee80211_unregister_hw mac80211
 alias symbol:rtl92c_dm_init rtl8192c_common
+alias symbol:gf128mul_4k_lle gf128mul
+alias symbol:gf128mul_4k_bbe gf128mul
 alias symbol:dibusb_read_eeprom_byte dvb_usb_dibusb_common
 alias symbol:ieee80211_get_buffered_bc mac80211
 alias symbol:usb_serial_generic_resume usbserial
@@ -1261,6 +1271,7 @@ alias symbol:p9_client_destroy 9pnet
 alias symbol:lbs_resume libertas
 alias symbol:cfg80211_send_unprot_disassoc cfg80211
 alias symbol:isl6421_attach isl6421
+alias symbol:gf128mul_x_ble gf128mul
 alias symbol:cfg80211_get_mesh cfg80211
 alias symbol:usb_serial_generic_process_read_urb usbserial
 alias symbol:rt2x00mac_rfkill_poll rt2x00lib
@@ -1920,6 +1931,7 @@ alias symbol:rtl_usb_probe rtlwifi
 alias symbol:__nf_conntrack_find nf_conntrack
 alias symbol:usbnet_cdc_bind cdc_ether
 alias symbol:bitmap_close_sync md_mod
+alias symbol:gf128mul_bbe gf128mul
 alias symbol:snd_interval_refine snd_pcm
 alias symbol:videobuf_dvb_dealloc_frontends videobuf_dvb
 alias symbol:p54_parse_firmware p54common
