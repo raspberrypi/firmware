@@ -3510,6 +3510,17 @@ alias input:b*v*p*e*-e*3,*k*r*a*6,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*8,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*0,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*k*r*a*m*l*s*f*w* evdev
+alias i2c:rx8025 rtc_ds1307
+alias i2c:pt7c4338 rtc_ds1307
+alias i2c:mcp7941x rtc_ds1307
+alias i2c:m41t00 rtc_ds1307
+alias i2c:ds3231 rtc_ds1307
+alias i2c:ds1340 rtc_ds1307
+alias i2c:ds1388 rtc_ds1307
+alias i2c:ds1339 rtc_ds1307
+alias i2c:ds1338 rtc_ds1307
+alias i2c:ds1337 rtc_ds1307
+alias i2c:ds1307 rtc_ds1307
 alias platform:bcm2708_i2c i2c_bcm2708
 alias char-major-81-* videodev
 alias i2c:tuner tuner

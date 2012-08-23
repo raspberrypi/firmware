@@ -293,6 +293,7 @@ kernel/drivers/input/ff-memless.ko
 kernel/drivers/input/input-polldev.ko
 kernel/drivers/input/joydev.ko
 kernel/drivers/input/evdev.ko
+kernel/drivers/rtc/rtc-ds1307.ko
 kernel/drivers/i2c/busses/i2c-bcm2708.ko
 kernel/drivers/i2c/i2c-dev.ko
 kernel/drivers/media/common/tuners/tuner-xc2028.ko
