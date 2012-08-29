@@ -64,6 +64,8 @@ typedef enum {
    VC_TV_TEST_MODE_STOP,
    VC_TV_DDC_READ,
    VC_TV_SET_ATTACHED,
+   VC_TV_SET_PROP,
+   VC_TV_GET_PROP,
    //Add more commands here
    VC_TV_END_OF_LIST
 } VC_TV_CMD_CODE_T;
@@ -284,5 +286,27 @@ typedef struct {
    uint32_t offset;
    uint32_t length;
 } TV_DDC_READ_PARAM_T;
+
+//TV_SET_ATTACHED
+//Parameters: uint32_t attached or not (0 = hotplug low, 1 = hotplug high)
+
+//TV_SET_PROP
+//Parameters: parameter type, param1, param2
+//Reply: 0 = set successful, non-zero if error (int32_t) 
+typedef struct {
+   uint32_t prop; /**<HDMI_PROPERTY_T */
+   uint32_t param1; /**<param 1 */
+   uint32_t param2; /**<param 2 */
+} TV_SET_PROP_PARAM_T;
+
+//TV_GET_PROP
+//Parameters: parameter type (uint32_t)
+//Reply param1/param2 of the passed in property and return code
+typedef struct {
+   int32_t  ret; /**<Return code */
+   uint32_t prop; /**<HDMI_PROPERTY_T */
+   uint32_t param1; /**<param 1 */
+   uint32_t param2; /**<param 2 */
+} TV_GET_PROP_PARAM_T;
 
 #endif

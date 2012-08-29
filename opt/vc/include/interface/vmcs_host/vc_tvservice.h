@@ -451,6 +451,33 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_ddc_read(uint32_t offset, uint32_t length, uint8
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_attached(uint32_t attached);
 
 /**
+ * Sets one of the HDMI properties. HDMI properties persist
+ * between HDMI power on/off
+ *
+ * @param property type [in]
+ *
+ * @param param1 of property [in]
+ *
+ * @param param2 of property [in]
+ *
+ * @return zero if successful, non-zero otherwise
+ */
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property(uint32_t property, uint32_t param1, uint32_t param2);
+
+/**
+ * Gets the current value of an HDMI property.
+ *
+ * @param property type [in]
+ *
+ * @param pointer to param1 [out]
+ *
+ * @param pointer to param2 [out]
+ * 
+ * @return zero if success (param1/param2 will be set), non-zero otherwise (param1/param2 will not be set)
+ */
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(uint32_t property, uint32_t *param1, uint32_t *param2);
+
+/**
  * Converts the notification reason to a string.
  *
  * @param reason is the notification reason
