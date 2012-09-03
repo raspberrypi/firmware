@@ -80,7 +80,6 @@ kernel/drivers/video/console/font.ko
 kernel/drivers/video/console/softcursor.ko
 kernel/sound/soundcore.ko
 kernel/net/dns_resolver/dns_resolver.ko
-kernel/net/ipv4/inet_lro.ko
 kernel/net/ipv4/tcp_cubic.ko
 kernel/net/packet/af_packet.ko
 kernel/net/sunrpc/sunrpc.ko

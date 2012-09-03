@@ -91,6 +91,7 @@ kernel/drivers/video/backlight/generic_bl.ko
 kernel/drivers/block/pktcdvd.ko
 kernel/drivers/block/nbd.ko
 kernel/drivers/block/cryptoloop.ko
+kernel/drivers/block/drbd/drbd.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/iwmc3200top/iwmc3200top.ko
 kernel/drivers/nfc/pn533.ko
@@ -418,6 +419,12 @@ kernel/drivers/media/rc/ir-sony-decoder.ko
 kernel/drivers/media/rc/ir-rc5-sz-decoder.ko
 kernel/drivers/media/rc/ir-mce_kbd-decoder.ko
 kernel/drivers/media/rc/ir-lirc-codec.ko
+kernel/drivers/media/rc/ati_remote.ko
+kernel/drivers/media/rc/imon.ko
+kernel/drivers/media/rc/mceusb.ko
+kernel/drivers/media/rc/redrat3.ko
+kernel/drivers/media/rc/streamzap.ko
+kernel/drivers/media/rc/rc-loopback.ko
 kernel/drivers/media/video/videodev.ko
 kernel/drivers/media/video/v4l2-int-device.ko
 kernel/drivers/media/video/v4l2-common.ko
@@ -863,6 +870,7 @@ kernel/net/netfilter/xt_mac.ko
 kernel/net/netfilter/xt_multiport.ko
 kernel/net/netfilter/xt_osf.ko
 kernel/net/netfilter/xt_owner.ko
+kernel/net/netfilter/xt_physdev.ko
 kernel/net/netfilter/xt_pkttype.ko
 kernel/net/netfilter/xt_policy.ko
 kernel/net/netfilter/xt_quota.ko
@@ -922,7 +930,18 @@ kernel/net/ipv4/netfilter/arp_tables.ko
 kernel/net/ipv4/netfilter/arpt_mangle.ko
 kernel/net/ipv4/netfilter/arptable_filter.ko
 kernel/net/ipv4/ipip.ko
+kernel/net/ipv4/ah4.ko
+kernel/net/ipv4/esp4.ko
+kernel/net/ipv4/ipcomp.ko
+kernel/net/ipv4/xfrm4_tunnel.ko
+kernel/net/ipv4/xfrm4_mode_beet.ko
+kernel/net/ipv4/inet_lro.ko
 kernel/net/ipv4/tunnel4.ko
+kernel/net/ipv4/xfrm4_mode_transport.ko
+kernel/net/ipv4/xfrm4_mode_tunnel.ko
+kernel/net/ipv4/inet_diag.ko
+kernel/net/ipv4/tcp_diag.ko
+kernel/net/xfrm/xfrm_ipcomp.ko
 kernel/net/ipv6/netfilter/ip6_tables.ko
 kernel/net/ipv6/netfilter/ip6table_filter.ko
 kernel/net/ipv6/netfilter/ip6table_mangle.ko
@@ -939,6 +958,11 @@ kernel/net/ipv6/netfilter/ip6t_rt.ko
 kernel/net/ipv6/netfilter/ip6t_LOG.ko
 kernel/net/ipv6/netfilter/ip6t_REJECT.ko
 kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/ah6.ko
+kernel/net/ipv6/esp6.ko
+kernel/net/ipv6/ipcomp6.ko
+kernel/net/ipv6/xfrm6_tunnel.ko
+kernel/net/ipv6/tunnel6.ko
 kernel/net/ipv6/xfrm6_mode_transport.ko
 kernel/net/ipv6/xfrm6_mode_tunnel.ko
 kernel/net/ipv6/xfrm6_mode_beet.ko
@@ -1001,3 +1025,4 @@ kernel/lib/raid6/raid6_pq.ko
 kernel/lib/ts_kmp.ko
 kernel/lib/ts_bm.ko
 kernel/lib/ts_fsm.ko
+kernel/lib/lru_cache.ko
