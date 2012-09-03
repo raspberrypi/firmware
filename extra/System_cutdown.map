@@ -14657,11 +14657,11 @@ c0348264 r cgroup_pidlist_seq_operations
 c0348274 r proc_cgroupstats_operations
 c03482dc R proc_cgroup_operations
 c0348360 r kernel_config_data
-c034b624 r ikconfig_file_ops
-c034b68c r param.16160
-c034b690 r __param_str_irqfixup
-c034b6a4 r __param_str_noirqdebug
-c034b6b8 r irq_spurious_proc_fops
+c034b618 r ikconfig_file_ops
+c034b680 r param.16160
+c034b684 r __param_str_irqfixup
+c034b698 r __param_str_noirqdebug
+c034b6ac r irq_spurious_proc_fops
 c034b720 R generic_file_vm_ops
 c034b734 r __func__.23332
 c034b748 r __func__.27989

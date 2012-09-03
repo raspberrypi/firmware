@@ -113,9 +113,6 @@ kernel/drivers/net/wireless/b43/b43.ko
 kernel/drivers/net/wireless/b43legacy/b43legacy.ko
 kernel/drivers/net/wireless/zd1211rw/zd1211rw.ko
 kernel/drivers/net/wireless/rtl818x/rtl8187/rtl8187.ko
-kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko
-kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko
-kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu.ko
 kernel/drivers/net/wireless/rndis_wlan.ko
 kernel/drivers/net/wireless/zd1201.ko
 kernel/drivers/net/wireless/libertas/libertas.ko
@@ -142,6 +139,7 @@ kernel/drivers/net/wireless/wl1251/wl1251.ko
 kernel/drivers/net/wireless/iwmc3200wifi/iwmc3200wifi.ko
 kernel/drivers/net/wireless/mwifiex/mwifiex.ko
 kernel/drivers/net/wireless/mwifiex/mwifiex_sdio.ko
+kernel/drivers/net/wireless/rtl8192cu/8192cu.ko
 kernel/drivers/net/usb/catc.ko
 kernel/drivers/net/usb/kaweth.ko
 kernel/drivers/net/usb/pegasus.ko
