@@ -113,7 +113,7 @@ VideoCore OS Abstraction Layer - public header file
 
 #include "interface/vcos/vcos_assert.h"
 #include "vcos_types.h"
-#include "vcos_platform.h"
+#include "pthreads/vcos_platform.h"
 
 #ifndef VCOS_INIT_H
 #include "interface/vcos/vcos_init.h"

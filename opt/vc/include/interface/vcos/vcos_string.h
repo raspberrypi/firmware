@@ -44,7 +44,7 @@ extern "C" {
 #endif
 
 #include "interface/vcos/vcos_types.h"
-#include "vcos_platform.h"
+#include "pthreads/vcos_platform.h"
 
 #ifdef __KERNEL__
 #include <linux/string.h>

@@ -109,7 +109,7 @@ typedef struct VCOS_LLTHREAD_T
 #ifndef VCOS_USE_VCOS_FUTEX
 typedef pthread_mutex_t       VCOS_MUTEX_T;
 #else
-#include "vcos_futex_mutex.h"
+#include "pthreads/vcos_futex_mutex.h"
 #endif /* VCOS_USE_VCOS_FUTEX */
 
 #define VCOS_ONCE_INIT        PTHREAD_ONCE_INIT
