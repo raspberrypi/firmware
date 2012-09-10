@@ -643,6 +643,7 @@ kernel/drivers/md/dm-region-hash.ko: kernel/drivers/md/dm-log.ko kernel/drivers/
 kernel/drivers/md/dm-log-userspace.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko kernel/drivers/connector/cn.ko
 kernel/drivers/md/dm-zero.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-raid.ko: kernel/drivers/md/dm-mod.ko kernel/drivers/md/raid1.ko kernel/drivers/md/raid456.ko kernel/drivers/md/md-mod.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
+kernel/drivers/cpufreq/cpufreq_stats.ko:
 kernel/drivers/leds/ledtrig-timer.ko:
 kernel/drivers/leds/ledtrig-heartbeat.ko:
 kernel/drivers/leds/ledtrig-default-on.ko:

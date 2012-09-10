@@ -3929,6 +3929,7 @@
 0x1f1b40ae	mmc_free_host	vmlinux	EXPORT_SYMBOL
 0x0b742fd7	simple_strtol	vmlinux	EXPORT_SYMBOL
 0x2a7ebb6f	ilookup5_nowait	vmlinux	EXPORT_SYMBOL
+0xfe278c56	bcm_mailbox_property	vmlinux	EXPORT_SYMBOL_GPL
 0x2627cef5	fuse_dev_operations	fs/fuse/fuse	EXPORT_SYMBOL_GPL
 0x5fdf38b8	lbs_disablemesh	drivers/net/wireless/libertas/libertas	EXPORT_SYMBOL_GPL
 0xac6855b0	gen_kill_estimator	vmlinux	EXPORT_SYMBOL

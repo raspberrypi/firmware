@@ -643,6 +643,7 @@ kernel/drivers/md/dm-region-hash.ko
 kernel/drivers/md/dm-log-userspace.ko
 kernel/drivers/md/dm-zero.ko
 kernel/drivers/md/dm-raid.ko
+kernel/drivers/cpufreq/cpufreq_stats.ko
 kernel/drivers/leds/ledtrig-timer.ko
 kernel/drivers/leds/ledtrig-heartbeat.ko
 kernel/drivers/leds/ledtrig-default-on.ko
