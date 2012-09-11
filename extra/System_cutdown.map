@@ -30977,12 +30977,9 @@ c03e09b8 T __con_initcall_start
 c03e09b8 t __initcall_con_init
 c03e09b8 T __initcall_end
 c03e09bc T __con_initcall_end
+c03e09bc A __init_end
 c03e09bc T __security_initcall_end
 c03e09bc T __security_initcall_start
-c03e1000 A __init_end
-c03e1000 T __per_cpu_end
-c03e1000 T __per_cpu_load
-c03e1000 T __per_cpu_start
 c03e2000 A __data_loc
 c03e2000 D _data
 c03e2000 D _sdata
