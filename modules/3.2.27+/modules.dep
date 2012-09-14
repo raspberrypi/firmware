@@ -292,7 +292,34 @@ kernel/drivers/input/ff-memless.ko:
 kernel/drivers/input/input-polldev.ko:
 kernel/drivers/input/joydev.ko:
 kernel/drivers/input/evdev.ko:
+kernel/drivers/rtc/rtc-bq32k.ko:
+kernel/drivers/rtc/rtc-ds1305.ko:
 kernel/drivers/rtc/rtc-ds1307.ko:
+kernel/drivers/rtc/rtc-ds1374.ko:
+kernel/drivers/rtc/rtc-ds1390.ko:
+kernel/drivers/rtc/rtc-ds1672.ko:
+kernel/drivers/rtc/rtc-ds3232.ko:
+kernel/drivers/rtc/rtc-ds3234.ko:
+kernel/drivers/rtc/rtc-em3027.ko:
+kernel/drivers/rtc/rtc-fm3130.ko:
+kernel/drivers/rtc/rtc-isl1208.ko:
+kernel/drivers/rtc/rtc-isl12022.ko:
+kernel/drivers/rtc/rtc-m41t80.ko:
+kernel/drivers/rtc/rtc-m41t93.ko:
+kernel/drivers/rtc/rtc-m41t94.ko:
+kernel/drivers/rtc/rtc-max6900.ko:
+kernel/drivers/rtc/rtc-max6902.ko:
+kernel/drivers/rtc/rtc-pcf8563.ko:
+kernel/drivers/rtc/rtc-pcf8583.ko:
+kernel/drivers/rtc/rtc-pcf2123.ko:
+kernel/drivers/rtc/rtc-r9701.ko:
+kernel/drivers/rtc/rtc-rs5c348.ko:
+kernel/drivers/rtc/rtc-rs5c372.ko:
+kernel/drivers/rtc/rtc-rv3029c2.ko:
+kernel/drivers/rtc/rtc-rx8025.ko:
+kernel/drivers/rtc/rtc-rx8581.ko:
+kernel/drivers/rtc/rtc-s35390a.ko:
+kernel/drivers/rtc/rtc-x1205.ko:
 kernel/drivers/i2c/busses/i2c-bcm2708.ko:
 kernel/drivers/i2c/i2c-dev.ko:
 kernel/drivers/media/common/tuners/tuner-xc2028.ko:
@@ -1011,6 +1038,7 @@ kernel/net/bluetooth/bluetooth.ko:
 kernel/net/bluetooth/rfcomm/rfcomm.ko: kernel/net/bluetooth/bluetooth.ko
 kernel/net/bluetooth/bnep/bnep.ko: kernel/net/bluetooth/bluetooth.ko
 kernel/net/bluetooth/hidp/hidp.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/net/l2tp/l2tp_core.ko:
 kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko
 kernel/net/9p/9pnet.ko:
 kernel/net/wimax/wimax.ko:

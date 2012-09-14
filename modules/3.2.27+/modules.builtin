@@ -65,6 +65,8 @@ kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/sd_mod.ko
+kernel/drivers/thermal/thermal_sys.ko
+kernel/drivers/thermal/bcm2835-thermal.ko
 kernel/drivers/tty/serial/serial_core.ko
 kernel/drivers/tty/serial/amba-pl011.ko
 kernel/drivers/tty/serial/kgdboc.ko
