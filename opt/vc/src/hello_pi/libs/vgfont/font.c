@@ -156,8 +156,8 @@ void gx_priv_font_term(void)
   */
 VCOS_STATUS_T gx_priv_render_text( GX_DISPLAY_T *disp,
                                    GRAPHICS_RESOURCE_HANDLE res,
-                                   uint32_t x,
-                                   uint32_t y,
+                                   int32_t x,
+                                   int32_t y,
                                    uint32_t width,
                                    uint32_t height,
                                    uint32_t fg_colour,
@@ -335,8 +335,8 @@ int32_t graphics_resource_text_dimensions_ext(GRAPHICS_RESOURCE_HANDLE res,
    gx_priv_save(&save, res);
 
    VGFT_FONT_T *font = find_font(text, text_size);
-   if (!font)
-      goto finish;
+   if (!font) 
+     goto finish;
 
 
    vgft_get_text_extents(font, text, text_length, 0.0, 0.0, &w, &h);

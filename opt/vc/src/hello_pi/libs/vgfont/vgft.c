@@ -357,37 +357,23 @@ static void line_extents(VGFT_FONT_T *font, VGfloat *x, VGfloat *y, const char *
 void vgft_get_text_extents(VGFT_FONT_T *font,
                            const char *text,
                            unsigned text_length,
-                           VGfloat x, VGfloat y,
-                           VGfloat *w, VGfloat *h)
-{
+                           VGfloat start_x, VGfloat start_y,
+                           VGfloat *w, VGfloat *h) {
    int last_draw = 0;
-   int i = 0;
-   VGfloat start_x = x;
-   VGfloat start_y = y;
-   VGfloat max_x = x;
+   VGfloat max_x = start_x;
+   VGfloat y = start_y;
 
-   for (;;) 
-   {
-      int last = !text[i] || (text_length && i==text_length);
-      if ((text[i] == '\n') || last)
-      {
+   int i, last;
+   for (i = 0, last = 0; !last; ++i) {
+      last = !text[i] || (text_length && i==text_length);
+      if ((text[i] == '\n') || last) {
+         VGfloat x = 0;
          line_extents(font, &x, &y, text + last_draw, i - last_draw);
          last_draw = i+1;
          y -= float_from_26_6(font->ft_face->size->metrics.height);
-         if (x > max_x)
-            max_x = x;
+         if (x > max_x) max_x = x;
       }
-      if (last)
-      {
-         break;
-      }
-
-
-      ++i;
    }
    *w = max_x - start_x;
    *h = start_y - y;
 }
-
-
-
