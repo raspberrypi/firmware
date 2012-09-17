@@ -34078,7 +34078,7 @@ c04e1664 t __initcall_chr_dev_init5
 c04e1668 t __initcall_firmware_class_init5
 c04e166c t __initcall_thermal_init5
 c04e1670 t __initcall_cpufreq_gov_performance_init5
-c04e1674 t __initcall_cpufreq_gov_dbs_init5
+c04e1674 t __initcall_cpufreq_gov_powersave_init5
 c04e1678 t __initcall_sysctl_core_init5
 c04e167c t __initcall_inet_init5
 c04e1680 t __initcall_af_unix_init5
@@ -34210,8 +34210,8 @@ c04e1874 t __initcall_usb_stor_init6
 c04e1878 t __initcall_usb_usual_init6
 c04e187c t __initcall_mousedev_init6
 c04e1880 t __initcall_bcm2835_thermal_driver_init6
-c04e1884 t __initcall_cpufreq_gov_powersave_init6
-c04e1888 t __initcall_cpufreq_gov_userspace_init6
+c04e1884 t __initcall_cpufreq_gov_userspace_init6
+c04e1888 t __initcall_cpufreq_gov_dbs_init6
 c04e188c t __initcall_cpufreq_gov_dbs_init6
 c04e1890 t __initcall_bcm2835_cpufreq_module_init6
 c04e1894 t __initcall_init_ladder6
@@ -36054,7 +36054,7 @@ c0507254 d cpufreq_cpu_data
 c0507258 d cpufreq_policy_cpu
 c050725c d cpu_policy_rwsem
 c0507268 D cpufreq_gov_performance
-c0507294 d cpufreq_gov_powersave
+c0507294 D cpufreq_gov_powersave
 c05072c0 d cpufreq_gov_userspace
 c05072ec d userspace_mutex
 c05072f8 d userspace_cpufreq_notifier_block
@@ -36064,7 +36064,7 @@ c050730c d cpu_set_freq
 c0507310 d cpu_min_freq
 c0507314 d cpu_max_freq
 c0507318 d dbs_tuners_ins
-c0507334 D cpufreq_gov_ondemand
+c0507334 d cpufreq_gov_ondemand
 c0507360 d dbs_mutex
 c050736c d dbs_attr_group
 c0507378 d dbs_attributes
