@@ -202,7 +202,9 @@ typedef enum OMX_IMAGE_FOCUSCONTROLTYPE {
     OMX_IMAGE_FocusControlAutoInfinity,       /* CF over distant range (eg 50cm to infinity) */
     OMX_IMAGE_FocusControlAutoLockMacro,      /* AF over a macro range (eg 0-50cm) */
     OMX_IMAGE_FocusControlAutoLockInfinity,   /* AF over distant range (eg 50cm to infinity) */
-    
+    OMX_IMAGE_FocusControlNearFixed,          /* Focus at a fixed near focus point - (50cm-1m) */
+    OMX_IMAGE_FocusControlAutoNear,           /* CF over a near range (eg 0-200cm) */
+    OMX_IMAGE_FocusControlAutoLockNear,       /* AF over a near range (eg 0-200cm) */
     OMX_IMAGE_FocusControlMax = 0x7FFFFFFF
 } OMX_IMAGE_FOCUSCONTROLTYPE;
 
