@@ -93,7 +93,6 @@ extern "C" {
 #define VCOS_TIMER_MARGIN_LATE 15
 
 typedef sem_t                 VCOS_SEMAPHORE_T;
-typedef sem_t                 VCOS_EVENT_T;
 typedef uint32_t              VCOS_UNSIGNED;
 typedef uint32_t              VCOS_OPTION;
 typedef pthread_key_t         VCOS_TLS_KEY_T;
@@ -111,6 +110,12 @@ typedef pthread_mutex_t       VCOS_MUTEX_T;
 #else
 #include "vcos_futex_mutex.h"
 #endif /* VCOS_USE_VCOS_FUTEX */
+
+typedef struct
+{
+   VCOS_MUTEX_T   mutex;
+   sem_t          sem;
+} VCOS_EVENT_T;
 
 #define VCOS_ONCE_INIT        PTHREAD_ONCE_INIT
 
@@ -338,10 +343,13 @@ VCOS_STATUS_T vcos_semaphore_post(VCOS_SEMAPHORE_T *sem) {
 
 extern VCOS_THREAD_T *vcos_dummy_thread_create(void);
 extern pthread_key_t _vcos_thread_current_key;
-extern uint32_t vcos_getmicrosecs_internal(void);
+extern uint64_t vcos_getmicrosecs64_internal(void);
 
 VCOS_INLINE_IMPL
-uint32_t vcos_getmicrosecs(void) { return vcos_getmicrosecs_internal(); }
+uint32_t vcos_getmicrosecs(void) { return (uint32_t)vcos_getmicrosecs64_internal(); }
+
+VCOS_INLINE_IMPL
+uint64_t vcos_getmicrosecs64(void) { return vcos_getmicrosecs64_internal(); }
 
 VCOS_INLINE_IMPL
 VCOS_THREAD_T *vcos_thread_current(void) {
@@ -496,18 +504,41 @@ VCOS_STATUS_T vcos_mutex_trylock(VCOS_MUTEX_T *m) {
 VCOS_INLINE_IMPL
 VCOS_STATUS_T vcos_event_create(VCOS_EVENT_T *event, const char *debug_name)
 {
-   int rc = sem_init(event, 0, 0);
-   (void)debug_name;
-   if (rc != -1) return VCOS_SUCCESS;
-   else return vcos_pthreads_map_errno();
+   VCOS_STATUS_T status;
+
+   int rc = sem_init(&event->sem, 0, 0);
+   if (rc != 0) return vcos_pthreads_map_errno();
+
+   status = vcos_mutex_create(&event->mutex, debug_name);
+   if (status != VCOS_SUCCESS) {
+      sem_destroy(&event->sem);
+      return status;
+   }
+
+   return VCOS_SUCCESS;
 }
 
 VCOS_INLINE_IMPL
 void vcos_event_signal(VCOS_EVENT_T *event)
 {
-   int rc = sem_post(event);
-   vcos_assert(rc == 0);
-   (void)rc;
+   int ok = 0;
+   int value;
+
+   if (vcos_mutex_lock(&event->mutex) != VCOS_SUCCESS)
+      goto fail_mtx;
+
+   if (sem_getvalue(&event->sem, &value) != 0)
+      goto fail_sem;
+
+   if (value == 0)
+      if (sem_post(&event->sem) != 0)
+         goto fail_sem;
+
+   ok = 1;
+fail_sem:
+   vcos_mutex_unlock(&event->mutex);
+fail_mtx:
+   vcos_assert(ok);
 }
 
 VCOS_INLINE_IMPL
@@ -515,17 +546,17 @@ VCOS_STATUS_T vcos_event_wait(VCOS_EVENT_T *event)
 {
    int ret;
    /* gdb causes sem_wait() to EINTR when a breakpoint is hit, retry here */
-   while ((ret = sem_wait(event)) == -1 && errno == EINTR)
+   while ((ret = sem_wait(&event->sem)) == -1 && errno == EINTR)
       continue;
    vcos_assert(ret==0);
-   return VCOS_SUCCESS;
+   return ret == 0 ? VCOS_SUCCESS : (VCOS_STATUS_T)errno;
 }
 
 VCOS_INLINE_IMPL
 VCOS_STATUS_T vcos_event_try(VCOS_EVENT_T *event)
 {
    int ret;
-   while ((ret = sem_trywait(event)) == -1 && errno == EINTR)
+   while ((ret = sem_trywait(&event->sem)) == -1 && errno == EINTR)
       continue;
 
    if (ret == -1 && errno == EAGAIN)
@@ -537,9 +568,11 @@ VCOS_STATUS_T vcos_event_try(VCOS_EVENT_T *event)
 VCOS_INLINE_IMPL
 void vcos_event_delete(VCOS_EVENT_T *event)
 {
-   int rc = sem_destroy(event);
+   int rc = sem_destroy(&event->sem);
    vcos_assert(rc != -1);
    (void)rc;
+
+   vcos_mutex_delete(&event->mutex);
 }
 
 VCOS_INLINE_IMPL

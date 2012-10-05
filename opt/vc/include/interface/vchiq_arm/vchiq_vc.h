@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef VCHIQ_VC_H
 #define VCHIQ_VC_H
@@ -31,8 +31,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "vchiq_core.h"
 
 extern char _frdata[];
+extern char *__MEMPOOL_START;
+extern char *__MEMPOOL_END;
 
-#define VCHIQ_IS_SAFE_DATA(x) ((char *)RTOS_ALIAS_NORMAL(x) >= _frdata)
+#define VCHIQ_IS_SAFE_DATA(x) (((char *)RTOS_ALIAS_NORMAL(x) >= _frdata) || \
+   (((char *)RTOS_ALIAS_NORMAL(x) >= __MEMPOOL_START) && ((char *)RTOS_ALIAS_NORMAL(x) <= __MEMPOOL_END)))
 
 #define VCOS_LOG_CATEGORY (&vchiq_vc_log_category)
 
@@ -52,6 +55,9 @@ typedef struct vchiq_vc_state_struct {
    VCHIQ_REMOTE_USE_CALLBACK_T remote_use_callback;
    void*                       remote_use_cb_arg;
    int                         remote_use_sent;
+   VCOS_MUTEX_T                remote_use_mutex;
+
+   int                         suspending;
 } VCHIQ_VC_STATE_T;
 
 

@@ -30,6 +30,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VC_ILCS_DEFS_H
 #define VC_ILCS_DEFS_H
 
+#define VC_ILCS_VERSION 1
+
 #include "interface/vchiq_arm/vchiq.h"
 
 typedef enum {

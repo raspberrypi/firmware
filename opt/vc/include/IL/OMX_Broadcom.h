@@ -191,7 +191,11 @@ rendering.  The latency is returned as the number of samples that
 an audio rendering component has received but have not been played.
 */
 
-
+/* OMX_IndexConfigBrcmPoolMemAllocSize: Pool memory usage values */
+/*
+This config allows the client to query how much memory is being used by
+the component for any image pools. 
+*/
 
 /* OMX_IndexConfigDisplayRegion: Display Region */
 typedef enum OMX_DISPLAYTRANSFORMTYPE{
@@ -533,11 +537,11 @@ typedef struct OMX_PARAM_STILLSFUNCTIONTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_BOOL bBuffer;
-   OMX_PTR (*pOpenFunc)();
-   OMX_PTR (*pCloseFunc)();
-   OMX_PTR (*pReadFunc)();
-   OMX_PTR (*pSeekFunc)();
-   OMX_PTR (*pWriteFunc)();
+   OMX_PTR (*pOpenFunc)(void);
+   OMX_PTR (*pCloseFunc)(void);
+   OMX_PTR (*pReadFunc)(void);
+   OMX_PTR (*pSeekFunc)(void);
+   OMX_PTR (*pWriteFunc)(void);
 } OMX_PARAM_STILLSFUNCTIONTYPE;
 
 typedef void* OMX_BUFFERADDRESSHANDLETYPE;
@@ -574,7 +578,7 @@ typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nPortIndex;
    OMX_IMAGEFILTERTYPE eImageFilter;
    OMX_U32 nNumParams;
-   OMX_U32 nParams[4];
+   OMX_U32 nParams[5];
 } OMX_CONFIG_IMAGEFILTERPARAMSTYPE;
 /*
 This structure contains optional parameters for some image
@@ -716,6 +720,8 @@ typedef struct OMX_PARAM_CAMERAIMAGEPOOLTYPE {
    OMX_U32 nLoResWidth;
    OMX_U32 nLoResHeight;
    OMX_COLOR_FORMATTYPE eLoResType;
+   OMX_U32 nNumSnapshotFrames;
+   OMX_COLOR_FORMATTYPE eSnapshotType;
    OMX_CAMERAIMAGEPOOLINPUTMODETYPE eInputPoolMode;
    OMX_U32 nNumInputVideoFrames;
    OMX_U32 nInputVideoWidth;
@@ -1220,7 +1226,7 @@ on.
 */
 
 
-/* OMX_IndexConfigCameraFlashType: Select flash type */
+/* OMX_IndexParamCameraFlashType: Select flash type */
 typedef enum OMX_CAMERAFLASHTYPE {
    OMX_CameraFlashDefault,
    OMX_CameraFlashXenon,
@@ -1231,13 +1237,13 @@ typedef enum OMX_CAMERAFLASHTYPE {
    OMX_CameraFlashMax = 0x7FFFFFFF
 } OMX_CAMERAFLASHTYPE;
 
-typedef struct OMX_CONFIG_CAMERAFLASHTYPE {
+typedef struct OMX_PARAM_CAMERAFLASHTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_U32 nPortIndex;
    OMX_CAMERAFLASHTYPE eFlashType;
    OMX_BOOL bRedEyeUsesTorchMode;
-} OMX_CONFIG_CAMERAFLASHTYPE;
+} OMX_PARAM_CAMERAFLASHTYPE;
 /*
 This parameter allows the selection of xenon or LED flash devices
 to be used with the currently selected camera. If that device is not
@@ -1281,52 +1287,6 @@ to set the intensity of the flash.
 the duration of the exposure.
 
 \code{eIgnoreChargeState} will make the flash fire, even if it is not fully charged.
-*/
-
-/* OMX_IndexConfigCameraAlgorithmVersion: ISP Tuner algorithm version query */
-typedef enum OMX_CONFIG_CAMERAALGORITHMTYPE {
-   OMX_CameraAlgorithmKhronosExtensions = 0x6F000000,
-   OMX_CameraAlgorithmVendorStartUnused = 0x7F000000,
-   OMX_CameraAlgorithmAGC,
-   OMX_CameraAlgorithmAWB,
-   OMX_CameraAlgorithmBlackLevel,
-   OMX_CameraAlgorithmChromColour,
-   OMX_CameraAlgorithmFocus,
-   OMX_CameraAlgorithmLensShading,
-   OMX_CameraAlgorithmCorrection,
-   OMX_CameraAlgorithmSwDenoise,
-   OMX_CameraAlgorithmMotionDetection,
-   OMX_CameraAlgorithmDistortion,
-   OMX_CameraAlgorithmDefectivePixelCorrection,
-   OMX_CameraAlgorithmFaceTracking,
-   OMX_CameraAlgorithmRedEyeReduction,
-   OMX_CameraAlgorithmAntishake,
-   OMX_CameraAlgorithmWriteBayerCaptureImages,
-   OMX_CameraAlgorithmVideoDenoise,
-   OMX_CameraAlgorithmStillsDenoise,
-   OMX_CameraAlgorithmStabilisation,
-   OMX_CameraAlgorithmImageEffects,
-   OMX_CameraAlgorithmDarkFrameSubtraction,
-   OMX_CameraAlgorithmRMI,
-   OMX_CameraAlgorithmDynamicRangeExpansion,
-   OMX_CameraAlgorithmFaceRecognition,
-   OMX_CameraAlgorithmHighDynamicRange,
-   OMX_CameraAlgorithmMax = 0x7FFFFFFF
-} OMX_CONFIG_CAMERAALGORITHMTYPE;
-
-typedef struct OMX_CONFIG_CAMERAALGORITHMVERSIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_CONFIG_CAMERAALGORITHMTYPE eAlgorithm;
-   OMX_U8 sAlgorithmName[32];
-   OMX_U8 sVendorName[32];
-   OMX_U32 nVersionMajor;
-   OMX_U32 nVersionMinor;
-   OMX_U32 nBuild;
-} OMX_CONFIG_CAMERAALGORITHMVERSIONTYPE;
-/*
-This config allows the client to query over the version of the ISP
-algorithm being used.
 */
 
 /* OMX_IndexConfigBrcmAudioTrackGaplessPlayback: Encoder/decoder delay and padding information for gapless playback. */
@@ -1393,8 +1353,6 @@ typedef enum OMX_CAMERADISABLEALGORITHMTYPE {
       OMX_CameraDisableAlgorithmAntiShake,
       OMX_CameraDisableAlgorithmImageEffects,
       OMX_CameraDisableAlgorithmDarkSubtract,
-      OMX_CameraDisableAlgorithmDepurple,
-      OMX_CameraDisableAlgorithmRmi,
       OMX_CameraDisableAlgorithmDynamicRangeExpansion,
       OMX_CameraDisableAlgorithmFaceRecognition,
       OMX_CameraDisableAlgorithmFaceBeautification,
@@ -1530,15 +1488,6 @@ typedef struct OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE {
    OMX_VERSIONTYPE nVersion;
    OMX_U32 nBufferSize;
 } OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE;
-
-/** Can the camera focus, or is it busy capturing a frame? */
-typedef struct OMX_CONFIG_CANFOCUSTYPE
-{
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_BOOL bFocusAllowed;
-} OMX_CONFIG_CANFOCUSTYPE;
 
 /* OMX_IndexConfigCameraInfo: Camera device driver information */
 #define OMX_CONFIG_CAMERAINFOTYPE_NAME_LEN 16
@@ -1848,10 +1797,6 @@ at in its processing.
  */
 
 /* OMX_IndexConfigDynamicRangeExpansion: Configure image dynamic range expansion processing */
-/*
-Configures the intensity of an image dynamic range expansion processing stage
-*/
-/* OMX_IndexConfigCameraFlashType: Select flash type */
 typedef enum OMX_DYNAMICRANGEEXPANSIONMODETYPE {
    OMX_DynRangeExpOff,
    OMX_DynRangeExpLow,
@@ -1868,6 +1813,9 @@ typedef struct OMX_CONFIG_DYNAMICRANGEEXPANSIONTYPE
    OMX_VERSIONTYPE nVersion;
    OMX_DYNAMICRANGEEXPANSIONMODETYPE eMode;
 } OMX_CONFIG_DYNAMICRANGEEXPANSIONTYPE;
+/*
+Configures the intensity of an image dynamic range expansion processing stage
+*/
 
 /* OMX_IndexParamBrcmTransposeBufferCount: Configure the number of pre-allocated transpose buffers  */
 /*
@@ -2136,6 +2084,133 @@ typedef struct OMX_PARAM_TIMESTAMPMODETYPE
 } OMX_PARAM_TIMESTAMPMODETYPE;
 /*
  Specifies what to use as timestamps in the abscence of a clock component.
+*/
+
+/* EGL image buffer for passing to video port.
+ * Used when port color format is OMX_COLOR_FormatBRCMEGL.
+ */
+typedef struct OMX_BRCMVEGLIMAGETYPE
+{
+   /* Passed between ARM + VC; use fixed width types. */
+   OMX_U32 nWidth;
+   OMX_U32 nHeight;
+   OMX_U32 nStride;
+   OMX_U32 nUmemHandle;
+   OMX_U32 nUmemOffset;
+   OMX_U32 nFlipped;    /* Non-zero -> vertically flipped image */
+} OMX_BRCMVEGLIMAGETYPE;
+
+/* Provides field of view 
+ */
+typedef struct OMX_CONFIG_BRCMFOVTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 xFieldOfViewHorizontal;  /**< Horizontal field of view in degrees. 16p16 value */
+   OMX_U32 xFieldOfViewVertical;    /**< Vertical field of view in degrees. 16p16 value */
+} OMX_CONFIG_BRCMFOVTYPE;
+
+/* OMX_IndexConfigBrcmDecoderPassThrough: Enabling Audio Passthrough */
+/*
+This allows an audio decoder to disable decoding the stream and pass through correctly framed
+data to enable playback of compressed audio to supported output devices.
+*/
+
+/* OMX_IndexConfigBrcmClockReferenceSource: Select Clock Reference Source */
+/*
+This control allows communicating directly to an audio renderer component whether it should
+act as a clock reference source or act as a slave.
+*/
+
+/* OMX_IndexConfigEncLevelExtension: AVC Override encode capabilities */
+typedef struct OMX_VIDEO_CONFIG_LEVEL_EXTEND {
+   OMX_U32 nSize; 
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nCustomMaxMBPS;     /**< Specifies maximum macro-blocks per second */
+   OMX_U32 nCustomMaxFS;       /**< Specifies maximum frame size (macro-blocks per frame) */
+   OMX_U32 nCustomMaxBRandCPB; /**< Specifies maximum bitrate in units of 1000 bits/s and Codec Picture Buffer (CPB derived from bitrate) */
+} OMX_VIDEO_CONFIG_LEVEL_EXTEND;
+/*
+This allows finer control of the H264 encode internal parameters.
+*/
+
+/* OMX_IndexParamBrcmEEDEEnable: Enable/Disable end to end distortion estimator */
+typedef struct OMX_VIDEO_EEDE_ENABLE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_U32 enable;
+} OMX_VIDEO_EEDE_ENABLE;
+/*
+This enables or disables the use of end to end distortion estimation.
+*/
+
+/* OMX_IndexParamBrcmEEDELossRate: Loss rate configuration for end to end distortion */
+typedef struct OMX_VIDEO_EEDE_LOSSRATE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+   OMX_U32 loss_rate; /**< loss rate, 5 means 5% */
+} OMX_VIDEO_EEDE_LOSSRATE;
+/*
+Set the packet loss rate used by the end to end distortion estimator.
+*/
+
+/* OMX_IndexParamColorSpace: Colour space information */
+typedef enum OMX_COLORSPACETYPE
+{
+   OMX_COLORSPACE_UNKNOWN,
+   OMX_COLORSPACE_JPEG_JFIF,
+   OMX_COLORSPACE_ITU_R_BT601,
+   OMX_COLORSPACE_ITU_R_BT709,
+   OMX_COLORSPACE_MAX = 0x7FFFFFFF
+} OMX_COLORSPACETYPE;
+
+typedef struct OMX_PARAM_COLORSPACETYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_COLORSPACETYPE eColorSpace;
+} OMX_PARAM_COLORSPACETYPE;
+/*
+Provides information on the colour space that's in use during image/video processing.
+*/
+
+/* OMX_IndexConfigMinimiseFragmentation: Minimising Fragmentation */
+/*
+This control can be supported to enable the client to request that the component works
+to minimise fragmentation of output buffers.
+*/
+
+/* OMX_IndexConfigBrcmBufferFlagFilter: Filters buffers based on flags */
+/*
+This control can be set to request that buffers are conditionally forwarded on 
+output ports based on matching flags set on that buffer.
+*/
+
+/* OMX_IndexParamPortMaxFrameSize: Specifying maximum frame size */
+/*
+This control can be used to control the maximum frame size allowed on an output port.
+*/
+
+/* OMX_IndexConfigBrcmCameraRnDPreprocess: Enable use of development ISP software stage */
+/*
+This control can be used to enable a developmental software stage to be inserted into
+the preprocessor stage of the ISP.
+*/
+
+/* OMX_IndexConfigBrcmCameraRnDPostprocess: Enable use of development ISP software stage */
+/*
+This control can be used to enable a developmental software stage to be inserted into
+the postprocessor stage of the ISP.
+*/
+
+/* OMX_IndexParamDisableVllPool: Controlling use of memory for loadable modules */
+/*
+This control can be used to control whether loadable modules used a dedicated memory
+pool or use heap allocated memory.
 */
 
 #endif

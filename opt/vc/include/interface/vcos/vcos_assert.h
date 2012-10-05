@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - Assertion and error-handling macros.
@@ -149,8 +149,32 @@ extern "C" {
 #include "interface/vcos/vcos_types.h"
 
 #ifdef __COVERITY__
+/*
+ * This tells coverity not to expand the assert macro, so it still sees the
+ * asserts in the code, even in release builds (we currently run coverity on
+ * our release builds). Unfortunately MetaWare won't compile it, even though
+ * __COVERITY__ isn't defined.
+ */
+// #nodef assert
+
+/*
+ * So we need to declare the function. It's already built into coverity that
+ * assert is a "killpath"
+ */
+extern void assert(int cond);
+
+extern void __coverity_panic__(void);
 #undef VCOS_ASSERT_BKPT
 #define VCOS_ASSERT_BKPT __coverity_panic__()
+#endif
+
+/*
+ * ANDROID should NOT be defined for files built for Videocore, but currently it
+ * is. FIXME When that's fixed, remove the __VIDEOCORE__ band-aid.
+ */
+#if (defined(ANDROID) && !defined(__VIDEOCORE__))
+#  include "assert.h"
+#  define vcos_assert assert
 #endif
 
 #ifndef VCOS_VERIFY_BKPTS
@@ -180,7 +204,8 @@ VCOSPRE_ void VCOSPOST_ vcos_abort(void);
 #ifndef VCOS_ASSERT_MSG
 #ifdef LOGGING
 extern void logging_assert(const char *file, const char *func, int line, const char *format, ...);
-#define VCOS_ASSERT_MSG(...) ((VCOS_ASSERT_LOGGING && !VCOS_ASSERT_LOGGING_DISABLE) ? logging_assert(__FILE__, __func__, __LINE__, __VA_ARGS__) : (void)0)
+extern void logging_assert_dump(void);
+#define VCOS_ASSERT_MSG(...) ((VCOS_ASSERT_LOGGING && !VCOS_ASSERT_LOGGING_DISABLE) ? logging_assert_dump(), logging_assert(__FILE__, __func__, __LINE__, __VA_ARGS__) : (void)0)
 #else
 #define VCOS_ASSERT_MSG(...) ((void)0)
 #endif
@@ -277,6 +302,9 @@ extern void logging_assert(const char *file, const char *func, int line, const c
 #ifndef vc_assert
 #define vc_assert(cond) vcos_assert(cond)
 #endif
+
+#define vcos_unreachable() vcos_assert(0)
+#define vcos_not_impl() vcos_assert(0)
 
 /** Print out a backtrace, on supported platforms.
   */
