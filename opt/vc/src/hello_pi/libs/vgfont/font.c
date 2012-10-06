@@ -335,8 +335,8 @@ int32_t graphics_resource_text_dimensions_ext(GRAPHICS_RESOURCE_HANDLE res,
    gx_priv_save(&save, res);
 
    VGFT_FONT_T *font = find_font(text, text_size);
-   if (!font)
-      goto finish;
+   if (!font) 
+     goto finish;
 
 
    vgft_get_text_extents(font, text, text_length, 0.0, 0.0, &w, &h);
