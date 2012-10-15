@@ -475,8 +475,8 @@ int32_t graphics_resource_fill(GRAPHICS_RESOURCE_HANDLE res,
 
 /*****************************************************************************/
 int32_t graphics_resource_render_text_ext( GRAPHICS_RESOURCE_HANDLE res,
-                                           const int32_t x,
-                                           const int32_t y,
+                                           const uint32_t x,
+                                           const uint32_t y,
                                            const uint32_t width,
                                            const uint32_t height,
                                            const uint32_t fg_colour,
@@ -501,8 +501,8 @@ int32_t graphics_resource_render_text_ext( GRAPHICS_RESOURCE_HANDLE res,
 
 /*****************************************************************************/
 int32_t graphics_resource_render_text(  GRAPHICS_RESOURCE_HANDLE res,
-                                        const int32_t x,
-                                        const int32_t y,
+                                        const uint32_t x,
+                                        const uint32_t y,
                                         const uint32_t width, /* this can be GRAPHICS_RESOURCE_WIDTH for no clipping */
                                         const uint32_t height, /* this can be GRAPHICS_RESOURCE_HEIGHT for no clipping */
                                         const uint32_t fg_colour,

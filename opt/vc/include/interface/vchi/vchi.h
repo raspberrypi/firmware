@@ -51,13 +51,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VCHI_BULK_ALIGNED(x)      (((unsigned long)(x) & (VCHI_BULK_ALIGN-1)) == 0)
 #endif
 
-typedef struct 
-{
-   uint32_t version;
-   uint32_t version_min;
-} VCHI_VERSION_T;
-#define VCHI_VERSION(v_) { v_, v_ }
-#define VCHI_VERSION_EX(v_,m_) { v_, m_ }
 
 typedef enum
 {
@@ -122,7 +115,6 @@ typedef struct
 
 // structure used to provide the information needed to open a server or a client
 typedef struct {
-   VCHI_VERSION_T version;
    vcos_fourcc_t service_id;
    VCHI_CONNECTION_T *connection;
    uint32_t rx_fifo_size;

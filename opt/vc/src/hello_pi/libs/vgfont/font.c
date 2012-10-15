@@ -156,8 +156,8 @@ void gx_priv_font_term(void)
   */
 VCOS_STATUS_T gx_priv_render_text( GX_DISPLAY_T *disp,
                                    GRAPHICS_RESOURCE_HANDLE res,
-                                   int32_t x,
-                                   int32_t y,
+                                   uint32_t x,
+                                   uint32_t y,
                                    uint32_t width,
                                    uint32_t height,
                                    uint32_t fg_colour,

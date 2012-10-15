@@ -30,9 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* ---- Include Files ----------------------------------------------------- */
 
-#ifndef VCOS_H
 #include "interface/vcos/vcos.h"
-#endif
 #include "interface/vcos/vcos_stdint.h"
 
 
@@ -108,12 +106,6 @@ VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_cmd_register_multiple( VCOS_CMD_T *cmd_ent
  * Executes a command based on a command line.
  */
 VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_cmd_execute( int argc, char **argv, size_t result_size, char *result_buf );
-
-/*
- * Shut down the command system and free all allocated data.
- * Do not call any other command functions after this.
- */
-VCOSPRE_ void VCOSPOST_ vcos_cmd_shutdown( void );
 
 #endif /* VCOS_CMD_H */
 

@@ -201,10 +201,6 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterDeInterlaceAdvanced,
     
     OMX_ImageFilterColourSwap,
-    OMX_ImageFilterWashedOut,
-    OMX_ImageFilterColourPoint,
-    OMX_ImageFilterPosterise,
-    OMX_ImageFilterColourBalance,
 
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
@@ -524,8 +520,6 @@ typedef enum OMX_EXPOSURECONTROLTYPE {
     OMX_ExposureControlVeryLong,
     OMX_ExposureControlFixedFps,
     OMX_ExposureControlNightWithPreview,
-    OMX_ExposureControlAntishake,
-    OMX_ExposureControlFireworks,
     OMX_ExposureControlMax = 0x7FFFFFFF
 } OMX_EXPOSURECONTROLTYPE;
 

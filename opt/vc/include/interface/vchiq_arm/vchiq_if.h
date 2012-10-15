@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 #ifndef VCHIQ_IF_H
 #define VCHIQ_IF_H
@@ -66,8 +66,7 @@ typedef enum
 {
    VCHIQ_SERVICE_OPTION_AUTOCLOSE,
    VCHIQ_SERVICE_OPTION_SLOT_QUOTA,
-   VCHIQ_SERVICE_OPTION_MESSAGE_QUOTA,
-   VCHIQ_SERVICE_OPTION_SYNCHRONOUS
+   VCHIQ_SERVICE_OPTION_MESSAGE_QUOTA
 } VCHIQ_SERVICE_OPTION_T;
 
 #ifdef __HIGHC__
@@ -130,10 +129,12 @@ typedef void (*VCHIQ_REMOTE_USE_CALLBACK_T)(void* cb_arg);
 extern VCHIQ_STATUS_T vchiq_initialise(VCHIQ_INSTANCE_T *pinstance);
 extern VCHIQ_STATUS_T vchiq_shutdown(VCHIQ_INSTANCE_T instance);
 extern VCHIQ_STATUS_T vchiq_connect(VCHIQ_INSTANCE_T instance);
-extern VCHIQ_STATUS_T vchiq_add_service(VCHIQ_INSTANCE_T instance,
+extern VCHIQ_STATUS_T vchiq_add_service(VCHIQ_INSTANCE_T instance, int fourcc, VCHIQ_CALLBACK_T callback, void *userdata, VCHIQ_SERVICE_HANDLE_T *pservice);
+extern VCHIQ_STATUS_T vchiq_open_service(VCHIQ_INSTANCE_T instance, int fourcc, VCHIQ_CALLBACK_T callback, void *userdata, VCHIQ_SERVICE_HANDLE_T *pservice);
+extern VCHIQ_STATUS_T vchiq_add_service_params(VCHIQ_INSTANCE_T instance,
    const VCHIQ_SERVICE_PARAMS_T *params,
    VCHIQ_SERVICE_HANDLE_T *pservice);
-extern VCHIQ_STATUS_T vchiq_open_service(VCHIQ_INSTANCE_T instance,
+extern VCHIQ_STATUS_T vchiq_open_service_params(VCHIQ_INSTANCE_T instance,
    const VCHIQ_SERVICE_PARAMS_T *params,
    VCHIQ_SERVICE_HANDLE_T *pservice);
 extern VCHIQ_STATUS_T vchiq_close_service(VCHIQ_SERVICE_HANDLE_T service);

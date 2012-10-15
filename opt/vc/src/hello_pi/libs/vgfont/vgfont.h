@@ -101,8 +101,8 @@ int32_t graphics_update_displayed_resource(GRAPHICS_RESOURCE_HANDLE res,
                                            const uint32_t height );
 
 int32_t graphics_resource_render_text_ext( GRAPHICS_RESOURCE_HANDLE res,
-                                           const int32_t x,
-                                           const int32_t y,
+                                           const uint32_t x,
+                                           const uint32_t y,
                                            const uint32_t width,
                                            const uint32_t height,
                                            const uint32_t fg_colour,

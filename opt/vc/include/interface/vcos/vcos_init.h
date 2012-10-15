@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - initialization routines
@@ -39,39 +39,13 @@ extern "C" {
 
 /** \file
   *
-  * Some OS support libraries need some initialization. To support this, call
-  * vcos_init() function at the start of day; vcos_deinit() at the end.
+  * Some OS support libraries need some initialization. To support this, call this
+  * function at the start of day.
   */
 
-/**
- * vcos initialization. Call this function before using other vcos functions.
- * Calls can be nested within the same process; they are reference counted so
- * that only a call from uninitialized state has any effect.
- * @note On platforms/toolchains that support it, gcc's constructor attribute or
- *       similar is used to invoke this function before main() or equivalent.
- * @return Status of initialisation.
- */
 VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_init(void);
-
-/**
- * vcos deinitialization. Call this function when vcos is no longer required,
- * in order to free resources.
- * Calls can be nested within the same process; they are reference counted so
- * that only a call that decrements the reference count to 0 has any effect.
- * @note On platforms/toolchains that support it, gcc's destructor attribute or
- *       similar is used to invoke this function after exit() or equivalent.
- * @return Status of initialisation.
- */
 VCOSPRE_ void VCOSPOST_ vcos_deinit(void);
-
-/**
- * Acquire global lock. This must be available independent of vcos_init()/vcos_deinit().
- */
 VCOSPRE_ void VCOSPOST_ vcos_global_lock(void);
-
-/**
- * Release global lock. This must be available independent of vcos_init()/vcos_deinit().
- */
 VCOSPRE_ void VCOSPOST_ vcos_global_unlock(void);
 
 /** Pass in the argv/argc arguments passed to main() */
@@ -82,27 +56,6 @@ VCOSPRE_ int VCOSPOST_ vcos_get_argc(void);
 
 /** Return argv. */
 VCOSPRE_ const char ** VCOSPOST_ vcos_get_argv(void);
-
-/**
- * Platform-specific initialisation.
- * VCOS internal function, not part of public API, do not call from outside
- * vcos. vcos_init()/vcos_deinit() reference count calls, so this function is
- * only called from an uninitialized state, i.e. there will not be two
- * consecutive calls to vcos_platform_init() without an intervening call to
- * vcos_platform_deinit().
- * This function is called with vcos_global_lock held.
- * @return Status of initialisation.
- */
-VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_platform_init(void);
-
-/**
- * Platform-specific de-initialisation.
- * VCOS internal function, not part of public API, do not call from outside
- * vcos.
- * See vcos_platform_init() re reference counting.
- * This function is called with vcos_global_lock held.
- */
-VCOSPRE_ void VCOSPOST_ vcos_platform_deinit(void);
 
 #ifdef __cplusplus
 }

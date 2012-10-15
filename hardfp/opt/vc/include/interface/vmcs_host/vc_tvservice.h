@@ -483,5 +483,5 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(uint32_t property, uint32_t *param1
  * @param reason is the notification reason
  * @return  The notification reason as a string.
  */
-VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
+VCHPRE_ const char* vc_tv_notifcation_name(VC_HDMI_NOTIFY_T reason);
 #endif

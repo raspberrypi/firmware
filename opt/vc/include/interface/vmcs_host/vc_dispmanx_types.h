@@ -33,8 +33,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "interface/vctypes/vc_image_types.h"
 #include "interface/vctypes/vc_display_types.h"
 
-#define VC_DISPMANX_VERSION   1
-
 /* Opaque handles */
 typedef uint32_t DISPMANX_DISPLAY_HANDLE_T;
 typedef uint32_t DISPMANX_UPDATE_HANDLE_T;
@@ -156,11 +154,6 @@ typedef struct {
 
 /* Update callback. */
 typedef void (*DISPMANX_CALLBACK_FUNC_T)(DISPMANX_UPDATE_HANDLE_T u, void * arg);
-
-/* Progress callback */
-typedef void (*DISPMANX_PROGRESS_CALLBACK_FUNC_T)(DISPMANX_UPDATE_HANDLE_T u,
-                                                  uint32_t line,
-                                                  void * arg);
 
 /* Pluggable display interface */
 
