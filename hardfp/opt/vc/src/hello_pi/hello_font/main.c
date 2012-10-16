@@ -106,6 +106,9 @@ int main(void)
    s = gx_create_window(0, width, height, GRAPHICS_RESOURCE_RGBA32, &img);
    assert(s == 0);
 
+   // transparent before display to avoid screen flash
+   graphics_resource_fill(img, 0, 0, width, height, GRAPHICS_RGBA32(0,0,0,0x00));
+
    graphics_display_resource(img, 0, LAYER, 0, 0, GRAPHICS_RESOURCE_WIDTH, GRAPHICS_RESOURCE_HEIGHT, VC_DISPMAN_ROT0, 1);
 
    uint32_t text_size = 10;

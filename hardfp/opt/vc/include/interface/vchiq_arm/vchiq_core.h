@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef VCHIQ_CORE_H
 #define VCHIQ_CORE_H
@@ -146,6 +146,7 @@ enum
 typedef enum
 {
    VCHIQ_CONNSTATE_DISCONNECTED,
+   VCHIQ_CONNSTATE_CONNECTING,
    VCHIQ_CONNSTATE_CONNECTED,
    VCHIQ_CONNSTATE_PAUSING,
    VCHIQ_CONNSTATE_PAUSE_SENT,
@@ -160,6 +161,7 @@ enum
    VCHIQ_SRVSTATE_LISTENING,
    VCHIQ_SRVSTATE_OPENING,
    VCHIQ_SRVSTATE_OPEN,
+   VCHIQ_SRVSTATE_OPENSYNC,
    VCHIQ_SRVSTATE_CLOSESENT,
    VCHIQ_SRVSTATE_CLOSING,
    VCHIQ_SRVSTATE_CLOSEWAIT
@@ -227,7 +229,8 @@ typedef struct vchiq_service_struct {
    unsigned int remoteport;
    int public_fourcc;
    int client_id;
-   int auto_close;
+   char auto_close;
+   char sync;
    VCOS_ATOMIC_FLAGS_T poll_flags;
    short version;
    short version_min;
@@ -284,6 +287,9 @@ typedef struct vchiq_shared_state_struct {
    int slot_first;
    int slot_last;
 
+   /* The slot allocated to synchronous messages from the owner. */
+   int slot_sync;
+
    /* Signalling this event indicates that owner's slot handler thread should
       run. */
    REMOTE_EVENT_T trigger;
@@ -298,6 +304,12 @@ typedef struct vchiq_shared_state_struct {
 
    /* The slot_queue index where the next recycled slot will be written. */
    volatile int slot_queue_recycle;
+
+   /* This event should be signalled when a synchronous message is sent. */
+   REMOTE_EVENT_T sync_trigger;
+
+   /* This event should be signalled when a synchronous message has been released. */
+   REMOTE_EVENT_T sync_release;
 
    /* A circular buffer of slot indexes. */
    int slot_queue[VCHIQ_MAX_SLOTS_PER_SIDE];
@@ -339,12 +351,19 @@ struct vchiq_state_struct {
 
    VCOS_THREAD_T slot_handler_thread;  // processes incoming messages
    VCOS_THREAD_T recycle_thread;       // processes recycled slots
+   VCOS_THREAD_T sync_thread;          // processes synchronous messages
 
    /* Local implementation of the trigger remote event */
    VCOS_EVENT_T trigger_event;
 
    /* Local implementation of the recycle remote event */
    VCOS_EVENT_T recycle_event;
+
+   /* Local implementation of the sync trigger remote event */
+   VCOS_EVENT_T sync_trigger_event;
+
+   /* Local implementation of the sync release remote event */
+   VCOS_EVENT_T sync_release_event;
 
    char *tx_data;
    char *rx_data;
@@ -353,6 +372,8 @@ struct vchiq_state_struct {
    VCOS_MUTEX_T slot_mutex;
 
    VCOS_MUTEX_T recycle_mutex;
+
+   VCOS_MUTEX_T sync_mutex;
 
    /* Indicates the byte position within the stream from where the next message
       will be read. The least significant bits are an index into the slot.

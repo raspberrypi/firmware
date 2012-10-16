@@ -32,8 +32,11 @@ VideoCore OS Abstraction Layer - platform-specific types and defines
 #ifndef VCOS_PLATFORM_TYPES_H
 #define VCOS_PLATFORM_TYPES_H
 
-#include <inttypes.h> /* for PRId64, PRIi64, etc */
-#include <stdint.h>
+#include "interface/vcos/vcos_inttypes.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define VCOSPRE_ extern
 #define VCOSPOST_
@@ -44,6 +47,9 @@ VideoCore OS Abstraction Layer - platform-specific types and defines
 #define VCOS_FORMAT_ATTR_(ARCHETYPE, STRING_INDEX, FIRST_TO_CHECK)
 #endif
 
+#if defined(__linux__) && !defined(NDEBUG) && defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
+   #define VCOS_BKPT ({ __asm volatile ("int3":::"memory"); })
+#endif
 /*#define VCOS_BKPT vcos_abort() */
 
 #define VCOS_ASSERT_LOGGING         1
@@ -58,20 +64,8 @@ vcos_pthreads_logging_assert(const char *file, const char *func, unsigned int li
 #define VCOS_INLINE_DECL extern __inline__
 #define VCOS_INLINE_IMPL static __inline__
 
-#if !defined( PRId64 )
-#define PRId64 "lld"
-#endif
-#if !defined( PRIi64 )
-#define PRIi64 "lli"
-#endif
-#if !defined( PRIo64 )
-#define PRIo64 "llo"
-#endif
-#if !defined( PRIu64 )
-#define PRIu64 "llu"
-#endif
-#if !defined( PRIx64 )
-#define PRIx64 "llx"
+#ifdef __cplusplus
+}
 #endif
 
 #endif
