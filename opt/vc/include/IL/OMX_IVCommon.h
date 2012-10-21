@@ -137,6 +137,8 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_Format32bitABGR8888,
     OMX_COLOR_Format8bitPalette,
     OMX_COLOR_FormatYUVUV128,
+    OMX_COLOR_FormatRawBayer12bit,
+    OMX_COLOR_FormatBRCMEGL,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
@@ -199,6 +201,10 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterDeInterlaceAdvanced,
     
     OMX_ImageFilterColourSwap,
+    OMX_ImageFilterWashedOut,
+    OMX_ImageFilterColourPoint,
+    OMX_ImageFilterPosterise,
+    OMX_ImageFilterColourBalance,
 
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
@@ -518,6 +524,8 @@ typedef enum OMX_EXPOSURECONTROLTYPE {
     OMX_ExposureControlVeryLong,
     OMX_ExposureControlFixedFps,
     OMX_ExposureControlNightWithPreview,
+    OMX_ExposureControlAntishake,
+    OMX_ExposureControlFireworks,
     OMX_ExposureControlMax = 0x7FFFFFFF
 } OMX_EXPOSURECONTROLTYPE;
 

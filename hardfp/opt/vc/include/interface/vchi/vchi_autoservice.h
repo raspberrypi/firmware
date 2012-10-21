@@ -46,45 +46,38 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @param vchiq The VCHIQ handle.
  * @return 0 on success
  */
+
+typedef enum {
+   VCHI_API_VCHI,
+   VCHI_API_VCHIQ
+} VCHI_API_ID;
+
+typedef void (*VCHI_AUTO_ENTRY)(void*);
+
+typedef struct vchi_service_info_tag {
+   VCHI_API_ID api;
+   VCHI_AUTO_ENTRY entry;
+   const char *name;
+} VCHI_SERVICE_INFO_T;
+
 #ifdef USE_VCHIQ_ARM
 typedef int32_t (*VCHIQ_SERVICE_AUTOINIT)(VCHIQ_INSTANCE_T vchiq);
-typedef struct vchiq_service_info_tag {
-   /* Service initialisation function */
-   VCHIQ_SERVICE_AUTOINIT init;
-
-   /* Name of service for debugging */
-   const char* name;
-
-} VCHIQ_SERVICE_INFO_T;
 #endif
 
-typedef int32_t (*VCHI_SERVICE_AUTOINIT)(VCHI_INSTANCE_T vchiq);
-typedef struct vchi_service_info_tag {
-   /* Service initialisation function */
-   VCHI_SERVICE_AUTOINIT init;
-
-   /* Name of service for debugging */
-   const char* name;
-
-} VCHI_SERVICE_INFO_T;
+typedef int32_t (*VCHI_SERVICE_AUTOINIT)(VCHI_INSTANCE_T vchiq, int num_connections, VCHI_CONNECTION_T **connections);
 
 /** 
  * Declare one of these statically.
- *
- * To stop the linker 'optimizing' out the auto registration structures
- * there must be a reference to
- * <init>_info_p in dldummy.c
- * Create this by specifying this as the prototype in applications/vmcs/components/other.mk
  */
 #define VCHIQ_AUTO_REGISTER_SERVICE(name,init)      \
-   pragma Data(LIT, ".vchiq_services");                   \
-   static const VCHIQ_SERVICE_INFO_T init##_info = {init,name};   \
+   pragma Data(LIT, ".init.vchiq_services");        \
+   static const VCHI_SERVICE_INFO_T init##_info = {VCHI_API_VCHIQ,(VCHI_AUTO_ENTRY)init,name};   \
    pragma Data; \
-   const VCHIQ_SERVICE_INFO_T *init##_info_p(void) { return &init##_info; }
+   const VCHI_SERVICE_INFO_T *init##_info_p(void) { return &init##_info; }
 
-#define VCHI_AUTO_REGISTER_SERVICE(name)      \
-   pragma Data(LIT, ".vchiq_services");                   \
-   const const VCHI_SERVICE_INFO_T init##_info = {init,name};   \
+#define VCHI_AUTO_REGISTER_SERVICE(name,init)      \
+   pragma Data(LIT, ".init.vchiq_services");       \
+   static const VCHI_SERVICE_INFO_T init##_info = {VCHI_API_VCHI,(VCHI_AUTO_ENTRY)init,name};   \
    pragma Data; \
    const VCHI_SERVICE_INFO_T *init##_info_p(void) { return &init##_info; }
 

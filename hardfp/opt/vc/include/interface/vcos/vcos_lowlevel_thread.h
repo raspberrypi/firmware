@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - low level thread support
@@ -37,7 +37,9 @@ extern "C" {
 #endif
 
 #include "interface/vcos/vcos_types.h"
+#ifndef VCOS_PLATFORM_H
 #include "vcos_platform.h"
+#endif
 
 /**
  * \file

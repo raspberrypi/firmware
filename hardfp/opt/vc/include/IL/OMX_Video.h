@@ -297,9 +297,12 @@ typedef struct OMX_VIDEO_PARAM_MOTIONVECTORTYPE {
  * Enumeration of possible methods to use for Intra Refresh 
  */
 typedef enum OMX_VIDEO_INTRAREFRESHTYPE {
-    OMX_VIDEO_IntraRefreshCyclic,
-    OMX_VIDEO_IntraRefreshAdaptive,
-    OMX_VIDEO_IntraRefreshBoth,
+    OMX_VIDEO_IntraRefreshNone      = 0,    /**< No Intra refresh*/
+    OMX_VIDEO_IntraRefreshCyclic    = 1,    /**< Cyclic intra refresh, bit 0 is set*/
+    OMX_VIDEO_IntraRefreshAdaptive  = 2,    /**< Adaptive intra refresh, bit 1 is set*/
+    OMX_VIDEO_IntraRefreshBoth      = 3,    /**< Cyclic + Adaptive intra refresh (no mrows since bit 2 is off)*/
+    OMX_VIDEO_IntraRefreshCyclicMrows = 5,  /**< Cyclic intra refresh, multiple rows at a time bits 0 and 2 are set*/
+    OMX_VIDEO_IntraRefreshPseudoRand = 8,   /**< Psuedo random intra refresh, uses bit 3*/
     OMX_VIDEO_IntraRefreshKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_VIDEO_IntraRefreshVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
     OMX_VIDEO_IntraRefreshMax = 0x7FFFFFFF
@@ -329,6 +332,7 @@ typedef struct OMX_VIDEO_PARAM_INTRAREFRESHTYPE {
     OMX_U32 nAirMBs;
     OMX_U32 nAirRef;
     OMX_U32 nCirMBs;
+    OMX_U32 nPirMBs;
 } OMX_VIDEO_PARAM_INTRAREFRESHTYPE;
 
 
@@ -1059,59 +1063,6 @@ typedef struct OMX_VIDEO_CONFIG_NALSIZE {
     OMX_U32 nNaluBytes;
 } OMX_VIDEO_CONFIG_NALSIZE;
 
-/** 
- * AVC Override encode capabilities
- *
- * STRUCT MEMBERS:
- *  nSize               : Size of the structure in bytes
- *  nVersion            : OMX specification version information
- *  nPortIndex          : Port that this structure applies to
- *  nCustomMaxMBPS      : Specifies maximum macro-blocks per second
- *  nCustomMaxFS        : Specifies maximum frame size (macro-blocks per frame)
- *  nCustomeMaxBRandCPB : Specifies maximum bitrate in units of 1000 bits/s
- *                        and Codec Picture Buffer (CPB derived from bitrate)
- */
-typedef struct OMX_VIDEO_CONFIG_LEVEL_EXTEND {
-    OMX_U32 nSize; 
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_U32 nCustomMaxMBPS;
-    OMX_U32 nCustomMaxFS;
-    OMX_U32 nCustomMaxBRandCPB;
-} OMX_VIDEO_CONFIG_LEVEL_EXTEND;
-
-/**
- * Enable/Disable end to end distortion estimator
- * eede added
- * STRUCT MEMBERS:
- *  nSize      : Size of the structure in bytes
- *  nVersion   : OMX specification version information
- *  nPortIndex : Port that this structure applies to
- *  enable     : enable or disable
- */
-typedef struct OMX_VIDEO_EEDE_ENABLE {
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_U32 enable;
-} OMX_VIDEO_EEDE_ENABLE;
-
-/**
- * loss rate configuration for end to end distortion
- * estimator
- * eede added
- * STRUCT MEMBERS:
- *  nSize      : Size of the structure in bytes
- *  nVersion   : OMX specification version information
- *  nPortIndex : Port that this structure applies to
- *  LossRate   : loss rate, 5 means 5%
- */
-typedef struct OMX_VIDEO_EEDE_LOSSRATE {
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_U32 loss_rate;
-} OMX_VIDEO_EEDE_LOSSRATE;
 
 /** @} */
 

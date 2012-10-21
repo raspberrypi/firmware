@@ -83,7 +83,7 @@ typedef struct OMX_BUFFERFRAGMENTTYPE {
 
 /* OMX_IndexParamBrcmEnableIJGTableScaling: JPEG Quality Table Setting. */
 typedef struct OMX_PARAM_IJGSCALINGTYPE {
-   OMX_U32 nSize; 
+   OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_U32 nPortIndex;
    OMX_BOOL bEnabled;
@@ -185,13 +185,17 @@ created with \code{OMX_Set upCamPools}.
 */
 
 /* OMX_IndexConfigAudioRenderingLatency: Audio Rendering Latency */
-/* 
+/*
 This config allows the client to query the current latency of audio
 rendering.  The latency is returned as the number of samples that
 an audio rendering component has received but have not been played.
 */
 
-
+/* OMX_IndexConfigBrcmPoolMemAllocSize: Pool memory usage values */
+/*
+This config allows the client to query how much memory is being used by
+the component for any image pools. 
+*/
 
 /* OMX_IndexConfigDisplayRegion: Display Region */
 typedef enum OMX_DISPLAYTRANSFORMTYPE{
@@ -236,7 +240,7 @@ typedef enum OMX_DISPLAYSETTYPE {
 } OMX_DISPLAYSETTYPE;
 
 typedef struct OMX_CONFIG_DISPLAYREGIONTYPE {
-   OMX_U32 nSize; 
+   OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_U32 nPortIndex;
    OMX_DISPLAYSETTYPE set;
@@ -255,7 +259,7 @@ typedef struct OMX_CONFIG_DISPLAYREGIONTYPE {
    OMX_U32 wfc_context_width;
    OMX_U32 wfc_context_height;
 } OMX_CONFIG_DISPLAYREGIONTYPE;
-/* 
+/*
 This config sets the output display device, as well as the region used
 on the output display, any display transformation, and some flags to
 indicate how to scale the image.
@@ -430,11 +434,11 @@ typedef struct OMX_CONFIG_BRCMAUDIODESTINATIONTYPE {
    OMX_VERSIONTYPE nVersion;
    OMX_U8 sName[16];
 } OMX_CONFIG_BRCMAUDIODESTINATIONTYPE;
-/* 
-This config sets the platform-specific audio destination or output 
+/*
+This config sets the platform-specific audio destination or output
 device for audio sink components (e.g. audio_render).
 
-\code{sName} describes the audio destination, with \code{"local"} 
+\code{sName} describes the audio destination, with \code{"local"}
 typically being directly connected to headphones.
 */
 
@@ -444,12 +448,32 @@ typedef struct OMX_CONFIG_BRCMAUDIOSOURCETYPE {
    OMX_VERSIONTYPE nVersion;
    OMX_U8 sName[16];
 } OMX_CONFIG_BRCMAUDIOSOURCETYPE;
-/* 
-This config sets the platform-specific audio source or input device 
+/*
+This config sets the platform-specific audio source or input device
 for audio source components (e.g. audio_capture).
 
-\code{sName} describes the audio source, with \code{"local"} 
+\code{sName} describes the audio source, with \code{"local"}
 typically being directly connected to microphone.
+*/
+
+/* OMX_IndexConfigBrcmAudioDownmixCoefficients: Audio Downmix Coefficients */
+typedef struct OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 coeff[16];
+} OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS;
+/*
+This config sets the platform-specific audio downmixing coefficients for the 
+audio mixer component. The coefficients are 16.16 fixed point.
+The even coefficients contribute to the left channel. 
+The odd coefficients contribute to the right channel. 
+L' = coeff[0] * sample[N] + coeff[2] * sample[N+1] + coeff[4] * sample[N+2] + coeff[6] * sample[N+3] 
+   + coeff[8] * sample[N+4] + coeff[10] * sample[N+5] + coeff[12] * sample[N+6] + coeff[14] * sample[N+7]
+R' = coeff[1] * sample[N] + coeff[3] * sample[N+1] + coeff[5] * sample[N+2] + coeff[7] * sample[N+3] 
+   + coeff[9] * sample[N+4] + coeff[11] * sample[N+5] + coeff[13] * sample[N+6] + coeff[15] * sample[N+7]
+
+\code{coeff} describes the downmixing coefficients
 */
 
 /* OMX_IndexConfigPlayMode: Play Mode */
@@ -513,11 +537,11 @@ typedef struct OMX_PARAM_STILLSFUNCTIONTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_BOOL bBuffer;
-   OMX_PTR (*pOpenFunc)();
-   OMX_PTR (*pCloseFunc)();
-   OMX_PTR (*pReadFunc)();
-   OMX_PTR (*pSeekFunc)();
-   OMX_PTR (*pWriteFunc)();
+   OMX_PTR (*pOpenFunc)(void);
+   OMX_PTR (*pCloseFunc)(void);
+   OMX_PTR (*pReadFunc)(void);
+   OMX_PTR (*pSeekFunc)(void);
+   OMX_PTR (*pWriteFunc)(void);
 } OMX_PARAM_STILLSFUNCTIONTYPE;
 
 typedef void* OMX_BUFFERADDRESSHANDLETYPE;
@@ -554,7 +578,7 @@ typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nPortIndex;
    OMX_IMAGEFILTERTYPE eImageFilter;
    OMX_U32 nNumParams;
-   OMX_U32 nParams[4];
+   OMX_U32 nParams[5];
 } OMX_CONFIG_IMAGEFILTERPARAMSTYPE;
 /*
 This structure contains optional parameters for some image
@@ -564,20 +588,20 @@ parameters.
 <table border="1" cellspacing="0" cellpadding="2">
 <tr><td>Filter<td>Parameters<td>Notes
 
-<tr><td>\code{OMX_ImageFilterSolarize} 
+<tr><td>\code{OMX_ImageFilterSolarize}
 <td>\code{[x0 y0 y1 y2]}
 <td>Linear mapping of \code{[0,x0]} to \code{[0,y0>]}
 and \code{[x0,255]} to \code{[y1,y2]}.
 Default is \code{"128 128 128 0"}.
 
-<tr><td>\code{OMX_ImageFilterSharpen} 
+<tr><td>\code{OMX_ImageFilterSharpen}
 <td>\code{[sz [str [th]]}
 <td>\code{sz} size of filter, either 1 or 2.
 \code{str} strength of filter.
 \code{th} threshold of filter.
 Default is \code{"1 40 20"}.
 
-<tr><td>\code{OMX_ImageFilterFilm} 
+<tr><td>\code{OMX_ImageFilterFilm}
 <td>\code{[[str] [u v]]}
 <td>\code{str} strength of effect.
 \code{u} sets u to constant value.
@@ -670,10 +694,10 @@ typedef enum OMX_CAMERAIMAGEPOOLINPUTMODETYPE {
                                                Can not be used with parallel stills capture
                                                and video encode, as the pool will be sized for
                                                capture or viewfinder, not both simultaneously.
-                                               The pool wouldn't divide sensibly in this mode 
+                                               The pool wouldn't divide sensibly in this mode
                                                anyway.
                                              */
-   OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS,    /*All stills & video input images are allocated 
+   OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS,    /*All stills & video input images are allocated
                                                from two seperate pools.
                                                This ensures that parallel capture can work, but
                                                would consume more memory if used on a simple
@@ -696,6 +720,8 @@ typedef struct OMX_PARAM_CAMERAIMAGEPOOLTYPE {
    OMX_U32 nLoResWidth;
    OMX_U32 nLoResHeight;
    OMX_COLOR_FORMATTYPE eLoResType;
+   OMX_U32 nNumSnapshotFrames;
+   OMX_COLOR_FORMATTYPE eSnapshotType;
    OMX_CAMERAIMAGEPOOLINPUTMODETYPE eInputPoolMode;
    OMX_U32 nNumInputVideoFrames;
    OMX_U32 nInputVideoWidth;
@@ -709,10 +735,10 @@ typedef struct OMX_PARAM_CAMERAIMAGEPOOLTYPE {
 /*
 \sloppy This parameter specifies the size, type, and number, of images to
 allow in the images pools required by Camplus. Supported types are
-\code{OMX_COLOR_FormatYUV420PackedPlanar}, 
-\code{OMX_COLOR_FormatYUV422PackedPlanar}, 
-\code{OMX_COLOR_FormatRawBayer8bit}, 
-\code{OMX_COLOR_FormatRawBayer10bit}, 
+\code{OMX_COLOR_FormatYUV420PackedPlanar},
+\code{OMX_COLOR_FormatYUV422PackedPlanar},
+\code{OMX_COLOR_FormatRawBayer8bit},
+\code{OMX_COLOR_FormatRawBayer10bit},
 \code{OMX_COLOR_FormatRawBayer8bitcompressed}, and 0 (reserved for the
 Broadcom-specific format required by the video encoder). The input
 pool width, height, and type can be set as 0 to make the component
@@ -772,8 +798,8 @@ typedef struct OMX_PARAM_ILFIFOCONFIG {
    OMX_U32 nDataSize;         /**< The size of the FIFO's data area */
    OMX_U32 nHeaderCount;      /**< The number of headers allocated */
 } OMX_PARAM_ILFIFOCONFIG;
-/** 
- * Allows configuring the size of the ILFIFO used in a component. 
+/**
+ * Allows configuring the size of the ILFIFO used in a component.
  */
 
 /* OMX_IndexConfigCameraSensorModes: Camera Sensor Mode */
@@ -828,19 +854,19 @@ typedef struct OMX_BRCMBUFFERSTATSTYPE {
 } OMX_BRCMBUFFERSTATSTYPE;
 
 /*
-Ports that gather statistics for debugging and diagnostics 
-might also collect information about buffer header fields 
+Ports that gather statistics for debugging and diagnostics
+might also collect information about buffer header fields
 and data.
 
 Note that:
 
-The \code{nOrdinal} field increases monotonically whenever 
-a new buffer is received or emitted and shall not be reset 
+The \code{nOrdinal} field increases monotonically whenever
+a new buffer is received or emitted and shall not be reset
 upon a port flush.
 
-The \code{nFilledLen} might indicate the size of a data area 
-larger than the data area that actually contributed to the 
-checksums (e.g. when image data is provided with cropping 
+The \code{nFilledLen} might indicate the size of a data area
+larger than the data area that actually contributed to the
+checksums (e.g. when image data is provided with cropping
 information).
 */
 
@@ -853,11 +879,11 @@ typedef struct OMX_CONFIG_BRCMPORTBUFFERSTATSTYPE {
    OMX_BRCMBUFFERSTATSTYPE sData[1];
 } OMX_CONFIG_BRCMPORTBUFFERSTATSTYPE;
 /*
-Ports that gather statistics for debugging and diagnostics 
-might also collect information about buffer header fields 
+Ports that gather statistics for debugging and diagnostics
+might also collect information about buffer header fields
 and data.
 
-The \code{sStatsData} field is a variable length array and 
+The \code{sStatsData} field is a variable length array and
 the number of items is denoted by \code{nStatsCount}.
 */
 
@@ -881,12 +907,12 @@ typedef struct OMX_CONFIG_BRCMPORTSTATSTYPE {
 /*
 Some ports gather various statistics that can be used by clients for
 debugging purposes.  This structure is the set of all statistics that
-are gathered.  
+are gathered.
 
 The \code{nFrameSkips} field indicates the number of frames that did
 not have an expected PTS value based on the port frame rate.
 
-The \code{nByteCount} field is a 64 bit value, that will either use a 
+The \code{nByteCount} field is a 64 bit value, that will either use a
 64 bit type or two 32 bit types, similarly to \code{OMX_TICKS}.
 */
 
@@ -928,8 +954,8 @@ typedef struct OMX_CONFIG_BRCMIOPERFSTATSTYPE {
    OMX_BRCM_PERFSTATS wait;  /**< count:frequency num:microseconds waiting in calling function */
 } OMX_CONFIG_BRCMIOPERFSTATSTYPE;
 /*
-A sink component can gather various statistics about I/O (eg. file media) performance that can be used by 
-clients for debugging purposes.  The \code{bEnabled} field is used to turn the gathering of statistics 
+A sink component can gather various statistics about I/O (eg. file media) performance that can be used by
+clients for debugging purposes.  The \code{bEnabled} field is used to turn the gathering of statistics
 on/off.
 */
 
@@ -955,10 +981,10 @@ typedef struct OMX_CONFIG_FLICKERCANCELTYPE {
    OMX_U32 nPortIndex;
    OMX_COMMONFLICKERCANCELTYPE eFlickerCancel;
 } OMX_CONFIG_FLICKERCANCELTYPE;
-/* 
-Query / set the flicker cancellation frequency. Values are defined for Off, 
-50Hz, 60Hz, or auto. The method for auto detecting the flicker frequency is 
-not defined, and currently results in the feature being turned off. 
+/*
+Query / set the flicker cancellation frequency. Values are defined for Off,
+50Hz, 60Hz, or auto. The method for auto detecting the flicker frequency is
+not defined, and currently results in the feature being turned off.
 */
 
 /* OMX_IndexConfigCommonRedEyeRemoval: Red eye removal/reduction */
@@ -966,7 +992,7 @@ typedef enum OMX_REDEYEREMOVALTYPE {
    OMX_RedEyeRemovalNone,                           /**< No red eye removal */
    OMX_RedEyeRemovalOn,                             /**< Red eye removal on */
    OMX_RedEyeRemovalAuto,                           /**< Red eye removal will be done automatically when detected */
-   OMX_RedEyeRemovalKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_RedEyeRemovalKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_RedEyeRemovalVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_RedEyeRemovalSimple,                         /**< Use simple red eye reduction mechanism if supported by algorithm */
    OMX_RedEyeRemovalMax = 0x7FFFFFFF
@@ -978,18 +1004,18 @@ typedef struct OMX_CONFIG_REDEYEREMOVALTYPE {
    OMX_U32 nPortIndex;
    OMX_REDEYEREMOVALTYPE eMode;
 } OMX_CONFIG_REDEYEREMOVALTYPE;
-/* 
+/*
    Configures the red eye reduction algorithm in the camera processing
    pipeline. The stage is only enabled if the flash mode is not FlashOff.
-   The OMX_RedEyeRemovalSimple mode requests that the algorithm uses a 
-   reduced complexity algorithm to reduce the processing time. 
+   The OMX_RedEyeRemovalSimple mode requests that the algorithm uses a
+   reduced complexity algorithm to reduce the processing time.
 */
 
 
 typedef enum OMX_FACEDETECTIONCONTROLTYPE {
    OMX_FaceDetectionControlNone,                           /**< Disables face detection */
    OMX_FaceDetectionControlOn,                             /**< Enables face detection */
-   OMX_FaceDetectionControlKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_FaceDetectionControlKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_FaceDetectionControlVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_FaceDetectionControlMax = 0x7FFFFFFF
 } OMX_FACEDETECTIONCONTROLTYPE;
@@ -1010,7 +1036,7 @@ typedef enum OMX_FACEREGIONFLAGSTYPE {
    OMX_FaceRegionFlagsNone    = 0,
    OMX_FaceRegionFlagsBlink   = 1,
    OMX_FaceRegionFlagsSmile   = 2,
-   OMX_FaceRegionFlagsKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_FaceRegionFlagsKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_FaceRegionFlagsVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_FaceRegionFlagsMax = 0x7FFFFFFF
 } OMX_FACEREGIONFLAGSTYPE;
@@ -1043,6 +1069,8 @@ typedef struct OMX_CONFIG_FACEDETECTIONREGIONTYPE {
                                        When getting, the client sets this to the number of regions available.
                                        The component writes region data and updates this field with how many
                                        regions have been written to. */
+   OMX_U32 nImageWidth;           /**< Width of the image, hence reference for the face coordinates */
+   OMX_U32 nImageHeight;          /**< Height of the image, hence reference for the face coordinates */
    OMX_FACEREGIONTYPE sRegion[1]; /**< variable length array of face regions */
 } OMX_CONFIG_FACEDETECTIONREGIONTYPE;
 
@@ -1056,9 +1084,9 @@ typedef enum OMX_INTERLACETYPE {
                                                      interleaved, with the upper field temporally earlier */
    OMX_InterlaceFieldsInterleavedLowerFirst,    /**< The data is interlaced, two fields sent together line
                                                      interleaved, with the lower field temporally earlier */
-   OMX_InterlaceMixed,                          /**< The stream may contain a mixture of progressive 
+   OMX_InterlaceMixed,                          /**< The stream may contain a mixture of progressive
                                                      and interlaced frames */
-   OMX_InterlaceKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_InterlaceKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_InterlaceVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_InterlaceMax = 0x7FFFFFFF
 } OMX_INTERLACETYPE;
@@ -1079,7 +1107,7 @@ typedef struct OMX_PARAM_CAMERAISPTUNERTYPE {
 } OMX_PARAM_CAMERAISPTUNERTYPE;
 /*
 This parameter allows a custom ISP tuner to be loaded instead of
-the default one specified for the camera module. Setting an empty 
+the default one specified for the camera module. Setting an empty
 string uses the default value.
 */
 
@@ -1091,7 +1119,7 @@ typedef struct OMX_CONFIG_IMAGEPTRTYPE {
 } OMX_CONFIG_IMAGEPTRTYPE;
 /*
 This parameter parameter allows the return of a pointer to a
-VideoCore image resource. 
+VideoCore image resource.
 */
 
 /* OMX_IndexConfigAFAssistLight: Autofocus assist light mode selection */
@@ -1111,9 +1139,9 @@ typedef struct OMX_CONFIG_AFASSISTTYPE {
    OMX_U32 nPortIndex;
    OMX_AFASSISTTYPE eMode;
 } OMX_CONFIG_AFASSISTTYPE;
-/* 
+/*
 Set the mode to adopt for the autofocus assist light.
-\code{OMX_AFAssistTorch} will turn the AF assist light on permanently, allowing 
+\code{OMX_AFAssistTorch} will turn the AF assist light on permanently, allowing
 it to be used as a torch.
 */
 
@@ -1125,7 +1153,7 @@ typedef struct OMX_CONFIG_INPUTCROPTYPE {
    OMX_U32 xLeft;     /**< Fraction of the width for the top left corner of the rectangle */
    OMX_U32 xTop;      /**< Fraction of the height for the top left corner of the rectangle */
    OMX_U32 xWidth;    /**< Fraction of the image width desired */
-   OMX_U32 xHeight;   /**< Fraction of the image height desired */   
+   OMX_U32 xHeight;   /**< Fraction of the image height desired */
 } OMX_CONFIG_INPUTCROPTYPE;
 /*
 This parameter allows the input cropping to be specified as a
@@ -1159,7 +1187,7 @@ typedef struct OMX_CONFIG_BRCMEGLIMAGEMEMHANDLETYPE {
    OMX_PTR memHandle;
 } OMX_CONFIG_BRCMEGLIMAGEMEMHANDLETYPE;
 /*
-This config allows the EGL server to notify a RIL component that an 
+This config allows the EGL server to notify a RIL component that an
 EGLImage is available for rendering into and to provide a mapping from
 an EGLImage to a mem handle.
 */
@@ -1173,7 +1201,7 @@ typedef enum OMX_PRIVACYINDICATORTYPE {
    OMX_PrivacyIndicatorVendorStartUnused = 0x7F000000,
    OMX_PrivacyIndicatorMax = 0x7FFFFFFF
 } OMX_PRIVACYINDICATORTYPE;
-   
+
 typedef struct OMX_CONFIG_PRIVACYINDICATORTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
@@ -1181,13 +1209,13 @@ typedef struct OMX_CONFIG_PRIVACYINDICATORTYPE {
 } OMX_CONFIG_PRIVACYINDICATORTYPE;
 /*
 This config allows control over the privacy indicator light.  This
-light indicates when a capture is in progress.  
+light indicates when a capture is in progress.
 
-\code{OMX_PrivacyIndicatorOff} indicator is disabled.  
+\code{OMX_PrivacyIndicatorOff} indicator is disabled.
 
 \code{OMX_PrivacyIndicatorOn} indicator will be
 turned on whenever an image is being captured as determined by the
-capturing bit. Minimum on duration of approx 200ms.  
+capturing bit. Minimum on duration of approx 200ms.
 
 \code{OMX_PrivacyIndicatorForceOn} results in turning the indicator on
 immediately, whether an image is being captured or not. The mode will
@@ -1198,7 +1226,7 @@ on.
 */
 
 
-/* OMX_IndexConfigCameraFlashType: Select flash type */
+/* OMX_IndexParamCameraFlashType: Select flash type */
 typedef enum OMX_CAMERAFLASHTYPE {
    OMX_CameraFlashDefault,
    OMX_CameraFlashXenon,
@@ -1208,21 +1236,21 @@ typedef enum OMX_CAMERAFLASHTYPE {
    OMX_CameraFlashVendorStartUnused = 0x7F000000,
    OMX_CameraFlashMax = 0x7FFFFFFF
 } OMX_CAMERAFLASHTYPE;
-   
-typedef struct OMX_CONFIG_CAMERAFLASHTYPE {
+
+typedef struct OMX_PARAM_CAMERAFLASHTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
    OMX_U32 nPortIndex;
    OMX_CAMERAFLASHTYPE eFlashType;
    OMX_BOOL bRedEyeUsesTorchMode;
-} OMX_CONFIG_CAMERAFLASHTYPE;
+} OMX_PARAM_CAMERAFLASHTYPE;
 /*
 This parameter allows the selection of xenon or LED flash devices
 to be used with the currently selected camera. If that device is not
-available, then the component will revert back to whatever flash 
+available, then the component will revert back to whatever flash
 device is available for that camera.
-\code{bRedEyeUsesTorchMode} allows the blinking for red eye reduction to 
-be switched between using the indicator mode, and the torch mode for the 
+\code{bRedEyeUsesTorchMode} allows the blinking for red eye reduction to
+be switched between using the indicator mode, and the torch mode for the
 flash driver.
 */
 
@@ -1249,61 +1277,16 @@ typedef struct OMX_CONFIG_CAMERAFLASHCONFIGTYPE {
 This parameter allows the configuration of various parameters relating to
 the flash cycle. Some of the options are only applicable to xenon flash.
 
-\code{bUsePreFlash} uses a low intensity pre-flash to determine flash intensity. This setting 
+\code{bUsePreFlash} uses a low intensity pre-flash to determine flash intensity. This setting
 is recommended for almost all flash situations.
 
-\code{bUseFocusDistanceInfo} uses the distance of the subject, as measured by the AF algorithm 
+\code{bUseFocusDistanceInfo} uses the distance of the subject, as measured by the AF algorithm
 to set the intensity of the flash.
 
 \code{eFlashSync} configures which edge of the shutter is used to synchronise the flash, and
 the duration of the exposure.
 
 \code{eIgnoreChargeState} will make the flash fire, even if it is not fully charged.
-*/
-
-/* OMX_IndexConfigCameraAlgorithmVersion: ISP Tuner algorithm version query */
-typedef enum OMX_CONFIG_CAMERAALGORITHMTYPE {
-   OMX_CameraAlgorithmKhronosExtensions = 0x6F000000,
-   OMX_CameraAlgorithmVendorStartUnused = 0x7F000000,
-   OMX_CameraAlgorithmAGC,
-   OMX_CameraAlgorithmAWB,
-   OMX_CameraAlgorithmBlackLevel,
-   OMX_CameraAlgorithmChromColour,
-   OMX_CameraAlgorithmFocus,
-   OMX_CameraAlgorithmLensShading,
-   OMX_CameraAlgorithmCorrection,
-   OMX_CameraAlgorithmSwDenoise,
-   OMX_CameraAlgorithmMotionDetection,
-   OMX_CameraAlgorithmDistortion,
-   OMX_CameraAlgorithmDefectivePixelCorrection,
-   OMX_CameraAlgorithmFaceTracking,
-   OMX_CameraAlgorithmRedEyeReduction,
-   OMX_CameraAlgorithmAntishake,
-   OMX_CameraAlgorithmWriteBayerCaptureImages,
-   OMX_CameraAlgorithmVideoDenoise,
-   OMX_CameraAlgorithmStillsDenoise,
-   OMX_CameraAlgorithmStabilisation,
-   OMX_CameraAlgorithmImageEffects,
-   OMX_CameraAlgorithmDarkFrameSubtraction,
-   OMX_CameraAlgorithmRMI,
-   OMX_CameraAlgorithmDynamicRangeExpansion,
-   OMX_CameraAlgorithmFaceRecognition,
-   OMX_CameraAlgorithmMax = 0x7FFFFFFF
-} OMX_CONFIG_CAMERAALGORITHMTYPE;
-
-typedef struct OMX_CONFIG_CAMERAALGORITHMVERSIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_CONFIG_CAMERAALGORITHMTYPE eAlgorithm;
-   OMX_U8 sAlgorithmName[32];
-   OMX_U8 sVendorName[32];
-   OMX_U32 nVersionMajor;
-   OMX_U32 nVersionMinor;
-   OMX_U32 nBuild;
-} OMX_CONFIG_CAMERAALGORITHMVERSIONTYPE;
-/*
-This config allows the client to query over the version of the ISP
-algorithm being used.
 */
 
 /* OMX_IndexConfigBrcmAudioTrackGaplessPlayback: Encoder/decoder delay and padding information for gapless playback. */
@@ -1340,7 +1323,7 @@ typedef enum OMX_BRCMPIXELVALUERANGETYPE
    OMX_PixelValueRangeUnspecified = 0,
    OMX_PixelValueRangeITU_R_BT601,
    OMX_PixelValueRangeFull8Bit,
-   OMX_PixelValueRangeKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_PixelValueRangeKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_PixelValueRangeVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_PixelValueRangeMax = 0x7FFFFFFF
 } OMX_BRCMPIXELVALUERANGETYPE;
@@ -1370,13 +1353,12 @@ typedef enum OMX_CAMERADISABLEALGORITHMTYPE {
       OMX_CameraDisableAlgorithmAntiShake,
       OMX_CameraDisableAlgorithmImageEffects,
       OMX_CameraDisableAlgorithmDarkSubtract,
-      OMX_CameraDisableAlgorithmDepurple,
-      OMX_CameraDisableAlgorithmRmi,
       OMX_CameraDisableAlgorithmDynamicRangeExpansion,
       OMX_CameraDisableAlgorithmFaceRecognition,
       OMX_CameraDisableAlgorithmFaceBeautification,
       OMX_CameraDisableAlgorithmSceneDetection,
-   OMX_CameraDisableAlgorithmKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+      OMX_CameraDisableAlgorithmHighDynamicRange,
+   OMX_CameraDisableAlgorithmKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_CameraDisableAlgorithmVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_CameraDisableAlgorithmMax = 0x7FFFFFFF
 } OMX_CAMERADISABLEALGORITHMTYPE;
@@ -1389,7 +1371,7 @@ typedef struct OMX_PARAM_CAMERADISABLEALGORITHMTYPE
    OMX_BOOL bDisabled;
 } OMX_PARAM_CAMERADISABLEALGORITHMTYPE;
 /*
-Allows plugin algorithms to be disabled to save memory 
+Allows plugin algorithms to be disabled to save memory
 within the camera component
 */
 
@@ -1405,7 +1387,7 @@ typedef struct OMX_CONFIG_BRCMAUDIOEFFECTCONTROLTYPE {
 /*
 This structure represents the internal configuration of an audio effect.
 The audio effect is provided by a loadable plug-in described
-in the \code{name} field and is configured in a plug-in-dependent 
+in the \code{name} field and is configured in a plug-in-dependent
 manner with the \code{property} field. The \code{bEnable} field is used to
 turn the effect on/off.
 */
@@ -1455,7 +1437,7 @@ typedef enum OMX_PARAM_CAMERAUSECASE {
    OMX_CameraUseCaseAuto,
    OMX_CameraUseCaseVideo,
    OMX_CameraUseCaseStills,
-   OMX_CameraUseCaseKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_CameraUseCaseKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_CameraUseCaseVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_CameraUseCaseMax = 0x7FFFFFFF
 } OMX_PARAM_CAMERAUSECASE;
@@ -1507,15 +1489,6 @@ typedef struct OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE {
    OMX_U32 nBufferSize;
 } OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE;
 
-/** Can the camera focus, or is it busy capturing a frame? */
-typedef struct OMX_CONFIG_CANFOCUSTYPE
-{
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_BOOL bFocusAllowed;
-} OMX_CONFIG_CANFOCUSTYPE;
-
 /* OMX_IndexConfigCameraInfo: Camera device driver information */
 #define OMX_CONFIG_CAMERAINFOTYPE_NAME_LEN 16
 typedef struct OMX_CONFIG_LENSCALIBRATIONVALUETYPE
@@ -1524,10 +1497,10 @@ typedef struct OMX_CONFIG_LENSCALIBRATIONVALUETYPE
    OMX_U16  nNdTransparency;
    OMX_U16  nPwmPulseNearEnd;  /**< Num pulses to move lens 1um at near end */
    OMX_U16  nPwmPulseFarEnd;   /**< Num pulses to move lens 1um at far end */
-   OMX_U16  nVoltagePIOutNearEnd[3];   
-   OMX_U16  nVoltagePIOut10cm[3];   
-   OMX_U16  nVoltagePIOutInfinity[3];   
-   OMX_U16  nVoltagePIOutFarEnd[3];   
+   OMX_U16  nVoltagePIOutNearEnd[3];
+   OMX_U16  nVoltagePIOut10cm[3];
+   OMX_U16  nVoltagePIOutInfinity[3];
+   OMX_U16  nVoltagePIOutFarEnd[3];
    OMX_U32  nAdcConversionNearEnd;
    OMX_U32  nAdcConversionFarEnd;
 } OMX_CONFIG_LENSCALIBRATIONVALUETYPE;
@@ -1550,6 +1523,8 @@ typedef struct OMX_CONFIG_CAMERAINFOTYPE
    OMX_U8 sSerialNumber[OMX_CONFIG_CAMERAINFOTYPE_SERIALNUM_LEN];
    OMX_U8 sEpromVersion[OMX_CONFIG_CAMERAINFOTYPE_EPROMVER_LEN];
    OMX_CONFIG_LENSCALIBRATIONVALUETYPE sLensCalibration;
+   OMX_U32 xFNumber;
+   OMX_U32 xFocalLength;
 } OMX_CONFIG_CAMERAINFOTYPE;
 
 
@@ -1557,7 +1532,7 @@ typedef enum OMX_CONFIG_CAMERAFEATURESSHUTTER {
    OMX_CameraFeaturesShutterUnknown,
    OMX_CameraFeaturesShutterNotPresent,
    OMX_CameraFeaturesShutterPresent,
-   OMX_CameraFeaturesShutterKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_CameraFeaturesShutterKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_CameraFeaturesShutterVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_CameraFeaturesShutterMax = 0x7FFFFFFF
 } OMX_CONFIG_CAMERAFEATURESSHUTTER;
@@ -1573,18 +1548,18 @@ typedef struct OMX_CONFIG_CAMERAFEATURESTYPE
 
 //Should be added to the spec as part of IL416c
 /* OMX_IndexConfigRequestCallback: Enable config change notifications. */
-typedef struct OMX_CONFIG_REQUESTCALLBACKTYPE 
-{ 
-   OMX_U32 nSize; 
-   OMX_VERSIONTYPE nVersion; 
-   OMX_U32 nPortIndex; 
-   OMX_INDEXTYPE nIndex; 
-   OMX_BOOL bEnable; 
+typedef struct OMX_CONFIG_REQUESTCALLBACKTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_INDEXTYPE nIndex;
+   OMX_BOOL bEnable;
 } OMX_CONFIG_REQUESTCALLBACKTYPE;
-/* 
+/*
 This config implements IL416c to allow clients to request notification
 of when a config or parameter is changed. When the parameter specified
-in \code{nIndex} for port \code{nPortIndex} changes, an 
+in \code{nIndex} for port \code{nPortIndex} changes, an
 \code{OMX_EventParamOrConfigChanged} event is generated for the client.
 */
 
@@ -1607,21 +1582,21 @@ typedef struct OMX_FOCUSREGIONXY {
 
 typedef struct OMX_CONFIG_FOCUSREGIONXYTYPE
 {
-   OMX_U32 nSize; 
-   OMX_VERSIONTYPE nVersion; 
-   OMX_U32 nPortIndex; 
-   OMX_U32 nIndex;                
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nIndex;
    OMX_U32 nTotalRegions;
    OMX_S32 nValidRegions;
    OMX_BOOL bLockToFaces;
    OMX_U32 xFaceTolerance;
    OMX_FOCUSREGIONXY sRegion[1];
 } OMX_CONFIG_FOCUSREGIONXYTYPE;
-/* 
+/*
 Query / set the focus regions to use as a set of x/y/width/height boxes relative
 to the overall image.
 
-\code{nIndex} - first region number being set/read, allowing retrieval/setting 
+\code{nIndex} - first region number being set/read, allowing retrieval/setting
 of many regions over several requests.
 
 \code{nTotalRegions} - total number of regions currently defined.
@@ -1629,23 +1604,23 @@ of many regions over several requests.
 \code{nValidRegions} - number of valid regions in the \code{sRegion} array.
 When getting, the client sets this to the number of regions available.
 The component writes region data and updates this field with how many
-regions have been written to. 
+regions have been written to.
 When setting, this is the number of regions defined with this structure
 
 \code{bLockToFaces} - compare the region(s) given to the latest face tracking results.
-If a face is found within xFaceTolerance of the defined region, then amend the 
+If a face is found within xFaceTolerance of the defined region, then amend the
 region to correspond to the face.
 
-\code{xFaceTolerance} - 0p16 value to define the max difference between the region centre 
+\code{xFaceTolerance} - 0p16 value to define the max difference between the region centre
 and face tracking result centre to take the FT results
 
 \code{sRegions} - variable length array of focus regions.
 */
 
-typedef struct OMX_CONFIG_U8TYPE { 
-    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */ 
-    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */ 
-    OMX_U32 nPortIndex;               /**< port that this structure applies to */ 
+typedef struct OMX_CONFIG_U8TYPE {
+    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
     OMX_U8  nU8;                     /**< U8 value */
 } OMX_PARAM_U8TYPE;
 
@@ -1669,40 +1644,40 @@ typedef struct OMX_YUVCOLOUR {
 } OMX_YUVCOLOUR;
 
 typedef struct OMX_CONFIG_DRAWBOXLINEPARAMS {
-    OMX_U32 nSize;                           /**< Size of this structure, in Bytes */ 
-    OMX_VERSIONTYPE nVersion;                /**< OMX specification version information */ 
+    OMX_U32 nSize;                           /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;                /**< OMX specification version information */
     OMX_U32 nPortIndex;                      /**< Port to which this config applies */
     OMX_U32 xCornerSize;                     /**< Size of the corners as a fraction of the complete side */
     OMX_U32 nPrimaryFaceLineWidth;           /**< Width of the box line for the primary face in pixels */
     OMX_U32 nOtherFaceLineWidth;             /**< Width of the box line for other faces in pixels */
     OMX_U32 nFocusRegionLineWidth;           /**< Width of the box line for focus regions in pixels */
-    OMX_YUVCOLOUR sPrimaryFaceColour;        /**< YUV colour for the primary face */ 
-    OMX_YUVCOLOUR sPrimaryFaceSmileColour;   /**< YUV colour for the primary face if smiling */ 
-    OMX_YUVCOLOUR sPrimaryFaceBlinkColour;   /**< YUV colour for the primary face if blinking */ 
-    OMX_YUVCOLOUR sOtherFaceColour;          /**< YUV colour for the all other faces */ 
-    OMX_YUVCOLOUR sOtherFaceSmileColour;     /**< YUV colour for the all other faces if smiling */ 
-    OMX_YUVCOLOUR sOtherFaceBlinkColour;     /**< YUV colour for the all other faces if blinking */ 
+    OMX_YUVCOLOUR sPrimaryFaceColour;        /**< YUV colour for the primary face */
+    OMX_YUVCOLOUR sPrimaryFaceSmileColour;   /**< YUV colour for the primary face if smiling */
+    OMX_YUVCOLOUR sPrimaryFaceBlinkColour;   /**< YUV colour for the primary face if blinking */
+    OMX_YUVCOLOUR sOtherFaceColour;          /**< YUV colour for the all other faces */
+    OMX_YUVCOLOUR sOtherFaceSmileColour;     /**< YUV colour for the all other faces if smiling */
+    OMX_YUVCOLOUR sOtherFaceBlinkColour;     /**< YUV colour for the all other faces if blinking */
     OMX_BOOL bShowFocusRegionsWhenIdle;      /**< Are focus regions displayed when just in viewfinder/AF idle */
-    OMX_YUVCOLOUR sFocusRegionColour;        /**< YUV colour for focus regions */ 
+    OMX_YUVCOLOUR sFocusRegionColour;        /**< YUV colour for focus regions */
     OMX_BOOL bShowAfState;                   /**< Change to the colours specified below if AF cycle has run */
     OMX_BOOL bShowOnlyPrimaryAfState;        /**< Only show the primary face when displaying the AF status */
     OMX_BOOL bCombineNonFaceRegions;         /**< Combine all regions not defined as faces into one single box covering them all */
-    OMX_YUVCOLOUR sAfLockPrimaryFaceColour;  /**< YUV colour for the primary face */ 
-    OMX_YUVCOLOUR sAfLockOtherFaceColour;    /**< YUV colour for the all other faces */ 
-    OMX_YUVCOLOUR sAfLockFocusRegionColour;  /**< YUV colour for focus regions */ 
-    OMX_YUVCOLOUR sAfFailPrimaryFaceColour;  /**< YUV colour for the primary face */ 
-    OMX_YUVCOLOUR sAfFailOtherFaceColour;    /**< YUV colour for the all other faces */ 
-    OMX_YUVCOLOUR sAfFailFocusRegionColour;  /**< YUV colour for focus regions */ 
+    OMX_YUVCOLOUR sAfLockPrimaryFaceColour;  /**< YUV colour for the primary face */
+    OMX_YUVCOLOUR sAfLockOtherFaceColour;    /**< YUV colour for the all other faces */
+    OMX_YUVCOLOUR sAfLockFocusRegionColour;  /**< YUV colour for focus regions */
+    OMX_YUVCOLOUR sAfFailPrimaryFaceColour;  /**< YUV colour for the primary face */
+    OMX_YUVCOLOUR sAfFailOtherFaceColour;    /**< YUV colour for the all other faces */
+    OMX_YUVCOLOUR sAfFailFocusRegionColour;  /**< YUV colour for focus regions */
  } OMX_CONFIG_DRAWBOXLINEPARAMS;
 /*
 Query / set the parameters for the box to be drawn around faces/focus regions.
 */
- 
+
  #define OMX_PARAM_CAMERARMITYPE_RMINAME_LEN 16
- //OMX_IndexParamCameraRmiControl            
+ //OMX_IndexParamCameraRmiControl
  typedef struct OMX_PARAM_CAMERARMITYPE {
-    OMX_U32 nSize;                           
-    OMX_VERSIONTYPE nVersion;                
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
     OMX_BOOL bEnabled;
     OMX_U8 sRmiName[OMX_PARAM_CAMERARMITYPE_RMINAME_LEN];
     OMX_U32 nInputBufferHeight;
@@ -1712,17 +1687,17 @@ Query / set the parameters for the box to be drawn around faces/focus regions.
 
 /* OMX_IndexConfigBrcmSyncOutput: Forcing a write sync */
 typedef struct OMX_CONFIG_BRCMSYNCOUTPUTTYPE {
-    OMX_U32 nSize;                           /**< Size of this structure, in Bytes */ 
-    OMX_VERSIONTYPE nVersion;                /**< OMX specification version information */ 
+    OMX_U32 nSize;                           /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;                /**< OMX specification version information */
 }  OMX_CONFIG_BRCMSYNCOUTPUTTYPE;
 /*
 Setting this config forces a sync of data to the filesystem.
-*/  
+*/
 
 /* OMX_IndexConfigDrmView: View information for DRM rental files */
 typedef struct OMX_CONFIG_DRMVIEWTYPE {
-   OMX_U32 nSize;             /**< Size of this structure, in Bytes */ 
-   OMX_VERSIONTYPE nVersion;  /**< OMX specification version information */ 
+   OMX_U32 nSize;             /**< Size of this structure, in Bytes */
+   OMX_VERSIONTYPE nVersion;  /**< OMX specification version information */
    OMX_U32 nCurrentView;      /**< Current view count */
    OMX_U32 nMaxView;          /**< Max. no. of view allowed */
 } OMX_CONFIG_DRMVIEWTYPE;
@@ -1734,10 +1709,10 @@ the file, which will increment the number of current views the file
 has had.
 */
 
-typedef struct OMX_PARAM_BRCMU64TYPE { 
-    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */ 
-    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */ 
-    OMX_U32 nPortIndex;               /**< port that this structure applies to */ 
+typedef struct OMX_PARAM_BRCMU64TYPE {
+    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
     OMX_U32 nLowPart;                 /**< low bits of the unsigned 64 bit value */
     OMX_U32 nHighPart;                /**< high bits of the unsigned 64 bit value */
 } OMX_PARAM_BRCMU64TYPE;
@@ -1822,10 +1797,6 @@ at in its processing.
  */
 
 /* OMX_IndexConfigDynamicRangeExpansion: Configure image dynamic range expansion processing */
-/* 
-Configures the intensity of an image dynamic range expansion processing stage 
-*/
-/* OMX_IndexConfigCameraFlashType: Select flash type */
 typedef enum OMX_DYNAMICRANGEEXPANSIONMODETYPE {
    OMX_DynRangeExpOff,
    OMX_DynRangeExpLow,
@@ -1842,12 +1813,15 @@ typedef struct OMX_CONFIG_DYNAMICRANGEEXPANSIONTYPE
    OMX_VERSIONTYPE nVersion;
    OMX_DYNAMICRANGEEXPANSIONMODETYPE eMode;
 } OMX_CONFIG_DYNAMICRANGEEXPANSIONTYPE;
+/*
+Configures the intensity of an image dynamic range expansion processing stage
+*/
 
 /* OMX_IndexParamBrcmTransposeBufferCount: Configure the number of pre-allocated transpose buffers  */
-/* 
-This config allows the client to explicitly set the number of destination buffers pre-allocated for 
-ports that support 90/270 degree rotation (e.g. in video_render). The buffers will be pre-allocated during 
-a state transition from LOADED to IDLE (the transition will fail if there is not enough memory available 
+/*
+This config allows the client to explicitly set the number of destination buffers pre-allocated for
+ports that support 90/270 degree rotation (e.g. in video_render). The buffers will be pre-allocated during
+a state transition from LOADED to IDLE (the transition will fail if there is not enough memory available
 for the buffers).
 .
 */
@@ -1895,7 +1869,7 @@ typedef struct OMX_CONFIG_SCENEDETECTTYPE {
 /*
  This config is used to report to clients the scene type that has been detected.
  */
- 
+
 /* OMX_IndexParamNalStreamFormat: Control the NAL unit packaging. This is a Khronos extension. */
 typedef enum OMX_INDEXEXTTYPE {
     /* Video parameters and configurations */
@@ -1929,7 +1903,7 @@ typedef struct OMX_NALSTREAMFORMATTYPE{
  */
 
 /* OMX_IndexParamVideoMvc: MVC codec parameters */
-typedef  struct OMX_VIDEO_PARAM_AVCTYPE  OMX_VIDEO_PARAM_MVCTYPE; 
+typedef  struct OMX_VIDEO_PARAM_AVCTYPE  OMX_VIDEO_PARAM_MVCTYPE;
 /*
 This parameter is currently identical to the AVC parameter type.
 */
@@ -1959,20 +1933,20 @@ typedef struct OMX_STATICBOX {
 
 typedef struct OMX_CONFIG_STATICBOXTYPE
 {
-   OMX_U32 nSize; 
-   OMX_VERSIONTYPE nVersion; 
-   OMX_U32 nPortIndex; 
-   OMX_U32 nIndex;                
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nIndex;
    OMX_U32 nTotalBoxes;
    OMX_S32 nValidBoxes;
    OMX_BOOL bDrawOtherBoxes;
    OMX_STATICBOX sBoxes[1];
 } OMX_CONFIG_STATICBOXTYPE;
-/* 
+/*
 Query / set the parameters for a box to always be drawn on viewfinder images
 The x/y/width/height values for the boxes are relative to the overall image.
 
-\code{nIndex} - first box number being set/read, allowing retrieval/setting 
+\code{nIndex} - first box number being set/read, allowing retrieval/setting
 of many boxes over several requests.
 
 \code{nValidBoxes} - total number of boxes currently defined.
@@ -1980,7 +1954,7 @@ of many boxes over several requests.
 \code{nValidBoxes} - number of valid boxes in the \code{sBoxes} array.
 When getting, the client sets this to the number of boxes available.
 The component writes box data and updates this field with how many
-boxes have been written to. 
+boxes have been written to.
 When setting, this is the number of boxes defined with this structure
 
 \code{sBoxes} - variable length array of static boxes.
@@ -2013,7 +1987,7 @@ typedef struct OMX_PARAM_CAMERACAPTUREMODETYPE{
     OMX_CAMERACAPTUREMODETYPE eMode;
 } OMX_PARAM_CAMERACAPTUREMODETYPE;
 /*
-This controls the mode of operation for 
+This controls the mode of operation for
 still image capture in the camera component.
 */
 
@@ -2022,7 +1996,7 @@ typedef enum OMX_BRCMDRMENCRYPTIONTYPE
 {
    OMX_DrmEncryptionNone = 0,
    OMX_DrmEncryptionHdcp2,
-   OMX_DrmEncryptionKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_DrmEncryptionKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_DrmEncryptionVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_DrmEncryptionRangeMax = 0x7FFFFFFF
 } OMX_BRCMDRMENCRYPTIONTYPE;
@@ -2094,10 +2068,10 @@ Disable/enable the use of proprietary callbacks rather than OpenMAX IL buffer ha
 /* OMX_IndexParamCommonUseStcTimestamps: Select timestamp mode */
 typedef enum OMX_TIMESTAMPMODETYPE
 {
-   OMX_TimestampModeZero = 0,       /**< Use a timestamp of 0 */ 
-   OMX_TimestampModeRawStc,         /**< Use the raw STC as the timestamp */ 
-   OMX_TimestampModeResetStc,       /**< Store the STC when video capture port goes active, and subtract that from STC for the timestamp */ 
-   OMX_TimestampModeKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
+   OMX_TimestampModeZero = 0,       /**< Use a timestamp of 0 */
+   OMX_TimestampModeRawStc,         /**< Use the raw STC as the timestamp */
+   OMX_TimestampModeResetStc,       /**< Store the STC when video capture port goes active, and subtract that from STC for the timestamp */
+   OMX_TimestampModeKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_TimestampModeVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_TimestampModeMax = 0x7FFFFFFF
 } OMX_TIMESTAMPMODETYPE;
@@ -2110,6 +2084,133 @@ typedef struct OMX_PARAM_TIMESTAMPMODETYPE
 } OMX_PARAM_TIMESTAMPMODETYPE;
 /*
  Specifies what to use as timestamps in the abscence of a clock component.
+*/
+
+/* EGL image buffer for passing to video port.
+ * Used when port color format is OMX_COLOR_FormatBRCMEGL.
+ */
+typedef struct OMX_BRCMVEGLIMAGETYPE
+{
+   /* Passed between ARM + VC; use fixed width types. */
+   OMX_U32 nWidth;
+   OMX_U32 nHeight;
+   OMX_U32 nStride;
+   OMX_U32 nUmemHandle;
+   OMX_U32 nUmemOffset;
+   OMX_U32 nFlipped;    /* Non-zero -> vertically flipped image */
+} OMX_BRCMVEGLIMAGETYPE;
+
+/* Provides field of view 
+ */
+typedef struct OMX_CONFIG_BRCMFOVTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 xFieldOfViewHorizontal;  /**< Horizontal field of view in degrees. 16p16 value */
+   OMX_U32 xFieldOfViewVertical;    /**< Vertical field of view in degrees. 16p16 value */
+} OMX_CONFIG_BRCMFOVTYPE;
+
+/* OMX_IndexConfigBrcmDecoderPassThrough: Enabling Audio Passthrough */
+/*
+This allows an audio decoder to disable decoding the stream and pass through correctly framed
+data to enable playback of compressed audio to supported output devices.
+*/
+
+/* OMX_IndexConfigBrcmClockReferenceSource: Select Clock Reference Source */
+/*
+This control allows communicating directly to an audio renderer component whether it should
+act as a clock reference source or act as a slave.
+*/
+
+/* OMX_IndexConfigEncLevelExtension: AVC Override encode capabilities */
+typedef struct OMX_VIDEO_CONFIG_LEVEL_EXTEND {
+   OMX_U32 nSize; 
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nCustomMaxMBPS;     /**< Specifies maximum macro-blocks per second */
+   OMX_U32 nCustomMaxFS;       /**< Specifies maximum frame size (macro-blocks per frame) */
+   OMX_U32 nCustomMaxBRandCPB; /**< Specifies maximum bitrate in units of 1000 bits/s and Codec Picture Buffer (CPB derived from bitrate) */
+} OMX_VIDEO_CONFIG_LEVEL_EXTEND;
+/*
+This allows finer control of the H264 encode internal parameters.
+*/
+
+/* OMX_IndexParamBrcmEEDEEnable: Enable/Disable end to end distortion estimator */
+typedef struct OMX_VIDEO_EEDE_ENABLE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_U32 enable;
+} OMX_VIDEO_EEDE_ENABLE;
+/*
+This enables or disables the use of end to end distortion estimation.
+*/
+
+/* OMX_IndexParamBrcmEEDELossRate: Loss rate configuration for end to end distortion */
+typedef struct OMX_VIDEO_EEDE_LOSSRATE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+   OMX_U32 loss_rate; /**< loss rate, 5 means 5% */
+} OMX_VIDEO_EEDE_LOSSRATE;
+/*
+Set the packet loss rate used by the end to end distortion estimator.
+*/
+
+/* OMX_IndexParamColorSpace: Colour space information */
+typedef enum OMX_COLORSPACETYPE
+{
+   OMX_COLORSPACE_UNKNOWN,
+   OMX_COLORSPACE_JPEG_JFIF,
+   OMX_COLORSPACE_ITU_R_BT601,
+   OMX_COLORSPACE_ITU_R_BT709,
+   OMX_COLORSPACE_MAX = 0x7FFFFFFF
+} OMX_COLORSPACETYPE;
+
+typedef struct OMX_PARAM_COLORSPACETYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_COLORSPACETYPE eColorSpace;
+} OMX_PARAM_COLORSPACETYPE;
+/*
+Provides information on the colour space that's in use during image/video processing.
+*/
+
+/* OMX_IndexConfigMinimiseFragmentation: Minimising Fragmentation */
+/*
+This control can be supported to enable the client to request that the component works
+to minimise fragmentation of output buffers.
+*/
+
+/* OMX_IndexConfigBrcmBufferFlagFilter: Filters buffers based on flags */
+/*
+This control can be set to request that buffers are conditionally forwarded on 
+output ports based on matching flags set on that buffer.
+*/
+
+/* OMX_IndexParamPortMaxFrameSize: Specifying maximum frame size */
+/*
+This control can be used to control the maximum frame size allowed on an output port.
+*/
+
+/* OMX_IndexConfigBrcmCameraRnDPreprocess: Enable use of development ISP software stage */
+/*
+This control can be used to enable a developmental software stage to be inserted into
+the preprocessor stage of the ISP.
+*/
+
+/* OMX_IndexConfigBrcmCameraRnDPostprocess: Enable use of development ISP software stage */
+/*
+This control can be used to enable a developmental software stage to be inserted into
+the postprocessor stage of the ISP.
+*/
+
+/* OMX_IndexParamDisableVllPool: Controlling use of memory for loadable modules */
+/*
+This control can be used to control whether loadable modules used a dedicated memory
+pool or use heap allocated memory.
 */
 
 #endif

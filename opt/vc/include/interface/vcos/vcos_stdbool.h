@@ -23,8 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
+ */
 #ifndef VCOS_STDBOOL_H
 #define VCOS_STDBOOL_H
 
@@ -33,10 +32,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined(__STDC__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
 #else
-typedef enum {
+/* sizeof(bool) == 1. hopefully this matches up with c++ (so structures and
+ * such containing bool are binary compatible), but the c++ standard doesn't
+ * require sizeof(bool) == 1, so there's no guarantee */
+typedef unsigned char bool;
+enum {
    false,
    true
-} bool;
+};
 #endif
 
 #endif /* __cplusplus */

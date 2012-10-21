@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - implementation: joinable thread from plain
@@ -48,9 +48,15 @@ VideoCore OS Abstraction Layer - implementation: joinable thread from plain
 extern "C" {
 #endif
 
+#ifndef VCOS_SEMAPHORE_H
 #include "interface/vcos/vcos_semaphore.h"
+#endif
+#ifndef VCOS_LOWLEVEL_THREAD_H
 #include "interface/vcos/vcos_lowlevel_thread.h"
+#endif
+#ifndef VCOS_TIMER_H
 #include "interface/vcos/vcos_timer.h"
+#endif
 
 #ifdef VCOS_WANT_TLS_EMULATION
 #include "interface/vcos/generic/vcos_generic_tls.h"
