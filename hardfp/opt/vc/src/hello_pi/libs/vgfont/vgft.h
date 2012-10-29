@@ -63,7 +63,6 @@ void vgft_font_term(VGFT_FONT_T *font);
 
 void vgft_font_draw(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, unsigned text_length, VGbitfield paint_modes);
 
-void vgft_get_text_extents(VGFT_FONT_T *font, const char *text, unsigned text_length, VGfloat x, VGfloat y,
-                           VGfloat *w, VGfloat *h);
+void vgft_get_text_extents(VGFT_FONT_T *font, const char *text, unsigned text_length, VGfloat start_x, VGfloat start_y, VGfloat *w, VGfloat *h);
 
 #endif

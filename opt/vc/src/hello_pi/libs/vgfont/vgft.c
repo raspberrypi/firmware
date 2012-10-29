@@ -255,47 +255,74 @@ void vgft_font_term(VGFT_FONT_T *font)
    memset(font, 0, sizeof(*font));
 }
 
-#define GLYPHS_COUNT_MAX 200
 
-static VGuint glyph_indices[GLYPHS_COUNT_MAX];
-static VGfloat adjustments_x[GLYPHS_COUNT_MAX];
-static VGfloat adjustments_y[GLYPHS_COUNT_MAX];
+#define CHAR_COUNT_MAX 200
+static VGuint glyph_indices[CHAR_COUNT_MAX];
+static VGfloat adjustments_x[CHAR_COUNT_MAX];
+static VGfloat adjustments_y[CHAR_COUNT_MAX];
 
-static void draw_line(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, int glyphs_count, VGbitfield paint_modes)
-{
-   if (glyphs_count == 0) return;
+// Draws the first char_count characters from text, with adjustments, starting 
+// from the current origin.  The peek argument indicates whether to peek ahead 
+// and get a final adjustment based on the next character past char_count, or 
+// else just assume that this is the end of the text and add no final 
+// adjustment.
 
-   assert(glyphs_count <= GLYPHS_COUNT_MAX);
+static void draw_chars(VGFT_FONT_T *font, const char *text, int char_count, VGbitfield paint_modes, int peek) {
+   // Put in first character
+   glyph_indices[0] = FT_Get_Char_Index(font->ft_face, text[0]);
+   int prev_glyph_index = glyph_indices[0];
 
-   VGfloat glor[] = { x, y };
-   vgSetfv(VG_GLYPH_ORIGIN, 2, glor);
-
+   // Calculate glyph_indices and adjustments
    int i;
-   int prev_glyph_index = 0;
-   for (i = 0; i != glyphs_count; ++i) {
-
+   FT_Vector kern;
+   for (i = 1; i != char_count; ++i) {
       int glyph_index = FT_Get_Char_Index(font->ft_face, text[i]);
       if (!glyph_index) { return; }
-
       glyph_indices[i] = glyph_index;
 
-      if (i != 0) {
-         FT_Vector kern;
-         if (FT_Get_Kerning(font->ft_face, prev_glyph_index, glyph_index, FT_KERNING_DEFAULT, &kern)) {
-            assert(0);
-         }
-
-         adjustments_x[i - 1] = float_from_26_6(kern.x);
-         adjustments_y[i - 1] = float_from_26_6(kern.y);
-      }
+      if (FT_Get_Kerning(font->ft_face, prev_glyph_index, glyph_index, FT_KERNING_DEFAULT, &kern)) assert(0);
+      adjustments_x[i - 1] = float_from_26_6(kern.x);
+      adjustments_y[i - 1] = float_from_26_6(kern.y);
 
       prev_glyph_index = glyph_index;
    }
 
-   adjustments_x[glyphs_count - 1] = 0.0f;
-   adjustments_y[glyphs_count - 1] = 0.0f;
+   // Get the last adjustment?
+   if (peek) {
+      int peek_glyph_index = FT_Get_Char_Index(font->ft_face, text[i]);
+      if (!peek_glyph_index) { return; }
+      if (FT_Get_Kerning(font->ft_face, prev_glyph_index, peek_glyph_index, FT_KERNING_DEFAULT, &kern)) assert(0);
+      adjustments_x[char_count - 1] = float_from_26_6(kern.x);
+      adjustments_y[char_count - 1] = float_from_26_6(kern.y);
+   } else {
+      adjustments_x[char_count - 1] = 0.0f;
+      adjustments_y[char_count - 1] = 0.0f;
+   }
 
-   vgDrawGlyphs(font->vg_font, glyphs_count, glyph_indices, adjustments_x, adjustments_y, paint_modes, VG_FALSE);
+   vgDrawGlyphs(font->vg_font, char_count, glyph_indices, adjustments_x, adjustments_y, paint_modes, VG_FALSE);
+}
+
+// Goes to the x,y position and draws arbitrary number of characters, draws 
+// iteratively if the char_count exceeds the max buffer size given above.
+
+static void draw_line(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, int char_count, VGbitfield paint_modes) {
+   if (char_count == 0) return;
+
+   // Set origin to requested x,y
+   VGfloat glor[] = { x, y };
+   vgSetfv(VG_GLYPH_ORIGIN, 2, glor);
+
+   // Draw the characters in blocks to reuse buffer memory
+   const char *curr_text = text;
+   int chars_left = char_count;
+   while (chars_left > CHAR_COUNT_MAX) {
+      draw_chars(font, curr_text, CHAR_COUNT_MAX, paint_modes, 1);
+      chars_left -= CHAR_COUNT_MAX;
+      curr_text += CHAR_COUNT_MAX;
+   }
+
+   // Draw the last block
+   draw_chars(font, curr_text, chars_left, paint_modes, 0);
 }
 
 void vgft_font_draw(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, unsigned text_length, VGbitfield paint_modes)
