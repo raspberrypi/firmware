@@ -415,6 +415,7 @@ alias symbol:rt2x00queue_stop_queue rt2x00lib
 alias symbol:lc_seq_printf_stats lru_cache
 alias symbol:ircomm_close ircomm
 alias symbol:v4l2_device_register videodev
+alias symbol:ttpci_eeprom_decode_mac ttpci_eeprom
 alias symbol:ieee80211_channel_to_frequency cfg80211
 alias symbol:dib9000_get_component_bus_interface dib9000
 alias symbol:raid6_gfexp raid6_pq
@@ -703,6 +704,7 @@ alias symbol:o2hb_unregister_callback ocfs2_nodemanager
 alias symbol:snd_pcm_lib_readv snd_pcm
 alias symbol:v4l2_event_subscribe videodev
 alias symbol:phy_driver_unregister libphy
+alias symbol:mxl111sf_demod_attach mxl111sf_demod
 alias symbol:ath_regd_init ath
 alias symbol:ath9k_hw_wait ath9k_hw
 alias symbol:ct_sip_parse_numerical_param nf_conntrack_sip
@@ -836,6 +838,7 @@ alias symbol:usbnet_cdc_status cdc_ether
 alias symbol:ct_sip_parse_request nf_conntrack_sip
 alias symbol:flexcop_sram_set_dest b2c2_flexcop
 alias symbol:ath9k_hw_phy_disable ath9k_hw
+alias symbol:mxl111sf_tuner_attach mxl111sf_tuner
 alias symbol:p9_parse_header 9pnet
 alias symbol:ppp_unregister_compressor ppp_generic
 alias symbol:v4l2_chip_match_i2c_client v4l2_common
@@ -1426,6 +1429,7 @@ alias symbol:drbd_set_st_err_str drbd
 alias symbol:dvb_dmx_swfilter_204 dvb_core
 alias symbol:ath9k_hw_beaconq_setup ath9k_hw
 alias symbol:snd_card_file_add snd
+alias symbol:ttpci_eeprom_parse_mac ttpci_eeprom
 alias symbol:cx2341x_ctrl_get_menu cx2341x
 alias symbol:irlmp_unregister_service irda
 alias symbol:snd_midi_event_new snd_seq_midi_event

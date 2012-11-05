@@ -619,6 +619,7 @@ kernel/drivers/media/dvb/frontends/tda18271c2dd.ko
 kernel/drivers/media/dvb/frontends/it913x-fe.ko
 kernel/drivers/media/dvb/frontends/a8293.ko
 kernel/drivers/media/dvb/frontends/tda10071.ko
+kernel/drivers/media/dvb/ttpci/ttpci-eeprom.ko
 kernel/drivers/media/dvb/b2c2/b2c2-flexcop.ko
 kernel/drivers/media/dvb/b2c2/b2c2-flexcop-usb.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko
@@ -643,6 +644,7 @@ kernel/drivers/media/dvb/dvb-usb/dvb-usb-opera.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9005.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9005-remote.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-anysee.ko
+kernel/drivers/media/dvb/dvb-usb/dvb-usb-pctv452e.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-dw2102.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-dtv5100.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9015.ko
@@ -653,6 +655,10 @@ kernel/drivers/media/dvb/dvb-usb/dvb-usb-ec168.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-az6027.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-lmedm04.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-technisat-usb2.ko
+kernel/drivers/media/dvb/dvb-usb/dvb-usb-it913x.ko
+kernel/drivers/media/dvb/dvb-usb/dvb-usb-mxl111sf.ko
+kernel/drivers/media/dvb/dvb-usb/mxl111sf-demod.ko
+kernel/drivers/media/dvb/dvb-usb/mxl111sf-tuner.ko
 kernel/drivers/media/dvb/siano/smsmdtv.ko
 kernel/drivers/media/dvb/siano/smsdvb.ko
 kernel/drivers/media/dvb/siano/smsusb.ko
