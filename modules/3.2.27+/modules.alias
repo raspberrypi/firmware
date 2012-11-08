@@ -5017,6 +5017,9 @@ alias hid:b0003v0000172Fp00000501 hid_waltop
 alias hid:b0003v0000172Fp00000034 hid_waltop
 alias hid:b0003v0000172Fp00000032 hid_waltop
 alias hid:b0005v0000057Ep00000306 hid_wiimote
+alias usb:v03EBp21FEd*dc*dsc*dp*ic*isc*ip* lirc_igorplugusb
+alias usb:v03EBp0002d*dc*dsc*dp*ic*isc*ip* lirc_igorplugusb
+alias usb:v0B48p2003d*dc*dsc*dp*ic*isc*ip* lirc_ttusbir
 alias usb:v1131p2035d*dc*dsc*dp*ic*isc*ip* w35und
 alias usb:v18E8p6233d*dc*dsc*dp*ic*isc*ip* w35und
 alias usb:v18E8p6230d*dc*dsc*dp*ic*isc*ip* w35und

@@ -726,6 +726,10 @@ kernel/drivers/hid/hid-zydacron.ko:
 kernel/drivers/hid/hid-wacom.ko:
 kernel/drivers/hid/hid-waltop.ko:
 kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/power/power_supply.ko kernel/drivers/input/ff-memless.ko
+kernel/drivers/staging/media/lirc/lirc_igorplugusb.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_rpi.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_sasem.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_ttusbir.ko: kernel/drivers/media/rc/lirc_dev.ko
 kernel/drivers/staging/zram/zram.ko: kernel/lib/lzo/lzo_decompress.ko kernel/lib/lzo/lzo_compress.ko
 kernel/drivers/staging/winbond/w35und.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko
 kernel/drivers/staging/wlan-ng/prism2_usb.ko: kernel/net/wireless/cfg80211.ko
