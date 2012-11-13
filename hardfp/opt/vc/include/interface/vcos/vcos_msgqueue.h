@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 /*=============================================================================
 VCOS - packet-like messages, based loosely on those found in TRIPOS.
@@ -113,11 +113,7 @@ typedef struct VCOS_MSG_ENDPOINT_T
 
 /** Initalise the library. Normally called from vcos_init().
   */
-VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_init(void);
-
-/** De-initialise the library. Normally called from vcos_deinit().
- */
-VCOSPRE_ void VCOSPOST_ vcos_msgq_deinit(void);
+extern VCOS_STATUS_T vcos_msgq_init(void);
 
 /** Find a message queue by name and get a handle to it.
   *

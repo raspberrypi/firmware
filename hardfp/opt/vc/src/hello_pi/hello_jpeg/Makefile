@@ -1,5 +1,5 @@
-OBJS=encode.o
-BIN=hello_encode.bin
+OBJS=jpeg.o
+BIN=hello_jpeg.bin
 LDFLAGS+=-lilclient
 
 include ../Makefile.include

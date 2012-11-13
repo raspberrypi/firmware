@@ -479,6 +479,7 @@ int main(void)
 //TODO
 
 #elif defined __RASPBERRYPI__
+#include "bcm_host.h"
 int main(void)
 {
    uint32_t width, height;

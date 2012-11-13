@@ -1,5 +1,7 @@
 /*
-Copyright (c) 2012, Broadcom Europe Ltd
+Copyright (c) 2012, Matt Ownby
+                    Anthong Sale
+
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -25,26 +27,42 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef VCHIQ_BIVCM_H
-#define VCHIQ_BIVCM_H
+#ifndef _OPTION_H_
+#define _OPTION_H_
 
-#include "vchiq_pagelist.h"
-#include "vchiq_bi_ipc_shared_mem.h"
+/*
+Defines the methods for interacting with openmax il and ilclient to decode
+jpeg images from the camera
+*/
 
-/* It turns out the modem/dsp is using 4KB of the VideoCore space, so leave a gap */
-#define IPC_SHARED_MEM_VC_AVOID   (0x3000)
-#define IPC_SHARED_MEM_SLOTS      (IPC_SHARED_MEM_BASE + IPC_SHARED_MEM_VC_OFFSET + IPC_SHARED_MEM_VC_AVOID)
-#define IPC_SHARED_MEM_SLOTS_SIZE (IPC_SHARED_MEM_CLOCK_DEBUG_OFFSET - IPC_SHARED_MEM_VC_AVOID)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-#define VCHIQ_PLATFORM_FRAGMENTS_OFFSET_IDX 0
-#define VCHIQ_PLATFORM_FRAGMENTS_COUNT_IDX  1
+#include "bcm_host.h"
+#include "ilclient.h"
 
-#if defined(VCHIQ_SM_ALLOC_VCDDR)
-#define VCHIQ_IPC_SHARED_MEM_SIZE            0x1E000  /* ARM and VC channels. */ 
-#define VCHIQ_IPC_SHARED_MEM_EXTRA           0x1000   /* Misc pointers: clock debug, gpio. */
+#define OMXJPEG_OK                  0
+#define OMXJPEG_ERROR_ILCLIENT_INIT    -1024
+#define OMXJPEG_ERROR_OMX_INIT         -1025
+#define OMXJPEG_ERROR_MEMORY         -1026
+#define OMXJPEG_ERROR_CREATING_COMP    -1027
+#define OMXJPEG_ERROR_WRONG_NO_PORTS   -1028
+#define OMXJPEG_ERROR_EXECUTING         -1029
+#define OMXJPEG_ERROR_NOSETTINGS   -1030
 
-#define VCHIQ_IPC_SHARED_MEM_SYMBOL          "vchiq_ipc_shared_mem"
-#define VCHIQ_IPC_SHARED_MEM_SIZE_SYMBOL     "vchiq_ipc_shared_mem_size"
+typedef struct _OPENMAX_JPEG_DECODER OPENMAX_JPEG_DECODER;
+
+//this function run the boilerplate to setup the openmax components;
+int setupOpenMaxJpegDecoder(OPENMAX_JPEG_DECODER** decoder);
+
+//this function passed the jpeg image buffer in, and returns the decoded image
+int decodeImage(OPENMAX_JPEG_DECODER* decoder,
+              char* sourceImage, size_t imageSize);
+
+//this function cleans up the decoder.
+void cleanup(OPENMAX_JPEG_DECODER* decoder);
+
 #endif
 
-#endif /* VCHIQ_BIVCM_H */

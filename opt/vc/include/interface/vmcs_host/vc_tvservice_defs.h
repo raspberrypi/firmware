@@ -35,8 +35,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "interface/vchi/message_drivers/message.h"
 #include "vc_hdmi.h"
 
-#define VC_TVSERVICE_VER   1
-
 #define TVSERVICE_MSGFIFO_SIZE 1024
 #define TVSERVICE_CLIENT_NAME MAKE_FOURCC("TVSV")
 #define TVSERVICE_NOTIFY_NAME MAKE_FOURCC("TVNT")
