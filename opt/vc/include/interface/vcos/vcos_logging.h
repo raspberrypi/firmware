@@ -40,6 +40,7 @@ extern "C" {
 
 #include "interface/vcos/vcos_types.h"
 #include "vcos_platform.h"
+#include "vcos_logging_control.h"
 
 /**
  * \file
@@ -100,14 +101,14 @@ typedef enum VCOS_LOG_LEVEL_T
   */
 typedef struct VCOS_LOG_CAT_T
 {
-   VCOS_LOG_LEVEL_T level;      /** Which levels are enabled for this category */
-   const char *name;            /** Name for this category. */
+   VCOS_LOG_LEVEL_T level;      /**< Which levels are enabled for this category */
+   const char *name;            /**< Name for this category. */
    struct VCOS_LOG_CAT_T *next;
    struct {
       unsigned int want_prefix:1;
    } flags;
    unsigned int refcount;
-   void *platform_data;         /** platform specific data */
+   void *platform_data;         /**< platform specific data */
 } VCOS_LOG_CAT_T;
 
 typedef void (*VCOS_VLOG_IMPL_FUNC_T)(const VCOS_LOG_CAT_T *cat, VCOS_LOG_LEVEL_T _level, const char *fmt, va_list args);
@@ -219,7 +220,7 @@ void vcos_log_dump_mem_impl( const VCOS_LOG_CAT_T *cat,
 
 #if defined(_VCOS_METAWARE) || defined(__GNUC__)
 
-# if !defined(NDEBUG) || defined(VCOS_ALWAYS_WANT_LOGGING)
+# if !defined(AMPUTATE_ALL_VCOS_LOGGING) && (!defined(NDEBUG) || defined(VCOS_ALWAYS_WANT_LOGGING))
 #  define VCOS_LOGGING_ENABLED
 #  define _VCOS_LOG_X(cat, _level, fmt...)   do { if (vcos_is_log_enabled(cat,_level)) vcos_log_impl(cat,_level,fmt); } while (0)
 #  define _VCOS_VLOG_X(cat, _level, fmt, ap) do { if (vcos_is_log_enabled(cat,_level)) vcos_vlog_impl(cat,_level,fmt,ap); } while (0)
@@ -240,6 +241,16 @@ void vcos_log_dump_mem_impl( const VCOS_LOG_CAT_T *cat,
 # define vcos_vlog_info(fmt,ap)   _VCOS_VLOG_X(VCOS_LOG_CATEGORY, VCOS_LOG_INFO, fmt, ap)
 # define vcos_vlog_trace(fmt,ap)  _VCOS_VLOG_X(VCOS_LOG_CATEGORY, VCOS_LOG_TRACE, fmt, ap)
 
+# define vcos_logc_error(cat,...)   _VCOS_LOG_X(cat, VCOS_LOG_ERROR, __VA_ARGS__)
+# define vcos_logc_warn(cat,...)    _VCOS_LOG_X(cat, VCOS_LOG_WARN, __VA_ARGS__)
+# define vcos_logc_info(cat,...)    _VCOS_LOG_X(cat, VCOS_LOG_INFO, __VA_ARGS__)
+# define vcos_logc_trace(cat,...)   _VCOS_LOG_X(cat, VCOS_LOG_TRACE, __VA_ARGS__)
+
+# define vcos_vlogc_error(cat,fmt,ap)  _VCOS_VLOG_X(cat, VCOS_LOG_ERROR, fmt, ap)
+# define vcos_vlogc_warn(cat,fmt,ap)   _VCOS_VLOG_X(cat, VCOS_LOG_WARN, fmt, ap)
+# define vcos_vlogc_info(cat,fmt,ap)   _VCOS_VLOG_X(cat, VCOS_LOG_INFO, fmt, ap)
+# define vcos_vlogc_trace(cat,fmt,ap)  _VCOS_VLOG_X(cat, VCOS_LOG_TRACE, fmt, ap)
+
 # define vcos_log(...)   _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, __VA_ARGS__)
 # define vcos_vlog(fmt,ap)  _VCOS_VLOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, fmt, ap)
 # define VCOS_ALERT(...) _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_ERROR, __VA_ARGS__)
@@ -252,7 +263,7 @@ void vcos_log_dump_mem_impl( const VCOS_LOG_CAT_T *cat,
 
 # if _MSC_VER >= 1400
 
-#  if !defined(NDEBUG) || defined(VCOS_ALWAYS_WANT_LOGGING)
+#  if !defined(AMPUTATE_ALL_VCOS_LOGGING) && (!defined(NDEBUG) || defined(VCOS_ALWAYS_WANT_LOGGING))
 #   define VCOS_LOGGING_ENABLED
 #   define _VCOS_LOG_X(cat, _level, fmt,...) do { if (vcos_is_log_enabled(cat,_level)) vcos_log_impl(cat, _level, fmt, __VA_ARGS__); } while (0)
 #  else
@@ -264,9 +275,14 @@ void vcos_log_dump_mem_impl( const VCOS_LOG_CAT_T *cat,
 # define vcos_log_info(fmt,...)    _VCOS_LOG_X(VCOS_LOG_CATEGORY, VCOS_LOG_INFO, fmt, __VA_ARGS__)
 # define vcos_log_trace(fmt,...)   _VCOS_LOG_X(VCOS_LOG_CATEGORY, VCOS_LOG_TRACE, fmt, __VA_ARGS__)
 
-# define vcos_log(fmt,...)   _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, fmt)
-# define VCOS_ALERT(fmt,...) _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_ERROR, fmt)
-# define VCOS_TRACE(fmt,...) _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, fmt)
+# define vcos_logc_error(cat,fmt,...)   _VCOS_LOG_X(cat, VCOS_LOG_ERROR, fmt, __VA_ARGS__)
+# define vcos_logc_warn(cat,fmt,...)    _VCOS_LOG_X(cat, VCOS_LOG_WARN, fmt, __VA_ARGS__)
+# define vcos_logc_info(cat,fmt,...)    _VCOS_LOG_X(cat, VCOS_LOG_INFO, fmt, __VA_ARGS__)
+# define vcos_logc_trace(cat,fmt,...)   _VCOS_LOG_X(cat, VCOS_LOG_TRACE, fmt, __VA_ARGS__)
+
+# define vcos_log(fmt,...)   _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, fmt, __VA_ARGS__)
+# define VCOS_ALERT(fmt,...) _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_ERROR, fmt, __VA_ARGS__)
+# define VCOS_TRACE(fmt,...) _VCOS_LOG_X(VCOS_LOG_DFLT_CATEGORY, VCOS_LOG_INFO, fmt, __VA_ARGS__)
 
 # else /* _MSC_VER >= 1400 */
 

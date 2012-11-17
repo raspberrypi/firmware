@@ -25,12 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// OpenMAX IL Component Service definitions
-
 #ifndef ILCS_H
 #define ILCS_H
 
-#include "IL/OMX_Component.h"
+#include "interface/vmcs_host/khronos/IL/OMX_Component.h"
 #include "interface/vmcs_host/vc_ilcs_defs.h"
 
 struct ILCS_SERVICE_T;

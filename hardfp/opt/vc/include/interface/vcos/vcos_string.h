@@ -62,9 +62,42 @@ int vcos_strcasecmp(const char *s1, const char *s2);
 VCOS_INLINE_DECL
 int vcos_strncasecmp(const char *s1, const char *s2, size_t n);
 
-VCOSPRE_ int VCOSPOST_ vcos_vsnprintf( char *buf, size_t buflen, const char *fmt, va_list ap );
+VCOSPRE_ int VCOSPOST_ vcos_vsnprintf(char *buf, size_t buflen, const char *fmt, va_list ap);
 
 VCOSPRE_ int VCOSPOST_ vcos_snprintf(char *buf, size_t buflen, const char *fmt, ...);
+
+/** Like vsnprintf, except it places the output at the specified offset.
+  * Output is truncated to fit in buflen bytes, and is guaranteed to be NUL-terminated.
+  * Returns the string length before/without truncation.
+  */
+VCOSPRE_ size_t VCOSPOST_ vcos_safe_vsprintf(char *buf, size_t buflen, size_t offset, const char *fmt, va_list ap);
+
+#define VCOS_SAFE_VSPRINTF(buf, offset, fmt, ap) \
+   vcos_safe_vsprintf(buf, sizeof(buf) + ((char (*)[sizeof(buf)])buf - &(buf)), offset, fmt, ap)
+
+/** Like snprintf, except it places the output at the specified offset.
+  * Output is truncated to fit in buflen bytes, and is guaranteed to be NUL-terminated.
+  * Returns the string length before/without truncation.
+  */
+VCOSPRE_ size_t VCOSPOST_ vcos_safe_sprintf(char *buf, size_t buflen, size_t offset, const char *fmt, ...);
+
+/* The Metaware compiler currently has a bug in its variadic macro handling which
+   causes it to append a spurious command to the end of its __VA_ARGS__ data.
+   Do not use until this has been fixed (and this comment has been deleted). */
+
+#define VCOS_SAFE_SPRINTF(buf, offset, ...) \
+   vcos_safe_sprintf(buf, sizeof(buf) + ((char (*)[sizeof(buf)])buf - &(buf)), offset, __VA_ARGS__)
+
+/** Copies string src to dst at the specified offset.
+  * Output is truncated to fit in dstlen bytes, i.e. the string is at most
+  * (buflen - 1) characters long. Unlike strncpy, exactly one NUL is written
+  * to dst, which is always NUL-terminated.
+  * Returns the string length before/without truncation.
+  */
+VCOSPRE_ size_t VCOSPOST_ vcos_safe_strcpy(char *dst, const char *src, size_t dstlen, size_t offset);
+
+#define VCOS_SAFE_STRCPY(dst, src, offset) \
+   vcos_safe_strcpy(dst, src, sizeof(dst) + ((char (*)[sizeof(dst)])dst - &(dst)), offset)
 
 VCOS_STATIC_INLINE
 int vcos_strlen(const char *s) { return (int)strlen(s); }

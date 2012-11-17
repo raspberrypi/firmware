@@ -28,107 +28,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VCOS_INTTYPES_H
 #define VCOS_INTTYPES_H
 
-/* Attempt to provide the support for fixed width integer types as per inttypes.h.
- *
- * Ideally this would either call out to a platform-specific header file (e.g.
- * inttypes.h) or define the types on a per-architecture/compiler basis. But for
- * now we just use #ifdefs.
- *
- * Initially this just provides the most common printf() macros.
+/** \file
+ * Attempt to provide the support for fixed width integer types as per
+ * inttypes.h. This simply includes inttypes.h, which should find the
+ * system/toolchain version if present, otherwise falling back to the version
+ * in interface/vcos/<platform>. The vcos versions initially only provide the
+ * most common printf() macros.
  */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "interface/vcos/vcos_stdint.h"
-
-#ifdef __SYMBIAN32__
-
-# define VCOS_INTTYPES_ILP32
-
-#elif defined(__STDC__) && __STDC_VERSION__ >= 199901L
-
-# include <inttypes.h>
-
-#elif defined(__GNUC__)
-
-# include <inttypes.h>
-
-#elif defined(_MSC_VER)                     /* Visual C define equivalent types */
-
-# define VCOS_INTTYPES_ILP32
-
-#elif defined(__VIDEOCORE__)
-
-# define VCOS_INTTYPES_ILP32
-
-#elif defined (__HIGHC__) && defined(_I386)
-
-# include <inttypes.h>
-
-#else
-# error Unknown platform
-#endif
-
-/* VCOS_INTTYPES_ILP32 = ILP32 architecture, with 32-bit types defined as long int */
-#ifdef VCOS_INTTYPES_ILP32
-
-# define PRId8    "d"
-# define PRId16   "d"
-# define PRId32   "ld"
-# ifndef PRId64
-#  define PRId64  "lld"
-# endif
-# define PRIdMAX  "lld"
-# define PRIdPTR  "ld"
-
-# define PRIi8    "i"
-# define PRIi16   "i"
-# define PRIi32   "li"
-# ifndef PRIi64
-#  define PRIi64  "lli"
-# endif
-# define PRIiMAX  "lli"
-# define PRIiPTR  "li"
-
-# define PRIo8    "o"
-# define PRIo16   "o"
-# define PRIo32   "lo"
-# ifndef PRIo64
-#  define PRIo64  "llo"
-# endif
-# define PRIoMAX  "llo"
-# define PRIoPTR  "lo"
-
-# define PRIu8    "u"
-# define PRIu16   "u"
-# define PRIu32   "lu"
-# ifndef PRIu64
-#  define PRIu64  "llu"
-# endif
-# define PRIuMAX  "llu"
-# define PRIuPTR  "lu"
-
-# define PRIx8    "x"
-# define PRIx16   "x"
-# define PRIx32   "lx"
-# ifndef PRIx64
-#  define PRIx64  "llx"
-# endif
-# define PRIxMAX  "llx"
-# define PRIxPTR  "lx"
-
-# define PRIX8    "X"
-# define PRIX16   "X"
-# define PRIX32   "lX"
-# ifndef PRIX64
-#  define PRIX64  "llX"
-# endif
-# define PRIXMAX  "llX"
-# define PRIXPTR  "lX"
-
-#endif
+#include <inttypes.h>
 
 #ifdef __cplusplus
 }

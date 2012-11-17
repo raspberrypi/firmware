@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* $Revision: 10601 $ on $Date:: 2010-03-04 22:15:27 -0800 #$ */
 
-#include <GLES/glplatform.h>
+#include "glplatform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,6 +40,7 @@ extern "C" {
  * 2.0. For details, see http://oss.sgi.com/projects/FreeB/ .
  */
 
+#ifndef __gl2_h_
 typedef void             GLvoid;
 typedef char             GLchar;
 typedef unsigned int     GLenum;
@@ -55,11 +56,11 @@ typedef unsigned int     GLuint;
 typedef khronos_float_t  GLfloat;
 typedef khronos_float_t  GLclampf;
 typedef khronos_int32_t  GLfixed;
-typedef khronos_int32_t  GLclampx;
 
 typedef khronos_intptr_t GLintptr;
 typedef khronos_ssize_t  GLsizeiptr;
-
+#endif
+typedef khronos_int32_t  GLclampx;
 
 /*************************************************************/
 
@@ -75,8 +76,8 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_COLOR_BUFFER_BIT               0x00004000
 
 /* Boolean */
-#define GL_FALSE                          0
-#define GL_TRUE                           1
+#define GL_FALSE                          (GLboolean)0
+#define GL_TRUE                           (GLboolean)1
 
 /* BeginMode */
 #define GL_POINTS                         0x0000
@@ -759,6 +760,7 @@ GL_API void GL_APIENTRY glTexParameterx (GLenum target, GLenum pname, GLfixed pa
 GL_API void GL_APIENTRY glTexParameteriv (GLenum target, GLenum pname, const GLint *params);
 GL_API void GL_APIENTRY glTexParameterxv (GLenum target, GLenum pname, const GLfixed *params);
 GL_API void GL_APIENTRY glTexSubImage2D (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
+GL_API void GL_APIENTRY texSubImage2DAsync (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLint hpixels);
 GL_API void GL_APIENTRY glTranslatex (GLfixed x, GLfixed y, GLfixed z);
 GL_API void GL_APIENTRY glVertexPointer (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
 GL_API void GL_APIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei height);

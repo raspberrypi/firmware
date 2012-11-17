@@ -36,6 +36,12 @@
 
 #include "../KHR/khrplatform.h"
 
+#ifdef ABSTRACT_PLATFORM
+#include "begl_memplatform.h"
+#include "begl_hwplatform.h"
+#include "begl_dispplatform.h"
+#endif /* ABSTRACT_PLATFORM */
+
 /* Macros used in EGL function prototype declarations.
  *
  * EGL functions should be prototyped as:
@@ -83,16 +89,25 @@
     typedef const char *NativeWindowType;
         etc.
  */
+#if (defined (__ANDROID__) || defined(ANDROID)) && defined(KHRN_BCG_ANDROID)
+
+struct android_native_window_t;
+struct egl_native_pixmap_t;
+
+typedef struct android_native_window_t* EGLNativeWindowType;
+typedef struct egl_native_pixmap_t*     EGLNativePixmapType;
+typedef void *EGLNativeDisplayType;
+
+#else
+
 typedef void *EGLNativeDisplayType;
 typedef void *EGLNativePixmapType;
 typedef void *EGLNativeWindowType;
-#if defined ( WIN32 )
-#define EGL_SERVER_SMALLINT  //win32 platform currently only supports this
 #endif
 
 #ifndef EGL_SERVER_SMALLINT
 
-#include "bcm_host.h"
+#include "interface/vmcs_host/vc_dispmanx.h"
 /* TODO: EGLNativeWindowType is really one of these but I'm leaving it
  * as void* for now, in case changing it would cause problems
  */
@@ -101,6 +116,7 @@ typedef struct {
    int width;   /* This is necessary because dispmanx elements are not queriable. */
    int height;
 } EGL_DISPMANX_WINDOW_T;
+#elif defined (ABSTRACT_PLATFORM)
 
 #else
 
@@ -143,7 +159,46 @@ typedef EGLNativeWindowType  NativeWindowType;
  */
 typedef khronos_int32_t EGLint;
 
-#ifdef KHRONOS_NAME_MANGLING
+#ifdef ABSTRACT_PLATFORM
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+/*
+The client application, or default platform library must register valid versions of each of these
+interfaces before any EGL or GL functions are invoked, using the following functions provided by the 3D driver.
+*/
+typedef struct
+{
+   BEGL_MemoryInterface  *memInterface;     /* Memory interface which will called by the 3d driver */
+   BEGL_HWInterface      *hwInterface;      /* Hardware interface which will be called by the driver */
+   BEGL_DisplayInterface *displayInterface; /* Display interface which will be called by the driver */
+
+   BEGL_DisplayCallbacks displayCallbacks; /* Callback pointers set by BEGL_GetDefaultDriverInterfaces, for client to call into driver */
+   int hwInterfaceCloned;
+   int memInterfaceCloned;
+   void *memInterfaceFn;
+   void *hwInterfaceFn;
+} BEGL_DriverInterfaces;
+
+/* Register application level overrides for any or all of the abstract API calls made by the 3D driver. */
+EGLAPI void EGLAPIENTRY BEGL_RegisterDriverInterfaces(BEGL_DriverInterfaces *iface);
+
+/* Get a pointer to the registered driver interfaces, can be used to override partial defaults - see android platform layer(s) for example */
+EGLAPI BEGL_DriverInterfaces * BEGL_GetDriverInterfaces(void);
+
+/* Initializes all interfaces in the structure to NULL, fills out Callbacks with appropriate function pointers */
+EGLAPI void EGLAPIENTRY BEGL_GetDefaultDriverInterfaces(BEGL_DriverInterfaces *iface);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* ABSTRACT_PLATFORM */
+
+#if 0
 #include "interface/khronos/common/khrn_client_mangle.h"
 #endif
 

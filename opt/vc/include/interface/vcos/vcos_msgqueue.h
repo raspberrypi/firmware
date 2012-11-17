@@ -113,7 +113,11 @@ typedef struct VCOS_MSG_ENDPOINT_T
 
 /** Initalise the library. Normally called from vcos_init().
   */
-extern VCOS_STATUS_T vcos_msgq_init(void);
+VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_init(void);
+
+/** De-initialise the library. Normally called from vcos_deinit().
+ */
+VCOSPRE_ void VCOSPOST_ vcos_msgq_deinit(void);
 
 /** Find a message queue by name and get a handle to it.
   *

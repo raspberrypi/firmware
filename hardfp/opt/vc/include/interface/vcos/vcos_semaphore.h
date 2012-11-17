@@ -37,7 +37,9 @@ extern "C" {
 #endif
 
 #include "interface/vcos/vcos_types.h"
+#ifndef VCOS_PLATFORM_H
 #include "vcos_platform.h"
+#endif
 
 /**
  * \file vcos_semaphore.h

@@ -27,9 +27,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef __gl2_h_
 #define __gl2_h_
 
-/* $Revision: 10602 $ on $Date:: 2010-03-04 22:35:34 -0800 #$ */
+/* $Revision: 10602 $ on $Date:: 2010-03-05 06:35:34 +0000 #$ */
 
-#include <GLES2/gl2platform.h>
+#include "gl2platform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,6 +44,7 @@ extern "C" {
  * Data type definitions
  *-----------------------------------------------------------------------*/
 
+#ifndef __gl_h_
 typedef void             GLvoid;
 typedef char             GLchar;
 typedef unsigned int     GLenum;
@@ -63,6 +64,7 @@ typedef khronos_int32_t  GLfixed;
 /* GL types for handling large vertex buffer objects */
 typedef khronos_intptr_t GLintptr;
 typedef khronos_ssize_t  GLsizeiptr;
+#endif
 
 /* OpenGL ES core versions */
 #define GL_ES_VERSION_2_0                 1
@@ -73,8 +75,8 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_COLOR_BUFFER_BIT               0x00004000
 
 /* Boolean */
-#define GL_FALSE                          0
-#define GL_TRUE                           1
+#define GL_FALSE                          (GLboolean)0
+#define GL_TRUE                           (GLboolean)1
 
 /* BeginMode */
 #define GL_POINTS                         0x0000

@@ -217,6 +217,9 @@ void vcos_sleep(uint32_t ms);
 VCOS_INLINE_DECL
 uint32_t vcos_getmicrosecs(void);
 
+VCOS_INLINE_DECL
+uint64_t vcos_getmicrosecs64(void);
+
 #define vcos_get_ms() (vcos_getmicrosecs()/1000)
 
 /**

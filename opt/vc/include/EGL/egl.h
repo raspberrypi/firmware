@@ -33,7 +33,7 @@
 /* All platform-dependent types and macro boilerplate (such as EGLAPI
  * and EGLAPIENTRY) should go in eglplatform.h.
  */
-#include <EGL/eglplatform.h>
+#include "eglplatform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -61,8 +61,8 @@ typedef void *EGLClientBuffer;
  */
 
 /* EGL aliases */
-#define EGL_FALSE			0
-#define EGL_TRUE			1
+#define EGL_FALSE			((EGLBoolean)0)
+#define EGL_TRUE			((EGLBoolean)1)
 
 /* Out-of-band handle values */
 #define EGL_DEFAULT_DISPLAY		((EGLNativeDisplayType)0)

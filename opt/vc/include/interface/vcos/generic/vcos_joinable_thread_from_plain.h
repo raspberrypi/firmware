@@ -48,9 +48,15 @@ VideoCore OS Abstraction Layer - implementation: joinable thread from plain
 extern "C" {
 #endif
 
+#ifndef VCOS_SEMAPHORE_H
 #include "interface/vcos/vcos_semaphore.h"
+#endif
+#ifndef VCOS_LOWLEVEL_THREAD_H
 #include "interface/vcos/vcos_lowlevel_thread.h"
+#endif
+#ifndef VCOS_TIMER_H
 #include "interface/vcos/vcos_timer.h"
+#endif
 
 #ifdef VCOS_WANT_TLS_EMULATION
 #include "interface/vcos/generic/vcos_generic_tls.h"
