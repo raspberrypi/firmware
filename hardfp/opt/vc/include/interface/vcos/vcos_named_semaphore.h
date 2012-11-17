@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+VideoCore OS Abstraction Layer - named semaphores
+=============================================================================*/
+
 #ifndef VCOS_NAMED_SEMAPHORE_H
 #define VCOS_NAMED_SEMAPHORE_H
 

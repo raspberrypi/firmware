@@ -98,12 +98,27 @@ typedef enum
 } SDTV_CP_MODE_T;
 
 /**
+ * SDTV internal state
+ */
+typedef struct {
+   uint32_t state;
+   uint32_t width;
+   uint32_t height;
+   uint16_t frame_rate;
+   uint16_t scan_mode;
+   SDTV_MODE_T mode;
+   SDTV_OPTIONS_T display_options;
+   SDTV_COLOUR_T colour;
+   SDTV_CP_MODE_T cp_mode;
+} SDTV_DISPLAY_STATE_T;
+
+/**
  * SDTV notifications
  */
 typedef enum 
 {
    VC_SDTV_UNPLUGGED          = 1 << 16, /**<SDTV cable unplugged, subject to platform support */
-   VC_SDTV_STANDBY            = 1 << 17, /**<SDTV cable is plugged in */
+   VC_SDTV_ATTACHED           = 1 << 17, /**<SDTV cable is plugged in */
    VC_SDTV_NTSC               = 1 << 18, /**<SDTV is in NTSC mode */
    VC_SDTV_PAL                = 1 << 19, /**<SDTV is in PAL mode */
    VC_SDTV_CP_INACTIVE        = 1 << 20, /**<Copy protection disabled */

@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+VideoCore OS Abstraction Layer - IRQ support
+=============================================================================*/
+
 #ifndef VCOS_ISR_H
 #define VCOS_ISR_H
 

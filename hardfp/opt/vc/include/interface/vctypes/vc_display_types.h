@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+Common image types used by the vc_image library.
+=============================================================================*/
+
 #ifndef INTERFACE_VC_DISPLAY_TYPES_H
 #define INTERFACE_VC_DISPLAY_TYPES_H
 

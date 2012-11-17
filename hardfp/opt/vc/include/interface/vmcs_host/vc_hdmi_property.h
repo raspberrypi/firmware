@@ -35,6 +35,7 @@ modification, are permitted provided that the following conditions are met:
 
 #ifndef _VC_HDMI_PROPERTY_H_
 #define _VC_HDMI_PROPERTY_H_
+#include "vcinclude/common.h"
 
 /**
  * Property type
@@ -44,9 +45,21 @@ typedef enum {
    HDMI_PROPERTY_PIXEL_CLOCK_TYPE = 1, /**< See HDMI_PIXEL_CLOCK_TYPE_T, default is HDMI_PIXEL_CLOCK_TYPE_PAL */
    HDMI_PROPERTY_CONTENT_TYPE     = 2, /**< Set content type flag EDID_ContentType_T */
    HDMI_PROPERTY_FUZZY_MATCH      = 3, /**< disable (0 - default) or enable (1) fuzzy format match */
+   HDMI_PROPERTY_3D_STRUCTURE     = 4, /**< Set the 3D structure of the next HDMI power on (only for CEA mode) */
+
    //More properties to be added here
    HDMI_PROPERTY_MAX                   /**< place holder */
 } HDMI_PROPERTY_T;
+
+/**
+ * Setting/getting a property
+ */
+typedef struct {
+   HDMI_PROPERTY_T property;
+   uint32_t param1;
+   uint32_t param2;
+   //More fields may be added here if required in future
+} HDMI_PROPERTY_PARAM_T;
 
 /**
  * PIXEL_ENCODING: param1: encoding type, param2: n/a
@@ -100,5 +113,22 @@ typedef enum {
    EDID_FUZZY_MATCH_ENABLED  = 0x1,
    EDID_FUZZY_MATCH_MAX
 } EDID_FuzzyMatch_T;
+
+/**
+ * 3D structure: param1 - 3D structure (e.g. top/bottom side by side) (default value is none, i.e. 2D)
+ *               param2 - n/a at the moment, may be used in the future
+ *
+ * 3D structure is auto reset to "2D" every time HDMI is power on. Only affect CEA formats.
+ */
+/*
+ * Matched to the 3d struct bit fields stored internally to represent 3D support in EDID
+ */
+typedef enum {
+   HDMI_3D_FORMAT_NONE = 0,           /**<plain and simple 2D! */
+   HDMI_3D_FORMAT_SBS_HALF = (1<<7),  /**<side by side half horizontal */
+   HDMI_3D_FORMAT_TB_HALF  = (1<<6),  /**<top and bottom half vertical */
+   /* More 3D structs, e.g. full frame packing, may be added here */
+   HDMI_3D_FORMAT_INVALID = 0xFFFF
+} HDMI_3D_FORMAT_T;
 
 #endif //_VC_HDMI_PROPERTY_H_

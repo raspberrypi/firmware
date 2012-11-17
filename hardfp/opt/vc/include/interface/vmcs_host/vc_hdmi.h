@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012 Broadcom Europe Ltd
+Copyright (c) 2012, Broadcom Europe Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -46,41 +46,66 @@ typedef enum {
    HDMI_RES_GROUP_INVALID = 0, /**< Initialised value */
    HDMI_RES_GROUP_CEA     = 1, /**< CEA - HDMI device */
    HDMI_RES_GROUP_DMT     = 2, /**< DMT - computer monitors */
-   HDMI_RES_GROUP_CEA_3D  = 3  /**< CEA 3D mode (for 3D displays only) */
 } HDMI_RES_GROUP_T;
 
 #define HDMI_RES_GROUP_NAME(g) \
    (((g) == HDMI_RES_GROUP_INVALID) ? "Invalid" : \
    (((g) == HDMI_RES_GROUP_CEA) ? "CEA" : \
    (((g) == HDMI_RES_GROUP_DMT) ? "DMT" : \
-   (((g) == HDMI_RES_GROUP_CEA_3D) ? "CEA_3D" : \
-   "Unknown"))))
+    "Unknown")))
 
 /**
- *  CEA 861-B defined video code and aspect ratios for various HDMI modes
+ *  CEA 861 defined video code and aspect ratios for various HDMI modes
+ *  Not all values are valid for AVI infoframe
  */
 typedef enum {
-   HDMI_ASPECT_UNKNOWN  = 0, /**< Unknown aspect ratio */
+   HDMI_ASPECT_UNKNOWN  = 0, /**< Unknown aspect ratio, or not one of the values below */
    HDMI_ASPECT_4_3      = 1, /**< 4:3  */
    HDMI_ASPECT_14_9     = 2, /**< 14:9 */
-   HDMI_ASPECT_16_9     = 3  /**< 16:9 */
+   HDMI_ASPECT_16_9     = 3, /**< 16:9 */
+   HDMI_ASPECT_5_4      = 4, /**< 5:4  */
+   HDMI_ASPECT_16_10    = 5, /**< 16:10*/
+   HDMI_ASPECT_15_9     = 6, /**< 15:9 */
+   HDMI_ASPECT_21_9     = 7, /**< 21:9 */
+   HDMI_ASPECT_64_27    = 8  /**< 64:27*/
+   //More aspect ratio values may be added here if defined by CEA in future
 } HDMI_ASPECT_T;
 
 /**
  * Display options set the bounding box (only used in CEA mode)
  */
 typedef struct {
-   HDMI_ASPECT_T   aspect;
+   uint16_t aspect; /**<HDMI_ASPECT_T */
    /** Active area information - meanings as in CEA-861. */
-   VC_HDMI_BOOL_T  vertical_bar_present;
-   uint16_t        left_bar_width;
-   uint16_t        right_bar_width;
-   VC_HDMI_BOOL_T  horizontal_bar_present;
-   uint16_t        top_bar_height;
-   uint16_t        bottom_bar_height;
+   uint16_t vertical_bar_present; /**<VC_HDMI_BOOL_T */
+   uint16_t left_bar_width;
+   uint16_t right_bar_width;
+   uint16_t horizontal_bar_present; /**<VC_HDMI_BOOL_T */
+   uint16_t top_bar_height;
+   uint16_t bottom_bar_height;
    /** S0/S1 flags as defined in CEA-861. */
    uint8_t         overscan_flags;
 } HDMI_DISPLAY_OPTIONS_T;
+
+/**
+ * HDMI internal state (with some of the properties related to current display signal)
+ * Also see SDTV_DISPLAY_STATE_T in vc_sdtv.h, members up to scan_mode will be in the
+ * same position as the equivalent state in SDTV_DISPLAY_STATE_T;
+ */
+typedef struct {
+   uint32_t state;
+   uint32_t width;
+   uint32_t height;
+   uint16_t frame_rate;
+   uint16_t scan_mode;
+   uint32_t group; /**<HDMI_RES_GROUP_T */
+   uint32_t mode; //This is the mode number of the format
+   uint16_t pixel_rep;   //Pixel repetition factor, only relevant for CEA formats
+   uint16_t aspect_ratio; //This is the format's native aspect ratio
+   HDMI_DISPLAY_OPTIONS_T display_options; //This has the aspect ratio sent in AVI infoframe
+   uint16_t pixel_encoding;
+   uint16_t format_3d; //3D format, only relevant for CEA formats
+} HDMI_DISPLAY_STATE_T;
 
 /**
  * Copy protection for HDMI, only HDCP is available
@@ -413,6 +438,26 @@ typedef enum {
 } EDID_AudioLFEFB;
 
 /**
+ * All possible 3D structures
+ * to be used in decoded 3D modes (e.g. HDMI_3D_SUPPORTED_MODE)
+ */
+typedef enum {
+   HDMI_3D_STRUCT_NONE                                   = 0,
+   HDMI_3D_STRUCT_FRAME_PACKING                          = (1<<0),
+   HDMI_3D_STRUCT_FIELD_ALTERNATIVE                      = (1<<1),
+   HDMI_3D_STRUCT_LINE_ALTERNATIVE                       = (1<<2),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_FULL                      = (1<<3),
+   HDMI_3D_STRUCT_L_DEPTH                                = (1<<4),
+   HDMI_3D_STRUCT_L_DEPTH_GRAPHICS_GRAPHICS_DEPTH        = (1<<5),
+   HDMI_3D_STRUCT_TOP_AND_BOTTOM                         = (1<<6),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_HALF_HORIZONTAL           = (1<<7),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_HALF_ODD_LEFT_ODD_RIGHT   = (1<<8),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_HALF_ODD_LEFT_EVEN_RIGHT  = (1<<9),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_HALF_EVEN_LEFT_ODD_RIGHT  = (1<<10),
+   HDMI_3D_STRUCT_SIDE_BY_SIDE_HALF_EVEN_LEFT_EVEN_RIGHT = (1<<11),
+} HDMI_3D_STRUCT_T;
+
+/**
  * HDMI notifications (defined as a bit mask to be conveniently returned as a state),
  * make sure this does not clash with the values in vc_sdtv.h
  * SDTV notifications start at bit 16.
@@ -420,7 +465,7 @@ typedef enum {
  */
 typedef enum {
    VC_HDMI_UNPLUGGED          = (1 << 0),  /**<HDMI cable is detached */
-   VC_HDMI_STANDBY            = (1 << 1),  /**<HDMI cable is attached but not powered on */
+   VC_HDMI_ATTACHED           = (1 << 1),  /**<HDMI cable is attached but not powered on */
    VC_HDMI_DVI                = (1 << 2),  /**<HDMI is on but in DVI mode (no audio) */
    VC_HDMI_HDMI               = (1 << 3),  /**<HDMI is on and HDMI mode is active */
    VC_HDMI_HDCP_UNAUTH        = (1 << 4),  /**<HDCP authentication is broken (e.g. Ri mismatched) or not active */
@@ -430,6 +475,7 @@ typedef enum {
    VC_HDMI_CHANGING_MODE      = (1 << 8),  /**<HDMI is starting to change mode, clock has not yet been set */
 
 } VC_HDMI_NOTIFY_T;
+#define VC_HDMI_STANDBY (VC_HDMI_ATTACHED) //For backward code compatibility
 
 /**
  * Callback reason and arguments from HDMI middleware
@@ -483,9 +529,13 @@ typedef enum {
    VC_HDMI_ERROR_INVALID_INFOFRAME  = 5, /** invalid infoframe */
 } VC_HDMI_ERROR_T;
 
- //Defines for backward code compatibilty (these were originally in hdmi.h)
+//Defines for backward code compatibilty (these were originally in hdmi.h)
 typedef VC_HDMI_ERROR_T HDMI_RESULT_T;
 #define HDMI_RESULT_SUCCESS (VC_HDMI_SUCCESS)
 #define HDMI_RESULT_FAILED  (VC_HDMI_ERROR_FORMAT_UNSUPPORTED)
+
+#ifndef TV_SUPPORTED_MODE_NO_DEPRECATED
+#define HDMI_RES_GROUP_CEA_3D ((HDMI_RES_GROUP_T)3)
+#endif
 
 #endif

@@ -25,6 +25,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+// Contains the protypes for the vchi functions.
+
 #ifndef VCHI_H_
 #define VCHI_H_
 
@@ -39,6 +41,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  Global defs
  *****************************************************************************/
 
+#define VCHI_SERVICE_HANDLE_INVALID 0
+
 #define VCHI_BULK_ROUND_UP(x)     ((((unsigned long)(x))+VCHI_BULK_ALIGN-1) & ~(VCHI_BULK_ALIGN-1))
 #define VCHI_BULK_ROUND_DOWN(x)   (((unsigned long)(x)) & ~(VCHI_BULK_ALIGN-1))
 #define VCHI_BULK_ALIGN_NBYTES(x) (VCHI_BULK_ALIGNED(x) ? 0 : (VCHI_BULK_ALIGN - ((unsigned long)(x) & (VCHI_BULK_ALIGN-1))))
@@ -49,6 +53,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VCHI_BULK_ALIGNED(x)      (((unsigned long)(x) & (VCHI_BULK_ALIGN-1)) == 0)
 #endif
 
+typedef struct 
+{
+   uint32_t version;
+   uint32_t version_min;
+} VCHI_VERSION_T;
+#define VCHI_VERSION(v_) { v_, v_ }
+#define VCHI_VERSION_EX(v_,m_) { v_, m_ }
 
 typedef enum
 {
@@ -113,6 +124,7 @@ typedef struct
 
 // structure used to provide the information needed to open a server or a client
 typedef struct {
+   VCHI_VERSION_T version;
    vcos_fourcc_t service_id;
    VCHI_CONNECTION_T *connection;
    uint32_t rx_fifo_size;
@@ -128,7 +140,7 @@ typedef struct {
 typedef struct opaque_vchi_instance_handle_t *VCHI_INSTANCE_T;
 
 // Opaque handle for a server or client
-typedef struct opaque_vchi_service_handle_t *VCHI_SERVICE_HANDLE_T;
+typedef unsigned int VCHI_SERVICE_HANDLE_T;
 
 // Service registration & startup
 typedef void (*VCHI_SERVICE_INIT)(VCHI_INSTANCE_T initialise_instance, VCHI_CONNECTION_T **connections, uint32_t num_connections);
@@ -189,6 +201,9 @@ extern int32_t vchi_service_destroy( const VCHI_SERVICE_HANDLE_T handle );
 extern int32_t vchi_service_open( VCHI_INSTANCE_T instance_handle,
                                   SERVICE_CREATION_T *setup,
                                   VCHI_SERVICE_HANDLE_T *handle);
+
+extern int32_t vchi_get_peer_version( const VCHI_SERVICE_HANDLE_T handle,
+                                      short *peer_version );
 
 // Routine to close a named service
 extern int32_t vchi_service_close( const VCHI_SERVICE_HANDLE_T handle );

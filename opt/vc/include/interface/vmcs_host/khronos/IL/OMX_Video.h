@@ -297,14 +297,13 @@ typedef struct OMX_VIDEO_PARAM_MOTIONVECTORTYPE {
  * Enumeration of possible methods to use for Intra Refresh 
  */
 typedef enum OMX_VIDEO_INTRAREFRESHTYPE {
-    OMX_VIDEO_IntraRefreshNone      = 0,    /**< No Intra refresh*/
-    OMX_VIDEO_IntraRefreshCyclic    = 1,    /**< Cyclic intra refresh, bit 0 is set*/
-    OMX_VIDEO_IntraRefreshAdaptive  = 2,    /**< Adaptive intra refresh, bit 1 is set*/
-    OMX_VIDEO_IntraRefreshBoth      = 3,    /**< Cyclic + Adaptive intra refresh (no mrows since bit 2 is off)*/
-    OMX_VIDEO_IntraRefreshCyclicMrows = 5,  /**< Cyclic intra refresh, multiple rows at a time bits 0 and 2 are set*/
-    OMX_VIDEO_IntraRefreshPseudoRand = 8,   /**< Psuedo random intra refresh, uses bit 3*/
+    OMX_VIDEO_IntraRefreshCyclic,                         /**< Cyclic intra refresh, bit 0 is set*/
+    OMX_VIDEO_IntraRefreshAdaptive,                       /**< Adaptive intra refresh, bit 1 is set*/
+    OMX_VIDEO_IntraRefreshBoth,                           /**< Cyclic + Adaptive intra refresh (no mrows since bit 2 is off)*/
     OMX_VIDEO_IntraRefreshKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_VIDEO_IntraRefreshVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
+    OMX_VIDEO_IntraRefreshCyclicMrows,                    /**< Cyclic intra refresh, multiple rows at a time bits 0 and 2 are set*/
+    OMX_VIDEO_IntraRefreshPseudoRand,                     /**< Psuedo random intra refresh, uses bit 3*/
     OMX_VIDEO_IntraRefreshMax = 0x7FFFFFFF
 } OMX_VIDEO_INTRAREFRESHTYPE;
 
@@ -785,6 +784,7 @@ typedef enum OMX_VIDEO_AVCPROFILETYPE {
     OMX_VIDEO_AVCProfileHigh10   = 0x10,   /**< High 10 profile */
     OMX_VIDEO_AVCProfileHigh422  = 0x20,   /**< High 4:2:2 profile */
     OMX_VIDEO_AVCProfileHigh444  = 0x40,   /**< High 4:4:4 profile */
+    OMX_VIDEO_AVCProfileConstrainedBaseline = 0x80, /**< Constrained Baseline Profile   */
     OMX_VIDEO_AVCProfileKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_VIDEO_AVCProfileVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
     OMX_VIDEO_AVCProfileMax      = 0x7FFFFFFF  

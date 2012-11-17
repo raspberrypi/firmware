@@ -25,10 +25,18 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+// OpenMAX IL Component Service definitions
+
 #ifndef VC_ILCS_DEFS_H
 #define VC_ILCS_DEFS_H
 
+#define VC_ILCS_VERSION 1
+
+#ifdef USE_VCHIQ_ARM
 #include "interface/vchiq_arm/vchiq.h"
+#else
+#include "interface/vchiq/vchiq.h"
+#endif
 
 typedef enum {
    IL_RESPONSE,

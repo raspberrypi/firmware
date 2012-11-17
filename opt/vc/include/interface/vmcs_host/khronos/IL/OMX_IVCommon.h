@@ -139,6 +139,7 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_FormatYUVUV128,
     OMX_COLOR_FormatRawBayer12bit,
     OMX_COLOR_FormatBRCMEGL,
+    OMX_COLOR_FormatBRCMOpaque,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
@@ -205,6 +206,7 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterColourPoint,
     OMX_ImageFilterPosterise,
     OMX_ImageFilterColourBalance,
+    OMX_ImageFilterCartoon,
 
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
