@@ -1,3 +1,4 @@
+kernel/arch/arm/mach-bcm2708/dmaer.ko
 kernel/fs/quota/quota_tree.ko
 kernel/fs/nls/nls_cp737.ko
 kernel/fs/nls/nls_cp775.ko
@@ -95,6 +96,9 @@ kernel/drivers/block/drbd/drbd.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/iwmc3200top/iwmc3200top.ko
 kernel/drivers/nfc/pn533.ko
+kernel/drivers/scsi/libiscsi.ko
+kernel/drivers/scsi/libiscsi_tcp.ko
+kernel/drivers/scsi/iscsi_tcp.ko
 kernel/drivers/scsi/st.ko
 kernel/drivers/scsi/osst.ko
 kernel/drivers/scsi/sr_mod.ko
