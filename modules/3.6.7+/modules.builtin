@@ -43,7 +43,6 @@ kernel/drivers/base/firmware_class.ko
 kernel/drivers/block/brd.ko
 kernel/drivers/block/loop.ko
 kernel/drivers/char/raw.ko
-kernel/drivers/char/broadcom/vc_cma/vc-cma.ko
 kernel/drivers/cpufreq/cpufreq_performance.ko
 kernel/drivers/cpufreq/cpufreq_powersave.ko
 kernel/drivers/cpufreq/cpufreq_userspace.ko
@@ -67,6 +66,7 @@ kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/scsi/scsi_mod.ko
+kernel/drivers/scsi/scsi_transport_iscsi.ko
 kernel/drivers/scsi/sd_mod.ko
 kernel/drivers/thermal/thermal_sys.ko
 kernel/drivers/thermal/bcm2835-thermal.ko
