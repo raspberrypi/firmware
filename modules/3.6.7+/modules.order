@@ -782,6 +782,7 @@ kernel/net/sched/sch_htb.ko
 kernel/net/sched/sch_hfsc.ko
 kernel/net/sched/sch_red.ko
 kernel/net/sched/sch_gred.ko
+kernel/net/sched/sch_ingress.ko
 kernel/net/sched/sch_dsmark.ko
 kernel/net/sched/sch_sfb.ko
 kernel/net/sched/sch_sfq.ko
@@ -791,9 +792,12 @@ kernel/net/sched/sch_prio.ko
 kernel/net/sched/sch_multiq.ko
 kernel/net/sched/sch_netem.ko
 kernel/net/sched/sch_drr.ko
+kernel/net/sched/sch_plug.ko
 kernel/net/sched/sch_mqprio.ko
 kernel/net/sched/sch_choke.ko
 kernel/net/sched/sch_qfq.ko
+kernel/net/sched/sch_codel.ko
+kernel/net/sched/sch_fq_codel.ko
 kernel/net/sched/cls_u32.ko
 kernel/net/sched/cls_route.ko
 kernel/net/sched/cls_fw.ko
