@@ -220,7 +220,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_3d(uint32_t width, uint32_t height
  *
  * @return same as <DFN>vc_tv_hdmi_power_on_preferred</DFN>
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_new(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
 
 /**
  * <DFN>vc_tv_sdtv_power_on</DFN> is used to turn on analogue TV. HDMI will
@@ -267,8 +267,8 @@ VCHPRE_ int VCHPOST_ vc_tv_power_off( void );
  *         zero means no modes (no EDID or cable unplugged)
  *
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
-                                                    TV_SUPPORTED_MODE_T *supported_modes,
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_new(HDMI_RES_GROUP_T group,
+                                                    TV_SUPPORTED_MODE_NEW_T *supported_modes,
                                                     uint32_t max_supported_modes,
                                                     HDMI_RES_GROUP_T *preferred_group,
                                                     uint32_t *preferred_mode);
@@ -493,15 +493,13 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(HDMI_PROPERTY_PARAM_T *property);
  */
 VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
 
-#ifndef TV_SUPPORTED_MODE_NO_DEPRECATED
-
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_deprecated(HDMI_RES_GROUP_T group,
-                                                    TV_SUPPORTED_MODE_DEPRECATED_T *supported_modes,
+// temporary: maintain backwards compatibility
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
+                                                    TV_SUPPORTED_MODE_T *supported_modes,
                                                     uint32_t max_supported_modes,
                                                     HDMI_RES_GROUP_T *preferred_group,
                                                     uint32_t *preferred_mode);
-
-#define vc_tv_hdmi_get_supported_modes vc_tv_hdmi_get_supported_modes_deprecated
-#endif
+// temporary: maintain backwards compatibility
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
 
 #endif

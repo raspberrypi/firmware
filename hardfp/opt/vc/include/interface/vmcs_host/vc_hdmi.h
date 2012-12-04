@@ -46,6 +46,8 @@ typedef enum {
    HDMI_RES_GROUP_INVALID = 0, /**< Initialised value */
    HDMI_RES_GROUP_CEA     = 1, /**< CEA - HDMI device */
    HDMI_RES_GROUP_DMT     = 2, /**< DMT - computer monitors */
+   HDMI_RES_GROUP_CEA_3D  = 3, /* deprecated */
+
 } HDMI_RES_GROUP_T;
 
 #define HDMI_RES_GROUP_NAME(g) \
@@ -533,9 +535,5 @@ typedef enum {
 typedef VC_HDMI_ERROR_T HDMI_RESULT_T;
 #define HDMI_RESULT_SUCCESS (VC_HDMI_SUCCESS)
 #define HDMI_RESULT_FAILED  (VC_HDMI_ERROR_FORMAT_UNSUPPORTED)
-
-#ifndef TV_SUPPORTED_MODE_NO_DEPRECATED
-#define HDMI_RES_GROUP_CEA_3D ((HDMI_RES_GROUP_T)3)
-#endif
 
 #endif

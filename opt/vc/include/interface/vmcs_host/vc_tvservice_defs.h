@@ -154,7 +154,7 @@ typedef struct {
    uint16_t height;        /**<frame height */
    uint32_t pixel_freq;    /**<pixel clock in Hz */
    uint32_t struct_3d;     /**<3D structure supported for this mode, only valid if group == CEA, is a bitmask of HDMI_3D_STRUCT_T */
-} TV_SUPPORTED_MODE_T;
+} TV_SUPPORTED_MODE_NEW_T;
 
 typedef struct {
    uint16_t scan_mode : 1; /**<1 is interlaced, 0 for progressive */
@@ -163,11 +163,7 @@ typedef struct {
    uint16_t frame_rate;    /**<frame rate */
    uint16_t width;         /**<frame width */
    uint16_t height;        /**<frame height */
-} TV_SUPPORTED_MODE_DEPRECATED_T;
-
-#ifndef TV_SUPPORTED_MODE_NO_DEPRECATED
-#define TV_SUPPORTED_MODE_T TV_SUPPORTED_MODE_DEPRECATED_T
-#endif
+} TV_SUPPORTED_MODE_T;
 
 typedef struct {
    uint32_t num_supported_modes;
