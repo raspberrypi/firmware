@@ -486,7 +486,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmAttachLog,               /**< reference: OMX_CONFIG_BOOLEANTYPE */
 
     // 0x7f0000d0
-    OMX_IndexParamCameraZeroShutterLag,        /**< reference: OMX_CONFIG_BOOLEANTYPE */
+    OMX_IndexParamCameraZeroShutterLag,        /**< reference: OMX_CONFIG_ZEROSHUTTERLAGTYPE */
     OMX_IndexParamBrcmFpsRange,                /**< reference: OMX_PARAM_BRCMFRAMERATERANGETYPE */
     OMX_IndexParamCaptureExposureCompensation, /**< reference: OMX_PARAM_S32TYPE */
     OMX_IndexParamBrcmVideoPrecodeForQP,       /**< reference: OMX_CONFIG_BOOLEANTYPE */
@@ -494,6 +494,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamSWSharpenDisable,            /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexConfigBrcmFlashRequired,          /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexParamBrcmVideoDrmProtectBuffer,   /**< reference: OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE */
+    OMX_IndexParamSWSaturationDisable,         /**< reference: OMX_CONFIG_BOOLEANTYPE */
 
     // 0x7f0000f0
     OMX_IndexConfigBrcmAudioDownmixCoefficients = 0x7f0000f0, /**< reference: OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS */

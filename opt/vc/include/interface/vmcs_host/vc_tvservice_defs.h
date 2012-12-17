@@ -70,6 +70,7 @@ typedef enum {
    VC_TV_SET_PROP,
    VC_TV_GET_PROP,
    VC_TV_GET_DISPLAY_STATE,
+   VC_TV_QUERY_SUPPORTED_MODES_ACTUAL,
    //Add more commands here
    VC_TV_END_OF_LIST
 } VC_TV_CMD_CODE_T;
@@ -140,8 +141,16 @@ typedef struct {
 
 //TV_QUERY_SUPPORTED_MODES
 //Parameters: standard (CEA/DMT) sent as uint32_t
-//Reply: how many modes there are and the array of supported modes, and the preferred modes
-//       (sent back via bulk transfer)
+//Reply: how many modes there are in this group,
+//       preferred resolution
+
+//TV_QUERY_SUPPORTED_MODES_ACTUAL (This  downloads the array of supported modes)
+//Parameters: standard (CEA/DMT) sent as uint32_t,
+//            table size supplied
+//Reply: how many modes which will be returned,
+//       prefer resolution,
+//       the actual array of modes (via bulk transfer)
+
 typedef struct {
    uint32_t scan_mode    : 1; /**<1 is interlaced, 0 for progressive */
    uint32_t native       : 1; /**<1 means native mode, 0 otherwise */
@@ -153,7 +162,7 @@ typedef struct {
    uint16_t width;         /**<frame width */
    uint16_t height;        /**<frame height */
    uint32_t pixel_freq;    /**<pixel clock in Hz */
-   uint32_t struct_3d;     /**<3D structure supported for this mode, only valid if group == CEA, is a bitmask of HDMI_3D_STRUCT_T */
+   uint32_t struct_3d_mask;/**<3D structure supported for this mode, only valid if group == CEA. This is a bitmask of HDMI_3D_STRUCT_T */
 } TV_SUPPORTED_MODE_NEW_T;
 
 typedef struct {
@@ -171,8 +180,11 @@ typedef struct {
    uint32_t preferred_mode;
 } TV_QUERY_SUPPORTED_MODES_RESP_T;
 
-//An array of TV_SUPPORTED_MODE_T will be separately sent back as an bulk transfer
-//as the response from query_supported_modes
+//num_supported_modes is the no. of modes available in that group for TV_QUERY_SUPPORTED_MODES
+//and no. of modes which will be bulk sent across in TV_QUERY_SUPPORTED_MODES_ACTUAL
+
+//For TV_QUERY_SUPPORTED_MODES_ACTUAL, there will be a separate bulk receive
+//containing the supported modes array
 
 //TV_QUERY_MODE_SUPPORT
 //Parameters: stardard, mode

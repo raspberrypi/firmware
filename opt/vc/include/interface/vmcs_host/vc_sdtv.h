@@ -128,6 +128,7 @@ typedef enum
    VC_SDTV_CP_INACTIVE        = 1 << 20, /**<Copy protection disabled */
    VC_SDTV_CP_ACTIVE          = 1 << 21  /**<Copy protection enabled */
 } VC_SDTV_NOTIFY_T;
+#define VC_SDTV_STANDBY (VC_SDTV_ATTACHED) /* For backward code compatibility, to be consistent with HDMI */
 
 /**
  * Callback reason and arguments from vec middleware

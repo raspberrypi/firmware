@@ -213,9 +213,13 @@ extern void logging_assert_dump(void);
 
 #if !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS)
 #define VCOS_ASSERT_ENABLED 1
+#define VCOS_VERIFY_ENABLED 1
 #else
 #define VCOS_ASSERT_ENABLED 0
+#define VCOS_VERIFY_ENABLED 0
 #endif
+
+#define VCOS_DEMAND_ENABLED 1
 
 #if VCOS_ASSERT_ENABLED
 
@@ -241,7 +245,8 @@ extern void logging_assert_dump(void);
 
 #endif /* VCOS_ASSERT_ENABLED */
 
-#if VCOS_ASSERT_ENABLED
+
+#if VCOS_DEMAND_ENABLED
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -253,17 +258,7 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT, vcos_abort()) )
 #endif
 
-#ifndef vcos_verify
-#define vcos_verify(cond) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#ifndef vcos_verify_msg
-#define vcos_verify_msg(cond, ...) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#else  /* VCOS_ASSERT_ENABLED */
+#else  /* VCOS_DEMAND_ENABLED */
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -275,6 +270,23 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : vcos_abort() )
 #endif
 
+#endif /* VCOS_DEMAND_ENABLED */
+
+
+#if VCOS_VERIFY_ENABLED
+
+#ifndef vcos_verify
+#define vcos_verify(cond) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#ifndef vcos_verify_msg
+#define vcos_verify_msg(cond, ...) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#else /* VCOS_VERIFY_ENABLED */
+
 #ifndef vcos_verify
 #define vcos_verify(cond) (cond)
 #endif
@@ -283,7 +295,8 @@ extern void logging_assert_dump(void);
 #define vcos_verify_msg(cond, ...) (cond)
 #endif
 
-#endif /* VCOS_ASSERT_ENABLED */
+#endif /* VCOS_VERIFY_ENABLED */
+
 
 #ifndef vcos_static_assert
 #if defined(__GNUC__)

@@ -2281,5 +2281,15 @@ typedef struct OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE
    OMX_PTR phys_addr;       /**< Output. Physical memory address of protected buffer */
 } OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE;
 
+typedef struct OMX_CONFIG_ZEROSHUTTERLAGTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 bZeroShutterMode;        /**< Select ZSL mode from the camera. */
+   OMX_U32 bConcurrentCapture;      /**< Perform concurrent captures for full ZSL. */
+
+} OMX_CONFIG_ZEROSHUTTERLAGTYPE;
+
 #endif
 /* File EOF */

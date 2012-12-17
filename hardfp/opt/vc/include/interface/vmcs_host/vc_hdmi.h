@@ -68,9 +68,9 @@ typedef enum {
    HDMI_ASPECT_5_4      = 4, /**< 5:4  */
    HDMI_ASPECT_16_10    = 5, /**< 16:10*/
    HDMI_ASPECT_15_9     = 6, /**< 15:9 */
-   HDMI_ASPECT_21_9     = 7, /**< 21:9 */
-   HDMI_ASPECT_64_27    = 8  /**< 64:27*/
-   //More aspect ratio values may be added here if defined by CEA in future
+   HDMI_ASPECT_64_27    = 7, /**< 64:27 */
+   HDMI_ASPECT_21_9     = 7  /**< 21:9 is jargon, 64:27 is the actual aspect ratio, hence the same enum */
+   /* More aspect ratio values may be added here if defined by CEA in future */
 } HDMI_ASPECT_T;
 
 /**
@@ -101,12 +101,12 @@ typedef struct {
    uint16_t frame_rate;
    uint16_t scan_mode;
    uint32_t group; /**<HDMI_RES_GROUP_T */
-   uint32_t mode; //This is the mode number of the format
-   uint16_t pixel_rep;   //Pixel repetition factor, only relevant for CEA formats
-   uint16_t aspect_ratio; //This is the format's native aspect ratio
-   HDMI_DISPLAY_OPTIONS_T display_options; //This has the aspect ratio sent in AVI infoframe
+   uint32_t mode; /* This is the mode number of the format */
+   uint16_t pixel_rep;   /* Pixel repetition factor, only relevant for CEA formats */
+   uint16_t aspect_ratio; /* This is the format's native aspect ratio */
+   HDMI_DISPLAY_OPTIONS_T display_options; /* This has the aspect ratio sent in AVI infoframe */
    uint16_t pixel_encoding;
-   uint16_t format_3d; //3D format, only relevant for CEA formats
+   uint16_t format_3d; /* 3D format, only relevant for CEA formats */
 } HDMI_DISPLAY_STATE_T;
 
 /**
@@ -234,7 +234,7 @@ typedef enum {
    HDMI_CEA_1080p120        = 63,
    HDMI_CEA_1080p100        = 64,
 
-   //Up-to-date as of CEA 861-E
+   /* Up-to-date as of CEA 861-E */
 
    HDMI_CEA_OFF = 0xff /**<Special code to shutdown HDMI */
 
@@ -333,7 +333,7 @@ typedef enum {
    HDMI_DMT_2048x1152_RB    = 0x54, /**<2048x1152 reduced blanking */
    HDMI_DMT_720p_60         = 0x55, /**<Same as 720p60 above */
    HDMI_DMT_1366x768_RB     = 0x56, /**<1366x768 reduced blanking */
-   //Up-to-date as of VESA DMT v1 r12
+   /* Up-to-date as of VESA DMT v1 r12 */
 
    HDMI_DMT_OFF = 0xff
 } HDMI_DMT_RES_CODE_T;
@@ -477,7 +477,7 @@ typedef enum {
    VC_HDMI_CHANGING_MODE      = (1 << 8),  /**<HDMI is starting to change mode, clock has not yet been set */
 
 } VC_HDMI_NOTIFY_T;
-#define VC_HDMI_STANDBY (VC_HDMI_ATTACHED) //For backward code compatibility
+#define VC_HDMI_STANDBY (VC_HDMI_ATTACHED) /* For backward code compatibility */
 
 /**
  * Callback reason and arguments from HDMI middleware
@@ -494,15 +494,16 @@ typedef enum {
  * VC_HDMI_CHANGING_MODE        0            0         No information is supplied in this callback
  */
 
-//Some constants which are required on host side
+/* Some constants which are required on host side */
 #define HDCP_KEY_BLOCK_SIZE 328 /* KSV, padding, device keys and hash. */
 #define HDCP_KSV_LENGTH   5
 #define HDCP_MAX_DEVICE 127 /* Max. number of HDCP downstream device supported */
 #define HDCP_MAX_DEPTH 7 /* Max. number of levels HDCP 1.x can have */
 #define EDID_BLOCKSIZE 128
 #define HDMI_NUM_PACKET_BYTES 28 /* Size of HDMI infoframes minus the header */
+#define HDMI_MAX_EXPLICIT_3D_MODES 31 /* The number of explicit 3D modes is stored in 5 bits */
 
-//All CEC related constants now reside in vc_cec.h
+/* All CEC related constants now reside in vc_cec.h */
 
 /**
  * General callback function for both HDMI and HDCP middleware
@@ -521,7 +522,7 @@ typedef enum {
  */
 typedef void (*HDMI_CALLBACK_T)(void *client_p, VC_HDMI_NOTIFY_T reason, uint32_t param1, uint32_t param2);
 
-//TV service error return code
+/* TV service error return code */
 typedef enum {
    VC_HDMI_SUCCESS                  = 0, /** OK */
    VC_HDMI_ERROR_FORMAT_UNSUPPORTED = 1, /** format not supported */
@@ -531,7 +532,7 @@ typedef enum {
    VC_HDMI_ERROR_INVALID_INFOFRAME  = 5, /** invalid infoframe */
 } VC_HDMI_ERROR_T;
 
-//Defines for backward code compatibilty (these were originally in hdmi.h)
+/* Defines for backward code compatibilty (these were originally in hdmi.h) */
 typedef VC_HDMI_ERROR_T HDMI_RESULT_T;
 #define HDMI_RESULT_SUCCESS (VC_HDMI_SUCCESS)
 #define HDMI_RESULT_FAILED  (VC_HDMI_ERROR_FORMAT_UNSUPPORTED)
