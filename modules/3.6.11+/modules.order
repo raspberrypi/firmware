@@ -1,4 +1,4 @@
-kernel/arch/arm/mach-bcm2708/dmaer.ko
+kernel/arch/arm/mach-bcm2708/dmaer_master.ko
 kernel/fs/quota/quota_tree.ko
 kernel/fs/nls/nls_cp737.ko
 kernel/fs/nls/nls_cp775.ko
