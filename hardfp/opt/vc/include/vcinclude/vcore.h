@@ -28,9 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VCORE_H
 #define VCORE_H
 
-#ifdef __HIGHC__
+#ifdef __VIDEOCORE__
 #include "vc/intrinsics.h"
-
 #undef asm
 #define asm(x) _ASM(x)
 

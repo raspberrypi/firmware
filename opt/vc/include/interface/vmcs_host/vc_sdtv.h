@@ -38,7 +38,8 @@ typedef enum SDTV_COLOUR_
 {
    SDTV_COLOUR_UNKNOWN = 0x0,
    SDTV_COLOUR_RGB     = 0x4,
-   SDTV_COLOUR_YPRPB   = 0x8
+   SDTV_COLOUR_YPRPB   = 0x8,
+   SDTV_COLOUR_FORCE_32BIT    = 0x80000000
 } SDTV_COLOUR_T;
 /** operation mode */
 typedef enum SDTV_MODE_T_
@@ -56,7 +57,8 @@ typedef enum SDTV_MODE_T_
    SDTV_MODE_YPRPB_576i = (SDTV_MODE_PAL  | SDTV_COLOUR_YPRPB),
    SDTV_MODE_RGB_576i   = (SDTV_MODE_PAL  | SDTV_COLOUR_RGB),
 
-   SDTV_MODE_OFF        = 0xf0
+   SDTV_MODE_OFF        = 0xf0,
+   SDTV_MODE_FORCE_32BIT = 0x80000000
 } SDTV_MODE_T;
 
 /** Different aspect ratios */
@@ -66,7 +68,8 @@ typedef enum SDTV_ASPECT_T_
    SDTV_ASPECT_UNKNOWN  = 0, /**<Unknown */
    SDTV_ASPECT_4_3      = 1, /**<4:3 */
    SDTV_ASPECT_14_9     = 2, /**<14:9 */
-   SDTV_ASPECT_16_9     = 3  /**<16:9 */
+   SDTV_ASPECT_16_9     = 3, /**<16:9 */
+   SDTV_ASPECTFORCE_32BIT = 0x80000000
 } SDTV_ASPECT_T;
 
 /** SDTV power on option */
@@ -94,8 +97,24 @@ typedef enum
    SDTV_CP_WSS_COPYFREE      = 10, /**<WSS no restriction */
    SDTV_CP_WSS_COPYRIGHT_COPYFREE = 11, /**<WSS copyright asserted */
    SDTV_CP_WSS_NOCOPY        = 12, /**<WSS copying restricted */
-   SDTV_CP_WSS_COPYRIGHT_NOCOPY = 13 /**<WSS copying restriced, copyright asserted */
+   SDTV_CP_WSS_COPYRIGHT_NOCOPY = 13, /**<WSS copying restriced, copyright asserted */
+   SDTV_CP_FORCE_32BIT = 0x80000000
 } SDTV_CP_MODE_T;
+
+/**
+ * SDTV internal state
+ */
+typedef struct {
+   uint32_t state;
+   uint32_t width;
+   uint32_t height;
+   uint16_t frame_rate;
+   uint16_t scan_mode;
+   SDTV_MODE_T mode;
+   SDTV_OPTIONS_T display_options;
+   SDTV_COLOUR_T colour;
+   SDTV_CP_MODE_T cp_mode;
+} SDTV_DISPLAY_STATE_T;
 
 /**
  * SDTV notifications
@@ -103,12 +122,13 @@ typedef enum
 typedef enum 
 {
    VC_SDTV_UNPLUGGED          = 1 << 16, /**<SDTV cable unplugged, subject to platform support */
-   VC_SDTV_STANDBY            = 1 << 17, /**<SDTV cable is plugged in */
+   VC_SDTV_ATTACHED           = 1 << 17, /**<SDTV cable is plugged in */
    VC_SDTV_NTSC               = 1 << 18, /**<SDTV is in NTSC mode */
    VC_SDTV_PAL                = 1 << 19, /**<SDTV is in PAL mode */
    VC_SDTV_CP_INACTIVE        = 1 << 20, /**<Copy protection disabled */
    VC_SDTV_CP_ACTIVE          = 1 << 21  /**<Copy protection enabled */
 } VC_SDTV_NOTIFY_T;
+#define VC_SDTV_STANDBY (VC_SDTV_ATTACHED) /* For backward code compatibility, to be consistent with HDMI */
 
 /**
  * Callback reason and arguments from vec middleware

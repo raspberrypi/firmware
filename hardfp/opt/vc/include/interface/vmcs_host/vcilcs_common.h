@@ -25,6 +25,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+// OpenMAX IL Component Service common - Host side header
+
 typedef struct {
    OMX_U32 port;
    IL_FUNCTION_T func;

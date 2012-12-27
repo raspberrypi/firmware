@@ -130,6 +130,8 @@ VCHPRE_ void vc_tv_unregister_callback(TVSERVICE_CALLBACK_T callback);
  * Host applications should call this function right after registering
  * a callback in case any notifications are missed.
  *
+ * Now deprecated - use vc_tv_get_display_state instead
+ *
  * @param pointer to TV_GET_STATE_RESP_T
  *
  * @return zero if the command is sent successfully, non zero otherwise
@@ -137,6 +139,21 @@ VCHPRE_ void vc_tv_unregister_callback(TVSERVICE_CALLBACK_T callback);
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_get_state(TV_GET_STATE_RESP_T *tvstate);
+
+/**
+ * <DFN>vc_tv_get_display_state</DFN> is used to obtain the current TV display
+ * state. This function supersedes vc_tv_get_state (which is only kept for
+ * backward compatibility.
+ * Host applications should call this function right after registering
+ * a callback in case any notifications are missed.
+ *
+ * @param pointer to TV_DISPLAY_STATE_T
+ *
+ * @return zero if the command is sent successfully, non zero otherwise
+ * If the command fails to be sent, passed in state is unchanged
+ *
+ */
+VCHPRE_ int VCHPOST_ vc_tv_get_display_state(TV_DISPLAY_STATE_T *tvstate);
 
 /**
  * Use <DFN>vc_tv_hdmi_power_on_preferred</DFN> if you don't care what resolutions
@@ -203,7 +220,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_3d(uint32_t width, uint32_t height
  *
  * @return same as <DFN>vc_tv_hdmi_power_on_preferred</DFN>
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_new(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
 
 /**
  * <DFN>vc_tv_sdtv_power_on</DFN> is used to turn on analogue TV. HDMI will
@@ -250,12 +267,11 @@ VCHPRE_ int VCHPOST_ vc_tv_power_off( void );
  *         zero means no modes (no EDID or cable unplugged)
  *
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
-                                                    TV_SUPPORTED_MODE_T *supported_modes,
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_new(HDMI_RES_GROUP_T group,
+                                                    TV_SUPPORTED_MODE_NEW_T *supported_modes,
                                                     uint32_t max_supported_modes,
                                                     HDMI_RES_GROUP_T *preferred_group,
                                                     uint32_t *preferred_mode);
-
 /**
  * <DFN>vc_tv_hdmi_mode_supported</DFN> is used to query whether a particular mode
  * is supported or not.
@@ -454,28 +470,20 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_attached(uint32_t attached);
  * Sets one of the HDMI properties. HDMI properties persist
  * between HDMI power on/off
  *
- * @param property type [in]
- *
- * @param param1 of property [in]
- *
- * @param param2 of property [in]
+ * @param property [in]
  *
  * @return zero if successful, non-zero otherwise
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property(uint32_t property, uint32_t param1, uint32_t param2);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property(const HDMI_PROPERTY_PARAM_T *property);
 
 /**
  * Gets the current value of an HDMI property.
  *
- * @param property type [in]
+ * @param property [in/out]
  *
- * @param pointer to param1 [out]
- *
- * @param pointer to param2 [out]
- * 
  * @return zero if success (param1/param2 will be set), non-zero otherwise (param1/param2 will not be set)
  */
-VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(uint32_t property, uint32_t *param1, uint32_t *param2);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(HDMI_PROPERTY_PARAM_T *property);
 
 /**
  * Converts the notification reason to a string.
@@ -483,5 +491,15 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(uint32_t property, uint32_t *param1
  * @param reason is the notification reason
  * @return  The notification reason as a string.
  */
-VCHPRE_ const char* vc_tv_notifcation_name(VC_HDMI_NOTIFY_T reason);
+VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
+
+// temporary: maintain backwards compatibility
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
+                                                    TV_SUPPORTED_MODE_T *supported_modes,
+                                                    uint32_t max_supported_modes,
+                                                    HDMI_RES_GROUP_T *preferred_group,
+                                                    uint32_t *preferred_mode);
+// temporary: maintain backwards compatibility
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
+
 #endif

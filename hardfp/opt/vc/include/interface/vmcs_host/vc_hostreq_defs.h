@@ -30,6 +30,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "vcinclude/common.h"
 
+#define VC_HOSTREQ_VER 1
+
 /* Types and constants common across the both ends of the interface */
 #define VC_HRMAX_CMD_DATA        512
 #define VC_HRMAX_VIBRATOR_SEQ    (VC_HRMAX_CMD_DATA/4)

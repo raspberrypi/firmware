@@ -149,13 +149,15 @@ extern "C" {
 #include "interface/vcos/vcos_types.h"
 
 #ifdef __COVERITY__
+#include "interface/vcos/user_nodefs.h"
+
 extern void __coverity_panic__(void);
 #undef VCOS_ASSERT_BKPT
 #define VCOS_ASSERT_BKPT __coverity_panic__()
 #endif
 
 /*
- * ANDROID should NOT be defined for files built for Videcore, but currently it
+ * ANDROID should NOT be defined for files built for Videocore, but currently it
  * is. FIXME When that's fixed, remove the __VIDEOCORE__ band-aid.
  */
 #if (defined(ANDROID) && !defined(__VIDEOCORE__))
@@ -210,6 +212,16 @@ extern void logging_assert_dump(void);
 #endif
 
 #if !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS)
+#define VCOS_ASSERT_ENABLED 1
+#define VCOS_VERIFY_ENABLED 1
+#else
+#define VCOS_ASSERT_ENABLED 0
+#define VCOS_VERIFY_ENABLED 0
+#endif
+
+#define VCOS_DEMAND_ENABLED 1
+
+#if VCOS_ASSERT_ENABLED
 
 #ifndef vcos_assert
 #define vcos_assert(cond) \
@@ -221,7 +233,7 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT) )
 #endif
 
-#else  /* !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS) */
+#else  /* VCOS_ASSERT_ENABLED */
 
 #ifndef vcos_assert
 #define vcos_assert(cond) (void)0
@@ -231,9 +243,10 @@ extern void logging_assert_dump(void);
 #define vcos_assert_msg(cond, ...) (void)0
 #endif
 
-#endif /* !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS) */
+#endif /* VCOS_ASSERT_ENABLED */
 
-#if !defined(NDEBUG)
+
+#if VCOS_DEMAND_ENABLED
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -245,17 +258,7 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT, vcos_abort()) )
 #endif
 
-#ifndef vcos_verify
-#define vcos_verify(cond) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#ifndef vcos_verify_msg
-#define vcos_verify_msg(cond, ...) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#else  /* !defined(NDEBUG) */
+#else  /* VCOS_DEMAND_ENABLED */
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -267,6 +270,23 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : vcos_abort() )
 #endif
 
+#endif /* VCOS_DEMAND_ENABLED */
+
+
+#if VCOS_VERIFY_ENABLED
+
+#ifndef vcos_verify
+#define vcos_verify(cond) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#ifndef vcos_verify_msg
+#define vcos_verify_msg(cond, ...) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#else /* VCOS_VERIFY_ENABLED */
+
 #ifndef vcos_verify
 #define vcos_verify(cond) (cond)
 #endif
@@ -275,7 +295,8 @@ extern void logging_assert_dump(void);
 #define vcos_verify_msg(cond, ...) (cond)
 #endif
 
-#endif /* !defined(NDEBUG) */
+#endif /* VCOS_VERIFY_ENABLED */
+
 
 #ifndef vcos_static_assert
 #if defined(__GNUC__)

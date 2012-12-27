@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+VideoCore OS Abstraction Layer - pthreads types
+=============================================================================*/
+
 /* Do not include this file directly - instead include it via vcos.h */
 
 /** @file

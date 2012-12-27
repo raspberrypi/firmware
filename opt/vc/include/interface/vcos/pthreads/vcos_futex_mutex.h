@@ -25,6 +25,11 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+FIXME: This code should be moved to 'linux', it is linux-specific and not generic
+on 'pthreads'.
+============================================================================*/
+
 #ifndef VCOS_MUTEX_FROM_FUTEX_H
 #define VCOS_MUTEX_FROM_FUTEX_H
 

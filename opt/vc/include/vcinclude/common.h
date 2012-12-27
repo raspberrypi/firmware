@@ -37,6 +37,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vc/intrinsics.h>
 #endif
 
+#ifdef __COVERITY__
+#ifndef _Rarely
+#define _Rarely(x) (x)
+#endif
+#ifndef _Usually
+#define _Usually(x) (x)
+#endif
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

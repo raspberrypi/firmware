@@ -34,6 +34,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "vcinclude/common.h"
 #include "interface/vchi/message_drivers/message.h"
 #include "vc_hdmi.h"
+#include "vc_sdtv.h"
+
+#define VC_TVSERVICE_VER   1
 
 #define TVSERVICE_MSGFIFO_SIZE 1024
 #define TVSERVICE_CLIENT_NAME MAKE_FOURCC("TVSV")
@@ -66,12 +69,11 @@ typedef enum {
    VC_TV_SET_ATTACHED,
    VC_TV_SET_PROP,
    VC_TV_GET_PROP,
+   VC_TV_GET_DISPLAY_STATE,
+   VC_TV_QUERY_SUPPORTED_MODES_ACTUAL,
    //Add more commands here
    VC_TV_END_OF_LIST
 } VC_TV_CMD_CODE_T;
-
-//If you change this, remember to change the padding in TV_QUERY_SUPPORTED_MODES parameter
-#define TV_MAX_SUPPORTED_MODES 60
 
 //Parameters for each command (padded to multiple of 16 bytes)
 //See vc_hdmi.h and vc_sdtv.h for details
@@ -83,6 +85,7 @@ typedef enum {
 //       current height
 //       current refresh rate
 //       current scan mode
+
 typedef struct {
    uint32_t state;     /**<TV state is a union of bitmask of VC_HDMI_NOTIFY_T and VC_SDTV_NOTIFY_T */
    uint32_t width;     /**<Current display width if TV is on */
@@ -90,7 +93,6 @@ typedef struct {
    uint16_t frame_rate;/**<Current refresh rate is TV is on */
    uint16_t scan_mode; /**<Current scanmode 0 for progressive, 1 for interlaced */
 } TV_GET_STATE_RESP_T;
-
 
 //Generic single returned interpreted based on the command
 typedef struct {
@@ -138,12 +140,30 @@ typedef struct {
 //Reply: none
 
 //TV_QUERY_SUPPORTED_MODES
-//Parameters: standard (CEA/DMT)
-//Reply: how many modes there are and the array of supported modes, and the preferred modes
-//       (sent back via bulk transfer)
+//Parameters: standard (CEA/DMT) sent as uint32_t
+//Reply: how many modes there are in this group,
+//       preferred resolution
+
+//TV_QUERY_SUPPORTED_MODES_ACTUAL (This  downloads the array of supported modes)
+//Parameters: standard (CEA/DMT) sent as uint32_t,
+//            table size supplied
+//Reply: how many modes which will be returned,
+//       prefer resolution,
+//       the actual array of modes (via bulk transfer)
+
 typedef struct {
-   uint32_t group;
-} TV_QUERY_SUPPORTED_MODES_PARAM_T;
+   uint32_t scan_mode    : 1; /**<1 is interlaced, 0 for progressive */
+   uint32_t native       : 1; /**<1 means native mode, 0 otherwise */
+   uint32_t group        : 3; /**<group */
+   uint32_t code         : 7; /**<mode code */
+   uint32_t pixel_rep    : 3; /**<pixel repetition (zero means no repetition)*/
+   uint32_t aspect_ratio : 5; /**<aspect ratio of the format */
+   uint16_t frame_rate;    /**<frame rate */
+   uint16_t width;         /**<frame width */
+   uint16_t height;        /**<frame height */
+   uint32_t pixel_freq;    /**<pixel clock in Hz */
+   uint32_t struct_3d_mask;/**<3D structure supported for this mode, only valid if group == CEA. This is a bitmask of HDMI_3D_STRUCT_T */
+} TV_SUPPORTED_MODE_NEW_T;
 
 typedef struct {
    uint16_t scan_mode : 1; /**<1 is interlaced, 0 for progressive */
@@ -155,11 +175,16 @@ typedef struct {
 } TV_SUPPORTED_MODE_T;
 
 typedef struct {
-   TV_SUPPORTED_MODE_T supported_modes[TV_MAX_SUPPORTED_MODES];
    uint32_t num_supported_modes;
    uint32_t preferred_group;
    uint32_t preferred_mode;
 } TV_QUERY_SUPPORTED_MODES_RESP_T;
+
+//num_supported_modes is the no. of modes available in that group for TV_QUERY_SUPPORTED_MODES
+//and no. of modes which will be bulk sent across in TV_QUERY_SUPPORTED_MODES_ACTUAL
+
+//For TV_QUERY_SUPPORTED_MODES_ACTUAL, there will be a separate bulk receive
+//containing the supported modes array
 
 //TV_QUERY_MODE_SUPPORT
 //Parameters: stardard, mode
@@ -291,22 +316,26 @@ typedef struct {
 //Parameters: uint32_t attached or not (0 = hotplug low, 1 = hotplug high)
 
 //TV_SET_PROP
-//Parameters: parameter type, param1, param2
+//Parameters: HDMI_PROPERTY_PARAM_T
 //Reply: 0 = set successful, non-zero if error (int32_t) 
-typedef struct {
-   uint32_t prop; /**<HDMI_PROPERTY_T */
-   uint32_t param1; /**<param 1 */
-   uint32_t param2; /**<param 2 */
-} TV_SET_PROP_PARAM_T;
 
 //TV_GET_PROP
-//Parameters: parameter type (uint32_t)
+//Parameters: parameter type (sent as uint32_t)
 //Reply param1/param2 of the passed in property and return code
 typedef struct {
    int32_t  ret; /**<Return code */
-   uint32_t prop; /**<HDMI_PROPERTY_T */
-   uint32_t param1; /**<param 1 */
-   uint32_t param2; /**<param 2 */
+   HDMI_PROPERTY_PARAM_T property; /**<HDMI_PROPERTY_PARAM_T */
 } TV_GET_PROP_PARAM_T;
+
+//TV_GET_DISPLAY_STATE
+//Parameters: none
+//Return TV display state
+typedef struct {
+   uint32_t state;               /** This will be the state of HDMI | SDTV */
+   union {
+      SDTV_DISPLAY_STATE_T sdtv; /** If SDTV is active, this is the state of SDTV */
+      HDMI_DISPLAY_STATE_T hdmi; /** If HDMI is active, this is the state of HDMI */
+   } display;
+} TV_DISPLAY_STATE_T;
 
 #endif

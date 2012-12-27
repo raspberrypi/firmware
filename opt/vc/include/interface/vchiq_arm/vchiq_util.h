@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef VCHIQ_UTIL_H
 #define VCHIQ_UTIL_H
@@ -46,6 +46,7 @@ extern int  vchiu_queue_init(VCHIU_QUEUE_T *queue, int size);
 extern void vchiu_queue_delete(VCHIU_QUEUE_T *queue);
 
 extern int vchiu_queue_is_empty(VCHIU_QUEUE_T *queue);
+extern int vchiu_queue_is_full(VCHIU_QUEUE_T *queue);
 
 extern void vchiu_queue_push(VCHIU_QUEUE_T *queue, VCHIQ_HEADER_T *header);
 

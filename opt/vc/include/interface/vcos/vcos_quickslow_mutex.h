@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*=============================================================================
+VideoCore OS Abstraction Layer - mutex public header file
+=============================================================================*/
+
 #ifndef VCOS_QUICKSLOW_MUTEX_H
 #define VCOS_QUICKSLOW_MUTEX_H
 

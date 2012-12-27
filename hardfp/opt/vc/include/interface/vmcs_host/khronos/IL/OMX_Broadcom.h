@@ -1433,20 +1433,20 @@ IDLE, then taken back to LOADED, the profile increased and the
 component taken back to IDLE.
 */
 
-typedef enum OMX_PARAM_CAMERAUSECASE {
+typedef enum OMX_CONFIG_CAMERAUSECASE {
    OMX_CameraUseCaseAuto,
    OMX_CameraUseCaseVideo,
    OMX_CameraUseCaseStills,
    OMX_CameraUseCaseKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_CameraUseCaseVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_CameraUseCaseMax = 0x7FFFFFFF
-} OMX_PARAM_CAMERAUSECASE;
+} OMX_CONFIG_CAMERAUSECASE;
 
-typedef struct OMX_PARAM_CAMERAUSECASETYPE {
+typedef struct OMX_CONFIG_CAMERAUSECASETYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
-   OMX_PARAM_CAMERAUSECASE eUseCase;
-} OMX_PARAM_CAMERAUSECASETYPE;
+   OMX_CONFIG_CAMERAUSECASE eUseCase;
+} OMX_CONFIG_CAMERAUSECASETYPE;
 
 /* OMX_IndexParamBrcmDisableProprietaryTunnels: Disabling proprietary tunnelling */
 typedef struct OMX_PARAM_BRCMDISABLEPROPRIETARYTUNNELSTYPE {
@@ -2165,6 +2165,11 @@ typedef enum OMX_COLORSPACETYPE
    OMX_COLORSPACE_JPEG_JFIF,
    OMX_COLORSPACE_ITU_R_BT601,
    OMX_COLORSPACE_ITU_R_BT709,
+   OMX_COLORSPACE_FCC,
+   OMX_COLORSPACE_SMPTE240M,
+   OMX_COLORSPACE_BT470_2_M,
+   OMX_COLORSPACE_BT470_2_BG,
+   OMX_COLORSPACE_JFIF_Y16_255,
    OMX_COLORSPACE_MAX = 0x7FFFFFFF
 } OMX_COLORSPACETYPE;
 
@@ -2172,8 +2177,26 @@ typedef struct OMX_PARAM_COLORSPACETYPE
 {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
    OMX_COLORSPACETYPE eColorSpace;
 } OMX_PARAM_COLORSPACETYPE;
+
+typedef enum OMX_CAPTURESTATETYPE
+{
+   OMX_NotCapturing,
+   OMX_CaptureStarted,
+   OMX_CaptureComplete,
+   OMX_CaptureMax = 0x7FFFFFFF
+} OMX_CAPTURESTATETYPE;
+
+typedef struct OMX_PARAM_CAPTURESTATETYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_CAPTURESTATETYPE eCaptureState;
+} OMX_PARAM_CAPTURESTATETYPE;
+
 /*
 Provides information on the colour space that's in use during image/video processing.
 */
@@ -2212,6 +2235,61 @@ the postprocessor stage of the ISP.
 This control can be used to control whether loadable modules used a dedicated memory
 pool or use heap allocated memory.
 */
+
+typedef struct OMX_PARAM_BRCMCONFIGFILETYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual URI name */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 fileSize;                   /**< Size of complete file data */
+} OMX_PARAM_BRCMCONFIGFILETYPE;
+
+typedef struct OMX_PARAM_BRCMCONFIGFILECHUNKTYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual chunk data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 size;                       /**< Number of bytes being transferred in this chunk */
+   OMX_U32 offset;                     /**< Offset of this chunk in the file */
+   OMX_U8 data[1];                     /**< Chunk data */
+} OMX_PARAM_BRCMCONFIGFILECHUNKTYPE;
+
+typedef struct OMX_PARAM_BRCMFRAMERATERANGETYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual chunk data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 nPortIndex;
+   OMX_U32 xFramerateLow;              /**< Low end of framerate range. Q16 format */
+   OMX_U32 xFramerateHigh;             /**< High end of framerate range. Q16 format */
+} OMX_PARAM_BRCMFRAMERATERANGETYPE;
+
+typedef struct OMX_PARAM_S32TYPE {
+    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
+    OMX_S32 nS32;                     /**< S32 value */
+} OMX_PARAM_S32TYPE;
+
+typedef struct OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 size_wanted;     /**< Input. Zero size means internal video decoder buffer,
+                                 mem_handle and phys_addr not returned in this case */
+   OMX_U32 protect;         /**< Input. 1 = protect, 0 = unprotect */
+
+   OMX_U32 mem_handle;      /**< Output. Handle for protected buffer */
+   OMX_PTR phys_addr;       /**< Output. Physical memory address of protected buffer */
+} OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE;
+
+typedef struct OMX_CONFIG_ZEROSHUTTERLAGTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 bZeroShutterMode;        /**< Select ZSL mode from the camera. */
+   OMX_U32 bConcurrentCapture;      /**< Perform concurrent captures for full ZSL. */
+
+} OMX_CONFIG_ZEROSHUTTERLAGTYPE;
 
 #endif
 /* File EOF */

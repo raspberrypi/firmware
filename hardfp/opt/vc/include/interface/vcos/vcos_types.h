@@ -34,6 +34,7 @@ VideoCore OS Abstraction Layer - basic types
 
 #define VCOS_VERSION   1
 
+#include <stddef.h>
 #include "vcos_platform_types.h"
 
 #if !defined(VCOSPRE_) || !defined(VCOSPOST_)

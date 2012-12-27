@@ -25,6 +25,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*
+ * \file
+ *
+ * \brief Contains the protypes for the interface functions.
+*/
+
 #ifndef CONNECTION_H_
 #define CONNECTION_H_
 

@@ -25,6 +25,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+// Contains the #defines for the number of servers / clients etc, these can be
+// over-ridden from the platform makefile if needed
+
+
 #ifndef VCHI_CFG_H_
 #define VCHI_CFG_H_
 
