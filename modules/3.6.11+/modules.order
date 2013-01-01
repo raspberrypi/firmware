@@ -154,13 +154,16 @@ kernel/drivers/net/usb/net1080.ko
 kernel/drivers/net/usb/plusb.ko
 kernel/drivers/net/usb/rndis_host.ko
 kernel/drivers/net/usb/cdc_subset.ko
+kernel/drivers/net/usb/zaurus.ko
 kernel/drivers/net/usb/mcs7830.ko
 kernel/drivers/net/usb/int51x1.ko
 kernel/drivers/net/usb/kalmia.ko
 kernel/drivers/net/usb/ipheth.ko
 kernel/drivers/net/usb/sierra_net.ko
 kernel/drivers/net/usb/cx82310_eth.ko
+kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/net/usb/lg-vl600.ko
+kernel/drivers/net/usb/qmi_wwan.ko
 kernel/drivers/net/bonding/bonding.ko
 kernel/drivers/net/macvlan.ko
 kernel/drivers/net/netconsole.ko
@@ -222,6 +225,7 @@ kernel/drivers/usb/misc/usbsevseg.ko
 kernel/drivers/usb/misc/yurex.ko
 kernel/drivers/usb/mon/usbmon.ko
 kernel/drivers/usb/class/cdc-acm.ko
+kernel/drivers/usb/class/cdc-wdm.ko
 kernel/drivers/usb/image/mdc800.ko
 kernel/drivers/usb/image/microtek.ko
 kernel/drivers/usb/serial/usbserial.ko

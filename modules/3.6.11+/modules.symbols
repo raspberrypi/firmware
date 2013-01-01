@@ -453,6 +453,7 @@ alias symbol:xt_unregister_matches x_tables
 alias symbol:btmrvl_register_hdev btmrvl
 alias symbol:media_entity_init media
 alias symbol:irlmp_register_service irda
+alias symbol:usb_cdc_wdm_register cdc_wdm
 alias symbol:iscsi_update_cmdsn libiscsi
 alias symbol:__gameport_register_driver gameport
 alias symbol:__ieee80211_get_tx_led_name mac80211

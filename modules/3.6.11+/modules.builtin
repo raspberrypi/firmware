@@ -65,7 +65,6 @@ kernel/drivers/mmc/host/sdhci-pltfm.ko
 kernel/drivers/net/mii.ko
 kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/usbnet.ko
-kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/scsi_transport_iscsi.ko
 kernel/drivers/scsi/sd_mod.ko

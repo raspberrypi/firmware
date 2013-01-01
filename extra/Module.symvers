@@ -1509,6 +1509,7 @@
 0x60b65c70	crypto_ahash_digest	vmlinux	EXPORT_SYMBOL_GPL
 0x3de9cae1	crypto_remove_final	vmlinux	EXPORT_SYMBOL_GPL
 0x07d3647c	irlmp_register_service	net/irda/irda	EXPORT_SYMBOL
+0x848f3736	usb_cdc_wdm_register	drivers/usb/class/cdc-wdm	EXPORT_SYMBOL
 0xb76de7f8	iscsi_update_cmdsn	drivers/scsi/libiscsi	EXPORT_SYMBOL_GPL
 0x82ed4ded	svc_authenticate	vmlinux	EXPORT_SYMBOL_GPL
 0xe7135407	rtnl_set_sk_err	vmlinux	EXPORT_SYMBOL
