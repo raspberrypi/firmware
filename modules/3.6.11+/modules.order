@@ -703,6 +703,8 @@ kernel/drivers/staging/media/lirc/lirc_ttusbir.ko
 kernel/drivers/staging/winbond/w35und.ko
 kernel/drivers/staging/wlan-ng/prism2_usb.ko
 kernel/drivers/staging/rtl8712/r8712u.ko
+kernel/drivers/staging/zram/zram.ko
+kernel/drivers/staging/zsmalloc/zsmalloc.ko
 kernel/drivers/connector/cn.ko
 kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv.ko
@@ -1021,6 +1023,7 @@ kernel/net/bluetooth/bnep/bnep.ko
 kernel/net/bluetooth/hidp/hidp.ko
 kernel/net/l2tp/l2tp_core.ko
 kernel/net/mac80211/mac80211.ko
+kernel/net/rfkill/rfkill.ko
 kernel/net/9p/9pnet.ko
 kernel/net/wimax/wimax.ko
 kernel/net/nfc/nfc.ko
