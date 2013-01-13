@@ -571,7 +571,11 @@ kernel/drivers/media/dvb/dvb-core/dvb-core.ko:
 kernel/drivers/media/dvb/frontends/dib3000mb.ko:
 kernel/drivers/media/dvb/frontends/dib3000mc.ko: kernel/drivers/media/dvb/frontends/dibx000_common.ko
 kernel/drivers/media/dvb/frontends/dibx000_common.ko:
+kernel/drivers/media/dvb/frontends/dib7000m.ko: kernel/drivers/media/dvb/frontends/dibx000_common.ko
+kernel/drivers/media/dvb/frontends/dib7000p.ko: kernel/drivers/media/dvb/frontends/dibx000_common.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko
+kernel/drivers/media/dvb/frontends/dib9000.ko: kernel/drivers/media/dvb/frontends/dibx000_common.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko
 kernel/drivers/media/dvb/frontends/zl10353.ko:
+kernel/drivers/media/dvb/frontends/tda10048.ko:
 kernel/drivers/media/dvb/frontends/af9013.ko:
 kernel/drivers/media/dvb/frontends/ec100.ko:
 kernel/drivers/media/dvb/frontends/it913x-fe.ko:
@@ -594,9 +598,9 @@ kernel/drivers/media/dvb/dvb-usb/dvb-usb-m920x.ko: kernel/drivers/media/dvb/dvb-
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-gl861.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-au6610.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-digitv.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
-kernel/drivers/media/dvb/dvb-usb/dvb-usb-cxusb.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
+kernel/drivers/media/dvb/dvb-usb/dvb-usb-cxusb.ko: kernel/drivers/media/dvb/frontends/dib7000p.ko kernel/drivers/media/dvb/frontends/dibx000_common.ko kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-ttusb2.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
-kernel/drivers/media/dvb/dvb-usb/dvb-usb-dib0700.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/dvb/frontends/dib3000mc.ko kernel/drivers/media/rc/rc-core.ko kernel/drivers/media/dvb/frontends/dibx000_common.ko
+kernel/drivers/media/dvb/dvb-usb/dvb-usb-dib0700.ko: kernel/drivers/media/dvb/frontends/dib7000p.ko kernel/drivers/media/dvb/frontends/dib7000m.ko kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/frontends/dib9000.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/dvb/frontends/dib3000mc.ko kernel/drivers/media/rc/rc-core.ko kernel/drivers/media/dvb/frontends/dibx000_common.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-opera.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9005.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9005-remote.ko:
@@ -619,6 +623,9 @@ kernel/drivers/media/dvb/dvb-usb/mxl111sf-demod.ko:
 kernel/drivers/media/dvb/dvb-usb/mxl111sf-tuner.ko:
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-rtl28xxu.ko: kernel/drivers/media/dvb/frontends/rtl2830.ko kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9035.ko: kernel/drivers/media/dvb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
+kernel/drivers/media/dvb/siano/smsmdtv.ko: kernel/drivers/media/rc/rc-core.ko
+kernel/drivers/media/dvb/siano/smsdvb.ko: kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/dvb/siano/smsmdtv.ko kernel/drivers/media/rc/rc-core.ko
+kernel/drivers/media/dvb/siano/smsusb.ko: kernel/drivers/media/dvb/siano/smsmdtv.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko:
 kernel/drivers/md/raid1.ko: kernel/drivers/md/md-mod.ko
 kernel/drivers/md/raid10.ko: kernel/drivers/md/md-mod.ko
@@ -851,7 +858,9 @@ kernel/net/netfilter/xt_CLASSIFY.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_CT.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_DSCP.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_HL.ko: kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_HMARK.ko: kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_LED.ko: kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_LOG.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_NFLOG.ko: kernel/net/netfilter/x_tables.ko kernel/net/netfilter/nfnetlink_log.ko kernel/net/netfilter/nfnetlink.ko
 kernel/net/netfilter/xt_NFQUEUE.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_NOTRACK.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko

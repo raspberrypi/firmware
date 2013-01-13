@@ -571,7 +571,11 @@ kernel/drivers/media/dvb/dvb-core/dvb-core.ko
 kernel/drivers/media/dvb/frontends/dib3000mb.ko
 kernel/drivers/media/dvb/frontends/dib3000mc.ko
 kernel/drivers/media/dvb/frontends/dibx000_common.ko
+kernel/drivers/media/dvb/frontends/dib7000m.ko
+kernel/drivers/media/dvb/frontends/dib7000p.ko
+kernel/drivers/media/dvb/frontends/dib9000.ko
 kernel/drivers/media/dvb/frontends/zl10353.ko
+kernel/drivers/media/dvb/frontends/tda10048.ko
 kernel/drivers/media/dvb/frontends/af9013.ko
 kernel/drivers/media/dvb/frontends/ec100.ko
 kernel/drivers/media/dvb/frontends/it913x-fe.ko
@@ -619,6 +623,9 @@ kernel/drivers/media/dvb/dvb-usb/mxl111sf-demod.ko
 kernel/drivers/media/dvb/dvb-usb/mxl111sf-tuner.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-rtl28xxu.ko
 kernel/drivers/media/dvb/dvb-usb/dvb-usb-af9035.ko
+kernel/drivers/media/dvb/siano/smsmdtv.ko
+kernel/drivers/media/dvb/siano/smsdvb.ko
+kernel/drivers/media/dvb/siano/smsusb.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko
 kernel/drivers/md/raid1.ko
 kernel/drivers/md/raid10.ko
@@ -851,7 +858,9 @@ kernel/net/netfilter/xt_CLASSIFY.ko
 kernel/net/netfilter/xt_CT.ko
 kernel/net/netfilter/xt_DSCP.ko
 kernel/net/netfilter/xt_HL.ko
+kernel/net/netfilter/xt_HMARK.ko
 kernel/net/netfilter/xt_LED.ko
+kernel/net/netfilter/xt_LOG.ko
 kernel/net/netfilter/xt_NFLOG.ko
 kernel/net/netfilter/xt_NFQUEUE.ko
 kernel/net/netfilter/xt_NOTRACK.ko
