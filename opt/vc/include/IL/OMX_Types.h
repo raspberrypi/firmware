@@ -129,6 +129,11 @@ extern "C" {
   * 
   */ 
 
+#if defined(__GNUC__)
+#include <stdint.h>
+#define STDINT_H_AVAILABLE
+#endif
+
 /** OMX_U8 is an 8 bit unsigned quantity that is byte aligned */
 typedef unsigned char OMX_U8;
 
@@ -142,10 +147,18 @@ typedef unsigned short OMX_U16;
 typedef signed short OMX_S16;
 
 /** OMX_U32 is a 32 bit unsigned quantity that is 32 bit word aligned */
+#ifdef STDINT_H_AVAILABLE
+typedef uint32_t OMX_U32;
+#else
 typedef unsigned long OMX_U32;
+#endif
 
 /** OMX_S32 is a 32 bit signed quantity that is 32 bit word aligned */
+#ifdef STDINT_H_AVAILABLE
+typedef int32_t OMX_S32;
+#else
 typedef signed long OMX_S32;
+#endif
 
 
 /* Users with compilers that cannot accept the "long long" designation should
