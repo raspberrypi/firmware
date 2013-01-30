@@ -88,6 +88,8 @@ kernel/crypto/async_tx/async_pq.ko: kernel/crypto/async_tx/async_xor.ko kernel/c
 kernel/crypto/async_tx/async_raid6_recov.ko: kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
 kernel/drivers/video/backlight/lcd.ko:
 kernel/drivers/video/backlight/backlight.ko:
+kernel/drivers/char/hw_random/rng-core.ko:
+kernel/drivers/char/hw_random/bcm2708-rng.ko: kernel/drivers/char/hw_random/rng-core.ko
 kernel/drivers/block/pktcdvd.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/block/nbd.ko:
 kernel/drivers/block/cryptoloop.ko:
@@ -1037,6 +1039,8 @@ kernel/net/ipv4/netfilter/arp_tables.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/arpt_mangle.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/arptable_filter.ko: kernel/net/ipv4/netfilter/arp_tables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/ipip.ko: kernel/net/ipv4/tunnel4.ko
+kernel/net/ipv4/gre.ko:
+kernel/net/ipv4/ip_gre.ko: kernel/net/ipv4/gre.ko kernel/net/ipv6/ipv6.ko
 kernel/net/ipv4/ah4.ko:
 kernel/net/ipv4/esp4.ko:
 kernel/net/ipv4/ipcomp.ko: kernel/net/xfrm/xfrm_ipcomp.ko
@@ -1121,6 +1125,7 @@ kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfki
 kernel/net/rfkill/rfkill.ko:
 kernel/net/9p/9pnet.ko:
 kernel/net/wimax/wimax.ko: kernel/net/rfkill/rfkill.ko
+kernel/net/batman-adv/batman-adv.ko:
 kernel/net/nfc/nfc.ko:
 kernel/lib/crc-ccitt.ko:
 kernel/lib/crc7.ko:

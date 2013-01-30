@@ -308,6 +308,7 @@ alias symbol:ieee80211_disable_dyn_ps mac80211
 alias symbol:v4l2_int_device_try_attach_all v4l2_int_device
 alias symbol:ath9k_hw_reset_tsf ath9k_hw
 alias symbol:__lbtf_cmd libertas_tf
+alias symbol:hwrng_register rng_core
 alias symbol:nf_nat_need_gre nf_nat_proto_gre
 alias symbol:dvb_usb_device_init dvb_usb
 alias symbol:ath9k_hw_getrxfilter ath9k_hw
@@ -1072,6 +1073,7 @@ alias symbol:nf_ct_deliver_cached_events nf_conntrack
 alias symbol:rt2800_enable_radio rt2800lib
 alias symbol:dib8000_pid_filter dib8000
 alias symbol:dvb_ringbuffer_empty dvb_core
+alias symbol:hwrng_unregister rng_core
 alias symbol:xfrm6_rcv_spi ipv6
 alias symbol:snd_pcm_release_substream snd_pcm
 alias symbol:dm_dirty_log_destroy dm_log
@@ -1534,6 +1536,7 @@ alias symbol:ax25_rebuild_header ax25
 alias symbol:snd_ctl_rename_id snd
 alias symbol:rt2x00queue_unpause_queue rt2x00lib
 alias symbol:rt2x00lib_txdone rt2x00lib
+alias symbol:gre_del_protocol gre
 alias symbol:ath9k_hw_btcoex_disable ath9k_hw
 alias symbol:w1_touch_block wire
 alias symbol:dibusb_dib3000mc_tuner_attach dvb_usb_dibusb_common
@@ -2234,6 +2237,7 @@ alias symbol:qtree_delete_dquot quota_tree
 alias symbol:v4l2_ctrl_log_status videodev
 alias symbol:iscsi_conn_send_pdu libiscsi
 alias symbol:inet6_unregister_protosw ipv6
+alias symbol:gre_add_protocol gre
 alias symbol:dm_kcopyd_prepare_callback dm_mod
 alias symbol:ieee80211_tx_status mac80211
 alias symbol:snd_seq_set_queue_tempo snd_seq

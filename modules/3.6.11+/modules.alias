@@ -6075,6 +6075,9 @@ alias ip_nat_tftp nf_nat_tftp
 alias ip_nat iptable_nat
 alias net-pf-16-proto-5 ipt_ULOG
 alias netdev-tunl0 ipip
+alias netdev-gre0 ip_gre
+alias rtnl-link-gretap ip_gre
+alias rtnl-link-gre ip_gre
 alias xfrm-type-2-51 ah4
 alias xfrm-type-2-50 esp4
 alias xfrm-type-2-108 ipcomp
