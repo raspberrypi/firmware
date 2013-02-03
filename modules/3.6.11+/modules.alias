@@ -5094,6 +5094,9 @@ alias usb:v187Fp0100d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias usb:v187Fp0010d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias char-major-10-131 bcm2708_wdog
 alias char-major-10-130 bcm2708_wdog
+alias md-level-0 raid0
+alias md-raid0 raid0
+alias md-personality-2 raid0
 alias md-level-1 raid1
 alias md-raid1 raid1
 alias md-personality-3 raid1

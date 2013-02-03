@@ -713,6 +713,7 @@ kernel/drivers/media/dvb/siano/smsmdtv.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/siano/smsdvb.ko: kernel/drivers/media/dvb/dvb-core/dvb-core.ko kernel/drivers/media/dvb/siano/smsmdtv.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/dvb/siano/smsusb.ko: kernel/drivers/media/dvb/siano/smsmdtv.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko:
+kernel/drivers/md/raid0.ko: kernel/drivers/md/md-mod.ko
 kernel/drivers/md/raid1.ko: kernel/drivers/md/md-mod.ko
 kernel/drivers/md/raid10.ko: kernel/drivers/md/md-mod.ko
 kernel/drivers/md/raid456.ko: kernel/drivers/md/md-mod.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko

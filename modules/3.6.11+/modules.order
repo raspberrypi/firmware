@@ -713,6 +713,7 @@ kernel/drivers/media/dvb/siano/smsmdtv.ko
 kernel/drivers/media/dvb/siano/smsdvb.ko
 kernel/drivers/media/dvb/siano/smsusb.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko
+kernel/drivers/md/raid0.ko
 kernel/drivers/md/raid1.ko
 kernel/drivers/md/raid10.ko
 kernel/drivers/md/raid456.ko
