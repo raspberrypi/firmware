@@ -522,6 +522,7 @@
 0x88d372f4	snd_ctl_unregister_ioctl	sound/core/snd	EXPORT_SYMBOL
 0xa04cd6cd	skb_pull_rcsum	vmlinux	EXPORT_SYMBOL_GPL
 0x5f16ff29	__scsi_device_lookup_by_target	vmlinux	EXPORT_SYMBOL
+0xaf10d009	vchi_get_peer_version	vmlinux	EXPORT_SYMBOL
 0x9dc02767	nfs_instantiate	vmlinux	EXPORT_SYMBOL_GPL
 0xeed38436	malloc_sizes	vmlinux	EXPORT_SYMBOL
 0xce678ca7	tcp_fetch_timewait_stamp	vmlinux	EXPORT_SYMBOL_GPL

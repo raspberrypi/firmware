@@ -423,6 +423,7 @@
 0x4067c446	ssb_bus_resume	drivers/ssb/ssb	EXPORT_SYMBOL
 0x20c2af12	skb_pull_rcsum	vmlinux	EXPORT_SYMBOL_GPL
 0xf0eb0f72	__scsi_device_lookup_by_target	vmlinux	EXPORT_SYMBOL
+0xaf10d009	vchi_get_peer_version	vmlinux	EXPORT_SYMBOL
 0x2b8e4d22	nfs_instantiate	vmlinux	EXPORT_SYMBOL_GPL
 0xeed38436	malloc_sizes	vmlinux	EXPORT_SYMBOL
 0x3231426d	tcp_fetch_timewait_stamp	vmlinux	EXPORT_SYMBOL_GPL
