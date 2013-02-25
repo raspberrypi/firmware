@@ -802,6 +802,8 @@ kernel/drivers/staging/rtl8712/r8712u.ko:
 kernel/drivers/staging/vt6656/vt6656_stage.ko:
 kernel/drivers/staging/zram/zram.ko: kernel/drivers/staging/zsmalloc/zsmalloc.ko kernel/lib/lzo/lzo_decompress.ko kernel/lib/lzo/lzo_compress.ko
 kernel/drivers/staging/zsmalloc/zsmalloc.ko:
+kernel/drivers/staging/speakup/speakup_soft.ko: kernel/drivers/staging/speakup/speakup.ko
+kernel/drivers/staging/speakup/speakup.ko:
 kernel/drivers/connector/cn.ko:
 kernel/drivers/uio/uio.ko:
 kernel/drivers/uio/uio_pdrv.ko: kernel/drivers/uio/uio.ko
@@ -1122,6 +1124,7 @@ kernel/net/bluetooth/rfcomm/rfcomm.ko: kernel/net/bluetooth/bluetooth.ko kernel/
 kernel/net/bluetooth/bnep/bnep.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/net/bluetooth/hidp/hidp.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/net/l2tp/l2tp_core.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/sctp/sctp.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/net/rfkill/rfkill.ko:
 kernel/net/9p/9pnet.ko:

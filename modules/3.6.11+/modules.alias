@@ -6115,5 +6115,7 @@ alias net-pf-31 bluetooth
 alias bt-proto-3 rfcomm
 alias bt-proto-4 bnep
 alias bt-proto-6 hidp
+alias net-pf-10-proto-132 sctp
+alias net-pf-2-proto-132 sctp
 alias net-pf-16-proto-16-family-nfc nfc
 alias net-pf-39 nfc
