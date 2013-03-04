@@ -46,7 +46,7 @@ static int video_decode_test(char *filename)
    int status = 0;
    unsigned char *data = NULL;
    unsigned int data_len = 0;
-   int packet_size = 16<<10;   
+   int packet_size = 80<<10;
 
    memset(list, 0, sizeof(list));
    memset(tunnel, 0, sizeof(tunnel));
@@ -152,7 +152,7 @@ static int video_decode_test(char *filename)
                status = -12;
                break;
             }
-            
+
             ilclient_change_component_state(video_render, OMX_StateExecuting);
          }
          if(!data_len)
@@ -175,19 +175,18 @@ static int video_decode_test(char *filename)
             status = -6;
             break;
          }
-         
       }
 
       buf->nFilledLen = 0;
       buf->nFlags = OMX_BUFFERFLAG_TIME_UNKNOWN | OMX_BUFFERFLAG_EOS;
-      
+
       if(OMX_EmptyThisBuffer(ILC_GET_HANDLE(video_decode), buf) != OMX_ErrorNone)
          status = -20;
-      
+
       // wait for EOS from render
       ilclient_wait_for_event(video_render, OMX_EventBufferFlag, 90, 0, OMX_BUFFERFLAG_EOS, 0,
                               ILCLIENT_BUFFER_FLAG_EOS, 10000);
-      
+
       // need to flush the renderer to allow video_decode to disable its input port
       ilclient_flush_tunnels(tunnel, 0);
 
