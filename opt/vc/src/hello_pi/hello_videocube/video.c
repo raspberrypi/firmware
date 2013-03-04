@@ -72,7 +72,6 @@ void *video_decode_test(void* arg)
    int status = 0;
    unsigned char *data = NULL;
    unsigned int data_len = 0;
-   int find_start_codes = 0;
    int packet_size = 16<<10;   
 
    memset(list, 0, sizeof(list));
@@ -92,16 +91,6 @@ void *video_decode_test(void* arg)
       ilclient_destroy(client);
       fclose(in);
       return (void *)-4;
-   }
-
-   if(find_start_codes && (data = malloc(packet_size+4)) == NULL)
-   {
-      status = -16;
-      if(OMX_Deinit() != OMX_ErrorNone)
-         status = -17;
-      ilclient_destroy(client);
-      fclose(in);
-      return (void *)status;
    }
 
    // callback
@@ -169,7 +158,7 @@ void *video_decode_test(void* arg)
       while((buf = ilclient_get_input_buffer(video_decode, 130, 1)) != NULL)
       {
          // feed data and wait until we get port settings changed
-         unsigned char *dest = find_start_codes ? data + data_len : buf->pBuffer;
+         unsigned char *dest = buf->pBuffer;
 
          // loop if at end
          if (feof(in))
@@ -230,53 +219,8 @@ void *video_decode_test(void* arg)
          if(!data_len)
             break;
 
-         if(find_start_codes)
-         {
-            int i, start = -1, len = 0;
-            int max_len = data_len > packet_size ? packet_size : data_len;
-            for(i=2; i<max_len; i++)
-            {
-               if(data[i-2] == 0 && data[i-1] == 0 && data[i] == 1)
-               {
-                  len = 3;
-                  start = i-2;
-
-                  // check for 4 byte start code
-                  if(i > 2 && data[i-3] == 0)
-                  {
-                     len++;
-                     start--;
-                  }
-
-                  break;
-               }
-            }
-
-            if(start == 0)
-            {
-               // start code is next, so just send that
-               buf->nFilledLen = len;
-            }
-            else if(start == -1)
-            {
-               // no start codes seen, send the first block
-               buf->nFilledLen = max_len;
-            }
-            else
-            {
-               // start code in the middle of the buffer, send up to the code
-               buf->nFilledLen = start;
-            }
-
-            memcpy(buf->pBuffer, data, buf->nFilledLen);
-            memmove(data, data + buf->nFilledLen, data_len - buf->nFilledLen);
-            data_len -= buf->nFilledLen;
-         }
-         else
-         {
-            buf->nFilledLen = data_len;
-            data_len = 0;
-         }
+         buf->nFilledLen = data_len;
+         data_len = 0;
 
          buf->nOffset = 0;
          if(first_packet)
