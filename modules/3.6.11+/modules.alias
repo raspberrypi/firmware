@@ -2884,6 +2884,7 @@ alias usb:v1C9Ep9607d*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v1C9Ep9603d*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v20B9p1682d*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v1011p3198d*dc*dsc*dp*ic*isc*ip*in* option
+alias usb:v1BBBp011Ed*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v1BBBp0017d*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v1BBBp0000d*dc*dsc*dp*ic*isc*ip*in* option
 alias usb:v1E0Ep9200d*dc*dsc*dp*icFFiscFFipFFin* option
