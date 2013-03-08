@@ -179,12 +179,11 @@ static void init_ogl(CUBE_STATE_T *state)
 
    // Set background color and clear buffers
    glClearColor(0.15f, 0.25f, 0.35f, 1.0f);
-   glClear( GL_COLOR_BUFFER_BIT );
-   glClear( GL_DEPTH_BUFFER_BIT );
-   glShadeModel(GL_FLAT);
 
    // Enable back face culling.
    glEnable(GL_CULL_FACE);
+
+   glMatrixMode(GL_MODELVIEW);
 }
 
 /***********************************************************
@@ -219,9 +218,6 @@ static void init_model_proj(CUBE_STATE_T *state)
    
    glEnableClientState( GL_VERTEX_ARRAY );
    glVertexPointer( 3, GL_BYTE, 0, quadx );
-
-   glEnableClientState( GL_COLOR_ARRAY );
-   glColorPointer(4, GL_FLOAT, 0, colorsf);
 
    reset_model(state);
 }
@@ -345,10 +341,6 @@ static void redraw_scene(CUBE_STATE_T *state)
 {
    // Start with a clear screen
    glClear( GL_COLOR_BUFFER_BIT );
-   glMatrixMode(GL_MODELVIEW);
-
-   glEnable(GL_TEXTURE_2D);
-   glTexEnvx(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
    // Draw first (front) face:
    // Bind texture surface to current vertices
@@ -377,13 +369,9 @@ static void redraw_scene(CUBE_STATE_T *state)
    glRotatef(270.f, 0.f, 1.f, 0.f ); // top face normal along y axis
    glDrawArrays( GL_TRIANGLE_STRIP, 16, 4);
 
-   glTexEnvx(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
    glBindTexture(GL_TEXTURE_2D, state->tex[5]);
    glRotatef(90.f, 0.f, 1.f, 0.f ); // bottom face normal along y axis
    glDrawArrays( GL_TRIANGLE_STRIP, 20, 4);
-
-   glDisable(GL_TEXTURE_2D);
 
    eglSwapBuffers(state->display, state->surface);
 }
@@ -451,6 +439,8 @@ static void init_textures(CUBE_STATE_T *state)
    // setup overall texture environment
    glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+   
+   glEnable(GL_TEXTURE_2D);
 }
 
 /***********************************************************
@@ -541,11 +531,10 @@ int main ()
 
    while (!terminate)
    {
-      //usleep(5*1000);
       update_model(state);
       redraw_scene(state);
    }
    exit_func();
-  return 0;
+   return 0;
 }
 

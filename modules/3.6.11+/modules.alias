@@ -1151,7 +1151,8 @@ alias usb:v8086p0188d*dc*dsc*dp*ic*isc*ip*in* i2400m_usb
 alias usb:v8086p0186d*dc*dsc*dp*ic*isc*ip*in* i2400m_usb
 alias usb:v07B4p010Ad0102dc*dsc*dp*ic*isc*ip*in* ums_alauda
 alias usb:v0584p0008d0102dc*dsc*dp*ic*isc*ip*in* ums_alauda
-alias usb:v14CDp6116d*dc*dsc*dp*ic*isc*ip*in* ums_cypress
+alias usb:v14CDp6116d0[0-1]*dc*dsc*dp*ic*isc*ip*in* ums_cypress
+alias usb:v14CDp6116d02[0-1]*dc*dsc*dp*ic*isc*ip*in* ums_cypress
 alias usb:v04B4p6831d*dc*dsc*dp*ic*isc*ip*in* ums_cypress
 alias usb:v04B4p6830d*dc*dsc*dp*ic*isc*ip*in* ums_cypress
 alias usb:v0C0BpA109d*dc*dsc*dp*ic*isc*ip*in* ums_datafab
