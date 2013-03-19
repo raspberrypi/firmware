@@ -697,6 +697,7 @@ alias usb:v07B8p8178d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2019pAB2Bd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v7392p7822d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0586p341Fd*dc*dsc*dp*ic*isc*ip*in* 8192cu
+alias usb:v2001p330Dd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2001p3309d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2001p330Ad*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2001p3307d*dc*dsc*dp*ic*isc*ip*in* 8192cu
@@ -1489,6 +1490,7 @@ alias usb:v10C4p0F91d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v10B5pAC70d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v10ABp10C5d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v10A6pAA26d*dc*dsc*dp*ic*isc*ip*in* cp210x
+alias usb:v0FDEpCA05d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v0FCFp1006d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v0FCFp1004d*dc*dsc*dp*ic*isc*ip*in* cp210x
 alias usb:v0FCFp1003d*dc*dsc*dp*ic*isc*ip*in* cp210x
