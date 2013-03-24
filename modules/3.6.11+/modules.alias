@@ -5047,6 +5047,7 @@ alias usb:v2040pC603d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_mxl111sf
 alias usb:v2040pC602d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_mxl111sf
 alias usb:v2040pC601d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_mxl111sf
 alias usb:v2040pC600d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_mxl111sf
+alias usb:v1F4DpA803d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v0CCDp00B3d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v1F4DpB803d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v0CCDp00A9d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
