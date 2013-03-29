@@ -466,9 +466,9 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmDroppablePFrames,        /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexParamBrcmVideoInitialQuant,       /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamBrcmVideoEncodeQpP,          /**< reference: OMX_PARAM_U32TYPE */
+    OMX_IndexParamBrcmVideoRCSliceDQuant,      /**< reference: OMX_PARAM_U32TYPE */
 
     // 0x7f0000c0
-    OMX_IndexParamBrcmVideoRCSliceDQuant,      /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamBrcmVideoFrameLimitBits,     /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamBrcmVideoPeakRate,           /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexConfigBrcmVideoH264DisableCABAC,  /**< reference: OMX_CONFIG_BOOLEANTYPE */
@@ -484,9 +484,9 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmConfigFileRegisters,     /**< reference: OMX_PARAM_BRCMCONFIGFILETYPE */
     OMX_IndexParamBrcmConfigFileChunkRegisters,/**< reference: OMX_PARAM_BRCMCONFIGFILECHUNKTYPE */
     OMX_IndexParamBrcmAttachLog,               /**< reference: OMX_CONFIG_BOOLEANTYPE */
+    OMX_IndexParamCameraZeroShutterLag,        /**< reference: OMX_CONFIG_ZEROSHUTTERLAGTYPE */
 
     // 0x7f0000d0
-    OMX_IndexParamCameraZeroShutterLag,        /**< reference: OMX_CONFIG_ZEROSHUTTERLAGTYPE */
     OMX_IndexParamBrcmFpsRange,                /**< reference: OMX_PARAM_BRCMFRAMERATERANGETYPE */
     OMX_IndexParamCaptureExposureCompensation, /**< reference: OMX_PARAM_S32TYPE */
     OMX_IndexParamBrcmVideoPrecodeForQP,       /**< reference: OMX_CONFIG_BOOLEANTYPE */
@@ -498,6 +498,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmVideoDecodeConfigVD3,    /**< reference: OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE */
     OMX_IndexConfigBrcmPowerMonitor,           /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexParamBrcmZeroCopy,                /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
+    OMX_IndexParamBrcmVideoEGLRenderDiscardMode,   /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
 
     // 0x7f0000f0
     OMX_IndexConfigBrcmAudioDownmixCoefficients = 0x7f0000f0, /**< reference: OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS */
