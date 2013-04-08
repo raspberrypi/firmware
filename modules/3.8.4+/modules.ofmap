@@ -1,0 +1,3 @@
+# of module          name                 type                 compatible
+spidev               *                    *                    rohm,dh2228fv
+w1-gpio              *                    *                    w1-gpio
