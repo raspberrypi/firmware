@@ -69,7 +69,7 @@ typedef enum {
    HDMI_ASPECT_16_10    = 5, /**< 16:10*/
    HDMI_ASPECT_15_9     = 6, /**< 15:9 */
    HDMI_ASPECT_64_27    = 7, /**< 64:27 */
-   HDMI_ASPECT_21_9     = 7  /**< 21:9 is jargon, 64:27 is the actual aspect ratio, hence the same enum */
+   HDMI_ASPECT_21_9     = HDMI_ASPECT_64_27 /**< 21:9 is jargon, 64:27 is the actual aspect ratio */
    /* More aspect ratio values may be added here if defined by CEA in future */
 } HDMI_ASPECT_T;
 
@@ -502,6 +502,10 @@ typedef enum {
 #define EDID_BLOCKSIZE 128
 #define HDMI_NUM_PACKET_BYTES 28 /* Size of HDMI infoframes minus the header */
 #define HDMI_MAX_EXPLICIT_3D_MODES 31 /* The number of explicit 3D modes is stored in 5 bits */
+#define EDID_MONITOR_DESC_SIZE  18 /* Size of detailed timing descriptor in EDID */
+#define EDID_DESC_HEADER_LEN     5 /* Size of detailed timing descriptor header in EDID */
+#define EDID_DESC_ASCII_STRING_LEN (EDID_MONITOR_DESC_SIZE - EDID_DESC_HEADER_LEN)
+#define EDID_DEVICE_VENDOR_ID_LENGTH 3 /* Expanded Device Vendor ID length in EDID */
 
 /* All CEC related constants now reside in vc_cec.h */
 

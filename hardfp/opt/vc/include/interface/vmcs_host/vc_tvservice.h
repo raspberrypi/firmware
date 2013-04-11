@@ -493,6 +493,13 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(HDMI_PROPERTY_PARAM_T *property);
  */
 VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
 
+/**
+ * Get the unique device ID from the EDID
+ * @param pointer to device ID struct
+ * @return zero if successful, non-zero if failed.
+ */
+VCHPRE_ int VCHPOST_  vc_tv_get_device_id(TV_DEVICE_ID_T *id);
+
 // temporary: maintain backwards compatibility
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
                                                     TV_SUPPORTED_MODE_T *supported_modes,

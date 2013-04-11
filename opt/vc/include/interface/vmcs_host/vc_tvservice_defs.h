@@ -71,6 +71,7 @@ typedef enum {
    VC_TV_GET_PROP,
    VC_TV_GET_DISPLAY_STATE,
    VC_TV_QUERY_SUPPORTED_MODES_ACTUAL,
+   VC_TV_GET_DEVICE_ID,
    //Add more commands here
    VC_TV_END_OF_LIST
 } VC_TV_CMD_CODE_T;
@@ -318,6 +319,7 @@ typedef struct {
 //TV_SET_PROP
 //Parameters: HDMI_PROPERTY_PARAM_T
 //Reply: 0 = set successful, non-zero if error (int32_t) 
+#define HDMI_PROPERTY_SIZE_IN_WORDS (sizeof(HDMI_PROPERTY_T)/sizeof(uint32_t))
 
 //TV_GET_PROP
 //Parameters: parameter type (sent as uint32_t)
@@ -337,5 +339,14 @@ typedef struct {
       HDMI_DISPLAY_STATE_T hdmi; /** If HDMI is active, this is the state of HDMI */
    } display;
 } TV_DISPLAY_STATE_T;
+
+//TV_GET_DEVICE_ID
+//Parameter: none
+//Return device ID information from EDID
+typedef struct {
+   char vendor[EDID_DEVICE_VENDOR_ID_LENGTH+1];
+   char monitor_name[EDID_DESC_ASCII_STRING_LEN+1];
+   uint32_t serial_num;
+} TV_DEVICE_ID_T;
 
 #endif

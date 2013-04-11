@@ -57,6 +57,7 @@ extern "C" {
 #include <signal.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 
 
 #define VCOS_HAVE_RTOS         1
@@ -722,6 +723,11 @@ char *vcos_strdup(const char *str)
 }
 
 typedef void (*VCOS_ISR_HANDLER_T)(VCOS_UNSIGNED vecnum);
+
+#define VCOS_DL_LAZY RTLD_LAZY
+#define VCOS_DL_NOW  RTLD_NOW
+#define VCOS_DL_LOCAL  RTLD_LOCAL
+#define VCOS_DL_GLOBAL  RTLD_GLOBAL
 
 #ifdef __cplusplus
 }
