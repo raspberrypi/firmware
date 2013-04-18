@@ -167,7 +167,7 @@ extern VCHIQ_STATUS_T vchiq_bulk_transmit_handle(VCHIQ_SERVICE_HANDLE_T service,
    VCHIQ_BULK_MODE_T mode);
 extern VCHIQ_STATUS_T vchiq_bulk_receive_handle(VCHIQ_SERVICE_HANDLE_T service,
    VCHI_MEM_HANDLE_T handle, void *offset, int size, void *userdata,
-   VCHIQ_BULK_MODE_T mode);
+   VCHIQ_BULK_MODE_T mode, int (*copy_pagelist)());
 extern int   vchiq_get_client_id(VCHIQ_SERVICE_HANDLE_T service);
 extern void *vchiq_get_service_userdata(VCHIQ_SERVICE_HANDLE_T service);
 extern int   vchiq_get_service_fourcc(VCHIQ_SERVICE_HANDLE_T service);

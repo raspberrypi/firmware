@@ -10,6 +10,9 @@ alias devname:fuse fuse
 alias char-major-10-229 fuse
 alias devname:btrfs-control btrfs
 alias char-major-10-234 btrfs
+alias cipher_null crypto_null
+alias digest_null crypto_null
+alias compress_null crypto_null
 alias sha256 sha256_generic
 alias sha224 sha256_generic
 alias sha512 sha512_generic
