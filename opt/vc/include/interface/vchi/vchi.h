@@ -332,6 +332,15 @@ int32_t vchi_bulk_queue_receive_reloc( const VCHI_SERVICE_HANDLE_T handle,
                                        const VCHI_FLAGS_T flags,
                                        void * const bulk_handle );
 
+// Prepare interface for a transfer from the other side into relocatable memory.
+int32_t vchi_bulk_queue_receive_reloc_func( const VCHI_SERVICE_HANDLE_T handle,
+                                       VCHI_MEM_HANDLE_T h_dst,
+                                       uint32_t offset,
+                                       uint32_t data_size,
+                                       const VCHI_FLAGS_T flags,
+                                       void * const bulk_handle,
+                                       int (*copy_pagelist)() );
+
 // Routine to queue up data ready for transfer to the other (once they have signalled they are ready)
 extern int32_t vchi_bulk_queue_transmit( VCHI_SERVICE_HANDLE_T handle,
                                          const void *data_src,
