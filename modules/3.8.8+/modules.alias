@@ -6259,6 +6259,8 @@ alias ip6t_hl xt_hl
 alias ipt_ttl xt_hl
 alias ip6t_iprange xt_iprange
 alias ipt_iprange xt_iprange
+alias ip6t_ipvs xt_ipvs
+alias ipt_ipvs xt_ipvs
 alias ip6t_length xt_length
 alias ipt_length xt_length
 alias ip6t_limit xt_limit

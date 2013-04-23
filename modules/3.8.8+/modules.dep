@@ -980,6 +980,7 @@ kernel/net/netfilter/xt_hashlimit.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_helper.ko: kernel/net/netfilter/x_tables.ko kernel/net/netfilter/nf_conntrack.ko
 kernel/net/netfilter/xt_hl.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_iprange.ko: kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_ipvs.ko: kernel/net/netfilter/x_tables.ko kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
 kernel/net/netfilter/xt_length.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_limit.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_mac.ko: kernel/net/netfilter/x_tables.ko
@@ -1014,6 +1015,19 @@ kernel/net/netfilter/ipset/ip_set_hash_net.ko: kernel/net/netfilter/ipset/ip_set
 kernel/net/netfilter/ipset/ip_set_hash_netport.ko: kernel/net/netfilter/ipset/ip_set.ko kernel/net/netfilter/nfnetlink.ko
 kernel/net/netfilter/ipset/ip_set_hash_netiface.ko: kernel/net/netfilter/ipset/ip_set.ko kernel/net/netfilter/nfnetlink.ko
 kernel/net/netfilter/ipset/ip_set_list_set.ko: kernel/net/netfilter/ipset/ip_set.ko kernel/net/netfilter/nfnetlink.ko
+kernel/net/netfilter/ipvs/ip_vs.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_rr.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_wrr.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_lc.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_wlc.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_lblc.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_lblcr.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_dh.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_sh.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_sed.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_nq.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv6/ipv6.ko
+kernel/net/netfilter/ipvs/ip_vs_ftp.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/netfilter/ipvs/ip_vs_pe_sip.ko: kernel/net/netfilter/ipvs/ip_vs.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack_sip.ko kernel/net/netfilter/nf_conntrack.ko
 kernel/net/ipv4/netfilter/nf_conntrack_ipv4.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko
 kernel/net/ipv4/netfilter/nf_nat_ipv4.ko: kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
 kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko:
