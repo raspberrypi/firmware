@@ -66,7 +66,8 @@ typedef struct {
  * Setting encoding type is subjected to support in EDID
  */
 typedef enum {
-   HDMI_PIXEL_ENCODING_RGB_LIMITED = 0, /**<Default, note that CEA mode defaults to limited RGB limited but DMT modes always uses RGB full */
+   HDMI_PIXEL_ENCODING_DEFAULT = 0,  /**<Default, note that CEA modes (except VGA) default to RGB limited but DMT modes default to RGB full */
+   HDMI_PIXEL_ENCODING_RGB_LIMITED,
    HDMI_PIXEL_ENCODING_RGB_FULL,
    HDMI_PIXEL_ENCODING_YCbCr444_LIMITED,
    HDMI_PIXEL_ENCODING_YCbCr444_FULL,
