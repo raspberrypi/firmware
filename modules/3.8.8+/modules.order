@@ -39,6 +39,7 @@ kernel/fs/nls/nls_koi8-u.ko
 kernel/fs/nls/nls_koi8-ru.ko
 kernel/fs/nls/nls_utf8.ko
 kernel/fs/binfmt_misc.ko
+kernel/fs/dlm/dlm.ko
 kernel/fs/reiserfs/reiserfs.ko
 kernel/fs/squashfs/squashfs.ko
 kernel/fs/isofs/isofs.ko
@@ -58,6 +59,7 @@ kernel/fs/nilfs2/nilfs2.ko
 kernel/fs/ocfs2/ocfs2.ko
 kernel/fs/ocfs2/ocfs2_stackglue.ko
 kernel/fs/ocfs2/ocfs2_stack_o2cb.ko
+kernel/fs/ocfs2/ocfs2_stack_user.ko
 kernel/fs/ocfs2/dlmfs/ocfs2_dlmfs.ko
 kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/ocfs2/dlm/ocfs2_dlm.ko

@@ -39,6 +39,7 @@ kernel/fs/nls/nls_koi8-u.ko:
 kernel/fs/nls/nls_koi8-ru.ko:
 kernel/fs/nls/nls_utf8.ko:
 kernel/fs/binfmt_misc.ko:
+kernel/fs/dlm/dlm.ko: kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko
 kernel/fs/reiserfs/reiserfs.ko:
 kernel/fs/squashfs/squashfs.ko: kernel/lib/xz/xz_dec.ko kernel/lib/lzo/lzo_decompress.ko kernel/lib/zlib_inflate/zlib_inflate.ko
 kernel/fs/isofs/isofs.ko: kernel/lib/zlib_inflate/zlib_inflate.ko
@@ -58,11 +59,12 @@ kernel/fs/nilfs2/nilfs2.ko:
 kernel/fs/ocfs2/ocfs2.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko kernel/fs/ocfs2/ocfs2_stackglue.ko kernel/fs/quota/quota_tree.ko
 kernel/fs/ocfs2/ocfs2_stackglue.ko:
 kernel/fs/ocfs2/ocfs2_stack_o2cb.ko: kernel/fs/ocfs2/dlm/ocfs2_dlm.ko kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko kernel/fs/ocfs2/ocfs2_stackglue.ko
+kernel/fs/ocfs2/ocfs2_stack_user.ko: kernel/fs/dlm/dlm.ko kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko kernel/fs/ocfs2/ocfs2_stackglue.ko
 kernel/fs/ocfs2/dlmfs/ocfs2_dlmfs.ko: kernel/fs/ocfs2/ocfs2_stackglue.ko kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko:
 kernel/fs/ocfs2/dlm/ocfs2_dlm.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/btrfs/btrfs.ko: kernel/lib/zlib_deflate/zlib_deflate.ko kernel/lib/lzo/lzo_decompress.ko kernel/lib/lzo/lzo_compress.ko kernel/lib/zlib_inflate/zlib_inflate.ko
-kernel/fs/gfs2/gfs2.ko:
+kernel/fs/gfs2/gfs2.ko: kernel/fs/dlm/dlm.ko kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko
 kernel/crypto/seqiv.ko:
 kernel/crypto/xcbc.ko:
 kernel/crypto/crypto_null.ko:

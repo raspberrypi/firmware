@@ -161,6 +161,7 @@ alias symbol:lbtf_send_tx_feedback libertas_tf
 alias symbol:__serio_register_port serio
 alias symbol:md_integrity_register md_mod
 alias symbol:snd_ctl_unregister_ioctl snd
+alias symbol:dlm_posix_unlock dlm
 alias symbol:o2hb_check_node_heartbeating ocfs2_nodemanager
 alias symbol:irlmp_discovery_request irda
 alias symbol:usb_wwan_suspend usb_wwan
@@ -343,6 +344,7 @@ alias symbol:p9_client_xattrcreate 9pnet
 alias symbol:__ieee80211_get_radio_led_name mac80211
 alias symbol:in6_dev_finish_destroy ipv6
 alias symbol:usb_wwan_close usb_wwan
+alias symbol:dlm_release_lockspace dlm
 alias symbol:em28xx_alloc_isoc em28xx
 alias symbol:rt2x00mac_tx_frames_pending rt2x00lib
 alias symbol:cdrom_check_events cdrom
@@ -389,6 +391,7 @@ alias symbol:dvb_dmx_swfilter_packets dvb_core
 alias symbol:ocfs2_plock ocfs2_stackglue
 alias symbol:nf_ct_untracked_status_or nf_conntrack
 alias symbol:get_phy_device libphy
+alias symbol:dlm_posix_lock dlm
 alias symbol:iriap_getvaluebyclass_request irda
 alias symbol:print_tuple nf_conntrack
 alias symbol:dib0090_set_vga dib0090
@@ -423,11 +426,13 @@ alias symbol:nf_conntrack_alter_reply nf_conntrack
 alias symbol:cx231xx_send_gpio_cmd cx231xx
 alias symbol:if_usb_reset_device libertas_tf_usb
 alias symbol:iscsi_queuecommand libiscsi
+alias symbol:dlm_new_lockspace dlm
 alias symbol:cfg80211_unlink_bss cfg80211
 alias symbol:p9_client_xattrwalk 9pnet
 alias symbol:nf_ct_helper_expectfn_unregister nf_conntrack
 alias symbol:videobuf_read_stream videobuf_core
 alias symbol:hostap_set_roaming hostap
+alias symbol:dlm_lock dlm
 alias symbol:xfrm6_tunnel_register tunnel6
 alias symbol:xfrm4_tunnel_register tunnel4
 alias symbol:nf_ct_get_tuple nf_conntrack
@@ -580,6 +585,7 @@ alias symbol:lg2160_attach lg2160
 alias symbol:cfg80211_remain_on_channel_expired cfg80211
 alias symbol:snd_seq_create_kernel_client snd_seq
 alias symbol:dvb_dmx_swfilter dvb_core
+alias symbol:dlm_unlock dlm
 alias symbol:l2tp_session_find_nth l2tp_core
 alias symbol:crc7 crc7
 alias symbol:lib80211_register_crypto_ops lib80211
@@ -732,6 +738,7 @@ alias symbol:mdio_bus_type libphy
 alias symbol:ip6_xmit ipv6
 alias symbol:w1_remove_master_device wire
 alias symbol:o2nm_get_node_by_ip ocfs2_nodemanager
+alias symbol:dlm_posix_get dlm
 alias symbol:gf128mul_init_64k_lle gf128mul
 alias symbol:gf128mul_init_64k_bbe gf128mul
 alias symbol:xt_find_match x_tables
