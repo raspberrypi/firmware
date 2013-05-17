@@ -39,7 +39,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define WIDTH   200
 #define HEIGHT  200
 
+#ifndef ALIGN_UP
 #define ALIGN_UP(x,y)  ((x + (y)-1) & ~((y)-1))
+#endif
 
 typedef struct
 {
