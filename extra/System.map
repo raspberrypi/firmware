@@ -492,7 +492,7 @@ c001a09c T clk_set_rate
 c001a0a4 t bcm2708_read_sched_clock
 c001a0bc t clksrc_read
 c001a0d4 t bcm2708_restart
-c001a114 t bcm2708_power_off
+c001a13c t bcm2708_power_off
 c001a174 t timer_set_next_event
 c001a19c t bcm2708_timer_interrupt
 c001a1d0 t bcm2708_udelay
