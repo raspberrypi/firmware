@@ -455,7 +455,7 @@ int main ()
    init_textures(state);
 
    //state->model = cube_wavefront();
-   state->model = load_wavefront("teapot.obj.dat", NULL);
+   state->model = load_wavefront("/opt/vc/src/hello_pi/hello_teapot/teapot.obj.dat", NULL);
 
    while (!terminate)
    {

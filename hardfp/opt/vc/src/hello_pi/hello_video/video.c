@@ -44,7 +44,6 @@ static int video_decode_test(char *filename)
    ILCLIENT_T *client;
    FILE *in;
    int status = 0;
-   unsigned char *data = NULL;
    unsigned int data_len = 0;
    int packet_size = 80<<10;
 
