@@ -228,6 +228,7 @@ kernel/drivers/usb/misc/usbsevseg.ko
 kernel/drivers/usb/misc/yurex.ko
 kernel/drivers/usb/mon/usbmon.ko
 kernel/drivers/usb/class/cdc-acm.ko
+kernel/drivers/usb/class/usblp.ko
 kernel/drivers/usb/class/cdc-wdm.ko
 kernel/drivers/usb/image/mdc800.ko
 kernel/drivers/usb/image/microtek.ko
