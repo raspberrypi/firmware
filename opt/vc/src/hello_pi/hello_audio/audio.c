@@ -41,6 +41,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PI (1<<16>>1)
 #define SIN(x) Sinewave[((x)>>6) & (N_WAVE-1)]
 #define COS(x) SIN((x)+(PI>>1))
+#define OUT_CHANNELS(num_channels) ((num_channels) > 4 ? 8: (num_channels) > 2 ? 4: (num_channels))
 extern short Sinewave[];
 
 #ifndef countof
@@ -74,14 +75,14 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
                          uint32_t num_buffers,
                          uint32_t buffer_size)
 {
-   uint32_t bytes_per_sample = (bit_depth * num_channels) >> 3;
+   uint32_t bytes_per_sample = (bit_depth * OUT_CHANNELS(num_channels)) >> 3;
    int32_t ret = -1;
 
    *handle = NULL;
 
    // basic sanity check on arguments
-   if(sample_rate >= 8000 && sample_rate <= 96000 &&
-      (num_channels == 1 || num_channels == 2 || num_channels == 4 || num_channels == 8) &&
+   if(sample_rate >= 8000 && sample_rate <= 192000 &&
+      (num_channels >= 1 && num_channels <= 8) &&
       (bit_depth == 16 || bit_depth == 32) &&
       num_buffers > 0 &&
       buffer_size >= bytes_per_sample)
@@ -143,7 +144,7 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
          pcm.nSize = sizeof(OMX_AUDIO_PARAM_PCMMODETYPE);
          pcm.nVersion.nVersion = OMX_VERSION;
          pcm.nPortIndex = 100;
-         pcm.nChannels = num_channels;
+         pcm.nChannels = OUT_CHANNELS(num_channels);
          pcm.eNumData = OMX_NumericalDataSigned;
          pcm.eEndian = OMX_EndianLittle;
          pcm.nSamplingRate = sample_rate;
@@ -155,25 +156,25 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
          case 1:
             pcm.eChannelMapping[0] = OMX_AUDIO_ChannelCF;
             break;
-         case 8:
-            pcm.eChannelMapping[0] = OMX_AUDIO_ChannelLF;
-            pcm.eChannelMapping[1] = OMX_AUDIO_ChannelRF;
+         case 3:
             pcm.eChannelMapping[2] = OMX_AUDIO_ChannelCF;
-            pcm.eChannelMapping[3] = OMX_AUDIO_ChannelLFE;
-            pcm.eChannelMapping[4] = OMX_AUDIO_ChannelLR;
-            pcm.eChannelMapping[5] = OMX_AUDIO_ChannelRR;
-            pcm.eChannelMapping[6] = OMX_AUDIO_ChannelLS;
+            pcm.eChannelMapping[1] = OMX_AUDIO_ChannelRF;
+            pcm.eChannelMapping[0] = OMX_AUDIO_ChannelLF;
+            break;
+         case 8:
             pcm.eChannelMapping[7] = OMX_AUDIO_ChannelRS;
-            break;
+         case 7:
+            pcm.eChannelMapping[6] = OMX_AUDIO_ChannelLS;
+         case 6:
+            pcm.eChannelMapping[5] = OMX_AUDIO_ChannelRR;
+         case 5:
+            pcm.eChannelMapping[4] = OMX_AUDIO_ChannelLR;
          case 4:
-            pcm.eChannelMapping[0] = OMX_AUDIO_ChannelLF;
-            pcm.eChannelMapping[1] = OMX_AUDIO_ChannelRF;
-            pcm.eChannelMapping[2] = OMX_AUDIO_ChannelLR;
-            pcm.eChannelMapping[3] = OMX_AUDIO_ChannelRR;
-            break;
+            pcm.eChannelMapping[3] = OMX_AUDIO_ChannelLFE;
+            pcm.eChannelMapping[2] = OMX_AUDIO_ChannelCF;
          case 2:
-            pcm.eChannelMapping[0] = OMX_AUDIO_ChannelLF;
             pcm.eChannelMapping[1] = OMX_AUDIO_ChannelRF;
+            pcm.eChannelMapping[0] = OMX_AUDIO_ChannelLF;
             break;
          }
 
@@ -336,10 +337,6 @@ uint32_t audioplay_get_latency(AUDIOPLAY_STATE_T *st)
 #define CTTW_SLEEP_TIME 10
 #define MIN_LATENCY_TIME 20
 
-const int SAMPLERATE[] = {8000, 11025, 44100, 96000};
-const int BITDEPTH[] = {16, 32};
-const int CHANNELS[] = {1, 2, 4, 8};
-
 static const char *audio_dest[] = {"local", "hdmi"};
 void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
 {
@@ -349,7 +346,7 @@ void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
    int phase = 0;
    int inc = 256<<16;
    int dinc = 0;
-   int buffer_size = (BUFFER_SIZE_SAMPLES * bitdepth * nchannels)>>3;
+   int buffer_size = (BUFFER_SIZE_SAMPLES * bitdepth * OUT_CHANNELS(nchannels))>>3;
 
    assert(dest == 0 || dest == 1);
 
@@ -360,7 +357,7 @@ void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
    assert(ret == 0);
 
    // iterate for 5 seconds worth of packets
-   for (n=0; n<((samplerate * 5)/ BUFFER_SIZE_SAMPLES); n++)
+   for (n=0; n<((samplerate * 1000)/ BUFFER_SIZE_SAMPLES); n++)
    {
       uint8_t *buf;
       int16_t *p;
@@ -382,7 +379,7 @@ void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
          else
             dinc--;
 
-         for(j=0; j<nchannels; j++)
+         for(j=0; j<OUT_CHANNELS(nchannels); j++)
          {
             if (bitdepth == 32)
                *p++ = 0;
@@ -416,6 +413,10 @@ int main (int argc, char **argv)
 
    if (argc > 1)
       audio_dest = atoi(argv[1]);
+   if (argc > 2)
+      channels = atoi(argv[2]);
+   if (argc > 3)
+      samplerate = atoi(argv[3]);
 
    printf("Outputting audio to %s\n", audio_dest==0 ? "analogue":"hdmi");
 
