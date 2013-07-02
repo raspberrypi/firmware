@@ -81,7 +81,7 @@ int32_t audioplay_create(AUDIOPLAY_STATE_T **handle,
    *handle = NULL;
 
    // basic sanity check on arguments
-   if(sample_rate >= 8000 && sample_rate <= 96000 &&
+   if(sample_rate >= 8000 && sample_rate <= 192000 &&
       (num_channels >= 1 && num_channels <= 8) &&
       (bit_depth == 16 || bit_depth == 32) &&
       num_buffers > 0 &&
@@ -337,10 +337,6 @@ uint32_t audioplay_get_latency(AUDIOPLAY_STATE_T *st)
 #define CTTW_SLEEP_TIME 10
 #define MIN_LATENCY_TIME 20
 
-const int SAMPLERATE[] = {8000, 11025, 44100, 96000};
-const int BITDEPTH[] = {16, 32};
-const int CHANNELS[] = {1, 2, 4, 8};
-
 static const char *audio_dest[] = {"local", "hdmi"};
 void play_api_test(int samplerate, int bitdepth, int nchannels, int dest)
 {
@@ -419,6 +415,8 @@ int main (int argc, char **argv)
       audio_dest = atoi(argv[1]);
    if (argc > 2)
       channels = atoi(argv[2]);
+   if (argc > 3)
+      samplerate = atoi(argv[3]);
 
    printf("Outputting audio to %s\n", audio_dest==0 ? "analogue":"hdmi");
 
