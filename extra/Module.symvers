@@ -7171,6 +7171,7 @@
 0x869c9414	blk_queue_flush_queueable	vmlinux	EXPORT_SYMBOL_GPL
 0xa43ad84f	blk_queue_rq_timeout	vmlinux	EXPORT_SYMBOL_GPL
 0x9e9877a1	nfs_path	vmlinux	EXPORT_SYMBOL_GPL
+0x42046d78	flush_kernel_dcache_page	vmlinux	EXPORT_SYMBOL
 0x494e9888	mwifiex_init_shutdown_fw	drivers/net/wireless/mwifiex/mwifiex	EXPORT_SYMBOL_GPL
 0x4d14aa70	lbs_queue_event	drivers/net/wireless/libertas/libertas	EXPORT_SYMBOL_GPL
 0x6ce4fab8	hostap_set_antsel	drivers/net/wireless/hostap/hostap	EXPORT_SYMBOL
