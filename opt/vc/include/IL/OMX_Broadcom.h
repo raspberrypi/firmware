@@ -476,6 +476,21 @@ R' = coeff[1] * sample[N] + coeff[3] * sample[N+1] + coeff[5] * sample[N+2] + co
 \code{coeff} describes the downmixing coefficients
 */
 
+/* OMX_IndexConfigBrcmAudioDownmixCoefficients8x8: Audio Downmix Coefficients */
+typedef struct OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8 {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 coeff[64];
+} OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8;
+/*
+This config sets the platform-specific audio downmixing coefficients for the 
+audio mixer component. The coefficients are 16.16 fixed point.
+The coefficients are a 8*8 mixing matrix from 8 input channels to 8 outputs channels
+
+\code{coeff} describes the downmixing coefficients
+*/
+
 /* OMX_IndexConfigPlayMode: Play Mode */
 typedef enum OMX_PLAYMODETYPE {
    OMX_PLAYMODE_NORMAL,
