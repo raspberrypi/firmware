@@ -150,7 +150,7 @@ typedef struct {
 typedef struct {
   int32_t width;
   int32_t height;
-  VC_IMAGE_TRANSFORM_T transform;
+  DISPMANX_TRANSFORM_T transform;
   DISPLAY_INPUT_FORMAT_T input_format;
 } DISPMANX_MODEINFO_T;
 
