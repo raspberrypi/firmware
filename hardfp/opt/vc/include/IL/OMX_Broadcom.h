@@ -491,6 +491,22 @@ The coefficients are a 8*8 mixing matrix from 8 input channels to 8 outputs chan
 \code{coeff} describes the downmixing coefficients
 */
 
+/* OMX_IndexConfigBrcmAudioMaxSample: Maximum sample seen */
+typedef struct OMX_CONFIG_BRCMAUDIOMAXSAMPLE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nMaxSample;
+   OMX_TICKS nTimeStamp;
+} OMX_CONFIG_BRCMAUDIOMAXSAMPLE;
+/*
+This gets the largest sample produced (after downmixing with OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8) 
+since this config was last read. The nTimestamp is the earliest timestamp processed. 
+This can be used for DRC schemes 
+
+\code{coeff} maximum sample seen in current block
+*/
+
 /* OMX_IndexConfigPlayMode: Play Mode */
 typedef enum OMX_PLAYMODETYPE {
    OMX_PLAYMODE_NORMAL,
