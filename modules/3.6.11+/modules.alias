@@ -1116,6 +1116,7 @@ alias usb:v1410pB001d*dc*dsc*dp*ic02isc06ip00in* qmi_wwan
 alias usb:v12D1p*d*dc*dsc*dp*icFFisc01ip39in* qmi_wwan
 alias usb:v12D1p*d*dc*dsc*dp*icFFisc01ip09in* qmi_wwan
 alias rtnl-link-bond bonding
+alias rtnl-link-dummy dummy
 alias rtnl-link-macvlan macvlan
 alias devname:net/tun tun
 alias char-major-10-200 tun

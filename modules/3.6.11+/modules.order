@@ -1,4 +1,6 @@
 kernel/arch/arm/mach-bcm2708/dmaer_master.ko
+kernel/fs/quota/quota_v1.ko
+kernel/fs/quota/quota_v2.ko
 kernel/fs/quota/quota_tree.ko
 kernel/fs/nls/nls_cp737.ko
 kernel/fs/nls/nls_cp775.ko
@@ -39,6 +41,7 @@ kernel/fs/nls/nls_koi8-u.ko
 kernel/fs/nls/nls_koi8-ru.ko
 kernel/fs/nls/nls_utf8.ko
 kernel/fs/binfmt_misc.ko
+kernel/fs/dlm/dlm.ko
 kernel/fs/reiserfs/reiserfs.ko
 kernel/fs/squashfs/squashfs.ko
 kernel/fs/isofs/isofs.ko
@@ -58,6 +61,7 @@ kernel/fs/nilfs2/nilfs2.ko
 kernel/fs/ocfs2/ocfs2.ko
 kernel/fs/ocfs2/ocfs2_stackglue.ko
 kernel/fs/ocfs2/ocfs2_stack_o2cb.ko
+kernel/fs/ocfs2/ocfs2_stack_user.ko
 kernel/fs/ocfs2/dlmfs/ocfs2_dlmfs.ko
 kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/ocfs2/dlm/ocfs2_dlm.ko
@@ -168,6 +172,7 @@ kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/net/usb/lg-vl600.ko
 kernel/drivers/net/usb/qmi_wwan.ko
 kernel/drivers/net/bonding/bonding.ko
+kernel/drivers/net/dummy.ko
 kernel/drivers/net/macvlan.ko
 kernel/drivers/net/netconsole.ko
 kernel/drivers/net/phy/libphy.ko

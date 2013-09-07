@@ -75,7 +75,14 @@ typedef enum {
   DISPMANX_ROTATE_270 = 3,
 
   DISPMANX_FLIP_HRIZ = 1 << 16,
-  DISPMANX_FLIP_VERT = 1 << 17
+  DISPMANX_FLIP_VERT = 1 << 17,
+
+  /* extra flags for controlling snapshot behaviour */
+  DISPMANX_SNAPSHOT_NO_YUV = 1 << 24,
+  DISPMANX_SNAPSHOT_NO_RGB = 1 << 25,
+  DISPMANX_SNAPSHOT_FILL = 1 << 26,
+  DISPMANX_SNAPSHOT_SWAP_RED_BLUE = 1 << 27,
+  DISPMANX_SNAPSHOT_PACK = 1 << 28
 } DISPMANX_TRANSFORM_T;
 
 typedef enum {
