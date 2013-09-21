@@ -639,7 +639,9 @@ alias usb:v0CF3p7010d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v1668p1200d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v0CF3p7015d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v057Cp8403d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
+alias usb:v057Cp8403d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v0CF3pB003d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
+alias usb:v0CF3pB002d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v040Dp3801d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v04CAp4605d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
 alias usb:v13D3p3350d*dc*dsc*dp*ic*isc*ip*in* ath9k_htc
