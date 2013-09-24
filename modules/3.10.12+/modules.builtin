@@ -6,6 +6,7 @@ kernel/fs/cachefiles/cachefiles.ko
 kernel/fs/configfs/configfs.ko
 kernel/fs/exportfs/exportfs.ko
 kernel/fs/ext4/ext4.ko
+kernel/fs/f2fs/f2fs.ko
 kernel/fs/fat/fat.ko
 kernel/fs/fat/vfat.ko
 kernel/fs/fat/msdos.ko
@@ -56,7 +57,9 @@ kernel/drivers/hid/hid-generic.ko
 kernel/drivers/hid/usbhid/usbhid.ko
 kernel/drivers/i2c/i2c-core.ko
 kernel/drivers/input/input-core.ko
+kernel/drivers/input/ff-memless.ko
 kernel/drivers/input/mousedev.ko
+kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/leds/trigger/ledtrig-timer.ko
 kernel/drivers/leds/trigger/ledtrig-oneshot.ko
 kernel/drivers/leds/trigger/ledtrig-heartbeat.ko
@@ -83,8 +86,6 @@ kernel/drivers/tty/serial/amba-pl011.ko
 kernel/drivers/tty/serial/kgdboc.ko
 kernel/drivers/usb/usb-common.ko
 kernel/drivers/usb/core/usbcore.ko
-kernel/drivers/usb/host/dwc_common_port/dwc_common_port_lib.ko
-kernel/drivers/usb/host/dwc_otg/dwc_otg.ko
 kernel/drivers/usb/storage/usb-storage.ko
 kernel/drivers/video/fb.ko
 kernel/drivers/video/cfbfillrect.ko
