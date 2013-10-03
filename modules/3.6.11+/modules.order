@@ -1133,6 +1133,7 @@ kernel/net/bridge/netfilter/ebt_snat.ko
 kernel/net/bridge/netfilter/ebt_log.ko
 kernel/net/bridge/netfilter/ebt_ulog.ko
 kernel/net/bridge/netfilter/ebt_nflog.ko
+kernel/net/appletalk/appletalk.ko
 kernel/net/netrom/netrom.ko
 kernel/net/rose/rose.ko
 kernel/net/ax25/ax25.ko

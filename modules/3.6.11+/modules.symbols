@@ -719,6 +719,7 @@ alias symbol:dm_kcopyd_client_create dm_mod
 alias symbol:v4l2_fh_add videodev
 alias symbol:rc_map_register rc_core
 alias symbol:iscsi_tcp_conn_setup libiscsi_tcp
+alias symbol:aarp_send_ddp appletalk
 alias symbol:serio_interrupt serio
 alias symbol:rc_unregister_device rc_core
 alias symbol:ath9k_hw_set_gpio ath9k_hw
@@ -961,6 +962,7 @@ alias symbol:v4l2_chip_match_i2c_client v4l2_common
 alias symbol:i2c_bit_add_bus i2c_algo_bit
 alias symbol:md_rdev_init md_mod
 alias symbol:usb_ftdi_elan_edset_single ftdi_elan
+alias symbol:atrtr_get_dev appletalk
 alias symbol:snd_timer_start snd_timer
 alias symbol:usb_serial_generic_read_bulk_callback usbserial
 alias symbol:s5h1409_attach s5h1409
@@ -1366,6 +1368,7 @@ alias symbol:is_fw_load cx231xx
 alias symbol:mdiobus_alloc_size libphy
 alias symbol:macvlan_common_newlink macvlan
 alias symbol:hashbin_remove irda
+alias symbol:atalk_find_dev_addr appletalk
 alias symbol:cfg80211_sched_scan_stopped cfg80211
 alias symbol:cfg80211_get_bss cfg80211
 alias symbol:md_run md_mod
@@ -1662,6 +1665,7 @@ alias symbol:ftdi_elan_gone_away ftdi_elan
 alias symbol:tuners tuner_types
 alias symbol:nfc_proto_unregister nfc
 alias symbol:llc_sap_find llc
+alias symbol:alloc_ltalkdev appletalk
 alias symbol:dm_consume_args dm_mod
 alias symbol:pppox_unbind_sock pppox
 alias symbol:rt2800_sta_remove rt2800lib

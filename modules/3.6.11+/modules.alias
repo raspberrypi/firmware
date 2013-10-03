@@ -6123,6 +6123,7 @@ alias netdev-sit0 sit
 alias rtnl-link-vlan 8021q
 alias net-pf-15 af_key
 alias rtnl-link-bridge bridge
+alias net-pf-5 appletalk
 alias net-pf-6 netrom
 alias net-pf-11 rose
 alias net-pf-3 ax25
