@@ -3785,6 +3785,7 @@
 0x99591a7a	ipv6_ext_hdr	vmlinux	EXPORT_SYMBOL
 0xcc377b25	neigh_destroy	vmlinux	EXPORT_SYMBOL
 0xca42f512	netdev_warn	vmlinux	EXPORT_SYMBOL
+0x9a5a51df	hid_validate_values	vmlinux	EXPORT_SYMBOL_GPL
 0x9c5dd32a	mmc_wait_for_app_cmd	vmlinux	EXPORT_SYMBOL
 0x9c812b61	blk_end_request_cur	vmlinux	EXPORT_SYMBOL
 0x0db3fbd1	replace_mount_options	vmlinux	EXPORT_SYMBOL
