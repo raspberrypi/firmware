@@ -1864,6 +1864,7 @@
 0xcbbf0a6f	audit_log_task_context	vmlinux	EXPORT_SYMBOL
 0x856209b1	lbtf_remove_card	drivers/net/wireless/libertas_tf/libertas_tf	EXPORT_SYMBOL_GPL
 0xad93b21b	hostap_free_data	drivers/net/wireless/hostap/hostap	EXPORT_SYMBOL
+0x8219de14	hid_alloc_report_buf	vmlinux	EXPORT_SYMBOL_GPL
 0xebb8510c	dwc_cc_if_free	vmlinux	EXPORT_SYMBOL
 0xd7aeed43	splice_from_pipe_feed	vmlinux	EXPORT_SYMBOL
 0xf9a054b5	__round_jiffies	vmlinux	EXPORT_SYMBOL_GPL

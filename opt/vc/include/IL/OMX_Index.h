@@ -499,6 +499,10 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigBrcmPowerMonitor,           /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexParamBrcmZeroCopy,                /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
     OMX_IndexParamBrcmVideoEGLRenderDiscardMode,   /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
+    OMX_IndexParamBrcmVideoAVC_VCLHRDEnable,    /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
+    OMX_IndexParamBrcmVideoAVC_LowDelayHRDEnable, /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
+    OMX_IndexParamBrcmVideoCroppingDisable,    /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
+    OMX_IndexParamBrcmVideoAVCInlineHeaderEnable, /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
 
     // 0x7f0000f0
     OMX_IndexConfigBrcmAudioDownmixCoefficients = 0x7f0000f0, /**< reference: OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS */
