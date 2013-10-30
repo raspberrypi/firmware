@@ -5588,6 +5588,7 @@ alias usb:v046Dp0A0Ed*dc*dsc*dp*ic03isc00ip00in* radio_keene
 alias usb:v16C0p05DFd*dc*dsc*dp*ic03isc00ip00in* radio_ma901
 alias i2c:saa7706h saa7706h
 alias i2c:tef6862 tef6862
+alias platform:ds2760-battery ds2760_battery
 alias char-major-10-131 bcm2708_wdog
 alias char-major-10-130 bcm2708_wdog
 alias devname:mapper/control dm_mod
@@ -5914,6 +5915,7 @@ alias hid:b0005g*v0000057Ep00000330 hid_wiimote
 alias hid:b0005g*v0000057Ep00000306 hid_wiimote
 alias platform:uio_pdrv uio_pdrv
 alias platform:uio_pdrv_genirq uio_pdrv_genirq
+alias usb:v04FAp2490d*dc*dsc*dp*ic*isc*ip*in* ds2490
 alias usb:v0A5Cp2033d*dc*dsc*dp*ic*isc*ip*in* bcm203x
 alias usb:v08FDp0002d*dc*dsc*dp*ic*isc*ip*in* bpa10x
 alias usb:v057Cp2200d*dc*dsc*dp*ic*isc*ip*in* bfusb
