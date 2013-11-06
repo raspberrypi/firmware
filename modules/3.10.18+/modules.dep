@@ -79,6 +79,11 @@ kernel/crypto/michael_mic.ko:
 kernel/crypto/authenc.ko:
 kernel/crypto/authencesn.ko:
 kernel/crypto/xor.ko:
+kernel/crypto/async_tx/async_tx.ko:
+kernel/crypto/async_tx/async_memcpy.ko: kernel/crypto/async_tx/async_tx.ko
+kernel/crypto/async_tx/async_xor.ko: kernel/crypto/async_tx/async_tx.ko kernel/crypto/xor.ko
+kernel/crypto/async_tx/async_pq.ko: kernel/crypto/async_tx/async_xor.ko kernel/crypto/async_tx/async_tx.ko kernel/crypto/xor.ko kernel/lib/raid6/raid6_pq.ko
+kernel/crypto/async_tx/async_raid6_recov.ko: kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
 kernel/drivers/video/backlight/lcd.ko:
 kernel/drivers/video/backlight/backlight.ko:
 kernel/drivers/video/backlight/generic_bl.ko: kernel/drivers/video/backlight/backlight.ko
@@ -89,7 +94,11 @@ kernel/drivers/block/drbd/drbd.ko: kernel/lib/lru_cache.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko:
 kernel/drivers/misc/ti-st/st_drv.ko:
 kernel/drivers/nfc/pn533.ko: kernel/net/nfc/nfc.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/scsi/sd_mod.ko:
+kernel/drivers/scsi/scsi_transport_iscsi.ko:
+kernel/drivers/scsi/libiscsi.ko: kernel/drivers/scsi/scsi_transport_iscsi.ko
+kernel/drivers/scsi/libiscsi_tcp.ko: kernel/drivers/scsi/libiscsi.ko kernel/drivers/scsi/scsi_transport_iscsi.ko
+kernel/drivers/scsi/iscsi_tcp.ko: kernel/drivers/scsi/libiscsi_tcp.ko kernel/drivers/scsi/libiscsi.ko kernel/drivers/scsi/scsi_transport_iscsi.ko
+kernel/drivers/scsi/iscsi_boot_sysfs.ko:
 kernel/drivers/scsi/sr_mod.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/spi/spidev.ko:
 kernel/drivers/spi/spi-bcm2708.ko:
@@ -699,8 +708,20 @@ kernel/drivers/media/radio/tef6862.ko: kernel/drivers/media/v4l2-core/v4l2-commo
 kernel/drivers/media/radio/wl128x/fm_drv.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/misc/ti-st/st_drv.ko
 kernel/drivers/power/ds2760_battery.ko: kernel/drivers/w1/slaves/w1_ds2760.ko kernel/drivers/w1/wire.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko:
+kernel/drivers/md/raid0.ko: kernel/drivers/md/md-mod.ko
+kernel/drivers/md/raid1.ko: kernel/drivers/md/md-mod.ko
+kernel/drivers/md/raid10.ko: kernel/drivers/md/md-mod.ko
+kernel/drivers/md/raid456.ko: kernel/drivers/md/md-mod.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
+kernel/drivers/md/md-mod.ko:
 kernel/drivers/md/dm-mod.ko:
 kernel/drivers/md/dm-crypt.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-delay.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-snapshot.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-mirror.ko: kernel/drivers/md/dm-region-hash.ko kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-log.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-region-hash.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-zero.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-raid.ko: kernel/drivers/md/dm-mod.ko kernel/drivers/md/raid10.ko kernel/drivers/md/raid1.ko kernel/drivers/md/raid456.ko kernel/drivers/md/md-mod.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
 kernel/drivers/cpufreq/cpufreq_stats.ko:
 kernel/drivers/leds/trigger/ledtrig-transient.ko:
 kernel/drivers/leds/trigger/ledtrig-camera.ko:
@@ -762,6 +783,7 @@ kernel/drivers/hid/hid-wacom.ko: kernel/drivers/leds/led-class.ko
 kernel/drivers/hid/hid-waltop.ko:
 kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/leds/led-class.ko
 kernel/drivers/staging/media/lirc/lirc_rpi.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/rtl8712/r8712u.ko:
 kernel/drivers/uio/uio.ko:
 kernel/drivers/uio/uio_pdrv.ko: kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv_genirq.ko: kernel/drivers/uio/uio.ko
