@@ -1,3 +1,4 @@
+kernel/arch/arm/crypto/sha1-arm.ko:
 kernel/fs/quota/quota_v1.ko:
 kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
 kernel/fs/quota/quota_tree.ko:
@@ -64,13 +65,21 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
 kernel/fs/btrfs/btrfs.ko: kernel/lib/raid6/raid6_pq.ko kernel/lib/zlib_deflate/zlib_deflate.ko kernel/lib/lzo/lzo_decompress.ko kernel/lib/lzo/lzo_compress.ko kernel/crypto/xor.ko
 kernel/fs/gfs2/gfs2.ko:
 kernel/crypto/seqiv.ko:
+kernel/crypto/crypto_user.ko:
+kernel/crypto/hmac.ko:
 kernel/crypto/xcbc.ko:
+kernel/crypto/crypto_null.ko:
 kernel/crypto/md4.ko:
+kernel/crypto/md5.ko:
+kernel/crypto/sha1_generic.ko:
 kernel/crypto/sha256_generic.ko:
 kernel/crypto/sha512_generic.ko:
 kernel/crypto/wp512.ko:
 kernel/crypto/tgr192.ko:
+kernel/crypto/gf128mul.ko:
 kernel/crypto/ecb.ko:
+kernel/crypto/xts.ko: kernel/crypto/gf128mul.ko
+kernel/crypto/cryptd.ko:
 kernel/crypto/cast_common.ko:
 kernel/crypto/cast5_generic.ko: kernel/crypto/cast_common.ko
 kernel/crypto/arc4.ko:
@@ -184,7 +193,10 @@ kernel/drivers/net/ppp/ppp_generic.ko: kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/ppp/ppp_async.ko: kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko kernel/lib/crc-ccitt.ko
 kernel/drivers/net/ppp/bsd_comp.ko: kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/ppp/ppp_deflate.ko: kernel/lib/zlib_deflate/zlib_deflate.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
+kernel/drivers/net/ppp/ppp_mppe.ko: kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/ppp/ppp_synctty.ko: kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
+kernel/drivers/net/ppp/pppox.ko: kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
+kernel/drivers/net/ppp/pppoe.ko: kernel/drivers/net/ppp/pppox.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/slip/slip.ko: kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/slip/slhc.ko:
 kernel/drivers/net/wimax/i2400m/i2400m.ko: kernel/net/wimax/wimax.ko kernel/net/rfkill/rfkill.ko
@@ -706,7 +718,7 @@ kernel/drivers/media/radio/radio-ma901.ko: kernel/drivers/media/v4l2-core/videod
 kernel/drivers/media/radio/saa7706h.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/tef6862.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/wl128x/fm_drv.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/misc/ti-st/st_drv.ko
-kernel/drivers/power/ds2760_battery.ko: kernel/drivers/w1/slaves/w1_ds2760.ko kernel/drivers/w1/wire.ko
+kernel/drivers/power/ds2760_battery.ko: kernel/drivers/w1/slaves/w1_ds2760.ko kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko:
 kernel/drivers/md/raid0.ko: kernel/drivers/md/md-mod.ko
 kernel/drivers/md/raid1.ko: kernel/drivers/md/md-mod.ko
@@ -720,9 +732,11 @@ kernel/drivers/md/dm-snapshot.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-mirror.ko: kernel/drivers/md/dm-region-hash.ko kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-log.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-region-hash.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-log-userspace.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko kernel/drivers/connector/cn.ko
 kernel/drivers/md/dm-zero.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-raid.ko: kernel/drivers/md/dm-mod.ko kernel/drivers/md/raid10.ko kernel/drivers/md/raid1.ko kernel/drivers/md/raid456.ko kernel/drivers/md/md-mod.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
 kernel/drivers/cpufreq/cpufreq_stats.ko:
+kernel/drivers/mmc/host/mmc_spi.ko: kernel/lib/crc7.ko
 kernel/drivers/leds/trigger/ledtrig-transient.ko:
 kernel/drivers/leds/trigger/ledtrig-camera.ko:
 kernel/drivers/leds/led-class.ko:
@@ -784,26 +798,27 @@ kernel/drivers/hid/hid-waltop.ko:
 kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/leds/led-class.ko
 kernel/drivers/staging/media/lirc/lirc_rpi.ko: kernel/drivers/media/rc/lirc_dev.ko
 kernel/drivers/staging/rtl8712/r8712u.ko:
+kernel/drivers/connector/cn.ko:
 kernel/drivers/uio/uio.ko:
 kernel/drivers/uio/uio_pdrv.ko: kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv_genirq.ko: kernel/drivers/uio/uio.ko
-kernel/drivers/w1/masters/ds2490.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/masters/ds2482.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/masters/ds1wm.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/masters/w1-gpio.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_therm.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_smem.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2408.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2413.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2423.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2431.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2433.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2760.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2780.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds2781.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_bq27000.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/slaves/w1_ds28e04.ko: kernel/drivers/w1/wire.ko
-kernel/drivers/w1/wire.ko:
+kernel/drivers/w1/masters/ds2490.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/masters/ds2482.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/masters/ds1wm.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/masters/w1-gpio.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_therm.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_smem.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2408.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2413.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2423.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2431.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2433.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2760.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2780.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds2781.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_bq27000.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/slaves/w1_ds28e04.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
+kernel/drivers/w1/wire.ko: kernel/drivers/connector/cn.ko
 kernel/drivers/bluetooth/hci_vhci.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bcm203x.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bpa10x.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
@@ -1126,6 +1141,7 @@ kernel/net/bluetooth/rfcomm/rfcomm.ko: kernel/net/bluetooth/bluetooth.ko kernel/
 kernel/net/bluetooth/bnep/bnep.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/net/bluetooth/hidp/hidp.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/net/l2tp/l2tp_core.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/l2tp/l2tp_ppp.ko: kernel/drivers/net/ppp/pppox.ko kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ipv6.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
 kernel/net/sctp/sctp.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/net/rfkill/rfkill.ko:
@@ -1135,6 +1151,7 @@ kernel/net/batman-adv/batman-adv.ko:
 kernel/net/nfc/nfc.ko: kernel/net/rfkill/rfkill.ko
 kernel/net/openvswitch/openvswitch.ko:
 kernel/lib/crc-ccitt.ko:
+kernel/lib/crc7.ko:
 kernel/lib/zlib_deflate/zlib_deflate.ko:
 kernel/lib/lzo/lzo_compress.ko:
 kernel/lib/lzo/lzo_decompress.ko:

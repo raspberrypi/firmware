@@ -1,4 +1,5 @@
 # Aliases extracted from modules themselves.
+alias sha1 sha1_arm
 alias nls_tis-620 nls_cp874
 alias nls_sjis nls_cp932
 alias nls_gb2312 nls_cp936
@@ -30,6 +31,10 @@ alias char-major-10-234 btrfs
 alias fs-btrfs btrfs
 alias fs-gfs2meta gfs2
 alias fs-gfs2 gfs2
+alias cipher_null crypto_null
+alias digest_null crypto_null
+alias compress_null crypto_null
+alias sha1 sha1_generic
 alias sha256 sha256_generic
 alias sha224 sha256_generic
 alias sha512 sha512_generic
@@ -1411,7 +1416,9 @@ alias tty-ldisc-3 ppp_async
 alias ppp-compress-21 bsd_comp
 alias ppp-compress-24 ppp_deflate
 alias ppp-compress-26 ppp_deflate
+alias ppp-compress-18 ppp_mppe
 alias tty-ldisc-14 ppp_synctty
+alias net-pf-24 pppoe
 alias tty-ldisc-1 slip
 alias usb:v8086p1403d*dc*dsc*dp*ic*isc*ip*in* i2400m_usb
 alias usb:v8086p1406d*dc*dsc*dp*ic*isc*ip*in* i2400m_usb
@@ -5605,6 +5612,7 @@ alias dm-raid5 dm_raid
 alias dm-raid4 dm_raid
 alias dm-raid10 dm_raid
 alias dm-raid1 dm_raid
+alias spi:mmc_spi mmc_spi
 alias platform:leds-gpio leds_gpio
 alias hid:b0003g*v000009DAp0000001A hid_a4tech
 alias hid:b0003g*v000009DAp0000000A hid_a4tech
@@ -6002,6 +6010,7 @@ alias usb:v0BDAp8713d*dc*dsc*dp*ic*isc*ip*in* r8712u
 alias usb:v0BDAp8712d*dc*dsc*dp*ic*isc*ip*in* r8712u
 alias usb:v0BDAp8173d*dc*dsc*dp*ic*isc*ip*in* r8712u
 alias usb:v0BDAp8171d*dc*dsc*dp*ic*isc*ip*in* r8712u
+alias net-pf-16-proto-11 cn
 alias platform:uio_pdrv uio_pdrv
 alias platform:uio_pdrv_genirq uio_pdrv_genirq
 alias usb:v04FAp2490d*dc*dsc*dp*ic*isc*ip*in* ds2490
@@ -6604,6 +6613,7 @@ alias net-pf-31 bluetooth
 alias bt-proto-3 rfcomm
 alias bt-proto-4 bnep
 alias bt-proto-6 hidp
+alias pppox-proto-1 l2tp_ppp
 alias net-pf-10-proto-132 sctp
 alias net-pf-2-proto-132 sctp
 alias net-pf-16-proto-16-family-nfc nfc
