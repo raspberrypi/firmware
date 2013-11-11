@@ -1,4 +1,6 @@
 # Aliases extracted from modules themselves.
+alias aes-asm aes_arm
+alias aes aes_arm
 alias sha1 sha1_arm
 alias nls_tis-620 nls_cp874
 alias nls_sjis nls_cp932

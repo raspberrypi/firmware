@@ -1,3 +1,4 @@
+kernel/arch/arm/crypto/aes-arm.ko
 kernel/arch/arm/crypto/sha1-arm.ko
 kernel/fs/quota/quota_v1.ko
 kernel/fs/quota/quota_v2.ko
