@@ -44,7 +44,6 @@ kernel/drivers/block/brd.ko
 kernel/drivers/block/loop.ko
 kernel/drivers/char/raw.ko
 kernel/drivers/char/hw_random/rng-core.ko
-kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/cpufreq/cpufreq_performance.ko
 kernel/drivers/cpufreq/cpufreq_powersave.ko
 kernel/drivers/cpufreq/cpufreq_userspace.ko
@@ -76,8 +75,8 @@ kernel/drivers/net/phy/libphy.ko
 kernel/drivers/net/usb/ax88179_178a.ko
 kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/usbnet.ko
-kernel/drivers/net/usb/cdc_ncm.ko
 kernel/drivers/scsi/scsi_mod.ko
+kernel/drivers/scsi/scsi_transport_iscsi.ko
 kernel/drivers/scsi/sd_mod.ko
 kernel/drivers/thermal/thermal_sys.ko
 kernel/drivers/thermal/bcm2835-thermal.ko

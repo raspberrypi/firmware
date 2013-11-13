@@ -46,6 +46,9 @@ kernel/fs/dlm/dlm.ko: kernel/net/sctp/sctp.ko kernel/net/ipv6/ipv6.ko
 kernel/fs/reiserfs/reiserfs.ko:
 kernel/fs/squashfs/squashfs.ko: kernel/lib/xz/xz_dec.ko kernel/lib/lzo/lzo_decompress.ko
 kernel/fs/isofs/isofs.ko:
+kernel/fs/hfsplus/hfsplus.ko:
+kernel/fs/hfs/hfs.ko:
+kernel/fs/ecryptfs/ecryptfs.ko:
 kernel/fs/nfsd/nfsd.ko:
 kernel/fs/cifs/cifs.ko:
 kernel/fs/ntfs/ntfs.ko:
@@ -96,19 +99,22 @@ kernel/crypto/async_tx/async_pq.ko: kernel/crypto/async_tx/async_xor.ko kernel/c
 kernel/crypto/async_tx/async_raid6_recov.ko: kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
 kernel/drivers/video/backlight/lcd.ko:
 kernel/drivers/video/backlight/backlight.ko:
-kernel/drivers/video/backlight/generic_bl.ko: kernel/drivers/video/backlight/backlight.ko
+kernel/drivers/char/hw_random/bcm2708-rng.ko:
 kernel/drivers/block/pktcdvd.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/block/nbd.ko:
 kernel/drivers/block/cryptoloop.ko:
 kernel/drivers/block/drbd/drbd.ko: kernel/lib/lru_cache.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko:
 kernel/drivers/misc/ti-st/st_drv.ko:
+kernel/drivers/mfd/mfd-core.ko:
+kernel/drivers/mfd/wl1273-core.ko: kernel/drivers/mfd/mfd-core.ko
 kernel/drivers/nfc/pn533.ko: kernel/net/nfc/nfc.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/scsi/scsi_transport_iscsi.ko:
-kernel/drivers/scsi/libiscsi.ko: kernel/drivers/scsi/scsi_transport_iscsi.ko
-kernel/drivers/scsi/libiscsi_tcp.ko: kernel/drivers/scsi/libiscsi.ko kernel/drivers/scsi/scsi_transport_iscsi.ko
-kernel/drivers/scsi/iscsi_tcp.ko: kernel/drivers/scsi/libiscsi_tcp.ko kernel/drivers/scsi/libiscsi.ko kernel/drivers/scsi/scsi_transport_iscsi.ko
+kernel/drivers/scsi/libiscsi.ko:
+kernel/drivers/scsi/libiscsi_tcp.ko: kernel/drivers/scsi/libiscsi.ko
+kernel/drivers/scsi/iscsi_tcp.ko: kernel/drivers/scsi/libiscsi_tcp.ko kernel/drivers/scsi/libiscsi.ko
 kernel/drivers/scsi/iscsi_boot_sysfs.ko:
+kernel/drivers/scsi/st.ko:
+kernel/drivers/scsi/osst.ko:
 kernel/drivers/scsi/sr_mod.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/spi/spidev.ko:
 kernel/drivers/spi/spi-bcm2708.ko:
@@ -176,10 +182,13 @@ kernel/drivers/net/usb/kalmia.ko:
 kernel/drivers/net/usb/ipheth.ko:
 kernel/drivers/net/usb/sierra_net.ko:
 kernel/drivers/net/usb/cx82310_eth.ko:
+kernel/drivers/net/usb/cdc_ncm.ko:
 kernel/drivers/net/usb/lg-vl600.ko: kernel/drivers/net/usb/cdc_ether.ko
 kernel/drivers/net/usb/qmi_wwan.ko: kernel/drivers/usb/class/cdc-wdm.ko
-kernel/drivers/net/usb/cdc_mbim.ko: kernel/drivers/usb/class/cdc-wdm.ko
+kernel/drivers/net/usb/cdc_mbim.ko: kernel/drivers/net/usb/cdc_ncm.ko kernel/drivers/usb/class/cdc-wdm.ko
+kernel/drivers/net/bonding/bonding.ko:
 kernel/drivers/net/dummy.ko:
+kernel/drivers/net/macvlan.ko:
 kernel/drivers/net/netconsole.ko:
 kernel/drivers/net/tun.ko:
 kernel/drivers/net/irda/irda-usb.ko: kernel/net/irda/irda.ko kernel/lib/crc-ccitt.ko
@@ -708,6 +717,7 @@ kernel/drivers/media/v4l2-core/videobuf2-memops.ko:
 kernel/drivers/media/v4l2-core/videobuf2-vmalloc.ko: kernel/drivers/media/v4l2-core/videobuf2-memops.ko
 kernel/drivers/media/dvb-core/dvb-core.ko:
 kernel/drivers/media/radio/si470x/radio-usb-si470x.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
+kernel/drivers/media/radio/si470x/radio-i2c-si470x.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/radio-shark.ko: kernel/sound/i2c/other/snd-tea575x-tuner.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/leds/led-class.ko
 kernel/drivers/media/radio/shark2.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/leds/led-class.ko
 kernel/drivers/media/radio/si4713-i2c.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
@@ -716,8 +726,10 @@ kernel/drivers/media/radio/dsbr100.ko: kernel/drivers/media/v4l2-core/videodev.k
 kernel/drivers/media/radio/radio-mr800.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/radio-keene.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/radio-ma901.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
+kernel/drivers/media/radio/radio-tea5764.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/saa7706h.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/tef6862.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
+kernel/drivers/media/radio/radio-wl1273.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/wl128x/fm_drv.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/misc/ti-st/st_drv.ko
 kernel/drivers/power/ds2760_battery.ko: kernel/drivers/w1/slaves/w1_ds2760.ko kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/watchdog/bcm2708_wdog.ko:
@@ -797,12 +809,28 @@ kernel/drivers/hid/hid-zydacron.ko:
 kernel/drivers/hid/hid-wacom.ko: kernel/drivers/leds/led-class.ko
 kernel/drivers/hid/hid-waltop.ko:
 kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/leds/led-class.ko
+kernel/drivers/staging/media/lirc/lirc_igorplugusb.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_imon.ko: kernel/drivers/media/rc/lirc_dev.ko
 kernel/drivers/staging/media/lirc/lirc_rpi.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_sasem.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/lirc/lirc_serial.ko: kernel/drivers/media/rc/lirc_dev.ko
+kernel/drivers/staging/media/as102/dvb-as102.ko: kernel/drivers/media/dvb-core/dvb-core.ko
+kernel/drivers/staging/winbond/w35und.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/staging/wlan-ng/prism2_usb.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/staging/rtl8712/r8712u.ko:
+kernel/drivers/staging/vt6656/vt6656_stage.ko:
+kernel/drivers/staging/speakup/speakup_soft.ko: kernel/drivers/staging/speakup/speakup.ko
+kernel/drivers/staging/speakup/speakup.ko:
 kernel/drivers/connector/cn.ko:
 kernel/drivers/uio/uio.ko:
 kernel/drivers/uio/uio_pdrv.ko: kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv_genirq.ko: kernel/drivers/uio/uio.ko
+kernel/drivers/input/serio/serio.ko:
+kernel/drivers/input/serio/serport.ko: kernel/drivers/input/serio/serio.ko
+kernel/drivers/input/serio/serio_raw.ko: kernel/drivers/input/serio/serio.ko
+kernel/drivers/input/gameport/gameport.ko:
+kernel/drivers/input/gameport/lightning.ko: kernel/drivers/input/gameport/gameport.ko
+kernel/drivers/input/gameport/ns558.ko: kernel/drivers/input/gameport/gameport.ko
 kernel/drivers/w1/masters/ds2490.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/w1/masters/ds2482.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/w1/masters/ds1wm.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
@@ -1059,6 +1087,8 @@ kernel/net/ipv4/netfilter/arpt_mangle.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/arptable_filter.ko: kernel/net/ipv4/netfilter/arp_tables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/ip_tunnel.ko:
 kernel/net/ipv4/ipip.ko: kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv4/tunnel4.ko
+kernel/net/ipv4/gre.ko:
+kernel/net/ipv4/ip_gre.ko: kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv4/gre.ko
 kernel/net/ipv4/ah4.ko:
 kernel/net/ipv4/esp4.ko:
 kernel/net/ipv4/ipcomp.ko: kernel/net/xfrm/xfrm_ipcomp.ko
