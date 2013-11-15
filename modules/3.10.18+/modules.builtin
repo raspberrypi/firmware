@@ -78,6 +78,7 @@ kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/scsi_transport_iscsi.ko
 kernel/drivers/scsi/sd_mod.ko
+kernel/drivers/spi/spidev.ko
 kernel/drivers/thermal/thermal_sys.ko
 kernel/drivers/thermal/bcm2835-thermal.ko
 kernel/drivers/tty/serial/serial_core.ko

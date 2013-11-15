@@ -116,7 +116,6 @@ kernel/drivers/scsi/iscsi_boot_sysfs.ko:
 kernel/drivers/scsi/st.ko:
 kernel/drivers/scsi/osst.ko:
 kernel/drivers/scsi/sr_mod.ko: kernel/drivers/cdrom/cdrom.ko
-kernel/drivers/spi/spidev.ko:
 kernel/drivers/spi/spi-bcm2708.ko:
 kernel/drivers/net/phy/mdio-bitbang.ko:
 kernel/drivers/net/hamradio/mkiss.ko: kernel/net/ax25/ax25.ko

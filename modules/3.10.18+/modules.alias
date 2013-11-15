@@ -62,8 +62,6 @@ alias char-major-206-* osst
 alias scsi:t-0x04* sr_mod
 alias scsi:t-0x05* sr_mod
 alias block-major-11-* sr_mod
-alias spi:spidev spidev
-alias of:N*T*Crohm,dh2228fv* spidev
 alias platform:bcm2708_spi spi_bcm2708
 alias tty-ldisc-5 mkiss
 alias tty-ldisc-7 6pack
