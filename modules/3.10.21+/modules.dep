@@ -521,6 +521,7 @@ kernel/drivers/media/common/siano/smsdvb.ko: kernel/drivers/media/dvb-core/dvb-c
 kernel/drivers/media/common/cx2341x.ko: kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/common/tveeprom.ko:
 kernel/drivers/media/common/cypress_firmware.ko:
+kernel/drivers/media/platform/bcm2835/bcm2835-v4l2.ko: kernel/drivers/media/v4l2-core/videobuf2-core.ko kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/media/v4l2-core/videobuf2-vmalloc.ko kernel/drivers/media/v4l2-core/videobuf2-memops.ko
 kernel/drivers/media/pci/ttpci/ttpci-eeprom.ko:
 kernel/drivers/media/usb/dvb-usb/dvb-usb.ko: kernel/drivers/media/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/usb/dvb-usb/dvb-usb-vp7045.ko: kernel/drivers/media/usb/dvb-usb/dvb-usb.ko kernel/drivers/media/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
