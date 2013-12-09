@@ -26,7 +26,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Video deocode demo using OpenMAX IL though the ilcient helper library
+// Video decode demo using OpenMAX IL though the ilcient helper library
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,13 +36,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ilclient.h"
 
 static OMX_BUFFERHEADERTYPE* eglBuffer = NULL;
-static COMPONENT_T* video_render = NULL;
+static COMPONENT_T* egl_render = NULL;
 
 static void* eglImage = 0;
 
 void my_fill_buffer_done(void* data, COMPONENT_T* comp)
 {
-  if (OMX_FillThisBuffer(ilclient_get_handle(video_render), eglBuffer) != OMX_ErrorNone)
+  if (OMX_FillThisBuffer(ilclient_get_handle(egl_render), eglBuffer) != OMX_ErrorNone)
    {
       printf("OMX_FillThisBuffer failed in callback\n");
       exit(1);
@@ -100,11 +100,10 @@ void *video_decode_test(void* arg)
       status = -14;
    list[0] = video_decode;
 
-   // create video_render
-   //if(status == 0 && ilclient_create_component(client, &video_render, "video_render", ILCLIENT_DISABLE_ALL_PORTS) != 0)
-   if(status == 0 && ilclient_create_component(client, &video_render, "egl_render", ILCLIENT_DISABLE_ALL_PORTS | ILCLIENT_ENABLE_OUTPUT_BUFFERS) != 0)
+   // create egl_render
+   if(status == 0 && ilclient_create_component(client, &egl_render, "egl_render", ILCLIENT_DISABLE_ALL_PORTS | ILCLIENT_ENABLE_OUTPUT_BUFFERS) != 0)
       status = -14;
-   list[1] = video_render;
+   list[1] = egl_render;
 
    // create clock
    if(status == 0 && ilclient_create_component(client, &clock, "clock", ILCLIENT_DISABLE_ALL_PORTS) != 0)
@@ -125,8 +124,7 @@ void *video_decode_test(void* arg)
    list[3] = video_scheduler;
 
    set_tunnel(tunnel, video_decode, 131, video_scheduler, 10);
-   //set_tunnel(tunnel+1, video_scheduler, 11, video_render, 90);
-   set_tunnel(tunnel+1, video_scheduler, 11, video_render, 220);
+   set_tunnel(tunnel+1, video_scheduler, 11, egl_render, 220);
    set_tunnel(tunnel+2, clock, 80, video_scheduler, 12);
 
    // setup clock tunnel first
@@ -180,7 +178,7 @@ void *video_decode_test(void* arg)
 
             ilclient_change_component_state(video_scheduler, OMX_StateExecuting);
 
-            // now setup tunnel to video_render
+            // now setup tunnel to egl_render
             if(ilclient_setup_tunnel(tunnel+1, 0, 1000) != 0)
             {
                status = -12;
@@ -188,28 +186,28 @@ void *video_decode_test(void* arg)
             }
 
             // Set egl_render to idle
-            ilclient_change_component_state(video_render, OMX_StateIdle);
+            ilclient_change_component_state(egl_render, OMX_StateIdle);
 
             // Enable the output port and tell egl_render to use the texture as a buffer
-            //ilclient_enable_port(video_render, 221); THIS BLOCKS SO CANT BE USED
-            if (OMX_SendCommand(ILC_GET_HANDLE(video_render), OMX_CommandPortEnable, 221, NULL) != OMX_ErrorNone)
+            //ilclient_enable_port(egl_render, 221); THIS BLOCKS SO CANT BE USED
+            if (OMX_SendCommand(ILC_GET_HANDLE(egl_render), OMX_CommandPortEnable, 221, NULL) != OMX_ErrorNone)
             {
                printf("OMX_CommandPortEnable failed.\n");
                exit(1);
             }
 
-            if (OMX_UseEGLImage(ILC_GET_HANDLE(video_render), &eglBuffer, 221, NULL, eglImage) != OMX_ErrorNone)
+            if (OMX_UseEGLImage(ILC_GET_HANDLE(egl_render), &eglBuffer, 221, NULL, eglImage) != OMX_ErrorNone)
             {
                printf("OMX_UseEGLImage failed.\n");
                exit(1);
             }
 
             // Set egl_render to executing
-            ilclient_change_component_state(video_render, OMX_StateExecuting);
+            ilclient_change_component_state(egl_render, OMX_StateExecuting);
 
 
             // Request egl_render to write data to the texture buffer
-            if(OMX_FillThisBuffer(ILC_GET_HANDLE(video_render), eglBuffer) != OMX_ErrorNone)
+            if(OMX_FillThisBuffer(ILC_GET_HANDLE(egl_render), eglBuffer) != OMX_ErrorNone)
             {
                printf("OMX_FillThisBuffer failed.\n");
                exit(1);
@@ -242,10 +240,6 @@ void *video_decode_test(void* arg)
 
       if(OMX_EmptyThisBuffer(ILC_GET_HANDLE(video_decode), buf) != OMX_ErrorNone)
          status = -20;
-
-      // wait for EOS from render
-      ilclient_wait_for_event(video_render, OMX_EventBufferFlag, 90, 0, OMX_BUFFERFLAG_EOS, 0,
-                              ILCLIENT_BUFFER_FLAG_EOS, 10000);
 
       // need to flush the renderer to allow video_decode to disable its input port
       ilclient_flush_tunnels(tunnel, 0);
