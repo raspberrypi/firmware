@@ -1148,6 +1148,7 @@ kernel/net/ipv6/xfrm6_mode_transport.ko:
 kernel/net/ipv6/xfrm6_mode_tunnel.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/xfrm6_mode_beet.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/sit.ko: kernel/net/ipv6/ipv6.ko kernel/net/ipv4/tunnel4.ko kernel/net/ipv4/ip_tunnel.ko
+kernel/net/ipv6/ip6_tunnel.ko: kernel/net/ipv6/tunnel6.ko kernel/net/ipv6/ipv6.ko
 kernel/net/8021q/8021q.ko: kernel/net/802/garp.ko kernel/net/802/stp.ko kernel/net/llc/llc.ko
 kernel/net/wireless/cfg80211.ko: kernel/net/rfkill/rfkill.ko
 kernel/net/wireless/lib80211.ko:
