@@ -4888,6 +4888,7 @@
 0x77d8df32	wait_for_completion_io	vmlinux	EXPORT_SYMBOL
 0x92fe8191	find_vpid	vmlinux	EXPORT_SYMBOL_GPL
 0xd273b1b1	__round_jiffies_up_relative	vmlinux	EXPORT_SYMBOL_GPL
+0x973002c8	bcm_dma_is_busy	vmlinux	EXPORT_SYMBOL_GPL
 0xe67d81ba	strlen_user	vmlinux	EXPORT_SYMBOL
 0xba543313	unmap_mapping_range	vmlinux	EXPORT_SYMBOL
 0x8b618d08	overflowuid	vmlinux	EXPORT_SYMBOL
