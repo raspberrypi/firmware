@@ -71,7 +71,6 @@ void *video_decode_test(void* arg)
    FILE *in;
    int status = 0;
    unsigned int data_len = 0;
-   int packet_size = 80<<10;
 
    memset(list, 0, sizeof(list));
    memset(tunnel, 0, sizeof(tunnel));
@@ -161,7 +160,7 @@ void *video_decode_test(void* arg)
          if (feof(in))
             rewind(in);
 
-         data_len += fread(dest, 1, packet_size-data_len, in);
+         data_len += fread(dest, 1, buf->nAllocLen-data_len, in);
 
          if(port_settings_changed == 0 &&
             ((data_len > 0 && ilclient_remove_event(video_decode, OMX_EventPortSettingsChanged, 131, 0, 0, 1) == 0) ||
