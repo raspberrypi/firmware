@@ -542,7 +542,7 @@ c001b3b4 T bcm_dma_abort
 c001b434 T bcm_dma_wait_idle
 c001b460 t bcm2708_gpio_get
 c001b49c t bcm2708_gpio_set
-c001b4f8 t bcm2708_gpio_to_irq
+c001b4f8 t bcm2708___bcm2708_gpio_to_irq
 c001b500 t bcm2708_gpio_remove
 c001b550 t bcm2708_gpio_probe
 c001b688 t bcm2708_gpio_interrupt
