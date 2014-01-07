@@ -58,7 +58,7 @@ a platform video display device.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="12">90<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="13">90<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Sets the port definition type to describe the input video
   stream. Typically this is called by the component itself when this
   port is tunnelled with an appropriate output port. This port also
@@ -82,6 +82,8 @@ a platform video display device.
  <tr valign="top"><td><tt>OMX_IndexConfigCommonMirror</tt>
 <td> Mirroring reflects video or image frames along the horizontal and
   vertical axes.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
+<td> Query / set the pixel aspect ratio of the source content.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmTransposeBufferCount">OMX_IndexParamBrcmTransposeBufferCount</a></tt>
 <td> Query / set the number of buffers pre-allocated for 90/270 rotation.
   Must be less than or equal to 2. If 0 (default), buffers are allocated

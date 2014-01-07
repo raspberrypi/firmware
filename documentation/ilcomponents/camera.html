@@ -66,7 +66,7 @@ correctly assigning timestamps to frames.
 The preview port, 70, will emit video images whenever the component is
 in the executing state and the port is not disabled. The video capture port,
 71, will emit images only when the capturing configuration parameter
-<tt>OMX_IndexConfigPortCapturing</tt> is set for that port, and either 
+<tt>OMX_IndexConfigPortCapturing</tt> is set for that port, and either
 the clock port is disabled or the connected clock is in the Running state.
 <p>
 Due to limitations in the current underlying layers, it is not
@@ -86,15 +86,19 @@ This uses a second instance of Camplus and will grab the Bayer input
 image from the primary Camplus instance, and then process it in the
 background. The primary Camplus may resume viewfinder operation
 dependent on configuration and memory being available in the input pool.
-The port will only capture an image when the port is executing and 
-<tt>OMX_IndexConfigPortCapturing</tt> is set for the port. 
-If the bOneShot flag is set, an EOS will be emited from the port 
+The port will only capture an image when the port is executing and
+<tt>OMX_IndexConfigPortCapturing</tt> is set for the port.
+If the bOneShot flag is set, an EOS will be emitted from the port
 after each complete capture.
 <p>
 The video ports will emit images in
-<tt>OMX_COLOR_FormatYUV420PackedPlanar</tt> or
-<tt>OMX_COLOR_FormatYUV420PackedSemiPlanar</tt> or
-<tt>OMX_COLOR_FormatYUV422PackedPlanar</tt> format, unless configured
+<tt>OMX_COLOR_FormatYUV420PackedPlanar</tt>,
+<tt>OMX_COLOR_FormatYUV420PackedSemiPlanar</tt>,
+<tt>OMX_COLOR_FormatYUV422PackedPlanar</tt>,
+<tt>OMX_COLOR_FormatYCbYCr</tt>,
+<tt>OMX_COLOR_FormatYCrYCb</tt>,
+<tt>OMX_COLOR_FormatCbYCrY</tt>, or
+<tt>OMX_COLOR_FormatCrYCbY</tt>, format, unless configured
 for proprietary tunnelling to a Broadcom component supporting the
 OMX_IndexParamImagePoolDisplayFunction callback, or
 OMX_IndexParamCameraPoolToEncoderFunction callback, in
@@ -121,7 +125,7 @@ unloaded, extending the startup latency.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="87">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
+<tr valign="top"><td rowspan="98">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
 <td> Query / set the camera sensor mode. When setting this parameter, only
   bOneShot is used. It will return the actual sensor resolution when
   queried (as per the OMX specification)
@@ -134,7 +138,7 @@ unloaded, extending the startup latency.
   will reset the internal counter used for time stamping frames when not
   connected to a clock component.
  <tr valign="top"><td><tt>OMX_IndexConfigCapturing</tt>
-<td> This index is deprecated and should no longer be used. 
+<td> This index is deprecated and should no longer be used.
   Use <tt>OMX_IndexConfigPortCapturing</tt> instead.
  <tr valign="top"><td><tt>OMX_IndexAutoPauseAfterCapture</tt>
 <td> Query / set option to pause the component after the capture bit has
@@ -153,7 +157,7 @@ unloaded, extending the startup latency.
   notified once that driver is loaded, rather than having to poll the settings.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraDevicesPresent">OMX_IndexParamCameraDevicesPresent</a></tt>
 <td> Query the camera devices defined for this platform. The result is a bitmask
-  indicating which cameras ahve been detected.
+  indicating which cameras have been detected.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamISPTunerName">OMX_IndexParamISPTunerName</a></tt>
 <td> ISP tuner name. Allow the client to query / set the name of the camera tuner module to be
   used by Camplus. If tuner_name is a null string, the default tuner
@@ -163,15 +167,15 @@ unloaded, extending the startup latency.
  <tr valign="top"><td><tt>OMX_IndexConfigCommonFrameStabilisation</tt>
 <td> Query / set the state of the image stabilisation function of the
   camera (NB the image will be automatically zoomed by approx 10% to
-  allow the stabilisation alogrithm space to operate in)
+  allow the stabilisation algorithm space to operate in)
  <tr valign="top"><td><tt>OMX_IndexConfigCommonExposure</tt>
 <td> Query / set the exposure mode for the camera.
  <tr valign="top"><td><tt>OMX_IndexConfigCommonExposureValue</tt>
 <td> Query / set the exposure parameters for the camera
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraImagePool">OMX_IndexParamCameraImagePool</a></tt>
 <td> Set the image pool parameters for to be used by the components. This
-  allows a client to specifies the size, type, and number of images in each 
-  pool. By default the sizes are left as 0 so the size is determined by 
+  allows a client to specifies the size, type, and number of images in each
+  pool. By default the sizes are left as 0 so the size is determined by
   <tt>OMX_IndexParamPortMaxFrameSize</tt>. The number of images in each pool is always
   determined by the settings in this parameter.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraISPOutputPoolHeight">OMX_IndexConfigCameraISPOutputPoolHeight</a></tt>
@@ -193,10 +197,10 @@ unloaded, extending the startup latency.
 <td> Allows pointers to external image pools to be passed in to the
   component to be used for image capture. <tt>image_pool</tt> is used as
   the ISP high resolution image pool, <tt>image_pool2</tt> as the ISP low
-  res pool, <tt>image_pool3</tt> as the input pool, <tt>image_pool3</tt> as the 
-  high res stills pool, and <tt>image_pool5</tt> as the stills input pool. 
-  If being used, all five must be valid image pools. If not, all five must 
-  be <tt>NULL</tt>, the default, which causes the component to allocate pools 
+  res pool, <tt>image_pool3</tt> as the input pool, <tt>image_pool3</tt> as the
+  high res stills pool, and <tt>image_pool5</tt> as the stills input pool.
+  If being used, all five must be valid image pools. If not, all five must
+  be <tt>NULL</tt>, the default, which causes the component to allocate pools
   when active.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmCameraStats">OMX_IndexConfigBrcmCameraStats</a></tt>
 <td> Camera frame statistics. Allows the Camplus frame counts for number of frames produced and dropped
@@ -343,7 +347,7 @@ unloaded, extending the startup latency.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraCaptureEventFunction">OMX_IndexParamCameraCaptureEventFunction</a></tt>
 <td> Allows a VideoCore callback function to be registered to be used as
   an indication of when a capture is being started. This will not work over ILCS.
- <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraUseCase">OMX_IndexParamCameraUseCase</a></tt>
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraUseCase">OMX_IndexConfigCameraUseCase</a></tt>
 <td> Camera use case. Query / set the use case to be passed into the tuner
   module.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraInputFrame">OMX_IndexConfigCameraInputFrame</a></tt>
@@ -355,11 +359,22 @@ unloaded, extending the startup latency.
   <tt>OMX_IndexParamUseDynamicParameterFile</tt> must be set.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamUseDynamicParameterFile">OMX_IndexParamUseDynamicParameterFile</a></tt>
 <td> Specify whether we wish to load the DPF file.
+  The filename is set with <tt>OMX_IndexParamDynamicParameterFile</tt>.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamDynamicParameterFileFailFatal">OMX_IndexParamDynamicParameterFileFailFatal</a></tt>
 <td> Classify error condition when DFP fails to load.  This specifies whether the
-  failure to load the DPF file should this be treated as a fatal error
-  Enables loading of a dynamic parameter file. The filename is set with
-  <tt>OMX_IndexParamDynamicParameterFile</tt>.
+  failure to load the DPF file should be treated as a fatal error.
+ <tr valign="top"><td><tt>OMX_IndexParamConfigFileRegisters</tt>
+<td> Specify a register settings file to use instead of hard-coded defaults.
+  If a file is to be used, <tt>OMX_IndexParamUseRegisterFile</tt> must be set.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmConfigFileChunkRegisters">OMX_IndexParamBrcmConfigFileChunkRegisters</a></tt>
+<td> Specify a chunk of data for a register settings file.
+  <tt>OMX_IndexParamConfigFileRegisters</tt> must be called first.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseRegisterFile">OMX_IndexConfigBrcmUseRegisterFile</a></tt>
+<td> Specify whether we wish to load the register settings file.
+  The file is specified with <tt>OMX_IndexParamConfigFileRegisters</tt>.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmRegisterFileFailFatal">OMX_IndexConfigBrcmRegisterFileFailFatal</a></tt>
+<td> Classify error condition when register file fails to load.  This specifies whether
+  the failure to load the register file should be treated as a fatal error.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraInfo">OMX_IndexConfigCameraInfo</a></tt>
 <td> Query the camera and lens information for the current camera.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraFeatures">OMX_IndexConfigCameraFeatures</a></tt>
@@ -368,14 +383,14 @@ unloaded, extending the startup latency.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigRequestCallback">OMX_IndexConfigRequestCallback</a></tt>
 <td> Query / set whether a <tt>RIL_CALLBACK_CONFIGCHANGED</tt> should be
   generated when parameters change state within the component.
-  Currently supported for 
+  Currently supported for
   <tt>OMX_IndexConfigCommonFocusStatus</tt>,
   <tt>OMX_IndexParamCommonSensorMode</tt>,
   <tt>OMX_IndexConfigCameraSettings</tt>,
   <tt>OMX_IndexParamCameraDeviceNumber</tt>,
   <tt>OMX_IndexConfigCommonSceneDetected</tt>,
   <tt>OMX_IndexConfigCommonFaceDetectionRegion</tt>,
-  <tt>OMX_IndexParamCaptureStatus</tt>, and 
+  <tt>OMX_IndexParamCaptureStatus</tt>, and
   <tt>OMX_IndexConfigFieldOfView</tt> only.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCommonFocusRegionXY">OMX_IndexConfigCommonFocusRegionXY</a></tt>
 <td> Query / set the focus regions to use as a set of x/y/width/height boxes.
@@ -454,7 +469,7 @@ unloaded, extending the startup latency.
         Resume viewfinder/video encode as soon as the input image for the still
         has been acquired, and then process the still in a parallel thread. This
         requires <tt>image_pool_params.eInputPoolMode</tt> to be set to
-        <tt>OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS</tt>, and 
+        <tt>OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS</tt>, and
         <tt>image_pool_params.nNumHiResStillsFrames</tt>
         to be non-zero, otherwise the image pools won't split in a manner that
         allows viewfinder to be resumed.
@@ -481,15 +496,15 @@ unloaded, extending the startup latency.
    <tt>OMX_TimestampModeResetStc</tt>:
         Store the STC of the 1st frame sent on the video port, and subtract
         that value from all frames. The offset value will get reset whenever
-        video capture is started with either the port capturing flag or 
+        video capture is started with either the port capturing flag or
         enabling the port, so a capture pause function can not be achieved
         in this mode.
-  If passing buffers it also relies on passing the entire frame in one buffer, 
-  as the time information is not available until the whole frame has been 
+  If passing buffers it also relies on passing the entire frame in one buffer,
+  as the time information is not available until the whole frame has been
   received from Camplus.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCaptureStatus">OMX_IndexParamCaptureStatus</a></tt>
 <td> Returns the actual capture status of the camera component. Set to True when
-  a stills capture starts, and will be cleared when the capture image has been 
+  a stills capture starts, and will be cleared when the capture image has been
   passed downstream.
   This parameter is supported by <tt>OMX_IndexConfigRequestCallback</tt>
   to allow a client to do stuff on image capture (eg play a shutter sound).
@@ -504,8 +519,34 @@ unloaded, extending the startup latency.
   Returns the field of view provided by the current camera settings.
   Read only.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmPoolMemAllocSize">OMX_IndexConfigBrcmPoolMemAllocSize</a></tt>
-<td> Returns the amount of memory being used by the component's 
+<td> Returns the amount of memory being used by the component's
   image pools. Read only.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigContrastEnhance">OMX_IndexConfigContrastEnhance</a></tt>
+<td> Enable / disable contrast enhancement.
+ <tr valign="top"><td><tt>OMX_IndexParamCameraCustomSensorConfig</tt>
+<td> Allows a request to be made to the sensor driver to use an alternate set of
+  configuration registers. The meaning of these will be sensor specific.
+  The setting will only be changed on the next call to the sensor set_mode,
+  hence this is enforced as an IL parameter that the component must be loaded,
+  or all ports disabled in order to change it.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraZeroShutterLag">OMX_IndexParamCameraZeroShutterLag</a></tt>
+<td> Two parameters.
+  The first requests that the camera should run preview using
+  the full resolution sensor mode.
+  The second controls whether captures should then grab the last raw
+  preview image and generate the capture based on that.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCaptureExposureCompensation">OMX_IndexParamCaptureExposureCompensation</a></tt>
+<td> Sets the exposure compensation that should be applied to a stills capture
+  compared to the previous preview frames.
+ <tr valign="top"><td><tt>OMX_IndexParamSWSharpenDisable</tt>
+<td> Requests the tuner to disable the software sharpen stage for improved
+  capture performance.
+ <tr valign="top"><td><tt>OMX_IndexParamSWSaturationDisable</tt>
+<td> Requests the tuner to disable the software saturation stage for improved
+  capture performance.
+ <tr valign="top"><td><tt>OMX_IndexConfigBrcmFlashRequired</tt>
+<td> Returns the tuner indication whether a flash (normal or fill-in)
+  is required for the capture. Read only.
  <tr valign="top"><td rowspan="6">70<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the preview port resolution. Parts of this value may be
   overwritten by the component if Camplus needs to apply additional
@@ -530,7 +571,7 @@ unloaded, extending the startup latency.
 <td> Query / set the mirroring requirements for images emitted from the
   viewfinder port. These are always used in combination with the
   rotation parameters, so <tt>OMX_MirrorBoth</tt> and rotate 180 will
-  result in the image being back at upright. 
+  result in the image being back at upright.
  <tr valign="top"><td rowspan="7">71<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the capture port resolution.
  <tr valign="top"><td><tt>OMX_IndexConfigVideoFramerate</tt>
@@ -568,13 +609,16 @@ unloaded, extending the startup latency.
 <td> Tells the component not to use proprietary communication for the selected
   output port.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamPortMaxFrameSize">OMX_IndexParamPortMaxFrameSize</a></tt>
-<td> Allows the defining of the maximum frame size to be used on the 
+<td> Allows the defining of the maximum frame size to be used on the
   specified port. Image pools will be sized based on this information
-  in the absence of any additional configuration from the application 
+  in the absence of any additional configuration from the application
   (via <tt>OMX_IndexParamCameraImagePool</tt>).
-  The size passed in <tt>OMX_IndexParamPortDefinition</tt> will be checked 
-  against this setting (potentially tranposed) to ensure that the images 
+  The size passed in <tt>OMX_IndexParamPortDefinition</tt> will be checked
+  against this setting (potentially transposed) to ensure that the images
   can fit in the pool.
+ <tr valign="top"><td rowspan="1">70  71<td><tt><a href="prop.html#OMX_IndexParamBrcmFpsRange">OMX_IndexParamBrcmFpsRange</a></tt>
+<td> Allows a variable frame rate range to be defined. Used if xFramerate
+  in the port definition is 0.
  <tr valign="top"><td rowspan="1">73<td><tt>OMX_IndexParamOtherPortFormat</tt>
 <td> Query / set the format used by this port.  This port supports only the clock format type.
  </table>
