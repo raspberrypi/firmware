@@ -28,5 +28,5 @@ make -C hello_encode
 make -C hello_jpeg
 make -C hello_videocube
 make -C hello_teapot
-make -C hello_fft clean
+make -C hello_fft
 
