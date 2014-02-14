@@ -968,6 +968,7 @@
 0x06a3ee58	irias_new_integer_value	net/irda/irda	EXPORT_SYMBOL
 0x1c215fcd	key_type_user	vmlinux	EXPORT_SYMBOL_GPL
 0x6da8726e	bio_flush_dcache_pages	vmlinux	EXPORT_SYMBOL
+0x9cac3753	nosteal_pipe_buf_ops	vmlinux	EXPORT_SYMBOL
 0xc56a83ab	simple_lookup	vmlinux	EXPORT_SYMBOL
 0xb861c959	p9_client_clunk	net/9p/9pnet	EXPORT_SYMBOL
 0xfa599bb2	netlink_register_notifier	vmlinux	EXPORT_SYMBOL
