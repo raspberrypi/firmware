@@ -182,7 +182,7 @@ video_encode_test(char *outputfilename)
    OMX_VIDEO_PARAM_BITRATETYPE bitrateType;
    // set current bitrate to 1Mbit
    memset(&bitrateType, 0, sizeof(OMX_VIDEO_PARAM_BITRATETYPE));
-   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_PORTFORMATTYPE);
+   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_BITRATETYPE);
    bitrateType.nVersion.nVersion = OMX_VERSION;
    bitrateType.eControlRate = OMX_Video_ControlRateVariable;
    bitrateType.nTargetBitrate = 1000000;
@@ -199,7 +199,7 @@ video_encode_test(char *outputfilename)
 
    // get current bitrate
    memset(&bitrateType, 0, sizeof(OMX_VIDEO_PARAM_BITRATETYPE));
-   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_PORTFORMATTYPE);
+   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_BITRATETYPE);
    bitrateType.nVersion.nVersion = OMX_VERSION;
    bitrateType.nPortIndex = 201;
 

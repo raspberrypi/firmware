@@ -127,6 +127,11 @@ VCHPRE_ void VCHPOST_ vc_vchi_dispmanx_init (VCHI_INSTANCE_T initialise_instance
 VCHPRE_ int VCHPOST_ vc_dispmanx_snapshot( DISPMANX_DISPLAY_HANDLE_T display, 
                                            DISPMANX_RESOURCE_HANDLE_T snapshot_resource, 
                                            DISPMANX_TRANSFORM_T transform );
+
+// Set the resource palette (for VC_IMAGE_4BPP and VC_IMAGE_8BPP)
+VCHPRE_ int VCHPOST_ vc_dispmanx_resource_set_palette( DISPMANX_RESOURCE_HANDLE_T handle, 
+                                                      void * src_address, int offset, int size);
+
 #ifdef __cplusplus
 }
 #endif

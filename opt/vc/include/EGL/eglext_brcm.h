@@ -38,6 +38,13 @@ extern "C" {
 #define EGL_IMAGE_BRCM_MULTIMEDIA         0x99930B2
 #define EGL_IMAGE_BRCM_DUPLICATE         0x99930B3 /* a new EGL Image pointing at the same underlying object */
 #define EGL_IMAGE_BRCM_RAW_PIXELS        0x99930B4 /* Raw YUV multimedia pixels */
+
+/* Fastpath for creating greyscale textures from a single plane of a
+ * MMAL opaque buffers. */
+#define EGL_IMAGE_BRCM_MULTIMEDIA_Y      0x99930C0
+#define EGL_IMAGE_BRCM_MULTIMEDIA_U      0x99930C1
+#define EGL_IMAGE_BRCM_MULTIMEDIA_V      0x99930C2
+
 #ifndef EGL_BRCM_sane_choose_config
 #define EGL_BRCM_sane_choose_config 1
 #endif
