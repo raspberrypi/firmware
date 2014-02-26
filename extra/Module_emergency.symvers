@@ -8,6 +8,7 @@
 0xefd1d343	ieee80211_wake_queues	net/mac80211/mac80211	EXPORT_SYMBOL
 0x96cd2b04	scsi_sense_key_string	vmlinux	EXPORT_SYMBOL
 0xcf80e4ea	request_firmware	vmlinux	EXPORT_SYMBOL
+0xa3b9d56a	irq_to_desc	vmlinux	EXPORT_SYMBOL
 0x0a2487e0	unblock_all_signals	vmlinux	EXPORT_SYMBOL
 0xe889e3c4	__hci_cmd_sync	net/bluetooth/bluetooth	EXPORT_SYMBOL
 0xdd40d5f6	dev_uc_sync	vmlinux	EXPORT_SYMBOL

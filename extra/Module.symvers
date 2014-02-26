@@ -15,6 +15,7 @@
 0xe805f9b2	rtc_class_open	vmlinux	EXPORT_SYMBOL_GPL
 0x96cd2b04	scsi_sense_key_string	vmlinux	EXPORT_SYMBOL
 0x29181701	request_firmware	vmlinux	EXPORT_SYMBOL
+0xe34d119a	irq_to_desc	vmlinux	EXPORT_SYMBOL
 0x0a2487e0	unblock_all_signals	vmlinux	EXPORT_SYMBOL
 0xcbd22644	__hci_cmd_sync	net/bluetooth/bluetooth	EXPORT_SYMBOL
 0x5666e1f2	dev_uc_sync	vmlinux	EXPORT_SYMBOL
