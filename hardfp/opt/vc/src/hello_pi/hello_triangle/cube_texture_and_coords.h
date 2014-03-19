@@ -68,33 +68,33 @@ static const GLbyte quadx[6*4*3] = {
 /** Texture coordinates for the quad. */
 static const GLfloat texCoords[6 * 4 * 2] = {
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
+   1.f,  0.f,
    1.f,  1.f,
 
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
+   1.f,  0.f,
    1.f,  1.f,
 
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
+   1.f,  0.f,
    1.f,  1.f,
 
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
+   1.f,  0.f,
    1.f,  1.f,
 
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
+   1.f,  0.f,
    1.f,  1.f,
 
    0.f,  0.f,
-   1.f,  0.f,
    0.f,  1.f,
-   1.f,  1.f,
+   1.f,  0.f,
+   1.f,  1.f
 };
 
