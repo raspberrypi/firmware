@@ -123,7 +123,8 @@ enum {
    MMAL_PARAMETER_SW_SHARPEN_DISABLE,        /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_FLASH_REQUIRED,            /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_SW_SATURATION_DISABLE,     /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
-   MMAL_PARAMETER_SHUTTER_SPEED              /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_SHUTTER_SPEED,             /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_CUSTOM_AWB_GAINS,          /**< Takes a @ref MMAL_PARAMETER_AWB_GAINS_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -654,5 +655,13 @@ typedef struct MMAL_PARAMETER_ZEROSHUTTERLAG_T
                                               *  use the last preview raw image for the stills capture
                                               */
 } MMAL_PARAMETER_ZEROSHUTTERLAG_T;
+
+typedef struct MMAL_PARAMETER_AWB_GAINS_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_RATIONAL_T r_gain;                   /**< Red gain */
+   MMAL_RATIONAL_T b_gain;                   /**< Blue gain */
+} MMAL_PARAMETER_AWB_GAINS_T;
 
 #endif  /* MMAL_PARAMETERS_CAMERA_H */
