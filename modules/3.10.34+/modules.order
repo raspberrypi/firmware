@@ -199,6 +199,7 @@ kernel/drivers/net/netconsole.ko
 kernel/drivers/net/phy/libphy.ko
 kernel/drivers/net/phy/mdio-bitbang.ko
 kernel/drivers/net/tun.ko
+kernel/drivers/net/veth.ko
 kernel/drivers/net/irda/irda-usb.ko
 kernel/drivers/net/irda/stir4200.ko
 kernel/drivers/net/irda/mcs7780.ko

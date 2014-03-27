@@ -1444,6 +1444,7 @@ alias rtnl-link-ifb ifb
 alias rtnl-link-macvlan macvlan
 alias devname:net/tun tun
 alias char-major-10-200 tun
+alias rtnl-link-veth veth
 alias usb:v*p*d*dc*dsc*dp*icFEisc02ip*in* irda_usb
 alias usb:v066Fp4116d*dc*dsc*dp*ic*isc*ip*in* irda_usb
 alias usb:v066Fp4220d*dc*dsc*dp*ic*isc*ip*in* irda_usb
