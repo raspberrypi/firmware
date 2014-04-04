@@ -1,0 +1,4 @@
+# of module          name                 type                 compatible
+snd-soc-pcm512x      *                    *                    ti,pcm5121
+snd-soc-pcm512x      *                    *                    ti,pcm5122
+snd-soc-wm8804       *                    *                    wlf,wm8804

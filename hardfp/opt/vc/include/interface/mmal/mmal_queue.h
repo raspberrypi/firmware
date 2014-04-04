@@ -82,6 +82,17 @@ MMAL_BUFFER_HEADER_T *mmal_queue_get(MMAL_QUEUE_T *queue);
  */
 MMAL_BUFFER_HEADER_T *mmal_queue_wait(MMAL_QUEUE_T *queue);
 
+/** Wait for a MMAL_BUFFER_HEADER_T from a queue, up to a given timeout.
+ * This is the same as a wait, except that it will abort in case of timeout.
+ *
+ * @param queue  Pointer to a queue
+ * @param timeout Number of milliseconds to wait before
+ *                returning if the semaphore can't be acquired.
+ *
+ * @return pointer to the next MMAL_BUFFER_HEADER_T.
+ */
+MMAL_BUFFER_HEADER_T *mmal_queue_timedwait(MMAL_QUEUE_T *queue, VCOS_UNSIGNED timeout);
+
 /** Get the number of MMAL_BUFFER_HEADER_T currently in a queue.
  *
  * @param queue  Pointer to a queue
