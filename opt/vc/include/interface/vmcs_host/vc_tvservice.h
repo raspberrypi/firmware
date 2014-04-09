@@ -120,6 +120,18 @@ VCHPRE_ void vc_tv_register_callback(TVSERVICE_CALLBACK_T callback, void *callba
 VCHPRE_ void vc_tv_unregister_callback(TVSERVICE_CALLBACK_T callback);
 
 /**
+ * <DFN>vc_tv_unregister_callback</DNF> removes a function registered with
+ * <DFN>vc_tv_register_callback</DNF> from the list of callbacks.
+ * In contrast to vc_tv_unregister_callback this one matches not only the
+ * function pointer but also the data pointer before removal.
+ *
+ * @param callback function
+ *
+ * @return void
+ */
+VCHPRE_ void vc_tv_unregister_callback_full(TVSERVICE_CALLBACK_T callback, void *callback_data);
+
+/**
  * In the following API any functions applying to HDMI only will have hdmi_
  * in the name, ditto for SDTV only will have sdtv_ in the name,
  * Otherwise the function applies to both SDTV and HDMI (e.g. power off)

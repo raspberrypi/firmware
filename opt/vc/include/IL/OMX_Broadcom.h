@@ -2329,5 +2329,13 @@ typedef struct OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE {
    OMX_U8 config[1];                   /**< Configuration data (a VD3_CONFIGURE_T) */
 } OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE;
 
+typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            configuration data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 xGainR;                     /**< Red gain - 16p16 */
+   OMX_U32 xGainB;                     /**< Blue gain - 16p16 */
+} OMX_CONFIG_CUSTOMAWBGAINSTYPE;
+
 #endif
 /* File EOF */
