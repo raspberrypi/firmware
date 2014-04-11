@@ -510,6 +510,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigBrcmAudioMaxSample,                        /**< reference: OMX_CONFIG_BRCMAUDIOMAXSAMPLE */
     OMX_IndexConfigCustomAwbGains,                            /**< reference: OMX_CONFIG_CUSTOMAWBGAINSTYPE */
     OMX_IndexParamRemoveImagePadding,                         /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
+    OMX_IndexParamBrcmVideoAVCInlineVectorsEnable,            /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
 
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;
