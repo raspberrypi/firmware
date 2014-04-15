@@ -6838,6 +6838,15 @@ alias usb:v17CCp1940d*dc*dsc*dp*ic*isc*ip*in* snd_usb_caiaq
 alias usb:v17CCp1969d*dc*dsc*dp*ic*isc*ip*in* snd_usb_caiaq
 alias usb:v0CCDp0080d*dc*dsc*dp*ic*isc*ip*in* snd_usb_6fire
 alias platform:soc-audio snd_soc_core
+alias i2c:pcm5122 snd_soc_pcm512x
+alias i2c:pcm5121 snd_soc_pcm512x
+alias spi:pcm5122 snd_soc_pcm512x
+alias spi:pcm5121 snd_soc_pcm512x
+alias of:N*T*Cti,pcm5122* snd_soc_pcm512x
+alias of:N*T*Cti,pcm5121* snd_soc_pcm512x
+alias i2c:wm8804 snd_soc_wm8804
+alias of:N*T*Cwlf,wm8804* snd_soc_wm8804
+alias platform:bcm2708-i2s snd_soc_bcm2708_i2s
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
 alias ematch-kind-1 em_cmp

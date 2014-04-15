@@ -148,6 +148,7 @@ alias symbol:__async_tx_find_channel async_tx
 alias symbol:ieee80211_stop_tx_ba_cb_irqsafe mac80211
 alias symbol:lro_flush_all inet_lro
 alias symbol:snd_seq_device_unregister_driver snd_seq_device
+alias symbol:snd_dmaengine_pcm_open_request_chan snd_pcm_dmaengine
 alias symbol:rt2x00lib_remove_dev rt2x00lib
 alias symbol:backlight_force_update backlight
 alias symbol:ieee80211_sched_scan_stopped mac80211
@@ -441,6 +442,7 @@ alias symbol:v4l2_s_ext_ctrls videodev
 alias symbol:ath9k_hw_init_btcoex_hw ath9k_hw
 alias symbol:rfkill_set_sw_state rfkill
 alias symbol:snd_soc_bulk_write_raw snd_soc_core
+alias symbol:snd_dmaengine_pcm_open snd_pcm_dmaengine
 alias symbol:ar9003_paprd_create_curve ath9k_hw
 alias symbol:snd_soc_free_ac97_codec snd_soc_core
 alias symbol:ath9k_hw_gpio_get ath9k_hw
@@ -837,6 +839,7 @@ alias symbol:w1_ds2780_eeprom_cmd w1_ds2780
 alias symbol:hostap_dump_rx_header hostap
 alias symbol:hostap_dump_tx_header hostap
 alias symbol:snd_unregister_device snd
+alias symbol:regmap_init_mmio_clk regmap_mmio
 alias symbol:xt_request_find_match x_tables
 alias symbol:microtune_attach mt20xx
 alias symbol:iscsi_put_task libiscsi
@@ -945,6 +948,7 @@ alias symbol:snd_card_file_remove snd
 alias symbol:au8522_sleep au8522_common
 alias symbol:__iscsi_complete_pdu libiscsi
 alias symbol:o2nm_get_node_by_num ocfs2_nodemanager
+alias symbol:snd_dmaengine_pcm_get_chan snd_pcm_dmaengine
 alias symbol:snd_interval_ratnum snd_pcm
 alias symbol:wimax_msg_send wimax
 alias symbol:ipv6_dev_get_saddr ipv6
@@ -1044,6 +1048,7 @@ alias symbol:mdiobus_free libphy
 alias symbol:mwifiex_del_virtual_intf mwifiex
 alias symbol:mwifiex_main_process mwifiex
 alias symbol:xt_find_table_lock x_tables
+alias symbol:snd_dmaengine_pcm_trigger snd_pcm_dmaengine
 alias symbol:tea5767_attach tea5767
 alias symbol:ppp_dev_name ppp_generic
 alias symbol:lbs_send_tx_feedback libertas
@@ -1118,6 +1123,7 @@ alias symbol:md_write_start md_mod
 alias symbol:dib8000_i2c_enumeration dib8000
 alias symbol:o2nm_configured_node_map ocfs2_nodemanager
 alias symbol:nf_nat_sip_expect_hook nf_conntrack_sip
+alias symbol:snd_dmaengine_pcm_register snd_soc_core
 alias symbol:__lbs_cmd libertas
 alias symbol:fuse_file_poll fuse
 alias symbol:hci_register_cb bluetooth
@@ -1196,6 +1202,7 @@ alias symbol:smsendian_handle_rx_message smsmdtv
 alias symbol:cfg80211_connect_result cfg80211
 alias symbol:gre_cisco_register gre
 alias symbol:iscsi_conn_get_param libiscsi
+alias symbol:snd_dmaengine_pcm_close snd_pcm_dmaengine
 alias symbol:dm_table_event dm_mod
 alias symbol:usb_serial_handle_sysrq_char usbserial
 alias symbol:ath9k_hw_abort_tx_dma ath9k_hw
@@ -1377,6 +1384,7 @@ alias symbol:gf128mul_64k_lle gf128mul
 alias symbol:gf128mul_64k_bbe gf128mul
 alias symbol:ieee80211_stop_rx_ba_session mac80211
 alias symbol:ip_vs_scheduler_err ip_vs
+alias symbol:snd_soc_dai_set_bclk_ratio snd_soc_core
 alias symbol:p9_idpool_get 9pnet
 alias symbol:rfkill_register rfkill
 alias symbol:snd_pcm_format_set_silence snd_pcm
@@ -1470,6 +1478,7 @@ alias symbol:snd_seq_kernel_client_enqueue_blocking snd_seq
 alias symbol:snd_soc_write snd_soc_core
 alias symbol:snd_soc_get_xr_sx snd_soc_core
 alias symbol:snd_soc_put_xr_sx snd_soc_core
+alias symbol:snd_dmaengine_pcm_request_channel snd_pcm_dmaengine
 alias symbol:i2400m_dev_reset_handle i2400m
 alias symbol:rt2800_clear_beacon rt2800lib
 alias symbol:spk_do_catch_up speakup
@@ -2160,6 +2169,7 @@ alias symbol:rt2x00queue_flush_queues rt2x00lib
 alias symbol:irda_notify_init irda
 alias symbol:rt2800_config_ant rt2800lib
 alias symbol:p9_client_read 9pnet
+alias symbol:snd_dmaengine_pcm_prepare_slave_config snd_soc_core
 alias symbol:media_entity_remote_pad media
 alias symbol:p9_client_write 9pnet
 alias symbol:nf_ct_port_nlattr_tuple_size nf_conntrack
@@ -2180,6 +2190,7 @@ alias symbol:vb2_streamon videobuf2_core
 alias symbol:cx231xx_init_isoc cx231xx
 alias symbol:genphy_restart_aneg libphy
 alias symbol:lbs_cmd_copyback libertas
+alias symbol:snd_dmaengine_pcm_close_release_chan snd_pcm_dmaengine
 alias symbol:snd_pcm_lib_read snd_pcm
 alias symbol:lbs_host_to_card_done libertas
 alias symbol:ocfs2_cluster_hangup ocfs2_stackglue
@@ -2279,6 +2290,7 @@ alias symbol:copy_to_user_fromio snd
 alias symbol:ipv6_fixup_options ipv6
 alias symbol:dvb_usbv2_generic_write dvb_usb_v2
 alias symbol:cdrom_open cdrom
+alias symbol:devm_regmap_init_mmio_clk regmap_mmio
 alias symbol:vb2_streamoff videobuf2_core
 alias symbol:cryptd_alloc_ahash cryptd
 alias symbol:p9_client_stat 9pnet
@@ -2433,6 +2445,7 @@ alias symbol:snd_pcm_alt_chmaps snd_pcm
 alias symbol:videobuf_waiton videobuf_core
 alias symbol:ppp_register_compressor ppp_generic
 alias symbol:rfkill_pause_polling rfkill
+alias symbol:snd_dmaengine_pcm_pointer snd_pcm_dmaengine
 alias symbol:atbm8830_attach atbm8830
 alias symbol:freq_reg_info cfg80211
 alias symbol:snd_soc_get_volsw_sx snd_soc_core
@@ -2711,6 +2724,7 @@ alias symbol:ax25_linkfail_register ax25
 alias symbol:nf_nat_l4proto_in_range nf_nat
 alias symbol:snd_soc_dpcm_fe_can_update snd_soc_core
 alias symbol:snd_soc_dpcm_be_can_update snd_soc_core
+alias symbol:snd_dmaengine_pcm_pointer_no_residue snd_pcm_dmaengine
 alias symbol:nfc_tm_deactivated nfc
 alias symbol:tm6000_set_reg tm6000
 alias symbol:tm6000_get_reg tm6000
@@ -2729,6 +2743,7 @@ alias symbol:spk_synth_immediate speakup
 alias symbol:regulatory_hint cfg80211
 alias symbol:wiphy_rfkill_start_polling cfg80211
 alias symbol:snd_soc_dapm_mixer_update_power snd_soc_core
+alias symbol:snd_dmaengine_pcm_set_config_from_dai_data snd_pcm_dmaengine
 alias symbol:videobuf_vmalloc_free videobuf_vmalloc
 alias symbol:bt_sock_link bluetooth
 alias symbol:xt_register_target x_tables
@@ -2811,6 +2826,7 @@ alias symbol:led_classdev_register led_class
 alias symbol:vb2_ioctl_reqbufs videobuf2_core
 alias symbol:xt_find_target x_tables
 alias symbol:snd_soc_set_ac97_ops_of_reset snd_soc_core
+alias symbol:snd_hwparams_to_dma_slave_config snd_pcm_dmaengine
 alias symbol:ath6kl_core_tx_complete ath6kl_core
 alias symbol:ath6kl_core_rx_complete ath6kl_core
 alias symbol:nf_connlabels_replace nf_conntrack
@@ -2826,6 +2842,7 @@ alias symbol:p9_client_symlink 9pnet
 alias symbol:snd_jack_new snd
 alias symbol:dib8090p_get_dc_power dib8000
 alias symbol:lib80211_crypt_delayed_deinit lib80211
+alias symbol:snd_dmaengine_pcm_unregister snd_soc_core
 alias symbol:md_trim_bio md_mod
 alias symbol:rdev_clear_badblocks md_mod
 alias symbol:sirdev_get_instance sir_dev
