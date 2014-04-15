@@ -220,6 +220,11 @@ typedef struct OMX_DISPLAYRECTTYPE {
 typedef enum OMX_DISPLAYMODETYPE {
    OMX_DISPLAY_MODE_FILL = 0,
    OMX_DISPLAY_MODE_LETTERBOX = 1,
+   // these allow a left eye source->dest to be specified and the right eye mapping will be inferred by symmetry
+   OMX_DISPLAY_MODE_STEREO_LEFT_TO_LEFT = 2,
+   OMX_DISPLAY_MODE_STEREO_TOP_TO_TOP = 3,
+   OMX_DISPLAY_MODE_STEREO_LEFT_TO_TOP = 4,
+   OMX_DISPLAY_MODE_STEREO_TOP_TO_LEFT = 5,
    OMX_DISPLAY_MODE_DUMMY = 0x7FFFFFFF
 } OMX_DISPLAYMODETYPE;
 
