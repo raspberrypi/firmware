@@ -164,6 +164,8 @@ kernel/drivers/net/wireless/ath/ath.ko: kernel/net/wireless/cfg80211.ko kernel/n
 kernel/drivers/net/wireless/mac80211_hwsim.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/mwifiex/mwifiex.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/mwifiex/mwifiex_sdio.ko: kernel/drivers/net/wireless/mwifiex/mwifiex.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko:
+kernel/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko: kernel/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/usb/catc.ko:
 kernel/drivers/net/usb/kaweth.ko:
 kernel/drivers/net/usb/pegasus.ko:

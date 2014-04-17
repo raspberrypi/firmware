@@ -916,6 +916,10 @@ alias sdio:c*v02DFd912D* mwifiex_sdio
 alias sdio:c*v02DFd9129* mwifiex_sdio
 alias sdio:c*v02DFd9119* mwifiex_sdio
 alias sdio:c*v02DFd9116* mwifiex_sdio
+alias usb:v0A5Cp0BDCd*dc*dsc*dp*ic*isc*ip*in* brcmfmac
+alias usb:v0A5CpBD1Fd*dc*dsc*dp*ic*isc*ip*in* brcmfmac
+alias usb:v0A5CpBD17d*dc*dsc*dp*ic*isc*ip*in* brcmfmac
+alias usb:v0A5CpBD1Ed*dc*dsc*dp*ic*isc*ip*in* brcmfmac
 alias usb:v08D1p0001d*dc*dsc*dp*ic*isc*ip*in* catc
 alias usb:v0423p000Cd*dc*dsc*dp*ic*isc*ip*in* catc
 alias usb:v0423p000Ad*dc*dsc*dp*ic*isc*ip*in* catc

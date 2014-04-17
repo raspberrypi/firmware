@@ -530,6 +530,9 @@ alias symbol:snd_soc_params_to_frame_size snd_soc_core
 alias symbol:snd_pcm_lib_ioctl snd_pcm
 alias symbol:w1_read_8 wire
 alias symbol:ir_raw_event_store_edge rc_core
+alias symbol:brcmu_pktq_penq_head brcmutil
+alias symbol:brcmu_pktq_pdeq_tail brcmutil
+alias symbol:brcmu_pktq_peek_tail brcmutil
 alias symbol:rt2x00queue_stop_queue rt2x00lib
 alias symbol:lc_seq_printf_stats lru_cache
 alias symbol:ircomm_close ircomm
@@ -601,6 +604,7 @@ alias symbol:__ieee80211_get_tx_led_name mac80211
 alias symbol:l2tp_xmit_skb l2tp_core
 alias symbol:snd_pcm_new_stream snd_pcm
 alias symbol:sync_page_io md_mod
+alias symbol:brcmu_pkt_buf_get_skb brcmutil
 alias symbol:inet6_csk_update_pmtu ipv6
 alias symbol:snd_soc_jack_free_gpios snd_soc_core
 alias symbol:v4l2_ctrl_get_menu videodev
@@ -1366,6 +1370,8 @@ alias symbol:wimax_msg_alloc wimax
 alias symbol:xfrm6_find_1stfragopt ipv6
 alias symbol:snd_lookup_oss_minor_data snd
 alias symbol:snd_request_card snd
+alias symbol:brcmu_pktq_mlen brcmutil
+alias symbol:brcmu_pktq_mdeq brcmutil
 alias symbol:l2tp_nl_register_ops l2tp_netlink
 alias symbol:cfg80211_chandef_create cfg80211
 alias symbol:cfg80211_tdls_oper_request cfg80211
@@ -1710,6 +1716,8 @@ alias symbol:free_mdio_bitbang mdio_bitbang
 alias symbol:dm_rh_recovery_in_flight dm_region_hash
 alias symbol:ip6_sk_dst_lookup_flow ipv6
 alias symbol:snd_dma_get_reserved_buf snd_page_alloc
+alias symbol:brcmu_pktq_penq brcmutil
+alias symbol:brcmu_pktq_pdeq brcmutil
 alias symbol:rt2x00mac_sta_add rt2x00lib
 alias symbol:snd_timer_new snd_timer
 alias symbol:raid6_call raid6_pq
@@ -1875,6 +1883,7 @@ alias symbol:gspca_disconnect gspca_main
 alias symbol:fc0012_attach fc0012
 alias symbol:ftdi_elan_gone_away ftdi_elan
 alias symbol:tuners tuner_types
+alias symbol:brcmu_d11_attach brcmutil
 alias symbol:usb_serial_generic_tiocmiwait usbserial
 alias symbol:nfc_proto_unregister nfc
 alias symbol:llc_sap_find llc
@@ -2252,6 +2261,7 @@ alias symbol:usb_serial_register_drivers usbserial
 alias symbol:cryptd_ahash_child cryptd
 alias symbol:roccat_common2_send_with_status hid_roccat_common
 alias symbol:dvb_dmxdev_release dvb_core
+alias symbol:brcmu_pktq_pflush brcmutil
 alias symbol:ar9003_paprd_populate_single_table ath9k_hw
 alias symbol:ip_set_hostmask_map ip_set
 alias symbol:cfg80211_scan_done cfg80211
@@ -2307,6 +2317,7 @@ alias symbol:usb_ftdi_elan_read_pcimem ftdi_elan
 alias symbol:nf_connlabel_match nf_conntrack
 alias symbol:vb2_poll videobuf2_core
 alias symbol:au8522_attach au8522_dig
+alias symbol:brcmu_pktq_flush brcmutil
 alias symbol:snd_seq_device_load_drivers snd_seq_device
 alias symbol:bio_alloc_mddev md_mod
 alias symbol:i2400m_pre_reset i2400m
@@ -2393,6 +2404,7 @@ alias symbol:em28xx_write_ac97 em28xx
 alias symbol:iscsi_session_get_param libiscsi
 alias symbol:cfg80211_pmksa_candidate_notify cfg80211
 alias symbol:intlog10 dvb_core
+alias symbol:brcmu_pktq_pdeq_match brcmutil
 alias symbol:iscsi_host_get_param libiscsi
 alias symbol:ieee80211_get_mesh_hdrlen cfg80211
 alias symbol:__nf_ct_ext_destroy nf_conntrack
@@ -2581,6 +2593,7 @@ alias symbol:snd_seq_device_register_driver snd_seq_device
 alias symbol:dm_get_reserved_bio_based_ios dm_mod
 alias symbol:dvb_dmx_release dvb_core
 alias symbol:sms_board_power smsmdtv
+alias symbol:brcmu_pkt_buf_free_skb brcmutil
 alias symbol:cast_s2 cast_common
 alias symbol:hashbin_lock_find irda
 alias symbol:inet6_destroy_sock ipv6
@@ -2758,6 +2771,7 @@ alias symbol:i2400m_post_reset i2400m
 alias symbol:wiphy_apply_custom_regulatory cfg80211
 alias symbol:dm_table_get_md dm_mod
 alias symbol:cx24113_agc_callback cx24113
+alias symbol:brcmu_pktq_init brcmutil
 alias symbol:ct_sip_parse_header_uri nf_conntrack_sip
 alias symbol:gameport_set_phys gameport
 alias symbol:v4l2_prio_check videodev
