@@ -6283,6 +6283,7 @@
 0x0ee755a0	rpc_lookup_machine_cred	vmlinux	EXPORT_SYMBOL_GPL
 0x13829332	bcm_power_close	vmlinux	EXPORT_SYMBOL_GPL
 0x00d80c64	videobuf_queue_is_busy	drivers/media/v4l2-core/videobuf-core	EXPORT_SYMBOL_GPL
+0xa81f12f7	xs_swapper	vmlinux	EXPORT_SYMBOL_GPL
 0xd0c10130	led_set_brightness	vmlinux	EXPORT_SYMBOL
 0x6def2db2	half_md4_transform	vmlinux	EXPORT_SYMBOL
 0xb835b3e4	radix_tree_prev_hole	vmlinux	EXPORT_SYMBOL
