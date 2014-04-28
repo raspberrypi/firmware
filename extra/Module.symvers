@@ -1553,7 +1553,6 @@
 0x66f9b30f	dwc_cc_match_cdid	vmlinux	EXPORT_SYMBOL
 0x77a926f4	iscsi_find_flashnode_sess	vmlinux	EXPORT_SYMBOL_GPL
 0xf5276695	blk_insert_cloned_request	vmlinux	EXPORT_SYMBOL_GPL
-0x73f5f749	__FIQ_Branch	vmlinux	EXPORT_SYMBOL
 0xc8269f94	snd_soc_params_to_frame_size	sound/soc/snd-soc-core	EXPORT_SYMBOL_GPL
 0xceb7bd8c	snd_pcm_lib_ioctl	sound/core/snd-pcm	EXPORT_SYMBOL
 0x4285d50e	ircomm_open	net/irda/ircomm/ircomm	EXPORT_SYMBOL
