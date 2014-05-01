@@ -171,6 +171,7 @@ kernel/drivers/net/usb/kaweth.ko
 kernel/drivers/net/usb/pegasus.ko
 kernel/drivers/net/usb/rtl8150.ko
 kernel/drivers/net/usb/r8152.ko
+kernel/drivers/net/usb/hso.ko
 kernel/drivers/net/usb/asix.ko
 kernel/drivers/net/usb/ax88179_178a.ko
 kernel/drivers/net/usb/cdc_ether.ko
