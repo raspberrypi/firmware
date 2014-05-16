@@ -104,3 +104,26 @@ It accepts three optional command-line arguments: <log2_N> <batch> <loops>
 
 The special character device is required for the ioctl mailbox through which
 the ARM communicates with the Videocore GPU.
+
+
+*** With Open GL ***
+
+GPU_FFT and Open GL will run concurrently if the GPU_FFT_MEM_* defines in
+file gpu_fft.c are changed as follows:
+
+#define GPU_FFT_MEM_FLG 0x4        // cached=0xC; direct=0x4
+#define GPU_FFT_MEM_MAP 0x20000000 // cached=0x0; direct=0x20000000
+
+Overall performance will probably be higher if GPU_FFT and Open GL take turns
+at using the 3D hardware.  Since eglSwapBuffers() returns immediately without
+waiting for rendering, call glFlush() and glFinish() afterwards as follows:
+
+    for (;;) {
+        ....
+        eglSwapBuffers(....); // non-blocking call returns immediately
+        glFlush();
+        glFinish(); // wait until V3D hardware is idle
+        ....
+        gpu_fft_execute(....); // blocking call
+        ....
+    }
