@@ -785,6 +785,7 @@
 0x2fd2433c	rt2x00queue_unmap_skb	drivers/net/wireless/rt2x00/rt2x00lib	EXPORT_SYMBOL_GPL
 0xee17f65c	dib3000mc_pid_parse	drivers/media/dvb-frontends/dib3000mc	EXPORT_SYMBOL
 0xe04f7caa	dm_read_arg_group	drivers/md/dm-mod	EXPORT_SYMBOL
+0x7703e50d	svc_alien_sock	vmlinux	EXPORT_SYMBOL_GPL
 0xbcd76942	bus_find_device	vmlinux	EXPORT_SYMBOL_GPL
 0xbcfb074c	sg_alloc_table_from_pages	vmlinux	EXPORT_SYMBOL
 0x1453c173	blk_rq_unprep_clone	vmlinux	EXPORT_SYMBOL_GPL
