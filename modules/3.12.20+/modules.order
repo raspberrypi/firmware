@@ -350,6 +350,7 @@ kernel/drivers/rtc/rtc-m41t93.ko
 kernel/drivers/rtc/rtc-m41t94.ko
 kernel/drivers/rtc/rtc-max6900.ko
 kernel/drivers/rtc/rtc-max6902.ko
+kernel/drivers/rtc/rtc-pcf2127.ko
 kernel/drivers/rtc/rtc-pcf8523.ko
 kernel/drivers/rtc/rtc-pcf8563.ko
 kernel/drivers/rtc/rtc-pcf8583.ko

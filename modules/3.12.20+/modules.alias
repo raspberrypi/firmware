@@ -4700,6 +4700,7 @@ alias i2c:m41t62 rtc_m41t80
 alias spi:rtc-m41t93 rtc_m41t93
 alias spi:rtc-m41t94 rtc_m41t94
 alias spi:rtc-max6902 rtc_max6902
+alias i2c:pcf2127 rtc_pcf2127
 alias i2c:pcf8523 rtc_pcf8523
 alias i2c:rtc8564 rtc_pcf8563
 alias i2c:pcf8563 rtc_pcf8563
