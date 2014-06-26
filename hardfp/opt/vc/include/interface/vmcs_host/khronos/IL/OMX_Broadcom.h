@@ -2342,5 +2342,20 @@ typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
    OMX_U32 xGainB;                     /**< Blue gain - 16p16 */
 } OMX_CONFIG_CUSTOMAWBGAINSTYPE;
 
+/* OMX_IndexConfigBrcmRenderStats: Query port statistics */
+typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_BOOL nValid;
+   OMX_U32 nMatch;
+   OMX_U32 nPeriod;
+   OMX_U32 nPhase;
+   OMX_U32 nPixelClockNominal;
+   OMX_U32 nPixelClock;
+   OMX_U32 nHvsStatus;
+   OMX_U32 dummy0[2];
+} OMX_CONFIG_BRCMRENDERSTATSTYPE;
+
 #endif
 /* File EOF */
