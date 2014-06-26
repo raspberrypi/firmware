@@ -125,6 +125,7 @@ enum {
    MMAL_PARAMETER_SW_SATURATION_DISABLE,     /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_SHUTTER_SPEED,             /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
    MMAL_PARAMETER_CUSTOM_AWB_GAINS,          /**< Takes a @ref MMAL_PARAMETER_AWB_GAINS_T */
+   MMAL_PARAMETER_CAMERA_SETTINGS,           /**< Takes a @ref MMAL_PARAMETER_CAMERA_SETTINGS_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -665,5 +666,17 @@ typedef struct MMAL_PARAMETER_AWB_GAINS_T
    MMAL_RATIONAL_T r_gain;                   /**< Red gain */
    MMAL_RATIONAL_T b_gain;                   /**< Blue gain */
 } MMAL_PARAMETER_AWB_GAINS_T;
+
+typedef struct MMAL_PARAMETER_CAMERA_SETTINGS_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   uint32_t exposure;
+   MMAL_RATIONAL_T analog_gain;
+   MMAL_RATIONAL_T digital_gain;
+   MMAL_RATIONAL_T awb_red_gain;
+   MMAL_RATIONAL_T awb_blue_gain;
+   uint32_t focus_position;
+} MMAL_PARAMETER_CAMERA_SETTINGS_T;
 
 #endif  /* MMAL_PARAMETERS_CAMERA_H */

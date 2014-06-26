@@ -1663,6 +1663,7 @@ typedef struct OMX_CONFIG_U8TYPE {
 typedef struct OMX_CONFIG_CAMERASETTINGSTYPE {
     OMX_U32 nSize;
     OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
     OMX_U32 nExposure;
     OMX_U32 nAnalogGain;
     OMX_U32 nDigitalGain;
