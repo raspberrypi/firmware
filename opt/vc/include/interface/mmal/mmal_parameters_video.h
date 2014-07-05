@@ -96,6 +96,7 @@ enum {
    MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER,            /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE,               /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS,           /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
+   MMAL_PARAMETER_VIDEO_RENDER_STATS,           /**< Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T. */
 };
 
 /** Display transformations.
@@ -438,5 +439,16 @@ typedef struct MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T {
    void *   phys_addr;       /**< Output. Physical memory address of protected buffer */
 
 } MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T;
+
+typedef struct MMAL_PARAMETER_VIDEO_RENDER_STATS_T {
+   MMAL_BOOL_T valid;
+   uint32_t match;
+   uint32_t period;
+   uint32_t phase;
+   uint32_t pixel_clock_nominal;
+   uint32_t pixel_clock;
+   uint32_t hvs_status;
+   uint32_t dummy[2];
+} MMAL_PARAMETER_VIDEO_RENDER_STATS_T;
 
 #endif

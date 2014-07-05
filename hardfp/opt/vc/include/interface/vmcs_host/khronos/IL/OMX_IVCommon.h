@@ -211,6 +211,7 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterCartoon,
 
     OMX_ImageFilterAnaglyph,
+    OMX_ImageFilterDeInterlaceFast,
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
 
