@@ -109,6 +109,7 @@ kernel/drivers/block/pktcdvd.ko
 kernel/drivers/block/nbd.ko
 kernel/drivers/block/cryptoloop.ko
 kernel/drivers/block/drbd/drbd.ko
+kernel/drivers/misc/eeprom/at24.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/ti-st/st_drv.ko
 kernel/drivers/mfd/mfd-core.ko
