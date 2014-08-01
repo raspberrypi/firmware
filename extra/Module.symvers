@@ -7932,6 +7932,7 @@
 0x1a8a74a3	elevator_alloc	vmlinux	EXPORT_SYMBOL
 0xb55756d9	crypto_alg_sem	vmlinux	EXPORT_SYMBOL_GPL
 0xaf93e380	bio_sector_offset	vmlinux	EXPORT_SYMBOL
+0x37e0cee8	bcm2708_i2s_set_gpio	sound/soc/bcm/snd-soc-bcm2708-i2s	EXPORT_SYMBOL
 0x6e135ded	fuse_get_req_for_background	fs/fuse/fuse	EXPORT_SYMBOL_GPL
 0x584c919c	rpc_call_async	vmlinux	EXPORT_SYMBOL_GPL
 0xcda3565b	inverse_translate	vmlinux	EXPORT_SYMBOL_GPL

@@ -897,6 +897,7 @@ alias symbol:snd_ctl_register_ioctl snd
 alias symbol:snd_ctl_rename_id snd
 alias symbol:snd_soc_dapm_sync snd_soc_core
 alias symbol:usb_serial_generic_tiocmiwait usbserial
+alias symbol:bcm2708_i2s_set_gpio snd_soc_bcm2708_i2s
 alias symbol:sirdev_set_dtr_rts sir_dev
 alias symbol:rt2800_get_tsf rt2800lib
 alias symbol:ip_set_get_ip4_port ip_set
