@@ -139,6 +139,9 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_FormatYUVUV128,
     OMX_COLOR_FormatRawBayer12bit,
     OMX_COLOR_FormatBRCMEGL,
+    OMX_COLOR_FormatBRCMOpaque,
+    OMX_COLOR_FormatYVU420PackedPlanar,
+    OMX_COLOR_FormatYVU420PackedSemiPlanar,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
@@ -205,10 +208,24 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterColourPoint,
     OMX_ImageFilterPosterise,
     OMX_ImageFilterColourBalance,
+    OMX_ImageFilterCartoon,
 
+    OMX_ImageFilterAnaglyph,
+    OMX_ImageFilterDeInterlaceFast,
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
 
+typedef enum OMX_IMAGEFILTERANAGLYPHTYPE {
+    OMX_ImageFilterAnaglyphNone,
+    OMX_ImageFilterAnaglyphSBStoRedCyan,
+    OMX_ImageFilterAnaglyphSBStoCyanRed,
+    OMX_ImageFilterAnaglyphSBStoGreenMagenta,
+    OMX_ImageFilterAnaglyphSBStoMagentaGreen,
+    OMX_ImageFilterAnaglyphTABtoRedCyan,
+    OMX_ImageFilterAnaglyphTABtoCyanRed,
+    OMX_ImageFilterAnaglyphTABtoGreenMagenta,
+    OMX_ImageFilterAnaglyphTABtoMagentaGreen,
+} OMX_IMAGEFILTERANAGLYPHTYPE;
 
 /** 
  * Image filter configuration 
@@ -1029,6 +1046,8 @@ typedef enum OMX_FOCUSSTATUSTYPE {
     OMX_FocusStatusLost,
     OMX_FocusStatusKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_FocusStatusVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
+    OMX_FocusStatusCafWatching,
+    OMX_FocusStatusCafSceneChanged,
     OMX_FocusStatusMax = 0x7FFFFFFF
 } OMX_FOCUSSTATUSTYPE;
 

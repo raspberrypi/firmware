@@ -39,9 +39,6 @@ VCOS - abstraction over dynamic library opening
 extern "C" {
 #endif
 
-#define VCOS_DL_LAZY 1
-#define VCOS_DL_NOW  2
-
 /**
  * \file
  *
@@ -51,7 +48,7 @@ extern "C" {
 /** Open a dynamic library.
   *
   * @param name  name of the library
-  * @param mode  Load lazily or immediately (VCOS_DL_LAZY, VCOS_DL_NOW).
+  * @param mode  Load lazily or immediately (VCOS_DL_LAZY, VCOS_DL_NOW, VCOS_DL_LOCAL, VCOS_DL_GLOBAL).
   *
   * @return A handle for use in subsequent calls.
   */

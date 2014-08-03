@@ -28,12 +28,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VCHIQ_CFG_H
 #define VCHIQ_CFG_H
 
-#define VCHIQ_MAGIC              VCHIQ_MAKE_FOURCC('V','C','H','I')
+#define VCHIQ_MAGIC              VCHIQ_MAKE_FOURCC('V', 'C', 'H', 'I')
 /* The version of VCHIQ - change with any non-trivial change */
-#define VCHIQ_VERSION            5
-/* The minimum compatible version - update to match VCHIQ_VERSION with any incompatible change */
+#define VCHIQ_VERSION            6
+/* The minimum compatible version - update to match VCHIQ_VERSION with any
+** incompatible change */
 #define VCHIQ_VERSION_MIN        3
 
+#define VCHIQ_MAX_STATES         2
 #define VCHIQ_MAX_SERVICES       4096
 #define VCHIQ_MAX_SLOTS          128
 #define VCHIQ_MAX_SLOTS_PER_SIDE 64

@@ -57,6 +57,7 @@ extern "C" {
 #include <signal.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 
 
 #define VCOS_HAVE_RTOS         1
@@ -296,16 +297,29 @@ VCOS_INLINE_IMPL
 VCOS_STATUS_T vcos_semaphore_wait_timeout(VCOS_SEMAPHORE_T *sem, VCOS_UNSIGNED timeout) {
    struct timespec ts;
    int ret;
-   ts.tv_sec  = timeout/1000;
-   ts.tv_nsec = (timeout%1000)*1000*1000;
-   ret = sem_timedwait( sem, &ts );
-   if (ret == 0)
-      return VCOS_SUCCESS;
-   else if (ret == ETIMEDOUT)
-      return VCOS_EAGAIN;
-   else {
-      vcos_assert(0);
+   if (clock_gettime(CLOCK_REALTIME, &ts) == -1)
       return VCOS_EINVAL;
+   ts.tv_sec  += timeout/1000;
+   ts.tv_nsec += (timeout%1000)*1000*1000;
+   if (ts.tv_nsec > 1000000000) {
+      ts.tv_sec++;
+      ts.tv_nsec -= 1000000000;
+   }
+
+   while (1) {
+      ret = sem_timedwait( sem, &ts );
+      if (ret == 0) {
+         return VCOS_SUCCESS;
+      } else {
+         if (errno == EINTR) {
+            continue;
+         } else if (errno == ETIMEDOUT) {
+            return VCOS_EAGAIN;
+         } else {
+            vcos_assert(0);
+            return VCOS_EINVAL;
+         }
+      }
    }
 }
 
@@ -722,6 +736,11 @@ char *vcos_strdup(const char *str)
 }
 
 typedef void (*VCOS_ISR_HANDLER_T)(VCOS_UNSIGNED vecnum);
+
+#define VCOS_DL_LAZY RTLD_LAZY
+#define VCOS_DL_NOW  RTLD_NOW
+#define VCOS_DL_LOCAL  RTLD_LOCAL
+#define VCOS_DL_GLOBAL  RTLD_GLOBAL
 
 #ifdef __cplusplus
 }

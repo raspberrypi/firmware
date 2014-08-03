@@ -25,8 +25,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-// Broadcom specific EGL extensions
-
 #ifndef EGLEXT_BRCM_H
 #define EGLEXT_BRCM_H
 
@@ -40,6 +38,13 @@ extern "C" {
 #define EGL_IMAGE_BRCM_MULTIMEDIA         0x99930B2
 #define EGL_IMAGE_BRCM_DUPLICATE         0x99930B3 /* a new EGL Image pointing at the same underlying object */
 #define EGL_IMAGE_BRCM_RAW_PIXELS        0x99930B4 /* Raw YUV multimedia pixels */
+
+/* Fastpath for creating greyscale textures from a single plane of a
+ * MMAL opaque buffers. */
+#define EGL_IMAGE_BRCM_MULTIMEDIA_Y      0x99930C0
+#define EGL_IMAGE_BRCM_MULTIMEDIA_U      0x99930C1
+#define EGL_IMAGE_BRCM_MULTIMEDIA_V      0x99930C2
+
 #ifndef EGL_BRCM_sane_choose_config
 #define EGL_BRCM_sane_choose_config 1
 #endif
@@ -142,6 +147,25 @@ typedef void (EGLAPIENTRYP PFNEGLFLUSHBRCMPROC)(void);
 #ifndef EGL_BRCM_image_wrap
 #define EGL_BRCM_image_wrap 1
 #define EGL_IMAGE_WRAP_BRCM 0x9993140
+#endif
+
+#ifndef EGL_BRCM_image_wrap_bcg
+#define EGL_BRCM_image_wrap_bcg 0
+#define EGL_IMAGE_WRAP_BRCM_BCG 0x9993141
+
+#if EGL_BRCM_image_wrap_bcg
+typedef struct {
+   BEGL_BufferFormat format;
+
+   uint16_t width;
+   uint16_t height;
+
+   int32_t stride; /* in bytes */
+
+   void *storage;
+} EGL_IMAGE_WRAP_BRCM_BCG_IMAGE_T;
+#endif
+
 #endif
 
 #ifndef EGL_BRCM_mem_usage

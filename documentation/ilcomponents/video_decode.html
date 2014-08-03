@@ -72,7 +72,7 @@ on the fly.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="14">130<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="15">130<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port parameters for the encoded video stream.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDataUnit">OMX_IndexParamBrcmDataUnit</a></tt>
 <td> Sets the type of data delivery for the encoded data
@@ -121,7 +121,9 @@ on the fly.
  <tr valign="top"><td><tt>OMX_IndexParamVideoProfileLevelQuerySupported</tt>
 <td> Allows to client to enumerate the various profile and level supported by
   the port. Only the highest level is reported for each supported profile.
- <tr valign="top"><td rowspan="10">131<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
+<td> Query / set the pixel aspect ratio of the source content.
+ <tr valign="top"><td rowspan="11">131<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Once we have the details of the output format, this will be
   populated. Details are acquired via codec-specific headers, which are
   either exchanged using the <tt>OMX_IndexParamCodecConfig</tt> when tunnelling
@@ -136,6 +138,8 @@ on the fly.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmDisableProprietaryTunnels">OMX_IndexParamBrcmDisableProprietaryTunnels</a></tt>
 <td> Tells the component not to use proprietary communication for its
   output port.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
+<td> Query the pixel aspect ratio of the decoded video.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCommonInterlace">OMX_IndexConfigCommonInterlace</a></tt>
 <td> Query the type of interlacing in use in the decoded video.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmInterpolateMissingTimestamps">OMX_IndexParamBrcmInterpolateMissingTimestamps</a></tt>
@@ -162,7 +166,7 @@ on the fly.
 <td> Query / set the port format.  The input port supports a wide range of
   compressed video format, the output port supports only raw non-encoded
   video.
- <tr valign="top"><td rowspan="8">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+ <tr valign="top"><td rowspan="12">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
 <td> Query / set the location of an externally allocated image pool to use
   for output frames. Defaults to NULL, causing the component to allocate
   a pool when active.
@@ -193,6 +197,24 @@ on the fly.
   sometimes be necessary to increase this.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmPoolMemAllocSize">OMX_IndexConfigBrcmPoolMemAllocSize</a></tt>
 <td> Query for the size of the allocated image pool.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmAlignHoriz">OMX_IndexParamBrcmAlignHoriz</a></tt>
+<td> Query / set the horizonal alignment of the output buffer to be a given multiple of bytes in width.
+  Setting this to anything other than the default of 32 may have a negative impact of performance
+  because the input buffer may need to be re-pitched before it is encoded. Supported values
+  are 32 or 1 (no padding).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmAlignVert">OMX_IndexParamBrcmAlignVert</a></tt>
+<td> Query / set the vertical alignment of the output buffer to be a given multiple of rows in height.
+  Setting this to anything other than the default of 16 may have a negative impact of performance
+  because the input buffer may need to be re-pitched before it is encoded. Supported values
+  are 16 or 1 (no padding).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoTimestampFifo">OMX_IndexParamBrcmVideoTimestampFifo</a></tt>
+<td> Query / set the timestamp fifo mode. When enabled, the timestamp fifo mode will change the way
+  incoming timestamps are associated with output images. In this mode the incoming timestamps
+  get used without re-ordering on output images.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoDrmProtectBuffer">OMX_IndexParamBrcmVideoDrmProtectBuffer</a></tt>
+<td> Query to request that a memory buffer be allocated for protected video decode, and the fields
+  in a shared memory region be filled in to request protection from the hardware. Set to indicate
+  that the previous protection request has been processed.
  </table>
 
 </table>

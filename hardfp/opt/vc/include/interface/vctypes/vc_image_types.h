@@ -112,6 +112,9 @@ typedef enum
    VC_IMAGE_YUV420SP,    /* Y as a plane, then UV byte interleaved in plane with with same pitch, half height */
    
    VC_IMAGE_YUV444PLANAR,  /* Y, U, & V planes separately 4:4:4 */
+
+   VC_IMAGE_TF_U8,   /* T-format 8-bit U - same as TF_Y8 buf from U plane */
+   VC_IMAGE_TF_V8,   /* T-format 8-bit U - same as TF_Y8 buf from V plane */
    
    VC_IMAGE_MAX,     //bounds for error checking
    VC_IMAGE_FORCE_ENUM_16BIT = 0xffff,

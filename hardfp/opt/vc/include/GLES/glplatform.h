@@ -29,6 +29,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* $Revision: 10601 $ on $Date:: 2010-03-04 22:15:27 -0800 #$ */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * This document is licensed under the SGI Free Software B License Version
  * 2.0. For details, see http://oss.sgi.com/projects/FreeB/ .
@@ -43,7 +47,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * by filing a bug against product "OpenGL-ES" component "Registry".
  */
 
-#include <KHR/khrplatform.h>
+#include "../KHR/khrplatform.h"
 
 #ifndef GL_API
 #define GL_API      KHRONOS_APICALL
@@ -51,6 +55,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifndef GL_APIENTRY
 #define GL_APIENTRY KHRONOS_APIENTRY
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif /* __glplatform_h_ */

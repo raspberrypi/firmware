@@ -220,6 +220,11 @@ typedef struct OMX_DISPLAYRECTTYPE {
 typedef enum OMX_DISPLAYMODETYPE {
    OMX_DISPLAY_MODE_FILL = 0,
    OMX_DISPLAY_MODE_LETTERBOX = 1,
+   // these allow a left eye source->dest to be specified and the right eye mapping will be inferred by symmetry
+   OMX_DISPLAY_MODE_STEREO_LEFT_TO_LEFT = 2,
+   OMX_DISPLAY_MODE_STEREO_TOP_TO_TOP = 3,
+   OMX_DISPLAY_MODE_STEREO_LEFT_TO_TOP = 4,
+   OMX_DISPLAY_MODE_STEREO_TOP_TO_LEFT = 5,
    OMX_DISPLAY_MODE_DUMMY = 0x7FFFFFFF
 } OMX_DISPLAYMODETYPE;
 
@@ -474,6 +479,37 @@ R' = coeff[1] * sample[N] + coeff[3] * sample[N+1] + coeff[5] * sample[N+2] + co
    + coeff[9] * sample[N+4] + coeff[11] * sample[N+5] + coeff[13] * sample[N+6] + coeff[15] * sample[N+7]
 
 \code{coeff} describes the downmixing coefficients
+*/
+
+/* OMX_IndexConfigBrcmAudioDownmixCoefficients8x8: Audio Downmix Coefficients */
+typedef struct OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8 {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 coeff[64];
+} OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8;
+/*
+This config sets the platform-specific audio downmixing coefficients for the 
+audio mixer component. The coefficients are 16.16 fixed point.
+The coefficients are a 8*8 mixing matrix from 8 input channels to 8 outputs channels
+
+\code{coeff} describes the downmixing coefficients
+*/
+
+/* OMX_IndexConfigBrcmAudioMaxSample: Maximum sample seen */
+typedef struct OMX_CONFIG_BRCMAUDIOMAXSAMPLE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 nMaxSample;
+   OMX_TICKS nTimeStamp;
+} OMX_CONFIG_BRCMAUDIOMAXSAMPLE;
+/*
+This gets the largest sample produced (after downmixing with OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8) 
+since this config was last read. The nTimestamp is the earliest timestamp processed. 
+This can be used for DRC schemes 
+
+\code{coeff} maximum sample seen in current block
 */
 
 /* OMX_IndexConfigPlayMode: Play Mode */
@@ -1433,20 +1469,20 @@ IDLE, then taken back to LOADED, the profile increased and the
 component taken back to IDLE.
 */
 
-typedef enum OMX_PARAM_CAMERAUSECASE {
+typedef enum OMX_CONFIG_CAMERAUSECASE {
    OMX_CameraUseCaseAuto,
    OMX_CameraUseCaseVideo,
    OMX_CameraUseCaseStills,
    OMX_CameraUseCaseKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
    OMX_CameraUseCaseVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
    OMX_CameraUseCaseMax = 0x7FFFFFFF
-} OMX_PARAM_CAMERAUSECASE;
+} OMX_CONFIG_CAMERAUSECASE;
 
-typedef struct OMX_PARAM_CAMERAUSECASETYPE {
+typedef struct OMX_CONFIG_CAMERAUSECASETYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
-   OMX_PARAM_CAMERAUSECASE eUseCase;
-} OMX_PARAM_CAMERAUSECASETYPE;
+   OMX_CONFIG_CAMERAUSECASE eUseCase;
+} OMX_CONFIG_CAMERAUSECASETYPE;
 
 /* OMX_IndexParamBrcmDisableProprietaryTunnels: Disabling proprietary tunnelling */
 typedef struct OMX_PARAM_BRCMDISABLEPROPRIETARYTUNNELSTYPE {
@@ -1627,6 +1663,7 @@ typedef struct OMX_CONFIG_U8TYPE {
 typedef struct OMX_CONFIG_CAMERASETTINGSTYPE {
     OMX_U32 nSize;
     OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
     OMX_U32 nExposure;
     OMX_U32 nAnalogGain;
     OMX_U32 nDigitalGain;
@@ -2165,6 +2202,11 @@ typedef enum OMX_COLORSPACETYPE
    OMX_COLORSPACE_JPEG_JFIF,
    OMX_COLORSPACE_ITU_R_BT601,
    OMX_COLORSPACE_ITU_R_BT709,
+   OMX_COLORSPACE_FCC,
+   OMX_COLORSPACE_SMPTE240M,
+   OMX_COLORSPACE_BT470_2_M,
+   OMX_COLORSPACE_BT470_2_BG,
+   OMX_COLORSPACE_JFIF_Y16_255,
    OMX_COLORSPACE_MAX = 0x7FFFFFFF
 } OMX_COLORSPACETYPE;
 
@@ -2172,8 +2214,26 @@ typedef struct OMX_PARAM_COLORSPACETYPE
 {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
    OMX_COLORSPACETYPE eColorSpace;
 } OMX_PARAM_COLORSPACETYPE;
+
+typedef enum OMX_CAPTURESTATETYPE
+{
+   OMX_NotCapturing,
+   OMX_CaptureStarted,
+   OMX_CaptureComplete,
+   OMX_CaptureMax = 0x7FFFFFFF
+} OMX_CAPTURESTATETYPE;
+
+typedef struct OMX_PARAM_CAPTURESTATETYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_CAPTURESTATETYPE eCaptureState;
+} OMX_PARAM_CAPTURESTATETYPE;
+
 /*
 Provides information on the colour space that's in use during image/video processing.
 */
@@ -2212,6 +2272,91 @@ the postprocessor stage of the ISP.
 This control can be used to control whether loadable modules used a dedicated memory
 pool or use heap allocated memory.
 */
+
+typedef struct OMX_PARAM_BRCMCONFIGFILETYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual URI name */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 fileSize;                   /**< Size of complete file data */
+} OMX_PARAM_BRCMCONFIGFILETYPE;
+
+typedef struct OMX_PARAM_BRCMCONFIGFILECHUNKTYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual chunk data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 size;                       /**< Number of bytes being transferred in this chunk */
+   OMX_U32 offset;                     /**< Offset of this chunk in the file */
+   OMX_U8 data[1];                     /**< Chunk data */
+} OMX_PARAM_BRCMCONFIGFILECHUNKTYPE;
+
+typedef struct OMX_PARAM_BRCMFRAMERATERANGETYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            actual chunk data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 nPortIndex;
+   OMX_U32 xFramerateLow;              /**< Low end of framerate range. Q16 format */
+   OMX_U32 xFramerateHigh;             /**< High end of framerate range. Q16 format */
+} OMX_PARAM_BRCMFRAMERATERANGETYPE;
+
+typedef struct OMX_PARAM_S32TYPE {
+    OMX_U32 nSize;                    /**< Size of this structure, in Bytes */
+    OMX_VERSIONTYPE nVersion;         /**< OMX specification version information */
+    OMX_U32 nPortIndex;               /**< port that this structure applies to */
+    OMX_S32 nS32;                     /**< S32 value */
+} OMX_PARAM_S32TYPE;
+
+typedef struct OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 size_wanted;     /**< Input. Zero size means internal video decoder buffer,
+                                 mem_handle and phys_addr not returned in this case */
+   OMX_U32 protect;         /**< Input. 1 = protect, 0 = unprotect */
+
+   OMX_U32 mem_handle;      /**< Output. Handle for protected buffer */
+   OMX_PTR phys_addr;       /**< Output. Physical memory address of protected buffer */
+} OMX_PARAM_BRCMVIDEODRMPROTECTBUFFERTYPE;
+
+typedef struct OMX_CONFIG_ZEROSHUTTERLAGTYPE
+{
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 bZeroShutterMode;        /**< Select ZSL mode from the camera. */
+   OMX_U32 bConcurrentCapture;      /**< Perform concurrent captures for full ZSL. */
+
+} OMX_CONFIG_ZEROSHUTTERLAGTYPE;
+
+typedef struct OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            configuration data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U8 config[1];                   /**< Configuration data (a VD3_CONFIGURE_T) */
+} OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE;
+
+typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
+   OMX_U32 nSize;                      /**< size of the structure in bytes, including
+                                            configuration data */
+   OMX_VERSIONTYPE nVersion;           /**< OMX specification version information */
+   OMX_U32 xGainR;                     /**< Red gain - 16p16 */
+   OMX_U32 xGainB;                     /**< Blue gain - 16p16 */
+} OMX_CONFIG_CUSTOMAWBGAINSTYPE;
+
+/* OMX_IndexConfigBrcmRenderStats: Query port statistics */
+typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_BOOL nValid;
+   OMX_U32 nMatch;
+   OMX_U32 nPeriod;
+   OMX_U32 nPhase;
+   OMX_U32 nPixelClockNominal;
+   OMX_U32 nPixelClock;
+   OMX_U32 nHvsStatus;
+   OMX_U32 dummy0[2];
+} OMX_CONFIG_BRCMRENDERSTATSTYPE;
 
 #endif
 /* File EOF */

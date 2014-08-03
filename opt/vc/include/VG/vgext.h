@@ -1,7 +1,7 @@
-/* $Revision: 6810 $ on $Date:: 2008-10-29 07:31:37 -0700 #$ */
+/* $Revision: 6810 $ on $Date:: 2008-10-29 14:31:37 +0000 #$ */
 
 /*------------------------------------------------------------------------
- * 
+ *
  * VG extensions Reference Implementation
  * -------------------------------------
  *
@@ -13,10 +13,10 @@
  * including without limitation the rights to use, copy, modify, merge,
  * publish, distribute, sublicense, and/or sell copies of the Materials,
  * and to permit persons to whom the Materials are furnished to do so,
- * subject to the following conditions: 
+ * subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
- * in all copies or substantial portions of the Materials. 
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
  *
  * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -40,8 +40,8 @@
 extern "C" {
 #endif
 
-#include <VG/openvg.h>
-#include <VG/vgu.h>
+#include "openvg.h"
+#include "vgu.h"
 
 #ifndef VG_API_ENTRYP
 #   define VG_API_ENTRYP VG_API_ENTRY*
@@ -69,7 +69,7 @@ typedef enum  {
 #ifndef VG_KHR_EGL_image
 #define VG_KHR_EGL_image 1
 /* VGEGLImageKHR is an opaque handle to an EGLImage */
-typedef void* VGeglImageKHR; 
+typedef void* VGeglImageKHR;
 
 #ifdef VG_VGEXT_PROTOTYPES
 VG_API_CALL VGImage VG_API_ENTRY vgCreateEGLImageTargetKHR(VGeglImageKHR image);
@@ -84,7 +84,7 @@ typedef VGImage (VG_API_ENTRYP PFNVGCREATEEGLIMAGETARGETKHRPROC) (VGeglImageKHR 
 
 #ifdef VG_VGEXT_PROTOTYPES
 VG_API_CALL void vgIterativeAverageBlurKHR(VGImage dst,VGImage src,VGfloat dimX,VGfloat dimY,VGuint iterative,VGTilingMode tilingMode);
-#endif 
+#endif
 typedef void (VG_API_ENTRYP PFNVGITERATIVEAVERAGEBLURKHRPROC) (VGImage dst,VGImage src,VGfloat dimX,VGfloat dimY,VGuint iterative,VGTilingMode tilingMode);
 
 #endif
@@ -123,7 +123,7 @@ typedef enum {
 #endif
 
 #ifndef VG_KHR_parametric_filter
-#define VG_KHR_parametric_filter 1 
+#define VG_KHR_parametric_filter 1
 
 typedef enum {
   VG_PF_OBJECT_VISIBLE_FLAG_KHR = (1 << 0),
@@ -165,7 +165,7 @@ typedef VGUErrorCode (VGU_API_ENTRYP PFNVGUGRADIENTBEVELKHRPROC) (VGImage dst,VG
 #ifndef VG_NDS_paint_generation
 #define VG_NDS_paint_generation 1
 
-typedef enum { 
+typedef enum {
   VG_PAINT_COLOR_RAMP_LINEAR_NDS            = 0x1A10,
   VG_COLOR_MATRIX_NDS                       = 0x1A11,
   VG_PAINT_COLOR_TRANSFORM_LINEAR_NDS       = 0x1A12,
@@ -178,7 +178,7 @@ typedef enum {
 
   VG_IMAGE_MODE_NDS_FORCE_SIZE              = VG_MAX_ENUM
 } VGImageModeNds;
-#endif 
+#endif
 
 
 #ifndef VG_NDS_projective_geometry
@@ -204,7 +204,7 @@ typedef enum {
 typedef enum {
   VG_RQUAD_TO_NDS              = ( 13 << 1 ),
   VG_RCUBIC_TO_NDS             = ( 14 << 1 ),
-  
+
   VG_PATH_SEGMENT_NDS_FORCE_SIZE = VG_MAX_ENUM
 } VGPathSegmentNds;
 
@@ -220,13 +220,13 @@ typedef enum {
 #ifdef VG_VGEXT_PROTOTYPES
 VG_API_CALL void VG_API_ENTRY vgProjectiveMatrixNDS(VGboolean enable) ;
 VGU_API_CALL VGUErrorCode VGU_API_ENTRY vguTransformClipLineNDS(const VGfloat Ain,const VGfloat Bin,const VGfloat Cin,const VGfloat* matrix,const VGboolean inverse,VGfloat* Aout,VGfloat* Bout,VGfloat* Cout);
-#endif 
+#endif
 typedef void (VG_API_ENTRYP PFNVGPROJECTIVEMATRIXNDSPROC) (VGboolean enable) ;
 typedef VGUErrorCode (VGU_API_ENTRYP PFNVGUTRANSFORMCLIPLINENDSPROC) (const VGfloat Ain,const VGfloat Bin,const VGfloat Cin,const VGfloat* matrix,const VGboolean inverse,VGfloat* Aout,VGfloat* Bout,VGfloat* Cout);
 
 #endif
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

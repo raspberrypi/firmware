@@ -1,2 +1,0 @@
-# module         matchBits bustype vendor product version evBits keyBits relBits absBits mscBits ledBits sndBits ffBits [swBits] driver_info
-joydev              0x90  0x0  0x0  0x0  0x0  8  0  0  0  0  0  0  0  0  0x0

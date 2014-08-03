@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - public header file
@@ -102,6 +102,27 @@ VCOS_STATUS_T vcos_semaphore_create(VCOS_SEMAPHORE_T *sem, const char *name, VCO
   */
 VCOS_INLINE_DECL
 VCOS_STATUS_T vcos_semaphore_wait(VCOS_SEMAPHORE_T *sem);
+
+/**
+  * \brief Wait on a semaphore with a timeout.
+  *
+  * Note that this function may not be implemented on all
+  * platforms, and may not be efficient on all platforms
+  * (see comment in vcos_semaphore_wait)
+  *
+  * Try to obtain the semaphore. If it is already taken, return
+  * VCOS_EAGAIN.
+  * @param sem Semaphore to wait on
+  * @param timeout Number of milliseconds to wait before
+  *                returning if the semaphore can't be acquired.
+  * @return VCOS_SUCCESS - semaphore was taken.
+  *         VCOS_EAGAIN - could not take semaphore (i.e. timeout
+  *         expired)
+  *         VCOS_EINVAL - Some other error (most likely bad
+  *         parameters).
+  */
+VCOS_INLINE_DECL
+VCOS_STATUS_T vcos_semaphore_wait_timeout(VCOS_SEMAPHORE_T *sem, VCOS_UNSIGNED timeout);
 
 /**
   * \brief Try to wait for a semaphore.

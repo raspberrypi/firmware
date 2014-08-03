@@ -1,6 +1,6 @@
 OBJS=encode.o
 BIN=hello_encode.bin
-LDFLAGS+=-lilclient -lpthread
+LDFLAGS+=-lilclient
 
 include ../Makefile.include
 

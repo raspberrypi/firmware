@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 /*=============================================================================
 VideoCore OS Abstraction Layer - Assertion and error-handling macros.
@@ -149,19 +149,7 @@ extern "C" {
 #include "interface/vcos/vcos_types.h"
 
 #ifdef __COVERITY__
-/*
- * This tells coverity not to expand the assert macro, so it still sees the
- * asserts in the code, even in release builds (we currently run coverity on
- * our release builds). Unfortunately MetaWare won't compile it, even though
- * __COVERITY__ isn't defined.
- */
-// #nodef assert
-
-/*
- * So we need to declare the function. It's already built into coverity that
- * assert is a "killpath"
- */
-extern void assert(int cond);
+#include "interface/vcos/user_nodefs.h"
 
 extern void __coverity_panic__(void);
 #undef VCOS_ASSERT_BKPT
@@ -224,6 +212,16 @@ extern void logging_assert_dump(void);
 #endif
 
 #if !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS)
+#define VCOS_ASSERT_ENABLED 1
+#define VCOS_VERIFY_ENABLED 1
+#else
+#define VCOS_ASSERT_ENABLED 0
+#define VCOS_VERIFY_ENABLED 0
+#endif
+
+#define VCOS_DEMAND_ENABLED 1
+
+#if VCOS_ASSERT_ENABLED
 
 #ifndef vcos_assert
 #define vcos_assert(cond) \
@@ -235,7 +233,7 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT) )
 #endif
 
-#else  /* !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS) */
+#else  /* VCOS_ASSERT_ENABLED */
 
 #ifndef vcos_assert
 #define vcos_assert(cond) (void)0
@@ -245,9 +243,10 @@ extern void logging_assert_dump(void);
 #define vcos_assert_msg(cond, ...) (void)0
 #endif
 
-#endif /* !defined(NDEBUG) || defined(VCOS_RELEASE_ASSERTS) */
+#endif /* VCOS_ASSERT_ENABLED */
 
-#if !defined(NDEBUG)
+
+#if VCOS_DEMAND_ENABLED
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -259,17 +258,7 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT, vcos_abort()) )
 #endif
 
-#ifndef vcos_verify
-#define vcos_verify(cond) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#ifndef vcos_verify_msg
-#define vcos_verify_msg(cond, ...) \
-   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
-#endif
-
-#else  /* !defined(NDEBUG) */
+#else  /* VCOS_DEMAND_ENABLED */
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
@@ -281,6 +270,23 @@ extern void logging_assert_dump(void);
    ( (cond) ? (void)0 : vcos_abort() )
 #endif
 
+#endif /* VCOS_DEMAND_ENABLED */
+
+
+#if VCOS_VERIFY_ENABLED
+
+#ifndef vcos_verify
+#define vcos_verify(cond) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG("%s", #cond), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#ifndef vcos_verify_msg
+#define vcos_verify_msg(cond, ...) \
+   ( (cond) ? 1 : (VCOS_VERIFY_MSG(__VA_ARGS__), VCOS_VERIFY_BKPT, 0) )
+#endif
+
+#else /* VCOS_VERIFY_ENABLED */
+
 #ifndef vcos_verify
 #define vcos_verify(cond) (cond)
 #endif
@@ -289,7 +295,8 @@ extern void logging_assert_dump(void);
 #define vcos_verify_msg(cond, ...) (cond)
 #endif
 
-#endif /* !defined(NDEBUG) */
+#endif /* VCOS_VERIFY_ENABLED */
+
 
 #ifndef vcos_static_assert
 #if defined(__GNUC__)

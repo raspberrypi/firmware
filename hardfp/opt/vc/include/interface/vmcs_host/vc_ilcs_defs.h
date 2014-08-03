@@ -32,7 +32,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define VC_ILCS_VERSION 1
 
+#ifdef USE_VCHIQ_ARM
 #include "interface/vchiq_arm/vchiq.h"
+#else
+#include "interface/vchiq/vchiq.h"
+#endif
 
 typedef enum {
    IL_RESPONSE,

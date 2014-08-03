@@ -1,4 +1,4 @@
-/* $Revision: 6810 $ on $Date:: 2008-10-29 07:31:37 -0700 #$ */
+/* $Revision: 6810 $ on $Date:: 2008-10-29 14:31:37 +0000 #$ */
 
 /*------------------------------------------------------------------------
  *
@@ -13,10 +13,10 @@
  * including without limitation the rights to use, copy, modify, merge,
  * publish, distribute, sublicense, and/or sell copies of the Materials,
  * and to permit persons to whom the Materials are furnished to do so,
- * subject to the following conditions: 
+ * subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
- * in all copies or substantial portions of the Materials. 
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
  *
  * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -38,38 +38,17 @@
 extern "C" {
 #endif
 
-#ifndef VG_API_CALL 
-#if defined(OPENVG_STATIC_LIBRARY)
-#	define VG_API_CALL
-#else
-#	if defined(_WIN32) || defined(__VC32__)				/* Win32 */
-#		if defined (OPENVG_DLL_EXPORTS)
-#			define VG_API_CALL __declspec(dllexport)
-#		else
-#			define VG_API_CALL __declspec(dllimport)
-#		endif
-#	else 
-#		define VG_API_CALL extern
-#	endif /* defined(_WIN32) ||... */
-#endif /* defined OPENVG_STATIC_LIBRARY */
-#endif /* ifndef VG_API_CALL */
+#ifndef VG_API_CALL
+   #ifdef KHAPI
+      #define VG_API_CALL KHAPI
+   #else
+      #define VG_API_CALL extern
+   #endif
+#endif
 
-#ifndef VGU_API_CALL 
-#if defined(OPENVG_STATIC_LIBRARY)
-#	define VGU_API_CALL
-#else
-#	if defined(_WIN32) || defined(__VC32__)				/* Win32 */
-#		if defined (OPENVG_DLL_EXPORTS)
-#			define VGU_API_CALL __declspec(dllexport)
-#		else
-#			define VGU_API_CALL __declspec(dllimport)
-#		endif
-#	else 
-#		define VGU_API_CALL extern
-#	endif /* defined(_WIN32) ||... */
-#endif /* defined OPENVG_STATIC_LIBRARY */
-#endif /* ifndef VGU_API_CALL */
-
+#ifndef VGU_API_CALL
+   #define VGU_API_CALL VG_API_CALL
+#endif
 
 #ifndef VG_API_ENTRY
 #define VG_API_ENTRY
@@ -87,19 +66,20 @@ extern "C" {
 #define VGU_API_EXIT
 #endif
 
-typedef float          VGfloat;
-typedef signed char    VGbyte;
-typedef unsigned char  VGubyte;
-typedef signed short   VGshort;
-typedef signed int     VGint;
-typedef unsigned int   VGuint;
-typedef unsigned int   VGbitfield;
+#include "../KHR/khrplatform.h"
+typedef khronos_float_t  VGfloat;
+typedef khronos_int8_t   VGbyte;
+typedef khronos_uint8_t  VGubyte;
+typedef khronos_int16_t  VGshort;
+typedef khronos_int32_t  VGint;
+typedef khronos_uint32_t VGuint;
+typedef khronos_uint32_t VGbitfield;
 
 #ifndef VG_VGEXT_PROTOTYPES
 #define VG_VGEXT_PROTOTYPES
-#endif 
+#endif
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

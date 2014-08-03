@@ -65,7 +65,7 @@ VCHPRE_ DISPMANX_DISPLAY_HANDLE_T VCHPOST_ vc_dispmanx_display_open( uint32_t de
 // Opens a display on the given device in the request mode
 VCHPRE_ DISPMANX_DISPLAY_HANDLE_T VCHPOST_ vc_dispmanx_display_open_mode( uint32_t device, uint32_t mode );
 // Open an offscreen display
-VCHPRE_ DISPMANX_DISPLAY_HANDLE_T VCHPOST_ vc_dispmanx_display_open_offscreen( DISPMANX_RESOURCE_HANDLE_T dest, VC_IMAGE_TRANSFORM_T orientation );
+VCHPRE_ DISPMANX_DISPLAY_HANDLE_T VCHPOST_ vc_dispmanx_display_open_offscreen( DISPMANX_RESOURCE_HANDLE_T dest, DISPMANX_TRANSFORM_T orientation );
 // Change the mode of a display
 VCHPRE_ int VCHPOST_ vc_dispmanx_display_reconfigure( DISPMANX_DISPLAY_HANDLE_T display, uint32_t mode );
 // Sets the desstination of the display to be the given resource
@@ -113,7 +113,7 @@ VCHPRE_ int VCHPOST_ vc_dispmanx_element_change_attributes( DISPMANX_UPDATE_HAND
                                                             const VC_RECT_T *dest_rect,
                                                             const VC_RECT_T *src_rect,
                                                             DISPMANX_RESOURCE_HANDLE_T mask,
-                                                            VC_IMAGE_TRANSFORM_T transform );
+                                                            DISPMANX_TRANSFORM_T transform );
 
 //xxx hack to get the image pointer from a resource handle, will be obsolete real soon
 VCHPRE_ uint32_t VCHPOST_ vc_dispmanx_resource_get_image_handle( DISPMANX_RESOURCE_HANDLE_T res);
@@ -123,9 +123,15 @@ VCHPRE_ void VCHPOST_ vc_vchi_dispmanx_init (VCHI_INSTANCE_T initialise_instance
 
 // Take a snapshot of a display in its current state.
 // This call may block for a time; when it completes, the snapshot is ready.
+// only transform=0 is supported
 VCHPRE_ int VCHPOST_ vc_dispmanx_snapshot( DISPMANX_DISPLAY_HANDLE_T display, 
                                            DISPMANX_RESOURCE_HANDLE_T snapshot_resource, 
-                                           VC_IMAGE_TRANSFORM_T transform );
+                                           DISPMANX_TRANSFORM_T transform );
+
+// Set the resource palette (for VC_IMAGE_4BPP and VC_IMAGE_8BPP)
+VCHPRE_ int VCHPOST_ vc_dispmanx_resource_set_palette( DISPMANX_RESOURCE_HANDLE_T handle, 
+                                                      void * src_address, int offset, int size);
+
 #ifdef __cplusplus
 }
 #endif

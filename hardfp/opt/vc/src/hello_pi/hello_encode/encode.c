@@ -72,7 +72,7 @@ generate_test_card(void *buf, OMX_U32 * filledLen, int frame)
 static void
 print_def(OMX_PARAM_PORTDEFINITIONTYPE def)
 {
-   printf("Port %lu: %s %lu/%lu %lu %lu %s,%s,%s %lux%lu %lux%lu @%lu %u\n",
+   printf("Port %u: %s %u/%u %u %u %s,%s,%s %ux%u %ux%u @%u %u\n",
 	  def.nPortIndex,
 	  def.eDir == OMX_DirInput ? "in" : "out",
 	  def.nBufferCountActual,
@@ -128,6 +128,7 @@ video_encode_test(char *outputfilename)
    }
    list[0] = video_encode;
 
+   // get current settings of video_encode component from port 200
    memset(&def, 0, sizeof(OMX_PARAM_PORTDEFINITIONTYPE));
    def.nSize = sizeof(OMX_PARAM_PORTDEFINITIONTYPE);
    def.nVersion.nVersion = OMX_VERSION;
@@ -177,6 +178,41 @@ video_encode_test(char *outputfilename)
 	  __FUNCTION__, __LINE__, r);
       exit(1);
    }
+
+   OMX_VIDEO_PARAM_BITRATETYPE bitrateType;
+   // set current bitrate to 1Mbit
+   memset(&bitrateType, 0, sizeof(OMX_VIDEO_PARAM_BITRATETYPE));
+   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_BITRATETYPE);
+   bitrateType.nVersion.nVersion = OMX_VERSION;
+   bitrateType.eControlRate = OMX_Video_ControlRateVariable;
+   bitrateType.nTargetBitrate = 1000000;
+   bitrateType.nPortIndex = 201;
+   r = OMX_SetParameter(ILC_GET_HANDLE(video_encode),
+                       OMX_IndexParamVideoBitrate, &bitrateType);
+   if (r != OMX_ErrorNone) {
+      printf
+        ("%s:%d: OMX_SetParameter() for bitrate for video_encode port 201 failed with %x!\n",
+         __FUNCTION__, __LINE__, r);
+      exit(1);
+   }
+
+
+   // get current bitrate
+   memset(&bitrateType, 0, sizeof(OMX_VIDEO_PARAM_BITRATETYPE));
+   bitrateType.nSize = sizeof(OMX_VIDEO_PARAM_BITRATETYPE);
+   bitrateType.nVersion.nVersion = OMX_VERSION;
+   bitrateType.nPortIndex = 201;
+
+   if (OMX_GetParameter
+       (ILC_GET_HANDLE(video_encode), OMX_IndexParamVideoBitrate,
+       &bitrateType) != OMX_ErrorNone) {
+      printf("%s:%d: OMX_GetParameter() for video_encode for bitrate port 201 failed!\n",
+            __FUNCTION__, __LINE__);
+      exit(1);
+   }
+   printf("Current Bitrate=%u\n",bitrateType.nTargetBitrate);
+
+
 
    printf("encode to idle...\n");
    if (ilclient_change_component_state(video_encode, OMX_StateIdle) == -1) {

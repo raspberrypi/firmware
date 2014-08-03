@@ -59,6 +59,9 @@ typedef uint32_t DISPMANX_PROTECTION_T;
 #define DISPMANX_ID_AUX_LCD   1
 #define DISPMANX_ID_HDMI      2
 #define DISPMANX_ID_SDTV      3
+#define DISPMANX_ID_FORCE_LCD 4
+#define DISPMANX_ID_FORCE_TV  5
+#define DISPMANX_ID_FORCE_OTHER 6 /* non-default display */
 
 /* Return codes. Nonzero ones indicate failure. */
 typedef enum {
@@ -75,7 +78,14 @@ typedef enum {
   DISPMANX_ROTATE_270 = 3,
 
   DISPMANX_FLIP_HRIZ = 1 << 16,
-  DISPMANX_FLIP_VERT = 1 << 17
+  DISPMANX_FLIP_VERT = 1 << 17,
+
+  /* extra flags for controlling snapshot behaviour */
+  DISPMANX_SNAPSHOT_NO_YUV = 1 << 24,
+  DISPMANX_SNAPSHOT_NO_RGB = 1 << 25,
+  DISPMANX_SNAPSHOT_FILL = 1 << 26,
+  DISPMANX_SNAPSHOT_SWAP_RED_BLUE = 1 << 27,
+  DISPMANX_SNAPSHOT_PACK = 1 << 28
 } DISPMANX_TRANSFORM_T;
 
 typedef enum {
@@ -150,7 +160,7 @@ typedef struct {
 typedef struct {
   int32_t width;
   int32_t height;
-  VC_IMAGE_TRANSFORM_T transform;
+  DISPMANX_TRANSFORM_T transform;
   DISPLAY_INPUT_FORMAT_T input_format;
 } DISPMANX_MODEINFO_T;
 

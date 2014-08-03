@@ -188,7 +188,7 @@ VCHPRE_ int VCHPOST_ vc_cec_deregister_all( void );
 VCHPRE_ int VCHPOST_ vc_cec_send_message(const uint32_t follower,
                                          const uint8_t *payload,
                                          uint32_t length,
-                                         bool_t is_reply);
+                                         vcos_bool_t is_reply);
 /**
  * <DFN>vc_cec_get_logical_address</DFN> gets the logical address, 
  * If one is being allocated 0xF (unregistered) will be set.
@@ -379,7 +379,7 @@ VCHPRE_ int VCHPOST_ vc_cec_set_logical_address(const CEC_AllDevices_T logical_a
 VCHPRE_ int VCHPOST_ vc_cec_add_device(const CEC_AllDevices_T logical_address,
                                        const uint16_t physical_address,
                                        const CEC_DEVICE_TYPE_T device_type,
-                                       bool_t last_device);
+                                       vcos_bool_t last_device);
 
 /**
  * <DFN> vc_cec_set_passive </DFN> enables and disables passive mode.
@@ -390,7 +390,7 @@ VCHPRE_ int VCHPOST_ vc_cec_add_device(const CEC_AllDevices_T logical_address,
  * 
  * @return 0 if successful, non-zero otherwise
  */
-VCHPRE_ int VCHPOST_ vc_cec_set_passive(bool_t enabled);
+VCHPRE_ int VCHPOST_ vc_cec_set_passive(vcos_bool_t enabled);
 
 
 //API for some common CEC messages
@@ -426,7 +426,7 @@ VCHPRE_ int VCHPOST_ vc_cec_send_FeatureAbort(uint32_t follower,
  * @return zero if the command is successful, non-zero otherwise
  *         Tx callback if successful
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_send_ActiveSource(uint16_t physical_address, bool_t is_reply);
+VCHPRE_ int VCHPOST_ vc_cec_send_ActiveSource(uint16_t physical_address, vcos_bool_t is_reply);
 
 /**
  * <DFN>vc_cec_send_ImageViewOn</DFN> sends <Image View On>
@@ -438,7 +438,7 @@ VCHPRE_ int VCHPOST_ vc_cec_send_ActiveSource(uint16_t physical_address, bool_t 
  * @return zero if the command is successful, non-zero otherwise
  *         Tx callback if successful
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_send_ImageViewOn(uint32_t follower, bool_t is_reply);
+VCHPRE_ int VCHPOST_ vc_cec_send_ImageViewOn(uint32_t follower, vcos_bool_t is_reply);
 
 /**
  * <DFN>vc_cec_send_SetOSDString</DFN> sends <Set OSD String>
@@ -457,7 +457,7 @@ VCHPRE_ int VCHPOST_ vc_cec_send_ImageViewOn(uint32_t follower, bool_t is_reply)
 VCHPRE_ int VCHPOST_ vc_cec_send_SetOSDString(uint32_t follower, 
                                               CEC_DISPLAY_CONTROL_T disp_ctrl, 
                                               const char* string,
-                                              bool_t is_reply);
+                                              vcos_bool_t is_reply);
 
 /**
  * <DFN>vc_cec_send_Standby</DFN> sends <Standby>.
@@ -471,7 +471,7 @@ VCHPRE_ int VCHPOST_ vc_cec_send_SetOSDString(uint32_t follower,
  * @return zero if the command is successful, non-zero otherwise
  *         Tx callback if successful
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_send_Standby(uint32_t follower, bool_t is_reply);
+VCHPRE_ int VCHPOST_ vc_cec_send_Standby(uint32_t follower, vcos_bool_t is_reply);
 
 /**
  * <DFN>vc_cec_send_MenuStatus</DFN> sends <Menu Status> 
@@ -488,7 +488,7 @@ VCHPRE_ int VCHPOST_ vc_cec_send_Standby(uint32_t follower, bool_t is_reply);
  ***********************************************************/
 VCHPRE_ int VCHPOST_ vc_cec_send_MenuStatus(uint32_t follower, 
                                             CEC_MENU_STATE_T menu_state, 
-                                            bool_t is_reply);
+                                            vcos_bool_t is_reply);
 
 /**
  * <DFN>vc_cec_send_ReportPhysicalAddress</DFN> broadcasts
@@ -510,6 +510,6 @@ VCHPRE_ int VCHPOST_ vc_cec_send_MenuStatus(uint32_t follower,
  ***********************************************************/
 VCHPRE_ int VCHPOST_ vc_cec_send_ReportPhysicalAddress(uint16_t physical_address, 
                                                        CEC_DEVICE_TYPE_T device_type,
-                                                       bool_t is_reply);
+                                                       vcos_bool_t is_reply);
 
 #endif //_VC_CECSERVICE_H_

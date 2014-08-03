@@ -189,7 +189,7 @@ Used by: <a href="audio_mixer.html">audio_mixer</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-A track change is complete for an input port when a buffer flagged with <tt>OMX_BUFFERFLAG_EOS</tt> 
+A track change is complete for an input port when a buffer flagged with <tt>OMX_BUFFERFLAG_EOS</tt> 
   has been fully mixed into output port buffers as is ready to be returned or flushed
   from the input port. This configuration value can be monitored via 
   <tt>OMX_IndexConfigRequestCallback</tt>.
@@ -253,7 +253,7 @@ typedef struct OMX_CONFIG_BRCMCAMERASTATSTYPE {
    OMX_U32 nDroppedFrameCount;
 } OMX_CONFIG_BRCMCAMERASTATSTYPE;
 </pre><p>
-Allows the Camplus frame counts for number of frames produced and dropped to be read by the client. These counts get reset whenever a new mode is
+Allows the Camplus frame counts for number of frames produced and dropped to be read by the client. These counts get reset whenever a new mode is
   requested from Camplus. Additional knowledge of when this occurs is required
   to obtain meaningful results from this config.
   
@@ -380,7 +380,7 @@ Used by: <a href="write_media.html">write_media</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-This is a rough guide to whether or not the output destination (SD card typically) is keeping up. This
+This is a rough guide to whether or not the output destination (SD card typically) is keeping up. This
   configuration value can be monitored via <tt>OMX_IndexConfigRequestCallback</tt>.
   
  <p>
@@ -447,6 +447,16 @@ Some ports gather various statistics that can be used by clients for
 <dl>
 <dt><tt>nCorruptMBs</tt><dd>Number of corrupt macroblocks in the stream 
 </dl>
+<a name="OMX_IndexConfigBrcmRegisterFileFailFatal"><h2>Classify error condition when register file fails to load</h2></a>
+<tt>OMX_IndexConfigBrcmRegisterFileFailFatal</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+This specifies whether the failure to load the register file should be treated as a fatal error.
+  
+ <p>
+
 <a name="OMX_IndexConfigBrcmSyncOutput"><h2>Forcing a write sync</h2></a>
 <tt>OMX_IndexConfigBrcmSyncOutput</tt><br>
 Used by: <a href="write_still.html">write_still</a><p>
@@ -470,6 +480,16 @@ This index uses the standard IL structure <tt>OMX_CONFIG_BRCMUSEPROPRIETARYTUNNE
 
 Disable/enable the use of proprietary callbacks rather than OpenMAX IL buffer handling.<p>
 
+<a name="OMX_IndexConfigBrcmUseRegisterFile"><h2>Specify whether we wish to load the register settings file</h2></a>
+<tt>OMX_IndexConfigBrcmUseRegisterFile</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+ The file is specified with <tt>OMX_IndexParamConfigFileRegisters</tt>.
+  
+ <p>
+
 <a name="OMX_IndexConfigBrcmVideoEncodedSliceSize"><h2>Video encoding output slice size</h2></a>
 <tt>OMX_IndexConfigBrcmVideoEncodedSliceSize</tt><br>
 Used by: <a href="video_encode.html">video_encode</a><p>
@@ -488,8 +508,17 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-Setting the value to zero resets to the default (one slice per frame).
+Setting the value to zero resets to the default (one slice per frame).
   
+ <p>
+
+<a name="OMX_IndexConfigBrcmVideoH264LowLatency"><h2>Require the encoder to configure the low-latency mode</h2></a>
+<tt>OMX_IndexConfigBrcmVideoH264LowLatency</tt><br>
+Used by: <a href="video_encode.html">video_encode</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+ 
  <p>
 
 <a name="OMX_IndexConfigBrcmVideoIntraPeriod"><h2>Configure the number of frames between intra frames</h2></a>
@@ -498,7 +527,7 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-This overrides the setting in <tt>OMX_IndexConfigBrcmVideoIntraPeriodTime</tt>.
+This overrides the setting in <tt>OMX_IndexConfigBrcmVideoIntraPeriodTime</tt>.
   
  <p>
 
@@ -508,7 +537,7 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-Only valid if the framerate is zero (and hence the framerate is inferred from timestamps).
+Only valid if the framerate is zero (and hence the framerate is inferred from timestamps).
   This overrides the setting in <tt>OMX_IndexConfigBrcmVideoIntraPeriod</tt>.
   
  <p>
@@ -519,7 +548,7 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_VIDEO_PARAM_INTRAREFRESHTYPE</tt><p>
 
-Can be used when the component is executing.
+Can be used when the component is executing.
   
  <p>
 
@@ -529,7 +558,7 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-If set to OMX_TRUE, the next job submitted  will be flagged to be converted as an I-frame. This automatically resets
+If set to OMX_TRUE, the next job submitted  will be flagged to be converted as an I-frame. This automatically resets
   itself. This works with proprietary tunnelling and OMX buffers.
   
  <p>
@@ -565,7 +594,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-The viewfinder port can be executing, but will only emit the snapshot images associated to any captures
+The viewfinder port can be executing, but will only emit the snapshot images associated to any captures
   requested, and not viewfinder frames. This is an optimisation, and not essential.
   
  <p>
@@ -576,7 +605,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set whether setting the capture bit will abort any AF cycle that is in progress, or if the AF cycle
+Query / set whether setting the capture bit will abort any AF cycle that is in progress, or if the AF cycle
   should continue and the capture happen automatically on completion.
   
  <p>
@@ -604,7 +633,7 @@ typedef struct OMX_CONFIG_CAMERAFEATURESTYPE
    OMX_BOOL bHasLens;
 } OMX_CONFIG_CAMERAFEATURESTYPE;
 </pre><p>
-Query the capabilities of the current camera (lens and shutter). Some information is only valid when the component is Idle or Executing.
+Query the capabilities of the current camera (lens and shutter). Some information is only valid when the component is Idle or Executing.
   
  <p>
 
@@ -759,7 +788,7 @@ typedef struct OMX_CONFIG_CAMERASETTINGSTYPE {
     OMX_U32 nFocusPosition;
 } OMX_CONFIG_CAMERASETTINGSTYPE;
 </pre><p>
-The client can also set <tt>OMX_IndexConfigRequestCallback</tt> for this config.
+The client can also set <tt>OMX_IndexConfigRequestCallback</tt> for this config.
   
  <p>
 
@@ -769,7 +798,22 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-The stripe function itself is set with <tt>OMX_IndexParamCameraStripeFunction</tt>.
+The stripe function itself is set with <tt>OMX_IndexParamCameraStripeFunction</tt>.
+  
+ <p>
+
+<a name="OMX_IndexConfigCameraUseCase"><h2>Camera use case</h2></a>
+<tt>OMX_IndexConfigCameraUseCase</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+<pre>
+typedef struct OMX_CONFIG_CAMERAUSECASETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_CONFIG_CAMERAUSECASE eUseCase;
+} OMX_CONFIG_CAMERAUSECASETYPE;
+</pre><p>
+Query / set the use case to be passed into the tuner module.
   
  <p>
 
@@ -779,7 +823,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_CONTENTURITYPE</tt><p>
 
-Query / set whether the filename to which the raw Bayer format image should be written out to
+Query / set whether the filename to which the raw Bayer format image should be written out to
   file. Follows the standard URI structure.  Can NOT be set when the
   capture bit is set and the capture port is executing.  Will return
   <tt>OMX_ErrorUnsupportedIndex</tt> if the algorithm is not loaded.
@@ -807,7 +851,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Enables/disables the face beautification algorithm, if it is present.
+Enables/disables the face beautification algorithm, if it is present.
   
  <p>
 
@@ -826,7 +870,7 @@ typedef struct OMX_CONFIG_FACEDETECTIONCONTROLTYPE {
    OMX_U32 nQuality;
 } OMX_CONFIG_FACEDETECTIONCONTROLTYPE;
 </pre><p>
-Query / set the state of the face detection algorithm. Will return <tt>OMX_ErrorUnsupportedIndex</tt> if the algorithm is not loaded.
+Query / set the state of the face detection algorithm. Will return <tt>OMX_ErrorUnsupportedIndex</tt> if the algorithm is not loaded.
   
  <p>
 
@@ -852,7 +896,7 @@ typedef struct OMX_CONFIG_FACEDETECTIONREGIONTYPE {
    OMX_FACEREGIONTYPE sRegion[1];
 } OMX_CONFIG_FACEDETECTIONREGIONTYPE;
 </pre><p>
-Query the currently detected face regions within the viewfinder image.  Will return
+Query the currently detected face regions within the viewfinder image.  Will return
   <tt>OMX_ErrorUnsupportedIndex</tt> if the algorithm is not loaded.
   
  <p>
@@ -956,7 +1000,7 @@ typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nPortIndex;
    OMX_IMAGEFILTERTYPE eImageFilter;
    OMX_U32 nNumParams;
-   OMX_U32 nParams[4];
+   OMX_U32 nParams[5];
 } OMX_CONFIG_IMAGEFILTERPARAMSTYPE;</pre><p>
 This structure contains optional parameters for some image
  filters. The following table lists all image filters that support
@@ -1065,7 +1109,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Enables/disables the scene detection algorithm, if it is present.
+Enables/disables the scene detection algorithm, if it is present.
   
  <p>
 
@@ -1081,7 +1125,7 @@ typedef struct OMX_CONFIG_SHARPNESSTYPE {
    OMX_S32 nSharpness;
 } OMX_CONFIG_SHARPNESSTYPE;
 </pre><p>
-Query / set the sharpening/softening of the output image.  -100 = max softening. 0 = no change. +100 = max sharpening.
+Query / set the sharpening/softening of the output image.  -100 = max softening. 0 = no change. +100 = max sharpening.
   
  <p>
 
@@ -1091,10 +1135,19 @@ Used by: <a href="read_media.html">read_media</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-This is a boolean config parameter.  Setting this to TRUE will continue the playback of
+This is a boolean config parameter.  Setting this to TRUE will continue the playback of
   a rental file, while setting to FALSE has no effect, and the host
   application is expected to stop the playback afterwards.
   
+ <p>
+
+<a name="OMX_IndexConfigContrastEnhance"><h2>Enable / disable contrast enhancement</h2></a>
+<tt>OMX_IndexConfigContrastEnhance</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+ 
  <p>
 
 <a name="OMX_IndexConfigDisplayRegion"><h2>Display Region</h2></a>
@@ -1207,7 +1260,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set the state of adding boxes around the faces detected in the viewfinder frames.
+Query / set the state of adding boxes around the faces detected in the viewfinder frames.
   
  <p>
 
@@ -1348,7 +1401,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Enables/disables the face recognition software stage (if present)
+Enables/disables the face recognition software stage (if present)
   
  <p>
 
@@ -1358,7 +1411,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_CONTENTURITYPE</tt><p>
 
-Specifies the URI of the database file to be used by face recognition.
+Specifies the URI of the database file to be used by face recognition.
   
  <p>
 
@@ -1375,7 +1428,7 @@ typedef struct OMX_PARAM_BRCMU64TYPE {
     OMX_U32 nHighPart;
 } OMX_PARAM_BRCMU64TYPE;
 </pre><p>
-Instructs the face recognition stage to save the next primary face it sees into the database with the
+Instructs the face recognition stage to save the next primary face it sees into the database with the
   supplied ID.
   
  <p>
@@ -1416,7 +1469,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-This is updated at the start of every frame.
+This is updated at the start of every frame.
   
  <p>
 
@@ -1435,7 +1488,7 @@ typedef struct OMX_CONFIG_FLASHINFOTYPE
    OMX_U8 nDeviceVersion;
 } OMX_CONFIG_FLASHINFOTYPE;
 </pre><p>
-Queries for the information on the flash devices present.
+Queries for the information on the flash devices present.
   
  <p>
 
@@ -1454,7 +1507,7 @@ typedef struct OMX_CONFIG_INPUTCROPTYPE {
    OMX_U32 xHeight;
 } OMX_CONFIG_INPUTCROPTYPE;
 </pre><p>
-Query / set the region of the input image that will be cropped before being processed by the ISP. It is
+Query / set the region of the input image that will be cropped before being processed by the ISP. It is
   specified as a fraction of the input width and height, expressed as a
   16p16 value.
   
@@ -1550,7 +1603,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query /set the power status of the camera module. Setting this parameter to <tt>OMX_TRUE</tt> instructs the component to
+Query /set the power status of the camera module. Setting this parameter to <tt>OMX_TRUE</tt> instructs the component to
   power down the sensor, but keeping all memory allocated as required by
   the component state.
   
@@ -1610,7 +1663,7 @@ Used by: <a href="video_decode.html">video_decode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-This will only happen if the codec is currently loaded.  To perform this operation, the <tt>bEnabled</tt> value should
+This will only happen if the codec is currently loaded.  To perform this operation, the <tt>bEnabled</tt> value should
   be set to <tt>OMX_TRUE</tt>.
   
  <p>
@@ -1661,7 +1714,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set the state of the Smart Shake Reduction function.  Will return <tt>OMX_ErrorUnsupportedIndex</tt> if the
+Query / set the state of the Smart Shake Reduction function.  Will return <tt>OMX_ErrorUnsupportedIndex</tt> if the
   algorithm is not loaded.
   
  <p>
@@ -1672,7 +1725,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set the state of the still colour denoise function of the camera. This is only applicable whilst
+Query / set the state of the still colour denoise function of the camera. This is only applicable whilst
   doing a stills capture in YUV422 or YUV420 planar format.
   
  <p>
@@ -1692,7 +1745,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set the state of the temporal denoising function of the camera. This is only applicable
+Query / set the state of the temporal denoising function of the camera. This is only applicable
   whilst the camera is producing images in the Broadcom-specific format
   or YUV420.
   
@@ -1756,7 +1809,7 @@ typedef struct OMX_CONFIG_U8TYPE {
     OMX_U8  nU8;
 } OMX_PARAM_U8TYPE;
 </pre><p>
-Sets an identifier to be set on the start of the next frame.  Gets the identifier seen on the last frame from Camplus.
+Sets an identifier to be set on the start of the next frame.  Gets the identifier seen on the last frame from Camplus.
   This allows a client to identify when a group of settings have all
   been applied to Camplus (apply settings, change
   <tt>OMX_IndexConfigUserSettingsId</tt>, wait for value read back from
@@ -1776,7 +1829,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set the state of the video colour denoising function of the camera. This is only applicable
+Query / set the state of the video colour denoising function of the camera. This is only applicable
   whilst the camera is producing images in the Broadcom-specific format
   or YUV420.
   
@@ -1810,7 +1863,7 @@ Used by: <a href="camera.html">camera</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-Query / set whether the camera component will ensure that the camera module has reported the lens
+Query / set whether the camera component will ensure that the camera module has reported the lens
   back at the focused position before stopping capturing with the
   OneShot flag set. This may lead to multiple complete images being
   emitted from the capture port, and any receiving component/client
@@ -1828,13 +1881,13 @@ The allows the client to specify to a component that is writing files
  that this writing may happen asynchronously, including opening and closing
  of files.<p>
 
-<a name="OMX_IndexParamAudioDdp"><h2>Query / set the DDP format of this port</h2></a>
+<a name="OMX_IndexParamAudioDdp"><h2>Query DDP format parameters</h2></a>
 <tt>OMX_IndexParamAudioDdp</tt><br>
 Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_render.html">audio_render</a>, <a href="read_media.html">read_media</a><p>
 
 This index uses the standard IL structure <tt>OMX_AUDIO_PARAM_DDPTYPE</tt><p>
 
- <tt>nSamplingRate</tt> must be 32000, 44100 or 48000.
+Currently eBitStreamId is used to  distinguish between different variants of DDP.
   
  <p>
 
@@ -1845,6 +1898,30 @@ Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_render.htm
 This index uses the standard IL structure <tt>OMX_AUDIO_PARAM_DTSTYPE</tt><p>
 
  Supported on the output port for when pass through mode is enabled.
+  
+ <p>
+
+<a name="OMX_IndexParamBrcmAlignHoriz"><h2>Query / set the horizonal alignment of the input buffer to be a given multiple of bytes in width</h2></a>
+<tt>OMX_IndexParamBrcmAlignHoriz</tt><br>
+Used by: <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
+
+ Setting this to anything other than the default of 32 may have a negative impact of performance
+  because the input buffer may need to be re-pitched before it is encoded. Supported values
+  are 32 or 1 (no padding).
+  
+ <p>
+
+<a name="OMX_IndexParamBrcmAlignVert"><h2>Query / set the vertical alignment of the input buffer to be a given multiple of rows in height</h2></a>
+<tt>OMX_IndexParamBrcmAlignVert</tt><br>
+Used by: <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
+
+ Setting this to anything other than the default of 16 may have a negative impact of performance
+  because the input buffer may need to be re-pitched before it is encoded. Supported values
+  are 16 or 1 (no padding).
   
  <p>
 
@@ -1865,6 +1942,16 @@ Let the component change the amount of memory it has allocated when
  might occur if (for example) the component was configured, taken to
  IDLE, then taken back to LOADED, the profile increased and the
  component taken back to IDLE.<p>
+
+<a name="OMX_IndexParamBrcmAttachLog"><h2>Sets whether to attach log data to the encoded file or not</h2></a>
+<tt>OMX_IndexParamBrcmAttachLog</tt><br>
+Used by: <a href="image_encode.html">image_encode</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+ 
+  
+ <p>
 
 <a name="OMX_IndexParamBrcmCRC"><h2>Query for the latest CRC for input data on this port</h2></a>
 <tt>OMX_IndexParamBrcmCRC</tt><br>
@@ -1898,12 +1985,36 @@ typedef struct OMX_PARAM_BRCMASPECTRATIOTYPE {
     OMX_U32 nHeight;
 } OMX_PARAM_BRCMASPECTRATIOTYPE;
 </pre><p>
-Query / set the prefered aspect ratio of the sensor CDI mode. The CDI will use the nearest value to this.
+Query / set the prefered aspect ratio of the sensor CDI mode. The CDI will use the nearest value to this.
   If both are left as 0, then the aspect ratio of the requested output
   mode is used to bias the sensor mode selection.
   
  <p>
 
+<a name="OMX_IndexParamBrcmConfigFileChunkRegisters"><h2>Specify a chunk of data for a register settings file</h2></a>
+<tt>OMX_IndexParamBrcmConfigFileChunkRegisters</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+<pre>
+typedef struct OMX_PARAM_BRCMCONFIGFILECHUNKTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 size;
+   OMX_U32 offset;
+   OMX_U8 data[1];
+} OMX_PARAM_BRCMCONFIGFILECHUNKTYPE;
+</pre><p>
+ <tt>OMX_IndexParamConfigFileRegisters</tt> must be called first.
+  
+ <p>
+
+<dl>
+<dt><tt>nSize</tt><dd>size of the structure in bytes, including
+<dt><tt>nVersion</tt><dd>OMX specification version information 
+<dt><tt>size</tt><dd>Number of bytes being transferred in this chunk 
+<dt><tt>offset</tt><dd>Offset of this chunk in the file 
+<dt><tt>data</tt><dd>Chunk data 
+</dl>
 <a name="OMX_IndexParamBrcmDataUnit"><h2>Data Unit</h2></a>
 <tt>OMX_IndexParamBrcmDataUnit</tt><br>
 Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
@@ -1966,6 +2077,16 @@ typedef struct OMX_PARAM_BRCMDRMENCRYPTIONTYPE
    OMX_U8 configData[1];
 } OMX_PARAM_BRCMDRMENCRYPTIONTYPE;</pre><p>
 Query/set the DRM encryption scheme used by a port writing out data.<p>
+
+<a name="OMX_IndexParamBrcmDroppablePFrames"><h2>Require the encoder to select alternate PFrames as not droppable PFrames</h2></a>
+<tt>OMX_IndexParamBrcmDroppablePFrames</tt><br>
+Used by: <a href="video_encode.html">video_encode</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
+
+This uses the standard code (OMX_CONFIG_BOOLEANTYPE) structure.
+  
+ <p>
 
 <a name="OMX_IndexParamBrcmEEDEEnable"><h2>Enable/Disable end to end distortion estimator</h2></a>
 <tt>OMX_IndexParamBrcmEEDEEnable</tt><br>
@@ -2036,13 +2157,36 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
   
  <p>
 
+<a name="OMX_IndexParamBrcmFpsRange"><h2>Allows a variable frame rate range to be defined</h2></a>
+<tt>OMX_IndexParamBrcmFpsRange</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+<pre>
+typedef struct OMX_PARAM_BRCMFRAMERATERANGETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+   OMX_U32 xFramerateLow;
+   OMX_U32 xFramerateHigh;
+} OMX_PARAM_BRCMFRAMERATERANGETYPE;
+</pre><p>
+Used if xFramerate in the port definition is 0.
+  
+ <p>
+
+<dl>
+<dt><tt>nSize</tt><dd>size of the structure in bytes, including
+<dt><tt>nVersion</tt><dd>OMX specification version information 
+<dt><tt>xFramerateLow</tt><dd>Low end of framerate range. Q16 format 
+<dt><tt>xFramerateHigh</tt><dd>High end of framerate range. Q16 format 
+</dl>
 <a name="OMX_IndexParamBrcmImmutableInput"><h2>Require the encoder to not modify the input images</h2></a>
 <tt>OMX_IndexParamBrcmImmutableInput</tt><br>
 Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-This uses the standard <tt>OMX_CONFIG_BOOLEANTYPE</tt> structure. If set to <tt>OMX_TRUE</tt>, the encoder
+This uses the standard <tt>OMX_CONFIG_BOOLEANTYPE</tt> structure. If set to <tt>OMX_TRUE</tt>, the encoder
   will not modify the input images. Only relevant when using proprietary tunnels.
   
  <p>
@@ -2063,7 +2207,7 @@ Used by: <a href="camera.html">camera</a>, <a href="video_decode.html">video_dec
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-e. we will not wait for the images to be returned from the pool, but instead rely on the image pool tidying itself
+e. we will not wait for the images to be returned from the pool, but instead rely on the image pool tidying itself
   up automatically when all references are released.
   
  <p>
@@ -2074,7 +2218,7 @@ Used by: <a href="null_sink.html">null_sink</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
-The default value is zero. 
+The default value is zero. 
  <p>
 
 <a name="OMX_IndexParamBrcmMaxFileSize"><h2>Limit the maximum file size that can be generated</h2></a>
@@ -2090,7 +2234,7 @@ typedef struct OMX_PARAM_BRCMU64TYPE {
     OMX_U32 nHighPart;
 } OMX_PARAM_BRCMU64TYPE;
 </pre><p>
-An error will be reported when this size is reached.
+An error will be reported when this size is reached.
   
  <p>
 
@@ -2116,7 +2260,7 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
-With this enabled, those encoders that support it will produce NALs in separate OMX buffers.
+With this enabled, those encoders that support it will produce NALs in separate OMX buffers.
   
  <p>
 
@@ -2131,17 +2275,17 @@ typedef struct OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE {
    OMX_U32 nBufferSize;
 } OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE;
 </pre><p>
-This is a hint to the underlying handler, and may be ignored.
+This is a hint to the underlying handler, and may be ignored.
   
  <p>
 
 <a name="OMX_IndexParamBrcmPixelAspectRatio"><h2>Allows configuring the pixel aspect ratio</h2></a>
 <tt>OMX_IndexParamBrcmPixelAspectRatio</tt><br>
-Used by: <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="null_sink.html">null_sink</a>, <a href="video_decode.html">video_decode</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_POINTTYPE</tt><p>
 
-Allowed values are: 1:1, 10:11, 16:11, 40:33, 59:54, and 118:81.
+Allowed values are: 1:1, 10:11, 16:11, 40:33, 59:54, and 118:81.
   
  <p>
 
@@ -2270,6 +2414,21 @@ This config allows the client to explicitly set the number of destination buffer
  for the buffers).
  .<p>
 
+<a name="OMX_IndexParamBrcmVideoAVCInlineHeaderEnable"><h2>Enable SPS/PPS insertion in the encoder bitstream</h2></a>
+<tt>OMX_IndexParamBrcmVideoAVCInlineHeaderEnable</tt><br>
+Used by: <a href="video_encode.html">video_encode</a><p>
+
+<pre>
+typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_BOOL bEnabled;
+} OMX_CONFIG_PORTBOOLEANTYPE;
+</pre><p>
+If this property is set then SPS/PPS will be output before each IDR frame or P=intrarefresh frame 
+ <p>
+
 <a name="OMX_IndexParamBrcmVideoAVCSEIEnable"><h2>Enable/disable SEI messages</h2></a>
 <tt>OMX_IndexParamBrcmVideoAVCSEIEnable</tt><br>
 Used by: <a href="video_encode.html">video_encode</a><p>
@@ -2282,8 +2441,38 @@ typedef struct OMX_PARAM_BRCMVIDEOAVCSEIENABLETYPE {
    OMX_BOOL bEnable;
 } OMX_PARAM_BRCMVIDEOAVCSEIENABLETYPE;
 </pre><p>
-Enable or disable Supplemental Enhancement Information (SEI) messages to be inserted in the H.264 bitstream.
+Enable or disable Supplemental Enhancement Information (SEI) messages to be inserted in the H.264 bitstream.
   
+ <p>
+
+<a name="OMX_IndexParamBrcmVideoAVC_LowDelayHRDEnable"><h2>Enable/Disable setting low_delay_hrd flag in H</h2></a>
+<tt>OMX_IndexParamBrcmVideoAVC_LowDelayHRDEnable</tt><br>
+Used by: <a href="video_encode.html">video_encode</a><p>
+
+<pre>
+typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_BOOL bEnabled;
+} OMX_CONFIG_PORTBOOLEANTYPE;
+</pre><p>
+264 header. "big_pictures" that violate the nominal CPB removal times due to the number of bits used by an access unit are permitted when the flag is set. 
+ <p>
+
+<a name="OMX_IndexParamBrcmVideoAVC_VCLHRDEnable"><h2>Enable/disable VCL HRD parameters to be inserted to the H</h2></a>
+<tt>OMX_IndexParamBrcmVideoAVC_VCLHRDEnable</tt><br>
+Used by: <a href="video_encode.html">video_encode</a><p>
+
+<pre>
+typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_BOOL bEnabled;
+} OMX_CONFIG_PORTBOOLEANTYPE;
+</pre><p>
+264 SPS header 
  <p>
 
 <a name="OMX_IndexParamBrcmVideoDecodeErrorConcealment"><h2>Control error concealment for video decode</h2></a>
@@ -2302,642 +2491,3 @@ This parameter is used by clients to control the type of error concealment
 <dl>
 <dt><tt>bStartWithValidFrame</tt><dd>Decoder will only start emitting frames from a non-corrupted frame 
 </dl>
-<a name="OMX_IndexParamBrcmVideoEncodeMaxQuant"><h2>Query / set the codec's maximum quantization level</h2></a>
-<tt>OMX_IndexParamBrcmVideoEncodeMaxQuant</tt><br>
-Used by: <a href="video_encode.html">video_encode</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
- 
- <p>
-
-<a name="OMX_IndexParamBrcmVideoEncodeMinQuant"><h2>Query / set the codec's minimum quantization level</h2></a>
-<tt>OMX_IndexParamBrcmVideoEncodeMinQuant</tt><br>
-Used by: <a href="video_encode.html">video_encode</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
- 
- <p>
-
-<a name="OMX_IndexParamCameraCamplusId"><h2>Camera Subsystem Identification</h2></a>
-<tt>OMX_IndexParamCameraCamplusId</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-This parameter allows the configuration of the identifier to be used
- to initialise the Broadcom Camplus subsystem that sits beneath the
- camera component. If only one instance of the camera component is
- used, the default value can be used. If more than one instance is
- required, they must each have their own unique values for this
- parameter. It is also used to tie the component to the image pool
- created with <tt>OMX_Set upCamPools</tt>.<p>
-
-<a name="OMX_IndexParamCameraCaptureEventFunction"><h2>Capture start event callback</h2></a>
-<tt>OMX_IndexParamCameraCaptureEventFunction</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERACAPTUREEVENTFUNCTIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_PTR pPrivate;
-   RIL_CAMERA_CAPTURE_EVENT_FUNC_T pCaptureFunc;
-} OMX_PARAM_CAMERACAPTUREEVENTFUNCTIONTYPE;</pre><p>
-This parameter is used to pass a callback to the camera component
- which is called when a capture is started.<p>
-
-<a name="OMX_IndexParamCameraCaptureMode"><h2>Allow the client to specify the behaviour desired for stills captures</h2></a>
-<tt>OMX_IndexParamCameraCaptureMode</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERACAPTUREMODETYPE{
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_CAMERACAPTUREMODETYPE eMode;
-} OMX_PARAM_CAMERACAPTUREMODETYPE;
-</pre><p>
- Options are:
-   <tt>OMX_CameraCaptureModeWaitForCaptureEnd</tt>:
-        Wait for capture to complete before resuming viewfinder.
-   <tt>OMX_CameraCaptureModeWaitForCaptureEndAndUsePreviousInputImage</tt>:
-        Reprocess the same input frame multiple times with different settings.
-        Currently not implemented in the Camplus levels.
-   <tt>OMX_CameraCaptureModeResumeViewfinderImmediately</tt>:
-        Resume viewfinder/video encode as soon as the input image for the still
-        has been acquired, and then process the still in a parallel thread. This
-        requires <tt>image_pool_params.eInputPoolMode</tt> to be set to
-        <tt>OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS</tt>, and 
-        <tt>image_pool_params.nNumHiResStillsFrames</tt>
-        to be non-zero, otherwise the image pools won't split in a manner that
-        allows viewfinder to be resumed.
-  
- <p>
-
-<a name="OMX_IndexParamCameraDeviceNumber"><h2>Camera device number</h2></a>
-<tt>OMX_IndexParamCameraDeviceNumber</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-Query / set the camera number (as defined by the Videocore make system) to be used by this camera component. When set, the value will be checked to ensure that
-  the camera number specified is defined for the platform.
-  Setting this parameter also triggers loading of the relevant drivers to speed up
-  queries for <tt>OMX_IndexConfigCameraSensorModes</tt>, which require the drivers to be loaded.
-  This parameter is supported by <tt>OMX_IndexConfigRequestCallback</tt>, so the client can be
-  notified once that driver is loaded, rather than having to poll the settings.
-  
- <p>
-
-<a name="OMX_IndexParamCameraDevicesPresent"><h2>Query the camera devices defined for this platform</h2></a>
-<tt>OMX_IndexParamCameraDevicesPresent</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-The result is a bitmask indicating which cameras ahve been detected.
-  
- <p>
-
-<a name="OMX_IndexParamCameraDisableAlgorithm"><h2>Disabling camera processing stages.</h2></a>
-<tt>OMX_IndexParamCameraDisableAlgorithm</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef enum OMX_CAMERADISABLEALGORITHMTYPE {
-      OMX_CameraDisableAlgorithmFacetracking,
-      OMX_CameraDisableAlgorithmRedEyeReduction,
-      OMX_CameraDisableAlgorithmVideoStabilisation,
-      OMX_CameraDisableAlgorithmWriteRaw,
-      OMX_CameraDisableAlgorithmVideoDenoise,
-      OMX_CameraDisableAlgorithmStillsDenoise,
-      OMX_CameraDisableAlgorithmAntiShake,
-      OMX_CameraDisableAlgorithmImageEffects,
-      OMX_CameraDisableAlgorithmDarkSubtract,
-      OMX_CameraDisableAlgorithmDynamicRangeExpansion,
-      OMX_CameraDisableAlgorithmFaceRecognition,
-      OMX_CameraDisableAlgorithmFaceBeautification,
-      OMX_CameraDisableAlgorithmSceneDetection,
-      OMX_CameraDisableAlgorithmHighDynamicRange,
-   OMX_CameraDisableAlgorithmKhronosExtensions = 0x6F000000,
-   OMX_CameraDisableAlgorithmVendorStartUnused = 0x7F000000,
-   OMX_CameraDisableAlgorithmMax = 0x7FFFFFFF
-} OMX_CAMERADISABLEALGORITHMTYPE;
-
-typedef struct OMX_PARAM_CAMERADISABLEALGORITHMTYPE
-{
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_CAMERADISABLEALGORITHMTYPE eAlgorithm;
-   OMX_BOOL bDisabled;
-} OMX_PARAM_CAMERADISABLEALGORITHMTYPE;</pre><p>
-Allows plugin algorithms to be disabled to save memory
- within the camera component<p>
-
-<a name="OMX_IndexParamCameraFlashType"><h2>Select flash type</h2></a>
-<tt>OMX_IndexParamCameraFlashType</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef enum OMX_CAMERAFLASHTYPE {
-   OMX_CameraFlashDefault,
-   OMX_CameraFlashXenon,
-   OMX_CameraFlashLED,
-   OMX_CameraFlashNone,
-   OMX_CameraFlashKhronosExtensions = 0x6F000000,
-   OMX_CameraFlashVendorStartUnused = 0x7F000000,
-   OMX_CameraFlashMax = 0x7FFFFFFF
-} OMX_CAMERAFLASHTYPE;
-
-typedef struct OMX_PARAM_CAMERAFLASHTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_CAMERAFLASHTYPE eFlashType;
-   OMX_BOOL bRedEyeUsesTorchMode;
-} OMX_PARAM_CAMERAFLASHTYPE;</pre><p>
-This parameter allows the selection of xenon or LED flash devices
- to be used with the currently selected camera. If that device is not
- available, then the component will revert back to whatever flash
- device is available for that camera.
- <tt>bRedEyeUsesTorchMode</tt> allows the blinking for red eye reduction to
- be switched between using the indicator mode, and the torch mode for the
- flash driver.<p>
-
-<a name="OMX_IndexParamCameraImagePool"><h2>Camera Image Pools</h2></a>
-<tt>OMX_IndexParamCameraImagePool</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef enum OMX_CAMERAIMAGEPOOLINPUTMODETYPE {
-   OMX_CAMERAIMAGEPOOLINPUTMODE_ONEPOOL,     /*All input images are allocated from one pool
-                                               Works for simple stills capture use cases
-                                               Can not be used with parallel stills capture
-                                               and video encode, as the pool will be sized for
-                                               capture or viewfinder, not both simultaneously.
-                                               The pool wouldn't divide sensibly in this mode
-                                               anyway.
-                                             */
-   OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS,    /*All stills & video input images are allocated
-                                               from two seperate pools.
-                                               This ensures that parallel capture can work, but
-                                               would consume more memory if used on a simple
-                                               stills capture use case.
-                                             */
-} OMX_CAMERAIMAGEPOOLINPUTMODETYPE;
-
-typedef struct OMX_PARAM_CAMERAIMAGEPOOLTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nNumHiResVideoFrames;
-   OMX_U32 nHiResVideoWidth;
-   OMX_U32 nHiResVideoHeight;
-   OMX_COLOR_FORMATTYPE eHiResVideoType;
-   OMX_U32 nNumHiResStillsFrames;
-   OMX_U32 nHiResStillsWidth;
-   OMX_U32 nHiResStillsHeight;
-   OMX_COLOR_FORMATTYPE eHiResStillsType;
-   OMX_U32 nNumLoResFrames;
-   OMX_U32 nLoResWidth;
-   OMX_U32 nLoResHeight;
-   OMX_COLOR_FORMATTYPE eLoResType;
-   OMX_CAMERAIMAGEPOOLINPUTMODETYPE eInputPoolMode;
-   OMX_U32 nNumInputVideoFrames;
-   OMX_U32 nInputVideoWidth;
-   OMX_U32 nInputVideoHeight;
-   OMX_COLOR_FORMATTYPE eInputVideoType;
-   OMX_U32 nNumInputStillsFrames;
-   OMX_U32 nInputStillsWidth;
-   OMX_U32 nInputStillsHeight;
-   OMX_COLOR_FORMATTYPE eInputStillsType;
-} OMX_PARAM_CAMERAIMAGEPOOLTYPE;</pre><p>
-\sloppy This parameter specifies the size, type, and number, of images to
- allow in the images pools required by Camplus. Supported types are
- <tt>OMX_COLOR_FormatYUV420PackedPlanar</tt>,
- <tt>OMX_COLOR_FormatYUV422PackedPlanar</tt>,
- <tt>OMX_COLOR_FormatRawBayer8bit</tt>,
- <tt>OMX_COLOR_FormatRawBayer10bit</tt>,
- <tt>OMX_COLOR_FormatRawBayer8bitcompressed</tt>, and 0 (reserved for the
- Broadcom-specific format required by the video encoder). The input
- pool width, height, and type can be set as 0 to make the component
- query Camplus for the sensor mode that would correspond to the largest
- of the viewfinder port definition, the capture port definition, or the
- high resolution image pool.<p>
-
-<a name="OMX_IndexParamCameraPoolToEncoderFunction"><h2>Camera and Video Encoder communication</h2></a>
-<tt>OMX_IndexParamCameraPoolToEncoderFunction</tt><br>
-Used by: <a href="camera.html">camera</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERAPOOLTOENCODERFUNCTIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_PTR pPrivate;
-   RIL_CAMERA_ENCODER_FUNC_T pEncoderFunc;
-   RIL_IMAGE_FLUSH_FUNC_T pFlushFunc;
-   OMX_BOOL bUseYUVUV;
-} OMX_PARAM_CAMERAPOOLTOENCODERFUNCTIONTYPE;</pre><p>
-This parameter is used when creating proprietary communication with
- the video_encode component from the capture port. It provides the
- encoder function for passing the main and subsampled images to be
- encoded, together with a function used to release all images. The
- image format in this mode can be set to the Broadcom-specific format
- required for the video encode functions, and does not comply with any
- of the OMX standard formats.<p>
-
-<a name="OMX_IndexParamCameraSingleBufferCaptureInput"><h2>Save memory by using a single input buffer</h2></a>
-<tt>OMX_IndexParamCameraSingleBufferCaptureInput</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-Configures the camera component to switch to a single input buffer when capturing, therefore
-  saving the memory requirement of having two full resolution bayer
-  input buffers to store the input images.
-  
- <p>
-
-<a name="OMX_IndexParamCameraStripeFunction"><h2>Camera proprietary stripe passing</h2></a>
-<tt>OMX_IndexParamCameraStripeFunction</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="camera.html">camera</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERASTRIPEFUNCTIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_PTR pPrivate;
-   RIL_CAMERA_STRIPE_FUNC_T pStripeFunc;
-   RIL_IMAGE_FLUSH_FUNC_T pFlushFunc;
-   RIL_CAMERA_STRIPE_RELEASE_FUNC_T pReleaseFunc;
-   OMX_PTR pReleasePrivate;
-   OMX_BOOL bUseYUVUV;
-} OMX_PARAM_CAMERASTRIPEFUNCTIONTYPE;</pre><p>
-This parameter is used by the camera when setting up proprietary
- communication, and passes several function pointers used for passing
- and flushing stripes.<p>
-
-<a name="OMX_IndexParamCameraSwapImagePools"><h2>Swap over image pools</h2></a>
-<tt>OMX_IndexParamCameraSwapImagePools</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-Configures the camera component to swap over the two image pools when in stills capture mode. The behind this logic being that the viewfinder
-  high res images and the capture low res images are approximately the same
-  size, and the viewfinder low res images and the capture high res circular
-  output buffer are approximately the same size.
-  DO NOT USE WITH PARALLEL CAPTURE, AS POOL ALLOCATIONS ALREADY TAKE THIS INTO ACCOUNT
-  
- <p>
-
-<a name="OMX_IndexParamCameraUseCase"><h2>Camera use case</h2></a>
-<tt>OMX_IndexParamCameraUseCase</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERAUSECASETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_PARAM_CAMERAUSECASE eUseCase;
-} OMX_PARAM_CAMERAUSECASETYPE;
-</pre><p>
-Query / set the use case to be passed into the tuner module.
-  
- <p>
-
-<a name="OMX_IndexParamCaptureStatus"><h2>Returns the actual capture status of the camera component</h2></a>
-<tt>OMX_IndexParamCaptureStatus</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-Set to True when a stills capture starts, and will be cleared when the capture image has been 
-  passed downstream.
-  This parameter is supported by <tt>OMX_IndexConfigRequestCallback</tt>
-  to allow a client to do stuff on image capture (eg play a shutter sound).
-  
- <p>
-
-<a name="OMX_IndexParamCodecConfig"><h2>Codec Configuration</h2></a>
-<tt>OMX_IndexParamCodecConfig</tt><br>
-Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CODECCONFIGTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_U32 bCodecConfigIsComplete;
-   OMX_U8 nData[1];
-} OMX_PARAM_CODECCONFIGTYPE;</pre><p>
-This parameter contains opaque data in a format specified by Broadcom
- and allows out-of-band information such as cropping rectangles, aspect
- ratio information, codec-specific header bytes, and other essential
- information to be passed between connected components.
- 
- <tt>bCodecConfigIsCompete</tt> specifies if the codec config is fully
- contained in here and there is no need to wait for OMX_BUFFERFLAG_CODECCONFIG
- buffers<p>
-
-<a name="OMX_IndexParamCommonUseStcTimestamps"><h2>Select timestamp mode</h2></a>
-<tt>OMX_IndexParamCommonUseStcTimestamps</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef enum OMX_TIMESTAMPMODETYPE
-{
-   OMX_TimestampModeZero = 0,
-   OMX_TimestampModeRawStc,
-   OMX_TimestampModeResetStc,
-   OMX_TimestampModeKhronosExtensions = 0x6F000000,
-   OMX_TimestampModeVendorStartUnused = 0x7F000000,
-   OMX_TimestampModeMax = 0x7FFFFFFF
-} OMX_TIMESTAMPMODETYPE;
-
-typedef struct OMX_PARAM_TIMESTAMPMODETYPE
-{
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_TIMESTAMPMODETYPE eTimestampMode;
-} OMX_PARAM_TIMESTAMPMODETYPE;</pre><p>
-Specifies what to use as timestamps in the abscence of a clock component.<p>
-
-<a name="OMX_IndexParamComponentName"><h2>Sets the component name to be used in internal logging messages</h2></a>
-<tt>OMX_IndexParamComponentName</tt><br>
-Used by: <a href="read_media.html">read_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_COMPONENTROLETYPE</tt><p>
-
- 
- <p>
-
-<a name="OMX_IndexParamDisableVllPool"><h2>Controlling use of memory for loadable modules</h2></a>
-<tt>OMX_IndexParamDisableVllPool</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-This control can be used to control whether loadable modules used a dedicated memory
- pool or use heap allocated memory.<p>
-
-<a name="OMX_IndexParamDynamicParameterFile"><h2>Specify a dynamic parameter file to use or not</h2></a>
-<tt>OMX_IndexParamDynamicParameterFile</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_CONTENTURITYPE</tt><p>
-
-If a file is to be used, <tt>OMX_IndexParamUseDynamicParameterFile</tt> must be set.
-  
- <p>
-
-<a name="OMX_IndexParamDynamicParameterFileFailFatal"><h2>Classify error condition when DFP fails to load</h2></a>
-<tt>OMX_IndexParamDynamicParameterFileFailFatal</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-This specifies whether the failure to load the DPF file should this be treated as a fatal error
-  Enables loading of a dynamic parameter file. The filename is set with
-  <tt>OMX_IndexParamDynamicParameterFile</tt>.
-  
- <p>
-
-<a name="OMX_IndexParamILFifoConfig"><h2>Allows configuration of the FIFO settings.</h2></a>
-<tt>OMX_IndexParamILFifoConfig</tt><br>
-Used by: <a href="audio_encode.html">audio_encode</a>, <a href="video_encode.html">video_encode</a><p>
-
-<pre>
-typedef struct OMX_PARAM_ILFIFOCONFIG {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_U32 nDataSize;
-   OMX_U32 nHeaderCount;
-} OMX_PARAM_ILFIFOCONFIG;</pre><p>
-Allows configuring the size of the ILFIFO used in a component.<p>
-
-<dl>
-<dt><tt>nDataSize</tt><dd>The size of the FIFO's data area 
-<dt><tt>nHeaderCount</tt><dd>The number of headers allocated 
-</dl>
-<a name="OMX_IndexParamISPTunerName"><h2>ISP tuner name</h2></a>
-<tt>OMX_IndexParamISPTunerName</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-<pre>
-typedef struct OMX_PARAM_CAMERAISPTUNERTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U8 tuner_name[64];
-} OMX_PARAM_CAMERAISPTUNERTYPE;
-</pre><p>
-Allow the client to query / set the name of the camera tuner module to be used by Camplus. If tuner_name is a null string, the default tuner
-  for the camera module is loaded.
-  It is recommended that this parameter is set before <tt>OMX_IndexParamCameraDeviceNumber</tt>
-  to avoid reloading the CDI and default tuner.
-  
- <p>
-
-<a name="OMX_IndexParamImagePoolDisplayFunction"><h2>Proprietary Image Passing</h2></a>
-<tt>OMX_IndexParamImagePoolDisplayFunction</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="transition.html">transition</a>, <a href="visualisation.html">visualisation</a>, <a href="camera.html">camera</a>, <a href="camera.html">camera</a>, <a href="video_decode.html">video_decode</a>, <a href="video_scheduler.html">video_scheduler</a>, <a href="video_splitter.html">video_splitter</a><p>
-
-<pre>
-typedef struct OMX_PARAM_IMAGEDISPLAYFUNCTIONTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_PTR pPrivate;
-   RIL_IMAGE_DISPLAY_FUNC_T pDisplayFunc;
-   RIL_IMAGE_FLUSH_FUNC_T pFlushFunc;
-} OMX_PARAM_IMAGEDISPLAYFUNCTIONTYPE;</pre><p>
-This parameter is used when setting up proprietary communication
- between two components.  It allows the output port to pass images to
- the input port that are allocated from an image pool, and also request
- that any previously passed images are flushed.<p>
-
-<a name="OMX_IndexParamImagePoolExternal"><h2>Client Allocated Image Pools</h2></a>
-<tt>OMX_IndexParamImagePoolExternal</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="visualisation.html">visualisation</a>, <a href="camera.html">camera</a>, <a href="video_decode.html">video_decode</a><p>
-
-<pre>
-struct opaque_vc_pool_s;
-typedef struct opaque_vc_pool_s OMX_BRCM_POOL_T;
-
-typedef struct OMX_PARAM_IMAGEPOOLEXTERNALTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_BRCM_POOL_T *image_pool;
-   OMX_BRCM_POOL_T *image_pool2;
-   OMX_BRCM_POOL_T *image_pool3;
-   OMX_BRCM_POOL_T *image_pool4;
-   OMX_BRCM_POOL_T *image_pool5;
-} OMX_PARAM_IMAGEPOOLEXTERNALTYPE;</pre><p>
-This config allows the client to pass in handles to pre-allocated
- image pools for use within the component.<p>
-
-<a name="OMX_IndexParamImagePoolSize"><h2>Specifying Image Pool Properties</h2></a>
-<tt>OMX_IndexParamImagePoolSize</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="transition.html">transition</a>, <a href="visualisation.html">visualisation</a>, <a href="video_decode.html">video_decode</a>, <a href="video_splitter.html">video_splitter</a><p>
-
-<pre>
-typedef struct OMX_PARAM_IMAGEPOOLSIZETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 width;
-   OMX_U32 height;
-   OMX_U32 num_pages;
-} OMX_PARAM_IMAGEPOOLSIZETYPE;</pre><p>
-This parameter is used to control the size of pool that the component
- will allocate in the absence of setting an external pool.  The default
- can be reset by setting this parameter with all three fields set to
- zero.<p>
-
-<a name="OMX_IndexParamNumOutputChannels"><h2>Query for the number of output channels in the decoded stream</h2></a>
-<tt>OMX_IndexParamNumOutputChannels</tt><br>
-Used by: <a href="video_decode.html">video_decode</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-This indicates whether the stream is 2d (1 channel) or stereoscopic (2 channels).
-  
- <p>
-
-<a name="OMX_IndexParamPortMaxFrameSize"><h2>Specifying maximum frame size</h2></a>
-<tt>OMX_IndexParamPortMaxFrameSize</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_FRAMESIZETYPE</tt><p>
-
-This control can be used to control the maximum frame size allowed on an output port.<p>
-
-<a name="OMX_IndexParamRateControlModel"><h2>Query / set the rate control method to be used</h2></a>
-<tt>OMX_IndexParamRateControlModel</tt><br>
-Used by: <a href="video_encode.html">video_encode</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-This parameter uses internal configuration to determine used, so should not be changed without explicit internal knowledge.
-  
- <p>
-
-<a name="OMX_IndexParamResize"><h2>Resize Control</h2></a>
-<tt>OMX_IndexParamResize</tt><br>
-Used by: <a href="resize.html">resize</a><p>
-
-<pre>
-typedef enum OMX_RESIZEMODETYPE {
-   OMX_RESIZE_NONE,
-   OMX_RESIZE_CROP,
-   OMX_RESIZE_BOX,
-   OMX_RESIZE_BYTES,
-   OMX_RESIZE_DUMMY = 0x7FFFFFFF
-} OMX_RESIZEMODETYPE;
-
-typedef struct OMX_PARAM_RESIZETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_RESIZEMODETYPE eMode;
-   OMX_U32 nMaxWidth;
-   OMX_U32 nMaxHeight;
-   OMX_U32 nMaxBytes;
-   OMX_BOOL bPreserveAspectRatio;
-   OMX_BOOL bAllowUpscaling;
-} OMX_PARAM_RESIZETYPE;</pre><p>
-The mode determines the kind of resize. <tt>OMX_RESIZE_BOX</tt> allow
- the <tt>nMaxWidth</tt> and <tt>nMaxHeight</tt> to set a bounding box into
- which the output must fit. <tt>OMX_RESIZE_BYTES</tt> allows
- <tt>nMaxBytes</tt> to set the maximum number of bytes into which the
- full output frame must fit.  Two flags aid the setting of the output
- size. <tt>bPreseveAspectRatio</tt> sets whether the resize should
- preserve the aspect ratio of the incoming
- image. <tt>bAllowUpscaling</tt> sets whether the resize is allowed to
- increase the size of the output image compared to the size of the
- input image.<p>
-
-<a name="OMX_IndexParamSource"><h2>Source Image Configuration</h2></a>
-<tt>OMX_IndexParamSource</tt><br>
-Used by: <a href="source.html">source</a><p>
-
-<pre>
-typedef enum OMX_SOURCETYPE {
-   OMX_SOURCE_WHITE = 0,    // all white images
-   OMX_SOURCE_BLACK = 1,    // all black images
-   OMX_SOURCE_DIAGONAL = 2, // greyscale diagonal stripes
-   OMX_SOURCE_NOISE = 3,    // random pixel values
-   OMX_SOURCE_RANDOM = 4,   // a shaded random pattern of colours
-   OMX_SOURCE_COLOUR = 5,   // a solid colour determined by nParam
-   OMX_SOURCE_BLOCKS = 6,   // random coloured blocks of 16x16 size
-   OMX_SOURCE_SWIRLY,       // a swirly pattern used for encode testing
-   OMX_SOURCE_DUMMY = 0x7FFFFFFF
-} OMX_SOURCETYPE;
-
-typedef struct OMX_PARAM_SOURCETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_SOURCETYPE eType;
-   OMX_U32 nParam;
-   OMX_U32 nFrameCount;
-   OMX_U32 xFrameRate;
-} OMX_PARAM_SOURCETYPE;</pre><p>
-The source type determines the kind of image that is produced. Not all
- combinations of source type and image type are supported.  The
- <tt>OMX_SOURCE_SWIRLY</tt> setting can only be used with YUV420 packed
- planar image formats.  When producing RGB565 image format, the
- <tt>OMX_SOURCE_DIAGONAL</tt> and <tt>OMX_SOURCE_RANDOM</tt> modes are
- treated as <tt>OMX_SOURCE_NOISE</tt>.
- 
- The <tt>nParam</tt> field is used to specify the colour for the source
- colour mode, and the offset of the diagonal pattern for diagonal mode.
- For the blocks mode, <tt>nParam</tt> is used as the seed for the random
- colour generator.
- 
- The <tt>nFrameCount</tt> parameter determines how many frames to send.
- If it is zero, then frames are sent continuously. For any other value,
- it counts down until it has sent that many frames, and then stops,
- sending out an EOS. The <tt>xFrameRate</tt> setting is used to determine
- the timestamp for each frame produced, or can be set to zero if
- timestamps should all remain at zero.<p>
-
-<a name="OMX_IndexParamSourceSeed"><h2>Source Random Seed</h2></a>
-<tt>OMX_IndexParamSourceSeed</tt><br>
-Used by: <a href="source.html">source</a><p>
-
-<pre>
-typedef struct OMX_PARAM_SOURCESEEDTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_U16 nData[16];
-} OMX_PARAM_SOURCESEEDTYPE;</pre><p>
-This structure sets the current state of the random number generator
- used for <tt>OMX_SOURCE_RANDOM</tt> source type, allowing repeatable
- random image creation.<p>
-
-<a name="OMX_IndexParamUseDynamicParameterFile"><h2>Specify whether we wish to load the DPF file</h2></a>
-<tt>OMX_IndexParamUseDynamicParameterFile</tt><br>
-Used by: <a href="camera.html">camera</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
- 
- <p>
-
-<a name="OMX_IndexParamVideoMvc"><h2>MVC codec parameters</h2></a>
-<tt>OMX_IndexParamVideoMvc</tt><br>
-Used by: <a href="video_decode.html">video_decode</a><p>
-
-This index uses the standard IL structure <tt>OMX_VIDEO_PARAM_MVCTYPE</tt><p>
-
-This parameter is currently identical to the AVC parameter type.<p>
-
-</table>
-</body>
-</html>

@@ -1,7 +1,7 @@
-/* $Revision: 6810 $ on $Date:: 2008-10-29 07:31:37 -0700 #$ */
+/* $Revision: 6810 $ on $Date:: 2008-10-29 14:31:37 +0000 #$ */
 
 /*------------------------------------------------------------------------
- * 
+ *
  * VGU 1.1 Reference Implementation
  * -------------------------------------
  *
@@ -13,10 +13,10 @@
  * including without limitation the rights to use, copy, modify, merge,
  * publish, distribute, sublicense, and/or sell copies of the Materials,
  * and to permit persons to whom the Materials are furnished to do so,
- * subject to the following conditions: 
+ * subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
- * in all copies or substantial portions of the Materials. 
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
  *
  * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -34,11 +34,11 @@
 #ifndef _VGU_H
 #define _VGU_H
 
-#ifdef __cplusplus 
-extern "C" { 
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-#include <VG/openvg.h>
+#include "openvg.h"
 
 #define VGU_VERSION_1_0 1
 #define VGU_VERSION_1_1 2
@@ -48,11 +48,11 @@ extern "C" {
 #endif
 
 #ifndef VGU_API_ENTRY
-#   error VGU_API_ENTRY must be defined 
+#   error VGU_API_ENTRY must be defined
 #endif
 
 #ifndef VGU_API_EXIT
-#   error VGU_API_EXIT must be defined 
+#   error VGU_API_EXIT must be defined
 #endif
 
 
@@ -124,7 +124,7 @@ VGU_API_CALL VGUErrorCode VGU_API_ENTRY vguComputeWarpQuadToQuad(VGfloat dx0, VG
                                                    VGfloat sx3, VGfloat sy3,
                                                    VGfloat * matrix) VGU_API_EXIT;
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

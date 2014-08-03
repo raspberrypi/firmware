@@ -1,4 +1,4 @@
-/* $Revision: 9203 $ on $Date:: 2009-10-07 02:21:52 -0700 #$ */
+/* $Revision: 6838 $ on $Date:: 2008-11-04 11:46:08 +0000 #$ */
 
 /*------------------------------------------------------------------------
  *
@@ -13,10 +13,10 @@
  * including without limitation the rights to use, copy, modify, merge,
  * publish, distribute, sublicense, and/or sell copies of the Materials,
  * and to permit persons to whom the Materials are furnished to do so,
- * subject to the following conditions: 
+ * subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included 
- * in all copies or substantial portions of the Materials. 
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
  *
  * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -34,7 +34,7 @@
 #ifndef _OPENVG_H
 #define _OPENVG_H
 
-#include <VG/vgplatform.h>
+#include "vgplatform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -66,12 +66,9 @@ typedef VGHandle VGPaint;
 
 #define VG_INVALID_HANDLE ((VGHandle)0)
 
-typedef enum {
-  VG_FALSE               = 0,
-  VG_TRUE                = 1,
-
-  VG_BOOLEAN_FORCE_SIZE  = VG_MAX_ENUM
-} VGboolean;
+typedef VGuint VGboolean;
+#define VG_FALSE 0
+#define VG_TRUE  1
 
 typedef enum {
   VG_NO_ERROR                                 = 0,
@@ -223,6 +220,8 @@ typedef enum {
   VG_SCWARC_TO                                = (10 << 1),
   VG_LCCWARC_TO                               = (11 << 1),
   VG_LCWARC_TO                                = (12 << 1),
+
+  VG_SEGMENT_MASK                             = 0xf << 1,
 
   VG_PATH_SEGMENT_FORCE_SIZE                  = VG_MAX_ENUM
 } VGPathSegment;
@@ -497,11 +496,11 @@ typedef enum {
 #endif
 
 #ifndef VG_API_ENTRY
-#   error VG_API_ENTRY must be defined 
+#   error VG_API_ENTRY must be defined
 #endif
 
 #ifndef VG_API_EXIT
-#   error VG_API_EXIT must be defined 
+#   error VG_API_EXIT must be defined
 #endif
 
 VG_API_CALL VGErrorCode VG_API_ENTRY vgGetError(void) VG_API_EXIT;
@@ -645,7 +644,7 @@ VG_API_CALL void VG_API_ENTRY vgGetImageSubData(VGImage image,
                                    VGint width, VGint height) VG_API_EXIT;
 VG_API_CALL VGImage VG_API_ENTRY vgChildImage(VGImage parent,
                                  VGint x, VGint y, VGint width, VGint height) VG_API_EXIT;
-VG_API_CALL VGImage VG_API_ENTRY vgGetParent(VGImage image) VG_API_EXIT; 
+VG_API_CALL VGImage VG_API_ENTRY vgGetParent(VGImage image) VG_API_EXIT;
 VG_API_CALL void VG_API_ENTRY vgCopyImage(VGImage dst, VGint dx, VGint dy,
                              VGImage src, VGint sx, VGint sy,
                              VGint width, VGint height,
@@ -676,15 +675,15 @@ VG_API_CALL void VG_API_ENTRY vgSetGlyphToPath(VGFont font,
                                               VGuint glyphIndex,
                                               VGPath path,
                                               VGboolean isHinted,
-                                              const VGfloat glyphOrigin [2],
-                                              const VGfloat escapement[2]) VG_API_EXIT;
+                                              VGfloat glyphOrigin [2],
+                                              VGfloat escapement[2]) VG_API_EXIT;
 VG_API_CALL void VG_API_ENTRY vgSetGlyphToImage(VGFont font,
                                                VGuint glyphIndex,
                                                VGImage image,
-                                               const VGfloat glyphOrigin [2],
-                                               const VGfloat escapement[2]) VG_API_EXIT;
+                                               VGfloat glyphOrigin [2],
+                                               VGfloat escapement[2]) VG_API_EXIT;
 VG_API_CALL void VG_API_ENTRY vgClearGlyph(VGFont font,VGuint glyphIndex) VG_API_EXIT;
-VG_API_CALL void VG_API_ENTRY vgDrawGlyph(VGFont font, 
+VG_API_CALL void VG_API_ENTRY vgDrawGlyph(VGFont font,
                                          VGuint glyphIndex,
                                          VGbitfield paintModes,
                                          VGboolean allowAutoHinting) VG_API_EXIT;
@@ -739,7 +738,7 @@ VG_API_CALL VGHardwareQueryResult VG_API_ENTRY vgHardwareQuery(VGHardwareQueryTy
 /* Renderer and Extension Information */
 VG_API_CALL const VGubyte * VG_API_ENTRY vgGetString(VGStringID name) VG_API_EXIT;
 
-#ifdef __cplusplus 
+#ifdef __cplusplus
 } /* extern "C" */
 #endif
 

@@ -1,0 +1,129 @@
+BCM2835 "GPU_FFT" by Andrew Holme, 2013.
+
+GPU_FFT is an FFT library for the Raspberry Pi which exploits the BCM2835 SoC
+3D hardware to deliver ten times more data throughput than is possible on the
+700 MHz ARM.  Kernels are provided for all power-of-2 FFT lengths between 256
+and 131,072 points inclusive.
+
+
+*** Accuracy ***
+
+GPU_FFT uses single-precision floats for data and twiddle factors.  The output
+is not scaled.  The relative root-mean-square (rms) error in parts-per-million
+(ppm) for different transform lengths (N) is typically:
+
+log2(N) |  8    | 9    | 10   |  11   |  12  |  13  |  14  |  15  |  16 |  17
+ppm rms |  0.27 | 0.42 | 0.50 |  0.70 |  2.3 |  4.4 |  7.6 |  9.2 |  18 |  70
+
+
+*** Throughput ***
+
+GPU_FFT is invoked through a kernel ioctl call which adds 100us overhead.  To
+mitigate this, transform batches can be executed with a single call.  Typical
+per-transform runtime in microseconds for various batch sizes and comparative
+figures for FFTW (FFTW_MEASURE mode) are as follows:
+
+log2(N) |   8 |   9 |  10 |  11 |   12 |   13 |    14 |    15 |    16 |     17
+      1 | 112 | 125 | 136 | 180 |  298 |  689 |  1274 |  3397 |  6978 |  16734
+      2 |  56 |  74 |  85 | 133 |  285 |  663 |  1227 |  3362 |  6759 |  16179
+      5 |  31 |  75 |  61 | 113 |  274 |  631 |  1188 |  3228 |  6693 |  16180
+     10 |  22 |  37 |  54 | 107 |  256 |  624 |  1167 |  3225 |  6703 |  16110
+     20 |  19 |  31 |  52 | 101 |  252 |  615 |  1138 |  3202 |  6684 |  16181
+     50 |  16 |  26 |  45 |  93 |  240 |  608 |  1131 |  3196 |  6674 |  16171
+   FFTW |  92 | 217 | 482 | 952 | 3002 | 5082 | 12005 | 31211 | 82769 | 183731
+
+
+*** API functions ***
+
+    gpu_fft_prepare()       Call once to allocate memory and initialise data
+                            structures.  Returns 0 for success.
+
+    gpu_fft_execute()       Call one or more times to execute a previously
+                            prepared FFT batch.  Returns 0 for success.
+
+    gpu_fft_release()       Call once to release resources after use.
+                            GPU memory is permanently lost if not freed.
+
+
+*** Parameters ***
+
+    int mb          Mailbox file descriptor obtained by calling mbox_open()
+
+    int log2_N      log2(FFT length) = 8 to 17
+
+    int direction   FFT direction:  GPU_FFT_FWD for forward FFT
+                                    GPU_FFT_REV for inverse FFT
+
+    int jobs        Number of transforms in batch = 1 or more
+
+    GPU_FFT **      Output parameter from prepare: control structure.
+    GPU_FFT *       Input parameter to execute and release
+
+
+*** Data format ***
+
+Complex data arrays are stored as alternate real and imaginary parts:
+
+    struct GPU_FFT_COMPLEX {
+        float re, im;
+    };
+
+The GPU_FFT struct created by gpu_fft_prepare() contains pointers to the input
+and output arrays:
+
+    struct GPU_FFT {
+       struct GPU_FFT_COMPLEX *in, *out;
+
+When executing a batch of transforms, buffer pointers are obtained as follows:
+
+    struct GPU_FFT *fft = gpu_fft_prepare( ... , jobs);
+    for (int j=0; j<jobs; j++) {
+       struct GPU_FFT_COMPLEX *in  = fft->in  + j*fft->step;
+       struct GPU_FFT_COMPLEX *out = fft->out + j*fft->step;
+
+GPU_FFT.step is greater than FFT length because a guard space is left between
+buffers for caching and alignment reasons.
+
+GPU_FFT performs multiple passes between ping-pong buffers.  The final output
+lands in the same buffer as input after an even number of passes.  Transforms
+where log2_N=12...16 use an odd number of passes and the final result is left
+out-of-place.  The input data is never preserved.
+
+
+*** Example program ***
+
+The code that produced the above accuracy and performance figures is included
+as a demo with the latest Raspbian distro.  Build and run it as follows:
+
+cd /opt/vc/src/hello_pi/hello_fft
+make
+sudo mknod char_dev c 100 0
+sudo ./hello_fft.bin 12
+
+It accepts three optional command-line arguments: <log2_N> <batch> <loops>
+
+The special character device is required for the ioctl mailbox through which
+the ARM communicates with the Videocore GPU.
+
+
+*** With Open GL ***
+
+GPU_FFT and Open GL will run concurrently if the GPU_FFT_MEM_* defines in
+file gpu_fft.c are changed as follows:
+
+#define GPU_FFT_MEM_FLG 0x4        // cached=0xC; direct=0x4
+#define GPU_FFT_MEM_MAP 0x20000000 // cached=0x0; direct=0x20000000
+
+Overall performance will probably be higher if GPU_FFT and Open GL take turns
+at using the 3D hardware.  Since eglSwapBuffers() returns immediately without
+waiting for rendering, call glFlush() and glFinish() afterwards as follows:
+
+    for (;;) {
+        ....
+        eglSwapBuffers(....); // non-blocking call returns immediately
+        glFlush();
+        glFinish(); // wait until V3D hardware is idle
+        ....
+        gpu_fft_execute(....); // blocking call
+        ....
+    }
