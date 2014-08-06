@@ -27,6 +27,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*=============================================================================
 VCOS - packet-like messages, based loosely on those found in TRIPOS.
+
+In the simple case, only the server thread creates a message queue, and
+clients wait for replies on a semaphore. In more complex cases, clients can
+also create message queues (not yet implemented).
+
+Although it's possible for a thread to create multiple queues and listen
+on them in turn, if you find yourself doing this it's probably a bug.
 =============================================================================*/
 
 #ifndef VCOS_MSGQUEUE_H
@@ -36,8 +43,9 @@ VCOS - packet-like messages, based loosely on those found in TRIPOS.
 extern "C" {
 #endif
 
-#include "interface/vcos/vcos_types.h"
+#include "vcos_types.h"
 #include "vcos_platform.h"
+#include "vcos_blockpool.h"
 
 /**
  * \file
@@ -58,6 +66,8 @@ extern "C" {
  * be used freely to extend this.
  */
 
+#define VCOS_MSGQ_MAGIC 0x5147534d
+
 /** Map the payload portion of a message to a structure pointer.
   */
 #define VCOS_MSG_DATA(_msg) (void*)((_msg)->data)
@@ -77,39 +87,71 @@ extern "C" {
 #define __VCOS_MAY_ALIAS
 #endif
 
+struct VCOS_MSG_T;
+
+/* Replies go to one of these objects.
+ */
+typedef struct VCOS_MSG_WAITER_T
+{
+   /* When the reply is sent, this function gets called with the
+    * address of the waiter.
+    */
+   void (*on_reply)(struct VCOS_MSG_WAITER_T *waiter,
+                    struct VCOS_MSG_T *msg);
+} VCOS_MSG_WAITER_T;
+
 /** A single message queue.
   */
 typedef struct VCOS_MSGQUEUE_T
 {
+   VCOS_MSG_WAITER_T waiter;           /**< So we can wait on a queue */
    struct VCOS_MSG_T *head;            /**< head of linked list of messages waiting on this queue */
    struct VCOS_MSG_T *tail;            /**< tail of message queue */
    VCOS_SEMAPHORE_T sem;               /**< thread waits on this for new messages */
    VCOS_MUTEX_T lock;                  /**< locks the messages list */
+   int attached;                       /**< Is this attached to a thread? */
 } VCOS_MSGQUEUE_T;
 
 /** A single message
   */
 typedef struct VCOS_MSG_T
 {
+   uint32_t magic;                     /**< Sanity checking */
    uint32_t code;                      /**< message code */
-   int error;                          /**< error status signalled back to caller */
-   VCOS_MSGQUEUE_T *dst;               /**< destination queue */
-   VCOS_MSGQUEUE_T *src;               /**< source; replies go back to here */
    struct VCOS_MSG_T *next;            /**< next in queue */
    VCOS_THREAD_T *src_thread;          /**< for debug */
-   uint32_t data[25];                  /**< payload area */
+   struct VCOS_MSG_WAITER_T *waiter;   /**< client waiter structure */
+   struct VCOS_MSGQ_POOL_T *pool;      /**< Pool allocated from, or NULL */
 } VCOS_MSG_T;
-   
-/** An endpoint
-  */
-typedef struct VCOS_MSG_ENDPOINT_T
-{
-   VCOS_MSGQUEUE_T primary;            /**< incoming messages */
-   VCOS_MSGQUEUE_T secondary;          /**< this is used for waitspecific */
-   char name[32];                      /**< name of this endpoint, for find() */
-   struct VCOS_MSG_ENDPOINT_T *next;   /**< next in global list of endpoints */
-} VCOS_MSG_ENDPOINT_T;
+
 #define MSG_REPLY_BIT (1<<31)
+
+/** Initialize a VCOS_MSG_T. Can also use vcos_msg_init().
+ */
+#define VCOS_MSG_INITIALIZER {VCOS_MSGQ_MAGIC, 0, NULL, NULL, NULL, 0}
+
+/** A pool of messages. This contains its own waiter and
+ * semaphore, as well as a blockpool for the actual memory
+ * management.
+ *
+ * When messages are returned to the waiter, it posts the
+ * semaphore.
+ *
+ * When waiting for a message, we just wait on the semaphore.
+ * When allocating without waiting, we just try-wait on the
+ * semaphore.
+ *
+ * If we managed to claim the semaphore, then by definition
+ * there must be at least that many free messages in the
+ * blockpool.
+ */
+typedef struct VCOS_MSGQ_POOL_T
+{
+   VCOS_MSG_WAITER_T waiter;
+   VCOS_BLOCKPOOL_T blockpool;
+   VCOS_SEMAPHORE_T sem;
+   uint32_t magic;
+} VCOS_MSGQ_POOL_T;
 
 /** Initalise the library. Normally called from vcos_init().
   */
@@ -119,59 +161,116 @@ VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_init(void);
  */
 VCOSPRE_ void VCOSPOST_ vcos_msgq_deinit(void);
 
-/** Find a message queue by name and get a handle to it.
-  *
-  * @param name  the name of the queue to find
-  *
-  * @return The message queue, or NULL if not found.
-  */
-VCOSPRE_ VCOS_MSGQUEUE_T VCOSPOST_ *vcos_msgq_find(const char *name);
-
-/** Wait for a message queue to come into existence. If it already exists,
-  * return immediately, otherwise block.
-  *
-  * On the whole, if you find yourself using this, it is probably a sign
-  * of poor design, since you should create all the server threads first,
-  * and then the client threads. But it is sometimes useful.
-  *
-  * @param name  the name of the queue to find
-  * @return The message queue
-  */
-VCOSPRE_ VCOS_MSGQUEUE_T VCOSPOST_ *vcos_msgq_wait(const char *name);
-
 /** Send a message.
-  */
+ *
+ * @param dest    Destination message queue
+ * @param code    Message code.
+ * @param msg     Pointer to message to send. Must not go out of scope before
+ *                message is received (do not declare on the stack).
+ */
 VCOSPRE_ void VCOSPOST_ vcos_msg_send(VCOS_MSGQUEUE_T *dest, uint32_t code, VCOS_MSG_T *msg);
 
 /** Send a message and wait for a reply.
-  */
-VCOSPRE_ void VCOSPOST_ vcos_msg_sendwait(VCOS_MSGQUEUE_T *queue, uint32_t code, VCOS_MSG_T *msg);
+ *
+ * @param dest    Destination message queue
+ * @param code    Message code.
+ * @param msg     Pointer to message to send. May be declared on the stack.
+ */
+VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msg_sendwait(VCOS_MSGQUEUE_T *queue, uint32_t code, VCOS_MSG_T *msg);
 
-/** Wait for a message on this thread's endpoint.
+/** Wait for a message on a queue.
   */
-VCOSPRE_ VCOS_MSG_T * VCOSPOST_ vcos_msg_wait(void);
+VCOSPRE_ VCOS_MSG_T * VCOSPOST_ vcos_msg_wait(VCOS_MSGQUEUE_T *queue);
 
-/** Wait for a specific message.
-  */
-VCOS_MSG_T * vcos_msg_wait_specific(VCOS_MSGQUEUE_T *queue, VCOS_MSG_T *msg);
-
-/** Peek for a message on this thread's endpoint, if a message is not available, NULL is 
-    returned. If a message is available it will be removed from the endpoint and returned.
-  */
-VCOSPRE_ VCOS_MSG_T * VCOSPOST_ vcos_msg_peek(void);
+/** Peek for a message on this thread's endpoint. If a message is not
+ * available, NULL is returned. If a message is available it will be
+ * removed from the endpoint and returned.
+ */
+VCOSPRE_ VCOS_MSG_T * VCOSPOST_ vcos_msg_peek(VCOS_MSGQUEUE_T *queue);
 
 /** Send a reply to a message
   */
 VCOSPRE_ void VCOSPOST_ vcos_msg_reply(VCOS_MSG_T *msg);
 
-/** Create an endpoint. Each thread should need no more than one of these - if you 
-  * find yourself needing a second one, you've done something wrong.
-  */
-VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_endpoint_create(VCOS_MSG_ENDPOINT_T *ep, const char *name);
+/** Set the reply queue for a message. When the message is replied-to, it
+ * will return to the given queue.
+ *
+ * @param msg      Message
+ * @param queue    Message queue the message should return to
+ */
+VCOSPRE_ void VCOSPOST_ vcos_msg_set_source(VCOS_MSG_T *msg, VCOS_MSGQUEUE_T *queue);
 
-/** Destroy an endpoint.
+/** Initialise a newly allocated message. This only needs to be called
+ * for messages allocated on the stack, heap or statically. It is not
+ * needed for messages allocated from a pool.
+ */
+VCOSPRE_ void VCOSPOST_ vcos_msg_init(VCOS_MSG_T *msg);
+
+/** Create a message queue to wait on.
   */
-VCOSPRE_ void  VCOSPOST_ vcos_msgq_endpoint_delete(VCOS_MSG_ENDPOINT_T *ep);
+VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_create(VCOS_MSGQUEUE_T *queue, const char *name);
+
+/** Destroy a queue
+  */
+VCOSPRE_ void  VCOSPOST_ vcos_msgq_delete(VCOS_MSGQUEUE_T *queue);
+
+/*
+ * Message pools
+ */
+
+/** Create a pool of messages. Messages can be allocated from the pool and
+ * sent to a message queue. Replying to the message will automatically
+ * free it back to the pool.
+ *
+ * The pool is threadsafe.
+ *
+ * @param count          number of messages in the pool
+ * @param payload_size   maximum message payload size, not including MSG_T.
+ */
+VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_pool_create(
+   VCOS_MSGQ_POOL_T *pool,
+   size_t count,
+   size_t payload_size,
+   const char *name);
+
+/** Destroy a message pool.
+ */
+VCOSPRE_ void VCOSPOST_ vcos_msgq_pool_delete(VCOS_MSGQ_POOL_T *pool);
+
+/** Allocate a message from a message pool.
+ *
+ * Note:
+ *
+ * If the alloc fails (returns NULL) then your worker thread has stopped
+ * servicing requests or your pool is too small for the latency in
+ * the system. Your best bet to handle this is to fail the call that
+ * needs to send the message.
+ *
+ * The returned message payload area is initialised to zero.
+ *
+ * @param  pool  Pool to allocate from.
+ * @return Message or NULL if pool exhausted.
+ */
+VCOSPRE_ VCOS_MSG_T *VCOSPOST_ vcos_msgq_pool_alloc(VCOS_MSGQ_POOL_T *pool);
+
+/** Wait for a message from a message pool. Waits until a
+ * message is available in the pool and then allocates it. If
+ * one is already available, returns immediately.
+ *
+ * This call can never fail.
+ *
+ * The returned message payload area is initialised to zero.
+ *
+ * @param  pool  Pool to allocate from.
+ * @return Message
+ */
+VCOSPRE_ VCOS_MSG_T *VCOSPOST_ vcos_msgq_pool_wait(VCOS_MSGQ_POOL_T *pool);
+
+/** Explicitly free a message and return it to its pool.
+ *
+ * @param  msg  Message to free. No-op if NULL.
+ */
+VCOSPRE_ void VCOSPOST_ vcos_msgq_pool_free(VCOS_MSG_T *msg);
 
 #ifdef __cplusplus
 }
