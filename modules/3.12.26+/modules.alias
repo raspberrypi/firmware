@@ -49,7 +49,6 @@ alias wp384 wp512
 alias tgr128 tgr192
 alias tgr160 tgr192
 alias cast5 cast5_generic
-alias platform:bcm2708-dma bcm2708_dmaengine
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24

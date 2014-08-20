@@ -513,6 +513,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmVideoAVCInlineVectorsEnable,            /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
     OMX_IndexConfigBrcmRenderStats,                           /**< reference: OMX_CONFIG_BRCMRENDERSTATSTYPE */
     OMX_IndexConfigBrcmCameraAnnotate,                        /**< reference: OMX_CONFIG_BRCMANNOTATETYPE */
+    OMX_IndexParamBrcmStereoscopicMode,                       /**< reference :OMX_CONFIG_BRCMSTEREOSCOPICMODETYPE */
 
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;

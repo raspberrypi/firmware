@@ -50,6 +50,8 @@ kernel/drivers/cpufreq/cpufreq_userspace.ko
 kernel/drivers/cpufreq/cpufreq_ondemand.ko
 kernel/drivers/cpufreq/cpufreq_conservative.ko
 kernel/drivers/cpufreq/freq_table.ko
+kernel/drivers/dma/virt-dma.ko
+kernel/drivers/dma/bcm2708-dmaengine.ko
 kernel/drivers/hid/hid.ko
 kernel/drivers/hid/hid-generic.ko
 kernel/drivers/hid/usbhid/usbhid.ko
@@ -67,6 +69,7 @@ kernel/drivers/mmc/card/mmc_block.ko
 kernel/drivers/mmc/core/mmc_core.ko
 kernel/drivers/mmc/host/sdhci.ko
 kernel/drivers/mmc/host/sdhci-bcm2708.ko
+kernel/drivers/mmc/host/bcm2835-mmc.ko
 kernel/drivers/mmc/host/sdhci-pltfm.ko
 kernel/drivers/net/mii.ko
 kernel/drivers/net/usb/smsc95xx.ko

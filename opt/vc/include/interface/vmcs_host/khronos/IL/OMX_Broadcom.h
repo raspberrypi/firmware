@@ -614,7 +614,7 @@ typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nPortIndex;
    OMX_IMAGEFILTERTYPE eImageFilter;
    OMX_U32 nNumParams;
-   OMX_U32 nParams[5];
+   OMX_U32 nParams[6];
 } OMX_CONFIG_IMAGEFILTERPARAMSTYPE;
 /*
 This structure contains optional parameters for some image
@@ -2370,6 +2370,24 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_BOOL bShowCaf;
    OMX_BOOL bShowMotion;
 } OMX_CONFIG_BRCMANNOTATETYPE;
+
+typedef enum OMX_BRCMSTEREOSCOPICMODETYPE {
+   OMX_STEREOSCOPIC_NONE = 0,
+   OMX_STEREOSCOPIC_SIDEBYSIDE = 1,
+   OMX_STEREOSCOPIC_TOPBOTTOM = 2,
+   OMX_STEREOSCOPIC_MAX = 0x7FFFFFFF,
+} OMX_BRCMSTEREOSCOPICMODETYPE;
+
+typedef struct OMX_CONFIG_BRCMSTEREOSCOPICMODETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 nPortIndex;                    /**< port that this structure applies to */
+   OMX_BRCMSTEREOSCOPICMODETYPE eMode;    /**< Packing mode */
+   OMX_BOOL bDecimate;                    /**< Half/half mode
+                                          (pixel aspect ratio = 1:2 or 2:1 if set. 1:1 if not set) */
+   OMX_BOOL bSwapEyes;                    /**< False = left eye first. True = right eye first. */
+} OMX_CONFIG_BRCMSTEREOSCOPICMODETYPE;
 
 #endif
 /* File EOF */

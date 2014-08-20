@@ -99,8 +99,6 @@ kernel/crypto/async_tx/async_pq.ko: kernel/crypto/async_tx/async_xor.ko kernel/c
 kernel/crypto/async_tx/async_raid6_recov.ko: kernel/crypto/async_tx/async_tx.ko kernel/lib/raid6/raid6_pq.ko
 kernel/drivers/video/backlight/lcd.ko:
 kernel/drivers/video/backlight/backlight.ko:
-kernel/drivers/dma/virt-dma.ko:
-kernel/drivers/dma/bcm2708-dmaengine.ko: kernel/drivers/dma/virt-dma.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko:
 kernel/drivers/base/regmap/regmap-i2c.ko:
 kernel/drivers/base/regmap/regmap-spi.ko:

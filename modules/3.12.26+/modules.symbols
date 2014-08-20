@@ -167,7 +167,6 @@ alias symbol:dibusb_pid_filter dvb_usb_dibusb_common
 alias symbol:rt2x00queue_for_each_entry rt2x00lib
 alias symbol:ath_reg_notifier_apply ath
 alias symbol:irda_qos_bits_to_value irda
-alias symbol:vchan_tx_submit virt_dma
 alias symbol:fuse_dev_operations fuse
 alias symbol:snd_soc_dpcm_be_get_state snd_soc_core
 alias symbol:snd_soc_add_codec_controls snd_soc_core
@@ -456,7 +455,6 @@ alias symbol:v4l2_event_unsubscribe_all videodev
 alias symbol:xt_unregister_matches x_tables
 alias symbol:gf128mul_4k_lle gf128mul
 alias symbol:v9fs_unregister_trans 9pnet
-alias symbol:vchan_init virt_dma
 alias symbol:dvb_ca_en50221_camchange_irq dvb_core
 alias symbol:ssb_chipco_gpio_control ssb
 alias symbol:snd_seq_device_load_drivers snd_seq_device
@@ -544,7 +542,6 @@ alias symbol:irlmp_connect_request irda
 alias symbol:register_pppox_proto pppox
 alias symbol:snd_pcm_lib_preallocate_pages snd_pcm
 alias symbol:p9_client_lock_dotl 9pnet
-alias symbol:vchan_dma_desc_free_list virt_dma
 alias symbol:nf_ct_seq_offset nf_conntrack
 alias symbol:snd_pcm_hw_rule_noresample snd_pcm
 alias symbol:ndisc_mc_map ipv6
@@ -2603,7 +2600,6 @@ alias symbol:iscsi_eh_recover_target libiscsi
 alias symbol:ip_set_range_to_cidr ip_set
 alias symbol:generic_rndis_bind rndis_host
 alias symbol:simple_tuner_attach tuner_simple
-alias symbol:vchan_find_desc virt_dma
 alias symbol:dm_rh_start_recovery dm_region_hash
 alias symbol:snd_ac97_write_cache snd_ac97_codec
 alias symbol:ath9k_hw_wait ath9k_hw
