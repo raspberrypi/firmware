@@ -279,8 +279,6 @@ MMAL_STATUS_T mmal_port_event_get(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T **buff
 
 /* @} */
 
-MMAL_BOOL_T mmal_port_is_connected(MMAL_PORT_T *port);
-
 #ifdef __cplusplus
 }
 #endif

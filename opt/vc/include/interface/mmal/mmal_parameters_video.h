@@ -97,6 +97,7 @@ enum {
    MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE,               /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS,           /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_RENDER_STATS,           /**< Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T. */
+   MMAL_PARAMETER_VIDEO_INTERLACE_TYPE,           /**< Take a @ref MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T. */
 };
 
 /** Display transformations.
@@ -457,5 +458,29 @@ typedef struct MMAL_PARAMETER_VIDEO_RENDER_STATS_T {
    uint32_t hvs_status;
    uint32_t dummy[2];
 } MMAL_PARAMETER_VIDEO_RENDER_STATS_T;
+
+typedef enum MMAL_INTERLACETYPE_T {
+   MMAL_InterlaceProgressive,                    /**< The data is not interlaced, it is progressive scan */
+   MMAL_InterlaceFieldSingleUpperFirst,          /**< The data is interlaced, fields sent
+                                                     separately in temporal order, with upper field first */
+   MMAL_InterlaceFieldSingleLowerFirst,          /**< The data is interlaced, fields sent
+                                                     separately in temporal order, with lower field first */
+   MMAL_InterlaceFieldsInterleavedUpperFirst,    /**< The data is interlaced, two fields sent together line
+                                                     interleaved, with the upper field temporally earlier */
+   MMAL_InterlaceFieldsInterleavedLowerFirst,    /**< The data is interlaced, two fields sent together line
+                                                     interleaved, with the lower field temporally earlier */
+   MMAL_InterlaceMixed,                          /**< The stream may contain a mixture of progressive
+                                                     and interlaced frames */
+   MMAL_InterlaceKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
+   MMAL_InterlaceVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
+   MMAL_InterlaceMax = 0x7FFFFFFF
+} MMAL_INTERLACETYPE_T;
+
+typedef struct MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_INTERLACETYPE_T eMode;       /**< The interlace type of the content */
+   MMAL_BOOL_T bRepeatFirstField;    /**< Whether to repeat the first field */
+} MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T;
 
 #endif

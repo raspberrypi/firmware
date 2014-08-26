@@ -166,8 +166,6 @@ extern /*@observer@*/ VCHI_CONNECTION_T * vchi_create_connection( const VCHI_CON
 // Routine used to initialise the vchi on both local + remote connections
 extern int32_t vchi_initialise( VCHI_INSTANCE_T *instance_handle );
 
-extern int32_t vchi_exit( void );
-
 extern int32_t vchi_connect( VCHI_CONNECTION_T **connections,
                              const uint32_t num_connections,
                              VCHI_INSTANCE_T instance_handle );

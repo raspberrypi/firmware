@@ -374,6 +374,8 @@ static void line_extents(VGFT_FONT_T *font, VGfloat *x, VGfloat *y, const char *
       }
       FT_Load_Glyph(font->ft_face, glyph_index, FT_LOAD_DEFAULT);
       *x += float_from_26_6(font->ft_face->glyph->advance.x);
+
+      prev_glyph_index = glyph_index;
    }
 }
 
@@ -403,4 +405,12 @@ void vgft_get_text_extents(VGFT_FONT_T *font,
    }
    *w = max_x;
    *h = -y;
+}
+
+// Get y offset for first line; mitigates issue of start y being middle of block
+// for multiline renders by vgft_font_draw.  Currently simple, may be worth
+// adding y kerning?
+
+VGfloat vgft_first_line_y_offset(VGFT_FONT_T *font) {
+   return float_from_26_6(font->ft_face->size->metrics.height);
 }

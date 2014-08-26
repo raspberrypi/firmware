@@ -607,6 +607,7 @@ typedef struct OMX_PARAM_BRCMPORTEGLTYPE {
 /*
 */
 
+#define OMX_CONFIG_IMAGEFILTERPARAMS_MAXPARAMS 6
 /* OMX_IndexConfigCommonImageFilterParameters: Parameterized Image Filter */
 typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nSize;
@@ -614,7 +615,7 @@ typedef struct OMX_CONFIG_IMAGEFILTERPARAMSTYPE {
    OMX_U32 nPortIndex;
    OMX_IMAGEFILTERTYPE eImageFilter;
    OMX_U32 nNumParams;
-   OMX_U32 nParams[6];
+   OMX_U32 nParams[OMX_CONFIG_IMAGEFILTERPARAMS_MAXPARAMS];
 } OMX_CONFIG_IMAGEFILTERPARAMSTYPE;
 /*
 This structure contains optional parameters for some image
