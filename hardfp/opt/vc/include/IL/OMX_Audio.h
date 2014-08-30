@@ -92,12 +92,19 @@ typedef enum OMX_AUDIO_CODINGTYPE {
     OMX_AUDIO_CodingKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_AUDIO_CodingVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
 
+#define OMX_AUDIO_CodingFLAC_Supported 1
     OMX_AUDIO_CodingFLAC,        /**< Any variant of FLAC */
+#define OMX_AUDIO_CodingDDP_Supported 1
     OMX_AUDIO_CodingDDP,         /**< Any variant of Dolby Digital Plus */
+#define OMX_AUDIO_CodingDTS_Supported 1
     OMX_AUDIO_CodingDTS,         /**< Any variant of DTS */
+#define OMX_AUDIO_CodingWMAPRO_Supported 1
     OMX_AUDIO_CodingWMAPRO,      /**< Any variant of WMA Professional */
+#define OMX_AUDIO_CodingATRAC3_Supported 1
     OMX_AUDIO_CodingATRAC3,      /**< Sony ATRAC-3 variants */
+#define OMX_AUDIO_CodingATRACX_Supported 1
     OMX_AUDIO_CodingATRACX,      /**< Sony ATRAC-X variants */
+#define OMX_AUDIO_CodingATRACAAL_Supported 1
     OMX_AUDIO_CodingATRACAAL,    /**< Sony ATRAC advanced-lossless variants  */
 
     OMX_AUDIO_CodingMax = 0x7FFFFFFF

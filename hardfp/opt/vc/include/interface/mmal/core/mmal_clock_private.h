@@ -74,15 +74,13 @@ typedef void (*MMAL_CLOCK_REQUEST_CB)(MMAL_CLOCK_T *clock, int64_t media_time, v
  *
  * @param clock      The clock
  * @param media_time The media-time at which the callback should be invoked (microseconds)
- * @param offset     Time offset (in microseconds) applied to the media-time. This can be used
- *                   to schedule the request slightly in advance of the media-time.
  * @param cb         Callback to invoke
  * @param cb_data    Client-supplied callback data
  * @param priv       Function pointer used by the framework
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_request_add(MMAL_CLOCK_T *clock, int64_t media_time, int64_t offset,
+MMAL_STATUS_T mmal_clock_request_add(MMAL_CLOCK_T *clock, int64_t media_time,
                                      MMAL_CLOCK_REQUEST_CB cb, void *cb_data, MMAL_CLOCK_VOID_FP priv);
 
 /** Remove all previously registered clock requests.
@@ -101,15 +99,6 @@ MMAL_STATUS_T mmal_clock_request_flush(MMAL_CLOCK_T *clock);
  * @return MMAL_SUCCESS on success
  */
 MMAL_STATUS_T mmal_clock_media_time_set(MMAL_CLOCK_T *clock, int64_t media_time);
-
-/** Update the clock's media-time offset.
- *
- * @param clock      The clock to update
- * @param media_time New media-time offset to be applied (microseconds)
- *
- * @return MMAL_SUCCESS on success
- */
-MMAL_STATUS_T mmal_clock_media_time_offset_set(MMAL_CLOCK_T *clock, int64_t offset);
 
 /** Set the clock's scale.
  *
@@ -146,14 +135,6 @@ MMAL_RATIONAL_T mmal_clock_scale_get(MMAL_CLOCK_T *clock);
  */
 int64_t mmal_clock_media_time_get(MMAL_CLOCK_T *clock);
 
-/** Get the clock's media-time offset.
- *
- * @param clock      The clock to query
- *
- * @return Current media-time offset in microseconds
- */
-int64_t mmal_clock_media_time_offset_get(MMAL_CLOCK_T *clock);
-
 /** Get the clock's state.
  *
  * @param clock      The clock to query
@@ -169,7 +150,7 @@ MMAL_BOOL_T mmal_clock_is_active(MMAL_CLOCK_T *clock);
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_update_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T *update_threshold);
+MMAL_STATUS_T mmal_clock_update_threshold_get(MMAL_CLOCK_T *clock, MMAL_CLOCK_UPDATE_THRESHOLD_T *update_threshold);
 
 /** Set the clock's media-time update threshold values.
  *
@@ -178,7 +159,7 @@ MMAL_STATUS_T mmal_clock_update_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMETE
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_update_threshold_set(MMAL_CLOCK_T *clock, const MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T *update_threshold);
+MMAL_STATUS_T mmal_clock_update_threshold_set(MMAL_CLOCK_T *clock, const MMAL_CLOCK_UPDATE_THRESHOLD_T *update_threshold);
 
 /** Get the clock's discontinuity threshold values.
  *
@@ -187,7 +168,7 @@ MMAL_STATUS_T mmal_clock_update_threshold_set(MMAL_CLOCK_T *clock, const MMAL_PA
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_discont_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T *discont);
+MMAL_STATUS_T mmal_clock_discont_threshold_get(MMAL_CLOCK_T *clock, MMAL_CLOCK_DISCONT_THRESHOLD_T *discont);
 
 /** Set the clock's discontinuity threshold values.
  *
@@ -196,7 +177,7 @@ MMAL_STATUS_T mmal_clock_discont_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMET
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_discont_threshold_set(MMAL_CLOCK_T *clock, const MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T *discont);
+MMAL_STATUS_T mmal_clock_discont_threshold_set(MMAL_CLOCK_T *clock, const MMAL_CLOCK_DISCONT_THRESHOLD_T *discont);
 
 /** Get the clock's request threshold values.
  *
@@ -205,7 +186,7 @@ MMAL_STATUS_T mmal_clock_discont_threshold_set(MMAL_CLOCK_T *clock, const MMAL_P
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_request_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T *req);
+MMAL_STATUS_T mmal_clock_request_threshold_get(MMAL_CLOCK_T *clock, MMAL_CLOCK_REQUEST_THRESHOLD_T *req);
 
 /** Set the clock's request threshold values.
  *
@@ -214,7 +195,7 @@ MMAL_STATUS_T mmal_clock_request_threshold_get(MMAL_CLOCK_T *clock, MMAL_PARAMET
  *
  * @return MMAL_SUCCESS on success
  */
-MMAL_STATUS_T mmal_clock_request_threshold_set(MMAL_CLOCK_T *clock, const MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T *req);
+MMAL_STATUS_T mmal_clock_request_threshold_set(MMAL_CLOCK_T *clock, const MMAL_CLOCK_REQUEST_THRESHOLD_T *req);
 
 #ifdef __cplusplus
 }

@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MMAL_CLOCK_H
 #define MMAL_CLOCK_H
 
+#include "interface/vcos/vcos.h"
 #include "mmal_types.h"
 #include "mmal_common.h"
 
@@ -63,36 +64,139 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *   scale < 1.0 -> slow motion
  */
 
-/** Clock payload magic */
-#define MMAL_CLOCK_PAYLOAD_MAGIC     MMAL_FOURCC('C','K','L','M')
+/** Clock event magic */
+#define MMAL_CLOCK_EVENT_MAGIC               MMAL_FOURCC('C','K','L','M')
 
 /** Clock reference update */
-#define MMAL_CLOCK_PAYLOAD_REFERENCE MMAL_FOURCC('C','R','E','F')
+#define MMAL_CLOCK_EVENT_REFERENCE           MMAL_FOURCC('C','R','E','F')
 
 /** Clock state update */
-#define MMAL_CLOCK_PAYLOAD_ACTIVE    MMAL_FOURCC('C','A','C','T')
+#define MMAL_CLOCK_EVENT_ACTIVE              MMAL_FOURCC('C','A','C','T')
 
 /** Clock scale update */
-#define MMAL_CLOCK_PAYLOAD_SCALE     MMAL_FOURCC('C','S','C','A')
+#define MMAL_CLOCK_EVENT_SCALE               MMAL_FOURCC('C','S','C','A')
 
 /** Clock media-time update */
-#define MMAL_CLOCK_PAYLOAD_TIME      MMAL_FOURCC('C','T','I','M')
+#define MMAL_CLOCK_EVENT_TIME                MMAL_FOURCC('C','T','I','M')
 
-/** Clock payload not valid */
-#define MMAL_CLOCK_PAYLOAD_INVALID   0
+/** Clock update threshold */
+#define MMAL_CLOCK_EVENT_UPDATE_THRESHOLD    MMAL_FOURCC('C','U','T','H')
 
-/** Clock buffer payload type used to pass data between clock ports
- * and for signalling a clock event to a client. */
-typedef struct MMAL_CLOCK_PAYLOAD_T
+/** Clock discontinuity threshold */
+#define MMAL_CLOCK_EVENT_DISCONT_THRESHOLD   MMAL_FOURCC('C','D','T','H')
+
+/** Clock request threshold */
+#define MMAL_CLOCK_EVENT_REQUEST_THRESHOLD   MMAL_FOURCC('C','R','T','H')
+
+/** Buffer statistics */
+#define MMAL_CLOCK_EVENT_INPUT_BUFFER_INFO   MMAL_FOURCC('C','I','B','I')
+#define MMAL_CLOCK_EVENT_OUTPUT_BUFFER_INFO  MMAL_FOURCC('C','O','B','I')
+
+/** Clock latency setting */
+#define MMAL_CLOCK_EVENT_LATENCY             MMAL_FOURCC('C','L','A','T')
+
+/** Clock event not valid */
+#define MMAL_CLOCK_EVENT_INVALID   0
+
+
+/** Thresholds used when updating a clock's media-time */
+typedef struct MMAL_CLOCK_UPDATE_THRESHOLD_T
 {
-   uint32_t id;                 /**< 4cc payload id */
-   uint32_t magic;              /**< 4cc payload magic */
-   int64_t time;                /**< media-time at which the event ocurred */
+   /** Time differences below this threshold are ignored (microseconds) */
+   int64_t threshold_lower;
+
+   /** Time differences above this threshold reset media-time (microseconds) */
+   int64_t threshold_upper;
+} MMAL_CLOCK_UPDATE_THRESHOLD_T;
+
+/** Threshold for detecting a discontinuity in media-time */
+typedef struct MMAL_CLOCK_DISCONT_THRESHOLD_T
+{
+   /** Threshold after which backward jumps in media-time are treated as a
+    * discontinuity (microseconds) */
+   int64_t threshold;
+
+   /** Duration in microseconds for which a discontinuity applies (wall-time) */
+   int64_t duration;
+} MMAL_CLOCK_DISCONT_THRESHOLD_T;
+
+/** Threshold applied to client callback requests */
+typedef struct MMAL_CLOCK_REQUEST_THRESHOLD_T
+{
+   /** Frames with a media-time difference (compared to current media-time)
+    * above this threshold are dropped (microseconds) */
+   int64_t threshold;
+
+   /** Enable/disable the request threshold */
+   MMAL_BOOL_T threshold_enable;
+} MMAL_CLOCK_REQUEST_THRESHOLD_T;
+
+/** Structure for passing buffer information to a clock port */
+typedef struct MMAL_CLOCK_BUFFER_INFO_T
+{
+   int64_t time_stamp;
+   uint32_t arrival_time;
+} MMAL_CLOCK_BUFFER_INFO_T;
+
+/** Clock latency settings used by the clock component */
+typedef struct MMAL_CLOCK_LATENCY_T
+{
+   int64_t target;            /**< target latency (microseconds) */
+   int64_t attack_period;     /**< duration of one attack period (microseconds) */
+   int64_t attack_rate;       /**< amount by which media-time will be adjusted
+                                   every attack_period (microseconds) */
+} MMAL_CLOCK_LATENCY_T;
+
+/** Clock event used to pass data between clock ports and a client. */
+typedef struct MMAL_CLOCK_EVENT_T
+{
+   /** 4cc event id */
+   uint32_t id;
+
+   /** 4cc event magic */
+   uint32_t magic;
+
+   /** buffer associated with this event (can be NULL) */
+   struct MMAL_BUFFER_HEADER_T *buffer;
+
+   /** pad to 64-bit boundary */
+   uint32_t padding0;
+
+   /** additional event data (type-specific) */
    union
    {
-      MMAL_BOOL_T enable;       /**< clock reference or clock active */
-      MMAL_RATIONAL_T scale;    /**< new clock scale */
+      /** used either for clock reference or clock state */
+      MMAL_BOOL_T enable;
+
+      /** new clock scale */
+      MMAL_RATIONAL_T scale;
+
+      /** new media-time */
+      int64_t media_time;
+
+      /** media-time update threshold */
+      MMAL_CLOCK_UPDATE_THRESHOLD_T update_threshold;
+
+      /** media-time discontinuity threshold */
+      MMAL_CLOCK_DISCONT_THRESHOLD_T discont_threshold;
+
+      /** client callback request threshold */
+      MMAL_CLOCK_REQUEST_THRESHOLD_T request_threshold;
+
+      /** input/output buffer information */
+      MMAL_CLOCK_BUFFER_INFO_T buffer;
+
+      /** clock latency setting */
+      MMAL_CLOCK_LATENCY_T latency;
    } data;
-} MMAL_CLOCK_PAYLOAD_T;
+
+   /** pad to 64-bit boundary */
+   uint64_t padding1;
+} MMAL_CLOCK_EVENT_T;
+
+/* Make sure MMAL_CLOCK_EVENT_T will preserve 64-bit alignment */
+vcos_static_assert(!(sizeof(MMAL_CLOCK_EVENT_T) & 0x7));
+
+#define MMAL_CLOCK_EVENT_INIT(id) { id, MMAL_CLOCK_EVENT_MAGIC, NULL, 0, {0}, 0 }
 
 #endif /* MMAL_CLOCK_H */

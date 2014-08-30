@@ -720,6 +720,22 @@ typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_T
    MMAL_BOOL_T show_motion;
 } MMAL_PARAMETER_CAMERA_ANNOTATE_T;
 
+#define MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2 256
+typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;
+   MMAL_BOOL_T show_shutter;
+   MMAL_BOOL_T show_analog_gain;
+   MMAL_BOOL_T show_lens;
+   MMAL_BOOL_T show_caf;
+   MMAL_BOOL_T show_motion;
+   MMAL_BOOL_T show_frame_num;
+   MMAL_BOOL_T black_text_background;
+   char text[MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2];
+} MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T;
+
 typedef enum MMAL_STEREOSCOPIC_MODE_T {
    MMAL_STEREOSCOPIC_MODE_NONE = 0,
    MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE = 1,

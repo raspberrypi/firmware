@@ -100,15 +100,6 @@ typedef struct MMAL_EVENT_PARAMETER_CHANGED_T
  */
 MMAL_EVENT_FORMAT_CHANGED_T *mmal_event_format_changed_get(MMAL_BUFFER_HEADER_T *buffer);
 
-/** Send an error event to the component's control port.
- * The error event data will be the MMAL_STATUS_T passed in.
- *
- * @param component component to receive the error event.
- * @param error_status the error status to be sent.
- * @return MMAL_SUCCESS or an error if the event could not be sent.
- */
-MMAL_STATUS_T mmal_event_error_send(MMAL_COMPONENT_T *component, MMAL_STATUS_T error_status);
-
 /* @} */
 
 #ifdef __cplusplus

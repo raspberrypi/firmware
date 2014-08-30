@@ -40,7 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_CONTROL_FOURCC() VCHIQ_MAKE_FOURCC('m','m','a','l')
 
 /* Major version indicates binary backwards compatiblity */
-#define WORKER_VER_MAJOR   15
+#define WORKER_VER_MAJOR   16
 #define WORKER_VER_MINIMUM 10
 /* Minor version is not used normally.
  */
@@ -321,9 +321,18 @@ typedef struct
    mmal_worker_msg_header header;
    uint32_t component_handle;          /**< Which component */
    uint32_t port_handle;               /**< Which port */
-   MMAL_PARAMETER_HEADER_T param;      /**< Parameter ID and size (no data) */
+   MMAL_PARAMETER_HEADER_T param;      /**< Parameter ID and size */
+   uint32_t space[MMAL_WORKER_PORT_PARAMETER_SPACE];
 } mmal_worker_port_param_get;
 vcos_static_assert(sizeof(mmal_worker_port_param_get) <= MMAL_WORKER_MAX_MSG_LEN);
+
+typedef struct
+{
+   mmal_worker_msg_header header;
+   uint32_t component_handle;          /**< Which component */
+   uint32_t port_handle;               /**< Which port */
+   MMAL_PARAMETER_HEADER_T param;      /**< Parameter ID and size */
+} mmal_worker_port_param_get_old;
 
 /** Component port parameter get reply. Doesn't include space for the parameter data.
   */

@@ -514,6 +514,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigBrcmRenderStats,                           /**< reference: OMX_CONFIG_BRCMRENDERSTATSTYPE */
     OMX_IndexConfigBrcmCameraAnnotate,                        /**< reference: OMX_CONFIG_BRCMANNOTATETYPE */
     OMX_IndexParamBrcmStereoscopicMode,                       /**< reference :OMX_CONFIG_BRCMSTEREOSCOPICMODETYPE */
+    OMX_IndexParamBrcmLockStepEnable,                         /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
 
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;
