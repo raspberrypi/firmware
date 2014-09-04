@@ -1,7 +1,6 @@
+# BCM2835 "GPU_FFT" release 2.0 BETA
 #
-# BCM2835 "GPU_FFT"
-#
-# Copyright (c) 2013, Andrew Holme.
+# Copyright (c) 2014, Andrew Holme.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,11 +24,10 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
 
 .set STAGES, 17
 
-.include "gpu_fft.qinc"
+.include "gpu_fft_ex.qinc"
 
 ##############################################################################
 # Twiddles
@@ -168,27 +166,6 @@ body_ra_sync
 
 proc rx_sync_slave, r:main
 body_rx_sync_slave
-
-##############################################################################
-# Redefining this macro
-
-.macro read_rev, stride
-    add ra_load_idx, ra_load_idx, stride; mov r0, ra_load_idx
-
-    bit_rev 1,       rx_0x55555555  # 16 SIMD
-    bit_rev 2,       rx_0x33333333
-    bit_rev 4,       rx_0x0F0F0F0F
-    bit_rev 8,       rx_0x00FF00FF
-    bit_rev rb_0x10, rx_0x0000FFFF
-
-    shr r0, r0, 12          # r0 = re = {idx[0:STAGES-1], 1'b0, 2'b0}
-    add r1, r0, 4           # r1 = im = {idx[0:STAGES-1], 1'b1, 2'b0}
-
-    interleave
-
-    add t0s, ra_addr_x, r0
-    add t0s, ra_addr_x, r1
-.endm
 
 ##############################################################################
 # Subroutines

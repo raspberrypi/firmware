@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2013, Andrew Holme.
+BCM2835 "GPU_FFT" release 2.0 BETA
+Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -55,21 +56,33 @@ static unsigned int shader_64k[] = {
 static unsigned int shader_128k[] = {
     #include "hex/shader_128k.hex"
 };
+static unsigned int shader_256k[] = {
+    #include "hex/shader_256k.hex"
+};
+static unsigned int shader_512k[] = {
+    #include "hex/shader_512k.hex"
+};
+static unsigned int shader_1024k[] = {
+    #include "hex/shader_1024k.hex"
+};
 
 static struct {
     unsigned int size, *code;
 }
 shaders[] = {
-    {sizeof(shader_256 ), shader_256 },
-    {sizeof(shader_512 ), shader_512 },
-    {sizeof(shader_1k  ), shader_1k  },
-    {sizeof(shader_2k  ), shader_2k  },
-    {sizeof(shader_4k  ), shader_4k  },
-    {sizeof(shader_8k  ), shader_8k  },
-    {sizeof(shader_16k ), shader_16k },
-    {sizeof(shader_32k ), shader_32k },
-    {sizeof(shader_64k ), shader_64k },
-    {sizeof(shader_128k), shader_128k}
+    {sizeof(shader_256), shader_256},
+    {sizeof(shader_512), shader_512},
+    {sizeof(shader_1k), shader_1k},
+    {sizeof(shader_2k), shader_2k},
+    {sizeof(shader_4k), shader_4k},
+    {sizeof(shader_8k), shader_8k},
+    {sizeof(shader_16k), shader_16k},
+    {sizeof(shader_32k), shader_32k},
+    {sizeof(shader_64k), shader_64k},
+    {sizeof(shader_128k), shader_128k},
+    {sizeof(shader_256k), shader_256k},
+    {sizeof(shader_512k), shader_512k},
+    {sizeof(shader_1024k), shader_1024k}
 };
 
 unsigned int  gpu_fft_shader_size(int log2_N) {

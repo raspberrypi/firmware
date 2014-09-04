@@ -6290,6 +6290,8 @@ alias hid:b0003g*v00000079p00000011 hid_dr
 alias hid:b0003g*v00000079p00000006 hid_dr
 alias hid:b0003g*v00002006p00000118 hid_emsff
 alias hid:b0005g*v0000056Ep00000061 hid_elecom
+alias hid:b0003g*v000004E7p00000030 hid_elo
+alias hid:b0003g*v000004E7p00000009 hid_elo
 alias hid:b0003g*v00000518p00000002 hid_ezkey
 alias hid:b0003g*v00000C16p00000008 hid_gyration
 alias hid:b0003g*v00000C16p00000003 hid_gyration

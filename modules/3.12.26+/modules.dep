@@ -779,6 +779,7 @@ kernel/drivers/hid/hid-cypress.ko:
 kernel/drivers/hid/hid-dr.ko:
 kernel/drivers/hid/hid-emsff.ko: kernel/drivers/input/ff-memless.ko
 kernel/drivers/hid/hid-elecom.ko:
+kernel/drivers/hid/hid-elo.ko:
 kernel/drivers/hid/hid-ezkey.ko:
 kernel/drivers/hid/hid-gyration.ko:
 kernel/drivers/hid/hid-holtek-kbd.ko:

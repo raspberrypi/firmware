@@ -1,9 +1,10 @@
-BCM2835 "GPU_FFT" by Andrew Holme, 2013.
+BCM2835 "GPU_FFT" release 2.0 BETA by Andrew Holme, 2014.
 
 GPU_FFT is an FFT library for the Raspberry Pi which exploits the BCM2835 SoC
 3D hardware to deliver ten times more data throughput than is possible on the
 700 MHz ARM.  Kernels are provided for all power-of-2 FFT lengths between 256
-and 131,072 points inclusive.
+and 1,048,576 points inclusive.  A transpose function, which also uses the 3D
+hardware, is provided to support 2-dimensional transforms.
 
 
 *** Accuracy ***
@@ -15,22 +16,29 @@ is not scaled.  The relative root-mean-square (rms) error in parts-per-million
 log2(N) |  8    | 9    | 10   |  11   |  12  |  13  |  14  |  15  |  16 |  17
 ppm rms |  0.27 | 0.42 | 0.50 |  0.70 |  2.3 |  4.4 |  7.6 |  9.2 |  18 |  70
 
+log2(N) |  18 |  19 |  20 |                 8...17 batch of 10
+ppm rms | 100 | 180 | 360 |                18...20 batch of  1
+
 
 *** Throughput ***
 
-GPU_FFT is invoked through a kernel ioctl call which adds 100us overhead.  To
-mitigate this, transform batches can be executed with a single call.  Typical
-per-transform runtime in microseconds for various batch sizes and comparative
-figures for FFTW (FFTW_MEASURE mode) are as follows:
+GPU_FFT 1.0 had to be invoked through a "mailbox" which added a 100us overhead
+on every call.  To mitigate this, batches of transforms could be submitted via
+a single call.  GPU_FFT 2.0 avoids this 100us overhead by poking GPU registers
+directly from the ARM if total batch runtime will be short; but still uses the
+mailbox for longer jobs to avoid busy waiting at 100% CPU for too long.
 
-log2(N) |   8 |   9 |  10 |  11 |   12 |   13 |    14 |    15 |    16 |     17
-      1 | 112 | 125 | 136 | 180 |  298 |  689 |  1274 |  3397 |  6978 |  16734
-      2 |  56 |  74 |  85 | 133 |  285 |  663 |  1227 |  3362 |  6759 |  16179
-      5 |  31 |  75 |  61 | 113 |  274 |  631 |  1188 |  3228 |  6693 |  16180
-     10 |  22 |  37 |  54 | 107 |  256 |  624 |  1167 |  3225 |  6703 |  16110
-     20 |  19 |  31 |  52 | 101 |  252 |  615 |  1138 |  3202 |  6684 |  16181
-     50 |  16 |  26 |  45 |  93 |  240 |  608 |  1131 |  3196 |  6674 |  16171
-   FFTW |  92 | 217 | 482 | 952 | 3002 | 5082 | 12005 | 31211 | 82769 | 183731
+Typical per-transform runtimes for batch sizes of 1 and 10; and comparative
+figures for FFTW (FFTW_MEASURE mode) are:
+
+log2(N) |   8   |   9   |  10   |  11   |  12  |  13  |  14  |  15  |
+      1 | 0.036 | 0.051 | 0.070 | 0.11  | 0.24 | 0.58 |  1.2 |  3.3 |
+     10 | 0.016 | 0.027 | 0.045 | 0.095 | 0.25 | 0.61 |  1.2 |  3.2 |
+   FFTW | 0.092 | 0.22  | 0.48  | 0.95  | 3.0  | 5.1  | 12   | 31   |
+
+log2(N) |  16  |  17 |  18 |  19 |   20 |           All times in
+      1 |  6.8 |  16 |  42 |  95 |  190 |           milliseconds
+   FFTW | 83   | 180 | 560 | 670 | 1600 |           2 sig. figs.
 
 
 *** API functions ***
@@ -49,7 +57,7 @@ log2(N) |   8 |   9 |  10 |  11 |   12 |   13 |    14 |    15 |    16 |     17
 
     int mb          Mailbox file descriptor obtained by calling mbox_open()
 
-    int log2_N      log2(FFT length) = 8 to 17
+    int log2_N      log2(FFT length) = 8 to 20
 
     int direction   FFT direction:  GPU_FFT_FWD for forward FFT
                                     GPU_FFT_REV for inverse FFT
@@ -127,3 +135,23 @@ waiting for rendering, call glFlush() and glFinish() afterwards as follows:
         gpu_fft_execute(....); // blocking call
         ....
     }
+
+
+*** 2-dimensional FFT ***
+
+Please study the hello_fft_2d demo source, which is built and executed thus:
+
+make hello_fft_2d.bin
+sudo ./hello_fft_2d.bin
+
+This generates a Windows BMP file: "hello_fft_2d.bmp"
+
+The demo uses a square 512x512 array; however, rectangular arrays are allowed.
+The following lines in gpu_fft_trans.c will do what is safe:
+
+    ptr.arm.uptr[6] = src->x < dst->y? src->x : dst->y;
+    ptr.arm.uptr[7] = src->y < dst->x? src->y : dst->x;
+
+One may transpose the output from the second FFT pass back into the first pass
+input buffer, by preparing and executing a second transposition; however, this
+is probably unnecessary.  It depends on how the final output will be accessed.

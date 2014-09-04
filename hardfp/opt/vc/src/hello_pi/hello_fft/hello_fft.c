@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2013, Andrew Holme.
+BCM2835 "GPU_FFT" release 2.0 BETA
+Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -36,8 +37,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 char Usage[] =
     "Usage: hello_fft.bin log2_N [jobs [loops]]\n"
-    "log2_N = log2(FFT_length),       log2_N = 8...17\n"
-    "jobs   = transforms per batch,   jobs>0,        default 10\n"
+    "log2_N = log2(FFT_length),       log2_N = 8...20\n"
+    "jobs   = transforms per batch,   jobs>0,        default 1\n"
     "loops  = number of test repeats, loops>0,       default 1\n";
 
 unsigned Microseconds(void) {
@@ -54,8 +55,8 @@ int main(int argc, char *argv[]) {
     struct GPU_FFT_COMPLEX *base;
     struct GPU_FFT *fft;
 
-    log2_N = argc>1? atoi(argv[1]) : 12; // 8 <= log2_N <= 17
-    jobs   = argc>2? atoi(argv[2]) : 10; // transforms per batch
+    log2_N = argc>1? atoi(argv[1]) : 12; // 8 <= log2_N <= 20
+    jobs   = argc>2? atoi(argv[2]) : 1;  // transforms per batch
     loops  = argc>3? atoi(argv[3]) : 1;  // test repetitions
 
     if (argc<2 || jobs<1 || loops<1) {
@@ -68,8 +69,9 @@ int main(int argc, char *argv[]) {
 
     switch(ret) {
         case -1: printf("Unable to enable V3D. Please check your firmware is up to date.\n"); return -1;
-        case -2: printf("log2_N=%d not supported.  Try between 8 and 17.\n", log2_N);         return -1;
+        case -2: printf("log2_N=%d not supported.  Try between 8 and 20.\n", log2_N);         return -1;
         case -3: printf("Out of memory.  Try a smaller batch or increase GPU memory.\n");     return -1;
+        case -4: printf("Unable to map Videocore peripherals into ARM memory space.\n");      return -1;
     }
 
     for (k=0; k<loops; k++) {
