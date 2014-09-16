@@ -912,11 +912,14 @@ kernel/sound/soc/snd-soc-core.ko
 kernel/sound/soc/codecs/snd-soc-pcm1794a.ko
 kernel/sound/soc/codecs/snd-soc-pcm5102a.ko
 kernel/sound/soc/codecs/snd-soc-pcm512x.ko
+kernel/sound/soc/codecs/snd-soc-tas5713.ko
 kernel/sound/soc/codecs/snd-soc-wm8804.ko
+kernel/sound/soc/generic/snd-soc-simple-card.ko
 kernel/sound/soc/bcm/snd-soc-bcm2708-i2s.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dac.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplus.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-digi.ko
+kernel/sound/soc/bcm/snd-soc-hifiberry-amp.ko
 kernel/sound/soc/bcm/snd-soc-rpi-dac.ko
 kernel/sound/soc/bcm/snd-soc-iqaudio-dac.ko
 kernel/sound/ac97_bus.ko

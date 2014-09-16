@@ -7051,8 +7051,11 @@ alias of:N*T*Cti,pcm5122* snd_soc_pcm512x
 alias of:N*T*Cti,pcm5121* snd_soc_pcm512x
 alias spi:pcm5122 snd_soc_pcm512x
 alias spi:pcm5121 snd_soc_pcm512x
+alias of:N*T*Cti,tas5713* snd_soc_tas5713
+alias i2c:tas5713 snd_soc_tas5713
 alias i2c:wm8804 snd_soc_wm8804
 alias of:N*T*Cwlf,wm8804* snd_soc_wm8804
+alias platform:asoc-simple-card snd_soc_simple_card
 alias platform:bcm2708-i2s snd_soc_bcm2708_i2s
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
