@@ -82,6 +82,7 @@ kernel/crypto/wp512.ko
 kernel/crypto/tgr192.ko
 kernel/crypto/gf128mul.ko
 kernel/crypto/ecb.ko
+kernel/crypto/cts.ko
 kernel/crypto/xts.ko
 kernel/crypto/cryptd.ko
 kernel/crypto/cast_common.ko
@@ -312,6 +313,11 @@ kernel/drivers/usb/serial/wishbone-serial.ko
 kernel/drivers/usb/serial/whiteheat.ko
 kernel/drivers/usb/serial/xsens_mt.ko
 kernel/drivers/usb/serial/zte_ev.ko
+kernel/drivers/usb/atm/cxacru.ko
+kernel/drivers/usb/atm/speedtch.ko
+kernel/drivers/usb/atm/ueagle-atm.ko
+kernel/drivers/usb/atm/usbatm.ko
+kernel/drivers/usb/atm/xusbatm.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/input/misc/ad714x.ko
@@ -1161,6 +1167,7 @@ kernel/net/ipv6/xfrm6_mode_tunnel.ko
 kernel/net/ipv6/xfrm6_mode_beet.ko
 kernel/net/ipv6/sit.ko
 kernel/net/ipv6/ip6_tunnel.ko
+kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko
 kernel/net/8021q/8021q.ko
 kernel/net/wireless/cfg80211.ko
 kernel/net/wireless/lib80211.ko
@@ -1205,6 +1212,8 @@ kernel/net/bluetooth/bluetooth.ko
 kernel/net/bluetooth/rfcomm/rfcomm.ko
 kernel/net/bluetooth/bnep/bnep.ko
 kernel/net/bluetooth/hidp/hidp.ko
+kernel/net/atm/atm.ko
+kernel/net/atm/pppoatm.ko
 kernel/net/l2tp/l2tp_core.ko
 kernel/net/l2tp/l2tp_ppp.ko
 kernel/net/l2tp/l2tp_ip.ko
