@@ -6740,6 +6740,8 @@ alias platform:uio_pdrv_genirq uio_pdrv_genirq
 alias tty-ldisc-2 serport
 alias serio:ty06pr*id*ex* serio_raw
 alias serio:ty01pr*id*ex* serio_raw
+alias tty-ldisc-18 pps_ldisc
+alias of:N*T*Cpps-gpio* pps_gpio
 alias usb:v04FAp2490d*dc*dsc*dp*ic*isc*ip*in* ds2490
 alias w1-family-0x42 w1_therm
 alias w1-family-0x3B w1_therm

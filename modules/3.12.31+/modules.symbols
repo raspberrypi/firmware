@@ -175,6 +175,7 @@ alias symbol:snd_soc_dpcm_be_get_state snd_soc_core
 alias symbol:snd_soc_add_codec_controls snd_soc_core
 alias symbol:snd_soc_unregister_platform snd_soc_core
 alias symbol:stp_proto_unregister stp
+alias symbol:pps_lookup_dev pps_core
 alias symbol:i2c_bit_algo i2c_algo_bit
 alias symbol:ir_raw_handler_unregister rc_core
 alias symbol:ircomm_data_request ircomm
@@ -994,6 +995,7 @@ alias symbol:ath9k_hw_set_txpowerlimit ath9k_hw
 alias symbol:dib8000_set_slave_frontend dib8000
 alias symbol:dib8096p_get_i2c_tuner dib8000
 alias symbol:iscsi_host_free libiscsi
+alias symbol:pps_unregister_source pps_core
 alias symbol:dm_unregister_target dm_mod
 alias symbol:ocfs2_cluster_connect_agnostic ocfs2_stackglue
 alias symbol:v4l2_detect_cvt v4l2_dv_timings
@@ -2151,6 +2153,7 @@ alias symbol:cx22702_attach cx22702
 alias symbol:adxl34x_suspend adxl34x
 alias symbol:ath9k_hw_enable_interrupts ath9k_hw
 alias symbol:l2cap_conn_get bluetooth
+alias symbol:pps_event pps_core
 alias symbol:nf_ct_alloc_hashtable nf_conntrack
 alias symbol:bitmap_start_sync md_mod
 alias symbol:rc_unregister_device rc_core
@@ -2853,6 +2856,7 @@ alias symbol:wimax_msg_alloc wimax
 alias symbol:irias_new_integer_value irda
 alias symbol:ircomm_connect_request ircomm
 alias symbol:snd_seq_kernel_client_ctl snd_seq
+alias symbol:pps_register_source pps_core
 alias symbol:ip_tunnel_newlink ip_tunnel
 alias symbol:iscsi_tcp_hdr_recv_prep libiscsi_tcp
 alias symbol:l2tp_tunnel_sock_put l2tp_core

@@ -855,6 +855,9 @@ kernel/drivers/input/serio/serio_raw.ko: kernel/drivers/input/serio/serio.ko
 kernel/drivers/input/gameport/gameport.ko:
 kernel/drivers/input/gameport/lightning.ko: kernel/drivers/input/gameport/gameport.ko
 kernel/drivers/input/gameport/ns558.ko: kernel/drivers/input/gameport/gameport.ko
+kernel/drivers/pps/clients/pps-ldisc.ko: kernel/drivers/pps/pps_core.ko
+kernel/drivers/pps/clients/pps-gpio.ko: kernel/drivers/pps/pps_core.ko
+kernel/drivers/pps/pps_core.ko:
 kernel/drivers/w1/masters/ds2490.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/w1/masters/ds2482.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
 kernel/drivers/w1/masters/ds1wm.ko: kernel/drivers/w1/wire.ko kernel/drivers/connector/cn.ko
