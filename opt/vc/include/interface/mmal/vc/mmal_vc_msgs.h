@@ -102,6 +102,7 @@ typedef enum {
    MMAL_WORKER_BUFFER_FROM_HOST_ZEROLEN,
    MMAL_WORKER_PORT_FLUSH,
    MMAL_WORKER_HOST_LOG,
+   MMAL_WORKER_COMPACT,
    MMAL_WORKER_MSG_LAST
 } MMAL_WORKER_CMD_T;
 
@@ -477,6 +478,15 @@ typedef struct
    uint32_t handle;
 } mmal_worker_consume_mem;
 vcos_static_assert(sizeof(mmal_worker_consume_mem) <= MMAL_WORKER_MAX_MSG_LEN);
+
+typedef struct
+{
+   mmal_worker_msg_header header;
+   MMAL_STATUS_T status;
+   uint32_t mode;
+   uint32_t duration;
+} mmal_worker_compact;
+vcos_static_assert(sizeof(mmal_worker_compact) <= MMAL_WORKER_MAX_MSG_LEN);
 
 typedef struct
 {
