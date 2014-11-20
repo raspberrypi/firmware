@@ -41,6 +41,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
+/** List of topology types */
+typedef enum
+{
+   MMAL_GRAPH_TOPOLOGY_ALL = 0,    /**< All input ports and output ports are linked */
+   MMAL_GRAPH_TOPOLOGY_STRAIGHT,   /**< Input ports and output ports of the same index are linked */
+   MMAL_GRAPH_TOPOLOGY_CUSTOM,     /**< Custom defined topology */
+   MMAL_GRAPH_TOPOLOGY_MAX
+
+} MMAL_GRAPH_TOPOLOGY_T;
+
 /** Structure describing a graph */
 typedef struct MMAL_GRAPH_T
 {
@@ -66,6 +76,18 @@ typedef struct MMAL_GRAPH_T
    MMAL_STATUS_T (*pf_payload_free)(struct MMAL_GRAPH_T *, MMAL_PORT_T *port, uint8_t *payload);
    /** Optional callback that the client can set to intercept flush calls on ports exposed by the graph */
    MMAL_STATUS_T (*pf_flush)(struct MMAL_GRAPH_T *, MMAL_PORT_T *port);
+   /** Optional callback that the client can set to control callbacks from the internal components of the graph */
+   /** Optional callback that the client can set to intercept enable calls on ports exposed by the graph */
+   MMAL_STATUS_T (*pf_enable)(struct MMAL_GRAPH_T *, MMAL_PORT_T *port);
+   /** Optional callback that the client can set to intercept disable calls on ports exposed by the graph */
+   MMAL_STATUS_T (*pf_disable)(struct MMAL_GRAPH_T *, MMAL_PORT_T *port);
+   /** Optional callback that the client can set to control callbacks from the internal components of the graph */
+   MMAL_STATUS_T (*pf_control_callback)(struct MMAL_GRAPH_T *, MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffer);
+   /** Optional callback that the client can set to intercept component_enable/disable calls made to the graph */
+   MMAL_STATUS_T (*pf_graph_enable)(struct MMAL_GRAPH_T *, MMAL_BOOL_T enable);
+   /** Optional callback that the client can set to intercept buffers going through internal connections.
+    * This will only be triggered if the connection is not tunnelled */
+   MMAL_STATUS_T (*pf_connection_buffer)(struct MMAL_GRAPH_T *, MMAL_CONNECTION_T *connection, MMAL_BUFFER_HEADER_T *buffer);
 
 } MMAL_GRAPH_T;
 
@@ -86,6 +108,25 @@ MMAL_STATUS_T mmal_graph_create(MMAL_GRAPH_T **graph, unsigned int userdata_size
  * @return MMAL_SUCCESS on success
  */
 MMAL_STATUS_T mmal_graph_add_component(MMAL_GRAPH_T *graph, MMAL_COMPONENT_T *component);
+
+/** Describe the topology of the ports of a component.
+ * Allows the client to describe the topology of a component. This information
+ * is used by the graph to choose which action to perform when
+ * enabling / disabling / committing / flushing a port exposed by the graph.
+ * Note that by default the topology of a component is set to MMAL_GRAPH_TOPOLOGY_ALL.
+ *
+ * @param graph instance of the graph
+ * @param component component to describe
+ * @param topology type of topology used by this component
+ * @param input output index (or -1 if sink) linked to each input port
+ * @param input_num number of indexes in the input list
+ * @param output input index (or -1 if source) linked to each output port
+ * @param output_num number of indexes in the output list
+ * @return MMAL_SUCCESS on success
+ */
+MMAL_STATUS_T mmal_graph_component_topology(MMAL_GRAPH_T *graph, MMAL_COMPONENT_T *component,
+    MMAL_GRAPH_TOPOLOGY_T topology, int8_t *input, unsigned int input_num,
+    int8_t *output, unsigned int output_num);
 
 /** Add a port to a graph.
  * Allows the client to add an input or output port to a graph. The given port

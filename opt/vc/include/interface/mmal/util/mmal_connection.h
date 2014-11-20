@@ -94,6 +94,12 @@ extern "C" {
 #define MMAL_CONNECTION_FLAG_ALLOCATION_ON_INPUT 0x2
 /** Force the pool of buffer headers used by the connection to be allocated on the output port. */
 #define MMAL_CONNECTION_FLAG_ALLOCATION_ON_OUTPUT 0x4
+/** Specify that the connection should not modify the buffer requirements. */
+#define MMAL_CONNECTION_FLAG_KEEP_BUFFER_REQUIREMENTS 0x8
+/** The connection is flagged as direct. This doesn't change the behaviour of
+ * the connection itself but is used by the the graph utility to specify that
+ * the buffer should be sent to the input port from with the port callback. */
+#define MMAL_CONNECTION_FLAG_DIRECT 0x10
 /* @} */
 
 /** Forward type definition for a connection */

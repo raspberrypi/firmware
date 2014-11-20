@@ -216,7 +216,11 @@ VCOS_STATUS_T gx_priv_render_text( GX_DISPLAY_T *disp,
 
       if ( ( 0 < (VGint)rendered_w ) && ( 0 < (VGint)rendered_h ) )
       {
-         vgClear(x, y, (VGint)rendered_w, (VGint)rendered_h);
+         // Have to compensate for the messed up y position of multiline text.
+         VGfloat offset = vgft_first_line_y_offset(font);
+         int32_t bottom = y + offset - rendered_h;
+
+         vgClear(x, bottom, (VGint)rendered_w, (VGint)rendered_h);
          err = vgGetError();
          if (err)
          {

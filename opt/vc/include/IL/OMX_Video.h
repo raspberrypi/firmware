@@ -71,12 +71,19 @@ typedef enum OMX_VIDEO_CODINGTYPE {
     OMX_VIDEO_CodingKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_VIDEO_CodingVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
 
+#define OMX_AUDIO_CodingVP6_Supported 1
     OMX_VIDEO_CodingVP6,        /**< On2 VP6 */
+#define OMX_AUDIO_CodingVP7_Supported 1
     OMX_VIDEO_CodingVP7,        /**< On2 VP7 */
+#define OMX_AUDIO_CodingVP8_Supported 1
     OMX_VIDEO_CodingVP8,        /**< On2 VP8 */
+#define OMX_AUDIO_CodingYUV_Supported 1
     OMX_VIDEO_CodingYUV,        /* raw YUV video */
+#define OMX_AUDIO_CodingSorenson_Supported 1
     OMX_VIDEO_CodingSorenson,   /**< Sorenson */
+#define OMX_AUDIO_CodingTheora_Supported 1
     OMX_VIDEO_CodingTheora,     /**< Theora */
+#define OMX_AUDIO_CodingMVC_Supported 1
     OMX_VIDEO_CodingMVC,        /**< H.264/MVC */ 	
     
     OMX_VIDEO_CodingMax = 0x7FFFFFFF

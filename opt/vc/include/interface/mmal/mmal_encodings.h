@@ -130,6 +130,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_WMA2             MMAL_FOURCC('W','M','A','2')
 #define MMAL_ENCODING_WMAP             MMAL_FOURCC('W','M','A','P')
 #define MMAL_ENCODING_WMAL             MMAL_FOURCC('W','M','A','L')
+#define MMAL_ENCODING_WMAV             MMAL_FOURCC('W','M','A','V')
 #define MMAL_ENCODING_AMRNB            MMAL_FOURCC('A','M','R','N')
 #define MMAL_ENCODING_AMRWB            MMAL_FOURCC('A','M','R','W')
 #define MMAL_ENCODING_AMRWBP           MMAL_FOURCC('A','M','R','P')

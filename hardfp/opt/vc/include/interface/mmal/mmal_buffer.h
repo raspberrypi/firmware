@@ -128,6 +128,13 @@ typedef struct MMAL_BUFFER_HEADER_T
 #define MMAL_BUFFER_HEADER_FLAG_CORRUPTED              (1<<9)
 /** Signals that a buffer failed to be transmitted */
 #define MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED    (1<<10)
+/** Signals the output buffer won't be used, just update reference frames */
+#define MMAL_BUFFER_HEADER_FLAG_DECODEONLY             (1<<11)
+/** User flags - can be passed in and will get returned */
+#define MMAL_BUFFER_HEADER_FLAG_USER0                  (1<<28)
+#define MMAL_BUFFER_HEADER_FLAG_USER1                  (1<<29)
+#define MMAL_BUFFER_HEADER_FLAG_USER2                  (1<<30)
+#define MMAL_BUFFER_HEADER_FLAG_USER3                  (1<<31)
 /* @} */
 
 /** \name Video buffer header flags

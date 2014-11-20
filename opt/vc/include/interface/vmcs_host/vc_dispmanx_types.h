@@ -59,6 +59,9 @@ typedef uint32_t DISPMANX_PROTECTION_T;
 #define DISPMANX_ID_AUX_LCD   1
 #define DISPMANX_ID_HDMI      2
 #define DISPMANX_ID_SDTV      3
+#define DISPMANX_ID_FORCE_LCD 4
+#define DISPMANX_ID_FORCE_TV  5
+#define DISPMANX_ID_FORCE_OTHER 6 /* non-default display */
 
 /* Return codes. Nonzero ones indicate failure. */
 typedef enum {

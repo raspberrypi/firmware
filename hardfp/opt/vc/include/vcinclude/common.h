@@ -87,7 +87,11 @@ typedef enum bool_e
 {
    VC_FALSE = 0,
    VC_TRUE = 1,
-} bool_t;
+} VC_BOOL_T;
+
+#ifndef bool_t
+#define bool_t VC_BOOL_T
+#endif
 
 /*}}}*/
 

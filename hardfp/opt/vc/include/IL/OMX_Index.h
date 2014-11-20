@@ -508,6 +508,14 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigBrcmAudioDownmixCoefficients = 0x7f0000f0, /**< reference: OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS */
     OMX_IndexConfigBrcmAudioDownmixCoefficients8x8,           /**< reference: OMX_CONFIG_BRCMAUDIODOWNMIXCOEFFICIENTS8x8 */
     OMX_IndexConfigBrcmAudioMaxSample,                        /**< reference: OMX_CONFIG_BRCMAUDIOMAXSAMPLE */
+    OMX_IndexConfigCustomAwbGains,                            /**< reference: OMX_CONFIG_CUSTOMAWBGAINSTYPE */
+    OMX_IndexParamRemoveImagePadding,                         /**< reference: OMX_CONFIG_PORTBOOLEANTYPE*/
+    OMX_IndexParamBrcmVideoAVCInlineVectorsEnable,            /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
+    OMX_IndexConfigBrcmRenderStats,                           /**< reference: OMX_CONFIG_BRCMRENDERSTATSTYPE */
+    OMX_IndexConfigBrcmCameraAnnotate,                        /**< reference: OMX_CONFIG_BRCMANNOTATETYPE */
+    OMX_IndexParamBrcmStereoscopicMode,                       /**< reference :OMX_CONFIG_BRCMSTEREOSCOPICMODETYPE */
+    OMX_IndexParamBrcmLockStepEnable,                         /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
+    OMX_IndexParamBrcmTimeScale,                              /**< reference: OMX_PARAM_U32TYPE */
 
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;

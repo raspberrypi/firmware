@@ -109,6 +109,15 @@ MMAL_RATIONAL_T mmal_rational_from_fixed_16_16(int32_t fixed);
  */
 void mmal_rational_simplify(MMAL_RATIONAL_T *rational);
 
+/** Test 2 rational numbers for equality.
+ *
+ * @param a        First operand
+ * @param b        Second operand
+ *
+ * @return true if equal
+ */
+MMAL_BOOL_T mmal_rational_equal(MMAL_RATIONAL_T a, MMAL_RATIONAL_T b);
+
 #ifdef __cplusplus
 }
 #endif

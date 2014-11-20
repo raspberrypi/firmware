@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2012, Broadcom Europe Ltd
+Copyright (c) 2012-2014, Broadcom Europe Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -166,8 +166,6 @@ extern /*@observer@*/ VCHI_CONNECTION_T * vchi_create_connection( const VCHI_CON
 // Routine used to initialise the vchi on both local + remote connections
 extern int32_t vchi_initialise( VCHI_INSTANCE_T *instance_handle );
 
-extern int32_t vchi_exit( void );
-
 extern int32_t vchi_connect( VCHI_CONNECTION_T **connections,
                              const uint32_t num_connections,
                              VCHI_INSTANCE_T instance_handle );
@@ -214,7 +212,12 @@ extern int32_t vchi_service_use( const VCHI_SERVICE_HANDLE_T handle );
 // Routine to decrement ref count on a named service
 extern int32_t vchi_service_release( const VCHI_SERVICE_HANDLE_T handle );
 
-// Routine to send a message accross a service
+// Routine to set a control option for a named service
+extern int32_t vchi_service_set_option( const VCHI_SERVICE_HANDLE_T handle,
+                                        VCHI_SERVICE_OPTION_T option,
+                                        int value);
+
+// Routine to send a message across a service
 extern int32_t vchi_msg_queue( VCHI_SERVICE_HANDLE_T handle,
                                const void *data,
                                uint32_t data_size,

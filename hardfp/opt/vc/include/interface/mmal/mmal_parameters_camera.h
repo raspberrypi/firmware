@@ -61,7 +61,7 @@ enum {
    MMAL_PARAMETER_REDEYE,                    /**< Takes a @ref MMAL_PARAMETER_REDEYE_T */
    MMAL_PARAMETER_FOCUS,                     /**< Takes a @ref MMAL_PARAMETER_FOCUS_T */
    MMAL_PARAMETER_FOCAL_LENGTHS,             /**< Unused? */
-   MMAL_PARAMETER_EXPOSURE_COMP,             /**< Takes a @ref MMAL_PARAMETER_INT32_T */
+   MMAL_PARAMETER_EXPOSURE_COMP,             /**< Takes a @ref MMAL_PARAMETER_INT32_T or MMAL_PARAMETER_RATIONAL_T */
    MMAL_PARAMETER_ZOOM,                      /**< Takes a @ref MMAL_PARAMETER_SCALEFACTOR_T */
    MMAL_PARAMETER_MIRROR,                    /**< Takes a @ref MMAL_PARAMETER_MIRROR_T */
 
@@ -123,7 +123,14 @@ enum {
    MMAL_PARAMETER_SW_SHARPEN_DISABLE,        /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_FLASH_REQUIRED,            /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_SW_SATURATION_DISABLE,     /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
-   MMAL_PARAMETER_SHUTTER_SPEED              /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_SHUTTER_SPEED,             /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_CUSTOM_AWB_GAINS,          /**< Takes a @ref MMAL_PARAMETER_AWB_GAINS_T */
+   MMAL_PARAMETER_CAMERA_SETTINGS,           /**< Takes a @ref MMAL_PARAMETER_CAMERA_SETTINGS_T */
+   MMAL_PARAMETER_PRIVACY_INDICATOR,         /**< Takes a @ref MMAL_PARAMETER_PRIVACY_INDICATOR_T */
+   MMAL_PARAMETER_VIDEO_DENOISE,             /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
+   MMAL_PARAMETER_STILLS_DENOISE,            /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
+   MMAL_PARAMETER_ANNOTATE,                  /**< Takes a @ref MMAL_PARAMETER_CAMERA_ANNOTATE_T */
+   MMAL_PARAMETER_STEREOSCOPIC_MODE,         /**< Takes a @ref MMAL_PARAMETER_STEREOSCOPIC_MODE_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -240,6 +247,9 @@ typedef enum MMAL_PARAM_IMAGEFX_T
    MMAL_PARAM_IMAGEFX_COLOURPOINT,
    MMAL_PARAM_IMAGEFX_COLOURBALANCE,
    MMAL_PARAM_IMAGEFX_CARTOON,
+   MMAL_PARAM_IMAGEFX_DEINTERLACE_DOUBLE,
+   MMAL_PARAM_IMAGEFX_DEINTERLACE_ADV,
+   MMAL_PARAM_IMAGEFX_DEINTERLACE_FAST,
    MMAL_PARAM_IMAGEFX_MAX = 0x7fffffff
 } MMAL_PARAM_IMAGEFX_T;
 
@@ -250,7 +260,7 @@ typedef struct MMAL_PARAMETER_IMAGEFX_T
    MMAL_PARAM_IMAGEFX_T value;   /**< Image effect mode */
 } MMAL_PARAMETER_IMAGEFX_T;
 
-#define MMAL_MAX_IMAGEFX_PARAMETERS 5  /* Image effects library currently uses a maximum of 5 parameters per effect */
+#define MMAL_MAX_IMAGEFX_PARAMETERS 6  /* Image effects library currently uses a maximum of 5 parameters per effect */
 
 typedef struct MMAL_PARAMETER_IMAGEFX_PARAMETERS_T
 {
@@ -654,5 +664,92 @@ typedef struct MMAL_PARAMETER_ZEROSHUTTERLAG_T
                                               *  use the last preview raw image for the stills capture
                                               */
 } MMAL_PARAMETER_ZEROSHUTTERLAG_T;
+
+typedef struct MMAL_PARAMETER_AWB_GAINS_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_RATIONAL_T r_gain;                   /**< Red gain */
+   MMAL_RATIONAL_T b_gain;                   /**< Blue gain */
+} MMAL_PARAMETER_AWB_GAINS_T;
+
+typedef struct MMAL_PARAMETER_CAMERA_SETTINGS_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   uint32_t exposure;
+   MMAL_RATIONAL_T analog_gain;
+   MMAL_RATIONAL_T digital_gain;
+   MMAL_RATIONAL_T awb_red_gain;
+   MMAL_RATIONAL_T awb_blue_gain;
+   uint32_t focus_position;
+} MMAL_PARAMETER_CAMERA_SETTINGS_T;
+
+typedef enum MMAL_PARAM_PRIVACY_INDICATOR_T
+{
+   MMAL_PARAMETER_PRIVACY_INDICATOR_OFF,        /**< Indicator will be off. */
+   MMAL_PARAMETER_PRIVACY_INDICATOR_ON,         /**< Indicator will come on just after a stills capture and
+                                                 *   and remain on for 2seconds, or will be on whilst output[1]
+                                                 *   is actively producing images.
+                                                 */
+   MMAL_PARAMETER_PRIVACY_INDICATOR_FORCE_ON,   /**< Turns indicator of for 2s independent of capture status.
+                                                 *   Set this mode repeatedly to keep the indicator on for a
+                                                 *   longer period.
+                                                 */
+   MMAL_PARAMETER_PRIVACY_INDICATOR_MAX = 0x7fffffff
+} MMAL_PARAM_PRIVACY_INDICATOR_T;
+
+typedef struct MMAL_PARAMETER_PRIVACY_INDICATOR_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_PARAM_PRIVACY_INDICATOR_T mode;
+} MMAL_PARAMETER_PRIVACY_INDICATOR_T;
+
+#define MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN 32
+typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;
+   char text[MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN];
+   MMAL_BOOL_T show_shutter;
+   MMAL_BOOL_T show_analog_gain;
+   MMAL_BOOL_T show_lens;
+   MMAL_BOOL_T show_caf;
+   MMAL_BOOL_T show_motion;
+} MMAL_PARAMETER_CAMERA_ANNOTATE_T;
+
+#define MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2 256
+typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;
+   MMAL_BOOL_T show_shutter;
+   MMAL_BOOL_T show_analog_gain;
+   MMAL_BOOL_T show_lens;
+   MMAL_BOOL_T show_caf;
+   MMAL_BOOL_T show_motion;
+   MMAL_BOOL_T show_frame_num;
+   MMAL_BOOL_T black_text_background;
+   char text[MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V2];
+} MMAL_PARAMETER_CAMERA_ANNOTATE_V2_T;
+
+typedef enum MMAL_STEREOSCOPIC_MODE_T {
+   MMAL_STEREOSCOPIC_MODE_NONE = 0,
+   MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE = 1,
+   MMAL_STEREOSCOPIC_MODE_TOP_BOTTOM = 2,
+   MMAL_STEREOSCOPIC_MODE_MAX = 0x7FFFFFFF,
+} MMAL_STEREOSCOPIC_MODE_T;
+
+typedef struct MMAL_PARAMETER_STEREOSCOPIC_MODE_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_STEREOSCOPIC_MODE_T mode;
+   MMAL_BOOL_T decimate;
+   MMAL_BOOL_T swap_eyes;
+} MMAL_PARAMETER_STEREOSCOPIC_MODE_T;
 
 #endif  /* MMAL_PARAMETERS_CAMERA_H */

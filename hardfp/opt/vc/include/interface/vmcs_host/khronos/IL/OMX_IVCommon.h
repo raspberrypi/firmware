@@ -210,9 +210,22 @@ typedef enum OMX_IMAGEFILTERTYPE {
     OMX_ImageFilterColourBalance,
     OMX_ImageFilterCartoon,
 
+    OMX_ImageFilterAnaglyph,
+    OMX_ImageFilterDeInterlaceFast,
     OMX_ImageFilterMax = 0x7FFFFFFF
 } OMX_IMAGEFILTERTYPE;
 
+typedef enum OMX_IMAGEFILTERANAGLYPHTYPE {
+    OMX_ImageFilterAnaglyphNone,
+    OMX_ImageFilterAnaglyphSBStoRedCyan,
+    OMX_ImageFilterAnaglyphSBStoCyanRed,
+    OMX_ImageFilterAnaglyphSBStoGreenMagenta,
+    OMX_ImageFilterAnaglyphSBStoMagentaGreen,
+    OMX_ImageFilterAnaglyphTABtoRedCyan,
+    OMX_ImageFilterAnaglyphTABtoCyanRed,
+    OMX_ImageFilterAnaglyphTABtoGreenMagenta,
+    OMX_ImageFilterAnaglyphTABtoMagentaGreen,
+} OMX_IMAGEFILTERANAGLYPHTYPE;
 
 /** 
  * Image filter configuration 

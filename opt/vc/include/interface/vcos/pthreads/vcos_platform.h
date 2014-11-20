@@ -120,9 +120,6 @@ typedef struct
 
 #define VCOS_ONCE_INIT        PTHREAD_ONCE_INIT
 
-#if defined(__arm__) && !defined(_HAVE_TIMER_T) && !defined(ANDROID)
-typedef __timer_t timer_t;
-#endif
 typedef struct VCOS_TIMER_T
 {
    pthread_t thread;                      /**< id of the timer thread */
@@ -297,16 +294,29 @@ VCOS_INLINE_IMPL
 VCOS_STATUS_T vcos_semaphore_wait_timeout(VCOS_SEMAPHORE_T *sem, VCOS_UNSIGNED timeout) {
    struct timespec ts;
    int ret;
-   ts.tv_sec  = timeout/1000;
-   ts.tv_nsec = (timeout%1000)*1000*1000;
-   ret = sem_timedwait( sem, &ts );
-   if (ret == 0)
-      return VCOS_SUCCESS;
-   else if (ret == ETIMEDOUT)
-      return VCOS_EAGAIN;
-   else {
-      vcos_assert(0);
+   if (clock_gettime(CLOCK_REALTIME, &ts) == -1)
       return VCOS_EINVAL;
+   ts.tv_sec  += timeout/1000;
+   ts.tv_nsec += (timeout%1000)*1000*1000;
+   if (ts.tv_nsec > 1000000000) {
+      ts.tv_sec++;
+      ts.tv_nsec -= 1000000000;
+   }
+
+   while (1) {
+      ret = sem_timedwait( sem, &ts );
+      if (ret == 0) {
+         return VCOS_SUCCESS;
+      } else {
+         if (errno == EINTR) {
+            continue;
+         } else if (errno == ETIMEDOUT) {
+            return VCOS_EAGAIN;
+         } else {
+            vcos_assert(0);
+            return VCOS_EINVAL;
+         }
+      }
    }
 }
 
