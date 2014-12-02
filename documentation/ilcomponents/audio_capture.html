@@ -94,7 +94,7 @@ transmit its next packet with no data but with the EOS flag set.
  <tr valign="top"><td><tt>OMX_IndexParamAudioPortFormat</tt>
 <td> Query / set the audio port format used on this port.  The port
   supports PCM only.
- <tr valign="top"><td rowspan="2">181<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="2">182<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port parameter to support connecting to a clock
   component output port.
  <tr valign="top"><td><tt>OMX_IndexParamOtherPortFormat</tt>
@@ -103,6 +103,10 @@ transmit its next packet with no data but with the EOS flag set.
  <tr valign="top"><td rowspan="1">&nbsp;<td><tt>OMX_IndexConfigCapturing</tt>
 <td> Query / set whether we are actively capturing audio data, subject to
   the restrictions given about when connected to a clock component.
+ <p>N.B. Port 181 is used for audio events. It is defined as an audio
+  port (so that MMAL does not misclassify it as a clock port)
+  although it is really just a generic data port used to send
+  data of type AUDIOPLUS_EVENT_T.
  </table>
 
 </table>

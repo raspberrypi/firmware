@@ -184,6 +184,7 @@ portSettingsChanged(OPENMAX_JPEG_DECODER * decoder)
 					     portdef.nBufferSize);
     if (ret != OMX_ErrorNone) {
 	perror("Eror allocating buffer");
+	fprintf(stderr, "OMX_AllocateBuffer returned 0x%x allocating buffer size 0x%x\n", ret, portdef.nBufferSize);
 	return OMXJPEG_ERROR_MEMORY;
     }
 
@@ -491,7 +492,7 @@ decodeImage(OPENMAX_JPEG_DECODER * decoder, char *sourceImage,
 	}
 	// wait for buffer to empty or port changed event
 	int             done = 0;
-	while ((done == 0) || (decoder->pOutputBufferHeader == NULL)) {
+	while ((done == 0) && (decoder->pOutputBufferHeader == NULL)) {
 	    if (decoder->pOutputBufferHeader == NULL) {
 		ret =
 		    ilclient_wait_for_event
@@ -500,7 +501,9 @@ decodeImage(OPENMAX_JPEG_DECODER * decoder, char *sourceImage,
 		     decoder->imageDecoder->outPort, 0, 0, 1, 0, 5);
 
 		if (ret == 0) {
-		    portSettingsChanged(decoder);
+		    ret = portSettingsChanged(decoder);
+		    if (ret != OMXJPEG_OK)
+			return ret;
 		}
 	    } else {
 		ret =
@@ -523,10 +526,7 @@ decodeImage(OPENMAX_JPEG_DECODER * decoder, char *sourceImage,
 	}
 
 	// fill the buffer if we have created the buffer
-	if (bFilled == 0) {
-	    if ((decoder->pOutputBufferHeader == NULL)) {
-		portSettingsChanged(decoder);
-	    }
+	if ((bFilled == 0) && (decoder->pOutputBufferHeader != NULL)) {
 	    ret = OMX_FillThisBuffer(decoder->imageResizer->handle,
 				     decoder->pOutputBufferHeader);
 	    if (ret != OMX_ErrorNone) {

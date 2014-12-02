@@ -28,6 +28,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MMAL_COMPONENT_PRIVATE_H
 #define MMAL_COMPONENT_PRIVATE_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define MMAL_VIDEO_DECODE  "video_decode"
 #define MMAL_VIDEO_ENCODE  "video_encode"
 #define MMAL_VIDEO_RENDER  "video_render"
@@ -157,5 +161,9 @@ MMAL_STATUS_T mmal_component_create_with_constructor(const char *name,
   */
 void mmal_component_supplier_register(const char *prefix,
                                       MMAL_COMPONENT_SUPPLIER_FUNCTION_T create_fn);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MMAL_COMPONENT_PRIVATE_H */

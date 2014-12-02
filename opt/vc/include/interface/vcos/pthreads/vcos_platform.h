@@ -120,9 +120,6 @@ typedef struct
 
 #define VCOS_ONCE_INIT        PTHREAD_ONCE_INIT
 
-#if defined(__arm__) && !defined(_HAVE_TIMER_T) && !defined(ANDROID)
-typedef __timer_t timer_t;
-#endif
 typedef struct VCOS_TIMER_T
 {
    pthread_t thread;                      /**< id of the timer thread */

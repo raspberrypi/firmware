@@ -107,6 +107,7 @@ uint32_t mmalil_omx_video_level_to_mmal(OMX_U32 level, OMX_VIDEO_CODINGTYPE codi
 OMX_U32 mmalil_video_level_to_omx(uint32_t level);
 MMAL_VIDEO_RATECONTROL_T mmalil_omx_video_ratecontrol_to_mmal(OMX_VIDEO_CONTROLRATETYPE omx);
 OMX_VIDEO_CONTROLRATETYPE mmalil_video_ratecontrol_to_omx(MMAL_VIDEO_RATECONTROL_T mmal);
+MMAL_VIDEO_INTRA_REFRESH_T mmalil_omx_video_intrarefresh_to_mmal(OMX_VIDEO_INTRAREFRESHTYPE omx);
 
 /** Union of all the OMX_VIDEO/AUDIO_PARAM types */
 typedef union OMX_FORMAT_PARAM_TYPE {
@@ -146,6 +147,12 @@ typedef union OMX_FORMAT_PARAM_TYPE {
    OMX_AUDIO_PARAM_EVRCTYPE evrc;
    OMX_AUDIO_PARAM_SMVTYPE smv;
    OMX_AUDIO_PARAM_MIDITYPE midi;
+#ifdef OMX_AUDIO_CodingDDP_Supported
+   OMX_AUDIO_PARAM_DDPTYPE ddp;
+#endif
+#ifdef OMX_AUDIO_CodingDTS_Supported
+   OMX_AUDIO_PARAM_DTSTYPE dts;
+#endif
 
 } OMX_FORMAT_PARAM_TYPE;
 
@@ -157,6 +164,22 @@ typedef union OMX_FORMAT_PARAM_TYPE {
  * @return OMX index or 0 if no match was found.
  */
 OMX_INDEXTYPE mmalil_omx_audio_param_index(OMX_AUDIO_CODINGTYPE coding, OMX_U32 *size);
+
+/** Get the audio coding corresponding to a specified OMX_IndexParamAudio index.
+ *
+ * @param index Audio coding type.
+ *
+ * @return Audio coding type.
+ */
+OMX_AUDIO_CODINGTYPE mmalil_omx_audio_param_index_to_coding(OMX_INDEXTYPE index);
+
+/** Setup a default channel mapping based on the number of channels
+ * @param channel_mapping The output channel mapping
+ * @param nchannels Number of channels
+ *
+ * @return MMAL_SUCCESS if we managed to produce a channel mapping
+ */
+MMAL_STATUS_T mmalil_omx_default_channel_mapping(OMX_AUDIO_CHANNELTYPE *channel_mapping, unsigned int nchannels);
 
 /** Convert an OMX_IndexParamAudio into a MMAL elementary stream format.
  *

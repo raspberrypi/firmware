@@ -75,6 +75,14 @@ YUV_UV input is currently handled only when using proprietary communication.
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the <tt>pNativeWindow</tt>.
   Other parameters must be unchanged.
+ <tr valign="top"><td rowspan="1">220<td><tt><a href="prop.html#OMX_IndexParamBrcmVideoEGLRenderDiscardMode">OMX_IndexParamBrcmVideoEGLRenderDiscardMode</a></tt>
+<td> Boolean parameter to enable/disable EGL discard mode. With discard mode enabled
+  (default), EGL render will only buffer up to one image. If a new image is
+  received while an image is waiting to be processed, the old image will be
+  dropped. With discard mode disabled, 32 VC images (used in tunnelled mode) can
+  be buffered. Once the buffer is full, the upstream component is notified and
+  should attempt to send the image again later. Non-discard mode only applies to
+  the tunnelled case (it does not apply when called internally).
  </table>
 
 </table>

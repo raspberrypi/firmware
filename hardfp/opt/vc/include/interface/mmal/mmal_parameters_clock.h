@@ -28,6 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MMAL_PARAMETERS_CLOCK_H
 #define MMAL_PARAMETERS_CLOCK_H
 
+#include "mmal_clock.h"
 #include "mmal_parameters_common.h"
 
 /*************************************************
@@ -44,10 +45,12 @@ enum
    MMAL_PARAMETER_CLOCK_ACTIVE,             /**< Takes a MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_CLOCK_SCALE,              /**< Takes a MMAL_PARAMETER_RATIONAL_T */
    MMAL_PARAMETER_CLOCK_TIME,               /**< Takes a MMAL_PARAMETER_INT64_T */
-   MMAL_PARAMETER_CLOCK_TIME_OFFSET,        /**< Takes a MMAL_PARAMETER_INT64_T */
    MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD,   /**< Takes a MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T */
    MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD,  /**< Takes a MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T */
-   MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD,   /**< Takes a MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T */
+   MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD,  /**< Takes a MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T */
+   MMAL_PARAMETER_CLOCK_ENABLE_BUFFER_INFO, /**< Takes a MMAL_PARAMETER_BOOLEAN_T */
+   MMAL_PARAMETER_CLOCK_FRAME_RATE,         /**< Takes a MMAL_PARAMETER_RATIONAL_T */
+   MMAL_PARAMETER_CLOCK_LATENCY,            /**< Takes a MMAL_PARAMETER_CLOCK_LATENCY_T */
 };
 
 /** Media-time update thresholds */
@@ -55,11 +58,7 @@ typedef struct MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T
 {
    MMAL_PARAMETER_HEADER_T hdr;
 
-   /** Time differences below this threshold are ignored (microseconds) */
-   int64_t threshold_lower;
-
-   /** Time differences above this threshold reset media time (microseconds) */
-   int64_t threshold_upper;
+   MMAL_CLOCK_UPDATE_THRESHOLD_T value;
 } MMAL_PARAMETER_CLOCK_UPDATE_THRESHOLD_T;
 
 /** Media-time discontinuity settings */
@@ -67,12 +66,7 @@ typedef struct MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T
 {
    MMAL_PARAMETER_HEADER_T hdr;
 
-   /** Threshold after which backward jumps in media-time are treated as a
-    * discontinuity (microseconds) */
-   int64_t threshold;
-
-   /** Duration in microseconds for which a discontinuity applies (wall-time) */
-   int64_t duration;
+   MMAL_CLOCK_DISCONT_THRESHOLD_T value;
 } MMAL_PARAMETER_CLOCK_DISCONT_THRESHOLD_T;
 
 /** Media-time future frame drop settings */
@@ -80,11 +74,15 @@ typedef struct MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T
 {
    MMAL_PARAMETER_HEADER_T hdr;
 
-   /** Threshold after which frames exceeding the media-time are dropped (microseconds) */
-   int64_t threshold;
-
-   /** Request threshold enable */
-   MMAL_BOOL_T threshold_enable;
+   MMAL_CLOCK_REQUEST_THRESHOLD_T value;
 } MMAL_PARAMETER_CLOCK_REQUEST_THRESHOLD_T;
+
+/** Clock latency parameter */
+typedef struct MMAL_PARAMETER_CLOCK_LATENCY_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_CLOCK_LATENCY_T value;
+} MMAL_PARAMETER_CLOCK_LATENCY_T;
 
 #endif /* MMAL_PARAMETERS_CLOCK_H */

@@ -96,6 +96,8 @@ enum {
    MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER,            /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_ENCODE_SEI_ENABLE,               /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
    MMAL_PARAMETER_VIDEO_ENCODE_INLINE_VECTORS,           /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T. */
+   MMAL_PARAMETER_VIDEO_RENDER_STATS,           /**< Take a @ref MMAL_PARAMETER_VIDEO_RENDER_STATS_T. */
+   MMAL_PARAMETER_VIDEO_INTERLACE_TYPE,           /**< Take a @ref MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T. */
 };
 
 /** Display transformations.
@@ -120,6 +122,11 @@ typedef enum MMAL_DISPLAYTRANSFORM_T {
 typedef enum MMAL_DISPLAYMODE_T {
    MMAL_DISPLAY_MODE_FILL = 0,
    MMAL_DISPLAY_MODE_LETTERBOX = 1,
+   // these allow a left eye source->dest to be specified and the right eye mapping will be inferred by symmetry
+   MMAL_DISPLAY_MODE_STEREO_LEFT_TO_LEFT = 2,
+   MMAL_DISPLAY_MODE_STEREO_TOP_TO_TOP = 3,
+   MMAL_DISPLAY_MODE_STEREO_LEFT_TO_TOP = 4,
+   MMAL_DISPLAY_MODE_STEREO_TOP_TO_LEFT = 5,
    MMAL_DISPLAY_MODE_DUMMY = 0x7FFFFFFF
 } MMAL_DISPLAYMODE_T;
 
@@ -438,5 +445,42 @@ typedef struct MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T {
    void *   phys_addr;       /**< Output. Physical memory address of protected buffer */
 
 } MMAL_PARAMETER_VIDEO_DRM_PROTECT_BUFFER_T;
+
+typedef struct MMAL_PARAMETER_VIDEO_RENDER_STATS_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T valid;
+   uint32_t match;
+   uint32_t period;
+   uint32_t phase;
+   uint32_t pixel_clock_nominal;
+   uint32_t pixel_clock;
+   uint32_t hvs_status;
+   uint32_t dummy[2];
+} MMAL_PARAMETER_VIDEO_RENDER_STATS_T;
+
+typedef enum MMAL_INTERLACETYPE_T {
+   MMAL_InterlaceProgressive,                    /**< The data is not interlaced, it is progressive scan */
+   MMAL_InterlaceFieldSingleUpperFirst,          /**< The data is interlaced, fields sent
+                                                     separately in temporal order, with upper field first */
+   MMAL_InterlaceFieldSingleLowerFirst,          /**< The data is interlaced, fields sent
+                                                     separately in temporal order, with lower field first */
+   MMAL_InterlaceFieldsInterleavedUpperFirst,    /**< The data is interlaced, two fields sent together line
+                                                     interleaved, with the upper field temporally earlier */
+   MMAL_InterlaceFieldsInterleavedLowerFirst,    /**< The data is interlaced, two fields sent together line
+                                                     interleaved, with the lower field temporally earlier */
+   MMAL_InterlaceMixed,                          /**< The stream may contain a mixture of progressive
+                                                     and interlaced frames */
+   MMAL_InterlaceKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
+   MMAL_InterlaceVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
+   MMAL_InterlaceMax = 0x7FFFFFFF
+} MMAL_INTERLACETYPE_T;
+
+typedef struct MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_INTERLACETYPE_T eMode;       /**< The interlace type of the content */
+   MMAL_BOOL_T bRepeatFirstField;    /**< Whether to repeat the first field */
+} MMAL_PARAMETER_VIDEO_INTERLACE_TYPE_T;
 
 #endif

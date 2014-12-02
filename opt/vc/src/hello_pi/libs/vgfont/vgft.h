@@ -65,4 +65,6 @@ void vgft_font_draw(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, u
 
 void vgft_get_text_extents(VGFT_FONT_T *font, const char *text, unsigned text_length, VGfloat start_x, VGfloat start_y, VGfloat *w, VGfloat *h);
 
+VGfloat vgft_first_line_y_offset(VGFT_FONT_T *font);
+
 #endif
