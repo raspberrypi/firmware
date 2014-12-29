@@ -1,9 +1,9 @@
-BCM2835 "GPU_FFT" release 2.0 BETA by Andrew Holme, 2014.
+BCM2835 "GPU_FFT" release 2.0 by Andrew Holme, 2014.
 
 GPU_FFT is an FFT library for the Raspberry Pi which exploits the BCM2835 SoC
 3D hardware to deliver ten times more data throughput than is possible on the
 700 MHz ARM.  Kernels are provided for all power-of-2 FFT lengths between 256
-and 1,048,576 points inclusive.  A transpose function, which also uses the 3D
+and 2,097,152 points inclusive.  A transpose function, which also uses the 3D
 hardware, is provided to support 2-dimensional transforms.
 
 
@@ -16,8 +16,8 @@ is not scaled.  The relative root-mean-square (rms) error in parts-per-million
 log2(N) |  8    | 9    | 10   |  11   |  12  |  13  |  14  |  15  |  16 |  17
 ppm rms |  0.27 | 0.42 | 0.50 |  0.70 |  2.3 |  4.4 |  7.6 |  9.2 |  18 |  70
 
-log2(N) |  18 |  19 |  20 |                 8...17 batch of 10
-ppm rms | 100 | 180 | 360 |                18...20 batch of  1
+log2(N) |  18 |  19 |  20 |  21 |                8...17 batch of 10
+ppm rms | 100 | 180 | 360 | 720 |               18...21 batch of  1
 
 
 *** Throughput ***
@@ -36,9 +36,9 @@ log2(N) |   8   |   9   |  10   |  11   |  12  |  13  |  14  |  15  |
      10 | 0.016 | 0.027 | 0.045 | 0.095 | 0.25 | 0.61 |  1.2 |  3.2 |
    FFTW | 0.092 | 0.22  | 0.48  | 0.95  | 3.0  | 5.1  | 12   | 31   |
 
-log2(N) |  16  |  17 |  18 |  19 |   20 |           All times in
-      1 |  6.8 |  16 |  42 |  95 |  190 |           milliseconds
-   FFTW | 83   | 180 | 560 | 670 | 1600 |           2 sig. figs.
+log2(N) |  16  |  17 |  18 |  19 |   20 |   21 |       All times in
+      1 |  6.8 |  16 |  42 |  95 |  190 |  380 |       milliseconds
+   FFTW | 83   | 180 | 560 | 670 | 1600 | 3400 |       2 sig. figs.
 
 
 *** API functions ***
@@ -57,7 +57,7 @@ log2(N) |  16  |  17 |  18 |  19 |   20 |           All times in
 
     int mb          Mailbox file descriptor obtained by calling mbox_open()
 
-    int log2_N      log2(FFT length) = 8 to 20
+    int log2_N      log2(FFT length) = 8 to 21
 
     int direction   FFT direction:  GPU_FFT_FWD for forward FFT
                                     GPU_FFT_REV for inverse FFT

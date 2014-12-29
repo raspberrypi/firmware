@@ -10,7 +10,8 @@ S = hex/shader_256.hex \
     hex/shader_128k.hex \
     hex/shader_256k.hex \
     hex/shader_512k.hex \
-    hex/shader_1024k.hex
+    hex/shader_1024k.hex \
+    hex/shader_2048k.hex
 
 C = mailbox.c gpu_fft.c gpu_fft_base.c gpu_fft_twiddles.c gpu_fft_shaders.c
 

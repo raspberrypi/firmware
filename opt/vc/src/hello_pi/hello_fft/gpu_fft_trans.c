@@ -1,5 +1,5 @@
 /*
-BCM2835 "GPU_FFT" release 2.0 BETA
+BCM2835 "GPU_FFT" release 2.0
 Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
@@ -87,7 +87,7 @@ int gpu_fft_trans_prepare(
 }
 
 unsigned gpu_fft_trans_execute(struct GPU_FFT_TRANS *info) {
-    gpu_fft_base_exec(&info->base, 1);
+    return gpu_fft_base_exec(&info->base, 1);
 }
 
 void gpu_fft_trans_release(struct GPU_FFT_TRANS *info) {

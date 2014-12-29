@@ -1,5 +1,5 @@
 /*
-BCM2835 "GPU_FFT" release 2.0 BETA
+BCM2835 "GPU_FFT" release 2.0
 Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
@@ -243,6 +243,19 @@ static void twiddles_1024k(double two_pi, float *out) {
         out = twiddles_base_32(two_pi, out, two_pi/N*q);
 }
 
+static void twiddles_2048k(double two_pi, float *out) {
+    double N=2048*1024;
+    int q;
+
+    out = twiddles_base_64(two_pi, out);
+    out = twiddles_step_32(two_pi, out, two_pi/N * 32*32);
+    out = twiddles_step_32(two_pi, out, two_pi/N * 32);
+    out = twiddles_step_32(two_pi, out, two_pi/N * GPU_FFT_QPUS);
+
+    for (q=0; q<GPU_FFT_QPUS; q++)
+        out = twiddles_base_32(two_pi, out, two_pi/N*q);
+}
+
 /****************************************************************************/
 
 static struct {
@@ -262,11 +275,12 @@ shaders[] = {
     {4, 5, 1, twiddles_128k},
     {4, 6, 2, twiddles_256k},
     {4, 7, 2, twiddles_512k},
-    {4, 8, 2, twiddles_1024k}
+    {4, 8, 2, twiddles_1024k},
+    {4,10, 2, twiddles_2048k}
 };
 
 int gpu_fft_twiddle_size(int log2_N, int *shared, int *unique, int *passes) {
-    if (log2_N<8 || log2_N>20) return -1;
+    if (log2_N<8 || log2_N>21) return -1;
     *shared = shaders[log2_N-8].shared;
     *unique = shaders[log2_N-8].unique;
     *passes = shaders[log2_N-8].passes;
