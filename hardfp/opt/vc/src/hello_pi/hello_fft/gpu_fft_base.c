@@ -1,5 +1,5 @@
 /*
-BCM2835 "GPU_FFT" release 2.0 BETA
+BCM2835 "GPU_FFT" release 2.0
 Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPU_FFT_MEM_MAP 0x0 // cached=0x0; direct=0x20000000
 
 #define GPU_FFT_NO_FLUSH 1
-#define GPU_FFT_TIMEOUT 1000 // ms
+#define GPU_FFT_TIMEOUT 2000 // ms
 
 unsigned gpu_fft_base_exec_direct (
     struct GPU_FFT_BASE *base,
@@ -82,6 +82,7 @@ unsigned gpu_fft_base_exec(
 
     if (base->vc_msg) {
         // Use mailbox
+        // Returns: 0x0 for success; 0x80000000 for timeout
         return execute_qpu(base->mb, num_qpus, base->vc_msg, GPU_FFT_NO_FLUSH, GPU_FFT_TIMEOUT);
     }
     else {

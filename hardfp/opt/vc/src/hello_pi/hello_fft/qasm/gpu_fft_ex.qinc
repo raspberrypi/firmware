@@ -1,4 +1,4 @@
-# BCM2835 "GPU_FFT" release 2.0 BETA
+# BCM2835 "GPU_FFT" release 2.0
 #
 # Copyright (c) 2014, Andrew Holme.
 # All rights reserved.

@@ -1,5 +1,5 @@
 /*
-BCM2835 "GPU_FFT" release 2.0 BETA
+BCM2835 "GPU_FFT" release 2.0
 Copyright (c) 2014, Andrew Holme.
 All rights reserved.
 
@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
     // Write bitmap info
     memset(&bih, 0, sizeof(bih));
     bih.biSize = sizeof(bih);
-    bih.biWidth = N-1;
-    bih.biHeight = N-1;
+    bih.biWidth = N;
+    bih.biHeight = N;
     bih.biPlanes = 1;
     bih.biBitCount = 24;
     bih.biCompression = BI_RGB;

@@ -28,20 +28,58 @@
 ##############################################################################
 # Macro baseline
 
-.include "gpu_fft.qinc"
+.include "gpu_fft_ex.qinc"
 
 ##############################################################################
 # Redefining some macros
 
-.if STAGES>16
+.macro body_ra_save_64
+    mov -, vw_wait
+
+    .rep i, 7
+        mov -, srel(i+1) # Master releases slaves
+    .endr
+
+    write_vpm_64
+
+    .rep i, 7
+        mov -, sacq(i+9) # Master waits for slaves
+    .endr
+
+    mov r0, vdw_setup_0(1, 16, dma_h32(0,0))
+    mov r1, 0x40
+    add ra_save_ptr, ra_save_ptr, r1; mov r1, ra_save_ptr
+    mov r2, vdw_setup_0(1, 16, dma_h32(1,0)) - vdw_setup_0(1, 16, dma_h32(0,0))
+    mov r3, PASS64_STRIDE
+
+    .rep i, 64
+        add r0, r0, r2; mov vw_setup, r0
+        add r1, r1, r3; mov vw_addr,  r1
+    .endr
+
+    bra -, ra_link_1
+    nop
+    nop
+    nop
+.endm
+
+.macro bit_rev, shift, mask
+    mov r2, mask
+    and r1, r0, r2
+    shr r0, r0, shift
+    and r0, r0, r2
+    shl r1, r1, shift
+    or  r0, r0, r1
+.endm
+
 .macro read_rev, stride
     add ra_load_idx, ra_load_idx, stride; mov r0, ra_load_idx
 
-    bit_rev 1,       rx_0x55555555  # 16 SIMD
-    bit_rev 2,       rx_0x33333333
-    bit_rev 4,       rx_0x0F0F0F0F
-    bit_rev 8,       rx_0x00FF00FF
-    bit_rev rb_0x10, rx_0x0000FFFF
+    bit_rev 1,       0x55555555  # 16 SIMD
+    bit_rev 2,       0x33333333
+    bit_rev 4,       0x0F0F0F0F
+    bit_rev 8,       0x00FF00FF
+    bit_rev rb_0x10, 0x0000FFFF
 
     shr r0, r0, 32-STAGES-3 # r0 = re = {idx[0:STAGES-1], 1'b0, 2'b0}
     add r1, r0, 4           # r1 = im = {idx[0:STAGES-1], 1'b1, 2'b0}
@@ -51,62 +89,3 @@
     add t0s, ra_addr_x, r0
     add t0s, ra_addr_x, r1
 .endm
-.endif
-
-.if STAGES>17
-.macro body_ra_save_16, arg_vpm, arg_vdw
-    write_vpm_16 arg_vpm
-
-    mov -, vw_wait
-
-    .rep i, 7
-        mov -, sacq(i+9) # Master waits for slave
-        mov -, srel(i+1) # Master releases slave
-    .endr
-
-    mov r0, arg_vdw
-    add ra_save_ptr, ra_save_ptr, rb_0x40; mov r1, ra_save_ptr
-
-    mov r2, vdw_setup_0(1, 16, dma_h32(1,0)) - vdw_setup_0(1, 16, dma_h32(0,0))
-    mov r3, PASS16_STRIDE
-
-    .rep i, 16
-        add r0, r0, r2; mov vw_setup, r0
-        add r1, r1, r3; mov vw_addr,  r1
-    .endr
-
-    bra -, ra_link_1
-    nop
-    nop
-    nop
-.endm
-.endif
-
-.if STAGES>18
-.macro body_ra_save_32
-    write_vpm_32
-
-    mov -, vw_wait
-
-    .rep i, 7
-        mov -, sacq(i+9) # Master waits for slave
-        mov -, srel(i+1) # Master releases slave
-    .endr
-
-    mov r0, ra_vdw_32
-    add ra_save_ptr, ra_save_ptr, rb_0x40; mov r1, ra_save_ptr
-
-    mov r2, vdw_setup_0(1, 16, dma_h32(1,0)) - vdw_setup_0(1, 16, dma_h32(0,0))
-    mov r3, PASS32_STRIDE
-
-    .rep i, 32
-        add r0, r0, r2; mov vw_setup, r0
-        add r1, r1, r3; mov vw_addr,  r1
-    .endr
-
-    bra -, ra_link_1
-    nop
-    nop
-    nop
-.endm
-.endif
