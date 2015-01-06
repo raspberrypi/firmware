@@ -136,14 +136,11 @@ kernel/drivers/net/hamradio/hdlcdrv.ko: kernel/lib/crc-ccitt.ko kernel/net/ax25/
 kernel/drivers/net/hamradio/baycom_ser_hdx.ko: kernel/drivers/net/hamradio/hdlcdrv.ko kernel/lib/crc-ccitt.ko kernel/net/ax25/ax25.ko
 kernel/drivers/net/wireless/at76c50x-usb.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/hostap/hostap.ko: kernel/net/wireless/lib80211.ko
-kernel/drivers/net/wireless/b43/b43.ko: kernel/drivers/leds/led-class.ko kernel/drivers/ssb/ssb.ko kernel/drivers/bcma/bcma.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/b43legacy/b43legacy.ko: kernel/drivers/leds/led-class.ko kernel/drivers/ssb/ssb.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/b43/b43.ko: kernel/drivers/ssb/ssb.ko kernel/drivers/bcma/bcma.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/b43legacy/b43legacy.ko: kernel/drivers/ssb/ssb.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/zd1211rw/zd1211rw.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rtl818x/rtl8187/rtl8187.ko: kernel/drivers/misc/eeprom/eeprom_93cx6.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rtlwifi/rtl_usb.ko: kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko: kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rtlwifi/rtl8192cu/rtl8192cu.ko: kernel/drivers/net/wireless/rtlwifi/rtl_usb.ko kernel/drivers/net/wireless/rtlwifi/rtl8192c/rtl8192c-common.ko kernel/drivers/net/wireless/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rtl818x/rtl8187/rtl8187.ko: kernel/drivers/misc/eeprom/eeprom_93cx6.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rtl8192cu/8192cu.ko:
 kernel/drivers/net/wireless/rndis_wlan.ko: kernel/drivers/net/usb/rndis_host.ko kernel/drivers/net/usb/cdc_ether.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/zd1201.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/libertas/libertas.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
@@ -151,19 +148,19 @@ kernel/drivers/net/wireless/libertas/usb8xxx.ko: kernel/drivers/net/wireless/lib
 kernel/drivers/net/wireless/libertas/libertas_sdio.ko: kernel/drivers/net/wireless/libertas/libertas.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/libertas_tf/libertas_tf.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/libertas_tf/libertas_tf_usb.ko: kernel/drivers/net/wireless/libertas_tf/libertas_tf.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko: kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt2800lib.ko: kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt2500usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt73usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/rt2x00/rt2800usb.ko: kernel/drivers/net/wireless/rt2x00/rt2800lib.ko kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/p54/p54common.ko: kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/p54/p54usb.ko: kernel/drivers/net/wireless/p54/p54common.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/ath/ath9k/ath9k.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt2800lib.ko: kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt2500usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt73usb.ko: kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/rt2x00/rt2800usb.ko: kernel/drivers/net/wireless/rt2x00/rt2800lib.ko kernel/drivers/net/wireless/rt2x00/rt2x00usb.ko kernel/drivers/net/wireless/rt2x00/rt2x00lib.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/p54/p54common.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/p54/p54usb.ko: kernel/drivers/net/wireless/p54/p54common.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/lib/crc-ccitt.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/ath/ath9k/ath9k.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko: kernel/drivers/net/wireless/ath/ath.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/ath/ath9k/ath9k_htc.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/ath/carl9170/carl9170.ko: kernel/drivers/net/wireless/ath/ath.ko kernel/drivers/leds/led-class.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/ath/ath9k/ath9k_htc.ko: kernel/drivers/net/wireless/ath/ath9k/ath9k_common.ko kernel/drivers/net/wireless/ath/ath9k/ath9k_hw.ko kernel/drivers/net/wireless/ath/ath.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/net/wireless/ath/carl9170/carl9170.ko: kernel/drivers/net/wireless/ath/ath.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/ath/ath6kl/ath6kl_core.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/ath/ath6kl/ath6kl_usb.ko: kernel/drivers/net/wireless/ath/ath6kl/ath6kl_core.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/ath/ar5523/ar5523.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
@@ -540,12 +537,12 @@ kernel/drivers/media/rc/ir-xmp-decoder.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/ati_remote.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/imon.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/mceusb.ko: kernel/drivers/media/rc/rc-core.ko
-kernel/drivers/media/rc/redrat3.ko: kernel/drivers/media/rc/rc-core.ko kernel/drivers/leds/led-class.ko
+kernel/drivers/media/rc/redrat3.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/streamzap.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/rc-loopback.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/gpio-ir-recv.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/iguanair.ko: kernel/drivers/media/rc/rc-core.ko
-kernel/drivers/media/rc/ttusbir.ko: kernel/drivers/media/rc/rc-core.ko kernel/drivers/leds/led-class.ko
+kernel/drivers/media/rc/ttusbir.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/common/b2c2/b2c2-flexcop.ko: kernel/drivers/media/dvb-frontends/s5h1420.ko kernel/drivers/media/dvb-frontends/cx24113.ko kernel/drivers/media/dvb-frontends/cx24123.ko kernel/drivers/media/dvb-core/dvb-core.ko
 kernel/drivers/media/common/siano/smsmdtv.ko: kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/common/siano/smsdvb.ko: kernel/drivers/media/common/siano/smsmdtv.ko kernel/drivers/media/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
@@ -761,8 +758,8 @@ kernel/drivers/media/v4l2-core/videobuf2-vmalloc.ko: kernel/drivers/media/v4l2-c
 kernel/drivers/media/dvb-core/dvb-core.ko:
 kernel/drivers/media/radio/si470x/radio-usb-si470x.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/si470x/radio-i2c-si470x.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
-kernel/drivers/media/radio/radio-shark.ko: kernel/drivers/media/radio/tea575x.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/leds/led-class.ko
-kernel/drivers/media/radio/shark2.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko kernel/drivers/leds/led-class.ko
+kernel/drivers/media/radio/radio-shark.ko: kernel/drivers/media/radio/tea575x.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
+kernel/drivers/media/radio/shark2.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/dsbr100.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/radio-mr800.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
 kernel/drivers/media/radio/radio-keene.ko: kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko
@@ -797,8 +794,6 @@ kernel/drivers/mmc/host/mmc_spi.ko: kernel/lib/crc7.ko kernel/drivers/mmc/host/o
 kernel/drivers/mmc/host/of_mmc_spi.ko:
 kernel/drivers/leds/trigger/ledtrig-transient.ko:
 kernel/drivers/leds/trigger/ledtrig-camera.ko:
-kernel/drivers/leds/led-class.ko:
-kernel/drivers/leds/leds-gpio.ko: kernel/drivers/leds/led-class.ko
 kernel/drivers/hid/hid-a4tech.ko:
 kernel/drivers/hid/hid-axff.ko:
 kernel/drivers/hid/hid-apple.ko:
@@ -842,11 +837,11 @@ kernel/drivers/hid/hid-roccat-ryos.ko: kernel/drivers/hid/hid-roccat.ko kernel/d
 kernel/drivers/hid/hid-roccat-savu.ko: kernel/drivers/hid/hid-roccat.ko kernel/drivers/hid/hid-roccat-common.ko
 kernel/drivers/hid/hid-samsung.ko:
 kernel/drivers/hid/hid-sjoy.ko:
-kernel/drivers/hid/hid-sony.ko: kernel/drivers/leds/led-class.ko
+kernel/drivers/hid/hid-sony.ko:
 kernel/drivers/hid/hid-speedlink.ko:
 kernel/drivers/hid/hid-sunplus.ko:
 kernel/drivers/hid/hid-gaff.ko:
-kernel/drivers/hid/hid-thingm.ko: kernel/drivers/leds/led-class.ko
+kernel/drivers/hid/hid-thingm.ko:
 kernel/drivers/hid/hid-tmff.ko:
 kernel/drivers/hid/hid-topseed.ko:
 kernel/drivers/hid/hid-twinhan.ko:
@@ -856,7 +851,7 @@ kernel/drivers/hid/hid-zpff.ko:
 kernel/drivers/hid/hid-zydacron.ko:
 kernel/drivers/hid/wacom.ko:
 kernel/drivers/hid/hid-waltop.ko:
-kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/input/ff-memless.ko kernel/drivers/leds/led-class.ko
+kernel/drivers/hid/hid-wiimote.ko: kernel/drivers/input/ff-memless.ko
 kernel/drivers/of/of_mdio.ko: kernel/drivers/net/phy/libphy.ko
 kernel/drivers/staging/media/lirc/lirc_igorplugusb.ko: kernel/drivers/media/rc/lirc_dev.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/staging/media/lirc/lirc_imon.ko: kernel/drivers/media/rc/lirc_dev.ko kernel/drivers/media/rc/rc-core.ko
