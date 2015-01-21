@@ -79,7 +79,7 @@ Params:
                               Set to "on" to invert the sense of the LED
         act_led_gpio (default "16" on a non-Plus board, "47" on a Plus)
                               Set which GPIO pin to use for the activity LED
-                              (in case you wan't to connect it to an external
+                              (in case you want to connect it to an external
                               device).
 
   and also:
@@ -155,4 +155,7 @@ Params: gpiopin (default "4")         GPIO pin for I/O
 Further reading
 ===============
 
-https://github.com/raspberrypi/documentation/blob/master/configuration/device-tree.md
+This is only meant to be a quick introduction to the subject of Device Tree on
+Raspberry Pi. There is a more complete explanation here:
+
+http://www.raspberrypi.org/documentation/configuration/device-tree.md
