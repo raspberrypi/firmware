@@ -27,7 +27,8 @@ are disabled, but they can be enabled using Device Tree parameters:
 
 However, this shouldn't be necessary in many use cases because loading an
 overlay that requires one of those interfaces will cause it to be enabled
-automatically.
+automatically, and it is advisable to only enable interfaces if they are
+needed.
 
 Configuring additional, optional hardware is done using Device Tree overlays
 (see below).
@@ -69,6 +70,7 @@ File:   <The base DTB>
 Info:   Describes the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
+        i2c0 (default "off")  Set to "on" to enable the i2c0 interface
         i2c1 (default "off")  Set to "on" to enable the i2c1 interface
         i2s (default "off")   Set to "on" to enable the i2s interface
         spi (default "off")   Set to "on" to enable the spi interfaces
@@ -82,13 +84,9 @@ Params:
                               (in case you want to connect it to an external
                               device).
 
-  and also:
-
-        i2c0 (default "off")  Set to "on" to enable the i2c0 interface, but
-                              don't do this unless you know what you are doing.
-                              In particular it can interfere with the detection
-                              and operation of the Pi Camera.
-
+        N.B. It is recommended to only enable those interfaces that are needed.
+        Leaving all interfaces enabled can lead to unwanted behaviour (I2C
+        interfering with Pi Camera, I2S and SPI hogging GPIO pins, etc.)
 
 File:   hifiberry-dac-overlay.dtb
 Info:   Describes the HifiBerry DAC audio card
