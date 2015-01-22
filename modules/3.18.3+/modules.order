@@ -877,6 +877,9 @@ kernel/drivers/input/serio/serio_raw.ko
 kernel/drivers/input/gameport/gameport.ko
 kernel/drivers/input/gameport/lightning.ko
 kernel/drivers/input/gameport/ns558.ko
+kernel/drivers/pps/clients/pps-ldisc.ko
+kernel/drivers/pps/clients/pps-gpio.ko
+kernel/drivers/pps/pps_core.ko
 kernel/drivers/w1/masters/ds2490.ko
 kernel/drivers/w1/masters/ds2482.ko
 kernel/drivers/w1/masters/ds1wm.ko
@@ -1043,6 +1046,7 @@ kernel/net/netfilter/xt_tcpudp.ko
 kernel/net/netfilter/xt_mark.ko
 kernel/net/netfilter/xt_connmark.ko
 kernel/net/netfilter/xt_set.ko
+kernel/net/netfilter/xt_nat.ko
 kernel/net/netfilter/xt_AUDIT.ko
 kernel/net/netfilter/xt_CHECKSUM.ko
 kernel/net/netfilter/xt_CLASSIFY.ko
@@ -1052,9 +1056,11 @@ kernel/net/netfilter/xt_HL.ko
 kernel/net/netfilter/xt_HMARK.ko
 kernel/net/netfilter/xt_LED.ko
 kernel/net/netfilter/xt_LOG.ko
+kernel/net/netfilter/xt_NETMAP.ko
 kernel/net/netfilter/xt_NFLOG.ko
 kernel/net/netfilter/xt_NFQUEUE.ko
 kernel/net/netfilter/xt_RATEEST.ko
+kernel/net/netfilter/xt_REDIRECT.ko
 kernel/net/netfilter/xt_TPROXY.ko
 kernel/net/netfilter/xt_TCPMSS.ko
 kernel/net/netfilter/xt_TCPOPTSTRIP.ko
@@ -1136,13 +1142,16 @@ kernel/net/ipv4/netfilter/nf_reject_ipv4.ko
 kernel/net/ipv4/netfilter/nf_nat_h323.ko
 kernel/net/ipv4/netfilter/nf_nat_pptp.ko
 kernel/net/ipv4/netfilter/nf_nat_snmp_basic.ko
+kernel/net/ipv4/netfilter/nf_nat_masquerade_ipv4.ko
 kernel/net/ipv4/netfilter/nf_nat_proto_gre.ko
 kernel/net/ipv4/netfilter/ip_tables.ko
 kernel/net/ipv4/netfilter/iptable_filter.ko
 kernel/net/ipv4/netfilter/iptable_mangle.ko
+kernel/net/ipv4/netfilter/iptable_nat.ko
 kernel/net/ipv4/netfilter/iptable_raw.ko
 kernel/net/ipv4/netfilter/ipt_ah.ko
 kernel/net/ipv4/netfilter/ipt_ECN.ko
+kernel/net/ipv4/netfilter/ipt_MASQUERADE.ko
 kernel/net/ipv4/netfilter/ipt_REJECT.ko
 kernel/net/ipv4/netfilter/arp_tables.ko
 kernel/net/ipv4/netfilter/arpt_mangle.ko
@@ -1168,8 +1177,10 @@ kernel/net/ipv6/netfilter/ip6_tables.ko
 kernel/net/ipv6/netfilter/ip6table_filter.ko
 kernel/net/ipv6/netfilter/ip6table_mangle.ko
 kernel/net/ipv6/netfilter/ip6table_raw.ko
+kernel/net/ipv6/netfilter/ip6table_nat.ko
 kernel/net/ipv6/netfilter/nf_conntrack_ipv6.ko
 kernel/net/ipv6/netfilter/nf_nat_ipv6.ko
+kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko
 kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko
 kernel/net/ipv6/netfilter/nf_log_ipv6.ko
 kernel/net/ipv6/netfilter/nf_reject_ipv6.ko
@@ -1180,6 +1191,8 @@ kernel/net/ipv6/netfilter/ip6t_ipv6header.ko
 kernel/net/ipv6/netfilter/ip6t_mh.ko
 kernel/net/ipv6/netfilter/ip6t_hbh.ko
 kernel/net/ipv6/netfilter/ip6t_rt.ko
+kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko
+kernel/net/ipv6/netfilter/ip6t_NPT.ko
 kernel/net/ipv6/netfilter/ip6t_REJECT.ko
 kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/ah6.ko

@@ -7061,6 +7061,8 @@ alias of:N*T*C* uio_pdrv_genirq
 alias tty-ldisc-2 serport
 alias serio:ty06pr*id*ex* serio_raw
 alias serio:ty01pr*id*ex* serio_raw
+alias tty-ldisc-18 pps_ldisc
+alias of:N*T*Cpps-gpio* pps_gpio
 alias usb:v04FAp2490d*dc*dsc*dp*ic*isc*ip*in* ds2490
 alias of:N*T*Cw1-gpio* w1_gpio
 alias w1-family-0x42 w1_therm
@@ -7517,6 +7519,10 @@ alias ipt_SET xt_set
 alias ip6t_set xt_set
 alias ipt_set xt_set
 alias xt_SET xt_set
+alias ip6t_DNAT xt_nat
+alias ip6t_SNAT xt_nat
+alias ipt_DNAT xt_nat
+alias ipt_SNAT xt_nat
 alias arpt_AUDIT xt_AUDIT
 alias ebt_AUDIT xt_AUDIT
 alias ip6t_AUDIT xt_AUDIT
@@ -7542,6 +7548,8 @@ alias ip6t_LED xt_LED
 alias ipt_LED xt_LED
 alias ip6t_LOG xt_LOG
 alias ipt_LOG xt_LOG
+alias ipt_NETMAP xt_NETMAP
+alias ip6t_NETMAP xt_NETMAP
 alias ip6t_NFLOG xt_NFLOG
 alias ipt_NFLOG xt_NFLOG
 alias arpt_NFQUEUE xt_NFQUEUE
@@ -7549,6 +7557,8 @@ alias ip6t_NFQUEUE xt_NFQUEUE
 alias ipt_NFQUEUE xt_NFQUEUE
 alias ip6t_RATEEST xt_RATEEST
 alias ipt_RATEEST xt_RATEEST
+alias ipt_REDIRECT xt_REDIRECT
+alias ip6t_REDIRECT xt_REDIRECT
 alias ip6t_TPROXY xt_TPROXY
 alias ipt_TPROXY xt_TPROXY
 alias ip6t_TCPMSS xt_TCPMSS
@@ -7686,6 +7696,8 @@ alias nf_conntrack-10 nf_conntrack_ipv6
 alias nf-nat-10 nf_nat_ipv6
 alias nf-logger-10-0 nf_log_ipv6
 alias ip6t_dst ip6t_hbh
+alias ip6t_DNPT ip6t_NPT
+alias ip6t_SNPT ip6t_NPT
 alias net-pf-10 ipv6
 alias xfrm-type-10-51 ah6
 alias xfrm-type-10-50 esp6

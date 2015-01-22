@@ -187,6 +187,7 @@ alias symbol:snd_soc_dpcm_be_get_state snd_soc_core
 alias symbol:snd_soc_add_codec_controls snd_soc_core
 alias symbol:snd_soc_unregister_platform snd_soc_core
 alias symbol:stp_proto_unregister stp
+alias symbol:pps_lookup_dev pps_core
 alias symbol:v4l2_src_change_event_subscribe videodev
 alias symbol:i2c_bit_algo i2c_algo_bit
 alias symbol:ir_raw_handler_unregister rc_core
@@ -212,6 +213,7 @@ alias symbol:ax25_send_frame ax25
 alias symbol:adxl34x_remove adxl34x
 alias symbol:atm_dev_signal_change atm
 alias symbol:md_integrity_register md_mod
+alias symbol:nf_nat_masquerade_ipv4_register_notifier nf_nat_masquerade_ipv4
 alias symbol:dm_table_get_mode dm_mod
 alias symbol:snd_soc_jack_report snd_soc_core
 alias symbol:sonet_copy_stats atm
@@ -284,6 +286,7 @@ alias symbol:genphy_soft_reset libphy
 alias symbol:ieee80211_csa_is_complete mac80211
 alias symbol:iscsi_conn_bind libiscsi
 alias symbol:mwifiex_write_data_complete mwifiex
+alias symbol:nf_nat_masquerade_ipv6_unregister_notifier nf_nat_masquerade_ipv6
 alias symbol:rt2x00usb_probe rt2x00usb
 alias symbol:bcma_core_disable bcma
 alias symbol:adxl34x_resume adxl34x
@@ -784,6 +787,7 @@ alias symbol:sms_board_load_modules smsmdtv
 alias symbol:rfkill_pause_polling rfkill
 alias symbol:nf_conntrack_in nf_conntrack
 alias symbol:cfg80211_inform_bss_width_frame cfg80211
+alias symbol:nf_nat_masquerade_ipv4_unregister_notifier nf_nat_masquerade_ipv4
 alias symbol:ssb_clockspeed ssb
 alias symbol:ocfs2_dlm_lock_status ocfs2_stackglue
 alias symbol:roccat_common2_receive hid_roccat_common
@@ -1044,6 +1048,7 @@ alias symbol:md_rdev_clear md_mod
 alias symbol:snd_card_file_add snd
 alias symbol:ath9k_hw_set_txpowerlimit ath9k_hw
 alias symbol:iscsi_host_free libiscsi
+alias symbol:pps_unregister_source pps_core
 alias symbol:roccat_common2_sysfs_read hid_roccat_common
 alias symbol:dm_unregister_target dm_mod
 alias symbol:ocfs2_cluster_connect_agnostic ocfs2_stackglue
@@ -1289,6 +1294,8 @@ alias symbol:ip6_frag_match ipv6
 alias symbol:ip_tunnel_lookup ip_tunnel
 alias symbol:md_flush_request md_mod
 alias symbol:videobuf_dqbuf videobuf_core
+alias symbol:nf_nat_masquerade_ipv6 nf_nat_masquerade_ipv6
+alias symbol:nf_nat_masquerade_ipv6_register_notifier nf_nat_masquerade_ipv6
 alias symbol:usb_serial_generic_close usbserial
 alias symbol:__ieee80211_create_tpt_led_trigger mac80211
 alias symbol:ieee80211_radiotap_iterator_next cfg80211
@@ -2233,6 +2240,7 @@ alias symbol:hostap_info_process hostap
 alias symbol:snd_soc_put_strobe snd_soc_core
 alias symbol:nf_nat_need_gre nf_nat_proto_gre
 alias symbol:xt_register_target x_tables
+alias symbol:nf_nat_masquerade_ipv4 nf_nat_masquerade_ipv4
 alias symbol:bcma_core_pll_ctl bcma
 alias symbol:v4l2_device_unregister_subdev videodev
 alias symbol:ath9k_hw_phy_disable ath9k_hw
@@ -2264,6 +2272,7 @@ alias symbol:cx22702_attach cx22702
 alias symbol:adxl34x_suspend adxl34x
 alias symbol:ath9k_hw_enable_interrupts ath9k_hw
 alias symbol:l2cap_conn_get bluetooth
+alias symbol:pps_event pps_core
 alias symbol:nf_ct_alloc_hashtable nf_conntrack
 alias symbol:bitmap_start_sync md_mod
 alias symbol:rc_unregister_device rc_core
@@ -3006,6 +3015,7 @@ alias symbol:snd_pcm_stream_unlock_irq snd_pcm
 alias symbol:br_netfilter_enable br_netfilter
 alias symbol:ircomm_connect_request ircomm
 alias symbol:snd_seq_kernel_client_ctl snd_seq
+alias symbol:pps_register_source pps_core
 alias symbol:crypto_authenc_extractkeys authenc
 alias symbol:ip_tunnel_newlink ip_tunnel
 alias symbol:iscsi_tcp_hdr_recv_prep libiscsi_tcp
