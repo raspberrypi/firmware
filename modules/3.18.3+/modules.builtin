@@ -32,8 +32,6 @@ kernel/crypto/eseqiv.ko
 kernel/crypto/crypto_hash.ko
 kernel/crypto/pcompress.ko
 kernel/crypto/cryptomgr.ko
-kernel/crypto/md5.ko
-kernel/crypto/sha1_generic.ko
 kernel/crypto/cbc.ko
 kernel/crypto/des_generic.ko
 kernel/crypto/aes_generic.ko
