@@ -88,6 +88,11 @@ Params:
         Leaving all interfaces enabled can lead to unwanted behaviour (I2C
         interfering with Pi Camera, I2S and SPI hogging GPIO pins, etc.)
 
+File:   hifiberry-amp-overlay.dtb
+Info:   Describes the HifiBerry Amp and Amp+ audio cards
+Load:   dtoverlay=hifiberry-amp
+Params: <None>
+
 File:   hifiberry-dac-overlay.dtb
 Info:   Describes the HifiBerry DAC audio card
 Load:   dtoverlay=hifiberry-dac
@@ -112,7 +117,7 @@ Load:   dtoverlay=iqaudio-dac
 Params: <None>
 
 
-File:   hifiberry-dacplus-overlay.dtb
+File:   iqaudio-dacplus-overlay.dtb
 Info:   Describes the IQaudio DAC+ audio card
 Load:   dtoverlay=iqaudio-dacplus
 Params: <None>
@@ -135,6 +140,12 @@ Params: gpio_out_pin (default "17")   GPIO pin for output
         debug (default "off")         "on" = enable additional debug messages.
 
 
+File:   pps-gpio-overlay.dtb
+Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
+Load:   dtoverlay=pps-gpio,<param>=<val>
+Params: gpiopin (default "18")        GPIO input pin
+
+
 File:   w1-gpio-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *don't* need a pin to drive an external pullup.
@@ -149,6 +160,20 @@ Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
 Params: gpiopin (default "4")         GPIO pin for I/O
         pullup  (default "5")         GPIO pin for external pullup
 
+
+Troubleshooting
+===============
+
+If you are experiencing problems that you think are DT-related, enable DT
+diagnostic output by adding this to /boot/config.txt:
+
+    dtdebug=on
+
+and rebooting. Then run:
+
+    sudo vcdbg log msg
+
+and look for relevant messages.
 
 Further reading
 ===============
