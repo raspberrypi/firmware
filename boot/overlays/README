@@ -140,6 +140,12 @@ Params: gpio_out_pin (default "17")   GPIO pin for output
         debug (default "off")         "on" = enable additional debug messages.
 
 
+File:   pfc8523-rtc-overlay.dtb
+Info:   Configures the pfc8523 Real Time Clock
+Load:   dtoverlay=pfc8523-rtc
+Params: <none>
+
+
 File:   pps-gpio-overlay.dtb
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
