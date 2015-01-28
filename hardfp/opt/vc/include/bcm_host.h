@@ -43,6 +43,10 @@ int32_t graphics_get_display_size( const uint16_t display_number,
                                                     uint32_t *width,
                                                     uint32_t *height);
 
+unsigned bcm_host_get_peripheral_address(void);
+unsigned bcm_host_get_peripheral_size(void);
+unsigned bcm_host_get_sdram_address(void);
+
 #include "interface/vmcs_host/vc_dispmanx.h"
 #include "interface/vmcs_host/vc_tvservice.h"
 #include "interface/vmcs_host/vc_cec.h"

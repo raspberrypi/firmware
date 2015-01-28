@@ -21,7 +21,7 @@ C2D = $(C) hello_fft_2d.c gpu_fft_trans.c
 H1D = gpu_fft.h
 H2D = gpu_fft.h gpu_fft_trans.h hello_fft_2d_bitmap.h
 
-F = -lrt -lm
+F = -lrt -lm -L../lib -L/opt/vc/lib/ -lbcm_host -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
 
 hello_fft.bin:	$(S) $(C1D) $(H1D)
 	gcc -o hello_fft.bin $(F) $(C1D)
