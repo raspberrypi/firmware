@@ -23,7 +23,7 @@ siblings) selects the .dtb file appropriate for the platform by name, and reads
 it into memory. At this point, all of the optional interfaces (i2c, i2s, spi)
 are disabled, but they can be enabled using Device Tree parameters:
 
-    dtparam=i2c1=on,i2s=on,spi=on
+    dtparam=i2c=on,i2s=on,spi=on
 
 However, this shouldn't be necessary in many use cases because loading an
 overlay that requires one of those interfaces will cause it to be enabled
@@ -32,6 +32,14 @@ needed.
 
 Configuring additional, optional hardware is done using Device Tree overlays
 (see below).
+
+raspi-config
+============
+
+The Advanced Options section of the raspi-config utility can enable and disable
+Device Tree use, as well as toggling the I2C and SPI interfaces. Note that it
+is possible to both enable an interface and blacklist the driver, if for some
+reason you should want to defer the loading.
 
 Modules
 =======
@@ -70,23 +78,29 @@ File:   <The base DTB>
 Info:   Describes the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
-        i2c0 (default "off")  Set to "on" to enable the i2c0 interface
-        i2c1 (default "off")  Set to "on" to enable the i2c1 interface
-        i2s (default "off")   Set to "on" to enable the i2s interface
-        spi (default "off")   Set to "on" to enable the spi interfaces
+        i2c_arm (default "off")  Set to "on" to enable the ARM's i2c interface
+        i2c_vc (default "off")   Set to "on" to enable the i2c interface
+                                 usually reserved for the VideoCore processor
+        i2c                      An alias for i2c_arm
+        i2s (default "off")      Set to "on" to enable the i2s interface
+        spi (default "off")      Set to "on" to enable the spi interfaces
         act_led_trigger (default "mmc")
-                              Choose which activity the LED tracks.
-                              Use "heartbeat" for a nice load indicator.
+                                 Choose which activity the LED tracks.
+                                 Use "heartbeat" for a nice load indicator.
         act_led_activelow (default "off")
-                              Set to "on" to invert the sense of the LED
+                                 Set to "on" to invert the sense of the LED
         act_led_gpio (default "16" on a non-Plus board, "47" on a Plus)
-                              Set which GPIO pin to use for the activity LED
-                              (in case you want to connect it to an external
-                              device).
+                                 Set which GPIO pin to use for the activity LED
+                                 (in case you want to connect it to an external
+                                 device).
 
         N.B. It is recommended to only enable those interfaces that are needed.
-        Leaving all interfaces enabled can lead to unwanted behaviour (I2C
+        Leaving all interfaces enabled can lead to unwanted behaviour (i2c_vc
         interfering with Pi Camera, I2S and SPI hogging GPIO pins, etc.)
+        Note also that i2c_arm and i2c_vc are aliases for the physical
+        interfaces i2c0 and i2c1. Use of the numeric variants is still possible
+        but deprecated because the ARM/VC assignments differ between board
+        revisions.
 
 File:   hifiberry-amp-overlay.dtb
 Info:   Describes the HifiBerry Amp and Amp+ audio cards
@@ -155,6 +169,7 @@ Params: gpiopin (default "18")        GPIO input pin
 File:   w1-gpio-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *don't* need a pin to drive an external pullup.
+        N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio,<param>=<val>
 Params: gpiopin (default "4")         GPIO pin for I/O
 
@@ -162,6 +177,7 @@ Params: gpiopin (default "4")         GPIO pin for I/O
 File:   w1-gpio-pullup-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *do* need a pin to drive an external pullup.
+        N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
 Params: gpiopin (default "4")         GPIO pin for I/O
         pullup  (default "5")         GPIO pin for external pullup
