@@ -5081,6 +5081,7 @@ alias i2c:ds1339 rtc_ds1307
 alias i2c:ds1338 rtc_ds1307
 alias i2c:ds1337 rtc_ds1307
 alias i2c:ds1307 rtc_ds1307
+alias of:N*T*Cmaxim,ds1307* rtc_ds1307
 alias i2c:ds1374 rtc_ds1374
 alias spi:rtc-ds1390 rtc_ds1390
 alias i2c:ds3232 rtc_ds3232
@@ -5635,6 +5636,7 @@ alias usb:v0BDAp2832d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v14AAp0161d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v14AAp0160d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v0BDAp2831d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
+alias usb:v0572p6831d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_dvbsky
 alias usb:v2013p0257d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias usb:v3275p0080d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias usb:v19D2p0078d*dc*dsc*dp*ic*isc*ip*in* smsusb
