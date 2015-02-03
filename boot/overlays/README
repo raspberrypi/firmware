@@ -78,34 +78,63 @@ File:   <The base DTB>
 Info:   Describes the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
-        i2c_arm (default "off")  Set to "on" to enable the ARM's i2c interface
-        i2c_vc (default "off")   Set to "on" to enable the i2c interface
+        i2c_arm                  Set to "on" to enable the ARM's i2c interface
+                                 (default "off")
+
+        i2c_vc                   Set to "on" to enable the i2c interface
                                  usually reserved for the VideoCore processor
+                                 (default "off")
+
         i2c                      An alias for i2c_arm
-        i2s (default "off")      Set to "on" to enable the i2s interface
-        spi (default "off")      Set to "on" to enable the spi interfaces
-        act_led_trigger (default "mmc")
-                                 Choose which activity the LED tracks.
+
+        i2c_arm_baudrate         Set the baudrate of the ARM's i2c interface
+                                 (default "100000")
+
+        i2c_vc_baudrate          Set the baudrate of the VideoCore i2c interface
+                                 (default "100000")
+
+        i2c_baudrate             An alias for i2c_arm_baudrate
+
+        i2s                      Set to "on" to enable the i2s interface
+                                 (default "off")
+
+        spi                      Set to "on" to enable the spi interfaces
+                                 (default "off")
+
+        act_led_trigger          Choose which activity the LED tracks.
                                  Use "heartbeat" for a nice load indicator.
-        act_led_activelow (default "off")
-                                 Set to "on" to invert the sense of the LED
-        act_led_gpio (default "16" on a non-Plus board, "47" on a Plus)
-                                 Set which GPIO pin to use for the activity LED
+                                 (default "mmc")
+
+        act_led_activelow        Set to "on" to invert the sense of the LED
+                                 (default "off")
+
+        act_led_gpio             Set which GPIO pin to use for the activity LED
                                  (in case you want to connect it to an external
-                                 device).
+                                 device)
+                                 (default "16" on a non-Plus board, "47" on a
+                                 Plus or Pi 2)
 
         N.B. It is recommended to only enable those interfaces that are needed.
         Leaving all interfaces enabled can lead to unwanted behaviour (i2c_vc
         interfering with Pi Camera, I2S and SPI hogging GPIO pins, etc.)
-        Note also that i2c_arm and i2c_vc are aliases for the physical
+        Note also that i2c, i2c_arm and i2c_vc are aliases for the physical
         interfaces i2c0 and i2c1. Use of the numeric variants is still possible
         but deprecated because the ARM/VC assignments differ between board
-        revisions.
+        revisions. The same board-specific mapping applies to i2c_baudrate,
+        and the other i2c baudrate parameters.
+
+
+File:   ds1307-rtc-overlay.dtb
+Info:   Configures the DS1307 Real Time Clock
+Load:   dtoverlay=ds1307-rtc
+Params: <none>
+
 
 File:   hifiberry-amp-overlay.dtb
 Info:   Describes the HifiBerry Amp and Amp+ audio cards
 Load:   dtoverlay=hifiberry-amp
 Params: <None>
+
 
 File:   hifiberry-dac-overlay.dtb
 Info:   Describes the HifiBerry DAC audio card
@@ -141,29 +170,38 @@ File:   lirc-rpi-overlay.dtb
 Info:   Configures lirc-rpi (Linux Infrared Remote Control for Raspberry Pi)
         Consult the module documentation for more details.
 Load:   dtoverlay=lirc-rpi,<param>=<val>,...
-Params: gpio_out_pin (default "17")   GPIO pin for output
-        gpio_in_pin (default "18")    GPIO pin for input
-        gpio_in_pull (default "down") Pull up/down/off on the input pin
-        sense (defaults to "-1")      Override the IR receive auto-detection
-                                      logic:
-                                      "1" = force active high
-                                      "0" = force active low
-                                      "-1" = use auto-detection
-        softcarrier (default "on")    Turn the software carrier "on" or "off".
-        invert (default "off")        "on" = invert the output pin.
-        debug (default "off")         "on" = enable additional debug messages.
+Params: gpio_out_pin             GPIO pin for output (default "17")
+
+        gpio_in_pin              GPIO pin for input (default "18")
+
+        gpio_in_pull             Pull up/down/off on the input pin
+                                 (default "down")
+
+        sense                    Override the IR receive auto-detection logic:
+                                   "1" = force active high
+                                   "0" = force active low
+                                   "-1" = use auto-detection
+                                 (default "-1")
+
+        softcarrier              Turn the software carrier "on" or "off"
+                                 (default "on")
+
+        invert                   "on" = invert the output pin (default "off")
+
+        debug                    "on" = enable additional debug messages
+                                 (default "off")
 
 
-File:   pfc8523-rtc-overlay.dtb
-Info:   Configures the pfc8523 Real Time Clock
-Load:   dtoverlay=pfc8523-rtc
+File:   pcf8523-rtc-overlay.dtb
+Info:   Configures the PCF8523 Real Time Clock
+Load:   dtoverlay=pcf8523-rtc
 Params: <none>
 
 
 File:   pps-gpio-overlay.dtb
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
-Params: gpiopin (default "18")        GPIO input pin
+Params: gpiopin                  GPIO input pin (default "18")
 
 
 File:   w1-gpio-overlay.dtb
@@ -171,7 +209,7 @@ Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *don't* need a pin to drive an external pullup.
         N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio,<param>=<val>
-Params: gpiopin (default "4")         GPIO pin for I/O
+Params: gpiopin                  GPIO pin for I/O (default "4")
 
 
 File:   w1-gpio-pullup-overlay.dtb
@@ -179,8 +217,9 @@ Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *do* need a pin to drive an external pullup.
         N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
-Params: gpiopin (default "4")         GPIO pin for I/O
-        pullup  (default "5")         GPIO pin for external pullup
+Params: gpiopin                  GPIO pin for I/O (default "4")
+
+        pullup                   GPIO pin for external pullup (default "5")
 
 
 Troubleshooting
