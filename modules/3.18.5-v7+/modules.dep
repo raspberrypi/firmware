@@ -330,6 +330,9 @@ kernel/drivers/usb/atm/speedtch.ko: kernel/drivers/usb/atm/usbatm.ko kernel/net/
 kernel/drivers/usb/atm/ueagle-atm.ko: kernel/drivers/usb/atm/usbatm.ko kernel/net/atm/atm.ko
 kernel/drivers/usb/atm/usbatm.ko: kernel/net/atm/atm.ko
 kernel/drivers/usb/atm/xusbatm.ko: kernel/drivers/usb/atm/usbatm.ko kernel/net/atm/atm.ko
+kernel/drivers/usb/usbip/usbip-core.ko:
+kernel/drivers/usb/usbip/vhci-hcd.ko: kernel/drivers/usb/usbip/usbip-core.ko
+kernel/drivers/usb/usbip/usbip-host.ko: kernel/drivers/usb/usbip/usbip-core.ko
 kernel/drivers/input/joystick/iforce/iforce.ko:
 kernel/drivers/input/joystick/xpad.ko: kernel/drivers/input/ff-memless.ko
 kernel/drivers/input/touchscreen/ads7846.ko:
@@ -609,6 +612,7 @@ kernel/drivers/media/usb/dvb-usb-v2/dvb-usb-mxl111sf.ko: kernel/drivers/media/co
 kernel/drivers/media/usb/dvb-usb-v2/mxl111sf-demod.ko:
 kernel/drivers/media/usb/dvb-usb-v2/mxl111sf-tuner.ko:
 kernel/drivers/media/usb/dvb-usb-v2/dvb-usb-rtl28xxu.ko: kernel/drivers/media/dvb-frontends/rtl2830.ko kernel/drivers/media/dvb-frontends/rtl2832.ko kernel/drivers/i2c/i2c-mux.ko kernel/drivers/media/usb/dvb-usb-v2/dvb_usb_v2.ko kernel/drivers/media/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
+kernel/drivers/media/usb/dvb-usb-v2/dvb-usb-dvbsky.ko: kernel/drivers/media/usb/dvb-usb-v2/dvb_usb_v2.ko kernel/drivers/media/dvb-core/dvb-core.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/usb/siano/smsusb.ko: kernel/drivers/media/common/siano/smsmdtv.ko kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/usb/b2c2/b2c2-flexcop-usb.ko: kernel/drivers/media/common/b2c2/b2c2-flexcop.ko kernel/drivers/media/dvb-frontends/s5h1420.ko kernel/drivers/media/dvb-frontends/cx24113.ko kernel/drivers/media/dvb-frontends/cx24123.ko kernel/drivers/media/dvb-core/dvb-core.ko
 kernel/drivers/media/usb/zr364xx/zr364xx.ko: kernel/drivers/media/v4l2-core/videobuf-vmalloc.ko kernel/drivers/media/v4l2-core/videobuf-core.ko kernel/drivers/media/v4l2-core/v4l2-common.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/media.ko

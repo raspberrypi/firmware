@@ -326,6 +326,9 @@ kernel/drivers/usb/atm/speedtch.ko
 kernel/drivers/usb/atm/ueagle-atm.ko
 kernel/drivers/usb/atm/usbatm.ko
 kernel/drivers/usb/atm/xusbatm.ko
+kernel/drivers/usb/usbip/usbip-core.ko
+kernel/drivers/usb/usbip/vhci-hcd.ko
+kernel/drivers/usb/usbip/usbip-host.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/input/touchscreen/ads7846.ko

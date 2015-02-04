@@ -5642,6 +5642,7 @@ alias usb:v0BDAp2832d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v14AAp0161d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v14AAp0160d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
 alias usb:v0BDAp2831d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_rtl28xxu
+alias usb:v0572p6831d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_dvbsky
 alias usb:v2013p0257d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias usb:v3275p0080d*dc*dsc*dp*ic*isc*ip*in* smsusb
 alias usb:v19D2p0078d*dc*dsc*dp*ic*isc*ip*in* smsusb
@@ -7572,6 +7573,7 @@ alias of:N*T*Cbrcm,bcm2708-i2s* snd_soc_bcm2708_i2s
 alias of:N*T*Chifiberry,hifiberry-dac* snd_soc_hifiberry_dac
 alias of:N*T*Chifiberry,hifiberry-dacplus* snd_soc_hifiberry_dacplus
 alias of:N*T*Chifiberry,hifiberry-digi* snd_soc_hifiberry_digi
+alias of:N*T*Chifiberry,hifiberry-amp* snd_soc_hifiberry_amp
 alias of:N*T*Ciqaudio,iqaudio-dac* snd_soc_iqaudio_dac
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
