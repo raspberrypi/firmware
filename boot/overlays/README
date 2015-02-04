@@ -207,19 +207,23 @@ Params: gpiopin                  GPIO input pin (default "18")
 File:   w1-gpio-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *don't* need a pin to drive an external pullup.
-        N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio,<param>=<val>
 Params: gpiopin                  GPIO pin for I/O (default "4")
+
+        pullup                   Non-zero, "on", or "y" to enable the parasitic
+                                 power (2-wire, power-on-data) feature
 
 
 File:   w1-gpio-pullup-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *do* need a pin to drive an external pullup.
-        N.B. The parasitic power feature is not yet functional using DT.
 Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
 Params: gpiopin                  GPIO pin for I/O (default "4")
 
-        pullup                   GPIO pin for external pullup (default "5")
+        pullup                   Non-zero, "on", or "y" to enable the parasitic
+                                 power (2-wire, power-on-data) feature
+
+        extpullup                GPIO pin for external pullup (default "5")
 
 
 Troubleshooting
