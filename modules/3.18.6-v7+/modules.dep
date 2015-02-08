@@ -133,6 +133,7 @@ kernel/drivers/scsi/osst.ko:
 kernel/drivers/scsi/sr_mod.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/scsi/sg.ko:
 kernel/drivers/spi/spi-bcm2708.ko:
+kernel/drivers/net/ethernet/microchip/enc28j60.ko:
 kernel/drivers/net/hamradio/mkiss.ko: kernel/net/ax25/ax25.ko
 kernel/drivers/net/hamradio/6pack.ko: kernel/net/ax25/ax25.ko
 kernel/drivers/net/hamradio/yam.ko: kernel/net/ax25/ax25.ko
