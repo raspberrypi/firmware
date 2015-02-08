@@ -684,6 +684,7 @@ kernel/drivers/media/usb/tm6000/tm6000.ko
 kernel/drivers/media/usb/tm6000/tm6000-alsa.ko
 kernel/drivers/media/usb/tm6000/tm6000-dvb.ko
 kernel/drivers/media/usb/em28xx/em28xx.ko
+kernel/drivers/media/usb/em28xx/em28xx-v4l.ko
 kernel/drivers/media/usb/em28xx/em28xx-alsa.ko
 kernel/drivers/media/usb/em28xx/em28xx-dvb.ko
 kernel/drivers/media/usb/em28xx/em28xx-rc.ko
@@ -1197,6 +1198,7 @@ kernel/net/ipv4/netfilter/iptable_mangle.ko
 kernel/net/ipv4/netfilter/iptable_nat.ko
 kernel/net/ipv4/netfilter/iptable_raw.ko
 kernel/net/ipv4/netfilter/ipt_ah.ko
+kernel/net/ipv4/netfilter/ipt_CLUSTERIP.ko
 kernel/net/ipv4/netfilter/ipt_ECN.ko
 kernel/net/ipv4/netfilter/ipt_MASQUERADE.ko
 kernel/net/ipv4/netfilter/ipt_REJECT.ko
