@@ -17,6 +17,7 @@ alias symbol:ath6kl_core_cleanup ath6kl_core
 alias symbol:w1_ds2760_read w1_ds2760
 alias symbol:rt2x00mac_set_tim rt2x00lib
 alias symbol:flexcop_eeprom_check_mac_addr b2c2_flexcop
+alias symbol:lowpan_process_data 6lowpan
 alias symbol:w1_read_block wire
 alias symbol:roccat_disconnect hid_roccat
 alias symbol:ieee80211_stop_rx_ba_session_offl mac80211
@@ -235,6 +236,7 @@ alias symbol:snd_timer_start snd_timer
 alias symbol:cx2341x_handler_init cx2341x
 alias symbol:tda9887_attach tda9887
 alias symbol:iscsi_prep_data_out_pdu libiscsi
+alias symbol:lowpan_header_compress 6lowpan
 alias symbol:md_register_thread md_mod
 alias symbol:snd_soc_cnew snd_soc_core
 alias symbol:xt_unregister_match x_tables

@@ -333,6 +333,7 @@ kernel/drivers/usb/usbip/usbip-host.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/input/touchscreen/ads7846.ko
+kernel/drivers/input/touchscreen/egalax_ts.ko
 kernel/drivers/input/misc/ad714x.ko
 kernel/drivers/input/misc/ad714x-i2c.ko
 kernel/drivers/input/misc/ad714x-spi.ko
@@ -1296,6 +1297,7 @@ kernel/net/bluetooth/bluetooth.ko
 kernel/net/bluetooth/rfcomm/rfcomm.ko
 kernel/net/bluetooth/bnep/bnep.ko
 kernel/net/bluetooth/hidp/hidp.ko
+kernel/net/bluetooth/bluetooth_6lowpan.ko
 kernel/net/atm/atm.ko
 kernel/net/atm/pppoatm.ko
 kernel/net/l2tp/l2tp_core.ko
@@ -1308,6 +1310,7 @@ kernel/net/sctp/sctp.ko
 kernel/net/mac80211/mac80211.ko
 kernel/net/rfkill/rfkill.ko
 kernel/net/9p/9pnet.ko
+kernel/net/6lowpan/6lowpan.ko
 kernel/net/wimax/wimax.ko
 kernel/net/batman-adv/batman-adv.ko
 kernel/net/nfc/nfc.ko

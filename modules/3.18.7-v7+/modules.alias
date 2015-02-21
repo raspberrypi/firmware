@@ -5053,6 +5053,7 @@ alias of:N*T*Cti,ads7846* ads7846
 alias of:N*T*Cti,ads7845* ads7846
 alias of:N*T*Cti,ads7843* ads7846
 alias of:N*T*Cti,tsc2046* ads7846
+alias i2c:egalax_ts egalax_ts
 alias i2c:ad7148_captouch ad714x_i2c
 alias i2c:ad7147a_captouch ad714x_i2c
 alias i2c:ad7147_captouch ad714x_i2c
