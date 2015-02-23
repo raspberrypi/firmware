@@ -114,6 +114,12 @@ Params:
                                  (default "16" on a non-Plus board, "47" on a
                                  Plus or Pi 2)
 
+        pwr_led_trigger
+        pwr_led_activelow
+        pwr_led_gpio
+                                 As for act_led_*, but using the PWR LED.
+                                 Not available on Model A/B boards.
+
         N.B. It is recommended to only enable those interfaces that are needed.
         Leaving all interfaces enabled can lead to unwanted behaviour (i2c_vc
         interfering with Pi Camera, I2S and SPI hogging GPIO pins, etc.)
@@ -124,10 +130,15 @@ Params:
         and the other i2c baudrate parameters.
 
 
+File:   bmp085_i2s-sensor-overlay.dtb
+Info:   Describes the BMP085/BMP180 digital barometric pressure and temperature
+        sensors from Bosch Sensortec
+Load:   dtoverlay=bmp085_i2s-sensor
+Params: <None>
+
+
 File:   ds1307-rtc-overlay.dtb
-Info:   Configures the DS1307 Real Time Clock
-Load:   dtoverlay=ds1307-rtc
-Params: <none>
+Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
 
 
 File:   hifiberry-amp-overlay.dtb
@@ -152,6 +163,18 @@ File:   hifiberry-digi-overlay.dtb
 Info:   Describes the HifiBerry Digi audio card
 Load:   dtoverlay=hifiberry-digi
 Params: <None>
+
+
+File:   i2c-rtc-overlay.dtb
+Info:   Adds support for a number of I2C Real Time Clock devices
+Load:   dtoverlay=i2c-rtc,<param>
+Params: ds1307                   Select the DS1307 device
+
+        ds3231                   Select the DS3231 device
+
+        pcf2127                  Select the PCF2127 device
+
+        pcf8523                  Select the PCF8523 device
 
 
 File:   iqaudio-dac-overlay.dtb
@@ -192,10 +215,12 @@ Params: gpio_out_pin             GPIO pin for output (default "17")
                                  (default "off")
 
 
+File:   pcf2127-rtc-overlay.dtb
+Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
+
+
 File:   pcf8523-rtc-overlay.dtb
-Info:   Configures the PCF8523 Real Time Clock
-Load:   dtoverlay=pcf8523-rtc
-Params: <none>
+Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
 
 
 File:   pps-gpio-overlay.dtb
