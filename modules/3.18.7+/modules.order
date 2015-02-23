@@ -334,6 +334,7 @@ kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/input/touchscreen/ads7846.ko
 kernel/drivers/input/touchscreen/egalax_ts.ko
+kernel/drivers/input/touchscreen/usbtouchscreen.ko
 kernel/drivers/input/misc/ad714x.ko
 kernel/drivers/input/misc/ad714x-i2c.ko
 kernel/drivers/input/misc/ad714x-spi.ko
