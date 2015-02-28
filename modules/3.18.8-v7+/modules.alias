@@ -166,6 +166,7 @@ alias char-major-21-* sg
 alias platform:bcm2708_spi spi_bcm2708
 alias of:N*T*Cbrcm,bcm2708-spi* spi_bcm2708
 alias spi:enc28j60 enc28j60
+alias of:N*T*Cmicrochip,enc28j60* enc28j60
 alias tty-ldisc-5 mkiss
 alias tty-ldisc-7 6pack
 alias usb:v03EBp7615d*dc*dsc*dp*ic*isc*ip*in* at76c50x_usb
