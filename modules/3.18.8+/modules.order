@@ -131,6 +131,7 @@ kernel/drivers/scsi/st.ko
 kernel/drivers/scsi/osst.ko
 kernel/drivers/scsi/sr_mod.ko
 kernel/drivers/scsi/sg.ko
+kernel/drivers/spi/spi-bcm2835.ko
 kernel/drivers/spi/spi-bcm2708.ko
 kernel/drivers/net/ethernet/microchip/enc28j60.ko
 kernel/drivers/net/hamradio/mkiss.ko
@@ -216,6 +217,9 @@ kernel/drivers/net/phy/libphy.ko
 kernel/drivers/net/phy/mdio-bitbang.ko
 kernel/drivers/net/tun.ko
 kernel/drivers/net/veth.ko
+kernel/drivers/net/can/spi/mcp251x.ko
+kernel/drivers/net/can/vcan.ko
+kernel/drivers/net/can/can-dev.ko
 kernel/drivers/net/irda/irda-usb.ko
 kernel/drivers/net/irda/stir4200.ko
 kernel/drivers/net/irda/mcs7780.ko
@@ -1320,6 +1324,10 @@ kernel/net/appletalk/appletalk.ko
 kernel/net/netrom/netrom.ko
 kernel/net/rose/rose.ko
 kernel/net/ax25/ax25.ko
+kernel/net/can/can.ko
+kernel/net/can/can-raw.ko
+kernel/net/can/can-bcm.ko
+kernel/net/can/can-gw.ko
 kernel/net/irda/irda.ko
 kernel/net/irda/irlan/irlan.ko
 kernel/net/irda/irnet/irnet.ko

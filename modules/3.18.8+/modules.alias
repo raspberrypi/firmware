@@ -157,6 +157,7 @@ alias scsi:t-0x04* sr_mod
 alias scsi:t-0x05* sr_mod
 alias block-major-11-* sr_mod
 alias char-major-21-* sg
+alias of:N*T*Cbrcm,bcm2835-spi* spi_bcm2835
 alias platform:bcm2708_spi spi_bcm2708
 alias of:N*T*Cbrcm,bcm2708-spi* spi_bcm2708
 alias spi:enc28j60 enc28j60
@@ -1721,6 +1722,11 @@ alias rtnl-link-macvlan macvlan
 alias devname:net/tun tun
 alias char-major-10-200 tun
 alias rtnl-link-veth veth
+alias of:N*T*Cmicrochip,mcp2515* mcp251x
+alias of:N*T*Cmicrochip,mcp2510* mcp251x
+alias spi:mcp2515 mcp251x
+alias spi:mcp2510 mcp251x
+alias rtnl-link-can can_dev
 alias usb:v*p*d*dc*dsc*dp*icFEisc02ip*in* irda_usb
 alias usb:v066Fp4116d*dc*dsc*dp*ic*isc*ip*in* irda_usb
 alias usb:v066Fp4220d*dc*dsc*dp*ic*isc*ip*in* irda_usb
@@ -7992,6 +7998,10 @@ alias net-pf-5 appletalk
 alias net-pf-6 netrom
 alias net-pf-11 rose
 alias net-pf-3 ax25
+alias net-pf-29 can
+alias can-proto-1 can_raw
+alias can-proto-2 can_bcm
+alias can-gw can_gw
 alias net-pf-23 irda
 alias char-major-10-187 irnet
 alias char-major-161-* ircomm_tty

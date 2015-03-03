@@ -62,6 +62,7 @@ alias symbol:macvlan_dellink macvlan
 alias symbol:iscsi_host_add libiscsi
 alias symbol:phy_get_eee_err libphy
 alias symbol:ath6kl_hif_rw_comp_handler ath6kl_core
+alias symbol:can_send can
 alias symbol:ocfs2_cluster_connect ocfs2_stackglue
 alias symbol:regmap_init_i2c regmap_i2c
 alias symbol:inet6_csk_addr2sockaddr ipv6
@@ -107,6 +108,7 @@ alias symbol:dm_snap_cow dm_snapshot
 alias symbol:spk_serial_in_nowait speakup
 alias symbol:dvb_register_adapter dvb_core
 alias symbol:hashbin_get_first irda
+alias symbol:free_candev can_dev
 alias symbol:phy_ethtool_gset libphy
 alias symbol:rt2x00lib_probe_dev rt2x00lib
 alias symbol:atm_dev_register atm
@@ -517,10 +519,12 @@ alias symbol:nfc_dep_link_is_up nfc
 alias symbol:rt2800_wait_wpdma_ready rt2800lib
 alias symbol:ieee80211_sta_ps_transition mac80211
 alias symbol:irttp_udata_request irda
+alias symbol:can_dlc2len can_dev
 alias symbol:dib3000mc_get_tuner_i2c_master dib3000mc
 alias symbol:dm_table_add_target_callbacks dm_mod
 alias symbol:async_syndrome_val async_pq
 alias symbol:inet6_csk_bind_conflict ipv6
+alias symbol:alloc_candev can_dev
 alias symbol:mmc_spi_get_pdata of_mmc_spi
 alias symbol:set_h245_addr_hook nf_conntrack_h323
 alias symbol:ssb_pmu_spuravoid_pllupdate ssb
@@ -631,6 +635,7 @@ alias symbol:irlap_close irda
 alias symbol:v4l2_ctrl_log_status videodev
 alias symbol:bt_accept_unlink bluetooth
 alias symbol:iscsi_conn_queue_work libiscsi
+alias symbol:alloc_can_skb can_dev
 alias symbol:dvb_usbv2_generic_write_locked dvb_usb_v2
 alias symbol:snd_ctl_remove snd
 alias symbol:dm_underlying_device_busy dm_mod
@@ -762,6 +767,7 @@ alias symbol:snd_soc_dai_set_pll snd_soc_core
 alias symbol:ieee80211_get_buffered_bc mac80211
 alias symbol:snd_soc_dapm_put_pin_switch snd_soc_core
 alias symbol:snd_soc_cache_sync snd_soc_core
+alias symbol:can_proto_unregister can
 alias symbol:irda_unregister_dongle sir_dev
 alias symbol:tveeprom_read tveeprom
 alias symbol:i2400m_tx_msg_get i2400m
@@ -874,6 +880,7 @@ alias symbol:media_entity_create_link media
 alias symbol:snd_rawmidi_transmit_peek snd_rawmidi
 alias symbol:hashbin_lock_find irda
 alias symbol:ipcomp_destroy xfrm_ipcomp
+alias symbol:can_len2dlc can_dev
 alias symbol:snd_soc_bytes_info_ext snd_soc_core
 alias symbol:snd_dma_free_pages snd_pcm
 alias symbol:usb_serial_generic_chars_in_buffer usbserial
@@ -985,6 +992,7 @@ alias symbol:nf_nat_setup_info nf_nat
 alias symbol:p9_client_create 9pnet
 alias symbol:p9_idpool_put 9pnet
 alias symbol:rtl2832_get_private_i2c_adapter rtl2832
+alias symbol:can_rx_register can
 alias symbol:ath_key_delete ath
 alias symbol:i2400m_tx i2400m
 alias symbol:ieee80211_stop_tx_ba_cb_irqsafe mac80211
@@ -1042,6 +1050,7 @@ alias symbol:iscsi_conn_get_addr_param libiscsi
 alias symbol:iscsi_host_alloc libiscsi
 alias symbol:mxl111sf_tuner_attach mxl111sf_tuner
 alias symbol:vb2_expbuf videobuf2_core
+alias symbol:can_free_echo_skb can_dev
 alias symbol:iscsi_host_remove libiscsi
 alias symbol:mwifiex_remove_card mwifiex
 alias symbol:ssb_driver_unregister ssb
@@ -1055,6 +1064,7 @@ alias symbol:serio_unregister_port serio
 alias symbol:br_handle_frame_finish bridge
 alias symbol:snd_soc_debugfs_root snd_soc_core
 alias symbol:br_dev_queue_push_xmit bridge
+alias symbol:close_candev can_dev
 alias symbol:inet6_csk_update_pmtu ipv6
 alias symbol:md_rdev_clear md_mod
 alias symbol:snd_card_file_add snd
@@ -1151,6 +1161,7 @@ alias symbol:phy_ethtool_sset libphy
 alias symbol:xt_request_find_target x_tables
 alias symbol:p9_client_readdir 9pnet
 alias symbol:ocfs2_stack_supports_plocks ocfs2_stackglue
+alias symbol:can_bus_off can_dev
 alias symbol:nf_nat_packet nf_nat
 alias symbol:snd_ac97_mixer snd_ac97_codec
 alias symbol:synth_add speakup
@@ -1169,6 +1180,7 @@ alias symbol:iscsi_suspend_queue libiscsi
 alias symbol:xfrm6_tunnel_alloc_spi xfrm6_tunnel
 alias symbol:ip6_route_lookup ipv6
 alias symbol:of_mdiobus_register of_mdio
+alias symbol:alloc_canfd_skb can_dev
 alias symbol:hostap_master_start_xmit hostap
 alias symbol:ieee80211_free_hw mac80211
 alias symbol:v4l2_ctrl_get_name videodev
@@ -1360,6 +1372,7 @@ alias symbol:ssb_bus_may_powerdown ssb
 alias symbol:ieee80211_stop_tx_ba_session mac80211
 alias symbol:mt2131_attach mt2131
 alias symbol:rc_g_keycode_from_table rc_core
+alias symbol:can_rx_unregister can
 alias symbol:cma3000_suspend cma3000_d0x
 alias symbol:xt_unregister_targets x_tables
 alias symbol:crypto_sha1_update sha1_generic
@@ -1467,6 +1480,7 @@ alias symbol:snd_usbmidi_input_stop snd_usbmidi_lib
 alias symbol:xfrm6_tunnel_spi_lookup xfrm6_tunnel
 alias symbol:v4l2_subdev_try_ext_ctrls videodev
 alias symbol:usb_wwan_port_remove usb_wwan
+alias symbol:can_put_echo_skb can_dev
 alias symbol:nf_ct_helper_expectfn_register nf_conntrack
 alias symbol:__cfg80211_send_event_skb cfg80211
 alias symbol:snd_soc_dapm_mixer_update_power snd_soc_core
@@ -1708,6 +1722,7 @@ alias symbol:dm_bufio_forget dm_bufio
 alias symbol:dm_read_arg_group dm_mod
 alias symbol:dm_set_target_max_io_len dm_mod
 alias symbol:brcmu_pkt_buf_free_skb brcmutil
+alias symbol:can_change_mtu can_dev
 alias symbol:mwifiex_del_virtual_intf mwifiex
 alias symbol:o2nm_get_node_by_num ocfs2_nodemanager
 alias symbol:is_fw_load cx231xx
@@ -1881,6 +1896,7 @@ alias symbol:usbip_event_happened usbip_core
 alias symbol:mt312_attach mt312
 alias symbol:nfc_find_se nfc
 alias symbol:snd_ac97_read snd_ac97_codec
+alias symbol:alloc_can_err_skb can_dev
 alias symbol:snd_pcm_lib_get_vmalloc_page snd_pcm
 alias symbol:hostap_remove_interface hostap
 alias symbol:v4l2_event_pending videodev
@@ -2154,6 +2170,7 @@ alias symbol:iscsi_pool_init libiscsi
 alias symbol:mddev_init md_mod
 alias symbol:btmrvl_process_event btmrvl
 alias symbol:rt2x00usb_watchdog rt2x00usb
+alias symbol:can_ioctl can
 alias symbol:dm_bufio_write_dirty_buffers dm_bufio
 alias symbol:gspca_frame_add gspca_main
 alias symbol:ath_is_world_regd ath
@@ -2299,6 +2316,7 @@ alias symbol:dm_dirty_log_destroy dm_log
 alias symbol:garp_init_applicant garp
 alias symbol:irlmp_register_service irda
 alias symbol:snd_pcm_format_set_silence snd_pcm
+alias symbol:can_proto_register can
 alias symbol:sms_get_board smsmdtv
 alias symbol:vcc_sklist_lock atm
 alias symbol:dapm_regulator_event snd_soc_core
@@ -2426,6 +2444,7 @@ alias symbol:tda829x_attach tda8290
 alias symbol:__udp6_lib_lookup ipv6
 alias symbol:bcma_core_set_clockmode bcma
 alias symbol:ct_sip_parse_header_uri nf_conntrack_sip
+alias symbol:register_candev can_dev
 alias symbol:v4l2_norm_to_name videodev
 alias symbol:tda10048_attach tda10048
 alias symbol:sirdev_raw_read sir_dev
@@ -2647,6 +2666,7 @@ alias symbol:dib0090_pwm_gain_reset dib0090
 alias symbol:genphy_restart_aneg libphy
 alias symbol:ip6_datagram_send_ctl ipv6
 alias symbol:snd_soc_add_component_controls snd_soc_core
+alias symbol:unregister_candev can_dev
 alias symbol:gf128mul_init_4k_bbe gf128mul
 alias symbol:snd_soc_of_parse_daifmt snd_soc_core
 alias symbol:bt_sock_wait_ready bluetooth
@@ -2661,6 +2681,7 @@ alias symbol:snd_soc_dapm_enable_pin_unlocked snd_soc_core
 alias symbol:__ieee80211_get_radio_led_name mac80211
 alias symbol:iscsi_tcp_recv_segment_is_hdr libiscsi_tcp
 alias symbol:rt2800_set_rts_threshold rt2800lib
+alias symbol:safe_candev_priv can_dev
 alias symbol:unregister_md_personality md_mod
 alias symbol:dm_bufio_get_client dm_bufio
 alias symbol:cfg80211_rx_unprot_mlme_mgmt cfg80211
@@ -2705,6 +2726,7 @@ alias symbol:snd_pcm_stream_unlock snd_pcm
 alias symbol:media_entity_setup_link media
 alias symbol:nf_nat_alloc_null_binding nf_nat
 alias symbol:nfnetlink_has_listeners nfnetlink
+alias symbol:can_get_echo_skb can_dev
 alias symbol:bt_sock_poll bluetooth
 alias symbol:nf_conntrack_expect_lock nf_conntrack
 alias symbol:ssb_device_is_enabled ssb
@@ -2716,6 +2738,7 @@ alias symbol:snd_rawmidi_receive snd_rawmidi
 alias symbol:snd_soc_params_to_frame_size snd_soc_core
 alias symbol:snd_pcm_lib_write snd_pcm
 alias symbol:ezusb_fx1_ihex_firmware_download ezusb
+alias symbol:open_candev can_dev
 alias symbol:p9_client_disconnect 9pnet
 alias symbol:lc_seq_printf_stats lru_cache
 alias symbol:snd_compress_new snd_compress
