@@ -956,6 +956,7 @@ kernel/drivers/staging/fbtft/fbtft_device.ko
 kernel/drivers/connector/cn.ko
 kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv_genirq.ko
+kernel/drivers/block/aoe/aoe.ko
 kernel/drivers/input/serio/serio.ko
 kernel/drivers/input/serio/serport.ko
 kernel/drivers/input/serio/serio_raw.ko
