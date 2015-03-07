@@ -1,6 +1,6 @@
-# BCM2835 "GPU_FFT"
+# BCM2835 "GPU_FFT" release 3.0
 #
-# Copyright (c) 2013, Andrew Holme.
+# Copyright (c) 2015, Andrew Holme.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,23 +35,18 @@
 ##############################################################################
 # Load twiddle factors
 
-.macro load_tw, stride, off, num, addr
-    mov r0, addr
+.macro load_tw, ptr, dst, src
+    shl r0, elem_num, 3
+    mov r1, src
+    shl r1, r1, 7
+    add r0, r0, r1
     add r1, r0, 4
-
-    shl r2, elem_num, 3
-
-    .rep i, num
-        add t0s, r0, r2
-        add r0,  r0, stride; ldtmu0
-        mov ra_tw_re+off+i, r4
-    .endr
-
-    .rep i, num
-        add t0s, r1, r2
-        add r1,  r1, stride; ldtmu0
-        mov rb_tw_im+off+i, r4
-    .endr
+    add t0s, ptr, r0
+    add t0s, ptr, r1
+    ldtmu0
+    mov ra_tw_re+dst, r4
+    ldtmu0
+    mov rb_tw_im+dst, r4
 .endm
 
 ##############################################################################
@@ -256,10 +251,10 @@
 ##############################################################################
 
 .macro fft_twiddles_32
-    nop;                  fmul ra_temp, r0, ra_tw_re+TW32_ACTIVE # rr
-    nop;                  fmul r2,      r1, rb_tw_im+TW32_ACTIVE # ii
-    nop;                  fmul r3,      r1, ra_tw_re+TW32_ACTIVE # ir
-    fsub r0, ra_temp, r2; fmul r1,      r0, rb_tw_im+TW32_ACTIVE # ri
+    nop;                  fmul ra_temp, r0, ra_tw_re+TW32 # rr
+    nop;                  fmul r2,      r1, rb_tw_im+TW32 # ii
+    nop;                  fmul r3,      r1, ra_tw_re+TW32 # ir
+    fsub r0, ra_temp, r2; fmul r1,      r0, rb_tw_im+TW32 # ri
     fadd r1, r1,      r3
 .endm
 
@@ -269,10 +264,10 @@
 .macro body_fft_16
 .rep i, 4
     and.setf -, elem_num, (1<<i)
-    nop;                       fmul.ifnz ra_temp, ra_tw_re+TW16_ACTIVE+i, r0
-    nop;                       fmul.ifnz r2,      rb_tw_im+TW16_ACTIVE+i, r1
-    fsub.ifnz r0, ra_temp, r2; fmul.ifnz r3,      rb_tw_im+TW16_ACTIVE+i, r0
-    nop;                       fmul.ifnz r1,      ra_tw_re+TW16_ACTIVE+i, r1
+    nop;                       fmul.ifnz ra_temp, ra_tw_re+TW16+i, r0
+    nop;                       fmul.ifnz r2,      rb_tw_im+TW16+i, r1
+    fsub.ifnz r0, ra_temp, r2; fmul.ifnz r3,      rb_tw_im+TW16+i, r0
+    nop;                       fmul.ifnz r1,      ra_tw_re+TW16+i, r1
     fadd.ifnz r1, r1, r3; mov r2, r0 << (1<<i)
     fadd.ifz  r0, r2, r0; mov r3, r0 >> (1<<i)
 .if i==3
@@ -295,6 +290,9 @@
 .endm
 
 ##############################################################################
+
+.macro swizzle
+.endm
 
 .macro interleave
     and.setf -, elem_num, 1; mov r2, r0
@@ -359,37 +357,55 @@
 # Unpack twiddles
 
 .macro unpack_twiddles
+    mov r2, ra_tw_re+TW16+3; mov r3, rb_tw_im+TW16+3
 .rep i, 4
     and.setf -, elem_num, (8>>i)
-    mov ra_tw_re+TW16_ACTIVE+3-i, r2; mov.ifnz r2, r2 >> (8>>i)
-    mov rb_tw_im+TW16_ACTIVE+3-i, r3; mov.ifnz r3, r3 >> (8>>i)
+    mov ra_tw_re+TW16+3-i, r2; mov.ifnz r2, r2 >> (8>>i)
+    mov rb_tw_im+TW16+3-i, r3; mov.ifnz r3, r3 >> (8>>i)
 .endr
 .endm
 
 ##############################################################################
-# Rotate twiddles
+# float-float enhanced-precision subtract (corrects rounding errors)
 
-.macro next_twiddles_32, tw32
-    mov r2, ra_tw_re+TW32_ACTIVE; mov r3, rb_tw_im+TW32_ACTIVE
-    nop;             fmul r0, r2, ra_tw_re+tw32 # a.cos
-    nop;             fmul r1, r2, rb_tw_im+tw32 # b.cos
-    nop;             fmul r2, r3, rb_tw_im+tw32 # b.sin
-    fadd r2, r0, r2; fmul r3, r3, ra_tw_re+tw32 # a.sin
-    fsub r3, r3, r1
-    fsub ra_tw_re+TW32_ACTIVE, ra_tw_re+TW32_ACTIVE, r2
-    fsub rb_tw_im+TW32_ACTIVE, rb_tw_im+TW32_ACTIVE, r3
+.macro df64_sub32, a, b     # df64_sub32(float2 &a, float b)
+    fsub r0,  a, b              # float2 s = twoSub(a.x, b);
+    fsub r1, r0, a
+    fadd r2, r1, b
+    fsub r1, r0, r1
+    fsub r1,  a, r1
+    fsub r1, r1, r2
+
+    fadd r1, r1, a+1            # s.y += a.y;
+
+    fadd r2, r0, r1             # a = twoSum(s.x, s,y);
+    fsub r2, r2, r0; mov a, r2
+    fsub r1, r1, r2
+    fsub r2,  a, r2
+    fsub r0, r0, r2
+    fadd a+1, r0, r1
 .endm
 
-.macro next_twiddles_16, tw16
-    mov r2, ra_tw_re+TW16_ACTIVE+3; mov r3, rb_tw_im+TW16_ACTIVE+3
-    nop;             fmul r0, r2, ra_tw_re+tw16 # a.cos
-    nop;             fmul r1, r2, rb_tw_im+tw16 # b.cos
-    nop;             fmul r2, r3, rb_tw_im+tw16 # b.sin
-    fadd r2, r0, r2; fmul r3, r3, ra_tw_re+tw16 # a.sin
-    fsub r3, r3, r1
-    fsub r2, ra_tw_re+TW16_ACTIVE+3, r2
-    fsub r3, rb_tw_im+TW16_ACTIVE+3, r3
+##############################################################################
+# Rotate twiddles using enhanced-precision trig recurrence
 
+.macro rotate, base, step
+    mov r2, ra_tw_re+base; mov r3, rb_tw_im+base
+    nop;             fmul r0, r2, ra_tw_re+step # a.cos
+    nop;             fmul r1, r2, rb_tw_im+step # b.cos
+    nop;             fmul r2, r3, rb_tw_im+step # b.sin
+    fadd r2, r0, r2; fmul r3, r3, ra_tw_re+step # a.sin
+    fsub r3, r3, r1
+    df64_sub32 ra_tw_re+base, r2
+    df64_sub32 rb_tw_im+base, r3
+.endm
+
+.macro next_twiddles_32
+    rotate TW32, TW32_STEP
+.endm
+
+.macro next_twiddles_16
+    rotate TW16+3, TW16_STEP
     unpack_twiddles
 .endm
 
@@ -403,12 +419,11 @@
 ##############################################################################
 # Reset counters and twiddles
 
-.macro init_stage_32, tw32
-    mov ra_tw_re+TW32_ACTIVE, ra_tw_re+tw32; mov rb_tw_im+TW32_ACTIVE, rb_tw_im+tw32
-.endm
-
-.macro init_stage_16, tw16, m
-    mov r2, ra_tw_re+tw16; mov r3, rb_tw_im+tw16
+.macro init_stage, m
+    mov ra_tw_re+TW16+4, 0; mov rb_tw_im+TW16+4, 0
+.ifset TW32
+    mov ra_tw_re+TW32+1, 0; mov rb_tw_im+TW32+1, 0
+.endif
     unpack_twiddles
     mov r0, rb_inst
     shl r0, r0, m
@@ -470,15 +485,15 @@
     fadd r1, rb_32_im, r1
     fadd r0, ra_32_re, r0
 
-    nop;                        fmul rb_32_im, r1, ra_tw_re+TW64_P1_BASE0 # ir
-    nop;                        fmul ra_32_re, r1, rb_tw_im+TW64_P1_BASE0 # ii
-    nop;                        fmul r1,       r0, rb_tw_im+TW64_P1_BASE0 # ri
-    fadd rb_64+1, r1, rb_32_im; fmul r0,       r0, ra_tw_re+TW64_P1_BASE0 # rr
-    fsub rb_64+0, r0, ra_32_re; fmul ra_32_re, r3, rb_tw_im+TW64_P1_BASE1 # ii
-    nop;                        fmul rb_32_im, r3, ra_tw_re+TW64_P1_BASE1 # ir
+    nop;                        fmul rb_32_im, r1, ra_tw_re+TW48 # ir
+    nop;                        fmul ra_32_re, r1, rb_tw_im+TW48 # ii
+    nop;                        fmul r1,       r0, rb_tw_im+TW48 # ri
+    fadd rb_64+1, r1, rb_32_im; fmul r0,       r0, ra_tw_re+TW48 # rr
+    fsub rb_64+0, r0, ra_32_re; fmul ra_32_re, r3, rb_tw_im+TW64 # ii
+    nop;                        fmul rb_32_im, r3, ra_tw_re+TW64 # ir
     bra -, ra_save_64
-    nop;                        fmul r3,       r2, rb_tw_im+TW64_P1_BASE1 # ri
-    fadd rb_64+3, r3, rb_32_im; fmul r2,       r2, ra_tw_re+TW64_P1_BASE1 # rr
+    nop;                        fmul r3,       r2, rb_tw_im+TW64 # ri
+    fadd rb_64+3, r3, rb_32_im; fmul r2,       r2, ra_tw_re+TW64 # rr
     fsub rb_64+2, r2, ra_32_re
 .endm
 
