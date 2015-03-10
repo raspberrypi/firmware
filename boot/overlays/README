@@ -165,6 +165,44 @@ Load:   dtoverlay=hifiberry-digi
 Params: <None>
 
 
+File:   hy28a-overlay.dtb
+Info:   HY28A - 2.8" TFT LCD Display Module by HAOYU Electronics
+        Default values match Texy's display shield
+Load:   dtoverlay=hy28a,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+
+        resetgpio                GPIO used to reset controller
+
+        ledgpio                  GPIO used to control backlight
+
+
+File:   hy28b-overlay.dtb
+Info:   HY28B - 2.8" TFT LCD Display Module by HAOYU Electronics
+        Default values match Texy's display shield
+Load:   dtoverlay=hy28b,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+
+        resetgpio                GPIO used to reset controller
+
+        ledgpio                  GPIO used to control backlight
+
+
 File:   i2c-rtc-overlay.dtb
 Info:   Adds support for a number of I2C Real Time Clock devices
 Load:   dtoverlay=i2c-rtc,<param>
@@ -215,6 +253,20 @@ Params: gpio_out_pin             GPIO pin for output (default "17")
                                  (default "off")
 
 
+File:   mz61581-overlay.dtb
+Info:   MZ61581 display by Tontec
+Load:   dtoverlay=mz61581,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+
+
 File:   pcf2127-rtc-overlay.dtb
 Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
 
@@ -223,10 +275,79 @@ File:   pcf8523-rtc-overlay.dtb
 Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
 
 
+File:   piscreen-overlay.dtb
+Info:   PiScreen display by OzzMaker.com
+Load:   dtoverlay=piscreen,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+
+File:   pitft28-resistive-overlay.dtb
+Info:   Adafruit PiTFT 2.8" resistive touch screen
+Load:   dtoverlay=pitft28-resistive,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+
 File:   pps-gpio-overlay.dtb
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
 Params: gpiopin                  GPIO input pin (default "18")
+
+
+File:   rpi-display-overlay.dtb
+Info:   RPi-Display - 2.8" Touch Display by Watterott
+Load:   dtoverlay=rpi-display,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+
+
+File:   tinylcd35-overlay.dtb
+Info:   3.5" Color TFT Display by www.tinlylcd.com
+        Options: Touch, RTC, keypad
+Load:   dtoverlay=tinylcd35,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        touch                    Enable touch panel
+
+        touchgpio                Touch controller IRQ GPIO
+
+        xohms                    Touchpanel: Resistance of X-plate in ohms
+
+        rtc-pcf                  PCF8563 Real Time Clock
+
+        rtc-ds                   DS1307 Real Time Clock
+
+        keypad                   Enable keypad
+
+        Examples:
+            Display with touchpanel, PCF8563 RTC and keypad:
+                dtoverlay=tinylcd35,touch,rtc-pcf,keypad
+            Old touch display:
+                dtoverlay=tinylcd35,touch,touchgpio=3
 
 
 File:   w1-gpio-overlay.dtb
