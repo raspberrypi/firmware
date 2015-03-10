@@ -128,6 +128,7 @@ typedef enum {
    HDMI_3D_FORMAT_NONE = 0,           /**<plain and simple 2D! */
    HDMI_3D_FORMAT_SBS_HALF = (1<<7),  /**<side by side half horizontal */
    HDMI_3D_FORMAT_TB_HALF  = (1<<6),  /**<top and bottom half vertical */
+   HDMI_3D_FORMAT_FRAME_PACKING = (1<<8),  /**<frame packed */
    /* More 3D structs, e.g. full frame packing, may be added here */
    HDMI_3D_FORMAT_INVALID = 0xFFFF
 } HDMI_3D_FORMAT_T;
