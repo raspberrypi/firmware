@@ -246,7 +246,6 @@ kernel/drivers/net/slip/slhc.ko
 kernel/drivers/net/wimax/i2400m/i2400m.ko
 kernel/drivers/net/wimax/i2400m/i2400m-usb.ko
 kernel/drivers/cdrom/cdrom.ko
-kernel/drivers/usb/storage/uas.ko
 kernel/drivers/usb/storage/ums-alauda.ko
 kernel/drivers/usb/storage/ums-cypress.ko
 kernel/drivers/usb/storage/ums-datafab.ko
@@ -342,6 +341,7 @@ kernel/drivers/usb/atm/xusbatm.ko
 kernel/drivers/usb/usbip/usbip-core.ko
 kernel/drivers/usb/usbip/vhci-hcd.ko
 kernel/drivers/usb/usbip/usbip-host.ko
+kernel/drivers/input/keyboard/gpio_keys.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
 kernel/drivers/input/touchscreen/ads7846.ko
