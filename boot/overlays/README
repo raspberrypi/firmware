@@ -130,6 +130,31 @@ Params:
         and the other i2c baudrate parameters.
 
 
+File:   ads7846-overlay.dtb
+Info:   ADS7846 Touch controller
+Load:   dtoverlay=ads7846,<param>=<val>
+Params: cs                       SPI bus Chip Select (default 1)
+        speed                    SPI bus speed (default 2Mhz, max 3.25MHz)
+        penirq                   GPIO used for PENIRQ. REQUIRED
+        penirq_pull              Set GPIO pull (default 0=none, 2=pullup)
+        swapxy                   Swap x and y axis
+        xmin                     Minimum value on the X axis (default 0)
+        ymin                     Minimum value on the Y axis (default 0)
+        xmax                     Maximum value on the X axis (default 4095)
+        ymax                     Maximum value on the Y axis (default 4095)
+        pmin                     Minimum reported pressure value (default 0)
+        pmax                     Maximum reported pressure value (default 65535)
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+                                 (default 400)
+
+        penirq is required and usually xohms (60-100) has to be set as well.
+        Apart from that, pmax (255) and swapxy are also common.
+        The rest of the calibration can be done with xinput-calibrator.
+        See: github.com/notro/fbtft/wiki/FBTFT-on-Raspian
+        Device Tree binding document:
+        www.kernel.org/doc/Documentation/devicetree/bindings/input/ads7846.txt
+
+
 File:   bmp085_i2s-sensor-overlay.dtb
 Info:   Describes the BMP085/BMP180 digital barometric pressure and temperature
         sensors from Bosch Sensortec
