@@ -1,5 +1,6 @@
 kernel/arch/arm/crypto/aes-arm.ko:
 kernel/arch/arm/crypto/sha1-arm.ko:
+kernel/mm/zsmalloc.ko:
 kernel/fs/quota/quota_v1.ko:
 kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
 kernel/fs/quota/quota_tree.ko:
@@ -108,6 +109,7 @@ kernel/drivers/video/fbdev/core/sysfillrect.ko:
 kernel/drivers/video/fbdev/core/syscopyarea.ko:
 kernel/drivers/video/fbdev/core/sysimgblt.ko:
 kernel/drivers/video/fbdev/core/fb_sys_fops.ko:
+kernel/drivers/video/fbdev/udlfb.ko: kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko:
 kernel/drivers/base/regmap/regmap-i2c.ko:
 kernel/drivers/base/regmap/regmap-spi.ko:
@@ -116,6 +118,7 @@ kernel/drivers/block/pktcdvd.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/block/nbd.ko:
 kernel/drivers/block/cryptoloop.ko:
 kernel/drivers/block/drbd/drbd.ko: kernel/lib/lru_cache.ko
+kernel/drivers/block/zram/zram.ko: kernel/lib/lz4/lz4_decompress.ko kernel/lib/lz4/lz4_compress.ko kernel/mm/zsmalloc.ko
 kernel/drivers/misc/eeprom/at24.ko:
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko:
 kernel/drivers/misc/ti-st/st_drv.ko:
@@ -1361,6 +1364,8 @@ kernel/net/openvswitch/openvswitch.ko: kernel/net/ipv4/gre.ko
 kernel/lib/crc-ccitt.ko:
 kernel/lib/crc7.ko:
 kernel/lib/zlib_deflate/zlib_deflate.ko:
+kernel/lib/lz4/lz4_compress.ko:
+kernel/lib/lz4/lz4_decompress.ko:
 kernel/lib/xz/xz_dec.ko:
 kernel/lib/raid6/raid6_pq.ko:
 kernel/lib/ts_kmp.ko:
