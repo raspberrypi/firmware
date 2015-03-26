@@ -166,6 +166,14 @@ File:   ds1307-rtc-overlay.dtb
 Info:   This overlay is now deprecated and will be deleted. Use i2c-rtc instead.
 
 
+File:   enc28j60-overlay.dtb
+Info:   Overlay for the Microchip ENC28J60 Ethernet Controller (SPI)
+Load:   dtoverlay=enc28j60,<param>=<val>
+Params: int_pin                  GPIO used for INT (default 25)
+
+        speed                    SPI bus speed (default 12000000)
+
+
 File:   hifiberry-amp-overlay.dtb
 Info:   Describes the HifiBerry Amp and Amp+ audio cards
 Load:   dtoverlay=hifiberry-amp
@@ -238,6 +246,8 @@ Params: ds1307                   Select the DS1307 device
         pcf2127                  Select the PCF2127 device
 
         pcf8523                  Select the PCF8523 device
+
+        pcf8563                  Select the PCF8563 device
 
 
 File:   iqaudio-dac-overlay.dtb
