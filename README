@@ -11,5 +11,5 @@ below (check the appropriate directories for full licence details):
 * ./extra: System.map files for the provided kernel builds
 * ./hardfp: userspace VideoCoreIV libraries built for the armv6 hardfp ABI
 * ./modules: pre-built modules for kernel.img
-* ./opt/vc: includes userspace libraries for the VideCoreIV (EGL/GLES/OpenVG 
+* ./opt/vc: includes userspace libraries for the VideoCoreIV (EGL/GLES/OpenVG 
    etc). See ./opt/vc/LICENCE for licencing terms
