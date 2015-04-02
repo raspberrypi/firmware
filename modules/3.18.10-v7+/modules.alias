@@ -7733,6 +7733,7 @@ alias i2c:pcm5122 snd_soc_pcm512x_i2c
 alias i2c:pcm5121 snd_soc_pcm512x_i2c
 alias of:N*T*Cti,pcm5122* snd_soc_pcm512x_i2c
 alias of:N*T*Cti,pcm5121* snd_soc_pcm512x_i2c
+alias of:N*T*Cti,pcm1794a* snd_soc_pcm1794a
 alias of:N*T*Cti,pcm5102a* snd_soc_pcm5102a
 alias of:N*T*Cti,tas5713* snd_soc_tas5713
 alias i2c:tas5713 snd_soc_tas5713
@@ -7748,6 +7749,7 @@ alias of:N*T*Chifiberry,hifiberry-dac* snd_soc_hifiberry_dac
 alias of:N*T*Chifiberry,hifiberry-dacplus* snd_soc_hifiberry_dacplus
 alias of:N*T*Chifiberry,hifiberry-digi* snd_soc_hifiberry_digi
 alias of:N*T*Chifiberry,hifiberry-amp* snd_soc_hifiberry_amp
+alias of:N*T*Crpi,rpi-dac* snd_soc_rpi_dac
 alias of:N*T*Crpi,rpi-proto* snd_soc_rpi_proto
 alias of:N*T*Ciqaudio,iqaudio-dac* snd_soc_iqaudio_dac
 alias fs-oprofilefs oprofile
