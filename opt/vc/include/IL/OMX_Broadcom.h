@@ -62,6 +62,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #define OMX_BUFFERFLAG_CODECSIDEINFO 0x00002000
 
+// for use in buffer headers - indicated the timestamp is a DTS rather than PTS
+#define OMX_BUFFERFLAG_TIME_IS_DTS 0x000004000
+
 /**
  * Macros to convert to <code>OMX_TICKS</code> from a signed 64 bit value and
  * vice-versa. These macros don't actually do anything unless <code>OMX_TICKS</code>
