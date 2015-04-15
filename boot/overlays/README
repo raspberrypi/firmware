@@ -62,7 +62,7 @@ this becomes a line in config.txt:
     dtoverlay=lirc-rpi
 
 This causes the file /boot/overlays/lirc-rpi-overlay.dtb to be loaded. By
-default it will use pins 17 (out) and 18 (in), but this can be modified using
+default it will use GPIOs 17 (out) and 18 (in), but this can be modified using
 DT parameters:
 
     dtoverlay=lirc-rpi,gpio_out_pin=17,gpio_in_pin=13
@@ -108,7 +108,7 @@ Params:
         act_led_activelow        Set to "on" to invert the sense of the LED
                                  (default "off")
 
-        act_led_gpio             Set which GPIO pin to use for the activity LED
+        act_led_gpio             Set which GPIO to use for the activity LED
                                  (in case you want to connect it to an external
                                  device)
                                  (default "16" on a non-Plus board, "47" on a
@@ -266,9 +266,9 @@ File:   lirc-rpi-overlay.dtb
 Info:   Configures lirc-rpi (Linux Infrared Remote Control for Raspberry Pi)
         Consult the module documentation for more details.
 Load:   dtoverlay=lirc-rpi,<param>=<val>,...
-Params: gpio_out_pin             GPIO pin for output (default "17")
+Params: gpio_out_pin             GPIO for output (default "17")
 
-        gpio_in_pin              GPIO pin for input (default "18")
+        gpio_in_pin              GPIO for input (default "18")
 
         gpio_in_pull             Pull up/down/off on the input pin
                                  (default "down")
@@ -337,7 +337,7 @@ Params: speed                    Display SPI bus speed
 File:   pps-gpio-overlay.dtb
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
-Params: gpiopin                  GPIO input pin (default "18")
+Params: gpiopin                  Input GPIO (default "18")
 
 
 File:   rpi-display-overlay.dtb
@@ -387,9 +387,9 @@ Params: speed                    Display SPI bus speed
 
 File:   w1-gpio-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
-        Use this overlay if you *don't* need a pin to drive an external pullup.
+        Use this overlay if you *don't* need a GPIO to drive an external pullup.
 Load:   dtoverlay=w1-gpio,<param>=<val>
-Params: gpiopin                  GPIO pin for I/O (default "4")
+Params: gpiopin                  GPIO for I/O (default "4")
 
         pullup                   Non-zero, "on", or "y" to enable the parasitic
                                  power (2-wire, power-on-data) feature
@@ -397,14 +397,14 @@ Params: gpiopin                  GPIO pin for I/O (default "4")
 
 File:   w1-gpio-pullup-overlay.dtb
 Info:   Configures the w1-gpio Onewire interface module.
-        Use this overlay if you *do* need a pin to drive an external pullup.
+        Use this overlay if you *do* need a GPIO to drive an external pullup.
 Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
-Params: gpiopin                  GPIO pin for I/O (default "4")
+Params: gpiopin                  GPIO for I/O (default "4")
 
         pullup                   Non-zero, "on", or "y" to enable the parasitic
                                  power (2-wire, power-on-data) feature
 
-        extpullup                GPIO pin for external pullup (default "5")
+        extpullup                GPIO for external pullup (default "5")
 
 
 Troubleshooting
