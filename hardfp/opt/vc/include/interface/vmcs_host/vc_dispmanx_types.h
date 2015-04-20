@@ -171,6 +171,7 @@ typedef struct {
   int32_t height;
   DISPMANX_TRANSFORM_T transform;
   DISPLAY_INPUT_FORMAT_T input_format;
+  uint32_t display_num;
 } DISPMANX_MODEINFO_T;
 
 /* Update callback. */
