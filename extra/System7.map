@@ -48478,7 +48478,7 @@
 807b03b8 t __irf_start
 807b03b8 T __security_initcall_end
 807b03b8 T __security_initcall_start
-807b043c t __irf_end
+807b043e t __irf_end
 807b0440 T __initramfs_size
 807b1000 D __per_cpu_load
 807b1000 D __per_cpu_start

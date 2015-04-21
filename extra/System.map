@@ -47701,8 +47701,8 @@ c07ede3c T __initramfs_start
 c07ede3c t __irf_start
 c07ede3c T __security_initcall_end
 c07ede3c T __security_initcall_start
-c07edec0 T __initramfs_size
-c07edec0 t __irf_end
+c07edec2 t __irf_end
+c07edec8 T __initramfs_size
 c07ee000 D __data_loc
 c07ee000 D __init_end
 c07ee000 D _data
