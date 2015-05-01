@@ -24,6 +24,8 @@ H2D = gpu_fft.h mailbox.h gpu_fft_trans.h hello_fft_2d_bitmap.h
 
 F = -lrt -lm -ldl
 
+all:	hello_fft.bin hello_fft_2d.bin
+
 hello_fft.bin:	$(S) $(C1D) $(H1D)
 	gcc -o hello_fft.bin $(F) $(C1D)
 
