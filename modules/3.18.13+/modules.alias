@@ -126,6 +126,10 @@ alias authencesn authencesn
 alias platform:arizona-gpio gpio_arizona
 alias platform:gpio-backlight gpio_backlight
 alias usb:v17E9p*d*dc*dsc*dp*icFFisc00ip00in* udlfb
+alias of:N*T*Csolomon,ssd1307fb-i2c* ssd1307fb
+alias of:N*T*Csolomon,ssd1306fb-i2c* ssd1307fb
+alias i2c:ssd1307fb ssd1307fb
+alias i2c:ssd1306fb ssd1307fb
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24

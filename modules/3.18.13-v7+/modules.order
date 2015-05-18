@@ -114,6 +114,7 @@ kernel/drivers/video/fbdev/core/syscopyarea.ko
 kernel/drivers/video/fbdev/core/sysimgblt.ko
 kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/video/fbdev/udlfb.ko
+kernel/drivers/video/fbdev/ssd1307fb.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/base/regmap/regmap-spi.ko

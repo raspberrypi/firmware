@@ -75,6 +75,7 @@ kernel/drivers/misc/vc04_services/vchiq.ko
 kernel/drivers/mmc/card/mmc_block.ko
 kernel/drivers/mmc/core/mmc_core.ko
 kernel/drivers/mmc/host/sdhci.ko
+kernel/drivers/mmc/host/bcm2835-sdhost.ko
 kernel/drivers/mmc/host/bcm2835-mmc.ko
 kernel/drivers/mmc/host/sdhci-pltfm.ko
 kernel/drivers/net/mii.ko
