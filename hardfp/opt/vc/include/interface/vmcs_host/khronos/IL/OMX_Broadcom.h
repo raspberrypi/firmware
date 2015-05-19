@@ -62,6 +62,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #define OMX_BUFFERFLAG_CODECSIDEINFO 0x00002000
 
+// for use in buffer headers - indicated the timestamp is a DTS rather than PTS
+#define OMX_BUFFERFLAG_TIME_IS_DTS 0x000004000
+
 /**
  * Macros to convert to <code>OMX_TICKS</code> from a signed 64 bit value and
  * vice-versa. These macros don't actually do anything unless <code>OMX_TICKS</code>
@@ -2370,7 +2373,17 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_BOOL bShowCaf;
    OMX_BOOL bShowMotion;
    OMX_BOOL bShowFrameNum;
-   OMX_BOOL bBlackBackground;
+   OMX_BOOL bEnableBackground;
+   OMX_BOOL bCustomBackgroundColour;
+   OMX_U8 nBackgroundY;
+   OMX_U8 nBackgroundU;
+   OMX_U8 nBackgroundV;
+   OMX_U8 dummy1;
+   OMX_BOOL bCustomTextColour;
+   OMX_U8 nTextY;
+   OMX_U8 nTextU;
+   OMX_U8 nTextV;
+   OMX_U8 nTextSize;   /**< Text size: 6-150 pixels */
    OMX_U8 sText[OMX_BRCM_MAXANNOTATETEXTLEN];
 } OMX_CONFIG_BRCMANNOTATETYPE;
 

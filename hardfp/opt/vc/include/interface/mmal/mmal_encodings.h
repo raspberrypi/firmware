@@ -39,6 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** \name Pre-defined video encodings */
 /* @{ */
 #define MMAL_ENCODING_H264             MMAL_FOURCC('H','2','6','4')
+#define MMAL_ENCODING_MVC              MMAL_FOURCC('M','V','C',' ')
 #define MMAL_ENCODING_H263             MMAL_FOURCC('H','2','6','3')
 #define MMAL_ENCODING_MP4V             MMAL_FOURCC('M','P','4','V')
 #define MMAL_ENCODING_MP2V             MMAL_FOURCC('M','P','2','V')

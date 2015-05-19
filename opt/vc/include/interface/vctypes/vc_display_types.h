@@ -55,6 +55,7 @@ typedef enum
    DISPLAY_3D_SBS_FULL_AUTO,     // Side-By-Side, Full Width (also used by some autostereoscopic displays)
    DISPLAY_3D_SBS_HALF_HORIZ,    // Side-By-Side, Half Width, Horizontal Subsampling (see HDMI spec)
    DISPLAY_3D_TB_HALF,           // Top-bottom 3D
+   DISPLAY_3D_FRAME_PACKING,     // Frame Packed 3D
    DISPLAY_3D_FORMAT_MAX
 } DISPLAY_3D_FORMAT_T;
 

@@ -1,10 +1,10 @@
-BCM2835 "GPU_FFT" release 2.0 by Andrew Holme, 2014.
+BCM2835 "GPU_FFT" release 3.0 by Andrew Holme, 2015.
 
 GPU_FFT is an FFT library for the Raspberry Pi which exploits the BCM2835 SoC
 3D hardware to deliver ten times more data throughput than is possible on the
-700 MHz ARM.  Kernels are provided for all power-of-2 FFT lengths between 256
-and 2,097,152 points inclusive.  A transpose function, which also uses the 3D
-hardware, is provided to support 2-dimensional transforms.
+700 MHz ARM of the Pi 1.  Kernels are provided for all power-of-2 FFT lengths
+between 256 and 4,194,304 points inclusive.  A transpose function, which also
+uses the 3D hardware, is provided to support 2-dimensional transforms.
 
 
 *** Accuracy ***
@@ -13,32 +13,36 @@ GPU_FFT uses single-precision floats for data and twiddle factors.  The output
 is not scaled.  The relative root-mean-square (rms) error in parts-per-million
 (ppm) for different transform lengths (N) is typically:
 
-log2(N) |  8    | 9    | 10   |  11   |  12  |  13  |  14  |  15  |  16 |  17
-ppm rms |  0.27 | 0.42 | 0.50 |  0.70 |  2.3 |  4.4 |  7.6 |  9.2 |  18 |  70
+log2(N) |  8    |  9    | 10    | 11    | 12    | 13    | 14    | 15
+ppm rms |  0.33 |  0.46 |  0.52 |  0.59 |  0.78 |  0.83 |  0.92 |  0.98
 
-log2(N) |  18 |  19 |  20 |  21 |                8...17 batch of 10
-ppm rms | 100 | 180 | 360 | 720 |               18...21 batch of  1
+log2(N) | 16    | 17    | 18    | 19    | 20    |  21   | 22
+ppm rms |  1.0  |  1.3  |  1.3  |  1.4  |  1.5  |  1.5  |  1.5
+
+Accuracy has improved significantly over previous releases at the expense of a
+small (2%) performance hit; however, FFTW is still one order of magnitude more
+accurate than GPU_FFT.
 
 
 *** Throughput ***
 
 GPU_FFT 1.0 had to be invoked through a "mailbox" which added a 100us overhead
 on every call.  To mitigate this, batches of transforms could be submitted via
-a single call.  GPU_FFT 2.0 avoids this 100us overhead by poking GPU registers
+a single call.  GPU_FFT now avoids this 100us overhead by poking GPU registers
 directly from the ARM if total batch runtime will be short; but still uses the
 mailbox for longer jobs to avoid busy waiting at 100% CPU for too long.
 
 Typical per-transform runtimes for batch sizes of 1 and 10; and comparative
-figures for FFTW (FFTW_MEASURE mode) are:
+figures for FFTW (FFTW_MEASURE mode) on a Pi 1 with L2 cache enabled are:
 
-log2(N) |   8   |   9   |  10   |  11   |  12  |  13  |  14  |  15  |
-      1 | 0.036 | 0.051 | 0.070 | 0.11  | 0.24 | 0.58 |  1.2 |  3.3 |
-     10 | 0.016 | 0.027 | 0.045 | 0.095 | 0.25 | 0.61 |  1.2 |  3.2 |
-   FFTW | 0.092 | 0.22  | 0.48  | 0.95  | 3.0  | 5.1  | 12   | 31   |
+log2(N) |   8   |   9   |  10   |  11   |  12  |  13  |  14  |  15
+      1 | 0.033 | 0.049 | 0.070 | 0.12  | 0.25 | 0.61 |  1.2 |  3.5
+     10 | 0.017 | 0.029 | 0.049 | 0.11  | 0.27 | 0.66 |  1.2 |  3.3
+   FFTW | 0.092 | 0.22  | 0.48  | 0.95  | 3.0  | 5.1  | 12   | 31
 
-log2(N) |  16  |  17 |  18 |  19 |   20 |   21 |       All times in
-      1 |  6.8 |  16 |  42 |  95 |  190 |  380 |       milliseconds
-   FFTW | 83   | 180 | 560 | 670 | 1600 | 3400 |       2 sig. figs.
+log2(N) |  16  |  17 |  18 |  19 |   20 |   21 |   22        All times in
+      1 |  7.0 |  17 |  43 |  97 |  194 |  388 |  786        milliseconds
+   FFTW | 83   | 180 | 560 | 670 | 1600 | 3400 | 8800        2 sig. figs.
 
 
 *** API functions ***
@@ -57,7 +61,7 @@ log2(N) |  16  |  17 |  18 |  19 |   20 |   21 |       All times in
 
     int mb          Mailbox file descriptor obtained by calling mbox_open()
 
-    int log2_N      log2(FFT length) = 8 to 21
+    int log2_N      log2(FFT length) = 8 to 22
 
     int direction   FFT direction:  GPU_FFT_FWD for forward FFT
                                     GPU_FFT_REV for inverse FFT
@@ -105,7 +109,6 @@ as a demo with the latest Raspbian distro.  Build and run it as follows:
 
 cd /opt/vc/src/hello_pi/hello_fft
 make
-sudo mknod char_dev c 100 0
 sudo ./hello_fft.bin 12
 
 It accepts three optional command-line arguments: <log2_N> <batch> <loops>
@@ -114,13 +117,12 @@ The special character device is required for the ioctl mailbox through which
 the ARM communicates with the Videocore GPU.
 
 
-*** With Open GL ***
+*** With Open GL on Pi 1 ***
 
-GPU_FFT and Open GL will run concurrently if the GPU_FFT_MEM_* defines in
-file gpu_fft.c are changed as follows:
+GPU_FFT and Open GL will run concurrently on Pi 1 if GPU_FFT is configured not
+to use VC4 L2 cache by zeroing a define in file gpu_fft_base.c as follows:
 
-#define GPU_FFT_MEM_FLG 0x4        // cached=0xC; direct=0x4
-#define GPU_FFT_MEM_MAP 0x20000000 // cached=0x0; direct=0x20000000
+#define GPU_FFT_USE_VC4_L2_CACHE 0 // Pi 1 only: cached=1; direct=0
 
 Overall performance will probably be higher if GPU_FFT and Open GL take turns
 at using the 3D hardware.  Since eglSwapBuffers() returns immediately without

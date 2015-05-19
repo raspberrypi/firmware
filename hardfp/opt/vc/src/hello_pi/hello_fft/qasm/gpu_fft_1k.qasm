@@ -1,6 +1,6 @@
-# BCM2835 "GPU_FFT"
+# BCM2835 "GPU_FFT" release 3.0
 #
-# Copyright (c) 2013, Andrew Holme.
+# Copyright (c) 2015, Andrew Holme.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -30,21 +30,23 @@
 .include "gpu_fft.qinc"
 
 ##############################################################################
-# Twiddles
+# Twiddles: src
 
-.set TW_SHARED,     4
-.set TW_UNIQUE,     2
-
-.set TW32_P1_BASE,  0
+.set TW32_P1_BASE,  0   # rx_tw_shared
 .set TW16_P1_BASE,  1
 .set TW32_P2_STEP,  2
 .set TW16_P2_STEP,  3
 
-.set TW32_P2_BASE,  4
-.set TW16_P2_BASE,  5
+.set TW32_P2_BASE,  0   # rx_tw_unique
+.set TW16_P2_BASE,  1
 
-.set TW32_ACTIVE,   TW_SHARED+TW_UNIQUE
-.set TW16_ACTIVE,   TW_SHARED+TW_UNIQUE+1
+##############################################################################
+# Twiddles: dst
+
+.set TW16_STEP, 0  # 1
+.set TW32_STEP, 1  # 1
+.set TW16,      2  # 5
+.set TW32,      7  # 2
 
 ##############################################################################
 # Registers
@@ -70,8 +72,11 @@
 .set ra_32_re,          ra9
 .set rb_32_im,          rb9
 
-.set ra_tw_re,          ra10 # 11
-.set rb_tw_im,          rb10 # 11
+.set rx_tw_shared,      ra10
+.set rx_tw_unique,      rb10
+
+.set ra_tw_re,          ra11 # 9
+.set rb_tw_im,          rb11 # 9
 
 .set ra_vpm_lo,         ra27
 .set ra_vpm_hi,         ra28
@@ -102,33 +107,16 @@ mov ra_vdw_32, vdw_setup_0(32, 16, dma_h32( 0,0))
 mov rb_vdw_32, vdw_setup_0(32, 16, dma_h32(32,0))
 
 ##############################################################################
-# Load twiddle factors
+# Twiddles: ptr
 
-mov r3, 0x80
-load_tw r3,         0, TW_SHARED, unif
-load_tw r3, TW_SHARED, TW_UNIQUE, unif
+mov rx_tw_shared, unif
+mov rx_tw_unique, unif
 
 ##############################################################################
 # Instance
 
 mov rb_inst, unif
 inst_vpm rb_inst, ra_vpm_lo, ra_vpm_hi, rb_vpm_lo, rb_vpm_hi
-
-##############################################################################
-# Macros
-
-.macro swizzle
-.endm
-
-.macro next_twiddles, tw16, tw32
-    next_twiddles_32 tw32
-    next_twiddles_16 tw16
-.endm
-
-.macro init_stage, tw16, tw32
-    init_stage_32 tw32
-    init_stage_16 tw16, 5
-.endm
 
 ##############################################################################
 # Master/slave procedures
@@ -179,7 +167,9 @@ body_rx_sync_slave
 ##############################################################################
 # Pass 1
 
-    init_stage TW16_P1_BASE, TW32_P1_BASE
+    load_tw rx_tw_shared, TW16+3, TW16_P1_BASE
+    load_tw rx_tw_shared, TW32+0, TW32_P1_BASE
+    init_stage 5
     read_rev rb_0x10
 
         brr ra_link_1, r:pass_1
@@ -203,7 +193,11 @@ body_rx_sync_slave
 # Pass 2
 
     swap_buffers
-    init_stage TW16_P2_BASE, TW32_P2_BASE
+    load_tw rx_tw_unique, TW16+3, TW16_P2_BASE
+    load_tw rx_tw_unique, TW32+0, TW32_P2_BASE
+    load_tw rx_tw_shared, TW16_STEP, TW16_P2_STEP
+    load_tw rx_tw_shared, TW32_STEP, TW32_P2_STEP
+    init_stage 5
     read_lin rb_0x10
 
         brr ra_link_1, r:pass_2
@@ -211,7 +205,8 @@ body_rx_sync_slave
         mov r0, 0x100
         add ra_points, ra_points, r0
 
-        next_twiddles TW16_P2_STEP, TW32_P2_STEP
+        next_twiddles_32
+        next_twiddles_16
 
         shr.setf -, ra_points, STAGES
 

@@ -1,6 +1,6 @@
 /*
-BCM2835 "GPU_FFT" release 2.0
-Copyright (c) 2014, Andrew Holme.
+BCM2835 "GPU_FFT" release 3.0
+Copyright (c) 2015, Andrew Holme.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -68,6 +68,9 @@ static unsigned int shader_1024k[] = {
 static unsigned int shader_2048k[] = {
     #include "hex/shader_2048k.hex"
 };
+static unsigned int shader_4096k[] = {
+    #include "hex/shader_4096k.hex"
+};
 
 static struct {
     unsigned int size, *code;
@@ -86,7 +89,8 @@ shaders[] = {
     {sizeof(shader_256k), shader_256k},
     {sizeof(shader_512k), shader_512k},
     {sizeof(shader_1024k), shader_1024k},
-    {sizeof(shader_2048k), shader_2048k}
+    {sizeof(shader_2048k), shader_2048k},
+    {sizeof(shader_4096k), shader_4096k}
 };
 
 unsigned int  gpu_fft_shader_size(int log2_N) {
