@@ -155,10 +155,10 @@ Params: cs                       SPI bus Chip Select (default 1)
         www.kernel.org/doc/Documentation/devicetree/bindings/input/ads7846.txt
 
 
-File:   bmp085_i2s-sensor-overlay.dtb
+File:   bmp085_i2c-sensor-overlay.dtb
 Info:   Describes the BMP085/BMP180 digital barometric pressure and temperature
         sensors from Bosch Sensortec
-Load:   dtoverlay=bmp085_i2s-sensor
+Load:   dtoverlay=bmp085_i2c-sensor
 Params: <None>
 
 
