@@ -83,6 +83,31 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BGR16            MMAL_FOURCC('B','G','R','2')
 #define MMAL_ENCODING_BGR24            MMAL_FOURCC('B','G','R','3')
 #define MMAL_ENCODING_BGR32            MMAL_FOURCC('B','G','R','4')
+//Bayer formats
+//FourCC values copied from V4L2
+//10 bit per pixel packed Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR10P   MMAL_FOURCC('p','B','A','A')  //BGGR
+//#define MMAL_ENCODING_BAYER_SGRBG10P   MMAL_FOURCC('p','g','A','A')  //GRBG
+//#define MMAL_ENCODING_BAYER_SGBRG10P   MMAL_FOURCC('p','G','A','A')  //GBRG
+//#define MMAL_ENCODING_BAYER_SRGGB10P   MMAL_FOURCC('p','R','A','A')  //RGGB
+
+//8 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR8     MMAL_FOURCC('B','A','8','1')  //BGGR
+//#define MMAL_ENCODING_BAYER_SGBRG8     MMAL_FOURCC('G','B','R','G')  //GBRG
+//#define MMAL_ENCODING_BAYER_SGRBG8     MMAL_FOURCC('G','R','B','G')  //GRBG
+//#define MMAL_ENCODING_BAYER_SRGGB8     MMAL_FOURCC('R','G','G','B')  //RGGB
+
+//12 bit per pixel Bayer formats - not defined in V4L2, only 12bit expanded to 16.
+#define MMAL_ENCODING_BAYER_SBGGR12P   MMAL_FOURCC('B','Y','1','2')  //BGGR
+
+//16 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('B','Y','R','2')  //BGGR
+
+//10 bit per pixel DPCM compressed to 8bits Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR10DPCM8 MMAL_FOURCC('b','B','A','8')  //BGGR
+//#define MMAL_ENCODING_BAYER_SGBRG10DPCM8 MMAL_FOURCC('b','G','A','8')  //GBRG
+//#define MMAL_ENCODING_BAYER_SGRBG10DPCM8 MMAL_FOURCC('b','D','A','8')  //GRBG
+//#define MMAL_ENCODING_BAYER_SRGGB10DPCM8 MMAL_FOURCC('b','R','A','8')  //RGGB
 
 /** SAND Video (YUVUV128) format, native format understood by VideoCore.
  * This format is *not* opaque - if requested you will receive full frames
