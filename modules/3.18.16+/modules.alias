@@ -29,6 +29,7 @@ alias fs-fuse fuse
 alias fs-fusectl fuse
 alias devname:cuse cuse
 alias char-major-10-203 cuse
+alias fs-overlay overlay
 alias fs-udf udf
 alias fs-jfs jfs
 alias fs-xfs xfs

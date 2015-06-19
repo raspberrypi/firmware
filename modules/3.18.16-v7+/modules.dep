@@ -58,6 +58,7 @@ kernel/fs/cifs/cifs.ko:
 kernel/fs/ntfs/ntfs.ko:
 kernel/fs/fuse/fuse.ko:
 kernel/fs/fuse/cuse.ko: kernel/fs/fuse/fuse.ko
+kernel/fs/overlayfs/overlay.ko:
 kernel/fs/udf/udf.ko:
 kernel/fs/jfs/jfs.ko:
 kernel/fs/xfs/xfs.ko:
@@ -845,15 +846,18 @@ kernel/drivers/md/raid456.ko: kernel/crypto/async_tx/async_raid6_recov.ko kernel
 kernel/drivers/md/md-mod.ko:
 kernel/drivers/md/dm-mod.ko:
 kernel/drivers/md/dm-bufio.ko: kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/dm-bio-prison.ko:
 kernel/drivers/md/dm-crypt.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-delay.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-snapshot.ko: kernel/drivers/md/dm-bufio.ko kernel/drivers/md/dm-mod.ko
+kernel/drivers/md/persistent-data/dm-persistent-data.ko: kernel/drivers/md/dm-bufio.ko kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-mirror.ko: kernel/drivers/md/dm-region-hash.ko kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-log.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-region-hash.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-log-userspace.ko: kernel/drivers/md/dm-log.ko kernel/drivers/md/dm-mod.ko kernel/drivers/connector/cn.ko
 kernel/drivers/md/dm-zero.ko: kernel/drivers/md/dm-mod.ko
 kernel/drivers/md/dm-raid.ko: kernel/drivers/md/raid456.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/async_tx/async_tx.ko kernel/drivers/md/raid1.ko kernel/drivers/md/raid10.ko kernel/drivers/md/dm-mod.ko kernel/drivers/md/md-mod.ko kernel/crypto/xor.ko kernel/arch/arm/lib/xor-neon.ko kernel/lib/raid6/raid6_pq.ko
+kernel/drivers/md/dm-thin-pool.ko: kernel/drivers/md/persistent-data/dm-persistent-data.ko kernel/drivers/md/dm-bio-prison.ko kernel/drivers/md/dm-bufio.ko kernel/drivers/md/dm-mod.ko
 kernel/drivers/cpufreq/cpufreq_stats.ko:
 kernel/drivers/mmc/host/mmc_spi.ko: kernel/lib/crc7.ko kernel/drivers/mmc/host/of_mmc_spi.ko
 kernel/drivers/mmc/host/of_mmc_spi.ko:
