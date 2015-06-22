@@ -78,6 +78,9 @@ Name:   <The base DTB>
 Info:   Configures the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
+        audio                    Set to "on" to disable the onboard ALSA audio
+                                 interface (default "off")
+
         i2c_arm                  Set to "on" to enable the ARM's i2c interface
                                  (default "off")
 
@@ -99,6 +102,14 @@ Params:
                                  (default "off")
 
         spi                      Set to "on" to enable the spi interfaces
+                                 (default "off")
+
+        random                   Set to "on" to enable the hardware random
+                                 number generator (default "off")
+
+        uart0                    Set to "off" to disable uart0 (default "on")
+
+        watchdog                 Set to "on" to enable the hardware watchdog
                                  (default "off")
 
         act_led_trigger          Choose which activity the LED tracks.
@@ -249,6 +260,12 @@ Params: ds1307                   Select the DS1307 device
         pcf8563                  Select the PCF8563 device
 
 
+Name:   i2s-mmap
+Info:   Enables mmap support in the bcm2708-i2s driver
+Load:   dtoverlay=i2s-mmap
+Params: <None>
+
+
 Name:   iqaudio-dac
 Info:   Configures the IQaudio DAC audio card
 Load:   dtoverlay=iqaudio-dac
@@ -391,7 +408,19 @@ Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock
 Load:   dtoverlay=sdhost,<param>=<val>
 Params: overclock_50             Clock (in MHz) to use when the MMC framework
                                  requests 50MHz
-        force_pio                Disable DMA support
+
+        force_pio                Disable DMA support (default off)
+
+        pio_limit                Number of blocks above which to use DMA
+                                 (default 2)
+
+        debug                    Enable debug output (default off)
+
+
+Name:   spi-bcm2708
+Info:   Selects the bcm2708-spi SPI driver
+Load:   dtoverlay=spi-bcm2708
+Params: <None>
 
 
 Name:   spi-bcm2835
@@ -401,7 +430,7 @@ Params: <None>
 
 
 Name:   tinylcd35
-Info:   3.5" Color TFT Display by www.tinlylcd.com
+Info:   3.5" Color TFT Display by www.tinylcd.com
         Options: Touch, RTC, keypad
 Load:   dtoverlay=tinylcd35,<param>=<val>
 Params: speed                    Display SPI bus speed
