@@ -1,6 +1,7 @@
 kernel/arch/arm/crypto/aes-arm.ko:
 kernel/arch/arm/crypto/sha1-arm.ko:
 kernel/kernel/configs.ko:
+kernel/mm/zsmalloc.ko:
 kernel/fs/quota/quota_v1.ko:
 kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
 kernel/fs/quota/quota_tree.ko:
@@ -122,6 +123,7 @@ kernel/drivers/block/pktcdvd.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/block/nbd.ko:
 kernel/drivers/block/cryptoloop.ko:
 kernel/drivers/block/drbd/drbd.ko: kernel/lib/lru_cache.ko
+kernel/drivers/block/zram/zram.ko: kernel/lib/lz4/lz4_compress.ko kernel/mm/zsmalloc.ko
 kernel/drivers/misc/eeprom/at24.ko:
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko:
 kernel/drivers/misc/ti-st/st_drv.ko:
@@ -1377,6 +1379,7 @@ kernel/net/nfc/nfc.ko: kernel/net/rfkill/rfkill.ko
 kernel/net/openvswitch/openvswitch.ko:
 kernel/net/openvswitch/vport-gre.ko: kernel/net/openvswitch/openvswitch.ko kernel/net/ipv4/gre.ko
 kernel/net/mpls/mpls_gso.ko:
+kernel/lib/lz4/lz4_compress.ko:
 kernel/lib/crc-ccitt.ko:
 kernel/lib/crc7.ko:
 kernel/lib/zlib_deflate/zlib_deflate.ko:

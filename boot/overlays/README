@@ -173,6 +173,14 @@ Load:   dtoverlay=bmp085_i2c-sensor
 Params: <None>
 
 
+Name:   dht11
+Info:   Overlay for the DHT11/DHT21/DHT22 humidity/temperature sensors
+        Also sometimes found with the part number(s) AM230x.
+Load:   dtoverlay=dht11,<param>=<val>
+Params: gpiopin                  GPIO connected to the sensor's DATA output.
+                                 (default 4)
+
+
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
 
 
@@ -182,6 +190,19 @@ Load:   dtoverlay=enc28j60,<param>=<val>
 Params: int_pin                  GPIO used for INT (default 25)
 
         speed                    SPI bus speed (default 12000000)
+
+
+Name:   gpio-poweroff
+Info:   Drives a GPIO high or low on reboot
+Load:   gpio-poweroff,<param>=<val>
+Params: gpiopin                  GPIO for signalling (default 26)
+
+        active_low               Set if the power control device requires a
+                                 high->low transition to trigger a power-down.
+                                 Note that this will require the support of a
+                                 custom dt-blob.bin to prevent a power-down
+                                 during the boot process, and that a reboot
+                                 will also cause the pin to go low.
 
 
 Name:   hifiberry-amp
@@ -252,6 +273,8 @@ Load:   dtoverlay=i2c-rtc,<param>
 Params: ds1307                   Select the DS1307 device
 
         ds3231                   Select the DS3231 device
+
+        mcp7941x                 Select the MCP7941x device
 
         pcf2127                  Select the PCF2127 device
 
@@ -396,6 +419,7 @@ Params: speed                    Display SPI bus speed
 
         xohms                    Touchpanel sensitivity (X-plate resistance)
 
+
 Name:   rpi-ft5406
 Info:   Official Raspberry Pi display touchscreen
 Load:   dtoverlay=rpi-ft5406
@@ -463,6 +487,14 @@ Params: speed                    Display SPI bus speed
                 dtoverlay=tinylcd35,touch,rtc-pcf,keypad
             Old touch display:
                 dtoverlay=tinylcd35,touch,touchgpio=3
+
+
+Name:   uart1
+Info:   Enable uart1 in place of uart0
+Load:   dtoverlay=uart1,<param>=<val>
+Params: txd1_pin                 GPIO pin for TXD1 (14, 32 or 40 - default 14)
+
+        rxd1_pin                 GPIO pin for RXD1 (15, 33 or 41 - default 15)
 
 
 Name:   w1-gpio
