@@ -328,8 +328,18 @@ Params: gpio_out_pin             GPIO for output (default "17")
 
 
 Name:   mcp2515-can0
-Info:   Configures the MCP2515 CAN controller
+Info:   Configures the MCP2515 CAN controller on spi0.0
 Load:   dtoverlay=mcp2515-can0,<param>=<val>
+Params: oscillator               Clock frequency for the CAN controller (Hz)
+
+        spimaxfrequency          Maximum SPI frequence (Hz)
+
+        interrupt                GPIO for interrupt signal
+
+
+Name:   mcp2515-can1
+Info:   Configures the MCP2515 CAN controller on spi0.1
+Load:   dtoverlay=mcp2515-can1,<param>=<val>
 Params: oscillator               Clock frequency for the CAN controller (Hz)
 
         spimaxfrequency          Maximum SPI frequence (Hz)
@@ -495,6 +505,14 @@ Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                 GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
         rxd1_pin                 GPIO pin for RXD1 (15, 33 or 41 - default 15)
+
+
+Name:   vga666
+Info:   Overlay for the Fen Logic VGA666 board
+        This uses GPIOs 2-21 (so no I2C), and activates the output 2-3 seconds
+        after the kernel has started.
+Load:   dtoverlay=vga666
+Params: <None>
 
 
 Name:   w1-gpio
