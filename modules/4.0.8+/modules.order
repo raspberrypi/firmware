@@ -114,6 +114,7 @@ kernel/drivers/video/fbdev/core/syscopyarea.ko
 kernel/drivers/video/fbdev/core/sysimgblt.ko
 kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/video/fbdev/ssd1307fb.ko
+kernel/drivers/video/fbdev/rpisense-fb.ko
 kernel/drivers/char/hw_random/bcm2835-rng.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/base/regmap/regmap-i2c.ko
@@ -131,6 +132,7 @@ kernel/drivers/mfd/arizona-i2c.ko
 kernel/drivers/mfd/arizona-spi.ko
 kernel/drivers/mfd/ucb1400_core.ko
 kernel/drivers/mfd/wl1273-core.ko
+kernel/drivers/mfd/rpisense-core.ko
 kernel/drivers/nfc/pn533.ko
 kernel/drivers/scsi/libiscsi.ko
 kernel/drivers/scsi/libiscsi_tcp.ko
@@ -348,6 +350,7 @@ kernel/drivers/usb/usbip/usbip-host.ko
 kernel/drivers/input/keyboard/gpio_keys.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/xpad.ko
+kernel/drivers/input/joystick/rpisense-js.ko
 kernel/drivers/input/touchscreen/ads7846.ko
 kernel/drivers/input/touchscreen/rpi-ft5406.ko
 kernel/drivers/input/touchscreen/egalax_ts.ko
@@ -996,6 +999,9 @@ kernel/drivers/w1/slaves/w1_ds2781.ko
 kernel/drivers/w1/slaves/w1_bq27000.ko
 kernel/drivers/w1/slaves/w1_ds28e04.ko
 kernel/drivers/w1/wire.ko
+kernel/drivers/hwmon/hwmon.ko
+kernel/drivers/hwmon/sht21.ko
+kernel/drivers/hwmon/shtc1.ko
 kernel/drivers/bluetooth/hci_vhci.ko
 kernel/drivers/bluetooth/bcm203x.ko
 kernel/drivers/bluetooth/bpa10x.ko

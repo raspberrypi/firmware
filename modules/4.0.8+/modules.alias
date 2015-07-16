@@ -143,6 +143,8 @@ alias of:N*T*Csolomon,ssd1307fb-i2c* ssd1307fb
 alias of:N*T*Csolomon,ssd1306fb-i2c* ssd1307fb
 alias i2c:ssd1307fb ssd1307fb
 alias i2c:ssd1306fb ssd1307fb
+alias of:N*T*Crpi,rpi-sense-fb* rpisense_fb
+alias platform:rpi-sense-fb rpisense_fb
 alias of:N*T*Cbrcm,bcm2835-rng* bcm2835_rng
 alias block-major-147-* drbd
 alias i2c:at24 at24
@@ -166,6 +168,7 @@ alias i2c:wm5102 arizona_i2c
 alias spi:wm5110 arizona_spi
 alias spi:wm5102 arizona_spi
 alias i2c:wl1273-fm wl1273_core
+alias i2c:rpi-sense rpisense_core
 alias usb:v072Fp2200d*dc*dsc*dp*ic*isc*ip*in* pn533
 alias usb:v054Cp02E1d*dc*dsc*dp*ic*isc*ip*in* pn533
 alias usb:v04E6p5591d*dc*dsc*dp*ic*isc*ip*in* pn533
@@ -5091,6 +5094,8 @@ alias usb:v045Ep*d*dc*dsc*dp*icFFisc5Dip01in* xpad
 alias usb:v044Fp*d*dc*dsc*dp*icFFisc5Dip81in* xpad
 alias usb:v044Fp*d*dc*dsc*dp*icFFisc5Dip01in* xpad
 alias usb:v*p*d*dc*dsc*dp*ic58isc42ip00in* xpad
+alias of:N*T*Crpi,rpi-sense-js* rpisense_js
+alias platform:rpi-sense-js rpisense_js
 alias spi:ads7846 ads7846
 alias of:N*T*Cti,ads7873* ads7846
 alias of:N*T*Cti,ads7846* ads7846
@@ -7414,6 +7419,9 @@ alias w1-family-0x32 w1_ds2780
 alias w1-family-0x3D w1_ds2781
 alias w1-family-0x01 w1_bq27000
 alias w1-family-0x1C w1_ds28e04
+alias i2c:sht21 sht21
+alias i2c:shtw1 shtc1
+alias i2c:shtc1 shtc1
 alias char-major-10-137 hci_vhci
 alias devname:vhci hci_vhci
 alias usb:v0A5Cp2033d*dc*dsc*dp*ic*isc*ip*in* bcm203x
