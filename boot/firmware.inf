@@ -1,0 +1,19 @@
+; Copyright (C) 2015 Richard Hughes
+
+[Version]
+Class=Firmware
+ClassGuid={f2e7dd72-6468-4e36-b6f1-6488f42c1b52}
+
+[Firmware_CopyFiles]
+firmware.bin
+
+[Firmware_AddReg]
+HKR,,FirmwareId,,{c77029fe-ffb2-3706-dc67-67af4a132afd}
+HKR,,FirmwareVersion,%REG_DWORD%,0x0000000
+HKR,,FirmwareFilename,,firmware.bin
+
+[Strings]
+Provider     = "Raspberry Pi Foundation"
+MfgName      = "Raspberry Pi"
+FirmwareDesc = "Raspberry Pi Firmware"
+DiskName     = "Firmware for the Raspberry Pi"
