@@ -225,12 +225,12 @@ extern void logging_assert_dump(void);
 
 #ifndef vcos_assert
 #define vcos_assert(cond) \
-   ( (cond) ? (void)0 : (VCOS_ASSERT_MSG("%s", #cond), VCOS_ASSERT_BKPT) )
+   ( (cond) ? (void)0 : (VCOS_ASSERT_BKPT, VCOS_ASSERT_MSG("%s", #cond)) )
 #endif
 
 #ifndef vcos_assert_msg
 #define vcos_assert_msg(cond, ...) \
-   ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT) )
+   ( (cond) ? (void)0 : (VCOS_ASSERT_BKPT, VCOS_ASSERT_MSG(__VA_ARGS__)) )
 #endif
 
 #else  /* VCOS_ASSERT_ENABLED */
@@ -250,12 +250,12 @@ extern void logging_assert_dump(void);
 
 #ifndef vcos_demand
 #define vcos_demand(cond) \
-   ( (cond) ? (void)0 : (VCOS_ASSERT_MSG("%s", #cond), VCOS_ASSERT_BKPT, vcos_abort()) )
+   ( (cond) ? (void)0 : (VCOS_ASSERT_BKPT, VCOS_ASSERT_MSG("%s", #cond), vcos_abort()) )
 #endif
 
 #ifndef vcos_demand_msg
 #define vcos_demand_msg(cond, ...) \
-   ( (cond) ? (void)0 : (VCOS_ASSERT_MSG(__VA_ARGS__), VCOS_ASSERT_BKPT, vcos_abort()) )
+   ( (cond) ? (void)0 : (VCOS_ASSERT_BKPT, VCOS_ASSERT_MSG(__VA_ARGS__), vcos_abort()) )
 #endif
 
 #else  /* VCOS_DEMAND_ENABLED */

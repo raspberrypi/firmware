@@ -349,4 +349,9 @@ typedef struct {
    uint32_t serial_num;
 } TV_DEVICE_ID_T;
 
+// state flag for LCD attached
+enum {
+   VC_LCD_ATTACHED_DEFAULT    = (1 <<22),  /**<LCD display is attached and default */
+};
+
 #endif
