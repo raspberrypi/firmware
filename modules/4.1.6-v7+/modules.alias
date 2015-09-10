@@ -153,6 +153,8 @@ alias i2c:ssd1306fb ssd1307fb
 alias of:N*T*Crpi,rpi-sense-fb* rpisense_fb
 alias platform:rpi-sense-fb rpisense_fb
 alias of:N*T*Cbrcm,bcm2835-rng* bcm2835_rng
+alias platform:gpiomem-bcm2835 bcm2835_gpiomem
+alias of:N*T*Cbrcm,bcm2835-gpiomem* bcm2835_gpiomem
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24
@@ -7854,6 +7856,11 @@ alias usb:v17CCp1940d*dc*dsc*dp*ic*isc*ip*in* snd_usb_caiaq
 alias usb:v17CCp1969d*dc*dsc*dp*ic*isc*ip*in* snd_usb_caiaq
 alias usb:v0CCDp0080d*dc*dsc*dp*ic*isc*ip*in* snd_usb_6fire
 alias platform:soc-audio snd_soc_core
+alias i2c:adau1702 snd_soc_adau1701
+alias i2c:adau1701 snd_soc_adau1701
+alias i2c:adau1401a snd_soc_adau1701
+alias i2c:adau1401 snd_soc_adau1701
+alias of:N*T*Cadi,adau1701* snd_soc_adau1701
 alias i2c:pcm5142 snd_soc_pcm512x_i2c
 alias i2c:pcm5141 snd_soc_pcm512x_i2c
 alias i2c:pcm5122 snd_soc_pcm512x_i2c
@@ -7870,6 +7877,10 @@ alias i2c:wm8731 snd_soc_wm8731
 alias of:N*T*Cwlf,wm8731* snd_soc_wm8731
 alias i2c:wm8804 snd_soc_wm8804_i2c
 alias of:N*T*Cwlf,wm8804* snd_soc_wm8804_i2c
+alias of:N*T*Cti,tpa6140a2* snd_soc_tpa6130a2
+alias of:N*T*Cti,tpa6130a2* snd_soc_tpa6130a2
+alias i2c:tpa6140a2 snd_soc_tpa6130a2
+alias i2c:tpa6130a2 snd_soc_tpa6130a2
 alias platform:asoc-simple-card snd_soc_simple_card
 alias of:N*T*Csimple-audio-card* snd_soc_simple_card
 alias platform:bcm2708-i2s snd_soc_bcm2708_i2s
@@ -7881,6 +7892,7 @@ alias of:N*T*Chifiberry,hifiberry-amp* snd_soc_hifiberry_amp
 alias of:N*T*Crpi,rpi-dac* snd_soc_rpi_dac
 alias of:N*T*Crpi,rpi-proto* snd_soc_rpi_proto
 alias of:N*T*Ciqaudio,iqaudio-dac* snd_soc_iqaudio_dac
+alias of:N*T*Cjg,raspidacv3* snd_soc_raspidac3
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
 alias ematch-kind-1 em_cmp

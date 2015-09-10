@@ -112,6 +112,7 @@ alias symbol:__cookie_v6_check ipv6
 alias symbol:ath_hw_setbssidmask ath
 alias symbol:cfg80211_get_station cfg80211
 alias symbol:dm_snap_cow dm_snapshot
+alias symbol:sigmadsp_reset snd_soc_sigmadsp
 alias symbol:spk_serial_in_nowait speakup
 alias symbol:dvb_register_adapter dvb_core
 alias symbol:hashbin_get_first irda
@@ -530,6 +531,7 @@ alias symbol:xt_unregister_matches x_tables
 alias symbol:devm_iio_device_alloc industrialio
 alias symbol:gf128mul_4k_lle gf128mul
 alias symbol:nf_send_reset6 nf_reject_ipv6
+alias symbol:sigmadsp_attach snd_soc_sigmadsp
 alias symbol:v9fs_unregister_trans 9pnet
 alias symbol:dvb_ca_en50221_camchange_irq dvb_core
 alias symbol:ssb_chipco_gpio_control ssb
@@ -803,6 +805,7 @@ alias symbol:ieee80211_data_from_8023 cfg80211
 alias symbol:snd_soc_dai_set_pll snd_soc_core
 alias symbol:ieee80211_get_buffered_bc mac80211
 alias symbol:snd_soc_dapm_put_pin_switch snd_soc_core
+alias symbol:devm_sigmadsp_init_i2c snd_soc_sigmadsp_i2c
 alias symbol:can_proto_unregister can
 alias symbol:irda_unregister_dongle sir_dev
 alias symbol:tveeprom_read tveeprom
@@ -1207,6 +1210,7 @@ alias symbol:cx231xx_register_extension cx231xx
 alias symbol:nf_ct_remove_expectations nf_conntrack
 alias symbol:ath_regd_init ath
 alias symbol:cdrom_get_media_event cdrom
+alias symbol:tpa6130a2_stereo_enable snd_soc_tpa6130a2
 alias symbol:dib0090_set_switch dib0090
 alias symbol:ieee80211_tx_status_irqsafe mac80211
 alias symbol:p9_client_write 9pnet
@@ -1470,6 +1474,7 @@ alias symbol:hashbin_new irda
 alias symbol:nf_ct_get_tuplepr nf_conntrack
 alias symbol:rc_keydown rc_core
 alias symbol:iio_channel_start_all_cb industrialio
+alias symbol:tpa6130a2_add_controls snd_soc_tpa6130a2
 alias symbol:prism2_update_comms_qual hostap
 alias symbol:rt2x00usb_disconnect rt2x00usb
 alias symbol:unregister_8022_client p8022
@@ -1852,6 +1857,7 @@ alias symbol:hci_mgmt_chan_unregister bluetooth
 alias symbol:snd_soc_dai_set_channel_map snd_soc_core
 alias symbol:tea5761_attach tea5761
 alias symbol:xc2028_attach tuner_xc2028
+alias symbol:sigmadsp_setup snd_soc_sigmadsp
 alias symbol:radio_tea5777_exit shark2
 alias symbol:ssb_bus_unregister ssb
 alias symbol:usb_cdc_wdm_register cdc_wdm
@@ -3233,6 +3239,7 @@ alias symbol:hashbin_delete irda
 alias symbol:cfg80211_find_vendor_ie cfg80211
 alias symbol:hci_register_cb bluetooth
 alias symbol:snd_pcm_stop snd_pcm
+alias symbol:sigmadsp_restrict_params snd_soc_sigmadsp
 alias symbol:usb_serial_generic_write_bulk_callback usbserial
 alias symbol:lbs_queue_event libertas
 alias symbol:nf_conntrack_l4proto_tcp6 nf_conntrack
@@ -3347,6 +3354,7 @@ alias symbol:ath9k_cmn_spectral_scan_trigger ath9k_common
 alias symbol:dvb_usbv2_disconnect dvb_usb_v2
 alias symbol:dib9000_set_slave_frontend dib9000
 alias symbol:tua6100_attach tua6100
+alias symbol:devm_sigmadsp_init snd_soc_sigmadsp
 alias symbol:i2400m_reset i2400m
 alias symbol:dib9000_get_tuner_interface dib9000
 alias symbol:hci_reset_dev bluetooth

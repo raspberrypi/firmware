@@ -455,6 +455,12 @@ Params: pin                      Output pin (default 18) - see table
         clock                    PWM clock frequency (informational)
 
 
+Name:   raspidac3
+Info:   Configures the RaspiDAV Rev.3x audio card
+Load:   dtoverlay=raspidac3
+Params: <None>
+
+
 Name:   rpi-dac
 Info:   Configures the RPi DAC audio card
 Load:   dtoverlay=rpi-dac
@@ -496,6 +502,21 @@ Params: <None>
 Name:   sdhost
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock
 Load:   dtoverlay=sdhost,<param>=<val>
+Params: overclock_50             Clock (in MHz) to use when the MMC framework
+                                 requests 50MHz
+
+        force_pio                Disable DMA support (default off)
+
+        pio_limit                Number of blocks above which to use DMA
+                                 (default 1)
+
+        debug                    Enable debug output (default off)
+
+
+Name:   sdio
+Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
+        and enables SDIO via GPIOs 22-27.
+Load:   dtoverlay=sdio,<param>=<val>
 Params: overclock_50             Clock (in MHz) to use when the MMC framework
                                  requests 50MHz
 

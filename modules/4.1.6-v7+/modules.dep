@@ -122,6 +122,7 @@ kernel/drivers/video/fbdev/ssd1307fb.ko: kernel/drivers/video/fbdev/core/fb_sys_
 kernel/drivers/video/fbdev/rpisense-fb.ko: kernel/drivers/mfd/rpisense-core.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko:
 kernel/drivers/char/hw_random/bcm2835-rng.ko:
+kernel/drivers/char/broadcom/bcm2835-gpiomem.ko:
 kernel/drivers/base/regmap/regmap-i2c.ko:
 kernel/drivers/base/regmap/regmap-spi.ko:
 kernel/drivers/base/regmap/regmap-mmio.ko:
@@ -1059,14 +1060,18 @@ kernel/sound/usb/misc/snd-ua101.ko: kernel/sound/usb/snd-usbmidi-lib.ko kernel/s
 kernel/sound/usb/caiaq/snd-usb-caiaq.ko: kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/usb/6fire/snd-usb-6fire.ko: kernel/sound/core/snd-rawmidi.ko kernel/sound/core/seq/snd-seq-device.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/snd-soc-core.ko: kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
+kernel/sound/soc/codecs/snd-soc-adau1701.ko: kernel/sound/soc/codecs/snd-soc-sigmadsp-i2c.ko kernel/sound/soc/codecs/snd-soc-sigmadsp.ko kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/codecs/snd-soc-pcm512x.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/codecs/snd-soc-pcm512x-i2c.ko: kernel/sound/soc/codecs/snd-soc-pcm512x.ko kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/sound/soc/codecs/snd-soc-pcm1794a.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/codecs/snd-soc-pcm5102a.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
+kernel/sound/soc/codecs/snd-soc-sigmadsp.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
+kernel/sound/soc/codecs/snd-soc-sigmadsp-i2c.ko: kernel/sound/soc/codecs/snd-soc-sigmadsp.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/codecs/snd-soc-tas5713.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/sound/soc/codecs/snd-soc-wm8731.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/drivers/base/regmap/regmap-spi.ko kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/sound/soc/codecs/snd-soc-wm8804.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/codecs/snd-soc-wm8804-i2c.ko: kernel/sound/soc/codecs/snd-soc-wm8804.ko kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/drivers/base/regmap/regmap-i2c.ko
+kernel/sound/soc/codecs/snd-soc-tpa6130a2.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/generic/snd-soc-simple-card.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/bcm/snd-soc-bcm2708-i2s.ko: kernel/drivers/base/regmap/regmap-mmio.ko kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dac.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
@@ -1076,6 +1081,7 @@ kernel/sound/soc/bcm/snd-soc-hifiberry-amp.ko: kernel/sound/soc/snd-soc-core.ko 
 kernel/sound/soc/bcm/snd-soc-rpi-dac.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/bcm/snd-soc-rpi-proto.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/soc/bcm/snd-soc-iqaudio-dac.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
+kernel/sound/soc/bcm/snd-soc-raspidac3.ko: kernel/sound/soc/codecs/snd-soc-tpa6130a2.ko kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/sound/ac97_bus.ko:
 kernel/arch/arm/oprofile/oprofile.ko:
 kernel/net/core/pktgen.ko:
