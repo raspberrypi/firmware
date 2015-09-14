@@ -3908,7 +3908,6 @@
 0xd892fcf7	init_pid_ns	vmlinux	EXPORT_SYMBOL_GPL
 0xba2b7f64	cpufreq_generic_get	vmlinux	EXPORT_SYMBOL_GPL
 0x8d4b009e	bio_add_page	vmlinux	EXPORT_SYMBOL
-0x95166d8d	scsi_set_sense_information	vmlinux	EXPORT_SYMBOL
 0x0e0cb8a4	xprt_adjust_cwnd	vmlinux	EXPORT_SYMBOL_GPL
 0xac0ba8c1	blk_iopoll_disable	vmlinux	EXPORT_SYMBOL
 0xc10bfdc6	debugfs_create_u16	vmlinux	EXPORT_SYMBOL_GPL
