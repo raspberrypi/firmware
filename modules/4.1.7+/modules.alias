@@ -22,6 +22,8 @@ alias fs-ecryptfs ecryptfs
 alias fs-nfsd nfsd
 alias fs-cifs cifs
 alias fs-ntfs ntfs
+alias fs-jffs2 jffs2
+alias fs-ubifs ubifs
 alias devname:fuse fuse
 alias char-major-10-229 fuse
 alias fs-fuseblk fuse
@@ -133,6 +135,8 @@ alias crypto-authenc authenc
 alias authenc authenc
 alias crypto-authencesn authencesn
 alias authencesn authencesn
+alias crypto-lzo lzo
+alias lzo lzo
 alias crypto-ghash-generic ghash_generic
 alias ghash-generic ghash_generic
 alias crypto-ghash ghash_generic
@@ -149,6 +153,8 @@ alias platform:rpi-sense-fb rpisense_fb
 alias of:N*T*Cbrcm,bcm2835-rng* bcm2835_rng
 alias platform:gpiomem-bcm2835 bcm2835_gpiomem
 alias of:N*T*Cbrcm,bcm2835-gpiomem* bcm2835_gpiomem
+alias platform:smi-dev-bcm2835 bcm2835_smi_dev
+alias of:N*T*Cbrcm,bcm2835-smi-dev* bcm2835_smi_dev
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24
@@ -165,6 +171,8 @@ alias i2c:24c02 at24
 alias i2c:24c01 at24
 alias i2c:24c00 at24
 alias of:N*T*Ckim* st_drv
+alias platform:smi-bcm2835 bcm2835_smi
+alias of:N*T*Cbrcm,bcm2835-smi* bcm2835_smi
 alias i2c:wm8997 arizona_i2c
 alias i2c:wm8280 arizona_i2c
 alias i2c:wm5110 arizona_i2c
@@ -7441,6 +7449,10 @@ alias of:N*T*Cnec,upd161704* fb_upd161704
 alias spi:fb_watterott fb_watterott
 alias of:N*T*Cwatterott,openlcd* fb_watterott
 alias net-pf-16-proto-11 cn
+alias platform:smi-nand-bcm2835 bcm2835_smi_nand
+alias of:N*T*Cbrcm,bcm2835-smi-nand* bcm2835_smi_nand
+alias char-major-90-* mtd
+alias ofoldpart ofpart
 alias platform:uio_pdrv_genirq uio_pdrv_genirq
 alias of:N*T*C* uio_pdrv_genirq
 alias tty-ldisc-2 serport

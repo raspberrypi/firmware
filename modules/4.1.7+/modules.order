@@ -54,6 +54,8 @@ kernel/fs/ecryptfs/ecryptfs.ko
 kernel/fs/nfsd/nfsd.ko
 kernel/fs/cifs/cifs.ko
 kernel/fs/ntfs/ntfs.ko
+kernel/fs/jffs2/jffs2.ko
+kernel/fs/ubifs/ubifs.ko
 kernel/fs/fuse/fuse.ko
 kernel/fs/fuse/cuse.ko
 kernel/fs/overlayfs/overlay.ko
@@ -99,6 +101,7 @@ kernel/crypto/deflate.ko
 kernel/crypto/michael_mic.ko
 kernel/crypto/authenc.ko
 kernel/crypto/authencesn.ko
+kernel/crypto/lzo.ko
 kernel/crypto/ghash-generic.ko
 kernel/crypto/xor.ko
 kernel/crypto/async_tx/async_tx.ko
@@ -119,6 +122,7 @@ kernel/drivers/video/fbdev/rpisense-fb.ko
 kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/char/hw_random/bcm2835-rng.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko
+kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
 kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/base/regmap/regmap-spi.ko
 kernel/drivers/base/regmap/regmap-mmio.ko
@@ -130,6 +134,7 @@ kernel/drivers/block/zram/zram.ko
 kernel/drivers/misc/eeprom/at24.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/ti-st/st_drv.ko
+kernel/drivers/misc/bcm2835_smi.ko
 kernel/drivers/mfd/arizona-i2c.ko
 kernel/drivers/mfd/arizona-spi.ko
 kernel/drivers/mfd/ucb1400_core.ko
@@ -972,6 +977,16 @@ kernel/drivers/staging/fbtft/fb_watterott.ko
 kernel/drivers/staging/fbtft/flexfb.ko
 kernel/drivers/staging/fbtft/fbtft_device.ko
 kernel/drivers/connector/cn.ko
+kernel/drivers/mtd/chips/chipreg.ko
+kernel/drivers/mtd/nand/nand.ko
+kernel/drivers/mtd/nand/nand_ecc.ko
+kernel/drivers/mtd/nand/nand_ids.ko
+kernel/drivers/mtd/nand/bcm2835_smi_nand.ko
+kernel/drivers/mtd/mtd.ko
+kernel/drivers/mtd/ofpart.ko
+kernel/drivers/mtd/mtd_blkdevs.ko
+kernel/drivers/mtd/mtdblock.ko
+kernel/drivers/mtd/ubi/ubi.ko
 kernel/drivers/uio/uio.ko
 kernel/drivers/uio/uio_pdrv_genirq.ko
 kernel/drivers/block/aoe/aoe.ko
