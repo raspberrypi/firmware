@@ -178,7 +178,7 @@ Load:   dtoverlay=at86rf233,<param>=<val>
 Params: interrupt                GPIO used for INT (default 23)
         reset                    GPIO used for Reset (default 24)
         sleep                    GPIO used for Sleep (default 25)
-        speed                    SPI bus speed in Hz (default 750000)
+        speed                    SPI bus speed in Hz (default 6000000)
         trim                     Fine tuning of the internal capacitance
                                  arrays (0=+0pF, 15=+4.5pF, default 15)
 
@@ -411,6 +411,20 @@ Params: speed                    Display SPI bus speed
         xohms                    Touchpanel sensitivity (X-plate resistance)
 
 
+Name:   piscreen2r
+Info:   PiScreen 2 with resistive TP display by OzzMaker.com
+Load:   dtoverlay=piscreen,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        xohms                    Touchpanel sensitivity (X-plate resistance)
+
+
 Name:   pitft28-resistive
 Info:   Adafruit PiTFT 2.8" resistive touch screen
 Load:   dtoverlay=pitft28-resistive,<param>=<val>
@@ -473,6 +487,12 @@ Params: pin                      Output pin (default 18) - see table
 Name:   raspidac3
 Info:   Configures the RaspiDAV Rev.3x audio card
 Load:   dtoverlay=raspidac3
+Params: <None>
+
+
+Name:   rpi-backlight
+Info:   Raspberry Pi official display backlight driver
+Load:   dtoverlay=rpi-backlight
 Params: <None>
 
 
