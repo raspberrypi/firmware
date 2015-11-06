@@ -427,6 +427,7 @@ kernel/drivers/rtc/rtc-s35390a.ko
 kernel/drivers/rtc/rtc-x1205.ko
 kernel/drivers/i2c/algos/i2c-algo-bit.ko
 kernel/drivers/i2c/busses/i2c-bcm2708.ko
+kernel/drivers/i2c/busses/i2c-gpio.ko
 kernel/drivers/i2c/i2c-dev.ko
 kernel/drivers/i2c/i2c-mux.ko
 kernel/drivers/media/i2c/msp3400.ko
@@ -1048,6 +1049,7 @@ kernel/drivers/ssb/ssb.ko
 kernel/drivers/bcma/bcma.ko
 kernel/drivers/extcon/extcon.ko
 kernel/drivers/extcon/extcon-arizona.ko
+kernel/drivers/iio/adc/mcp320x.ko
 kernel/drivers/iio/humidity/dht11.ko
 kernel/drivers/iio/industrialio.ko
 kernel/drivers/iio/kfifo_buf.ko

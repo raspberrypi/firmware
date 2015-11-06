@@ -49152,7 +49152,7 @@ c081902c T __initramfs_start
 c081902c t __irf_start
 c081902c T __security_initcall_end
 c081902c T __security_initcall_start
-c08190b2 t __irf_end
+c08190b1 t __irf_end
 c08190b8 T __initramfs_size
 c081a000 D __data_loc
 c081a000 D __init_end

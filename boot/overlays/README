@@ -284,6 +284,17 @@ Params: speed                    Display SPI bus speed
         ledgpio                  GPIO used to control backlight
 
 
+Name:   i2c-gpio
+Info:   Adds support for software i2c controller on gpio pins
+Load:   dtoverlay=i2c-gpio,<param>
+Params: i2c_gpio_sda             GPIO used for I2C data (default "23")
+
+        i2c_gpio_scl             GPIO used for I2C clock (default "24")
+
+        i2c_gpio_delay_us        Clock delay in microseconds
+                                 (default "2" = ~100kHz)
+
+
 Name:   i2c-rtc
 Info:   Adds support for a number of I2C Real Time Clock devices
 Load:   dtoverlay=i2c-rtc,<param>
@@ -423,6 +434,28 @@ Params: speed                    Display SPI bus speed
         debug                    Debug output level {0-7}
 
         xohms                    Touchpanel sensitivity (X-plate resistance)
+
+
+Name:   pitft28-capacitive
+Info:   Adafruit PiTFT 2.8" capacitive touch screen
+Load:   dtoverlay=pitft28-capacitive,<param>=<val>
+Params: speed                    Display SPI bus speed
+
+        rotate                   Display rotation {0,90,180,270}
+
+        fps                      Delay between frame updates
+
+        debug                    Debug output level {0-7}
+
+        touch-sizex              Touchscreen size x (default 240)
+
+        touch-sizey              Touchscreen size y (default 320)
+
+        touch-invx               Touchscreen inverted x axis
+
+        touch-invy               Touchscreen inverted y axis
+
+        touch-swapxy             Touchscreen swapped x y axis
 
 
 Name:   pitft28-resistive
