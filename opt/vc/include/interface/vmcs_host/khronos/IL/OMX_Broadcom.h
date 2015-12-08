@@ -2512,5 +2512,22 @@ typedef struct OMX_PARAM_CAMERARXTIMING_TYPE {
    OMX_U32 nCpiTiming1;
    OMX_U32 nCpiTiming2;
 } OMX_PARAM_CAMERARXTIMING_TYPE;
+
+typedef enum OMX_BAYERORDERTYPE {
+   OMX_BayerOrderRGGB = 0,
+   OMX_BayerOrderGBRG = 1,
+   OMX_BayerOrderBGGR = 3,
+   OMX_BayerOrderGRBG = 3,
+
+   OMX_BayerOrderMax = 0x7FFFFFFF
+} OMX_BAYERORDERTYPE;
+
+typedef struct OMX_PARAM_BAYERORDERTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_U32 nPortIndex;                    /**< port that this structure applies to */
+   OMX_BAYERORDERTYPE eBayerOrder;
+} OMX_PARAM_BAYERORDERTYPE;
 #endif
 /* File EOF */
