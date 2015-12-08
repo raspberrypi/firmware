@@ -7392,6 +7392,11 @@ alias spi:hx8353d fb_hx8353d
 alias platform:fb_hx8353d fb_hx8353d
 alias spi:fb_hx8353d fb_hx8353d
 alias of:N*T*Chimax,hx8353d* fb_hx8353d
+alias platform:ili9163 fb_ili9163
+alias spi:ili9163 fb_ili9163
+alias platform:fb_ili9163 fb_ili9163
+alias spi:fb_ili9163 fb_ili9163
+alias of:N*T*Cilitek,ili9163* fb_ili9163
 alias platform:ili9320 fb_ili9320
 alias spi:ili9320 fb_ili9320
 alias platform:fb_ili9320 fb_ili9320

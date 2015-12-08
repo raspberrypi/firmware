@@ -964,6 +964,7 @@ kernel/drivers/staging/fbtft/fb_bd663474.ko
 kernel/drivers/staging/fbtft/fb_hx8340bn.ko
 kernel/drivers/staging/fbtft/fb_hx8347d.ko
 kernel/drivers/staging/fbtft/fb_hx8353d.ko
+kernel/drivers/staging/fbtft/fb_ili9163.ko
 kernel/drivers/staging/fbtft/fb_ili9320.ko
 kernel/drivers/staging/fbtft/fb_ili9325.ko
 kernel/drivers/staging/fbtft/fb_ili9340.ko

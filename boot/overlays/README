@@ -209,9 +209,25 @@ Params: int_pin                  GPIO used for INT (default 25)
         speed                    SPI bus speed (default 12000000)
 
 
+Name:   gpio-ir
+Info:   Use GPIO pin as rc-core style infrared receiver input. The rc-core-
+        based gpio_ir_recv driver maps received keys directly to a
+        /dev/input/event* device, all decoding is done by the kernel - LIRC is
+        not required! The key mapping and other decoding parameters can be
+        configured by "ir-keytable" tool.
+Load:   dtoverlay=gpio-ir,<param>=<val>
+Params: gpio_pin                 Input pin number. Default is 18.
+
+        gpio_pull                Desired pull-up/down state (off, down, up)
+                                 Default is "down".
+
+        rc-map-name              Default rc keymap (can also be changed by
+                                 ir-keytable), defaults to "rc-rc6-mce"
+
+
 Name:   gpio-poweroff
 Info:   Drives a GPIO high or low on reboot
-Load:   gpio-poweroff,<param>=<val>
+Load:   dtoverlay=gpio-poweroff,<param>=<val>
 Params: gpiopin                  GPIO for signalling (default 26)
 
         active_low               Set if the power control device requires a
@@ -286,7 +302,7 @@ Params: speed                    Display SPI bus speed
 
 Name:   i2c-gpio
 Info:   Adds support for software i2c controller on gpio pins
-Load:   dtoverlay=i2c-gpio,<param>
+Load:   dtoverlay=i2c-gpio,<param>=<val>
 Params: i2c_gpio_sda             GPIO used for I2C data (default "23")
 
         i2c_gpio_scl             GPIO used for I2C clock (default "24")
@@ -297,7 +313,7 @@ Params: i2c_gpio_sda             GPIO used for I2C data (default "23")
 
 Name:   i2c-rtc
 Info:   Adds support for a number of I2C Real Time Clock devices
-Load:   dtoverlay=i2c-rtc,<param>
+Load:   dtoverlay=i2c-rtc,<param>=<val>
 Params: ds1307                   Select the DS1307 device
 
         ds3231                   Select the DS3231 device
@@ -332,7 +348,7 @@ Params: <None>
 Name:   lirc-rpi
 Info:   Configures lirc-rpi (Linux Infrared Remote Control for Raspberry Pi)
         Consult the module documentation for more details.
-Load:   dtoverlay=lirc-rpi,<param>=<val>,...
+Load:   dtoverlay=lirc-rpi,<param>=<val>
 Params: gpio_out_pin             GPIO for output (default "17")
 
         gpio_in_pin              GPIO for input (default "18")
@@ -424,7 +440,7 @@ Params: speed                    Display SPI bus speed
 
 Name:   piscreen2r
 Info:   PiScreen 2 with resistive TP display by OzzMaker.com
-Load:   dtoverlay=piscreen,<param>=<val>
+Load:   dtoverlay=piscreen2r,<param>=<val>
 Params: speed                    Display SPI bus speed
 
         rotate                   Display rotation {0,90,180,270}
@@ -489,7 +505,6 @@ Info:   Configures a single PWM channel
           3) So be careful mixing audio and PWM.
           4) Currently the clock must have been enabled and configured
              by other means.
-Load:   dtoverlay=pwm-2chan,<param>=<val>
 Load:   dtoverlay=pwm,<param>=<val>
 Params: pin                      Output pin (default 18) - see table
         func                     Pin function (default 2 = Alt5) - see above
@@ -595,6 +610,9 @@ Params: overclock_50             Clock (in MHz) to use when the MMC framework
 
         debug                    Enable debug output (default off)
 
+        poll_once                Disable SDIO-device polling every second
+                                 (default on: polling once at boot-time)
+
 
 Name:   smi
 Info:   Enables the Secondary Memory Interface peripheral. Uses GPIOs 2-25!
@@ -692,7 +710,7 @@ Params: gpiopin                  GPIO for I/O (default "4")
 Name:   w1-gpio-pullup
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *do* need a GPIO to drive an external pullup.
-Load:   dtoverlay=w1-gpio-pullup,<param>=<val>,...
+Load:   dtoverlay=w1-gpio-pullup,<param>=<val>
 Params: gpiopin                  GPIO for I/O (default "4")
 
         pullup                   Non-zero, "on", or "y" to enable the parasitic
