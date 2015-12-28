@@ -142,6 +142,7 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_FormatBRCMOpaque,
     OMX_COLOR_FormatYVU420PackedPlanar,
     OMX_COLOR_FormatYVU420PackedSemiPlanar,
+    OMX_COLOR_FormatRawBayer16bit,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
