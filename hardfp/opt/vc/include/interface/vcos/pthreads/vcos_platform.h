@@ -450,6 +450,38 @@ VCOS_LLTHREAD_T *vcos_llthread_current(void) {
    return (VCOS_LLTHREAD_T *)pthread_self();
 }
 
+VCOS_INLINE_IMPL
+VCOS_UNSIGNED vcos_thread_get_affinity(VCOS_THREAD_T *thread) {
+   vcos_unused(thread);
+   return _VCOS_AFFINITY_CPU0;
+}
+
+VCOS_INLINE_IMPL
+int vcos_thread_running(VCOS_THREAD_T *thread) {
+   vcos_unused(thread);
+   /* Not applicable to pthreads */
+   return 0;
+}
+
+VCOS_INLINE_IMPL
+VCOS_UNSIGNED vcos_change_preemption(VCOS_UNSIGNED pe) {
+   vcos_unused(pe);
+   /* Nothing to do */
+   return 0;
+}
+
+VCOS_INLINE_IMPL
+void vcos_thread_relinquish(void) {
+   /* Nothing to do */
+}
+
+VCOS_INLINE_IMPL
+void vcos_thread_resume(VCOS_THREAD_T *thread) {
+   vcos_unused(thread);
+   /* Nothing to do */
+}
+
+
 /*
  * Mutexes
  */
@@ -638,6 +670,60 @@ VCOS_STATUS_T vcos_tls_set(VCOS_TLS_KEY_T tls, void *v) {
 VCOS_INLINE_IMPL
 void *vcos_tls_get(VCOS_TLS_KEY_T tls) {
    return pthread_getspecific(tls);
+}
+
+/***********************************************************
+ *
+ * Timers
+ *
+ ***********************************************************/
+
+//Other platforms can call compatible OS implementations directly
+//from inline functions with minimal overhead.
+//Pthreads needs a little bit more, so call functions
+//in vcos_pthreads.c from the inline functions.
+VCOS_STATUS_T vcos_pthreads_timer_create(VCOS_TIMER_T *timer,
+                                const char *name,
+                                void (*expiration_routine)(void *context),
+                                void *context);
+void vcos_pthreads_timer_set(VCOS_TIMER_T *timer, VCOS_UNSIGNED delay_ms);
+void vcos_pthreads_timer_cancel(VCOS_TIMER_T *timer);
+void vcos_pthreads_timer_reset(VCOS_TIMER_T *timer, VCOS_UNSIGNED delay_ms);
+void vcos_pthreads_timer_delete(VCOS_TIMER_T *timer);
+
+/** Create a timer.
+  *
+  * Note that we just cast the expiry function - this assumes that UNSIGNED
+  * and VOID* are the same size.
+  */
+
+
+VCOS_INLINE_IMPL
+VCOS_STATUS_T vcos_timer_create(VCOS_TIMER_T *timer,
+                                const char *name,
+                                void (*expiration_routine)(void *context),
+                                void *context) {
+   return vcos_pthreads_timer_create(timer, name, expiration_routine, context);
+}
+
+VCOS_INLINE_IMPL
+void vcos_timer_set(VCOS_TIMER_T *timer, VCOS_UNSIGNED delay_ms) {
+   return vcos_pthreads_timer_set(timer, delay_ms);
+}
+
+VCOS_INLINE_IMPL
+void vcos_timer_cancel(VCOS_TIMER_T *timer) {
+   return vcos_pthreads_timer_cancel(timer);
+}
+
+VCOS_INLINE_IMPL
+void vcos_timer_reset(VCOS_TIMER_T *timer, VCOS_UNSIGNED delay) {
+   vcos_timer_set(timer, delay);
+}
+
+VCOS_INLINE_IMPL
+void vcos_timer_delete(VCOS_TIMER_T *timer) {
+   vcos_pthreads_timer_delete(timer);
 }
 
 #if VCOS_HAVE_ATOMIC_FLAGS
