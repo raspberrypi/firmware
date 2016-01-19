@@ -131,6 +131,9 @@ kernel/drivers/char/hw_random/bcm2708-rng.ko
 kernel/drivers/char/hw_random/bcm2835-rng.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
+kernel/drivers/gpu/drm/drm_kms_helper.ko
+kernel/drivers/gpu/drm/drm.ko
+kernel/drivers/gpu/drm/vc4/vc4.ko
 kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/base/regmap/regmap-spi.ko
 kernel/drivers/base/regmap/regmap-mmio.ko
