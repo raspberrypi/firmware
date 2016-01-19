@@ -51602,7 +51602,7 @@ c08478f0 T __initramfs_start
 c08478f0 t __irf_start
 c08478f0 T __security_initcall_end
 c08478f0 T __security_initcall_start
-c0847977 t __irf_end
+c0847975 t __irf_end
 c0847978 T __initramfs_size
 c0848000 D __data_loc
 c0848000 D __init_end

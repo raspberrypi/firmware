@@ -52761,7 +52761,7 @@
 8086b9a8 t __irf_start
 8086b9a8 T __security_initcall_end
 8086b9a8 T __security_initcall_start
-8086ba2f t __irf_end
+8086ba2d t __irf_end
 8086ba30 T __initramfs_size
 8086c000 D __per_cpu_load
 8086c000 D __per_cpu_start

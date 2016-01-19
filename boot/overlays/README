@@ -110,7 +110,7 @@ Params:
                                  (default "off")
 
         random                   Set to "on" to enable the hardware random
-                                 number generator (default "off")
+                                 number generator (default "on")
 
         uart0                    Set to "off" to disable uart0 (default "on")
 
@@ -210,9 +210,9 @@ Info:   Selects the dwc2 USB controller driver
 Load:   dtoverlay=dwc2,<param>=<val>
 Params: dr_mode                  Dual role mode: "host", "peripheral" or "otg"
 
-        g-np-tx-fifo-size        Size of rx fifo size in gadget mode
+        g-rx-fifo-size           Size of rx fifo size in gadget mode
 
-        g-rx-fifo-size           Size of non-periodic tx fifo size in gadget
+        g-np-tx-fifo-size        Size of non-periodic tx fifo size in gadget
                                  mode
 
         g-tx-fifo-size           Size of periodic tx fifo per endpoint
@@ -633,6 +633,8 @@ Params: overclock_50             Clock (in MHz) to use when the MMC framework
 
         poll_once                Disable SDIO-device polling every second
                                  (default on: polling once at boot-time)
+
+        bus_width                Set the SDIO host bus width (default 4 bits)
 
 
 Name:   sdtweak
