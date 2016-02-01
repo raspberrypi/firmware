@@ -97,7 +97,7 @@ int vcos_mutex_is_locked(VCOS_MUTEX_T *m);
   *
   * @param m  the mutex to try to obtain
   *
-  * @return VCOS_SUCCESS if mutex is succesfully obtained, or VCOS_EAGAIN
+  * @return VCOS_SUCCESS if mutex is successfully obtained, or VCOS_EAGAIN
   * if it is already in use by another thread.
   */
 #ifndef vcos_mutex_trylock

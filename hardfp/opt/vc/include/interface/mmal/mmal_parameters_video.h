@@ -427,7 +427,7 @@ typedef struct MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE_T {
    uint32_t loss_rate;
 } MMAL_PARAMETER_VIDEO_EEDE_LOSSRATE_T;
 
-/** Structure for setting inital DRM parameters */
+/** Structure for setting initial DRM parameters */
 typedef struct MMAL_PARAMETER_VIDEO_DRM_INIT_INFO_T {
    MMAL_PARAMETER_HEADER_T hdr;
 

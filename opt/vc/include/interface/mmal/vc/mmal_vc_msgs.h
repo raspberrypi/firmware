@@ -39,7 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define MMAL_CONTROL_FOURCC() VCHIQ_MAKE_FOURCC('m','m','a','l')
 
-/* Major version indicates binary backwards compatiblity */
+/* Major version indicates binary backwards compatibility */
 #define WORKER_VER_MAJOR   16
 #define WORKER_VER_MINIMUM 10
 /* Minor version is not used normally.
@@ -263,7 +263,7 @@ vcos_static_assert(sizeof(mmal_worker_drm_get_time_reply) <= MMAL_WORKER_MAX_MSG
 /** List of actions for a port */
 enum MMAL_WORKER_PORT_ACTIONS
 {
-   MMAL_WORKER_PORT_ACTION_UNKNOWN = 0,        /**< Unkown action */
+   MMAL_WORKER_PORT_ACTION_UNKNOWN = 0,        /**< Unknown action */
    MMAL_WORKER_PORT_ACTION_ENABLE,             /**< Enable a port */
    MMAL_WORKER_PORT_ACTION_DISABLE,            /**< Disable a port */
    MMAL_WORKER_PORT_ACTION_FLUSH,              /**< Flush a port */
