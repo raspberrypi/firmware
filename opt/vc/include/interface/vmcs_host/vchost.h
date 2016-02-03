@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UNUSED_PARAMETER(x) ((void)(x))/* macro to suppress not use warning */
 
 /*---------------------------------------------------------------------------*/
-/* Byte-swapping, dependant on host's orientation */
+/* Byte-swapping, dependent on host's orientation */
 /*---------------------------------------------------------------------------*/
 
 #ifndef VC_HOST_IS_BIG_ENDIAN

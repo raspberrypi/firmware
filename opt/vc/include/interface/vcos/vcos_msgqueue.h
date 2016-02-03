@@ -153,7 +153,7 @@ typedef struct VCOS_MSGQ_POOL_T
    uint32_t magic;
 } VCOS_MSGQ_POOL_T;
 
-/** Initalise the library. Normally called from vcos_init().
+/** Initialise the library. Normally called from vcos_init().
   */
 VCOSPRE_ VCOS_STATUS_T VCOSPOST_ vcos_msgq_init(void);
 

@@ -150,7 +150,7 @@ typedef struct VCOS_BLOCKPOOL_TAG
  * Sanity check to verify whether a handle is potentially a blockpool handle
  * when the pool pointer is not available.
  *
- * If the pool pointer is availabe use vcos_blockpool_elem_to_handle instead.
+ * If the pool pointer is available use vcos_blockpool_elem_to_handle instead.
  *
  * @param handle       the handle to verify
  * @param max_blocks   the expected maximum number of block in the pool

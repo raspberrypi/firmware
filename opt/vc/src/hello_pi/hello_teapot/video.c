@@ -188,7 +188,7 @@ void *video_decode_test(void* arg)
             ilclient_change_component_state(egl_render, OMX_StateIdle);
 
             // Enable the output port and tell egl_render to use the texture as a buffer
-            //ilclient_enable_port(egl_render, 221); THIS BLOCKS SO CANT BE USED
+            //ilclient_enable_port(egl_render, 221); THIS BLOCKS SO CAN'T BE USED
             if (OMX_SendCommand(ILC_GET_HANDLE(egl_render), OMX_CommandPortEnable, 221, NULL) != OMX_ErrorNone)
             {
                printf("OMX_CommandPortEnable failed.\n");

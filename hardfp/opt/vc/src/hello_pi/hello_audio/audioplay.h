@@ -84,7 +84,7 @@ typedef struct AUDIOPLAY_STATE_T AUDIOPLAY_STATE_T;
  * @param  buffer_size  The size in bytes of each buffer that will be used to write
  *                      PCM samples into.  Note that small buffers of less than a few
  *                      Kb in size may be faster than larger buffers, although this is
- *                      platform dependant.
+ *                      platform dependent.
  *                     
  * @return              0 on success, -1 on failure.
  *********************************************************************************/

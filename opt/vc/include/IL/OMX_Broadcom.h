@@ -738,7 +738,7 @@ typedef enum OMX_CAMERAIMAGEPOOLINPUTMODETYPE {
                                                anyway.
                                              */
    OMX_CAMERAIMAGEPOOLINPUTMODE_TWOPOOLS,    /*All stills & video input images are allocated
-                                               from two seperate pools.
+                                               from two separate pools.
                                                This ensures that parallel capture can work, but
                                                would consume more memory if used on a simple
                                                stills capture use case.
@@ -961,7 +961,7 @@ The \code{nByteCount} field is a 64 bit value, that will either use a
 For each port on the clock component, requests for media times may be
 made.  These are typically done one per video frame to allow for
 scheduling the display of that frame at the correct time.  If a
-request is made after the time has occured, then that frame will be
+request is made after the time has occurred, then that frame will be
 displayed late, and the clock component keeps a per-port record of the
 number of times this occurs.  This record can be read using this
 index.
@@ -2124,7 +2124,7 @@ typedef struct OMX_PARAM_TIMESTAMPMODETYPE
    OMX_TIMESTAMPMODETYPE eTimestampMode;
 } OMX_PARAM_TIMESTAMPMODETYPE;
 /*
- Specifies what to use as timestamps in the abscence of a clock component.
+ Specifies what to use as timestamps in the absence of a clock component.
 */
 
 /* EGL image buffer for passing to video port.

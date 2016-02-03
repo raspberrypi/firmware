@@ -442,7 +442,7 @@ int
 decodeImage(OPENMAX_JPEG_DECODER * decoder, char *sourceImage,
 	    size_t imageSize)
 {
-    char           *sourceOffset = sourceImage;	// we store a seperate
+    char           *sourceOffset = sourceImage;	// we store a separate
 						// buffer ot image so we
 						// can offset it
     size_t          toread = 0;	// bytes left to read from buffer

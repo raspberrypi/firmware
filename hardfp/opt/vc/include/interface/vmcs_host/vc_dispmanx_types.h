@@ -52,7 +52,7 @@ typedef uint32_t DISPMANX_PROTECTION_T;
 
 
 /* Default display IDs.
-   Note: if you overwrite with you own dispmanx_platfrom_init function, you
+   Note: if you overwrite with your own dispmanx_platform_init function, you
    should use IDs you provided during dispmanx_display_attach.
 */
 #define DISPMANX_ID_MAIN_LCD  0

@@ -537,7 +537,7 @@ typedef enum {
    VC_HDMI_ERROR_INVALID_INFOFRAME  = 5, /** invalid infoframe */
 } VC_HDMI_ERROR_T;
 
-/* Defines for backward code compatibilty (these were originally in hdmi.h) */
+/* Defines for backward code compatibility (these were originally in hdmi.h) */
 typedef VC_HDMI_ERROR_T HDMI_RESULT_T;
 #define HDMI_RESULT_SUCCESS (VC_HDMI_SUCCESS)
 #define HDMI_RESULT_FAILED  (VC_HDMI_ERROR_FORMAT_UNSUPPORTED)
