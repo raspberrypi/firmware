@@ -50187,7 +50187,7 @@
 807f371c t __irf_start
 807f371c T __security_initcall_end
 807f371c T __security_initcall_start
-807f37a2 t __irf_end
+807f37a1 t __irf_end
 807f37a8 T __initramfs_size
 807f4000 D __per_cpu_load
 807f4000 D __per_cpu_start
