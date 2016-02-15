@@ -56,6 +56,8 @@ typedef struct
    uint32_t screen_width;
    uint32_t screen_height;
 // OpenGL|ES objects
+   DISPMANX_DISPLAY_HANDLE_T dispman_display;
+   DISPMANX_ELEMENT_HANDLE_T dispman_element;
    EGLDisplay display;
    EGLSurface surface;
    EGLContext context;
@@ -110,8 +112,6 @@ static void init_ogl(CUBE_STATE_T *state)
 
    static EGL_DISPMANX_WINDOW_T nativewindow;
 
-   DISPMANX_ELEMENT_HANDLE_T dispman_element;
-   DISPMANX_DISPLAY_HANDLE_T dispman_display;
    DISPMANX_UPDATE_HANDLE_T dispman_update;
    VC_RECT_T dst_rect;
    VC_RECT_T src_rect;
@@ -158,14 +158,14 @@ static void init_ogl(CUBE_STATE_T *state)
    src_rect.width = state->screen_width << 16;
    src_rect.height = state->screen_height << 16;        
 
-   dispman_display = vc_dispmanx_display_open( 0 /* LCD */);
+   state->dispman_display = vc_dispmanx_display_open( 0 /* LCD */);
    dispman_update = vc_dispmanx_update_start( 0 );
          
-   dispman_element = vc_dispmanx_element_add ( dispman_update, dispman_display,
+   state->dispman_element = vc_dispmanx_element_add ( dispman_update, state->dispman_display,
       0/*layer*/, &dst_rect, 0/*src*/,
       &src_rect, DISPMANX_PROTECTION_NONE, 0 /*alpha*/, 0/*clamp*/, 0/*transform*/);
       
-   nativewindow.element = dispman_element;
+   nativewindow.element = state->dispman_element;
    nativewindow.width = state->screen_width;
    nativewindow.height = state->screen_height;
    vc_dispmanx_update_submit_sync( dispman_update );
@@ -493,13 +493,24 @@ static void load_tex_images(CUBE_STATE_T *state)
 static void exit_func(void)
 // Function to be passed to atexit().
 {
+   DISPMANX_UPDATE_HANDLE_T dispman_update;
+   int s;
    // clear screen
    glClear( GL_COLOR_BUFFER_BIT );
    eglSwapBuffers(state->display, state->surface);
 
+   glDeleteTextures(6, state->tex);
+   eglDestroySurface( state->display, state->surface );
+
+   dispman_update = vc_dispmanx_update_start( 0 );
+   s = vc_dispmanx_element_remove(dispman_update, state->dispman_element);
+   assert(s == 0);
+   vc_dispmanx_update_submit_sync( dispman_update );
+   s = vc_dispmanx_display_close(state->dispman_display);
+   assert (s == 0);
+
    // Release OpenGL resources
    eglMakeCurrent( state->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT );
-   eglDestroySurface( state->display, state->surface );
    eglDestroyContext( state->display, state->context );
    eglTerminate( state->display );
 
