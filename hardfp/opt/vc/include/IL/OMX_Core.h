@@ -33,6 +33,17 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#if !defined(OMX_SKIP64BIT) && !defined(_VIDEOCORE)
+  /* The Videocore compiler doesn't enforce 64 bit alignment on 64 bit variables,
+   * which is almost equivalent to OMX_SKIP64BIT.
+   * Annoyingly struct OMX_BUFFERHEADERTYPE doesn't do the sensible thing
+   * and add padding fields or similar to make it the same for all compilers,
+   * so all clients need to define this.
+   * Warn if this isn't set, as the GPU will not interpret your buffers correctly,
+   * or vice versa.
+   */
+  #warning OMX_SKIP64BIT is not defined - this will be incompatible with the VC GPU code.
+#endif
 
 /* Each OMX header shall include all required header files to allow the
  *  header to compile without errors.  The includes below are required
