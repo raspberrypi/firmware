@@ -6853,6 +6853,7 @@
 0x892d026b	swiotlb_dma_mapping_error	vmlinux	EXPORT_SYMBOL
 0x3dfc5525	nf_conntrack_helper_try_module_get	net/netfilter/nf_conntrack	EXPORT_SYMBOL_GPL
 0x3b9b19d1	spk_synth_is_alive_nop	drivers/staging/speakup/speakup	EXPORT_SYMBOL_GPL
+0xc332828a	h4_recv_buf	drivers/bluetooth/hci_uart	EXPORT_SYMBOL_GPL
 0xd791ea5c	tcp_timewait_state_process	vmlinux	EXPORT_SYMBOL
 0x75bdea12	iommu_area_alloc	vmlinux	EXPORT_SYMBOL
 0x44643b93	__aeabi_lmul	vmlinux	EXPORT_SYMBOL
