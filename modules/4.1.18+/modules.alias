@@ -204,6 +204,8 @@ alias platform:bcm2708_spi spi_bcm2708
 alias of:N*T*Cbrcm,bcm2708-spi* spi_bcm2708
 alias spi:enc28j60 enc28j60
 alias of:N*T*Cmicrochip,enc28j60* enc28j60
+alias of:N*T*Cqca,qca7000* qcaspi
+alias spi:qca7000 qcaspi
 alias tty-ldisc-5 mkiss
 alias tty-ldisc-7 6pack
 alias usb:v7392p7710d*dc*dsc*dp*ic*isc*ip*in* mt7601u
@@ -7542,6 +7544,7 @@ alias i2c:shtw1 shtc1
 alias i2c:shtc1 shtc1
 alias char-major-10-137 hci_vhci
 alias devname:vhci hci_vhci
+alias tty-ldisc-15 hci_uart
 alias usb:v0A5Cp2033d*dc*dsc*dp*ic*isc*ip*in* bcm203x
 alias usb:v08FDp0002d*dc*dsc*dp*ic*isc*ip*in* bpa10x
 alias usb:v057Cp2200d*dc*dsc*dp*ic*isc*ip*in* bfusb

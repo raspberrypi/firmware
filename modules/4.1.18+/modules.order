@@ -159,6 +159,7 @@ kernel/drivers/scsi/sg.ko
 kernel/drivers/spi/spi-bcm2835.ko
 kernel/drivers/spi/spi-bcm2708.ko
 kernel/drivers/net/ethernet/microchip/enc28j60.ko
+kernel/drivers/net/ethernet/qualcomm/qcaspi.ko
 kernel/drivers/net/hamradio/mkiss.ko
 kernel/drivers/net/hamradio/6pack.ko
 kernel/drivers/net/hamradio/yam.ko
@@ -1036,6 +1037,7 @@ kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/shtc1.ko
 kernel/drivers/bluetooth/hci_vhci.ko
+kernel/drivers/bluetooth/hci_uart.ko
 kernel/drivers/bluetooth/bcm203x.ko
 kernel/drivers/bluetooth/bpa10x.ko
 kernel/drivers/bluetooth/bfusb.ko

@@ -159,6 +159,7 @@ kernel/drivers/scsi/sg.ko:
 kernel/drivers/spi/spi-bcm2835.ko:
 kernel/drivers/spi/spi-bcm2708.ko:
 kernel/drivers/net/ethernet/microchip/enc28j60.ko:
+kernel/drivers/net/ethernet/qualcomm/qcaspi.ko:
 kernel/drivers/net/hamradio/mkiss.ko: kernel/net/ax25/ax25.ko
 kernel/drivers/net/hamradio/6pack.ko: kernel/net/ax25/ax25.ko
 kernel/drivers/net/hamradio/yam.ko: kernel/net/ax25/ax25.ko
@@ -1036,10 +1037,11 @@ kernel/drivers/hwmon/hwmon.ko:
 kernel/drivers/hwmon/sht21.ko: kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/hwmon/shtc1.ko: kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/bluetooth/hci_vhci.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/bluetooth/hci_uart.ko: kernel/drivers/bluetooth/btbcm.ko kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bcm203x.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bpa10x.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bfusb.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/bluetooth/btusb.ko: kernel/drivers/bluetooth/btbcm.ko kernel/drivers/bluetooth/btintel.ko kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/bluetooth/btusb.ko: kernel/drivers/bluetooth/btintel.ko kernel/drivers/bluetooth/btbcm.ko kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/btintel.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/ath3k.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/btmrvl.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko

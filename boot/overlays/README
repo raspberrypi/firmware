@@ -567,6 +567,14 @@ Params: pin                     Output pin (default 18) - see table
         clock                   PWM clock frequency (informational)
 
 
+Name:   qca7000
+Info:   I2SE's Evaluation Board for PLC Stamp micro
+Load:   dtoverlay=qca7000,<param>=<val>
+Params: int_pin                 GPIO pin for interrupt signal (default 23)
+
+        speed                   SPI bus speed (default 12 MHz)
+
+
 Name:   raspidac3
 Info:   Configures the RaspiDAV Rev.3x audio card
 Load:   dtoverlay=raspidac3
@@ -652,6 +660,27 @@ Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
                                 (default on: polling once at boot-time)
 
         bus_width               Set the SDIO host bus width (default 4 bits)
+
+
+Name:   sdio-1bit
+Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
+        and enables 1-bit SDIO via GPIOs 22-25.
+Load:   dtoverlay=sdio-1bit,<param>=<val>
+Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
+                                requests 50MHz
+
+        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+                                framework requests 50MHz
+
+        force_pio               Disable DMA support (default off)
+
+        pio_limit               Number of blocks above which to use DMA
+                                (default 1)
+
+        debug                   Enable debug output (default off)
+
+        poll_once               Disable SDIO-device polling every second
+                                (default on: polling once at boot-time)
 
 
 Name:   smi
