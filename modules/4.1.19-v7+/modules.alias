@@ -7661,6 +7661,13 @@ alias spi:mcp3008 mcp320x
 alias spi:mcp3004 mcp320x
 alias spi:mcp3002 mcp320x
 alias spi:mcp3001 mcp320x
+alias i2c:mcp3428 mcp3422
+alias i2c:mcp3427 mcp3422
+alias i2c:mcp3426 mcp3422
+alias i2c:mcp3424 mcp3422
+alias i2c:mcp3423 mcp3422
+alias i2c:mcp3422 mcp3422
+alias of:N*T*Cmcp3422* mcp3422
 alias of:N*T*Cdht11* dht11
 alias sound-service-?-0 snd_mixer_oss
 alias sound-service-?-12 snd_pcm_oss

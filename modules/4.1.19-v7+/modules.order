@@ -1057,6 +1057,7 @@ kernel/drivers/bcma/bcma.ko
 kernel/drivers/extcon/extcon.ko
 kernel/drivers/extcon/extcon-arizona.ko
 kernel/drivers/iio/adc/mcp320x.ko
+kernel/drivers/iio/adc/mcp3422.ko
 kernel/drivers/iio/humidity/dht11.ko
 kernel/drivers/iio/industrialio.ko
 kernel/drivers/iio/kfifo_buf.ko
