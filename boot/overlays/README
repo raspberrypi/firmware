@@ -496,6 +496,24 @@ Params: speed                   Display SPI bus speed
 [ The pcf8563-rtc overlay has been deleted. See i2c-rtc. ]
 
 
+Name:   pi3-disable-bt
+Info:   Disable Pi3 Bluetooth and restore UART0/ttyAMA0 over GPIOs 14 & 15
+        N.B. To disable the systemd service that initialises the modem so it
+        doesn't use the UART, use 'sudo systemctl disable hciuart'.
+Load:   dtoverlay=pi3-disable-bt
+Params: <None>
+
+
+Name:   pi3-miniuart-bt
+Info:   Switch Pi3 Bluetooth function to use the mini-UART (ttyS0) and restore
+        UART0/ttyAMA0 over GPIOs 14 & 15. Note that this may reduce the maximum
+        usable baudrate.
+        N.B. It is also necessary to edit /lib/systemd/system/hciuart.server
+        and replace ttyAMA0 with ttyS0.
+Load:   dtoverlay=pi3-miniuart-bt
+Params: <None>
+
+
 Name:   piscreen
 Info:   PiScreen display by OzzMaker.com
 Load:   dtoverlay=piscreen,<param>=<val>
@@ -626,14 +644,11 @@ Name:   rpi-display
 Info:   RPi-Display - 2.8" Touch Display by Watterott
 Load:   dtoverlay=rpi-display,<param>=<val>
 Params: speed                   Display SPI bus speed
-
         rotate                  Display rotation {0,90,180,270}
-
         fps                     Delay between frame updates
-
         debug                   Debug output level {0-7}
-
         xohms                   Touchpanel sensitivity (X-plate resistance)
+        swapxy                  Swap x and y axis
 
 
 Name:   rpi-ft5406
