@@ -5860,6 +5860,7 @@
 0x6c0054c4	uart_handle_dcd_change	vmlinux	EXPORT_SYMBOL_GPL
 0x32c2a3f4	device_show_int	vmlinux	EXPORT_SYMBOL_GPL
 0xbee55453	blk_fetch_request	vmlinux	EXPORT_SYMBOL
+0x1e8fac8e	wireless_nlevent_flush	vmlinux	EXPORT_SYMBOL_GPL
 0x1d53f6a6	dma_pool_create	vmlinux	EXPORT_SYMBOL
 0x3d470c4d	cfg80211_chandef_compatible	net/wireless/cfg80211	EXPORT_SYMBOL
 0xccb0f9cf	go7007_update_board	drivers/media/usb/go7007/go7007	EXPORT_SYMBOL

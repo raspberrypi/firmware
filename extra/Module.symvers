@@ -5869,6 +5869,7 @@
 0x7bce4802	uart_handle_dcd_change	vmlinux	EXPORT_SYMBOL_GPL
 0x1b62886d	device_show_int	vmlinux	EXPORT_SYMBOL_GPL
 0x0d444be9	blk_fetch_request	vmlinux	EXPORT_SYMBOL
+0x1e8fac8e	wireless_nlevent_flush	vmlinux	EXPORT_SYMBOL_GPL
 0x23147957	dma_pool_create	vmlinux	EXPORT_SYMBOL
 0x3d470c4d	cfg80211_chandef_compatible	net/wireless/cfg80211	EXPORT_SYMBOL
 0xd88ece8a	gether_disconnect	drivers/usb/gadget/function/u_ether	EXPORT_SYMBOL_GPL
