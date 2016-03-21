@@ -49102,7 +49102,7 @@ c07c78c8 T __initramfs_start
 c07c78c8 t __irf_start
 c07c78c8 T __security_initcall_end
 c07c78c8 T __security_initcall_start
-c07c794f t __irf_end
+c07c794e t __irf_end
 c07c7950 T __initramfs_size
 c07c8000 D __data_loc
 c07c8000 D __init_end

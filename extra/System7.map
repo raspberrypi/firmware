@@ -50206,7 +50206,7 @@
 807fe800 t __irf_start
 807fe800 T __security_initcall_end
 807fe800 T __security_initcall_start
-807fe887 t __irf_end
+807fe886 t __irf_end
 807fe888 T __initramfs_size
 807ff000 D __per_cpu_load
 807ff000 D __per_cpu_start
