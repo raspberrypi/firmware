@@ -51743,8 +51743,8 @@ c0854a5c T __initramfs_start
 c0854a5c t __irf_start
 c0854a5c T __security_initcall_end
 c0854a5c T __security_initcall_start
-c0854ae2 t __irf_end
-c0854ae8 T __initramfs_size
+c0854ae0 T __initramfs_size
+c0854ae0 t __irf_end
 c0856000 D __data_loc
 c0856000 D __init_end
 c0856000 D _data

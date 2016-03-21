@@ -52913,7 +52913,7 @@
 80894b38 t __irf_start
 80894b38 T __security_initcall_end
 80894b38 T __security_initcall_start
-80894bbe t __irf_end
+80894bbc t __irf_end
 80894bc0 T __initramfs_size
 80895000 D __per_cpu_load
 80895000 D __per_cpu_start
