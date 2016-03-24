@@ -268,7 +268,7 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 For each port on the clock component, requests for media times may be
  made.  These are typically done one per video frame to allow for
  scheduling the display of that frame at the correct time.  If a
- request is made after the time has occured, then that frame will be
+ request is made after the time has occurred, then that frame will be
  displayed late, and the clock component keeps a per-port record of the
  number of times this occurs.  This record can be read using this
  index.<p>
@@ -1985,7 +1985,7 @@ typedef struct OMX_PARAM_BRCMASPECTRATIOTYPE {
     OMX_U32 nHeight;
 } OMX_PARAM_BRCMASPECTRATIOTYPE;
 </pre><p>
-Query / set the prefered aspect ratio of the sensor CDI mode. The CDI will use the nearest value to this.
+Query / set the preferred aspect ratio of the sensor CDI mode. The CDI will use the nearest value to this.
   If both are left as 0, then the aspect ratio of the requested output
   mode is used to bias the sensor mode selection.
   
