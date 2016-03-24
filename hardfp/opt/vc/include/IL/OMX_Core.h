@@ -182,7 +182,7 @@ typedef enum OMX_ERRORTYPE
       lost resulting in the component returning to the loaded state */
   OMX_ErrorResourcesLost = (OMX_S32) 0x8000100D,
 
-  /** No more indicies can be enumerated */
+  /** No more indices can be enumerated */
   OMX_ErrorNoMore = (OMX_S32) 0x8000100E,
 
   /** The component detected a version mismatch */
@@ -219,7 +219,7 @@ typedef enum OMX_ERRORTYPE
       the non-supplier to return a buffer via an EmptyThisBuffer or FillThisBuffer call. */
   OMX_ErrorPortUnresponsiveDuringStop = (OMX_S32) 0x80001016,
 
-  /** Attempting a state transtion that is not allowed */
+  /** Attempting a state transition that is not allowed */
   OMX_ErrorIncorrectStateTransition = (OMX_S32) 0x80001017,
 
   /* Attempting a command that is not allowed during the present state. */
@@ -513,7 +513,7 @@ typedef struct OMX_PORT_PARAM_TYPE {
 /** @ingroup comp */
 typedef enum OMX_EVENTTYPE
 {
-    OMX_EventCmdComplete,         /**< component has sucessfully completed a command */
+    OMX_EventCmdComplete,         /**< component has successfully completed a command */
     OMX_EventError,               /**< component has detected an error condition */
     OMX_EventMark,                /**< component has detected a buffer mark */
     OMX_EventPortSettingsChanged, /**< component is reported a port settings change */
@@ -1261,7 +1261,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_Deinit(void);
     @param [in] nNameLength
         number of characters in the cComponentName string.  With all 
         component name strings restricted to less than 128 characters 
-        (including the trailing null) it is recomended that the caller
+        (including the trailing null) it is recommended that the caller
         provide a input string for the cComponentName of 128 characters.
     @param [in] nIndex
         number containing the enumeration index for the component. 

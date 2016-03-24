@@ -1340,7 +1340,7 @@ typedef struct OMX_AUDIO_CONFIG_REVERBERATIONTYPE {
 } OMX_AUDIO_CONFIG_REVERBERATIONTYPE;
 
 
-/** Possible settings for the Echo Cancelation structure to use 
+/** Possible settings for the Echo Cancellation structure to use
  * @ingroup effects
  */
 typedef enum OMX_AUDIO_ECHOCANTYPE {
@@ -1357,16 +1357,16 @@ typedef enum OMX_AUDIO_ECHOCANTYPE {
 } OMX_AUDIO_ECHOCANTYPE;
 
 
-/** Enable / Disable for echo cancelation, which removes undesired echo's
+/** Enable / Disable for echo cancellation, which removes undesired echo's
  *  from the audio
  * @ingroup effects
  */ 
-typedef struct OMX_AUDIO_CONFIG_ECHOCANCELATIONTYPE {
+typedef struct OMX_AUDIO_CONFIG_ECHOCANCELLATIONTYPE {
     OMX_U32 nSize;             /**< size of the structure in bytes */
     OMX_VERSIONTYPE nVersion;  /**< OMX specification version information */
     OMX_U32 nPortIndex;        /**< port that this structure applies to */
-    OMX_AUDIO_ECHOCANTYPE eEchoCancelation; /**< Echo cancelation settings */
-} OMX_AUDIO_CONFIG_ECHOCANCELATIONTYPE;
+    OMX_AUDIO_ECHOCANTYPE eEchoCancellation; /**< Echo cancellation settings */
+} OMX_AUDIO_CONFIG_ECHOCANCELLATIONTYPE;
 
 
 /** Enable / Disable for noise reduction, which undesired noise from
