@@ -136,12 +136,14 @@ Params:
 
         act_led_activelow       Set to "on" to invert the sense of the LED
                                 (default "off")
+                                N.B. For Pi3 see pi3-act-led overlay.
 
         act_led_gpio            Set which GPIO to use for the activity LED
                                 (in case you want to connect it to an external
                                 device)
                                 (default "16" on a non-Plus board, "47" on a
                                 Plus or Pi 2)
+                                N.B. For Pi3 see pi3-act-led overlay.
 
         pwr_led_trigger
         pwr_led_activelow
@@ -358,10 +360,18 @@ Params: i2c_gpio_sda            GPIO used for I2C data (default "23")
                                 (default "2" = ~100kHz)
 
 
+Name:   i2c-mux-pca9548a
+Info:   Adds support for an NXP PCA9548A I2C multiplexer on i2c_arm
+Load:   dtoverlay=i2c-mux-pca9548a,<param>=<val>
+Params: addr                    I2C address of PCA9548A (default 0x70)
+
+
 Name:   i2c-rtc
 Info:   Adds support for a number of I2C Real Time Clock devices
 Load:   dtoverlay=i2c-rtc,<param>=<val>
 Params: ds1307                  Select the DS1307 device
+
+        ds1339                  Select the DS1339 device
 
         ds3231                  Select the DS3231 device
 
@@ -372,6 +382,8 @@ Params: ds1307                  Select the DS1307 device
         pcf8523                 Select the PCF8523 device
 
         pcf8563                 Select the PCF8563 device
+
+        trickle-resistor-ohms   Resistor value for trickle charge (DS1339-only)
 
 
 Name:   i2c0-bcm2708
@@ -497,6 +509,23 @@ Params: speed                   Display SPI bus speed
 
 
 [ The pcf8563-rtc overlay has been deleted. See i2c-rtc. ]
+
+
+Name:   pi3-act-led
+Info:   Pi3 uses a GPIO expander to drive the LEDs which can only be accessed
+        from the VPU. There is a special driver for this with a separate DT
+        node, which has the unfortunate consequence of breaking the
+        act_led_gpio and act_led_activelow dtparams.
+        This overlay changes the GPIO controller back to the standard one and
+        restores the dtparams.
+Load:   dtoverlay=pi3-act-led,<param>=<val>
+Params: activelow               Set to "on" to invert the sense of the LED
+                                (default "off")
+
+        gpio                    Set which GPIO to use for the activity LED
+                                (in case you want to connect it to an external
+                                device)
+                                REQUIRED
 
 
 Name:   pi3-disable-bt
@@ -683,7 +712,11 @@ Params: <None>
 
 
 Name:   sdhost
-Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock
+Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock.
+        N.B. This overlay is designed for situations where the mmc driver is
+        the default, so it disables the other (mmc) interface - this will kill
+        WiFi on a Pi3. If this isn't what you want, either use the sdtweak
+        overlay or the new sd_* dtparams of the base DTBs.
 Load:   dtoverlay=sdhost,<param>=<val>
 Params: overclock_50            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
@@ -742,6 +775,8 @@ Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
 
 Name:   sdtweak
 Info:   Tunes the bcm2835-sdhost SD/MMC driver
+        N.B. This functionality is now available via the sd_* dtparams in the
+        base DTB.
 Load:   dtoverlay=sdtweak,<param>=<val>
 Params: overclock_50            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz

@@ -5374,6 +5374,14 @@ alias platform:bcm2708_i2c i2c_bcm2708
 alias of:N*T*Cbrcm,bcm2708-i2c* i2c_bcm2708
 alias platform:i2c-gpio i2c_gpio
 alias of:N*T*Ci2c-gpio* i2c_gpio
+alias i2c:pca9548 i2c_mux_pca954x
+alias i2c:pca9547 i2c_mux_pca954x
+alias i2c:pca9546 i2c_mux_pca954x
+alias i2c:pca9545 i2c_mux_pca954x
+alias i2c:pca9544 i2c_mux_pca954x
+alias i2c:pca9543 i2c_mux_pca954x
+alias i2c:pca9542 i2c_mux_pca954x
+alias i2c:pca9540 i2c_mux_pca954x
 alias i2c:msp3400 msp3400
 alias i2c:cx25840 cx25840
 alias i2c:gm7113c saa7115

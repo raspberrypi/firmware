@@ -430,6 +430,7 @@ kernel/drivers/rtc/rtc-x1205.ko
 kernel/drivers/i2c/algos/i2c-algo-bit.ko
 kernel/drivers/i2c/busses/i2c-bcm2708.ko
 kernel/drivers/i2c/busses/i2c-gpio.ko
+kernel/drivers/i2c/muxes/i2c-mux-pca954x.ko
 kernel/drivers/i2c/i2c-dev.ko
 kernel/drivers/i2c/i2c-mux.ko
 kernel/drivers/media/i2c/msp3400.ko
