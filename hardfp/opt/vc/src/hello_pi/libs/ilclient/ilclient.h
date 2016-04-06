@@ -508,7 +508,7 @@ VCHPRE_ void VCHPOST_  ilclient_state_transition(COMPONENT_T *list[],
  * given component.  This function sends the disable port message to
  * the component and waits for the component to signal that this has
  * taken place.  If the port is already disabled, this is treated as a
- * sucess.
+ * success.
  *
  * @param comp The component containing the port to disable.
  *
@@ -526,7 +526,7 @@ VCHPRE_ void VCHPOST_ ilclient_disable_port(COMPONENT_T *comp,
  * given component.  This function sends the enable port message to
  * the component and waits for the component to signal that this has
  * taken place.  If the port is already disabled, this is treated as a
- * sucess.
+ * success.
  *
  * @param comp The component containing the port to enable.
  *

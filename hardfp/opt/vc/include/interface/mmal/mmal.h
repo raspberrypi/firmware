@@ -310,7 +310,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   * // Data processing loop
   * while (1)
   * {
-  *    MMAL_BUFFER_HEADER_T *header;
+  *    MMAL_BUFFER_HEADER_T *buffer;
   *
   *    // The client needs to implement its own blocking code.
   *    // (e.g. a semaphore which is posted when a buffer header is put in one of the queues)
