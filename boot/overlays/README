@@ -213,6 +213,27 @@ Params: gpiopin                 GPIO connected to the sensor's DATA output.
                                 (default 4)
 
 
+Name:   dwc-otg
+Info:   Selects the dwc_otg USB controller driver which has fiq support. This
+        is the default on all except the Pi Zero which defaults to dwc2.
+Load:   dtoverlay=dwc-otg
+Params: <None>
+
+
+Name:   dwc2
+Info:   Selects the dwc2 USB controller driver
+Load:   dtoverlay=dwc2,<param>=<val>
+Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
+
+        g-rx-fifo-size          Size of rx fifo size in gadget mode
+
+        g-np-tx-fifo-size       Size of non-periodic tx fifo size in gadget
+                                mode
+
+        g-tx-fifo-size          Size of periodic tx fifo per endpoint
+                                (except ep0) in gadget mode
+
+
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
 
 
@@ -339,6 +360,18 @@ Params: i2c_gpio_sda            GPIO used for I2C data (default "23")
                                 (default "2" = ~100kHz)
 
 
+Name:   i2c-mux-pca9548a
+Info:   Adds support for an NXP PCA9548A I2C multiplexer on i2c_arm
+Load:   dtoverlay=i2c-mux-pca9548a,<param>=<val>
+Params: addr                    I2C address of PCA9548A (default 0x70)
+
+
+Name:   i2c-pwm-pca9685a
+Info:   Adds support for an NXP PCA9685A I2C PWM controller on i2c_arm
+Load:   dtoverlay=i2c-pwm-pca9685a,<param>=<val>
+Params: addr                    I2C address of PCA9685A (default 0x40)
+
+
 Name:   i2c-rtc
 Info:   Adds support for a number of I2C Real Time Clock devices
 Load:   dtoverlay=i2c-rtc,<param>=<val>
@@ -418,9 +451,9 @@ Params: gpio_out_pin            GPIO for output (default "17")
                                 (default "down")
 
         sense                   Override the IR receive auto-detection logic:
-                                  "0" = force active-high
-                                  "1" = force active-low
-                                  "-1" = use auto-detection
+                                 "0" = force active-high
+                                 "1" = force active-low
+                                 "-1" = use auto-detection
                                 (default "-1")
 
         softcarrier             Turn the software carrier "on" or "off"
@@ -685,7 +718,11 @@ Params: <None>
 
 
 Name:   sdhost
-Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock
+Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock.
+        N.B. This overlay is designed for situations where the mmc driver is
+        the default, so it disables the other (mmc) interface - this will kill
+        WiFi on a Pi3. If this isn't what you want, either use the sdtweak
+        overlay or the new sd_* dtparams of the base DTBs.
 Load:   dtoverlay=sdhost,<param>=<val>
 Params: overclock_50            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
@@ -742,6 +779,22 @@ Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
                                 (default on: polling once at boot-time)
 
 
+Name:   sdtweak
+Info:   Tunes the bcm2835-sdhost SD/MMC driver
+        N.B. This functionality is now available via the sd_* dtparams in the
+        base DTB.
+Load:   dtoverlay=sdtweak,<param>=<val>
+Params: overclock_50            Clock (in MHz) to use when the MMC framework
+                                requests 50MHz
+
+        force_pio               Disable DMA support (default off)
+
+        pio_limit               Number of blocks above which to use DMA
+                                (default 1)
+
+        debug                   Enable debug output (default off)
+
+
 Name:   smi
 Info:   Enables the Secondary Memory Interface peripheral. Uses GPIOs 2-25!
 Load:   dtoverlay=smi
@@ -760,22 +813,109 @@ Load:   dtoverlay=smi-nand
 Params: <None>
 
 
-Name:   spi-bcm2708
-Info:   Selects the bcm2708-spi SPI driver
-Load:   dtoverlay=spi-bcm2708
+Name:   spi-gpio35-39
+Info:   move SPI function block to GPIO 35 to 39
+Load:   dtoverlay=spi-gpio35-39
 Params: <None>
 
 
-Name:   spi-bcm2835
-Info:   Selects the bcm2835-spi SPI driver
-Load:   dtoverlay=spi-bcm2835
-Params: <None>
+Name:   spi1-1cs
+Info:   Enables spi1 with a single chip select (CS) line and associated spidev
+        dev node. The gpio pin number for the CS line and spidev device node
+        creation are configurable.
+        N.B.: spi1 is only accessible on devices with a 40pin header, eg:
+              A+, B+, Zero and PI2 B; as well as the Compute Module.
+Load:   dtoverlay=spi1-1cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI1_CE0).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.0 (default
+                                is 'okay' or enabled).
 
 
-Name:   spi-dma
-Info:   enables dma modes for spi-bcm2835
-Load:   dtoverlay=spi-dma
-Params: <None>
+Name:   spi1-2cs
+Info:   Enables spi1 with two chip select (CS) lines and associated spidev
+        dev nodes. The gpio pin numbers for the CS lines and spidev device node
+        creation are configurable.
+        N.B.: spi1 is only accessible on devices with a 40pin header, eg:
+              A+, B+, Zero and PI2 B; as well as the Compute Module.
+Load:   dtoverlay=spi1-2cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI1_CE0).
+        cs1_pin                 GPIO pin for CS1 (default 17 - BCM SPI1_CE1).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.0 (default
+                                is 'okay' or enabled).
+        cs1_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.1 (default
+                                is 'okay' or enabled).
+
+
+Name:   spi1-3cs
+Info:   Enables spi1 with three chip select (CS) lines and associated spidev
+        dev nodes. The gpio pin numbers for the CS lines and spidev device node
+        creation are configurable.
+        N.B.: spi1 is only accessible on devices with a 40pin header, eg:
+              A+, B+, Zero and PI2 B; as well as the Compute Module.
+Load:   dtoverlay=spi1-3cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI1_CE0).
+        cs1_pin                 GPIO pin for CS1 (default 17 - BCM SPI1_CE1).
+        cs2_pin                 GPIO pin for CS2 (default 16 - BCM SPI1_CE2).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.0 (default
+                                is 'okay' or enabled).
+        cs1_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.1 (default
+                                is 'okay' or enabled).
+        cs2_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev1.2 (default
+                                is 'okay' or enabled).
+
+
+Name:   spi2-1cs
+Info:   Enables spi2 with a single chip select (CS) line and associated spidev
+        dev node. The gpio pin number for the CS line and spidev device node
+        creation are configurable.
+        N.B.: spi2 is only accessible with the Compute Module.
+Load:   dtoverlay=spi2-1cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.0 (default
+                                is 'okay' or enabled).
+
+
+Name:   spi2-2cs
+Info:   Enables spi2 with two chip select (CS) lines and associated spidev
+        dev nodes. The gpio pin numbers for the CS lines and spidev device node
+        creation are configurable.
+        N.B.: spi2 is only accessible with the Compute Module.
+Load:   dtoverlay=spi2-2cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
+        cs1_pin                 GPIO pin for CS1 (default 44 - BCM SPI2_CE1).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.0 (default
+                                is 'okay' or enabled).
+        cs1_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.1 (default
+                                is 'okay' or enabled).
+
+
+Name:   spi2-3cs
+Info:   Enables spi2 with three chip select (CS) lines and associated spidev
+        dev nodes. The gpio pin numbers for the CS lines and spidev device node
+        creation are configurable.
+        N.B.: spi2 is only accessible with the Compute Module.
+Load:   dtoverlay=spi2-3cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
+        cs1_pin                 GPIO pin for CS1 (default 44 - BCM SPI2_CE1).
+        cs2_pin                 GPIO pin for CS2 (default 45 - BCM SPI2_CE2).
+        cs0_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.0 (default
+                                is 'okay' or enabled).
+        cs1_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.1 (default
+                                is 'okay' or enabled).
+        cs2_spidev              Set to 'disabled' to stop the creation of a
+                                userspace device node /dev/spidev2.2 (default
+                                is 'okay' or enabled).
 
 
 Name:   tinylcd35
