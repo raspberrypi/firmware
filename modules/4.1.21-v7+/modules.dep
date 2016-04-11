@@ -897,6 +897,7 @@ kernel/drivers/hid/hid-a4tech.ko:
 kernel/drivers/hid/hid-axff.ko:
 kernel/drivers/hid/hid-apple.ko:
 kernel/drivers/hid/hid-belkin.ko:
+kernel/drivers/hid/hid-betopff.ko: kernel/drivers/input/ff-memless.ko
 kernel/drivers/hid/hid-cherry.ko:
 kernel/drivers/hid/hid-chicony.ko:
 kernel/drivers/hid/hid-cypress.ko:

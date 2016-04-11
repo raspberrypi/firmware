@@ -6864,6 +6864,10 @@ alias hid:b0003g*v000005ACp0000020E hid_apple
 alias hid:b0003g*v000005ACp00000304 hid_apple
 alias hid:b0003g*v00001020p00000006 hid_belkin
 alias hid:b0003g*v0000050Dp00003201 hid_belkin
+alias hid:b0003g*v000020BCp00005500 hid_betopff
+alias hid:b0003g*v00008380p00001850 hid_betopff
+alias hid:b0003g*v000011C0p00005506 hid_betopff
+alias hid:b0003g*v000011C2p00002208 hid_betopff
 alias hid:b0003g*v0000046Ap00000027 hid_cherry
 alias hid:b0003g*v0000046Ap00000023 hid_cherry
 alias hid:b0003g*v000004F2p00001125 hid_chicony
