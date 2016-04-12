@@ -114,15 +114,7 @@ kernel/drivers/video/fbdev/core/cfbcopyarea.ko
 kernel/drivers/video/fbdev/core/cfbimgblt.ko
 kernel/sound/soundcore.ko
 kernel/net/dns_resolver/dns_resolver.ko
-kernel/net/ipv4/ip_tunnel.ko
-kernel/net/ipv4/tunnel4.ko
 kernel/net/ipv4/tcp_cubic.ko
-kernel/net/ipv6/ipv6.ko
-kernel/net/ipv6/xfrm6_mode_transport.ko
-kernel/net/ipv6/xfrm6_mode_tunnel.ko
-kernel/net/ipv6/xfrm6_mode_beet.ko
-kernel/net/ipv6/sit.ko
-kernel/net/ipv6/inet6_hashtables.ko
 kernel/net/packet/af_packet.ko
 kernel/net/sunrpc/sunrpc.ko
 kernel/net/sunrpc/auth_gss/auth_rpcgss.ko

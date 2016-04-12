@@ -1356,6 +1356,7 @@ kernel/net/ipv4/netfilter/arp_tables.ko
 kernel/net/ipv4/netfilter/arpt_mangle.ko
 kernel/net/ipv4/netfilter/arptable_filter.ko
 kernel/net/ipv4/netfilter/nf_dup_ipv4.ko
+kernel/net/ipv4/ip_tunnel.ko
 kernel/net/ipv4/ipip.ko
 kernel/net/ipv4/gre.ko
 kernel/net/ipv4/ip_gre.ko
@@ -1366,6 +1367,7 @@ kernel/net/ipv4/ipcomp.ko
 kernel/net/ipv4/xfrm4_tunnel.ko
 kernel/net/ipv4/xfrm4_mode_beet.ko
 kernel/net/ipv4/inet_lro.ko
+kernel/net/ipv4/tunnel4.ko
 kernel/net/ipv4/xfrm4_mode_transport.ko
 kernel/net/ipv4/xfrm4_mode_tunnel.ko
 kernel/net/ipv4/inet_diag.ko
@@ -1393,11 +1395,16 @@ kernel/net/ipv6/netfilter/ip6t_rt.ko
 kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko
 kernel/net/ipv6/netfilter/ip6t_NPT.ko
 kernel/net/ipv6/netfilter/ip6t_REJECT.ko
+kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/ah6.ko
 kernel/net/ipv6/esp6.ko
 kernel/net/ipv6/ipcomp6.ko
 kernel/net/ipv6/xfrm6_tunnel.ko
 kernel/net/ipv6/tunnel6.ko
+kernel/net/ipv6/xfrm6_mode_transport.ko
+kernel/net/ipv6/xfrm6_mode_tunnel.ko
+kernel/net/ipv6/xfrm6_mode_beet.ko
+kernel/net/ipv6/sit.ko
 kernel/net/ipv6/ip6_tunnel.ko
 kernel/net/ipv6/ip6_udp_tunnel.ko
 kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko

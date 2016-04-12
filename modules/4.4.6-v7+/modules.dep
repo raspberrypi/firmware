@@ -1229,10 +1229,10 @@ kernel/net/netfilter/xt_NFLOG.ko: kernel/net/netfilter/nfnetlink_log.ko kernel/n
 kernel/net/netfilter/xt_NFQUEUE.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_RATEEST.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_REDIRECT.ko: kernel/net/netfilter/nf_nat_redirect.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
-kernel/net/netfilter/xt_TPROXY.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_TPROXY.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_TCPMSS.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_TCPOPTSTRIP.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/netfilter/xt_TEE.ko: kernel/net/ipv6/netfilter/nf_dup_ipv6.ko kernel/net/ipv4/netfilter/nf_dup_ipv4.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_TEE.ko: kernel/net/ipv6/netfilter/nf_dup_ipv6.ko kernel/net/ipv4/netfilter/nf_dup_ipv4.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_TRACE.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_IDLETIMER.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_addrtype.ko: kernel/net/netfilter/x_tables.ko
@@ -1262,7 +1262,7 @@ kernel/net/netfilter/xt_multiport.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_nfacct.ko: kernel/net/netfilter/nfnetlink_acct.ko kernel/net/netfilter/nfnetlink.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_osf.ko: kernel/net/netfilter/nfnetlink.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_owner.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/netfilter/xt_physdev.ko: kernel/net/bridge/br_netfilter.ko kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/netfilter/x_tables.ko kernel/net/llc/llc.ko
+kernel/net/netfilter/xt_physdev.ko: kernel/net/bridge/br_netfilter.ko kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/x_tables.ko kernel/net/llc/llc.ko
 kernel/net/netfilter/xt_pkttype.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_policy.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_quota.ko: kernel/net/netfilter/x_tables.ko
@@ -1270,7 +1270,7 @@ kernel/net/netfilter/xt_rateest.ko: kernel/net/netfilter/xt_RATEEST.ko kernel/ne
 kernel/net/netfilter/xt_realm.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_recent.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_sctp.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/netfilter/xt_socket.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko kernel/net/netfilter/x_tables.ko
+kernel/net/netfilter/xt_socket.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_state.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_statistic.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_string.ko: kernel/net/netfilter/x_tables.ko
@@ -1326,16 +1326,18 @@ kernel/net/ipv4/netfilter/arp_tables.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/arpt_mangle.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/arptable_filter.ko: kernel/net/ipv4/netfilter/arp_tables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/nf_dup_ipv4.ko: kernel/net/netfilter/nf_conntrack.ko
-kernel/net/ipv4/ipip.ko:
+kernel/net/ipv4/ip_tunnel.ko:
+kernel/net/ipv4/ipip.ko: kernel/net/ipv4/tunnel4.ko kernel/net/ipv4/ip_tunnel.ko
 kernel/net/ipv4/gre.ko:
-kernel/net/ipv4/ip_gre.ko: kernel/net/ipv4/gre.ko
+kernel/net/ipv4/ip_gre.ko: kernel/net/ipv4/gre.ko kernel/net/ipv4/ip_tunnel.ko
 kernel/net/ipv4/udp_tunnel.ko:
 kernel/net/ipv4/ah4.ko:
 kernel/net/ipv4/esp4.ko:
 kernel/net/ipv4/ipcomp.ko: kernel/net/xfrm/xfrm_ipcomp.ko
-kernel/net/ipv4/xfrm4_tunnel.ko:
+kernel/net/ipv4/xfrm4_tunnel.ko: kernel/net/ipv4/tunnel4.ko
 kernel/net/ipv4/xfrm4_mode_beet.ko:
 kernel/net/ipv4/inet_lro.ko:
+kernel/net/ipv4/tunnel4.ko:
 kernel/net/ipv4/xfrm4_mode_transport.ko:
 kernel/net/ipv4/xfrm4_mode_tunnel.ko:
 kernel/net/ipv4/inet_diag.ko:
@@ -1343,16 +1345,16 @@ kernel/net/ipv4/tcp_diag.ko: kernel/net/ipv4/inet_diag.ko
 kernel/net/xfrm/xfrm_ipcomp.ko:
 kernel/net/ipv6/netfilter/ip6_tables.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6table_filter.ko: kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/netfilter/ip6table_mangle.ko: kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/netfilter/x_tables.ko
+kernel/net/ipv6/netfilter/ip6table_mangle.ko: kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6table_raw.ko: kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/netfilter/ip6table_nat.ko: kernel/net/ipv6/netfilter/nf_nat_ipv6.ko kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/netfilter/nf_conntrack_ipv6.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/netfilter/nf_conntrack.ko
-kernel/net/ipv6/netfilter/nf_nat_ipv6.ko: kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
-kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko: kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
-kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko:
+kernel/net/ipv6/netfilter/ip6table_nat.ko: kernel/net/ipv6/netfilter/nf_nat_ipv6.ko kernel/net/ipv6/netfilter/ip6_tables.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
+kernel/net/ipv6/netfilter/nf_conntrack_ipv6.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/ipv6/netfilter/nf_nat_ipv6.ko: kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko: kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/netfilter/nf_log_ipv6.ko: kernel/net/netfilter/nf_log_common.ko
-kernel/net/ipv6/netfilter/nf_reject_ipv6.ko:
-kernel/net/ipv6/netfilter/nf_dup_ipv6.ko: kernel/net/netfilter/nf_conntrack.ko
+kernel/net/ipv6/netfilter/nf_reject_ipv6.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/netfilter/nf_dup_ipv6.ko: kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack.ko
 kernel/net/ipv6/netfilter/ip6t_ah.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_eui64.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_frag.ko: kernel/net/netfilter/x_tables.ko
@@ -1360,15 +1362,20 @@ kernel/net/ipv6/netfilter/ip6t_ipv6header.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_mh.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_hbh.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_rt.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko: kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
+kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko: kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_NPT.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/netfilter/ip6t_REJECT.ko: kernel/net/ipv6/netfilter/nf_reject_ipv6.ko kernel/net/netfilter/x_tables.ko
-kernel/net/ipv6/ah6.ko:
-kernel/net/ipv6/esp6.ko:
-kernel/net/ipv6/ipcomp6.ko: kernel/net/ipv6/xfrm6_tunnel.ko kernel/net/ipv6/tunnel6.ko kernel/net/xfrm/xfrm_ipcomp.ko
-kernel/net/ipv6/xfrm6_tunnel.ko: kernel/net/ipv6/tunnel6.ko
+kernel/net/ipv6/netfilter/ip6t_REJECT.ko: kernel/net/ipv6/netfilter/nf_reject_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/x_tables.ko
+kernel/net/ipv6/ipv6.ko:
+kernel/net/ipv6/ah6.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/esp6.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/ipcomp6.ko: kernel/net/ipv6/xfrm6_tunnel.ko kernel/net/ipv6/tunnel6.ko kernel/net/xfrm/xfrm_ipcomp.ko kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/xfrm6_tunnel.ko: kernel/net/ipv6/tunnel6.ko kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/tunnel6.ko:
-kernel/net/ipv6/ip6_tunnel.ko: kernel/net/ipv6/tunnel6.ko
+kernel/net/ipv6/xfrm6_mode_transport.ko:
+kernel/net/ipv6/xfrm6_mode_tunnel.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/xfrm6_mode_beet.ko: kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/sit.ko: kernel/net/ipv4/tunnel4.ko kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/ipv6/ip6_tunnel.ko: kernel/net/ipv6/tunnel6.ko kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/ip6_udp_tunnel.ko:
 kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko:
 kernel/net/8021q/8021q.ko: kernel/net/802/garp.ko kernel/net/802/stp.ko kernel/net/llc/llc.ko
@@ -1381,7 +1388,7 @@ kernel/net/mpls/mpls_gso.ko:
 kernel/net/llc/llc.ko:
 kernel/net/key/af_key.ko:
 kernel/net/bridge/netfilter/ebtables.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/bridge/netfilter/ebtable_broute.ko: kernel/net/bridge/netfilter/ebtables.ko kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/netfilter/x_tables.ko kernel/net/llc/llc.ko
+kernel/net/bridge/netfilter/ebtable_broute.ko: kernel/net/bridge/netfilter/ebtables.ko kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/x_tables.ko kernel/net/llc/llc.ko
 kernel/net/bridge/netfilter/ebtable_filter.ko: kernel/net/bridge/netfilter/ebtables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/bridge/netfilter/ebtable_nat.ko: kernel/net/bridge/netfilter/ebtables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/bridge/netfilter/ebt_802_3.ko: kernel/net/netfilter/x_tables.ko
@@ -1401,8 +1408,8 @@ kernel/net/bridge/netfilter/ebt_redirect.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/bridge/netfilter/ebt_snat.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/bridge/netfilter/ebt_log.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/bridge/netfilter/ebt_nflog.ko: kernel/net/netfilter/x_tables.ko
-kernel/net/bridge/bridge.ko: kernel/net/802/stp.ko kernel/net/llc/llc.ko
-kernel/net/bridge/br_netfilter.ko: kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/llc/llc.ko
+kernel/net/bridge/bridge.ko: kernel/net/802/stp.ko kernel/net/ipv6/ipv6.ko kernel/net/llc/llc.ko
+kernel/net/bridge/br_netfilter.ko: kernel/net/bridge/bridge.ko kernel/net/802/stp.ko kernel/net/ipv6/ipv6.ko kernel/net/llc/llc.ko
 kernel/net/appletalk/appletalk.ko: kernel/net/802/psnap.ko kernel/net/llc/llc.ko
 kernel/net/netrom/netrom.ko: kernel/net/ax25/ax25.ko
 kernel/net/rose/rose.ko: kernel/net/ax25/ax25.ko
@@ -1423,13 +1430,13 @@ kernel/net/bluetooth/hidp/hidp.ko: kernel/net/bluetooth/bluetooth.ko kernel/net/
 kernel/net/bluetooth/bluetooth_6lowpan.ko: kernel/net/6lowpan/6lowpan.ko kernel/net/bluetooth/bluetooth.ko kernel/net/rfkill/rfkill.ko
 kernel/net/atm/atm.ko:
 kernel/net/atm/pppoatm.ko: kernel/net/atm/atm.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
-kernel/net/l2tp/l2tp_core.ko: kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
-kernel/net/l2tp/l2tp_ppp.ko: kernel/net/l2tp/l2tp_netlink.ko kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/drivers/net/ppp/pppox.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
-kernel/net/l2tp/l2tp_ip.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
-kernel/net/l2tp/l2tp_netlink.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
-kernel/net/l2tp/l2tp_eth.ko: kernel/net/l2tp/l2tp_netlink.ko kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
-kernel/net/l2tp/l2tp_ip6.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
-kernel/net/sctp/sctp.ko:
+kernel/net/l2tp/l2tp_core.ko: kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/l2tp/l2tp_ppp.ko: kernel/net/l2tp/l2tp_netlink.ko kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko kernel/drivers/net/ppp/pppox.ko kernel/drivers/net/ppp/ppp_generic.ko kernel/drivers/net/slip/slhc.ko
+kernel/net/l2tp/l2tp_ip.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/l2tp/l2tp_netlink.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/l2tp/l2tp_eth.ko: kernel/net/l2tp/l2tp_netlink.ko kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/l2tp/l2tp_ip6.ko: kernel/net/l2tp/l2tp_core.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/net/ipv6/ipv6.ko
+kernel/net/sctp/sctp.ko: kernel/net/ipv6/ipv6.ko
 kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/net/rfkill/rfkill.ko:
 kernel/net/9p/9pnet.ko:
@@ -1448,8 +1455,8 @@ kernel/net/mac802154/mac802154.ko: kernel/net/ieee802154/ieee802154.ko kernel/li
 kernel/net/wimax/wimax.ko: kernel/net/rfkill/rfkill.ko
 kernel/net/batman-adv/batman-adv.ko:
 kernel/net/nfc/nfc.ko: kernel/net/rfkill/rfkill.ko
-kernel/net/openvswitch/openvswitch.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/netfilter/nf_conntrack.ko
-kernel/net/openvswitch/vport-gre.ko: kernel/net/ipv4/ip_gre.ko kernel/net/ipv4/gre.ko kernel/net/openvswitch/openvswitch.ko kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/openvswitch/openvswitch.ko: kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack.ko
+kernel/net/openvswitch/vport-gre.ko: kernel/net/ipv4/ip_gre.ko kernel/net/ipv4/gre.ko kernel/net/openvswitch/openvswitch.ko kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_conntrack.ko
 kernel/arch/arm/lib/xor-neon.ko:
 kernel/lib/lz4/lz4_compress.ko:
 kernel/lib/crc-ccitt.ko:

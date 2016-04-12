@@ -8357,10 +8357,16 @@ alias nf-logger-10-0 nf_log_ipv6
 alias ip6t_dst ip6t_hbh
 alias ip6t_DNPT ip6t_NPT
 alias ip6t_SNPT ip6t_NPT
+alias net-pf-10 ipv6
 alias xfrm-type-10-51 ah6
 alias xfrm-type-10-50 esp6
 alias xfrm-type-10-108 ipcomp6
 alias xfrm-type-10-41 xfrm6_tunnel
+alias xfrm-mode-10-0 xfrm6_mode_transport
+alias xfrm-mode-10-1 xfrm6_mode_tunnel
+alias xfrm-mode-10-4 xfrm6_mode_beet
+alias netdev-sit0 sit
+alias rtnl-link-sit sit
 alias netdev-ip6tnl0 ip6_tunnel
 alias rtnl-link-ip6tnl ip6_tunnel
 alias rpc-auth-gss-1.2.840.113554.1.2.2 rpcsec_gss_krb5
