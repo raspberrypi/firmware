@@ -8124,6 +8124,8 @@ alias of:N*T*Chifiberry,hifiberry-dac* snd_soc_hifiberry_dac
 alias of:N*T*Chifiberry,hifiberry-dacplus* snd_soc_hifiberry_dacplus
 alias of:N*T*Chifiberry,hifiberry-digi* snd_soc_hifiberry_digi
 alias of:N*T*Chifiberry,hifiberry-amp* snd_soc_hifiberry_amp
+alias of:N*T*Cboomberry,boomberry-dac* snd_soc_boomberry_dac
+alias of:N*T*Cboomberry,boomberry-digi* snd_soc_boomberry_digi
 alias of:N*T*Crpi,rpi-dac* snd_soc_rpi_dac
 alias of:N*T*Crpi,rpi-proto* snd_soc_rpi_proto
 alias of:N*T*Ciqaudio,iqaudio-dac* snd_soc_iqaudio_dac

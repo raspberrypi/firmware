@@ -1122,6 +1122,8 @@ kernel/sound/soc/bcm/snd-soc-hifiberry-dac.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplus.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-digi.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-amp.ko
+kernel/sound/soc/bcm/snd-soc-boomberry-dac.ko
+kernel/sound/soc/bcm/snd-soc-boomberry-digi.ko
 kernel/sound/soc/bcm/snd-soc-rpi-dac.ko
 kernel/sound/soc/bcm/snd-soc-rpi-proto.ko
 kernel/sound/soc/bcm/snd-soc-iqaudio-dac.ko
