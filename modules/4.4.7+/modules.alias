@@ -182,6 +182,7 @@ alias platform:smi-dev-bcm2835 bcm2835_smi_dev
 alias of:N*T*Cbrcm,bcm2835-smi-dev* bcm2835_smi_dev
 alias platform:vc4-drm vc4
 alias of:N*T*Cbrcm,bcm2835-vc4* vc4
+alias usb:v17E9p*d*dc*dsc*dp*icFFisc00ip00in* udl
 alias block-major-147-* drbd
 alias i2c:at24 at24
 alias i2c:24c1024 at24

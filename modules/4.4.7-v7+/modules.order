@@ -133,6 +133,7 @@ kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
 kernel/drivers/gpu/drm/drm_kms_helper.ko
 kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/vc4/vc4.ko
+kernel/drivers/gpu/drm/udl/udl.ko
 kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/base/regmap/regmap-spi.ko
 kernel/drivers/block/pktcdvd.ko
