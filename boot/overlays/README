@@ -464,6 +464,12 @@ Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
                                 default 4)
 
 
+Name:   i2s-gpio28-31
+Info:   move I2S function block to GPIO 28 to 31
+Load:   dtoverlay=i2s-gpio28-31
+Params: <None>
+
+
 Name:   i2s-mmap
 Info:   Enables mmap support in the bcm2708-i2s driver
 Load:   dtoverlay=i2s-mmap
@@ -636,6 +642,18 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
 
         xohms                   Touchpanel sensitivity (X-plate resistance)
+
+
+Name:   pitft22
+Info:   Adafruit PiTFT 2.2" screen
+Load:   dtoverlay=pitft22,<param>=<val>
+Params: speed                   Display SPI bus speed
+
+        rotate                  Display rotation {0,90,180,270}
+
+        fps                     Delay between frame updates
+
+        debug                   Debug output level {0-7}
 
 
 Name:   pitft28-capacitive
@@ -1017,8 +1035,12 @@ Name:   vc4-kms-v3d
 Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
         booting to GUI while this overlay is in use will cause interesting
         lockups.
-Load:   dtoverlay=vc4-kms-v3d
-Params: <None>
+Load:   dtoverlay=vc4-kms-v3d,<param>
+Params: cma-256                 CMA is 256MB, 256MB-aligned (needs 1GB)
+        cma-192                 CMA is 192MB, 256MB-aligned (needs 1GB)
+        cma-128                 CMA is 128MB, 128MB-aligned
+        cma-96                  CMA is 96MB, 128MB-aligned
+        cma-64                  CMA is 64MB, 64MB-aligned
 
 
 Name:   vga666
