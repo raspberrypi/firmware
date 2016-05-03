@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ "$DISPLAY" == "" ]; then
+	export DISPLAY=":0.0"
+fi
+exec su pi -c "DISPLAY=$DISPLAY lxpanelctl alsastart >/dev/null"
