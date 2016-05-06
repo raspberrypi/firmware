@@ -2,4 +2,9 @@
 if [ "$DISPLAY" == "" ]; then
 	export DISPLAY=":0.0"
 fi
-exec su pi -c "DISPLAY=$DISPLAY lxpanelctl alsastart >/dev/null"
+CMD="lxpanelctl alsastart >/dev/null"
+if [ $EUID -eq 0 ]; then
+        exec su pi -c "$CMD"
+else
+        exec $CMD
+fi

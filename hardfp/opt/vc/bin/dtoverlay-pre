@@ -1,5 +1,10 @@
 #!/bin/bash
 if [ "$DISPLAY" == "" ]; then
-	DISPLAY=":0.0"
+	export DISPLAY=":0.0"
 fi
-exec su pi -c "DISPLAY=$DISPLAY lxpanelctl alsastop >/dev/null"
+CMD="lxpanelctl alsastop >/dev/null"
+if [ $EUID -eq 0 ]; then
+	exec su pi -c "$CMD"
+else
+	exec $CMD
+fi
