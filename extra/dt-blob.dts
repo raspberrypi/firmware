@@ -1383,6 +1383,10 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
+            pin@p41 { function = "output"; termination = "no_pulling";    }; // Camera shutdown
             pin@p46 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Hotplug
             pin@p47 { function = "output"; termination = "pull_up"; polarity="active_low"; }; // activity LED
             pin@p48 { function = "sdcard"; termination = "pull_up";    drive_strength_mA = < 8 >; }; // SD CLK
@@ -1400,25 +1404,31 @@
             };
             pin_define@NUM_CAMERAS {
                type = "internal";
-               number = <0>;
+               number = <1>;
             };
             pin_define@CAMERA_0_I2C_PORT {
-               type = "absent";
+               type = "internal";
+               number = <0>;
             };
             pin_define@CAMERA_0_SDA_PIN {
-               type = "absent";
+               type = "internal";
+               number = <28>;
             };
             pin_define@CAMERA_0_SCL_PIN {
-               type = "absent";
+               type = "internal";
+               number = <29>;
             };
             pin_define@CAMERA_0_SHUTDOWN {
-               type = "absent";
+               type = "internal";
+               number = <41>;
             };
             pin_define@CAMERA_0_UNICAM_PORT {
-               type = "absent";
+               type = "internal";
+               number = <1>;
             };
             pin_define@CAMERA_0_LED {
-               type = "absent";
+               type = "internal";
+               number = <32>;
             };
             pin_define@FLASH_0_ENABLE {
                type = "absent";
