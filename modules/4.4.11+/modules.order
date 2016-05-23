@@ -128,6 +128,7 @@ kernel/drivers/video/fbdev/ssd1307fb.ko
 kernel/drivers/video/fbdev/rpisense-fb.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
+kernel/drivers/gpu/drm/panel/panel-simple.ko
 kernel/drivers/gpu/drm/drm_kms_helper.ko
 kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/vc4/vc4.ko
@@ -1355,6 +1356,7 @@ kernel/net/ipv4/netfilter/iptable_mangle.ko
 kernel/net/ipv4/netfilter/iptable_nat.ko
 kernel/net/ipv4/netfilter/iptable_raw.ko
 kernel/net/ipv4/netfilter/ipt_ah.ko
+kernel/net/ipv4/netfilter/ipt_rpfilter.ko
 kernel/net/ipv4/netfilter/ipt_CLUSTERIP.ko
 kernel/net/ipv4/netfilter/ipt_ECN.ko
 kernel/net/ipv4/netfilter/ipt_MASQUERADE.ko
@@ -1398,6 +1400,7 @@ kernel/net/ipv6/netfilter/ip6t_frag.ko
 kernel/net/ipv6/netfilter/ip6t_ipv6header.ko
 kernel/net/ipv6/netfilter/ip6t_mh.ko
 kernel/net/ipv6/netfilter/ip6t_hbh.ko
+kernel/net/ipv6/netfilter/ip6t_rpfilter.ko
 kernel/net/ipv6/netfilter/ip6t_rt.ko
 kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko
 kernel/net/ipv6/netfilter/ip6t_NPT.ko

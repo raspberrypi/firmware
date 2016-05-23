@@ -199,6 +199,7 @@ alias symbol:dm_cell_release_no_holder dm_bio_prison
 alias symbol:lbtf_cmd_response_rx libertas_tf
 alias symbol:or51211_attach or51211
 alias symbol:async_tx_submit async_tx
+alias symbol:drm_display_mode_from_videomode drm
 alias symbol:tun_get_socket tun
 alias symbol:usb_get_function libcomposite
 alias symbol:cast5_setkey cast5_generic
@@ -423,6 +424,7 @@ alias symbol:ath9k_hw_updatetxtriglevel ath9k_hw
 alias symbol:cx24113_attach cx24113
 alias symbol:iio_read_channel_raw industrialio
 alias symbol:ip6t_unregister_table ip6_tables
+alias symbol:of_drm_find_panel drm
 alias symbol:vb2_write videobuf2_v4l2
 alias symbol:usb_serial_suspend usbserial
 alias symbol:phy_ethtool_set_wol libphy
@@ -936,6 +938,7 @@ alias symbol:vb2_core_expbuf videobuf2_core
 alias symbol:nfnl_acct_find_get nfnetlink_acct
 alias symbol:go7007_read_interrupt go7007
 alias symbol:ax25_listen_register ax25
+alias symbol:drm_panel_init drm
 alias symbol:nfnl_lock nfnetlink
 alias symbol:usb_ftdi_elan_edset_empty ftdi_elan
 alias symbol:drm_plane_force_disable drm
@@ -1340,6 +1343,7 @@ alias symbol:nfc_tm_activated nfc
 alias symbol:w1_unregister_family wire
 alias symbol:qtree_write_dquot quota_tree
 alias symbol:eeprom_93cx6_readb eeprom_93cx6
+alias symbol:of_get_drm_display_mode drm
 alias symbol:atm_alloc_charge atm
 alias symbol:cryptd_alloc_ablkcipher cryptd
 alias symbol:rt2x00usb_register_read_async rt2x00usb
@@ -2139,6 +2143,7 @@ alias symbol:drm_get_connector_status_name drm
 alias symbol:ieee80211_stop_queues mac80211
 alias symbol:hostap_set_encryption hostap
 alias symbol:usb_get_function_instance libcomposite
+alias symbol:drm_panel_add drm
 alias symbol:em28xx_tuner_callback em28xx
 alias symbol:drm_modeset_unlock_crtc drm
 alias symbol:nfnl_acct_overquota nfnetlink_acct
@@ -2547,6 +2552,7 @@ alias symbol:iio_convert_raw_to_processed industrialio
 alias symbol:ip6_tnl_dst_get ip6_tunnel
 alias symbol:videobuf_streamoff videobuf_core
 alias symbol:devm_input_allocate_polled_device input_polldev
+alias symbol:drm_panel_detach drm
 alias symbol:ip_set_hostmask_map ip_set
 alias symbol:ipcomp_output xfrm_ipcomp
 alias symbol:drm_gtf_mode drm
@@ -2832,6 +2838,7 @@ alias symbol:drm_i2c_encoder_init drm
 alias symbol:ocfs2_dlm_lvb_valid ocfs2_stackglue
 alias symbol:md_integrity_add_rdev md_mod
 alias symbol:nfc_alloc_recv_skb nfc
+alias symbol:drm_panel_remove drm
 alias symbol:drm_platform_set_busid drm
 alias symbol:genphy_setup_forced libphy
 alias symbol:ieee80211_channel_to_frequency cfg80211
@@ -3813,6 +3820,7 @@ alias symbol:drm_atomic_state_default_release drm
 alias symbol:ieee80211_rx_napi mac80211
 alias symbol:md_ack_all_badblocks md_mod
 alias symbol:ath9k_hw_releasetxqueue ath9k_hw
+alias symbol:drm_panel_attach drm
 alias symbol:ip_vs_proto_get ip_vs
 alias symbol:ath9k_hw_set_txq_props ath9k_hw
 alias symbol:iriap_getvaluebyclass_request irda
@@ -3942,6 +3950,7 @@ alias symbol:ath9k_hw_setmcastfilter ath9k_hw
 alias symbol:em28xx_toggle_reg_bits em28xx
 alias symbol:roccat_common2_send_with_status hid_roccat_common
 alias symbol:snd_pcm_format_size snd_pcm
+alias symbol:drm_display_mode_to_videomode drm
 alias symbol:__drm_atomic_helper_connector_duplicate_state drm_kms_helper
 alias symbol:s5h1420_get_tuner_i2c_adapter s5h1420
 alias symbol:snd_soc_dai_set_sysclk snd_soc_core

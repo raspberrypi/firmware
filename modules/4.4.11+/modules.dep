@@ -128,6 +128,7 @@ kernel/drivers/video/fbdev/ssd1307fb.ko: kernel/drivers/video/fbdev/core/syscopy
 kernel/drivers/video/fbdev/rpisense-fb.ko: kernel/drivers/mfd/rpisense-core.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko:
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko: kernel/drivers/misc/bcm2835_smi.ko
+kernel/drivers/gpu/drm/panel/panel-simple.ko: kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/drm_kms_helper.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/gpu/drm/drm.ko:
 kernel/drivers/gpu/drm/vc4/vc4.ko: kernel/drivers/gpu/drm/drm_kms_helper.ko kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
@@ -1355,6 +1356,7 @@ kernel/net/ipv4/netfilter/iptable_mangle.ko: kernel/net/ipv4/netfilter/ip_tables
 kernel/net/ipv4/netfilter/iptable_nat.ko: kernel/net/ipv4/netfilter/nf_nat_ipv4.ko kernel/net/ipv4/netfilter/ip_tables.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/iptable_raw.ko: kernel/net/ipv4/netfilter/ip_tables.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/ipt_ah.ko: kernel/net/netfilter/x_tables.ko
+kernel/net/ipv4/netfilter/ipt_rpfilter.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/ipt_CLUSTERIP.ko: kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/ipt_ECN.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv4/netfilter/ipt_MASQUERADE.ko: kernel/net/ipv4/netfilter/nf_nat_masquerade_ipv4.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
@@ -1398,6 +1400,7 @@ kernel/net/ipv6/netfilter/ip6t_frag.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_ipv6header.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_mh.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_hbh.ko: kernel/net/netfilter/x_tables.ko
+kernel/net/ipv6/netfilter/ip6t_rpfilter.ko: kernel/net/ipv6/ipv6.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_rt.ko: kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_MASQUERADE.ko: kernel/net/ipv6/netfilter/nf_nat_masquerade_ipv6.ko kernel/net/ipv6/ipv6.ko kernel/net/netfilter/nf_nat.ko kernel/net/netfilter/nf_conntrack.ko kernel/net/netfilter/x_tables.ko
 kernel/net/ipv6/netfilter/ip6t_NPT.ko: kernel/net/netfilter/x_tables.ko
