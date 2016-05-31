@@ -7048,6 +7048,14 @@ alias hid:b0003g*v0000046Dp0000C101 hid_logitech
 alias hid:b0003g*v0000046Dp0000C517 hid_logitech
 alias hid:b0003g*v0000046Dp0000C50C hid_logitech
 alias hid:b0003g*v0000046Dp0000C513 hid_logitech
+alias hid:b0003g*v0000046Dp0000C532 hid_logitech_dj
+alias hid:b0003g*v0000046Dp0000C52B hid_logitech_dj
+alias hid:b0003g0102v0000046Dp* hid_logitech_hidpp
+alias hid:b0003g0102v0000046Dp00004024 hid_logitech_hidpp
+alias hid:b0003g0102v0000046Dp0000402D hid_logitech_hidpp
+alias hid:b0005g*v0000046Dp0000B00C hid_logitech_hidpp
+alias hid:b0003g0102v0000046Dp00004101 hid_logitech_hidpp
+alias hid:b0003g0102v0000046Dp00004011 hid_logitech_hidpp
 alias hid:b0005g*v000005ACp0000030E hid_magicmouse
 alias hid:b0005g*v000005ACp0000030D hid_magicmouse
 alias hid:b0005g*v0000045Ep00000701 hid_microsoft

@@ -370,6 +370,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
+        slave                   Force DAC+ Pro into slave mode, using Pi as
+                                master for bit clock and frame clock.
 
 
 Name:   hifiberry-digi
@@ -565,6 +567,15 @@ Params: gpio_out_pin            GPIO for output (default "17")
 
         debug                   "on" = enable additional debug messages
                                 (default "off")
+
+
+Name:   mcp23017
+Info:   Configures the MCP23017 I2C port expander
+Load:   dtoverlay=mcp23017,<param>=<val>
+Params: gpiopin                 Gpio pin connected to the INTA output of the
+                                MCP23017 (default: 4)
+
+        addr                    I2C address of the MCP23017 (default: 0x20)
 
 
 Name:   mcp2515-can0

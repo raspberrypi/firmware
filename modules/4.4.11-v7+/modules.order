@@ -925,6 +925,8 @@ kernel/drivers/hid/hid-keytouch.ko
 kernel/drivers/hid/hid-kye.ko
 kernel/drivers/hid/hid-lcpower.ko
 kernel/drivers/hid/hid-logitech.ko
+kernel/drivers/hid/hid-logitech-dj.ko
+kernel/drivers/hid/hid-logitech-hidpp.ko
 kernel/drivers/hid/hid-magicmouse.ko
 kernel/drivers/hid/hid-microsoft.ko
 kernel/drivers/hid/hid-monterey.ko

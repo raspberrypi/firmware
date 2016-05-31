@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -65,7 +67,7 @@ against the media stream interleaving in the file format.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="15">120<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="18">120<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port parameters for the encoded audio stream.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCodecConfig">OMX_IndexParamCodecConfig</a></tt>
 <td> Sets codec configuration data to be used.  These bytes may also be
@@ -101,7 +103,12 @@ against the media stream interleaving in the file format.
   framing of input data.  Other values are not supported.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigAudioMonoTrackControl">OMX_IndexConfigAudioMonoTrackControl</a></tt>
 <td> Query / set the options for dual mono audio.
- <tr valign="top"><td rowspan="3">121<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td><tt>OMX_IndexConfigBrcmAudioDownmixCoefficients</tt>
+<td> Query / set downmix coefficients.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioDownmixCoefficients8x8">OMX_IndexConfigBrcmAudioDownmixCoefficients8x8</a></tt>
+<td> Query / set arbitrary downmix coefficients.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioMaxSample">OMX_IndexConfigBrcmAudioMaxSample</a></tt>
+<td><tr valign="top"><td rowspan="3">121<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port parameters for the decoded audio stream. Once the first 
   packet has been successfully decoded, the port definition is populated to indicate 
   that this port emits PCM data.

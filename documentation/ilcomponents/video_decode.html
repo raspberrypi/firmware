@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -166,7 +168,7 @@ on the fly.
 <td> Query / set the port format.  The input port supports a wide range of
   compressed video format, the output port supports only raw non-encoded
   video.
- <tr valign="top"><td rowspan="12">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+ <tr valign="top"><td rowspan="14">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
 <td> Query / set the location of an externally allocated image pool to use
   for output frames. Defaults to NULL, causing the component to allocate
   a pool when active.
@@ -212,9 +214,14 @@ on the fly.
   incoming timestamps are associated with output images. In this mode the incoming timestamps
   get used without re-ordering on output images.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoDrmProtectBuffer">OMX_IndexParamBrcmVideoDrmProtectBuffer</a></tt>
-<td> Query to request that a memory buffer be allocated for protected video decode, and the fields
+<td> DRM buffer protection.
+  Query to request that a memory buffer be allocated for protected video decode, and the fields
   in a shared memory region be filled in to request protection from the hardware. Set to indicate
   that the previous protection request has been processed.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmMaxNumCallbacks">OMX_IndexParamBrcmMaxNumCallbacks</a></tt>
+<td> Query / set a limit to the number of frames that can be stored inside the codec.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoDecodeConfigVD3">OMX_IndexParamBrcmVideoDecodeConfigVD3</a></tt>
+<td> Codec specific configuration.
  </table>
 
 </table>

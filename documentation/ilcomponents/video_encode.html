@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -85,7 +87,7 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
 <td> Used to set up proprietary communication with the previous component.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
 <td> Forces use of proprietary tunnelling between ports.
- <tr valign="top"><td rowspan="40">201<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="43">201<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the output format.  <tt>eCompressionFormat</tt> specifies
   the format to which to encode.  <tt>nBitrate</tt> specifies the target
   bit rate (unless overridden by <tt>OMX_IndexParamVideoBitrate</tt>). The
@@ -148,6 +150,10 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
 <td> Enable/Disable setting low_delay_hrd flag in H.264 header. "big_pictures" that violate the nominal CPB removal times due to the number of bits used by an access unit are permitted when the flag is set.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCInlineHeaderEnable">OMX_IndexParamBrcmVideoAVCInlineHeaderEnable</a></tt>
 <td> Enable SPS/PPS insertion in the encoder bitstream. If this property is set then SPS/PPS will be output before each IDR frame or P=intrarefresh frame
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCSPSTimingEnable">OMX_IndexParamBrcmVideoAVCSPSTimingEnable</a></tt>
+<td> Enable the insertion of timing information into the SPS based on the specified output port frame rate.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCInlineVectorsEnable">OMX_IndexParamBrcmVideoAVCInlineVectorsEnable</a></tt>
+<td> Enable insertion of vectors into the bitstream.  Will be added with flags so it is possible to identify the data in the stream
  <tr valign="top"><td><tt>OMX_IndexParamVideoQuantization</tt>
 <td> Query / set the quantization parameters for P and I frames. Only used if rate
   control has been disabled.
@@ -194,20 +200,26 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
 <td> Query / set the codec's maximum quantization level.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoInitialQuant">OMX_IndexParamBrcmVideoInitialQuant</a></tt>
 <td> Query / set the codec's initial quantization level.
- <tr valign="top"><td><tt>OMX_IndexParamBrcmVideoRCSliceDQuant</tt>
-<td> Query / set the codec's Slice DQuant level
- <tr valign="top"><td><tt>OMX_IndexParamBrcmVideoFrameLimitBits</tt>
-<td> Query / set the codec's frame limit in bits (used in RC) 
- <tr valign="top"><td><tt>OMX_IndexParamBrcmVideoPeakRate</tt>
-<td> Query / set the codec's peak rate (used in RC)
- <tr valign="top"><td><tt>OMX_IndexParamBrcmVideoEncodeQpP</tt>
-<td> Query / set the codec's P Frame QP if different from I-frames and rate control is disabled
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoRCSliceDQuant">OMX_IndexParamBrcmVideoRCSliceDQuant</a></tt>
+<td> Query / set the codec's Slice DQuant level.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoFrameLimitBits">OMX_IndexParamBrcmVideoFrameLimitBits</a></tt>
+<td> Query / set the codec's frame limit in bits (used in RC) .
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoPeakRate">OMX_IndexParamBrcmVideoPeakRate</a></tt>
+<td> Query / set the codec's peak rate (used in RC).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoEncodeQpP">OMX_IndexParamBrcmVideoEncodeQpP</a></tt>
+<td> EncodeQP control.
+  Query / set the codec's P Frame QP if different from I-frames and rate control is disabled
+ <tr valign="top"><td><tt>OMX_IndexConfigVideoIntraVOPRefresh</tt>
+<td> Khronos specified equivalent to OMX_IndexConfigBrcmVideoRequestIFrame.
+  Requests an I-frame to be encoded next (it doesn't force a P-frame
+  to be coded next if we are at the OMX_IndexConfigVideoAVCIntraPeriod
+  value).
  <tr valign="top"><td rowspan="2">200  201<td><tt><a href="prop.html#OMX_IndexConfigBrcmPortStats">OMX_IndexConfigBrcmPortStats</a></tt>
 <td> Return port statistics.
  <tr valign="top"><td><tt>OMX_IndexParamVideoPortFormat</tt>
 <td> Query / set the video port format.  The input port supports uncompressed pixel data,
   the output port supports a varietary of compressed formats.
- <tr valign="top"><td rowspan="20">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamBrcmAllowMemChange">OMX_IndexParamBrcmAllowMemChange</a></tt>
+ <tr valign="top"><td rowspan="21">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamBrcmAllowMemChange">OMX_IndexParamBrcmAllowMemChange</a></tt>
 <td> Allow the component to change the amount of memory allocated when it goes from LOADED
   to IDLE and has already allocated memory during an earlier transition. Enabled by default.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmRetainMemory">OMX_IndexParamBrcmRetainMemory</a></tt>
@@ -221,14 +233,18 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
   (OMX_CONFIG_BOOLEANTYPE) structure.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoH264LowLatency">OMX_IndexConfigBrcmVideoH264LowLatency</a></tt>
 <td> Require the encoder to configure the low-latency mode.
- <tr valign="top"><td><tt>OMX_IndexConfigBrcmVideoH264AUDelimiters</tt>
-<td> Enable/Disable appropriate encoder flags for supplying Access Unit delimiters along with the encoded stream
- <tr valign="top"><td><tt>OMX_IndexConfigBrcmVideoH264DisableCABAC</tt>
-<td> Enable/Disable appropriate encoder flags to enable or disable CABAC (H264 ONLY)
- <tr valign="top"><td><tt>OMX_IndexConfigBrcmVideoH264DeblockIDC</tt>
-<td> Enable/Disable Flags for deblock IDC (H264 Only)
- <tr valign="top"><td><tt>OMX_IndexConfigBrcmVideoH264IntraMBMode</tt>
-<td> Query/Set intra MB mode  (H264 Only)
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoH264AUDelimiters">OMX_IndexConfigBrcmVideoH264AUDelimiters</a></tt>
+<td> Access Unit delimiters.
+  Enable/Disable appropriate encoder flags for supplying Access Unit delimiters along with the encoded stream.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoH264DisableCABAC">OMX_IndexConfigBrcmVideoH264DisableCABAC</a></tt>
+<td> CABAC Control.
+  Enable/Disable appropriate encoder flags to enable or disable CABAC (H264 ONLY).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoH264DeblockIDC">OMX_IndexConfigBrcmVideoH264DeblockIDC</a></tt>
+<td> DEblock IDC control.
+  Enable/Disable Flags for deblock IDC (H264 Only).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoH264IntraMBMode">OMX_IndexConfigBrcmVideoH264IntraMBMode</a></tt>
+<td> Intra Macroblock mode.
+  Query/Set intra MB mode  (H264 Only).
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmVideoRequestIFrame">OMX_IndexConfigBrcmVideoRequestIFrame</a></tt>
 <td> Request an I frame.  If set to OMX_TRUE, the next job submitted 
   will be flagged to be converted as an I-frame. This automatically resets
@@ -265,9 +281,12 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
   Setting this to anything other than the default of 16 may have a negative impact of performance
   because the input buffer may need to be re-pitched before it is encoded. Supported values
   are 16 or 1 (no padding).
- <tr valign="top"><td><tt>OMX_IndexParamBrcmHeaderOnOpen</tt>
-<td> Query / set whether this component should output the header immediately on opening the codec,
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmHeaderOnOpen">OMX_IndexParamBrcmHeaderOnOpen</a></tt>
+<td> Header production control.
+  Query / set whether this component should output the header immediately on opening the codec,
   before any input images have been received.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoPrecodeForQP">OMX_IndexParamBrcmVideoPrecodeForQP</a></tt>
+<td> Query /set the option of precoding the first frame to set up a good initial QP value.
  </table>
 
 </table>

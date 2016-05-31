@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -65,7 +67,7 @@ communication.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="1">190<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="3">190<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Set this to control the input size of the image. Typically this is
   called by the component itself when this port is tunnelled with an
   appropriate output port.  YUV420 packed planar and YUV422 packed
@@ -74,6 +76,10 @@ communication.
   or larger than <tt>nFrameWidth</tt>.  Port 190 also supports being
   connected to an output port of video domain, by setting the port
   definition type with a structure of <tt>OMX_PortDomainVideo</tt>.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
+<td> Forces use of proprietary tunnelling between ports.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraPoolToEncoderFunction">OMX_IndexParamCameraPoolToEncoderFunction</a></tt>
+<td> Used to set up proprietary communication with the previous component.
  <tr valign="top"><td rowspan="5">191<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the
@@ -93,13 +99,19 @@ communication.
  <tr valign="top"><td rowspan="1">190  191<td><tt>OMX_IndexParamImagePortFormat</tt>
 <td> Query / set the image port format used.  Both ports
   support non-compressed images of a small number of image formats.
- <tr valign="top"><td rowspan="2">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+ <tr valign="top"><td rowspan="4">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
 <td> Query / set the location of an externally allocated image pool to use
   for output frames. Defaults to NULL, causing the component to allocate
   a pool when active.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamImagePoolSize">OMX_IndexParamImagePoolSize</a></tt>
 <td> Sets the size of the image pool to be allocated by the
   component. Defaults to the output port frame size.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmExtraBuffers">OMX_IndexParamBrcmExtraBuffers</a></tt>
+<td> Sets the number of buffers to allocate beyond the default of 5.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmLazyImagePoolDestroy">OMX_IndexParamBrcmLazyImagePoolDestroy</a></tt>
+<td> The image pool will be deleted lazily, i.e. we will not wait for the images
+  to be returned from the pool, but instead rely on the image pool tidying itself
+  up automatically when all references are released.
  </table>
 
 </table>
