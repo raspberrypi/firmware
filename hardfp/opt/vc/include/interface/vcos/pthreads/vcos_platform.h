@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 VideoCore OS Abstraction Layer - pthreads types
 =============================================================================*/
 
-/* Do not include this file directly - instead include it via vcos.h */
+/* DO NOT include this file directly - instead include it via vcos.h */
 
 /** @file
   *

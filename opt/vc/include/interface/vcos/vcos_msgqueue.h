@@ -44,7 +44,7 @@ extern "C" {
 #endif
 
 #include "vcos_types.h"
-#include "vcos_platform.h"
+#include "vcos.h"
 #include "vcos_blockpool.h"
 
 /**

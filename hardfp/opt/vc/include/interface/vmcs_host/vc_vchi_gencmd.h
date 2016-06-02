@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifndef VC_VCHI_GENCMD_H
 #define VC_VCHI_GENCMD_H
-#include "vchost_config.h"
+#include "vchost_platform_config.h"
 #include "interface/vchi/vchi.h"
 #include "interface/vcos/vcos.h" //for VCHPRE_ abd VCHPOST_ macro's for func declaration
 

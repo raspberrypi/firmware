@@ -38,7 +38,7 @@ extern "C" {
 
 #include "interface/vcos/vcos_types.h"
 #ifndef VCOS_PLATFORM_H
-#include "vcos_platform.h"
+#include "vcos.h"
 #endif
 
 /** \file vcos_timer.h

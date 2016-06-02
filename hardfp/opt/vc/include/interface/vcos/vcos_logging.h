@@ -39,7 +39,7 @@ extern "C" {
 #include <stdarg.h>
 
 #include "interface/vcos/vcos_types.h"
-#include "vcos_platform.h"
+#include "vcos.h"
 #include "vcos_logging_control.h"
 
 /**

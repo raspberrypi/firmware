@@ -25,7 +25,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "vchost_config.h"
+#include "vchost_platform_config.h"
 #include "vcfilesys_defs.h"
 #include "vc_fileservice_defs.h"
 
