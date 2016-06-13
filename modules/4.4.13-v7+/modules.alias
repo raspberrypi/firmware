@@ -322,6 +322,7 @@ alias usb:v13D3p3359d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0BDAp317Fd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0BDAp0A8Ad*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:vCDABp8011d*dc*dsc*dp*ic*isc*ip*in* 8192cu
+alias usb:v0BDAp8176d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v04BBp094Cd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0BDAp1E1Ed*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0B05p17BAd*dc*dsc*dp*ic*isc*ip*in* 8192cu
@@ -329,6 +330,8 @@ alias usb:vCDABp8010d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2001p330Bd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2019pAB2Ed*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2019p4902d*dc*dsc*dp*ic*isc*ip*in* 8192cu
+alias usb:v0846p9043d*dc*dsc*dp*ic*isc*ip*in* 8192cu
+alias usb:v0846p9042d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0846p9041d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v4856p0091d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v0BDAp5088d*dc*dsc*dp*ic*isc*ip*in* 8192cu
@@ -337,6 +340,7 @@ alias usb:v13D3p3357d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v4855p0090d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v20F4p648Bd*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2019pAB2Ad*dc*dsc*dp*ic*isc*ip*in* 8192cu
+alias usb:v050Dp11F2d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v050Dp1102d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v2001p3308d*dc*dsc*dp*ic*isc*ip*in* 8192cu
 alias usb:v103Cp1629d*dc*dsc*dp*ic*isc*ip*in* 8192cu

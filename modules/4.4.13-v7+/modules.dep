@@ -172,7 +172,7 @@ kernel/drivers/net/hamradio/baycom_ser_fdx.ko: kernel/drivers/net/hamradio/hdlcd
 kernel/drivers/net/hamradio/hdlcdrv.ko: kernel/lib/crc-ccitt.ko kernel/net/ax25/ax25.ko
 kernel/drivers/net/hamradio/baycom_ser_hdx.ko: kernel/drivers/net/hamradio/hdlcdrv.ko kernel/lib/crc-ccitt.ko kernel/net/ax25/ax25.ko
 kernel/drivers/net/wireless/realtek/rtl818x/rtl8187/rtl8187.ko: kernel/drivers/misc/eeprom/eeprom_93cx6.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/realtek/rtl8192cu/8192cu.ko:
+kernel/drivers/net/wireless/realtek/rtl8192cu/8192cu.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/mediatek/mt7601u/mt7601u.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/at76c50x-usb.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/hostap/hostap.ko: kernel/net/wireless/lib80211.ko

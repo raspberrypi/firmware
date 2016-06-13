@@ -284,8 +284,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p31 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "output"; termination = "pull_down"; }; // LAN_RUN
@@ -426,8 +426,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
@@ -568,8 +568,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p38 { function = "output"; termination = "no_pulling";    }; // USB current limit (0=600mA, 1=1200mA)
@@ -706,8 +706,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA / SMPS_SDA
-            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL / SMPS_SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA / SMPS_SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL / SMPS_SCL
             pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
@@ -850,10 +850,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            // The firmware changes I2C pin functions on the fly, returning them to inputs when done. But pins 28&29 are
-            // not used on a 1.1 Pi2, so the I2C0 function ends up multiply mapped (bad). therefore don't statically map.
-            // pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            // pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
@@ -1003,8 +1001,8 @@
             pin@p41 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Left audio
             pin@p42 { function = "gp_clk"; termination = "pull_down"; }; // ETH_CLK - Ethernet 25MHz output
             pin@p43 { function = "gp_clk"; termination = "pull_down"; }; // WIFI_CLK - Wifi 32kHz output
-            pin@p44 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            pin@p45 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p44 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p45 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p47 { function = "output"; termination = "pull_down"; }; // activity LED
             pin@p48 { function = "sdcard"; termination = "pull_up";    drive_strength_mA = < 8 >; }; // SD CLK
             pin@p49 { function = "sdcard"; termination = "pull_up";    drive_strength_mA = < 8 >; }; // SD CMD
@@ -1383,8 +1381,8 @@
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
-            pin@p28 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SDA
-            pin@p29 { function = "i2c0";   termination = "pull_up";    }; // I2C 0 SCL
+            pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
+            pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p41 { function = "output"; termination = "no_pulling";    }; // Camera shutdown
             pin@p46 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Hotplug
