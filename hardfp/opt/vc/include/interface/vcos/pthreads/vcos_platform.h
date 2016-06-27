@@ -815,7 +815,13 @@ VCOS_INLINE_DECL void _vcos_thread_sem_post(VCOS_THREAD_T *);
 VCOS_STATIC_INLINE
 char *vcos_strdup(const char *str)
 {
-   return strdup(str);
+   size_t len = strlen(str) + 1;
+   void *p = malloc(len);
+
+   if (p == NULL)
+      return NULL;
+
+   return (char *)memcpy(p, str, len);
 }
 
 typedef void (*VCOS_ISR_HANDLER_T)(VCOS_UNSIGNED vecnum);
