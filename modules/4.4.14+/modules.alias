@@ -8323,6 +8323,7 @@ alias of:N*T*Cjustboom,justboom-digi* snd_soc_justboom_digi
 alias of:N*T*Crpi,rpi-dac* snd_soc_rpi_dac
 alias of:N*T*Crpi,rpi-proto* snd_soc_rpi_proto
 alias of:N*T*Ciqaudio,iqaudio-dac* snd_soc_iqaudio_dac
+alias of:N*T*Ciqaudio,wm8804-digi* snd_soc_iqaudio_digi
 alias of:N*T*Cjg,raspidacv3* snd_soc_raspidac3
 alias platform:audioinjector-pi-soundcard snd_soc_audioinjector_pi_soundcard
 alias of:N*T*Cai,audioinjector-pi-soundcard* snd_soc_audioinjector_pi_soundcard

@@ -1165,6 +1165,7 @@ kernel/sound/soc/bcm/snd-soc-justboom-digi.ko
 kernel/sound/soc/bcm/snd-soc-rpi-dac.ko
 kernel/sound/soc/bcm/snd-soc-rpi-proto.ko
 kernel/sound/soc/bcm/snd-soc-iqaudio-dac.ko
+kernel/sound/soc/bcm/snd-soc-iqaudio-digi.ko
 kernel/sound/soc/bcm/snd-soc-raspidac3.ko
 kernel/sound/soc/bcm/snd-soc-audioinjector-pi-soundcard.ko
 kernel/sound/soc/bcm/snd-soc-digidac1-soundcard.ko

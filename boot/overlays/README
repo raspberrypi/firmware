@@ -546,6 +546,15 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 the DAC driver module loads.
 
 
+Name:   iqaudio-digi-wm8804-audio
+Info:   Configures the IQAudIO Digi WM8804 audio card
+Load:   dtoverlay=iqaudio-digi-wm8804-audio,<param>=<val>
+Params: card_name               Override the default, "IQAudIODigi", card name.
+        dai_name                Override the default, "IQAudIO Digi", dai name.
+        dai_stream_name         Override the default, "IQAudIO Digi HiFi",
+                                dai stream name.
+
+
 Name:   justboom-dac
 Info:   Configures the JustBoom DAC HAT, Amp HAT, DAC Zero and Amp Zero audio
         cards
@@ -691,7 +700,9 @@ Info:   Switch Pi3 Bluetooth function to use the mini-UART (ttyS0) and restore
         N.B. It is also necessary to edit /lib/systemd/system/hciuart.service
         and replace ttyAMA0 with ttyS0, unless you have a system with udev rules
         that create /dev/serial0 and /dev/serial1, in which case use
-        /dev/serial1 instead because it will always be correct.
+        /dev/serial1 instead because it will always be correct. Furthermore,
+        you must also set core_freq=250 in config.txt or the miniuart will not
+        work.
 Load:   dtoverlay=pi3-miniuart-bt
 Params: <None>
 
@@ -877,6 +888,16 @@ Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
 
 
+Name:   sc16is752-spi1
+Info:   Overlay for the NXP SC16IS752 Dual UART with SPI Interface
+        Enables the chip on SPI1.
+        N.B.: spi1 is only accessible on devices with a 40pin header, eg:
+              A+, B+, Zero and PI2 B; as well as the Compute Module.
+
+Load:   dtoverlay=sc16is752-spi1,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+
+
 Name:   sdhost
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock.
         N.B. This overlay is designed for situations where the mmc driver is
@@ -983,6 +1004,12 @@ Name:   spi-rtc
 Info:   Adds support for a number of SPI Real Time Clock devices
 Load:   dtoverlay=spi-rtc,<param>=<val>
 Params: pcf2123                 Select the PCF2123 device
+
+
+Name:   spi0-hw-cs
+Info:   Re-enables hardware CS/CE (chip selects) for SPI0
+Load:   dtoverlay=spi0-hw-cs
+Params: <None>
 
 
 Name:   spi1-1cs
