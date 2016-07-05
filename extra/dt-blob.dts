@@ -996,7 +996,13 @@
                function = "input";
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
-            pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p15 { function = "uart0";  termination = "pull_up";    drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p34 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p35 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p36 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p37 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p38 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p39 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
             pin@p40 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Right audio
             pin@p41 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Left audio
             pin@p42 { function = "gp_clk"; termination = "pull_down"; }; // ETH_CLK - Ethernet 25MHz output
@@ -1145,7 +1151,13 @@
                function = "input";
             }; // pin
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
-            pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p15 { function = "uart0";  termination = "pull_up";    drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p34 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p35 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p36 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p37 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p38 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
+            pin@p39 { function = "input";  termination = "pull_up";    drive_strength_mA = < 8 >; };
             pin@p40 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Right audio
             pin@p41 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Left audio
             pin@p42 { function = "gp_clk"; termination = "pull_down"; }; // ETH_CLK - Ethernet 25MHz output
