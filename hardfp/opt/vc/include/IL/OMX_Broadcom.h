@@ -65,6 +65,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // for use in buffer headers - indicated the timestamp is a DTS rather than PTS
 #define OMX_BUFFERFLAG_TIME_IS_DTS 0x000004000
 
+// for use in buffer headers - signals that a video picture is interlaced
+#define OMX_BUFFERFLAG_INTERLACED 0x000010000
+
+// Signals that the top field of the current interlaced frame should be displayed first
+#define OMX_BUFFERFLAG_TOP_FIELD_FIRST 0x000020000
+
 /**
  * Macros to convert to <code>OMX_TICKS</code> from a signed 64 bit value and
  * vice-versa. These macros don't actually do anything unless <code>OMX_TICKS</code>

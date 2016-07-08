@@ -140,15 +140,16 @@ typedef struct MMAL_BUFFER_HEADER_T
 /** \name Video buffer header flags
  * \anchor videobufferheaderflags
  * The following flags describe properties of a video buffer header */
+#define MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START (1<<16)
 /* @{ */
 /** Signals an interlaced video frame */
-#define MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED       (1<<0)
+#define MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED       (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START<<0)
 /** Signals that the top field of the current interlaced frame should be displayed first */
-#define MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST  (1<<2)
+#define MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST  (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START<<1)
 /** Signals that the buffer should be displayed on external display if attached. */
-#define MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL (1<<3)
+#define MMAL_BUFFER_HEADER_VIDEO_FLAG_DISPLAY_EXTERNAL (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START<<3)
 /** Signals that contents of the buffer requires copy protection. */
-#define MMAL_BUFFER_HEADER_VIDEO_FLAG_PROTECTED        (1<<4)
+#define MMAL_BUFFER_HEADER_VIDEO_FLAG_PROTECTED        (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START<<4)
 /* @} */
 
 /** Acquire a buffer header.
