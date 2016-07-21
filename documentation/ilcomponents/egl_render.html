@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -64,18 +66,14 @@ YUV_UV input is currently handled only when using proprietary communication.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="1">220<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="2">220<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Sets the port definition type to describe the input video
   stream. Typically this is called by the component itself when this
   port is tunnelled with an appropriate output port. This port also
   supports setting the port definition to an image domain, which allows
   connecting this port with an output image port - for example from a
   still image decode.
- <tr valign="top"><td rowspan="1">221<td><tt>OMX_IndexParamPortDefinition</tt>
-<td> Query this to show what the output size will be. Set to alter the
-  number of buffers to be used, or change the <tt>pNativeWindow</tt>.
-  Other parameters must be unchanged.
- <tr valign="top"><td rowspan="1">220<td><tt><a href="prop.html#OMX_IndexParamBrcmVideoEGLRenderDiscardMode">OMX_IndexParamBrcmVideoEGLRenderDiscardMode</a></tt>
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoEGLRenderDiscardMode">OMX_IndexParamBrcmVideoEGLRenderDiscardMode</a></tt>
 <td> Boolean parameter to enable/disable EGL discard mode. With discard mode enabled
   (default), EGL render will only buffer up to one image. If a new image is
   received while an image is waiting to be processed, the old image will be
@@ -83,6 +81,10 @@ YUV_UV input is currently handled only when using proprietary communication.
   be buffered. Once the buffer is full, the upstream component is notified and
   should attempt to send the image again later. Non-discard mode only applies to
   the tunnelled case (it does not apply when called internally).
+ <tr valign="top"><td rowspan="1">221<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query this to show what the output size will be. Set to alter the
+  number of buffers to be used, or change the <tt>pNativeWindow</tt>.
+  Other parameters must be unchanged.
  </table>
 
 </table>

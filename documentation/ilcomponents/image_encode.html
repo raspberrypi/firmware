@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -69,7 +71,7 @@ the output port.
 <td> Used to set up proprietary communication with the previous component.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
 <td> Forces use of proprietary tunnelling between ports.
- <tr valign="top"><td rowspan="6">341<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="8">341<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port definition for the output port.
   The component supports format conversion for when the codec does not
   support the input format. Where the codec supports multiple input
@@ -100,10 +102,12 @@ the output port.
   documentation for the <tt>image_decode</tt> component.
   Some exif tags may be added with image capture data from a directly
   connected camera component if they have not already been set.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmAttachLog">OMX_IndexParamBrcmAttachLog</a></tt>
+<td> Sets whether to attach log data to the encoded file or not.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmJpegRestartInterval">OMX_IndexParamBrcmJpegRestartInterval</a></tt>
+<td> Sets the JPEG restart interval.
  <tr valign="top"><td rowspan="1">340  341<td><tt>OMX_IndexParamImagePortFormat</tt>
 <td> Query / set the image port format.
- <tr valign="top"><td rowspan="1">341<td><tt><a href="prop.html#OMX_IndexParamBrcmAttachLog">OMX_IndexParamBrcmAttachLog</a></tt>
-<td> Sets whether to attach log data to the encoded file or not.
  </table>
 
 

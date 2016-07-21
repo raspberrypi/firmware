@@ -88,7 +88,7 @@ typedef void (*TVSERVICE_CALLBACK_T)(void *callback_data, uint32_t reason, uint3
 VCHPRE_ int vc_vchi_tv_init(VCHI_INSTANCE_T initialise_instance, VCHI_CONNECTION_T **connections, uint32_t num_connections );
 
 /**
- * <DFN>vc_vchi_tv_stop</DNF> is called to stop the host side of TV service.
+ * <DFN>vc_vchi_tv_stop</DFN> is called to stop the host side of TV service.
  *
  * @param none
  *
@@ -97,7 +97,7 @@ VCHPRE_ int vc_vchi_tv_init(VCHI_INSTANCE_T initialise_instance, VCHI_CONNECTION
 VCHPRE_ void vc_vchi_tv_stop( void );
 
 /**
- * Host applications should call <DFN>vc_tv_register_callback</DNF> at
+ * Host applications should call <DFN>vc_tv_register_callback</DFN> at
  * the beginning to register a callback function to handle all notifications.
  * See <DFN>TVSERVICE_CALLBACK_T </DFN>
  *
@@ -110,8 +110,8 @@ VCHPRE_ void vc_vchi_tv_stop( void );
 VCHPRE_ void vc_tv_register_callback(TVSERVICE_CALLBACK_T callback, void *callback_data);
 
 /**
- * <DFN>vc_tv_unregister_callback</DNF> removes a function registered with
- * <DFN>vc_tv_register_callback</DNF> from the list of callbacks.
+ * <DFN>vc_tv_unregister_callback</DFN> removes a function registered with
+ * <DFN>vc_tv_register_callback</DFN> from the list of callbacks.
  *
  * @param callback function
  *
@@ -120,8 +120,8 @@ VCHPRE_ void vc_tv_register_callback(TVSERVICE_CALLBACK_T callback, void *callba
 VCHPRE_ void vc_tv_unregister_callback(TVSERVICE_CALLBACK_T callback);
 
 /**
- * <DFN>vc_tv_unregister_callback</DNF> removes a function registered with
- * <DFN>vc_tv_register_callback</DNF> from the list of callbacks.
+ * <DFN>vc_tv_unregister_callback</DFN> removes a function registered with
+ * <DFN>vc_tv_register_callback</DFN> from the list of callbacks.
  * In contrast to vc_tv_unregister_callback this one matches not only the
  * function pointer but also the data pointer before removal.
  *

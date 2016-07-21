@@ -161,6 +161,35 @@ Params:
         and the other i2c baudrate parameters.
 
 
+Name:   adau1977-adc
+Info:   Overlay for activation of ADAU1977 ADC codec over I2C for control
+        and I2S for data.
+Load:   dtoverlay=adau1977-adc
+Params: <None>
+
+
+Name:   ads1015
+Info:   Overlay for activation of Texas Instruments ADS1015 ADC over I2C
+Load:   dtoverlay=ads1015,<param>=<val>
+Params: addr                    I2C bus address of device. Set based on how the
+                                addr pin is wired. (default=0x48 assumes addr
+                                is pulled to GND)
+        cha_enable              Enable virtual channel a. (default=true)
+        cha_cfg                 Set the configuration for virtual channel a.
+                                (default=4 configures this channel for the
+                                voltage at A0 with respect to GND)
+        cha_datarate            Set the datarate (samples/sec) for this channel.
+                                (default=4 sets 1600 sps)
+        cha_gain                Set the gain of the Programmable Gain
+                                Amplifier for this channel. (default=2 sets the
+                                full scale of the channel to 2.048 Volts)
+
+        Channel (ch) parameters can be set for each enabled channel.
+        A maximum of 4 channels can be enabled (letters a thru d).
+        For more information refer to the device datasheet at:
+        http://www.ti.com/lit/ds/symlink/ads1015.pdf
+
+
 Name:   ads7846
 Info:   ADS7846 Touch controller
 Load:   dtoverlay=ads7846,<param>=<val>
@@ -186,6 +215,26 @@ Params: cs                      SPI bus Chip Select (default 1)
         www.kernel.org/doc/Documentation/devicetree/bindings/input/ads7846.txt
 
 
+Name:   akkordion-iqdacplus
+Info:   Configures the Digital Dreamtime Akkordion Music Player (based on the
+        OEM IQAudIO DAC+ or DAC Zero module).
+Load:   dtoverlay=akkordion-iqdacplus,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                dtoverlay=akkordion-iqdacplus,24db_digital_gain
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24db_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+
+
 Name:   at86rf233
 Info:   Configures the Atmel AT86RF233 802.15.4 low-power WPAN transceiver,
         connected to spi0.0
@@ -196,6 +245,12 @@ Params: interrupt               GPIO used for INT (default 23)
         speed                   SPI bus speed in Hz (default 3000000)
         trim                    Fine tuning of the internal capacitance
                                 arrays (0=+0pF, 15=+4.5pF, default 15)
+
+
+Name:   audioinjector-wm8731-audio
+Info:   Configures the audioinjector.net audio add on soundcard
+Load:   dtoverlay=audioinjector-wm8731-audio
+Params: <None>
 
 
 Name:   bmp085_i2c-sensor
@@ -211,6 +266,20 @@ Info:   Overlay for the DHT11/DHT21/DHT22 humidity/temperature sensors
 Load:   dtoverlay=dht11,<param>=<val>
 Params: gpiopin                 GPIO connected to the sensor's DATA output.
                                 (default 4)
+
+
+Name:   dionaudio-loco
+Info:   Configures the Dion Audio LOCO DAC-AMP
+Load:   dtoverlay=dionaudio-loco
+Params: <None>
+
+
+Name:   dpi24
+Info:   Overlay for a generic 24-bit DPI display
+        This uses GPIOs 0-27 (so no I2C, uart etc.), and activates the output
+        2-3 seconds after the kernel has started.
+Load:   dtoverlay=dpi24
+Params: <None>
 
 
 Name:   dwc-otg
@@ -303,6 +372,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
+        slave                   Force DAC+ Pro into slave mode, using Pi as
+                                master for bit clock and frame clock.
 
 
 Name:   hifiberry-digi
@@ -360,10 +431,25 @@ Params: i2c_gpio_sda            GPIO used for I2C data (default "23")
                                 (default "2" = ~100kHz)
 
 
-Name:   i2c-mux-pca9548a
-Info:   Adds support for an NXP PCA9548A I2C multiplexer on i2c_arm
-Load:   dtoverlay=i2c-mux-pca9548a,<param>=<val>
-Params: addr                    I2C address of PCA9548A (default 0x70)
+Name:   i2c-mux
+Info:   Adds support for a number of I2C bus multiplexers on i2c_arm
+Load:   dtoverlay=i2c-mux,<param>=<val>
+Params: pca9542                 Select the NXP PCA9542 device
+
+        pca9545                 Select the NXP PCA9545 device
+
+        pca9548                 Select the NXP PCA9548 device
+
+        addr                    Change I2C address of the device (default 0x70)
+
+
+[ The i2c-mux-pca9548a overlay has been deleted. See i2c-mux. ]
+
+
+Name:   i2c-pwm-pca9685a
+Info:   Adds support for an NXP PCA9685A I2C PWM controller on i2c_arm
+Load:   dtoverlay=i2c-pwm-pca9685a,<param>=<val>
+Params: addr                    I2C address of PCA9685A (default 0x40)
 
 
 Name:   i2c-rtc
@@ -375,6 +461,8 @@ Params: ds1307                  Select the DS1307 device
 
         ds3231                  Select the DS3231 device
 
+        mcp7940x                Select the MCP7940x device
+
         mcp7941x                Select the MCP7941x device
 
         pcf2127                 Select the PCF2127 device
@@ -385,12 +473,20 @@ Params: ds1307                  Select the DS1307 device
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339-only)
 
+        wakeup-source           Specify that the RTC can be used as a wakeup
+                                source
+
 
 Name:   i2c0-bcm2708
-Info:   Enable the i2c_bcm2708 driver for the i2c0 bus
+Info:   Enable the i2c_bcm2708 driver for the i2c0 bus. Not all pin combinations
+        are usable on all platforms.
 Load:   dtoverlay=i2c0-bcm2708,<param>=<val>
-Params: sda0_pin                GPIO pin for SDA0 (0, 28 [or 44] - default 0)
-        scl0_pin                GPIO pin for SCL0 (1, 29 [or 45] - default 1)
+Params: sda0_pin                GPIO pin for SDA0 (deprecated - use pins_*)
+        scl0_pin                GPIO pin for SCL0 (deprecated - use pins_*)
+        pins_0_1                Use pins 0 and 1 (default)
+        pins_28_29              Use pins 28 and 29
+        pins_44_45              Use pins 44 and 45
+        pins_46_47              Use pins 46 and 47
 
 
 Name:   i2c1-bcm2708
@@ -402,6 +498,12 @@ Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
                                 default 4)
 
 
+Name:   i2s-gpio28-31
+Info:   move I2S function block to GPIO 28 to 31
+Load:   dtoverlay=i2s-gpio28-31
+Params: <None>
+
+
 Name:   i2s-mmap
 Info:   Enables mmap support in the bcm2708-i2s driver
 Load:   dtoverlay=i2s-mmap
@@ -410,8 +512,21 @@ Params: <None>
 
 Name:   iqaudio-dac
 Info:   Configures the IQaudio DAC audio card
-Load:   dtoverlay=iqaudio-dac
-Params: <None>
+Load:   dtoverlay=iqaudio-dac,<param>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=iqaudio-dac,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24db_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
 
 
 Name:   iqaudio-dacplus
@@ -431,6 +546,45 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
+        auto_mute_amp           If specified, unmute/mute the IQaudIO amp when
+                                starting/stopping audio playback.
+        unmute_amp              If specified, unmute the IQaudIO amp once when
+                                the DAC driver module loads.
+
+
+Name:   iqaudio-digi-wm8804-audio
+Info:   Configures the IQAudIO Digi WM8804 audio card
+Load:   dtoverlay=iqaudio-digi-wm8804-audio,<param>=<val>
+Params: card_name               Override the default, "IQAudIODigi", card name.
+        dai_name                Override the default, "IQAudIO Digi", dai name.
+        dai_stream_name         Override the default, "IQAudIO Digi HiFi",
+                                dai stream name.
+
+
+Name:   justboom-dac
+Info:   Configures the JustBoom DAC HAT, Amp HAT, DAC Zero and Amp Zero audio
+        cards
+Load:   dtoverlay=justboom-dac,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=justboom-dac,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+
+
+Name:   justboom-digi
+Info:   Configures the JustBoom Digi HAT and Digi Zero audio cards
+Load:   dtoverlay=justboom-digi
+Params: <None>
 
 
 Name:   lirc-rpi
@@ -457,6 +611,15 @@ Params: gpio_out_pin            GPIO for output (default "17")
 
         debug                   "on" = enable additional debug messages
                                 (default "off")
+
+
+Name:   mcp23017
+Info:   Configures the MCP23017 I2C GPIO expander
+Load:   dtoverlay=mcp23017,<param>=<val>
+Params: gpiopin                 Gpio pin connected to the INTA output of the
+                                MCP23017 (default: 4)
+
+        addr                    I2C address of the MCP23017 (default: 0x20)
 
 
 Name:   mcp2515-can0
@@ -543,7 +706,9 @@ Info:   Switch Pi3 Bluetooth function to use the mini-UART (ttyS0) and restore
         N.B. It is also necessary to edit /lib/systemd/system/hciuart.service
         and replace ttyAMA0 with ttyS0, unless you have a system with udev rules
         that create /dev/serial0 and /dev/serial1, in which case use
-        /dev/serial1 instead because it will always be correct.
+        /dev/serial1 instead because it will always be correct. Furthermore,
+        you must also set core_freq=250 in config.txt or the miniuart will not
+        work.
 Load:   dtoverlay=pi3-miniuart-bt
 Params: <None>
 
@@ -574,6 +739,18 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
 
         xohms                   Touchpanel sensitivity (X-plate resistance)
+
+
+Name:   pitft22
+Info:   Adafruit PiTFT 2.2" screen
+Load:   dtoverlay=pitft22,<param>=<val>
+Params: speed                   Display SPI bus speed
+
+        rotate                  Display rotation {0,90,180,270}
+
+        fps                     Delay between frame updates
+
+        debug                   Debug output level {0-7}
 
 
 Name:   pitft28-capacitive
@@ -711,6 +888,22 @@ Load:   dtoverlay=rpi-sense
 Params: <None>
 
 
+Name:   rra-digidac1-wm8741-audio
+Info:   Configures the Red Rocks Audio DigiDAC1 soundcard
+Load:   dtoverlay=rra-digidac1-wm8741-audio
+Params: <None>
+
+
+Name:   sc16is752-spi1
+Info:   Overlay for the NXP SC16IS752 Dual UART with SPI Interface
+        Enables the chip on SPI1.
+        N.B.: spi1 is only accessible on devices with a 40pin header, eg:
+              A+, B+, Zero and PI2 B; as well as the Compute Module.
+
+Load:   dtoverlay=sc16is752-spi1,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+
+
 Name:   sdhost
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock.
         N.B. This overlay is designed for situations where the mmc driver is
@@ -810,6 +1003,18 @@ Params: <None>
 Name:   spi-gpio35-39
 Info:   move SPI function block to GPIO 35 to 39
 Load:   dtoverlay=spi-gpio35-39
+Params: <None>
+
+
+Name:   spi-rtc
+Info:   Adds support for a number of SPI Real Time Clock devices
+Load:   dtoverlay=spi-rtc,<param>=<val>
+Params: pcf2123                 Select the PCF2123 device
+
+
+Name:   spi0-hw-cs
+Info:   Re-enables hardware CS/CE (chip selects) for SPI0
+Load:   dtoverlay=spi0-hw-cs
 Params: <None>
 
 
@@ -955,8 +1160,12 @@ Name:   vc4-kms-v3d
 Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
         booting to GUI while this overlay is in use will cause interesting
         lockups.
-Load:   dtoverlay=vc4-kms-v3d
-Params: <None>
+Load:   dtoverlay=vc4-kms-v3d,<param>
+Params: cma-256                 CMA is 256MB, 256MB-aligned (needs 1GB)
+        cma-192                 CMA is 192MB, 256MB-aligned (needs 1GB)
+        cma-128                 CMA is 128MB, 128MB-aligned
+        cma-96                  CMA is 96MB, 128MB-aligned
+        cma-64                  CMA is 64MB, 64MB-aligned
 
 
 Name:   vga666

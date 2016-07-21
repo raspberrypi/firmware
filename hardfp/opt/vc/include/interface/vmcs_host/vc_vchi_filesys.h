@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VC_VCHI_VCFILESYS_H_
 #define VC_VCHI_VCFILESYS_H_
 
-#include "vchost_config.h"
+#include "vchost_platform_config.h"
 #include "vcfilesys_defs.h"
 #include "vc_fileservice_defs.h"
 #include "interface/vchi/vchi.h"

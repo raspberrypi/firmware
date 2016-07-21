@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -98,9 +100,12 @@ audio track changes between input ports.
   only support PCM format audio.
  <tr valign="top"><td><tt>OMX_IndexConfigAudioMute</tt>
 <td> Query / set the mute status of the port.
- <tr valign="top"><td rowspan="4">232  233  234  235<td><tt>OMX_IndexConfigAudioVolume</tt>
+ <tr valign="top"><td rowspan="7">232  233  234  235<td><tt>OMX_IndexConfigAudioVolume</tt>
 <td> Query / set the volume control for the input ports. This controls the 
   software volume scaling that occurs prior to mixdown.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmTimeScale">OMX_IndexParamBrcmTimeScale</a></tt>
+<td> Query / set the speed control for the input ports. This controls the
+  dynamic resampling rate. Parameter is a 16.16 fixed point scale factor.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioTrackChangeControl">OMX_IndexConfigBrcmAudioTrackChangeControl</a></tt>
 <td> Configure a gapless or an overlapping crossfaded track change from one input
   port to another using the output buffering mechanism in the mixer.
@@ -113,6 +118,10 @@ audio track changes between input ports.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigRequestCallback">OMX_IndexConfigRequestCallback</a></tt>
 <td> Set whether we enable a callback to the client when the value of an index 
   structure changes.  Only supported for the index <tt>OMX_IndexConfigBrcmAudioTrackChangeCount</tt>.
+ <tr valign="top"><td><tt>OMX_IndexConfigBrcmAudioDownmixCoefficients</tt>
+<td> Query / set downmix coefficients.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmAudioDownmixCoefficients8x8">OMX_IndexConfigBrcmAudioDownmixCoefficients8x8</a></tt>
+<td> Query / set arbitrary downmix coefficients.
  <tr valign="top"><td rowspan="2">230<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the port parameter for the clock port.  Only the number of
   buffers can be modified on this port.

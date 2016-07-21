@@ -136,6 +136,7 @@ enum {
    MMAL_PARAMETER_CAMERA_RX_CONFIG,          /**< Takes a @ref MMAL_PARAMETER_CAMERA_RX_CONFIG_T */
    MMAL_PARAMETER_CAMERA_RX_TIMING,          /**< Takes a @ref MMAL_PARAMETER_CAMERA_RX_TIMING_T */
    MMAL_PARAMETER_DPF_CONFIG,                /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_JPEG_RESTART_INTERVAL,     /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -495,6 +496,7 @@ typedef struct MMAL_PARAMETER_CAMERA_CONFIG_T
 
 #define MMAL_PARAMETER_CAMERA_INFO_MAX_CAMERAS 4
 #define MMAL_PARAMETER_CAMERA_INFO_MAX_FLASHES 2
+#define MMAL_PARAMETER_CAMERA_INFO_MAX_STR_LEN 16
 
 typedef struct MMAL_PARAMETER_CAMERA_INFO_CAMERA_T
 {
@@ -502,6 +504,7 @@ typedef struct MMAL_PARAMETER_CAMERA_INFO_CAMERA_T
    uint32_t    max_width;
    uint32_t    max_height;
    MMAL_BOOL_T lens_present;
+   char        camera_name[MMAL_PARAMETER_CAMERA_INFO_MAX_STR_LEN];
 } MMAL_PARAMETER_CAMERA_INFO_CAMERA_T;
 
 typedef enum MMAL_PARAMETER_CAMERA_INFO_FLASH_TYPE_T

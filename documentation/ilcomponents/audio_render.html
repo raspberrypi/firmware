@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -56,8 +58,8 @@
 <p>
 This conformant component accepts raw PCM audio, and outputs this data
 using platform-specific audio output devices. Control of these
-platform-specific devices is outside the scope of IL. By default, when 
-connected to a clock component, it will act as a clock reference. The 
+platform-specific devices is outside the scope of IL. By default, when
+connected to a clock component, it will act as a clock reference. The
 time scale of the clock is respected, and when not normal speed no audio
 will be played and no reference times will be advertised to the clock.
 <p>
@@ -69,10 +71,9 @@ will be played and no reference times will be advertised to the clock.
 <td> Supports setting the port format to PCM unencoded audio, or DDP
   encoded data.
  <tr valign="top"><td><tt>OMX_IndexParamAudioPcm</tt>
-<td> <tt>nChannels</tt> must be 1, 2, 4, or 8. 5.1 audio can be carried
-  inside 8 channels, with the last two channels advertise as blank.
+<td> <tt>nChannels</tt> must be between 1 and 8.
   <tt>eNumData</tt> must be <tt>OMX_NumericalDataSigned</tt>.
-  <tt>eEndian</tt> must be <tt>OMX_EndianLittle</tt>.
+  <tt>eEndian</tt> must be <tt>OMX_EndianLittle</tt> or <tt>OMX_EndianBig</tt>.
   <tt>bInterleaved</tt> must be <tt>OMX_TRUE</tt>.
   <tt>nBitPerSample</tt> must be 16 or 32.
   <tt>nSamplingRate</tt> must be greater than or equal to 8000 but

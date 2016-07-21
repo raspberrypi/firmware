@@ -164,6 +164,17 @@ MMAL_PORT_T *mmal_util_get_port(MMAL_COMPONENT_T *comp, MMAL_PORT_TYPE_T type, u
 char *mmal_4cc_to_string(char *buf, size_t len, uint32_t fourcc);
 
 
+/** On FW prior to June 2016, camera and video_splitter
+ *  had BGR24 and RGB24 support reversed.
+ *  This is now fixed, and this function will return whether the
+ *  FW has the fix or not.
+ *
+ * @param port   MMAL port to check (on camera or video_splitter)
+ * @return 0 if old firmware, 1 if new.
+ *
+ */
+int mmal_util_rgb_order_fixed(MMAL_PORT_T *port);
+
 #ifdef __cplusplus
 }
 #endif

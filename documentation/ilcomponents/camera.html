@@ -35,6 +35,8 @@
 <tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
 <a href="video_encode.html">video_encode</a><br>
 <a href="video_render.html">video_render</a><br>
@@ -74,7 +76,7 @@ currently possible to emit the same frame at multiple
 resolutions. This means that to obtain both preview and video capture images
 simultaneously, the two ports must be at the same resolution and of
 the same image format. If they are different, the capture port takes
-precedence, and no images will be emitted from the preview port.
+precedence, and no images will be emited from the preview port.
 <p>
 If port 71 is executing when a connected clock is transitioned to stop
 the component will stop recording data at the end of the current
@@ -125,7 +127,7 @@ unloaded, extending the startup latency.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="98">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
+<tr valign="top"><td rowspan="102">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
 <td> Query / set the camera sensor mode. When setting this parameter, only
   bOneShot is used. It will return the actual sensor resolution when
   queried (as per the OMX specification)
@@ -148,7 +150,7 @@ unloaded, extending the startup latency.
 <td> Query / set the identifier to use with the Broadcom Camplus library
   used by this component.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraDeviceNumber">OMX_IndexParamCameraDeviceNumber</a></tt>
-<td> Camera device number. Query / set the camera number (as defined by the Videocore make system) to be
+<td> Query / set the camera number (as defined by the Videocore make system) to be
   used by this camera component. When set, the value will be checked to ensure that
   the camera number specified is defined for the platform.
   Setting this parameter also triggers loading of the relevant drivers to speed up
@@ -355,19 +357,33 @@ unloaded, extending the startup latency.
   for the camera input frame (typically Bayer). For debug use only,
   and will not work over ILCS.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamDynamicParameterFile">OMX_IndexParamDynamicParameterFile</a></tt>
-<td> Specify a dynamic parameter file to use or not. If a file is to be used,
+<td> DPF: file to be loaded.
+  Specify a dynamic parameter file to use or not. If a file is to be used,
   <tt>OMX_IndexParamUseDynamicParameterFile</tt> must be set.
+  DEPRECATED: Use OMX_IndexParamDynamicParameterConfig in preference
+  as file access is not always available on VideoCore.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamUseDynamicParameterFile">OMX_IndexParamUseDynamicParameterFile</a></tt>
-<td> Specify whether we wish to load the DPF file.
+<td> DPF: enable loading.
+  Specify whether we wish to load the DPF file.
   The filename is set with <tt>OMX_IndexParamDynamicParameterFile</tt>.
+  DEPRECATED: Use OMX_IndexParamDynamicParameterConfig in preference
+  as file access is not always available on VideoCore.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamDynamicParameterFileFailFatal">OMX_IndexParamDynamicParameterFileFailFatal</a></tt>
-<td> Classify error condition when DFP fails to load.  This specifies whether the
+<td> DPF: failure  behaviour.
+  Classify error condition when DFP fails to load.  This specifies whether the
   failure to load the DPF file should be treated as a fatal error.
- <tr valign="top"><td><tt>OMX_IndexParamConfigFileRegisters</tt>
-<td> Specify a register settings file to use instead of hard-coded defaults.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamDynamicParameterConfig">OMX_IndexParamDynamicParameterConfig</a></tt>
+<td> DPF: config in a MEM_HANDLE.
+  Specify dynamic parameter configuration via a mem handle. If the handle is
+  MEM_HANDLE_INVALID, then this mechanism is not active.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmConfigFileRegisters">OMX_IndexParamBrcmConfigFileRegisters</a></tt>
+<td> Sensor config override.
+  Specify a register settings file to use instead of hard-coded defaults.
   If a file is to be used, <tt>OMX_IndexParamUseRegisterFile</tt> must be set.
+  This requires support from the underlying sensor driver.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmConfigFileChunkRegisters">OMX_IndexParamBrcmConfigFileChunkRegisters</a></tt>
-<td> Specify a chunk of data for a register settings file.
+<td> Snensor config data.
+  Specify a chunk of data for a register settings file.
   <tt>OMX_IndexParamConfigFileRegisters</tt> must be called first.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseRegisterFile">OMX_IndexConfigBrcmUseRegisterFile</a></tt>
 <td> Specify whether we wish to load the register settings file.
@@ -414,7 +430,7 @@ unloaded, extending the startup latency.
   power down the sensor, but keeping all memory allocated as required by
   the component state.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmCameraInputAspectRatio">OMX_IndexParamBrcmCameraInputAspectRatio</a></tt>
-<td> Sensor aspect ratio selection. Query / set the prefered aspect ratio
+<td> Sensor aspect ratio selection. Query / set the preferred aspect ratio
   of the sensor CDI mode. The CDI will use the nearest value to this.
   If both are left as 0, then the aspect ratio of the requested output
   mode is used to bias the sensor mode selection.
@@ -458,7 +474,8 @@ unloaded, extending the startup latency.
   (face tracking, or focus results). This box will always be drawn when
   it is defined, overriding any face tracking or focus cycle results.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraCaptureMode">OMX_IndexParamCameraCaptureMode</a></tt>
-<td> Allow the client to specify the behaviour desired for stills captures.
+<td> Camera Capture Mode.
+  Allows the client to specify the behaviour desired for stills captures.
   Options are:
    <tt>OMX_CameraCaptureModeWaitForCaptureEnd</tt>:
         Wait for capture to complete before resuming viewfinder.
@@ -503,7 +520,8 @@ unloaded, extending the startup latency.
   as the time information is not available until the whole frame has been
   received from Camplus.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCaptureStatus">OMX_IndexParamCaptureStatus</a></tt>
-<td> Returns the actual capture status of the camera component. Set to True when
+<td> Stills capture status.
+  Returns the actual capture status of the camera component. Set to True when
   a stills capture starts, and will be cleared when the capture image has been
   passed downstream.
   This parameter is supported by <tt>OMX_IndexConfigRequestCallback</tt>
@@ -523,30 +541,48 @@ unloaded, extending the startup latency.
   image pools. Read only.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigContrastEnhance">OMX_IndexConfigContrastEnhance</a></tt>
 <td> Enable / disable contrast enhancement.
- <tr valign="top"><td><tt>OMX_IndexParamCameraCustomSensorConfig</tt>
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraCustomSensorConfig">OMX_IndexParamCameraCustomSensorConfig</a></tt>
 <td> Allows a request to be made to the sensor driver to use an alternate set of
   configuration registers. The meaning of these will be sensor specific.
   The setting will only be changed on the next call to the sensor set_mode,
   hence this is enforced as an IL parameter that the component must be loaded,
   or all ports disabled in order to change it.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraZeroShutterLag">OMX_IndexParamCameraZeroShutterLag</a></tt>
-<td> Two parameters.
-  The first requests that the camera should run preview using
-  the full resolution sensor mode.
-  The second controls whether captures should then grab the last raw
-  preview image and generate the capture based on that.
+<td> Zero shutter lag behaviour.
+  This takes two parameters. The first requests that the camera should run
+  preview using the full resolution sensor mode. The second controls whether
+  captures should then grab the last raw preview image and generate the capture
+  based on that.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCaptureExposureCompensation">OMX_IndexParamCaptureExposureCompensation</a></tt>
-<td> Sets the exposure compensation that should be applied to a stills capture
+<td> Capture Exposure Compensation.
+  Sets the exposure compensation that should be applied to a stills capture
   compared to the previous preview frames.
- <tr valign="top"><td><tt>OMX_IndexParamSWSharpenDisable</tt>
-<td> Requests the tuner to disable the software sharpen stage for improved
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamSWSharpenDisable">OMX_IndexParamSWSharpenDisable</a></tt>
+<td> Software Sharpening Control.
+  Requests the tuner to disable the software sharpen stage for improved
   capture performance.
- <tr valign="top"><td><tt>OMX_IndexParamSWSaturationDisable</tt>
-<td> Requests the tuner to disable the software saturation stage for improved
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamSWSaturationDisable">OMX_IndexParamSWSaturationDisable</a></tt>
+<td> Software Saturation Control.
+  Requests the tuner to disable the software saturation stage for improved
   capture performance.
- <tr valign="top"><td><tt>OMX_IndexConfigBrcmFlashRequired</tt>
-<td> Returns the tuner indication whether a flash (normal or fill-in)
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmFlashRequired">OMX_IndexConfigBrcmFlashRequired</a></tt>
+<td> Flash required status.
+  Returns the tuner indication whether a flash (normal or fill-in)
   is required for the capture. Read only.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCustomAwbGains">OMX_IndexConfigCustomAwbGains</a></tt>
+<td> Custom AWB Gains.
+  Allows client to set AWB gains.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmCameraAnnotate">OMX_IndexConfigBrcmCameraAnnotate</a></tt>
+<td> Annotation overlay parameters.
+  Query / set the paramters concerning the anotation overlay.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamRemoveImagePadding">OMX_IndexParamRemoveImagePadding</a></tt>
+<td> Remove image padding.
+  Normally the components will require nStride and nSliceHeight to be
+  padded to an appropriate multiple of N for performance reasons.
+  If a performance hit can be accepted, this parameter can remove the
+  restriction and run with nStride = (nFrameWidth * bytes_per_pixel), and
+  nSliceHeight = nFrameHeight, even if nFrameWidth and nFrameHeight are
+  not appropriate multiples.
  <tr valign="top"><td rowspan="6">70<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the preview port resolution. Parts of this value may be
   overwritten by the component if Camplus needs to apply additional
@@ -597,7 +633,8 @@ unloaded, extending the startup latency.
 <td> Used to set up proprietary communication with the next component when
   passing image stripes (write still specific)
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraStripeFuncMinLines">OMX_IndexConfigCameraStripeFuncMinLines</a></tt>
-<td> Used to set the minimum number of lines to be passed using the stripe function. The stripe
+<td> Stripe mode minimum height.
+  Used to set the minimum number of lines to be passed using the stripe function. The stripe
   function itself is set with <tt>OMX_IndexParamCameraStripeFunction</tt>.
  <tr valign="top"><td><tt>OMX_IndexParamImagePortFormat</tt>
 <td> Query / set the video port format.  This port supports a small range of
@@ -605,7 +642,7 @@ unloaded, extending the startup latency.
  <tr valign="top"><td rowspan="1">70  71<td><tt>OMX_IndexParamVideoPortFormat</tt>
 <td> Query / set the video port format.  These ports support a small range of
   uncompressed pixel formats.
- <tr valign="top"><td rowspan="2">70  71  72<td><tt><a href="prop.html#OMX_IndexParamBrcmDisableProprietaryTunnels">OMX_IndexParamBrcmDisableProprietaryTunnels</a></tt>
+ <tr valign="top"><td rowspan="5">70  71  72<td><tt><a href="prop.html#OMX_IndexParamBrcmDisableProprietaryTunnels">OMX_IndexParamBrcmDisableProprietaryTunnels</a></tt>
 <td> Tells the component not to use proprietary communication for the selected
   output port.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamPortMaxFrameSize">OMX_IndexParamPortMaxFrameSize</a></tt>
@@ -616,9 +653,18 @@ unloaded, extending the startup latency.
   The size passed in <tt>OMX_IndexParamPortDefinition</tt> will be checked
   against this setting (potentially transposed) to ensure that the images
   can fit in the pool.
- <tr valign="top"><td rowspan="1">70  71<td><tt><a href="prop.html#OMX_IndexParamBrcmFpsRange">OMX_IndexParamBrcmFpsRange</a></tt>
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmFpsRange">OMX_IndexParamBrcmFpsRange</a></tt>
 <td> Allows a variable frame rate range to be defined. Used if xFramerate
   in the port definition is 0.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
+<td> Set/retrieve the image colour space to be used on this port.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmStereoscopicMode">OMX_IndexParamBrcmStereoscopicMode</a></tt>
+<td> Query / set the stereoscopic mode for the ports.
+  Stereoscopic requires extra image buffers to be allocated, and the camera driver
+  to be opened in a different mode. If it is not selected before the component is
+  transitioned to idle, then stereoscopic can not be enabled. If it was enabled
+  prior to the transition to idle, then it can be freely enabled and disabled on
+  a disabled port.
  <tr valign="top"><td rowspan="1">73<td><tt>OMX_IndexParamOtherPortFormat</tt>
 <td> Query / set the format used by this port.  This port supports only the clock format type.
  </table>

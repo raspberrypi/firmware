@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef GENCMD_H
 #define GENCMD_H
 
-#include "vchost_config.h"
+#include "vchost_platform_config.h"
 #include "interface/vchi/vchi.h"
 
 VCHPRE_ void VCHPOST_ vc_vchi_gencmd_init(VCHI_INSTANCE_T initialise_instance, VCHI_CONNECTION_T **connections, uint32_t num_connections );

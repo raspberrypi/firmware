@@ -86,7 +86,8 @@ VCOSPRE_ void VCOSPOST_ vcos_cmd_vprintf( VCOS_CMD_PARAM_T *param, const char *f
  * vcos_cmd_execute is used as a line buffer and does not need to be
  * output by the caller.
  */
-VCOSPRE_ void VCOSPOST_ vcos_cmd_always_log_output( VCOS_LOG_CAT_T *log_category );
+struct VCOS_LOG_CAT_T;
+VCOSPRE_ void VCOSPOST_ vcos_cmd_always_log_output( struct VCOS_LOG_CAT_T *log_category );
 
 /*
  * Prints command usage for the current command.

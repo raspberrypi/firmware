@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VCHOSTREQ_H
 
 #include "vc_hostreq_defs.h"
-#include "vchost_config.h"
+#include "vchost_platform_config.h"
 #include <time.h>
 
 #include "interface/vchi/vchi.h"
