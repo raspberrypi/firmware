@@ -1083,6 +1083,14 @@
                type = "external";
                number = <3>;
             };
+            pin_define@BT_ON {
+               type = "external";
+               number = <0>;
+            };
+            pin_define@WL_ON {
+               type = "external";
+               number = <1>;
+            };
             pin_define@SMPS_SDA {
                type = "internal";
                number = <44>;
@@ -1238,6 +1246,14 @@
             pin_define@LAN_RUN {
                type = "external";
                number = <3>;
+            };
+            pin_define@BT_ON {
+               type = "external";
+               number = <0>;
+            };
+            pin_define@WL_ON {
+               type = "external";
+               number = <1>;
             };
             pin_define@SMPS_SDA {
                type = "internal";
