@@ -222,6 +222,7 @@ alias of:N*T*Cpanasonic,vvx10f004b00* panel_simple
 alias of:N*T*Clg,lh500wx1-sd03* panel_simple
 alias of:N*T*Clg,ld070wx3-sl01* panel_simple
 alias of:N*T*Cauo,b080uan01* panel_simple
+alias of:N*T*Craspberrypi,touchscreen* panel_raspberrypi_touchscreen
 alias platform:vc4-drm vc4
 alias of:N*T*Cbrcm,bcm2835-vc4* vc4
 alias usb:v17E9p*d*dc*dsc*dp*icFFisc00ip00in* udl
@@ -7142,6 +7143,7 @@ alias hid:b0005g*v0000056Ep00000061 hid_elecom
 alias hid:b0003g*v000004E7p00000030 hid_elo
 alias hid:b0003g*v000004E7p00000009 hid_elo
 alias hid:b0003g*v00000518p00000002 hid_ezkey
+alias hid:b0003g*v000011FFp00003331 hid_gembird
 alias hid:b0003g*v00000C16p00000008 hid_gyration
 alias hid:b0003g*v00000C16p00000003 hid_gyration
 alias hid:b0003g*v00000C16p00000002 hid_gyration

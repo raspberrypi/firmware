@@ -129,10 +129,12 @@ kernel/drivers/video/fbdev/ssd1307fb.ko: kernel/drivers/video/fbdev/core/syscopy
 kernel/drivers/video/fbdev/rpisense-fb.ko: kernel/drivers/mfd/rpisense-core.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko:
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko: kernel/drivers/misc/bcm2835_smi.ko
-kernel/drivers/gpu/drm/panel/panel-simple.ko: kernel/drivers/gpu/drm/drm.ko
+kernel/drivers/gpu/drm/panel/panel-simple.ko: kernel/drivers/gpu/drm/drm_mipi_dsi.ko kernel/drivers/gpu/drm/drm.ko
+kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko: kernel/drivers/gpu/drm/drm_mipi_dsi.ko kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/drm_kms_helper.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/gpu/drm/drm.ko:
-kernel/drivers/gpu/drm/vc4/vc4.ko: kernel/drivers/gpu/drm/drm_kms_helper.ko kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
+kernel/drivers/gpu/drm/drm_mipi_dsi.ko:
+kernel/drivers/gpu/drm/vc4/vc4.ko: kernel/drivers/gpu/drm/drm_kms_helper.ko kernel/drivers/gpu/drm/drm_mipi_dsi.ko kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/gpu/drm/udl/udl.ko: kernel/drivers/gpu/drm/drm_kms_helper.ko kernel/drivers/gpu/drm/drm.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko
 kernel/drivers/base/regmap/regmap-i2c.ko:
 kernel/drivers/base/regmap/regmap-spi.ko:
@@ -947,6 +949,7 @@ kernel/drivers/hid/hid-emsff.ko: kernel/drivers/input/ff-memless.ko
 kernel/drivers/hid/hid-elecom.ko:
 kernel/drivers/hid/hid-elo.ko:
 kernel/drivers/hid/hid-ezkey.ko:
+kernel/drivers/hid/hid-gembird.ko:
 kernel/drivers/hid/hid-gyration.ko:
 kernel/drivers/hid/hid-holtek-kbd.ko:
 kernel/drivers/hid/hid-holtek-mouse.ko:
