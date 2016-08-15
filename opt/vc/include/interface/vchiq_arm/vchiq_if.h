@@ -132,6 +132,7 @@ typedef void (*VCHIQ_REMOTE_USE_CALLBACK_T)(void* cb_arg);
 
 
 extern VCHIQ_STATUS_T vchiq_initialise(VCHIQ_INSTANCE_T *pinstance);
+extern VCHIQ_STATUS_T vchiq_initialise_fd(VCHIQ_INSTANCE_T *pinstance, int dev_vchiq_fd);
 extern VCHIQ_STATUS_T vchiq_shutdown(VCHIQ_INSTANCE_T instance);
 extern VCHIQ_STATUS_T vchiq_connect(VCHIQ_INSTANCE_T instance);
 extern VCHIQ_STATUS_T vchiq_add_service(VCHIQ_INSTANCE_T instance,

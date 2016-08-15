@@ -145,7 +145,12 @@ typedef enum
    MMAL_STATS_INVALID = 0x7fffffff
 } MMAL_STATS_RESULT_T;
 
+/* If opening dev_vchiq outside mmal/vchiq this is the file path and mode */
+#define MMAL_DEV_VCHIQ_PATH "/dev/vchiq"
+#define MMAL_DEV_VCHIQ_MODE O_RDWR
+
 MMAL_STATUS_T mmal_vc_init(void);
+MMAL_STATUS_T mmal_vc_init_fd(int dev_vchiq_fd);
 void mmal_vc_deinit(void);
 
 MMAL_STATUS_T mmal_vc_use(void);
