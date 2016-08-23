@@ -340,7 +340,7 @@ Params: gpio_pin                Input pin number. Default is 18.
 
 
 Name:   gpio-poweroff
-Info:   Drives a GPIO high or low on reboot
+Info:   Drives a GPIO high or low on poweroff (including halt)
 Load:   dtoverlay=gpio-poweroff,<param>=<val>
 Params: gpiopin                 GPIO for signalling (default 26)
 
@@ -933,6 +933,16 @@ Name:   rra-digidac1-wm8741-audio
 Info:   Configures the Red Rocks Audio DigiDAC1 soundcard
 Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
+
+
+Name:   sc16is750-i2c
+Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
+        Enables the chip on I2C1 at 0x48. To select another address,
+        please refer to table 10 in reference manual.
+
+Load:   dtoverlay=sc16is750-i2c,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+        addr                    Address (default 0x48)
 
 
 Name:   sc16is752-spi1
