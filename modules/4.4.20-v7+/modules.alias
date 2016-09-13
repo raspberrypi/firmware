@@ -7884,6 +7884,11 @@ alias w1-family-0x32 w1_ds2780
 alias w1-family-0x3D w1_ds2781
 alias w1-family-0x01 w1_bq27000
 alias w1-family-0x1C w1_ds28e04
+alias i2c:ina231 ina2xx
+alias i2c:ina230 ina2xx
+alias i2c:ina226 ina2xx
+alias i2c:ina220 ina2xx
+alias i2c:ina219 ina2xx
 alias i2c:tmp75c lm75
 alias i2c:tmp75 lm75
 alias i2c:tmp275 lm75

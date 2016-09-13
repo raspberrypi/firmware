@@ -66,6 +66,13 @@ uint32_t mmal_encoding_stride_to_width(uint32_t encoding, uint32_t stride);
  */
 uint32_t mmal_encoding_width_to_stride(uint32_t encoding, uint32_t width);
 
+/** Return the 16 line high sliced version of a given pixel encoding
+ *
+ * @param encoding The pixel encoding (such as one of the \ref MmalEncodings "pre-defined encodings")
+ * @return The sliced equivalent, or MMAL_ENCODING_UNKNOWN if not supported.
+ */
+uint32_t mmal_encoding_get_slice_variant(uint32_t encoding);
+
 /** Convert a port type to a string.
  *
  * @param type The MMAL port type.

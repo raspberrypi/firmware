@@ -1058,6 +1058,7 @@ kernel/drivers/w1/slaves/w1_bq27000.ko
 kernel/drivers/w1/slaves/w1_ds28e04.ko
 kernel/drivers/w1/wire.ko
 kernel/drivers/hwmon/hwmon.ko
+kernel/drivers/hwmon/ina2xx.ko
 kernel/drivers/hwmon/lm75.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/shtc1.ko
