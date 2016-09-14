@@ -2201,6 +2201,7 @@
 0x84c7de08	hrtimer_cancel	vmlinux	EXPORT_SYMBOL_GPL
 0x2c112f26	ip6_find_1stfragopt	vmlinux	EXPORT_SYMBOL
 0x3feb35b0	sock_no_recvmsg	vmlinux	EXPORT_SYMBOL
+0xce102fc0	rpi_firmware_transaction	vmlinux	EXPORT_SYMBOL_GPL
 0xb461b82a	xt_unregister_matches	net/netfilter/x_tables	EXPORT_SYMBOL
 0xef1b1170	dquot_file_open	vmlinux	EXPORT_SYMBOL
 0xfdfc0b3b	fiemap_fill_next_extent	vmlinux	EXPORT_SYMBOL

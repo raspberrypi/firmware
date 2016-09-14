@@ -581,7 +581,8 @@ void vcos_event_signal(VCOS_EVENT_T *event)
 fail_sem:
    vcos_mutex_unlock(&event->mutex);
 fail_mtx:
-   vcos_assert(ok);
+   if (!ok)
+      vcos_assert(ok);
 }
 
 VCOS_INLINE_IMPL
