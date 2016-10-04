@@ -7743,6 +7743,7 @@
 0x48e381b7	drm_modeset_acquire_init	drivers/gpu/drm/drm	EXPORT_SYMBOL
 0xf2d04c41	kiocb_set_cancel_fn	vmlinux	EXPORT_SYMBOL
 0x625198bf	i2c_clients_command	vmlinux	EXPORT_SYMBOL
+0xbdd2020d	netdev_is_rx_handler_busy	vmlinux	EXPORT_SYMBOL_GPL
 0x6b2095a8	mmc_flush_cache	vmlinux	EXPORT_SYMBOL
 0xaa0a5aba	xfrm_register_mode	vmlinux	EXPORT_SYMBOL
 0x8035bc96	inet_csk_get_port	vmlinux	EXPORT_SYMBOL_GPL

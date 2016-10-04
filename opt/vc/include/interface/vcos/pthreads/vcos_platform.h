@@ -771,11 +771,11 @@ void vcos_atomic_flags_delete(VCOS_ATOMIC_FLAGS_T *atomic_flags)
 
 #if defined(linux) || defined(_HAVE_SBRK)
 
-/* not exactly the free memory, but a measure of it */
+/* Returns invalid result, do not use */
 
 VCOS_INLINE_IMPL
-unsigned long vcos_get_free_mem(void) {
-   return (unsigned long)sbrk(0);
+unsigned long VCOS_DEPRECATED("returns invalid result") vcos_get_free_mem(void) {
+   return 0;
 }
 
 #endif
