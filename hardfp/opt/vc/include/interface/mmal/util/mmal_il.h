@@ -99,6 +99,8 @@ OMX_IMAGE_CODINGTYPE mmalil_encoding_to_omx_image_coding(uint32_t encoding);
 uint32_t mmalil_omx_coding_to_encoding(uint32_t encoding, OMX_PORTDOMAINTYPE domain);
 uint32_t mmalil_omx_color_format_to_encoding(OMX_COLOR_FORMATTYPE coding);
 OMX_COLOR_FORMATTYPE mmalil_encoding_to_omx_color_format(uint32_t encoding);
+uint32_t mmalil_omx_bayer_format_order_to_encoding(OMX_BAYERORDERTYPE bayer_order, OMX_COLOR_FORMATTYPE color_format);
+OMX_BAYERORDERTYPE mmalil_encoding_to_omx_bayer_order(uint32_t encoding);
 uint32_t mmalil_omx_color_space_to_mmal(OMX_COLORSPACETYPE coding);
 OMX_COLORSPACETYPE mmalil_color_space_to_omx(uint32_t coding);
 uint32_t mmalil_omx_video_profile_to_mmal(OMX_U32 level, OMX_VIDEO_CODINGTYPE coding);
