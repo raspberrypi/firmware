@@ -31,6 +31,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "vchiq_if.h"
 #include "interface/vcos/vcos.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
    int size;
    int read;
@@ -52,6 +56,10 @@ extern void vchiu_queue_push(VCHIU_QUEUE_T *queue, VCHIQ_HEADER_T *header);
 
 extern VCHIQ_HEADER_T *vchiu_queue_peek(VCHIU_QUEUE_T *queue);
 extern VCHIQ_HEADER_T *vchiu_queue_pop(VCHIU_QUEUE_T *queue);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -235,6 +235,26 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
 
 
+Name:   allo-piano-dac-pcm512x-audio
+Info:   Configures the Allo Piano DAC (2.0/2.1) audio cards.
+        (NB. This initial support is for 2.0 channel audio ONLY! ie. stereo.
+        The subwoofer outputs on the Piano 2.1 are not currently supported!)
+Load:   dtoverlay=allo-piano-dac-pcm512x-audio,<param>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control.
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24db_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+
+
 Name:   at86rf233
 Info:   Configures the Atmel AT86RF233 802.15.4 low-power WPAN transceiver,
         connected to spi0.0
@@ -251,6 +271,15 @@ Name:   audioinjector-wm8731-audio
 Info:   Configures the audioinjector.net audio add on soundcard
 Load:   dtoverlay=audioinjector-wm8731-audio
 Params: <None>
+
+
+Name:   audremap
+Info:   Switches PWM sound output to pins 12 (Right) & 13 (Left)
+Load:   dtoverlay=audremap,<param>=<val>
+Params: swap_lr                 Reverse the channel allocation, which will also
+                                swap the audio jack outputs (default off)
+        enable_jack             Don't switch off the audio jack output
+                                (default off)
 
 
 Name:   bmp085_i2c-sensor
@@ -271,6 +300,14 @@ Params: gpiopin                 GPIO connected to the sensor's DATA output.
 Name:   dionaudio-loco
 Info:   Configures the Dion Audio LOCO DAC-AMP
 Load:   dtoverlay=dionaudio-loco
+Params: <None>
+
+
+Name:   dpi18
+Info:   Overlay for a generic 18-bit DPI display
+        This uses GPIOs 0-21 (so no I2C, uart etc.), and activates the output
+        2-3 seconds after the kernel has started.
+Load:   dtoverlay=dpi18
 Params: <None>
 
 
@@ -331,7 +368,7 @@ Params: gpio_pin                Input pin number. Default is 18.
 
 
 Name:   gpio-poweroff
-Info:   Drives a GPIO high or low on reboot
+Info:   Drives a GPIO high or low on poweroff (including halt)
 Load:   dtoverlay=gpio-poweroff,<param>=<val>
 Params: gpiopin                 GPIO for signalling (default 26)
 
@@ -628,6 +665,30 @@ Params: gpiopin                 Gpio pin connected to the INTA output of the
         addr                    I2C address of the MCP23017 (default: 0x20)
 
 
+Name:   mcp23s17
+Info:   Configures the MCP23S08/17 SPI GPIO expanders.
+        If devices are present on SPI1 or SPI2, those interfaces must be enabled
+        with one of the spi1-1/2/3cs and/or spi2-1/2/3cs overlays.
+        If interrupts are enabled for a device on a given CS# on a SPI bus, that
+        device must be the only one present on that SPI bus/CS#.
+Load:   dtoverlay=mcp23s17,<param>=<val>
+Params: s08-spi<n>-<m>-present  4-bit integer, bitmap indicating MCP23S08
+                                devices present on SPI<n>, CS#<m>
+
+        s17-spi<n>-<m>-present  8-bit integer, bitmap indicating MCP23S17
+                                devices present on SPI<n>, CS#<m>
+
+        s08-spi<n>-<m>-int-gpio integer, enables interrupts on a single
+                                MCP23S08 device on SPI<n>, CS#<m>, specifies
+                                the GPIO pin to which INT output of MCP23S08
+                                is connected.
+
+        s17-spi<n>-<m>-int-gpio integer, enables mirrored interrupts on a
+                                single MCP23S17 device on SPI<n>, CS#<m>,
+                                specifies the GPIO pin to which either INTA
+                                or INTB output of MCP23S17 is connected.
+
+
 Name:   mcp2515-can0
 Info:   Configures the MCP2515 CAN controller on spi0.0
 Load:   dtoverlay=mcp2515-can0,<param>=<val>
@@ -793,6 +854,18 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
 
 
+Name:   pitft35-resistive
+Info:   Adafruit PiTFT 3.5" resistive touch screen
+Load:   dtoverlay=pitft35-resistive,<param>=<val>
+Params: speed                   Display SPI bus speed
+
+        rotate                  Display rotation {0,90,180,270}
+
+        fps                     Delay between frame updates
+
+        debug                   Debug output level {0-7}
+
+
 Name:   pps-gpio
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
@@ -900,6 +973,16 @@ Name:   rra-digidac1-wm8741-audio
 Info:   Configures the Red Rocks Audio DigiDAC1 soundcard
 Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
+
+
+Name:   sc16is750-i2c
+Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
+        Enables the chip on I2C1 at 0x48. To select another address,
+        please refer to table 10 in reference manual.
+
+Load:   dtoverlay=sc16is750-i2c,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+        addr                    Address (default 0x48)
 
 
 Name:   sc16is752-spi1
@@ -1162,6 +1245,17 @@ Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
         rxd1_pin                GPIO pin for RXD1 (15, 33 or 41 - default 15)
+
+
+Name:   vc4-fkms-v3d
+Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
+        display stack.
+Load:   dtoverlay=vc4-fkms-v3d,<param>
+Params: cma-256                 CMA is 256MB, 256MB-aligned (needs 1GB)
+        cma-192                 CMA is 192MB, 256MB-aligned (needs 1GB)
+        cma-128                 CMA is 128MB, 128MB-aligned
+        cma-96                  CMA is 96MB, 128MB-aligned
+        cma-64                  CMA is 64MB, 64MB-aligned
 
 
 Name:   vc4-kms-v3d

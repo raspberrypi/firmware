@@ -74,28 +74,38 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_NV12             MMAL_FOURCC('N','V','1','2')
 #define MMAL_ENCODING_NV21             MMAL_FOURCC('N','V','2','1')
 #define MMAL_ENCODING_ARGB             MMAL_FOURCC('A','R','G','B')
+#define MMAL_ENCODING_ARGB_SLICE       MMAL_FOURCC('a','r','g','b')
 #define MMAL_ENCODING_RGBA             MMAL_FOURCC('R','G','B','A')
+#define MMAL_ENCODING_RGBA_SLICE       MMAL_FOURCC('r','g','b','a')
 #define MMAL_ENCODING_ABGR             MMAL_FOURCC('A','B','G','R')
+#define MMAL_ENCODING_ABGR_SLICE       MMAL_FOURCC('a','b','g','r')
 #define MMAL_ENCODING_BGRA             MMAL_FOURCC('B','G','R','A')
+#define MMAL_ENCODING_BGRA_SLICE       MMAL_FOURCC('b','g','r','a')
 #define MMAL_ENCODING_RGB16            MMAL_FOURCC('R','G','B','2')
+#define MMAL_ENCODING_RGB16_SLICE      MMAL_FOURCC('r','g','b','2')
 #define MMAL_ENCODING_RGB24            MMAL_FOURCC('R','G','B','3')
+#define MMAL_ENCODING_RGB24_SLICE      MMAL_FOURCC('r','g','b','3')
 #define MMAL_ENCODING_RGB32            MMAL_FOURCC('R','G','B','4')
+#define MMAL_ENCODING_RGB32_SLICE      MMAL_FOURCC('r','g','b','4')
 #define MMAL_ENCODING_BGR16            MMAL_FOURCC('B','G','R','2')
+#define MMAL_ENCODING_BGR16_SLICE      MMAL_FOURCC('b','g','r','2')
 #define MMAL_ENCODING_BGR24            MMAL_FOURCC('B','G','R','3')
+#define MMAL_ENCODING_BGR24_SLICE      MMAL_FOURCC('b','g','r','3')
 #define MMAL_ENCODING_BGR32            MMAL_FOURCC('B','G','R','4')
+#define MMAL_ENCODING_BGR32_SLICE      MMAL_FOURCC('b','g','r','4')
 //Bayer formats
 //FourCC values copied from V4L2
 //10 bit per pixel packed Bayer formats.
 #define MMAL_ENCODING_BAYER_SBGGR10P   MMAL_FOURCC('p','B','A','A')  //BGGR
-//#define MMAL_ENCODING_BAYER_SGRBG10P   MMAL_FOURCC('p','g','A','A')  //GRBG
-//#define MMAL_ENCODING_BAYER_SGBRG10P   MMAL_FOURCC('p','G','A','A')  //GBRG
-//#define MMAL_ENCODING_BAYER_SRGGB10P   MMAL_FOURCC('p','R','A','A')  //RGGB
+#define MMAL_ENCODING_BAYER_SGRBG10P   MMAL_FOURCC('p','g','A','A')  //GRBG
+#define MMAL_ENCODING_BAYER_SGBRG10P   MMAL_FOURCC('p','G','A','A')  //GBRG
+#define MMAL_ENCODING_BAYER_SRGGB10P   MMAL_FOURCC('p','R','A','A')  //RGGB
 
 //8 bit per pixel Bayer formats.
 #define MMAL_ENCODING_BAYER_SBGGR8     MMAL_FOURCC('B','A','8','1')  //BGGR
-//#define MMAL_ENCODING_BAYER_SGBRG8     MMAL_FOURCC('G','B','R','G')  //GBRG
-//#define MMAL_ENCODING_BAYER_SGRBG8     MMAL_FOURCC('G','R','B','G')  //GRBG
-//#define MMAL_ENCODING_BAYER_SRGGB8     MMAL_FOURCC('R','G','G','B')  //RGGB
+#define MMAL_ENCODING_BAYER_SGBRG8     MMAL_FOURCC('G','B','R','G')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG8     MMAL_FOURCC('G','R','B','G')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB8     MMAL_FOURCC('R','G','G','B')  //RGGB
 
 //12 bit per pixel Bayer formats - not defined in V4L2, only 12bit expanded to 16.
 #define MMAL_ENCODING_BAYER_SBGGR12P   MMAL_FOURCC('B','Y','1','2')  //BGGR

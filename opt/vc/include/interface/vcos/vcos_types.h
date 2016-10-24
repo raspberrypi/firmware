@@ -284,4 +284,10 @@ typedef vcos_fourcc_t FOURCC_T;
 # define VCOS_WEAK_ALIAS_STR(ret_type, alias, params, target)  VCOS_CASSERT(0)
 #endif
 
+#if defined(__GNUC__)
+#define VCOS_DEPRECATED(msg) __attribute__((deprecated(msg)))
+#else
+#define VCOS_DEPRECATED(msg)
+#endif
+
 #endif
