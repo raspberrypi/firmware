@@ -288,7 +288,7 @@
             pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
             pin@p31 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
-            pin@p35 { function = "output"; termination = "pull_down"; }; // LAN_RUN
+            pin@p35 { function = "output"; termination = "pull_down"; startup_state = "active"; }; // LAN_RUN
             pin@p38 { function = "output"; termination = "no_pulling";    }; // USB current limit (0=600mA, 1=1200mA)
             pin@p40 { function = "pwm";    termination = "no_pulling"; drive_strength_mA = < 16 >; }; // Right audio
             pin@p41 { function = "output"; termination = "no_pulling";    }; // Camera shutdown
@@ -428,7 +428,7 @@
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
             pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
             pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
-            pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
+            pin@p31 { function = "output"; termination = "pull_down";  startup_state = "active"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p38 { function = "output"; termination = "no_pulling";    }; // USB current limit (0=600mA, 1=1200mA)
@@ -708,7 +708,7 @@
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
             pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA / SMPS_SDA
             pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL / SMPS_SCL
-            pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
+            pin@p31 { function = "output"; termination = "pull_down";  startup_state = "active"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p38 { function = "output"; termination = "no_pulling";    }; // USB current limit (0=600mA, 1=1200mA)
@@ -852,7 +852,7 @@
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
             pin@p28 { function = "input";   termination = "pull_up";    }; // I2C 0 SDA
             pin@p29 { function = "input";   termination = "pull_up";    }; // I2C 0 SCL
-            pin@p31 { function = "output"; termination = "pull_down"; }; // LAN_RUN
+            pin@p31 { function = "output"; termination = "pull_down";  startup_state = "active"; }; // LAN_RUN
             pin@p32 { function = "output"; termination = "pull_down"; }; // Camera LED
             pin@p35 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
             pin@p38 { function = "output"; termination = "no_pulling";    }; // USB current limit (0=600mA, 1=1200mA)
@@ -1019,7 +1019,7 @@
             pin@p128 { function = "output"; termination = "no_pulling"; }; // BT_ON
             pin@p129 { function = "output"; termination = "no_pulling"; }; // WL_ON
             pin@p130 { function = "output"; termination = "no_pulling"; }; // Status LED
-            pin@p131 { function = "output"; termination = "no_pulling"; }; // LAN_RUN
+            pin@p131 { function = "output"; termination = "no_pulling";  startup_state = "active"; }; // LAN_RUN
             pin@p132 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Hotplug
             pin@p133 { function = "output"; termination = "no_pulling"; }; // Camera LED
             pin@p134 { function = "output"; termination = "no_pulling"; }; // Camera shutdown
@@ -1082,6 +1082,10 @@
             pin_define@LAN_RUN {
                type = "external";
                number = <3>;
+            };
+            pin_define@LAN_RUN_BOOT {
+               type = "internal";
+               number = <29>;
             };
             pin_define@BT_ON {
                type = "external";
@@ -1183,7 +1187,7 @@
             pin@p128 { function = "output"; termination = "no_pulling"; }; // BT_ON
             pin@p129 { function = "output"; termination = "no_pulling"; }; // WL_ON
             pin@p130 { function = "output"; termination = "no_pulling"; }; // ACT_LED
-            pin@p131 { function = "output"; termination = "no_pulling"; }; // LAN_RUN
+            pin@p131 { function = "output"; termination = "no_pulling"; startup_state = "active"; }; // LAN_RUN
             pin@p132 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Hotplug
             pin@p133 { function = "output"; termination = "no_pulling"; }; // Camera LED
             pin@p134 { function = "output"; termination = "no_pulling"; }; // Camera shutdown
@@ -1246,6 +1250,10 @@
             pin_define@LAN_RUN {
                type = "external";
                number = <3>;
+            };
+            pin_define@LAN_RUN_BOOT {
+               type = "internal";
+               number = <29>;
             };
             pin_define@BT_ON {
                type = "external";
