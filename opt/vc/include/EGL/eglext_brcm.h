@@ -45,6 +45,14 @@ extern "C" {
 #define EGL_IMAGE_BRCM_MULTIMEDIA_U      0x99930C1
 #define EGL_IMAGE_BRCM_MULTIMEDIA_V      0x99930C2
 
+/* EGL image buffer allocated in shared memory */
+#define EGL_IMAGE_BRCM_VCSM              0x99930C3
+struct egl_image_brcm_vcsm_info {
+   unsigned width;
+   unsigned height;
+   unsigned int vcsm_handle;
+};
+
 #ifndef EGL_BRCM_sane_choose_config
 #define EGL_BRCM_sane_choose_config 1
 #endif
