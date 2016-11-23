@@ -5561,6 +5561,15 @@ alias input:b*v*p*e*-e*3,*k*r*a*6,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*8,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*3,*k*r*a*0,*m*l*s*f*w* joydev
 alias input:b*v*p*e*-e*k*r*a*m*l*s*f*w* evdev
+alias i2c:ab1805 rtc_abx80x
+alias i2c:ab1804 rtc_abx80x
+alias i2c:ab1803 rtc_abx80x
+alias i2c:ab1801 rtc_abx80x
+alias i2c:ab0805 rtc_abx80x
+alias i2c:ab0804 rtc_abx80x
+alias i2c:ab0803 rtc_abx80x
+alias i2c:ab0801 rtc_abx80x
+alias i2c:abx80x rtc_abx80x
 alias i2c:bq32000 rtc_bq32k
 alias spi:rtc-ds1305 rtc_ds1305
 alias i2c:rx8025 rtc_ds1307

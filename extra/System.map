@@ -51217,7 +51217,7 @@ c081e35c T __initramfs_start
 c081e35c t __irf_start
 c081e35c T __security_initcall_end
 c081e35c T __security_initcall_start
-c081e3e1 t __irf_end
+c081e3e2 t __irf_end
 c081e3e8 T __initramfs_size
 c0820000 D __data_loc
 c0820000 D __init_end

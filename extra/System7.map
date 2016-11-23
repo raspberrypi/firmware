@@ -52392,7 +52392,7 @@
 8085b438 t __irf_start
 8085b438 T __security_initcall_end
 8085b438 T __security_initcall_start
-8085b4bd t __irf_end
+8085b4be t __irf_end
 8085b4c0 T __initramfs_size
 8085c000 D __per_cpu_load
 8085c000 D __per_cpu_start

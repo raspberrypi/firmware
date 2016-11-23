@@ -404,6 +404,7 @@ kernel/drivers/input/ff-memless.ko
 kernel/drivers/input/input-polldev.ko
 kernel/drivers/input/joydev.ko
 kernel/drivers/input/evdev.ko
+kernel/drivers/rtc/rtc-abx80x.ko
 kernel/drivers/rtc/rtc-bq32k.ko
 kernel/drivers/rtc/rtc-ds1305.ko
 kernel/drivers/rtc/rtc-ds1307.ko
