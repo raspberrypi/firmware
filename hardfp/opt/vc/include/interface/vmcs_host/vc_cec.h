@@ -360,7 +360,7 @@ typedef enum {
 } CEC_USER_CONTROL_T;
 
 /**
- *CEC topology struct
+ *CEC topology struct (now deprecated)
  *
  * Meaning of device_attr is as follows (one per active logical device)
  * bit 3-0 logical address (see CEC_AllDevices_T above)

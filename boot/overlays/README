@@ -61,7 +61,7 @@ this becomes a line in config.txt:
 
     dtoverlay=lirc-rpi
 
-This causes the file /boot/overlays/lirc-rpi-overlay.dtb to be loaded. By
+This causes the file /boot/overlays/lirc-rpi.dtbo to be loaded. By
 default it will use GPIOs 17 (out) and 18 (in), but this can be modified using
 DT parameters:
 
@@ -283,8 +283,7 @@ Params: swap_lr                 Reverse the channel allocation, which will also
 
 
 Name:   bmp085_i2c-sensor
-Info:   Configures the BMP085/BMP180 digital barometric pressure and temperature
-        sensors from Bosch Sensortec
+Info:   This overlay is now deprecated - see i2c-sensor
 Load:   dtoverlay=bmp085_i2c-sensor
 Params: <None>
 
@@ -344,9 +343,17 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
 
 
 Name:   enc28j60
-Info:   Overlay for the Microchip ENC28J60 Ethernet Controller (SPI)
+Info:   Overlay for the Microchip ENC28J60 Ethernet Controller on SPI0
 Load:   dtoverlay=enc28j60,<param>=<val>
 Params: int_pin                 GPIO used for INT (default 25)
+
+        speed                   SPI bus speed (default 12000000)
+
+
+Name:   enc28j60-spi2
+Info:   Overlay for the Microchip ENC28J60 Ethernet Controller on SPI2
+Load:   dtoverlay=enc28j60-spi2,<param>=<val>
+Params: int_pin                 GPIO used for INT (default 39)
 
         speed                   SPI bus speed (default 12000000)
 
@@ -463,6 +470,12 @@ Params: speed                   Display SPI bus speed
         ledgpio                 GPIO used to control backlight
 
 
+Name:   i2c-bcm2708
+Info:   Fall back to the i2c_bcm2708 driver for the i2c_arm bus.
+Load:   dtoverlay=i2c-bcm2708
+Params: <None>
+
+
 Name:   i2c-gpio
 Info:   Adds support for software i2c controller on gpio pins
 Load:   dtoverlay=i2c-gpio,<param>=<val>
@@ -528,6 +541,15 @@ Params: abx80x                  Select one of the ABx80x family:
                                 source
 
 
+Name:   i2c-sensor
+Info:   Adds support for a number of I2C barometric pressure and temperature
+        sensors on i2c_arm
+Load:   dtoverlay=i2c-sensor,<param>=<val>
+Params: bmp085                  Select the Bosch sensortronic BMP085
+
+        bmp280                  Select the Bosch sensortronic BMP280
+
+
 Name:   i2c0-bcm2708
 Info:   Enable the i2c_bcm2708 driver for the i2c0 bus. Not all pin combinations
         are usable on all platforms.
@@ -552,12 +574,6 @@ Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
 Name:   i2s-gpio28-31
 Info:   move I2S function block to GPIO 28 to 31
 Load:   dtoverlay=i2s-gpio28-31
-Params: <None>
-
-
-Name:   i2s-mmap
-Info:   Enables mmap support in the bcm2708-i2s driver
-Load:   dtoverlay=i2s-mmap
 Params: <None>
 
 
@@ -715,6 +731,13 @@ Params: oscillator              Clock frequency for the CAN controller (Hz)
         spimaxfrequency         Maximum SPI frequence (Hz)
 
         interrupt               GPIO for interrupt signal
+
+
+Name:   midi-uart0
+Info:   Configures UART0 (ttyAMA0) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart0
+Params: <None>
 
 
 Name:   mmc
