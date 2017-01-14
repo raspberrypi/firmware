@@ -106,39 +106,27 @@ VCHPRE_ void vc_cec_register_callback(CECSERVICE_CALLBACK_T callback, void *call
 
 //Service API
 /**
- * Use <DFN>vc_cec_register_command</DFN> to register an opcode to
- * to forwarded to the host application. By default <Feature Abort> 
- * is always forwarded. Once an opcode is registered, it is left to
- * the host application to reply to a CEC message (where appropriate).
- * It is recommended NOT to register the following commands as they 
- * are replied to automatically by CEC middleware:
- * <Give Physical Address>, <Give Device Vendor ID>, <Give OSD Name>,
- * <Get CEC Version>, <Give Device Power Status>, <Menu Request>,
- * and <Get Menu Language>
- * In addition, the following opcodes cannot be registered:
- * <User Control Pressed>, <User Control Released>, 
- * <Vendor Remote Button Down>, <Vendor Remote Button Up>,
- * and <Abort>.
- * <Feature Abort> is always forwarded if it is the reply
- * of a command the host sent.
+ * This function is now deprecated. Commands are always forwarded.
+ *
+ * <DFN>vc_cec_register_command</DFN>
  *
  * @param opcode to be registered.
  *
  * @return zero if the command is successful, non-zero otherwise
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_register_command(CEC_OPCODE_T opcode);
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_register_command(CEC_OPCODE_T opcode);
 
 /**
- * <DFN>vc_cec_register_all</DFN> registers all opcodes except <Abort>
- *  to be forwarded as CEC_RX notification.
- * Button presses <User Control Pressed>, etc. will still be forwarded 
- * separately as VC_CEC_BUTTON_PRESSED etc. notification.
+ * This function is now deprecated. Commands are always forwarded.
+ *
+ * <DFN>vc_cec_register_all</DFN>
  *
  * @param None
  *
  * @return zero if the command is successful, non-zero otherwise
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_register_all( void );
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_register_all( void );
+
 
 /**
  * Use <DFN>vc_cec_deregister_command</DFN> to remove an opcode from
@@ -152,17 +140,18 @@ VCHPRE_ int VCHPOST_ vc_cec_register_all( void );
  *
  * @return zero if the command is successful, non-zero otherwise
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_deregister_command(CEC_OPCODE_T opcode);
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_deregister_command(CEC_OPCODE_T opcode);
 
 /**
- * <DFN>vc_cec_deregister_all</DFN> removes all registered opcodes,
- * except the ones (e.g. button presses) which are always forwarded.
+ * This function is now deprecated. Commands are always forwarded.
+ *
+ * <DFN>vc_cec_deregister_all</DFN>
  *
  * @param None
  *
  * @return zero if the command is successful, non-zero otherwise
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_deregister_all( void );
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_deregister_all(void);
 
 /**
  * <DFN>vc_cec_send_message</DFN> allows a host application to 
@@ -227,7 +216,7 @@ VCHPRE_ int VCHPOST_ vc_cec_alloc_logical_address( void );
  * be called by the host application. It is used to release 
  * our logical address. This effectively disables CEC.
  * The host will need to allocate a new logical address before
- * doing any CEC calls (send/receive message, get topology, etc.). 
+ * doing any CEC calls (send/receive message, etc.).
  *
  * @param none
  *
@@ -239,16 +228,17 @@ VCHPRE_ int VCHPOST_ vc_cec_alloc_logical_address( void );
 VCHPRE_ int VCHPOST_ vc_cec_release_logical_address( void );
 
 /**
+ * This function is now deprecated. Topology is always
+ * returned as a zeroed block of data.
+ *
  * Use <DFN>vc_cec_get_topology</DFN> to get the topology.
  *
  * @param pointer to <DFN>VC_CEC_TOPOLOGY_T</DFN>
  *
  * @return zero if the command is successful, non-zero otherwise
- *         If successful, the topology will be set, otherwise it is unchanged
- *         A topology with only 1 device (us) means CEC is not supported.
- *         If there is no topology available, this also returns a failure.
+ *
  ***********************************************************/
-VCHPRE_ int VCHPOST_ vc_cec_get_topology( VC_CEC_TOPOLOGY_T* topology);
+VCHPRE_ int VCOS_DEPRECATED("returns invalid result") VCHPOST_ vc_cec_get_topology( VC_CEC_TOPOLOGY_T* topology);
 
 /**
  * Use <DFN>vc_cec_set_vendor_id</DFN> to 
@@ -316,7 +306,7 @@ VCHPRE_ CEC_DEVICE_TYPE_T VCHPOST_ vc_cec_device_type(const CEC_AllDevices_T log
  * and return zero for success
  * 
  * Applications can call vc_cec_param2message to turn the callback parameters
- * into a VC_CEC_MESSAGE_T (not for LOGICAL_ADDR and TOPOLOGY callbacks). 
+ * into a VC_CEC_MESSAGE_T (not for LOGICAL_ADDR callbacks).
  * It also returns zero for success.
  */
 VCHPRE_ int VCHPOST_ vc_cec_send_message2(const VC_CEC_MESSAGE_T *message);
@@ -360,26 +350,17 @@ VCHPRE_ int VCHPOST_ vc_cec_set_logical_address(const CEC_AllDevices_T logical_a
                                                 const uint32_t vendor_id);
 
 /**
- * <DFN> vc_cec_add_device </DFN> adds a new device to topology. 
- * Only available when CEC is running in passive mode. Device will be
- * automatically removed from topology if a failed xmit is detected.
- * If last_device is true, it will trigger a topology computation
- * (and may trigger a topology callback).
+ * This function is now deprecated and has no effect.
  *
- * @param logical address
- * 
- * @param physical address
- *
- * @param device type
- *
- * @param true if this is the last device, false otherwise
+ * <DFN> vc_cec_add_device </DFN>
  *
  * @return 0 if successful, non-zero otherwise
  */
-VCHPRE_ int VCHPOST_ vc_cec_add_device(const CEC_AllDevices_T logical_address,
-                                       const uint16_t physical_address,
-                                       const CEC_DEVICE_TYPE_T device_type,
-                                       vcos_bool_t last_device);
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_
+    vc_cec_add_device(const CEC_AllDevices_T logical_address,
+                      const uint16_t physical_address,
+                      const CEC_DEVICE_TYPE_T device_type,
+                      vcos_bool_t last_device);
 
 /**
  * <DFN> vc_cec_set_passive </DFN> enables and disables passive mode.
