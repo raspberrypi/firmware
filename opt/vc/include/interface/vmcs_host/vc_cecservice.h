@@ -127,10 +127,14 @@ VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_register_command(CE
  ***********************************************************/
 VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_register_all( void );
 
+
 /**
- * This function is now deprecated. Commands are always forwarded.
- *
- * <DFN>vc_cec_deregister_command</DFN>
+ * Use <DFN>vc_cec_deregister_command</DFN> to remove an opcode from
+ * the filter for forwarding. By default <Feature Abort> is always forwarded.
+ * The following opcode cannot be deregistered:
+ * <User Control Pressed>, <User Control Released>, 
+ * <Vendor Remote Button Down>, <Vendor Remote Button Up>,
+ * and <Abort>.
  *
  * @param opcode to be deregistered
  *
@@ -147,7 +151,7 @@ VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_deregister_command(
  *
  * @return zero if the command is successful, non-zero otherwise
  ***********************************************************/
-VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_deregister_all( void );
+VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_deregister_all(void);
 
 /**
  * <DFN>vc_cec_send_message</DFN> allows a host application to 
@@ -175,10 +179,10 @@ VCHPRE_ int VCHPOST_ vc_cec_send_message(const uint32_t follower,
                                          uint32_t length,
                                          vcos_bool_t is_reply);
 /**
- * <DFN>vc_cec_get_logical_address</DFN> gets the current logical address.
- * If one has not been set, 15 (unregistered) will be returned.
- * A logical address of 15 also means CEC system is not yet ready
- * to receive any messages.
+ * <DFN>vc_cec_get_logical_address</DFN> gets the logical address, 
+ * If one is being allocated 0xF (unregistered) will be set.
+ * A address value of 0xF also means CEC system is not yet ready
+ * to send or receive any messages.
  *
  * @param pointer to logical address (set to allocated address)
  *
@@ -188,31 +192,38 @@ VCHPRE_ int VCHPOST_ vc_cec_send_message(const uint32_t follower,
 VCHPRE_ int VCHPOST_ vc_cec_get_logical_address(CEC_AllDevices_T *logical_address);
 
 /**
- * This function is now deprecated. Logical address must be explicitly
- * set by host (after host has checked that address is not in use).
- *
- * <DFN>vc_cec_alloc_logical_address</DFN>
+ * <DFN>vc_cec_alloc_logical_address</DFN> starts the allocation 
+ * of a logical address. Logical address is automatically allocated
+ * after HDMI power on is complete and AV mute is deassert.
+ * The host only needs to call this if the 
+ * initial allocation failed (logical address being 0xF and 
+ * physical address is NOT 0xFFFF from <DFN>VC_CEC_LOGICAL_ADDR</DFN>
+ * notification), or if the host explicitly released its logical 
+ * address.
  *
  * @param none
  *
  * @return zero if the command is successful, non-zero otherwise
+ *         If successful, there will be a callback notification
+ *         <DFN>VC_CEC_LOGICAL_ADDR</DFN>. 
+ *         The host should wait for this before calling this 
+ *         function again.
  ***********************************************************/
-VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_ vc_cec_alloc_logical_address( void );
+VCHPRE_ int VCHPOST_ vc_cec_alloc_logical_address( void );
 
 /**
- * Use <DFN>vc_cec_release_logical_address</DFN> to clear
- * the set logical address. Logical address will be reset
- * back to 15 (unregistered) internally. No direct inbound
- * messages will be acknowledged. Host must call
- * vc_cec_set_logical_address with a valid logical address
- * again before attempting to send any messages.
+ * Normally <DFN>vc_cec_release_logical_address</DFN> will not 
+ * be called by the host application. It is used to release 
+ * our logical address. This effectively disables CEC.
+ * The host will need to allocate a new logical address before
+ * doing any CEC calls (send/receive message, etc.).
  *
  * @param none
  *
  * @return zero if the command is successful, non-zero otherwise
  *         The host should get a callback <DFN>VC_CEC_LOGICAL_ADDR</DFN>
- *         with 0xF being the logical address and the current
- *         physical address.
+ *         with 0xF being the logical address and 0xFFFF 
+ *         being the physical address.
  ***********************************************************/
 VCHPRE_ int VCHPOST_ vc_cec_release_logical_address( void );
 
@@ -261,16 +272,17 @@ VCHPRE_ int VCHPOST_ vc_cec_set_osd_name( const char* name );
 VCHPRE_ int VCHPOST_ vc_cec_get_physical_address(uint16_t *physical_address);
 
 /**
- * <DFN>vc_cec_get_vendor_id(</DFN> gets your own vendor id
+ * <DFN>vc_cec_get_vendor_id(</DFN> gets the vendor id of a particular logical address
  *
- * @param logical_address (not used anymore)
+ * @param logical_address is the logical address of the device [in]
  *
  * @param vendorid is the pointer to vendor ID (24-bit IEEE OUI value) [out]
  *
  * @return zero if the command is successful, non-zero otherwise
  *         If failed, vendor id argument will not be changed
- *         The application can send <Give Device Vendor ID> to other
- *         logical address to obtain their vendor id.
+ *         A vendor ID of 0xFFFFFF means the device does not exist
+ *         A vendor ID of 0x0 means vendor ID is not known and
+ *         the application can send <Give Device Vendor ID> to that device
  ***********************************************************/
 VCHPRE_ int VCHPOST_ vc_cec_get_vendor_id(const CEC_AllDevices_T logical_address, uint32_t *vendor_id);
 
@@ -294,7 +306,7 @@ VCHPRE_ CEC_DEVICE_TYPE_T VCHPOST_ vc_cec_device_type(const CEC_AllDevices_T log
  * and return zero for success
  * 
  * Applications can call vc_cec_param2message to turn the callback parameters
- * into a VC_CEC_MESSAGE_T (not for LOGICAL_ADDR and TOPOLOGY callbacks). 
+ * into a VC_CEC_MESSAGE_T (not for LOGICAL_ADDR callbacks).
  * It also returns zero for success.
  */
 VCHPRE_ int VCHPOST_ vc_cec_send_message2(const VC_CEC_MESSAGE_T *message);
@@ -324,8 +336,6 @@ VCHPRE_ int VCHPOST_ vc_cec_poll_address(const CEC_AllDevices_T logical_address)
  * and vendor ID to be in use. Only available when CEC is running in passive
  * mode. It is the responsibility of the host to make sure the logical address
  * is actually free to be used. Physical address will be what is read from EDID.
- * This function must be called with a valid logical address before a message
- * can be received.
  *
  * @param logical address
  *
@@ -344,34 +354,24 @@ VCHPRE_ int VCHPOST_ vc_cec_set_logical_address(const CEC_AllDevices_T logical_a
  *
  * <DFN> vc_cec_add_device </DFN>
  *
- * @param logical address
- * 
- * @param physical address
- *
- * @param device type
- *
- * @param true if this is the last device, false otherwise
- *
  * @return 0 if successful, non-zero otherwise
  */
 VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_
- vc_cec_add_device(const CEC_AllDevices_T logical_address,
-                   const uint16_t physical_address,
-                   const CEC_DEVICE_TYPE_T device_type,
-                   vcos_bool_t last_device);
+    vc_cec_add_device(const CEC_AllDevices_T logical_address,
+                      const uint16_t physical_address,
+                      const CEC_DEVICE_TYPE_T device_type,
+                      vcos_bool_t last_device);
 
 /**
- * This function is now deprecated. CEC can now only operate in passive
- * mode.
- *
- * <DFN> vc_cec_set_passive </DFN>
+ * <DFN> vc_cec_set_passive </DFN> enables and disables passive mode.
+ * Call this function first (with VC_TRUE as the argument) to enable
+ * passive mode before calling any of the above passive API functions
  *
  * @param TRUE to enable passive mode, FALSE to disable
  * 
  * @return 0 if successful, non-zero otherwise
  */
-VCHPRE_ int VCOS_DEPRECATED("has no effect") VCHPOST_
- vc_cec_set_passive(vcos_bool_t enabled);
+VCHPRE_ int VCHPOST_ vc_cec_set_passive(vcos_bool_t enabled);
 
 
 //API for some common CEC messages
