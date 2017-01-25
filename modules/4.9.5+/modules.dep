@@ -1216,6 +1216,7 @@ kernel/net/sched/sch_tbf.ko:
 kernel/net/sched/sch_teql.ko:
 kernel/net/sched/sch_prio.ko:
 kernel/net/sched/sch_multiq.ko:
+kernel/net/sched/sch_atm.ko:
 kernel/net/sched/sch_netem.ko:
 kernel/net/sched/sch_drr.ko:
 kernel/net/sched/sch_plug.ko:
@@ -1224,6 +1225,9 @@ kernel/net/sched/sch_choke.ko:
 kernel/net/sched/sch_qfq.ko:
 kernel/net/sched/sch_codel.ko:
 kernel/net/sched/sch_fq_codel.ko:
+kernel/net/sched/sch_fq.ko:
+kernel/net/sched/sch_hhf.ko:
+kernel/net/sched/sch_pie.ko:
 kernel/net/sched/cls_u32.ko:
 kernel/net/sched/cls_route.ko:
 kernel/net/sched/cls_fw.ko:
