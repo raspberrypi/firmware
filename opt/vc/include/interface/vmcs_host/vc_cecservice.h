@@ -212,18 +212,19 @@ VCHPRE_ int VCHPOST_ vc_cec_get_logical_address(CEC_AllDevices_T *logical_addres
 VCHPRE_ int VCHPOST_ vc_cec_alloc_logical_address( void );
 
 /**
- * Normally <DFN>vc_cec_release_logical_address</DFN> will not 
- * be called by the host application. It is used to release 
- * our logical address. This effectively disables CEC.
- * The host will need to allocate a new logical address before
- * doing any CEC calls (send/receive message, etc.).
+ * Use <DFN>vc_cec_release_logical_address</DFN> to clear
+ * the set logical address. Logical address will be reset
+ * back to 15 (unregistered) internally. No direct inbound
+ * messages will be acknowledged. Host must call
+ * vc_cec_set_logical_address with a valid logical address
+ * again before attempting to send any more messages.
  *
  * @param none
  *
  * @return zero if the command is successful, non-zero otherwise
- *         The host should get a callback <DFN>VC_CEC_LOGICAL_ADDR</DFN>
- *         with 0xF being the logical address and 0xFFFF 
- *         being the physical address.
+ *         The host should get a callback reason
+ *         <DFN>VC_CEC_LOGICAL_ADDR</DFN> with 0xF being the
+ *         logical address and the current physical address.
  ***********************************************************/
 VCHPRE_ int VCHPOST_ vc_cec_release_logical_address( void );
 
