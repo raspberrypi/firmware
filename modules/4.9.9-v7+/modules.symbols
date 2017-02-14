@@ -207,6 +207,7 @@ alias symbol:dm_cell_release_no_holder dm_bio_prison
 alias symbol:lbtf_cmd_response_rx libertas_tf
 alias symbol:or51211_attach or51211
 alias symbol:async_tx_submit async_tx
+alias symbol:drm_display_mode_from_videomode drm
 alias symbol:mdio_device_remove libphy
 alias symbol:tun_get_socket tun
 alias symbol:cast5_setkey cast5_generic
@@ -1437,6 +1438,7 @@ alias symbol:nfc_tm_activated nfc
 alias symbol:w1_unregister_family wire
 alias symbol:qtree_write_dquot quota_tree
 alias symbol:eeprom_93cx6_readb eeprom_93cx6
+alias symbol:of_get_drm_display_mode drm
 alias symbol:atm_alloc_charge atm
 alias symbol:cryptd_alloc_ablkcipher cryptd
 alias symbol:ms_sensors_write_heater ms_sensors_i2c
@@ -2887,6 +2889,7 @@ alias symbol:register_cdrom cdrom
 alias symbol:dm_rh_flush dm_region_hash
 alias symbol:drm_edid_get_monitor_name drm
 alias symbol:wm_adsp2_remove snd_soc_wm_adsp
+alias symbol:drm_bus_flags_from_videomode drm
 alias symbol:ircomm_open ircomm
 alias symbol:nf_ct_l3proto_try_module_get nf_conntrack
 alias symbol:snd_free_pages snd_pcm
@@ -4247,6 +4250,7 @@ alias symbol:em28xx_toggle_reg_bits em28xx
 alias symbol:roccat_common2_send_with_status hid_roccat_common
 alias symbol:snd_pcm_format_size snd_pcm
 alias symbol:__media_entity_enum_init media
+alias symbol:drm_display_mode_to_videomode drm
 alias symbol:__drm_atomic_helper_connector_duplicate_state drm_kms_helper
 alias symbol:efuse_one_byte_read rtlwifi
 alias symbol:mtd_pairing_info_to_wunit mtd
