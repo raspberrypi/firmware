@@ -2606,5 +2606,22 @@ Deprecated. Do not use.
 Deprecated. Do not use.
 */
 
+/* OMX_IndexParamBrcmSupportsSlices: Sliced processing support */
+/*
+Mainly used by the MMAL framework.
+Some components support an nSliceHeight value of 16, to allow images
+to be passed in multiple chunks. All will support an nSliceHeight >=
+nFrameHeight (with some extra constraints).
+If a component supports nSliceHeight of 16, then it will respond to
+OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.
+*/
+
+/* OMX_IndexParamBrcmSupportsUnalignedSliceheight: Unaligned nSliceHeight support */
+/*
+Most components require an nSliceHeight value which is a multiple of 16, but
+some components accepting any value >= nFrameHeight. Those ports/components will
+respond to OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.
+*/
+
 #endif
 /* File EOF */
