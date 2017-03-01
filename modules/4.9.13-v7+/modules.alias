@@ -8819,6 +8819,9 @@ alias of:N*T*Cti,pcm5121C* snd_soc_pcm512x_i2c
 alias of:N*T*Cti,pcm5121 snd_soc_pcm512x_i2c
 alias of:N*T*Cti,pcm1794aC* snd_soc_pcm1794a
 alias of:N*T*Cti,pcm1794a snd_soc_pcm1794a
+alias of:N*T*Cfsl,sgtl5000C* snd_soc_sgtl5000
+alias of:N*T*Cfsl,sgtl5000 snd_soc_sgtl5000
+alias i2c:sgtl5000 snd_soc_sgtl5000
 alias of:N*T*Cti,tas5713C* snd_soc_tas5713
 alias of:N*T*Cti,tas5713 snd_soc_tas5713
 alias i2c:tas5713 snd_soc_tas5713
@@ -8885,6 +8888,8 @@ alias of:N*T*Cblokaslabs,pisound-spiC* snd_soc_pisound
 alias of:N*T*Cblokaslabs,pisound-spi snd_soc_pisound
 alias of:N*T*Cblokaslabs,pisoundC* snd_soc_pisound
 alias of:N*T*Cblokaslabs,pisound snd_soc_pisound
+alias of:N*T*Cfe-pi,fe-pi-audioC* snd_soc_fe_pi_audio
+alias of:N*T*Cfe-pi,fe-pi-audio snd_soc_fe_pi_audio
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
 alias sch_clsact sch_ingress
