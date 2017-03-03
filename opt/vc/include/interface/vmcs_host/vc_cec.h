@@ -360,7 +360,7 @@ typedef enum {
 } CEC_USER_CONTROL_T;
 
 /**
- *CEC topology struct (now deprecated)
+ *CEC topology struct
  *
  * Meaning of device_attr is as follows (one per active logical device)
  * bit 3-0 logical address (see CEC_AllDevices_T above)
@@ -401,7 +401,7 @@ typedef enum {
    VC_CEC_REMOTE_PRESSED  = (1 << 4), /**<<Vendor Remote Button Down> */
    VC_CEC_REMOTE_RELEASE  = (1 << 5), /**<<Vendor Remote Button Up> */
    VC_CEC_LOGICAL_ADDR    = (1 << 6), /**<New logical address allocated or released */
-   VC_CEC_TOPOLOGY        = (1 << 7), /**<Topology is available (deprecated) */
+   VC_CEC_TOPOLOGY        = (1 << 7), /**<Topology is available */
    VC_CEC_LOGICAL_ADDR_LOST = (1 << 15) /**<Only for passive mode, if the logical address is lost for whatever reason, this will be triggered */
 } VC_CEC_NOTIFY_T;
 
