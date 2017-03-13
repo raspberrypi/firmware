@@ -13,7 +13,7 @@
             pin@p2  { function = "i2c1";   termination = "pull_up"; }; // I2C 1 SDA
             pin@p3  { function = "i2c1";   termination = "pull_up"; }; // I2C 1 SCL
             pin@p5  { function = "output"; termination = "pull_down"; }; // CAM_LED
-            pin@p6  { function = "output"; termination = "pull_down"; }; // LAN NRESET
+            pin@p6  { function = "output"; termination = "pull_down";  startup_state = "active"; }; // LAN_RUN
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
             pin@p16 { function = "output"; termination = "pull_up"; polarity="active_low"; }; // activity LED
@@ -149,7 +149,7 @@
             pin@p0  { function = "i2c0";   termination = "pull_up"; }; // I2C 0 SDA
             pin@p1  { function = "i2c0";   termination = "pull_up"; }; // I2C 0 SCL
             pin@p5  { function = "output"; termination = "pull_down"; }; // CAM_LED
-            pin@p6  { function = "output"; termination = "pull_down"; }; // LAN NRESET
+            pin@p6  { function = "output"; termination = "pull_down"; startup_state = "active"; }; // LAN NRESET
             pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
             pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
             pin@p16 { function = "output"; termination = "pull_up"; polarity = "active_low"; }; // activity LED
@@ -1189,8 +1189,8 @@
             pin@p130 { function = "output"; termination = "no_pulling"; }; // ACT_LED
             pin@p131 { function = "output"; termination = "no_pulling"; startup_state = "active"; }; // LAN_RUN
             pin@p132 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Hotplug
-            pin@p133 { function = "output"; termination = "no_pulling"; }; // Camera LED
-            pin@p134 { function = "output"; termination = "no_pulling"; }; // Camera shutdown
+            pin@p133 { function = "output"; termination = "no_pulling"; }; // Camera shutdown
+            pin@p134 { function = "output"; termination = "no_pulling"; }; // Camera LED
             pin@p135 { function = "input";  termination = "no_pulling"; polarity = "active_low"; }; // Power low
          }; // pin_config
 
