@@ -8,7 +8,7 @@ below (check the appropriate directories for full licence details):
   bootloaders. Their licence is described in 'LICENCE.broadcom'. The 
   kernel.img files are builds of the Linux kernel, released under the GPL (see 
   COPYING.linux)
-* ./debug: pre-build modules for the kernel_debug.img
+* ./debug: pre-built modules for the kernel_debug.img
 * ./extra: System.map files for the provided kernel builds
 * ./hardfp: userspace VideoCoreIV libraries built for the armv6 hardfp ABI
 * ./modules: pre-built modules for kernel.img
