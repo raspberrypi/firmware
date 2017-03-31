@@ -68,7 +68,7 @@ It is also not considered to be production quality code - please use with cautio
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="3">360<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="6">360<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Set this to control the input size of the image. Typically this is
   called by the component itself when this port is tunnelled with an
   appropriate output port. The stripe height a multiple of 16, and
@@ -77,6 +77,13 @@ It is also not considered to be production quality code - please use with cautio
 <td> Allows cropping at the input. Cropping can be changed at any time.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmBayerOrder">OMX_IndexParamBrcmBayerOrder</a></tt>
 <td> Set / query the Bayer order for the incoming data.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraPoolToEncoderFunction">OMX_IndexParamCameraPoolToEncoderFunction</a></tt>
+<td> Used to set up proprietary communication with the previous component.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
+<td> Forces use of proprietary tunnelling between ports.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmSupportsUnalignedSliceheight">OMX_IndexParamBrcmSupportsUnalignedSliceheight</a></tt>
+<td> Retrieves the capabilites of this component to allow any
+  nSliceHeight value >= nHeight.
  <tr valign="top"><td rowspan="1">361<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the size of the output image

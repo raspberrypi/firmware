@@ -87,6 +87,8 @@ struct gpu_job_s {
 
 VCHPRE_ int32_t VCHPOST_ vc_gpuserv_init(void);
 
+VCHPRE_ void VCHPOST_ vc_gpuserv_deinit(void);
+
 VCHPRE_ int32_t VCHPOST_ vc_gpuserv_execute_code(int num_jobs, struct gpu_job_s jobs[]);
 
 #endif

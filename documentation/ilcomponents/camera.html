@@ -127,7 +127,7 @@ unloaded, extending the startup latency.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="102">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
+<tr valign="top"><td rowspan="103">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
 <td> Query / set the camera sensor mode. When setting this parameter, only
   bOneShot is used. It will return the actual sensor resolution when
   queried (as per the OMX specification)
@@ -575,6 +575,10 @@ unloaded, extending the startup latency.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmCameraAnnotate">OMX_IndexConfigBrcmCameraAnnotate</a></tt>
 <td> Annotation overlay parameters.
   Query / set the paramters concerning the anotation overlay.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmIspBlockOverride">OMX_IndexParamBrcmIspBlockOverride</a></tt>
+<td> Disables ISP blocks.
+  Query / set a bitmask that can disable ISP processing blocks.
+  Blocks can NOT be enabled if they haven't been configured in the tuning.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamRemoveImagePadding">OMX_IndexParamRemoveImagePadding</a></tt>
 <td> Remove image padding.
   Normally the components will require nStride and nSliceHeight to be

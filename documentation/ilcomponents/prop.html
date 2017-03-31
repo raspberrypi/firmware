@@ -573,7 +573,7 @@ Setting this config forces a sync of data to the filesystem.<p>
 </dl>
 <a name="OMX_IndexConfigBrcmUseProprietaryCallback"><h2>Force use of proprietary callback</h2></a>
 <tt>OMX_IndexConfigBrcmUseProprietaryCallback</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BRCMUSEPROPRIETARYTUNNELTYPE</tt><p>
 
@@ -2429,6 +2429,17 @@ Configures a component so that it tries to timestamp all the buffers it outputs.
  If the timestamp information is missing from the original buffer, the
  component will try its best to interpolate a value for the missing timestamp.<p>
 
+<a name="OMX_IndexParamBrcmIspBlockOverride"><h2>Disables ISP blocks</h2></a>
+<tt>OMX_IndexParamBrcmIspBlockOverride</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
+
+ Query / set a bitmask that can disable ISP processing blocks.
+  Blocks can NOT be enabled if they haven't been configured in the tuning.
+  
+ <p>
+
 <a name="OMX_IndexParamBrcmJpegRestartInterval"><h2>Sets the JPEG restart interval</h2></a>
 <tt>OMX_IndexParamBrcmJpegRestartInterval</tt><br>
 Used by: <a href="image_encode.html">image_encode</a><p>
@@ -2619,6 +2630,29 @@ This control sets up how stereoscopic images should be generated.<p>
 <dt><tt>bDecimate</tt><dd>Half/half mode
 <dt><tt>bSwapEyes</tt><dd>False = left eye first. True = right eye first. 
 </dl>
+<a name="OMX_IndexParamBrcmSupportsSlices"><h2>Sliced processing support</h2></a>
+<tt>OMX_IndexParamBrcmSupportsSlices</tt><br>
+Used by: <a href="resize.html">resize</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_PORTBOOLEANTYPE</tt><p>
+
+Mainly used by the MMAL framework.
+ Some components support an nSliceHeight value of 16, to allow images
+ to be passed in multiple chunks. All will support an nSliceHeight >=
+ nFrameHeight (with some extra constraints).
+ If a component supports nSliceHeight of 16, then it will respond to
+ OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.<p>
+
+<a name="OMX_IndexParamBrcmSupportsUnalignedSliceheight"><h2>Unaligned nSliceHeight support</h2></a>
+<tt>OMX_IndexParamBrcmSupportsUnalignedSliceheight</tt><br>
+Used by: <a href="isp.html">isp</a>, <a href="video_render.html">video_render</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_PORTBOOLEANTYPE</tt><p>
+
+Most components require an nSliceHeight value which is a multiple of 16, but
+ some components accepting any value >= nFrameHeight. Those ports/components will
+ respond to OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.<p>
+
 <a name="OMX_IndexParamBrcmThreadAffinity"><h2>Control the CPU affinity of component thread(s)</h2></a>
 <tt>OMX_IndexParamBrcmThreadAffinity</tt><br>
 Used by: <a href="null_sink.html">null_sink</a><p>
@@ -3218,7 +3252,7 @@ This configures the physical camera interface type.<p>
 </dl>
 <a name="OMX_IndexParamCameraPoolToEncoderFunction"><h2>Camera and Video Encoder communication</h2></a>
 <tt>OMX_IndexParamCameraPoolToEncoderFunction</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="camera.html">camera</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="camera.html">camera</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 <pre>
 typedef struct OMX_PARAM_CAMERAPOOLTOENCODERFUNCTIONTYPE {
