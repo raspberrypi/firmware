@@ -2612,6 +2612,7 @@
 0x192cc45f	locks_mandatory_area	vmlinux	EXPORT_SYMBOL
 0xbd87a215	xt_table_unlock	net/netfilter/x_tables	EXPORT_SYMBOL_GPL
 0xf7e1917d	iscsi_tcp_recv_skb	drivers/scsi/libiscsi_tcp	EXPORT_SYMBOL_GPL
+0x5e216b44	cxd2880_attach	drivers/media/dvb-frontends/cxd2880/cxd2880	EXPORT_SYMBOL
 0x633d107e	tcf_exts_dump_stats	vmlinux	EXPORT_SYMBOL
 0xe1f0495f	sock_alloc_send_pskb	vmlinux	EXPORT_SYMBOL
 0xaad0ae78	__bitmap_shift_right	vmlinux	EXPORT_SYMBOL
