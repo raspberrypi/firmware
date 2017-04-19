@@ -2460,6 +2460,38 @@ e. we will not wait for the images to be returned from the pool, but instead rel
   
  <p>
 
+<a name="OMX_IndexParamBrcmLensShadingOverride"><h2>Override the lens shading table</h2></a>
+<tt>OMX_IndexParamBrcmLensShadingOverride</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+<pre>
+typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;
+   OMX_U32 nGridCellSize;
+   OMX_U32 nWidth;
+   OMX_U32 nStride;
+   OMX_U32 nHeight;
+   OMX_U32 nMemHandleTable;
+   OMX_U32 nRefTransform;
+} OMX_PARAM_LENSSHADINGOVERRIDETYPE;
+</pre><p>
+ Mechanism for the client to provide lens shading tables to replace
+  the default lens shading tables.
+  
+ <p>
+
+<dl>
+<dt><tt>bEnabled</tt><dd>Enable the override grid 
+<dt><tt>nGridCellSize</tt><dd>size of each grid element. Assumes square grid 
+<dt><tt>nWidth</tt><dd>grid width 
+<dt><tt>nStride</tt><dd>grid stride (allows for padding) 
+<dt><tt>nHeight</tt><dd>grid height 
+<dt><tt>nMemHandleTable</tt><dd>Handle for grid 
+<dt><tt>nRefTransform</tt><dd>Reference transform taken from raw header 
+</dl>
 <a name="OMX_IndexParamBrcmMaxCorruptMBs"><h2>Sets the maximum number of corrupt macroblocks allowed</h2></a>
 <tt>OMX_IndexParamBrcmMaxCorruptMBs</tt><br>
 Used by: <a href="null_sink.html">null_sink</a><p>
