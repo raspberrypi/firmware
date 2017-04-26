@@ -1078,6 +1078,7 @@ kernel/drivers/hwmon/ina2xx.ko
 kernel/drivers/hwmon/lm75.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/shtc1.ko
+kernel/drivers/hwmon/tmp102.ko
 kernel/drivers/bluetooth/hci_vhci.ko
 kernel/drivers/bluetooth/hci_uart.ko
 kernel/drivers/bluetooth/bcm203x.ko
@@ -1102,6 +1103,9 @@ kernel/drivers/iio/buffer/kfifo_buf.ko
 kernel/drivers/iio/common/ms_sensors/ms_sensors_i2c.ko
 kernel/drivers/iio/humidity/dht11.ko
 kernel/drivers/iio/humidity/htu21.ko
+kernel/drivers/iio/pressure/bmp280.ko
+kernel/drivers/iio/pressure/bmp280-i2c.ko
+kernel/drivers/iio/pressure/bmp280-spi.ko
 kernel/drivers/iio/industrialio.ko
 kernel/drivers/nvmem/nvmem_core.ko
 kernel/sound/core/oss/snd-mixer-oss.ko

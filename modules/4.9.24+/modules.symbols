@@ -2537,6 +2537,7 @@ alias symbol:snd_pcm_hw_constraint_msbits snd_pcm
 alias symbol:ip_set_test ip_set
 alias symbol:irttp_flow_request irda
 alias symbol:snd_soc_test_bits snd_soc_core
+alias symbol:bmp180_regmap_config bmp280
 alias symbol:fc0013_attach fc0013
 alias symbol:iscsi_conn_get_param libiscsi
 alias symbol:__register_mtd_parser mtd
@@ -3151,6 +3152,7 @@ alias symbol:__drm_atomic_helper_connector_reset drm_kms_helper
 alias symbol:cfg80211_ibss_joined cfg80211
 alias symbol:dvb_filter_get_ac3info dvb_core
 alias symbol:lc_element_by_index lru_cache
+alias symbol:bmp280_common_probe bmp280
 alias symbol:o2nm_this_node ocfs2_nodemanager
 alias symbol:register_mtd_chip_driver chipreg
 alias symbol:ath9k_hw_setuprxdesc ath9k_hw
@@ -3550,6 +3552,7 @@ alias symbol:atalk_find_dev_addr appletalk
 alias symbol:iscsi_boot_create_ethernet iscsi_boot_sysfs
 alias symbol:xfrm6_rcv_tnl ipv6
 alias symbol:nfc_class nfc
+alias symbol:bmp280_common_remove bmp280
 alias symbol:drm_i2c_encoder_mode_set drm
 alias symbol:flexcop_pass_dmx_packets b2c2_flexcop
 alias symbol:ip_tunnel_init_net ip_tunnel
@@ -3664,6 +3667,7 @@ alias symbol:ix2505v_attach ix2505v
 alias symbol:mtd_concat_destroy mtd
 alias symbol:flexcop_i2c_request b2c2_flexcop
 alias symbol:m88rs2000_attach m88rs2000
+alias symbol:bmp280_regmap_config bmp280
 alias symbol:btmrvl_send_hscfg_cmd btmrvl
 alias symbol:cfg80211_auth_timeout cfg80211
 alias symbol:drm_atomic_state_free drm
@@ -3694,6 +3698,7 @@ alias symbol:drm_rect_calc_hscale_relaxed drm
 alias symbol:fsg_common_create_luns usb_f_mass_storage
 alias symbol:nf_ip6_checksum ipv6
 alias symbol:bcma_pmu_get_bus_clock bcma
+alias symbol:bmp280_dev_pm_ops bmp280
 alias symbol:mtd_table_mutex mtd
 alias symbol:o2hb_check_node_heartbeating_no_sem ocfs2_nodemanager
 alias symbol:cdrom_get_last_written cdrom
