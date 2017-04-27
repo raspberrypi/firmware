@@ -168,6 +168,12 @@ Load:   dtoverlay=adau1977-adc
 Params: <None>
 
 
+Name:   adau7002-simple
+Info:   Overlay for the activation of ADAU7002 stereo PDM to I2S converter.
+Load:   dtoverlay=adau7002-simple,<param>=<val>
+Params: card-name               Override the default, "adau7002", card name.
+
+
 Name:   ads1015
 Info:   Overlay for activation of Texas Instruments ADS1015 ADC over I2C
 Load:   dtoverlay=ads1015,<param>=<val>
@@ -188,6 +194,28 @@ Params: addr                    I2C bus address of device. Set based on how the
         A maximum of 4 channels can be enabled (letters a thru d).
         For more information refer to the device datasheet at:
         http://www.ti.com/lit/ds/symlink/ads1015.pdf
+
+
+Name:   ads1115
+Info:   Texas Instruments ADS1115 ADC
+Load:   dtoverlay=ads1115,<param>[=<val>]
+Params: addr                    I2C bus address of device. Set based on how the
+                                addr pin is wired. (default=0x48 assumes addr
+                                is pulled to GND)
+        cha_enable              Enable virtual channel a.
+        cha_cfg                 Set the configuration for virtual channel a.
+                                (default=4 configures this channel for the
+                                voltage at A0 with respect to GND)
+        cha_datarate            Set the datarate (samples/sec) for this channel.
+                                (default=7 sets 860 sps)
+        cha_gain                Set the gain of the Programmable Gain
+                                Amplifier for this channel. (Default 1 sets the
+                                full scale of the channel to 4.096 Volts)
+
+        Channel parameters can be set for each enabled channel.
+        A maximum of 4 channels can be enabled (letters a thru d).
+        For more information refer to the device datasheet at:
+        http://www.ti.com/lit/ds/symlink/ads1115.pdf
 
 
 Name:   ads7846
@@ -235,6 +263,30 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
 
 
+Name:   allo-boss-dac-pcm512x-audio
+Info:   Configures the Allo Boss DAC audio cards.
+Load:   dtoverlay=allo-boss-dac-pcm512x-audio,<param>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=allo-boss-dac-pcm512x-audio,
+                                24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24db_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        slave                   Force Boss DAC into slave mode, using Pi a
+                                master for bit clock and frame clock. Enable
+                                with "dtoverlay=allo-boss-dac-pcm512x-audio,
+                                slave"
+
+
 Name:   allo-piano-dac-pcm512x-audio
 Info:   Configures the Allo Piano DAC (2.0/2.1) audio cards.
         (NB. This initial support is for 2.0 channel audio ONLY! ie. stereo.
@@ -255,6 +307,27 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
 
 
+Name:   allo-piano-dac-plus-pcm512x-audio
+Info:   Configures the Allo Piano DAC (2.1) audio cards.
+Load:   dtoverlay=allo-piano-dac-plus-pcm512x-audio,<param>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control.
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24db_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        glb_mclk                This option is only with Kali board. If enabled,
+                                MCLK for Kali is used and PLL is disabled for
+                                better voice quality. (default Off)
+
+
 Name:   at86rf233
 Info:   Configures the Atmel AT86RF233 802.15.4 low-power WPAN transceiver,
         connected to spi0.0
@@ -265,6 +338,12 @@ Params: interrupt               GPIO used for INT (default 23)
         speed                   SPI bus speed in Hz (default 3000000)
         trim                    Fine tuning of the internal capacitance
                                 arrays (0=+0pF, 15=+4.5pF, default 15)
+
+
+Name:   audioinjector-addons
+Info:   Configures the audioinjector.net audio add on soundcards
+Load:   dtoverlay=audioinjector-addons
+Params: <None>
 
 
 Name:   audioinjector-wm8731-audio
@@ -302,6 +381,25 @@ Load:   dtoverlay=dionaudio-loco
 Params: <None>
 
 
+Name:   dionaudio-loco-v2
+Info:   Configures the Dion Audio LOCO-V2 DAC-AMP
+Load:   dtoverlay=dionaudio-loco-v2,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-dacplus,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+
+
 Name:   dpi18
 Info:   Overlay for a generic 18-bit DPI display
         This uses GPIOs 0-21 (so no I2C, uart etc.), and activates the output
@@ -335,9 +433,6 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
         g-np-tx-fifo-size       Size of non-periodic tx fifo size in gadget
                                 mode
 
-        g-tx-fifo-size          Size of periodic tx fifo per endpoint
-                                (except ep0) in gadget mode
-
 
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
 
@@ -356,6 +451,18 @@ Load:   dtoverlay=enc28j60-spi2,<param>=<val>
 Params: int_pin                 GPIO used for INT (default 39)
 
         speed                   SPI bus speed (default 12000000)
+
+
+Name:   fe-pi-audio
+Info:   Configures the Fe-Pi Audio Sound Card
+Load:   dtoverlay=fe-pi-audio
+Params: <None>
+
+
+Name:   googlevoicehat-soundcard
+Info:   Configures the Google voiceHAT soundcard
+Load:   dtoverlay=googlevoicehat-soundcard
+Params: <None>
 
 
 Name:   gpio-ir
@@ -470,6 +577,12 @@ Params: speed                   Display SPI bus speed
         ledgpio                 GPIO used to control backlight
 
 
+Name:   i2c-bcm2708
+Info:   Fall back to the i2c_bcm2708 driver for the i2c_arm bus.
+Load:   dtoverlay=i2c-bcm2708
+Params: <None>
+
+
 Name:   i2c-gpio
 Info:   Adds support for software i2c controller on gpio pins
 Load:   dtoverlay=i2c-gpio,<param>=<val>
@@ -539,12 +652,29 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: bmp085                  Select the Bosch sensortronic BMP085
+Params: addr                    Set the address for the BME280, BMP280 or
+                                TMP102
 
-        bmp280                  Select the Bosch sensortronic BMP280
+        bme280                  Select the Bosch Sensortronic BME280
+                                Valid addresses 0x76-0x77, default 0x76
+
+        bmp085                  Select the Bosch Sensortronic BMP085
+
+        bmp180                  Select the Bosch Sensortronic BMP180
+
+        bmp280                  Select the Bosch Sensortronic BMP280
+                                Valid addresses 0x76-0x77, default 0x76
+
+        lm75                    Select the Maxim LM75 temperature sensor
+
+        lm75addr                Choose the address for the LM75 (0x48-0x4f -
+                                default 0x4f)
 
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
+
+        tmp102                  Select the Texas Instruments TMP102 temp sensor
+                                Valid addresses 0x48-0x4b, default 0x48
 
 
 Name:   i2c0-bcm2708
@@ -571,12 +701,6 @@ Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
 Name:   i2s-gpio28-31
 Info:   move I2S function block to GPIO 28 to 31
 Load:   dtoverlay=i2s-gpio28-31
-Params: <None>
-
-
-Name:   i2s-mmap
-Info:   Enables mmap support in the bcm2708-i2s driver
-Load:   dtoverlay=i2s-mmap
 Params: <None>
 
 
@@ -743,6 +867,13 @@ Info:   Configures MCP3008 A/D converters
 Load:   dtoverlay=mcp3008,<param>[=<val>]
 Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
         spi<n>-<m>-speed        integer, set the spi bus speed for this device
+
+
+Name:   midi-uart0
+Info:   Configures UART0 (ttyAMA0) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart0
+Params: <None>
 
 
 Name:   mmc
@@ -982,6 +1113,12 @@ Load:   dtoverlay=rpi-backlight
 Params: <None>
 
 
+Name:   rpi-cirrus-wm5102
+Info:   Configures the Cirrus Logic Audio Card
+Load:   dtoverlay=rpi-cirrus-wm5102
+Params: <None>
+
+
 Name:   rpi-dac
 Info:   Configures the RPi DAC audio card
 Load:   dtoverlay=rpi-dac
@@ -1014,6 +1151,12 @@ Params: <None>
 Name:   rpi-sense
 Info:   Raspberry Pi Sense HAT
 Load:   dtoverlay=rpi-sense
+Params: <None>
+
+
+Name:   rpi-tv
+Info:   Raspberry Pi TV HAT
+Load:   dtoverlay=rpi-tv
 Params: <None>
 
 
