@@ -459,6 +459,14 @@ Load:   dtoverlay=fe-pi-audio
 Params: <None>
 
 
+Name:   goodix
+Info:   Enables I2C connected Goodix gt9271 multiple touch controller using
+        GPIOs 4 and 17 (pins 7 and 11 on GPIO header) for interrupt and reset.
+Load:   dtoverlay=goodix,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        reset                   GPIO used for reset (default 17)
+
+
 Name:   googlevoicehat-soundcard
 Info:   Configures the Google voiceHAT soundcard
 Load:   dtoverlay=googlevoicehat-soundcard
@@ -1107,6 +1115,15 @@ Load:   dtoverlay=raspidac3
 Params: <None>
 
 
+Name:   rotary-encoder
+Info:   Overlay for GPIO connected rotary encoder.
+Load:   dtoverlay=rotary-encoder,<param>=<val>
+Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
+                                (default 4).
+        rotary0_pin_b           GPIO connected to rotary encoder channel B
+                                (default 17).
+
+
 Name:   rpi-backlight
 Info:   Raspberry Pi official display backlight driver
 Load:   dtoverlay=rpi-backlight
@@ -1208,18 +1225,8 @@ Name:   sdio
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
         and enables SDIO via GPIOs 22-27.
 Load:   dtoverlay=sdio,<param>=<val>
-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
-                                requests 50MHz
-
-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
                                 framework requests 50MHz
-
-        force_pio               Disable DMA support (default off)
-
-        pio_limit               Number of blocks above which to use DMA
-                                (default 1)
-
-        debug                   Enable debug output (default off)
 
         poll_once               Disable SDIO-device polling every second
                                 (default on: polling once at boot-time)
@@ -1231,18 +1238,8 @@ Name:   sdio-1bit
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
         and enables 1-bit SDIO via GPIOs 22-25.
 Load:   dtoverlay=sdio-1bit,<param>=<val>
-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
-                                requests 50MHz
-
-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
                                 framework requests 50MHz
-
-        force_pio               Disable DMA support (default off)
-
-        pio_limit               Number of blocks above which to use DMA
-                                (default 1)
-
-        debug                   Enable debug output (default off)
 
         poll_once               Disable SDIO-device polling every second
                                 (default on: polling once at boot-time)
