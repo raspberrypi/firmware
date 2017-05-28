@@ -208,7 +208,7 @@ typedef struct OMX_TIME_CONFIG_MEDIATIMEREQUESTTYPE {
  *   Upon scale changes the clock component clears the nClientPrivate data, sends the current
  *   media time and sets the nScale to the new scale via the client port. It emits a 
  *   OMX_TIME_MEDIATIMETYPE to all clients independent of any requests. This allows clients to 
- *   alter processing to accomodate scaling. For instance a video component might skip inter-frames 
+ *   alter processing to accommodate scaling. For instance a video component might skip inter-frames
  *   in the case of extreme fastforward. Likewise an audio component might add or remove samples 
  *   from an audio frame to scale audio data. 
  *
@@ -247,7 +247,7 @@ typedef struct OMX_TIME_MEDIATIMETYPE {
 
 /** Structure representing the current media time scale factor. Applicable only to clock 
  *  component, other components see scale changes via OMX_TIME_MEDIATIMETYPE buffers sent via
- *  the clock component client ports. Upon recieving this config the clock component changes 
+ *  the clock component client ports. Upon receiving this config the clock component changes
  *  the rate by which the media time increases or decreases effectively implementing trick modes. 
  */ 
 typedef struct OMX_TIME_CONFIG_SCALETYPE {
