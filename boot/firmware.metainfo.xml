@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2015 Richard Hughes  -->
+<component type="firmware">
+  <id>c77029fe-ffb2-3706-dc67-67af4a132afd</id>
+  <name>Raspberry Pi Device Update</name>
+  <summary>Firmware for the Raspberry Pi</summary>
+  <description>
+    <p>
+      Updating the firmware on your Raspberry Pi device improves
+      performance and fixes reported bugs.
+    </p>
+  </description>
+  <url type="homepage">https://www.raspberrypi.org/</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>proprietary</project_license>
+  <developer_name>Raspberry Pi Foundation</developer_name>
+  <releases>
+    <release version="20150803">
+      <description>
+        <p>Fix unwanted lock release with turbo mode.</p>
+      </description>
+    </release>
+  </releases>
+</component>
