@@ -116,6 +116,9 @@ typedef enum
    VC_IMAGE_TF_U8,   /* T-format 8-bit U - same as TF_Y8 buf from U plane */
    VC_IMAGE_TF_V8,   /* T-format 8-bit U - same as TF_Y8 buf from V plane */
    
+   VC_IMAGE_YUV420_16,  /* YUV4:2:0 planar, 16bit values */
+   VC_IMAGE_YUV_UV_16,  /* YUV4:2:0 codec format, 16bit values */
+
    VC_IMAGE_MAX,     //bounds for error checking
    VC_IMAGE_FORCE_ENUM_16BIT = 0xffff,
 } VC_IMAGE_TYPE_T;

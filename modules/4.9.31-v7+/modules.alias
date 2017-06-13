@@ -2167,6 +2167,8 @@ alias of:N*T*Cmicrochip,mcp2510C* mcp251x
 alias of:N*T*Cmicrochip,mcp2510 mcp251x
 alias spi:mcp2515 mcp251x
 alias spi:mcp2510 mcp251x
+alias usb:v1209p2323d*dc*dsc*dp*ic*isc*ip*in00* gs_usb
+alias usb:v1D50p606Fd*dc*dsc*dp*ic*isc*ip*in00* gs_usb
 alias tty-ldisc-17 slcan
 alias rtnl-link-can can_dev
 alias usb:v*p*d*dc*dsc*dp*icFEisc02ip*in* irda_usb

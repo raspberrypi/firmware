@@ -263,6 +263,7 @@ kernel/drivers/net/tun.ko
 kernel/drivers/net/veth.ko
 kernel/drivers/net/vxlan.ko
 kernel/drivers/net/can/spi/mcp251x.ko
+kernel/drivers/net/can/usb/gs_usb.ko
 kernel/drivers/net/can/vcan.ko
 kernel/drivers/net/can/slcan.ko
 kernel/drivers/net/can/can-dev.ko

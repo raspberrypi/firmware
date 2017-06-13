@@ -94,6 +94,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BGR32            MMAL_FOURCC('B','G','R','4')
 #define MMAL_ENCODING_BGR32_SLICE      MMAL_FOURCC('b','g','r','4')
 
+/** YUV 4:2:0 planar, 16bit/component.
+*/
+#define MMAL_ENCODING_I420_16          MMAL_FOURCC('i','4','2','0')
+
 //Bayer formats
 //FourCC values copied from V4L2 where defined.
 //10 bit per pixel packed Bayer formats.
@@ -132,6 +136,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * of YUV_UV video.
  */
 #define MMAL_ENCODING_YUVUV128         MMAL_FOURCC('S','A','N','D')
+/** 16 bit SAND Video (YUVUV64_16) format.
+ * This format is *not* opaque - if requested you will receive full frames
+ * of YUV_UV_16 video.
+ */
+#define MMAL_ENCODING_YUVUV64_16      MMAL_FOURCC('S','A','1','6')
 
 /** VideoCore opaque image format, image handles are returned to
  * the host but not the actual image data.

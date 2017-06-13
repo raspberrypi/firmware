@@ -262,6 +262,7 @@ kernel/drivers/net/tun.ko:
 kernel/drivers/net/veth.ko:
 kernel/drivers/net/vxlan.ko: kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
 kernel/drivers/net/can/spi/mcp251x.ko: kernel/drivers/net/can/can-dev.ko
+kernel/drivers/net/can/usb/gs_usb.ko: kernel/drivers/net/can/can-dev.ko
 kernel/drivers/net/can/vcan.ko:
 kernel/drivers/net/can/slcan.ko:
 kernel/drivers/net/can/can-dev.ko:
