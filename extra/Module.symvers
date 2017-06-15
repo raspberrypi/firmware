@@ -2274,6 +2274,7 @@
 0x2884aef7	em28xx_setup_xc3028	drivers/media/usb/em28xx/em28xx	EXPORT_SYMBOL_GPL
 0x332b110f	mxl5005s_attach	drivers/media/tuners/mxl5005s	EXPORT_SYMBOL
 0x0bea0c83	rpc_count_iostats_metrics	vmlinux	EXPORT_SYMBOL_GPL
+0xbd2c7092	__inode_add_bytes	vmlinux	EXPORT_SYMBOL
 0xeb26a2a4	cad_pid	vmlinux	EXPORT_SYMBOL
 0xe4c80097	cacheid	vmlinux	EXPORT_SYMBOL
 0xa82a8645	o2nm_this_node	fs/ocfs2/cluster/ocfs2_nodemanager	EXPORT_SYMBOL_GPL
