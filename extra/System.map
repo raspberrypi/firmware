@@ -54151,7 +54151,7 @@ c08a37e4 T __initramfs_start
 c08a37e4 t __irf_start
 c08a37e4 T __security_initcall_end
 c08a37e4 T __security_initcall_start
-c08a3869 t __irf_end
+c08a386a t __irf_end
 c08a3870 T __initramfs_size
 c08a4000 D __data_loc
 c08a4000 D __init_end
