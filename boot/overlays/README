@@ -287,6 +287,12 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 slave"
 
 
+Name:   allo-digione
+Info:   Configures the Allo Digione audio card
+Load:   dtoverlay=allo-digione
+Params: <None>
+
+
 Name:   allo-piano-dac-pcm512x-audio
 Info:   Configures the Allo Piano DAC (2.0/2.1) audio cards.
         (NB. This initial support is for 2.0 channel audio ONLY! ie. stereo.
@@ -457,6 +463,14 @@ Name:   fe-pi-audio
 Info:   Configures the Fe-Pi Audio Sound Card
 Load:   dtoverlay=fe-pi-audio
 Params: <None>
+
+
+Name:   goodix
+Info:   Enables I2C connected Goodix gt9271 multiple touch controller using
+        GPIOs 4 and 17 (pins 7 and 11 on GPIO header) for interrupt and reset.
+Load:   dtoverlay=goodix,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        reset                   GPIO used for reset (default 17)
 
 
 Name:   googlevoicehat-soundcard
@@ -648,12 +662,53 @@ Params: abx80x                  Select one of the ABx80x family:
                                 source
 
 
+Name:   i2c-rtc-gpio
+Info:   Adds support for a number of I2C Real Time Clock devices
+        using the software i2c controller
+Load:   dtoverlay=i2c-rtc-gpio,<param>=<val>
+Params: abx80x                  Select one of the ABx80x family:
+                                  AB0801, AB0803, AB0804, AB0805,
+                                  AB1801, AB1803, AB1804, AB1805
+
+        ds1307                  Select the DS1307 device
+
+        ds1339                  Select the DS1339 device
+
+        ds3231                  Select the DS3231 device
+
+        mcp7940x                Select the MCP7940x device
+
+        mcp7941x                Select the MCP7941x device
+
+        pcf2127                 Select the PCF2127 device
+
+        pcf8523                 Select the PCF8523 device
+
+        pcf8563                 Select the PCF8563 device
+
+        trickle-diode-type      Diode type for trickle charge - "standard" or
+                                "schottky" (ABx80x only)
+
+        trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
+                                ABx80x)
+
+        wakeup-source           Specify that the RTC can be used as a wakeup
+                                source
+
+        i2c_gpio_sda            GPIO used for I2C data (default "23")
+
+        i2c_gpio_scl            GPIO used for I2C clock (default "24")
+
+        i2c_gpio_delay_us       Clock delay in microseconds
+                                (default "2" = ~100kHz)
+
+
 Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BMP280 or
-                                TMP102
+Params: addr                    Set the address for the BME280, BMP280, TMP102
+                                or LM75
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -665,10 +720,12 @@ Params: addr                    Set the address for the BME280, BMP280 or
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
 
-        lm75                    Select the Maxim LM75 temperature sensor
+        htu21                   Select the HTU21 temperature and humidity sensor
 
-        lm75addr                Choose the address for the LM75 (0x48-0x4f -
-                                default 0x4f)
+        lm75                    Select the Maxim LM75 temperature sensor
+                                Valid addresses 0x48-0x4f, default 0x4f
+
+        lm75addr                Deprecated - use addr parameter instead
 
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
@@ -876,11 +933,24 @@ Load:   dtoverlay=midi-uart0
 Params: <None>
 
 
+Name:   midi-uart1
+Info:   Configures UART1 (ttyS0) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart1
+Params: <None>
+
+
 Name:   mmc
 Info:   Selects the bcm2835-mmc SD/MMC driver, optionally with overclock
 Load:   dtoverlay=mmc,<param>=<val>
 Params: overclock_50            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
+
+
+Name:   mpu6050
+Info:   Overlay for i2c connected mpu6050 imu
+Load:   dtoverlay=mpu6050,<param>=<val>
+Params: interrupt               GPIO pin for interrupt (default 4)
 
 
 Name:   mz61581
@@ -1107,6 +1177,15 @@ Load:   dtoverlay=raspidac3
 Params: <None>
 
 
+Name:   rotary-encoder
+Info:   Overlay for GPIO connected rotary encoder.
+Load:   dtoverlay=rotary-encoder,<param>=<val>
+Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
+                                (default 4).
+        rotary0_pin_b           GPIO connected to rotary encoder channel B
+                                (default 17).
+
+
 Name:   rpi-backlight
 Info:   Raspberry Pi official display backlight driver
 Load:   dtoverlay=rpi-backlight
@@ -1208,18 +1287,8 @@ Name:   sdio
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
         and enables SDIO via GPIOs 22-27.
 Load:   dtoverlay=sdio,<param>=<val>
-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
-                                requests 50MHz
-
-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
                                 framework requests 50MHz
-
-        force_pio               Disable DMA support (default off)
-
-        pio_limit               Number of blocks above which to use DMA
-                                (default 1)
-
-        debug                   Enable debug output (default off)
 
         poll_once               Disable SDIO-device polling every second
                                 (default on: polling once at boot-time)
@@ -1231,18 +1300,8 @@ Name:   sdio-1bit
 Info:   Selects the bcm2835-sdhost SD/MMC driver, optionally with overclock,
         and enables 1-bit SDIO via GPIOs 22-25.
 Load:   dtoverlay=sdio-1bit,<param>=<val>
-Params: overclock_50            SD Clock (in MHz) to use when the MMC framework
-                                requests 50MHz
-
-        sdio_overclock          SDIO Clock (in MHz) to use when the MMC
+Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
                                 framework requests 50MHz
-
-        force_pio               Disable DMA support (default off)
-
-        pio_limit               Number of blocks above which to use DMA
-                                (default 1)
-
-        debug                   Enable debug output (default off)
 
         poll_once               Disable SDIO-device polling every second
                                 (default on: polling once at boot-time)
