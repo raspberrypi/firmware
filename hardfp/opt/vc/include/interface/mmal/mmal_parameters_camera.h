@@ -140,6 +140,7 @@ enum {
    /* 0x50 */
    MMAL_PARAMETER_JPEG_RESTART_INTERVAL,     /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
    MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE, /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_LENS_SHADING_OVERRIDE,     /**< Takes a @ref MMAL_PARAMETER_LENS_SHADING_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -892,5 +893,18 @@ typedef struct MMAL_PARAMETER_CAMERA_RX_TIMING_T
    uint32_t cpi_timing1;
    uint32_t cpi_timing2;
 } MMAL_PARAMETER_CAMERA_RX_TIMING_T;
+
+typedef struct MMAL_PARAMETER_LENS_SHADING_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enabled;
+   uint32_t grid_cell_size;
+   uint32_t grid_width;
+   uint32_t grid_stride;
+   uint32_t grid_height;
+   uint32_t mem_handle_table;
+   uint32_t ref_transform;
+} MMAL_PARAMETER_LENS_SHADING_T;
 
 #endif  /* MMAL_PARAMETERS_CAMERA_H */

@@ -2596,6 +2596,19 @@ The IL standard does not support a way to specify the Bayer order of Bayer image
 This control adds that missing functionality.
 */
 
+typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;                     /**< Enable the override grid */
+   OMX_U32 nGridCellSize;                 /**< size of each grid element. Assumes square grid */
+   OMX_U32 nWidth;                        /**< grid width */
+   OMX_U32 nStride;                       /**< grid stride (allows for padding) */
+   OMX_U32 nHeight;                       /**< grid height */
+   OMX_U32 nMemHandleTable;               /**< Handle for grid */
+   OMX_U32 nRefTransform;                 /**< Reference transform taken from raw header */
+} OMX_PARAM_LENSSHADINGOVERRIDETYPE;
+
 /* OMX_IndexConfigBrcmPowerMonitor: Deprecated.*/
 /*
 Deprecated. Do not use.

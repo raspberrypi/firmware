@@ -127,7 +127,7 @@ unloaded, extending the startup latency.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="103">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
+<tr valign="top"><td rowspan="104">&nbsp;<td><tt>OMX_IndexParamCommonSensorMode</tt>
 <td> Query / set the camera sensor mode. When setting this parameter, only
   bOneShot is used. It will return the actual sensor resolution when
   queried (as per the OMX specification)
@@ -587,6 +587,10 @@ unloaded, extending the startup latency.
   restriction and run with nStride = (nFrameWidth * bytes_per_pixel), and
   nSliceHeight = nFrameHeight, even if nFrameWidth and nFrameHeight are
   not appropriate multiples.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmLensShadingOverride">OMX_IndexParamBrcmLensShadingOverride</a></tt>
+<td> Override the lens shading table.
+  Mechanism for the client to provide lens shading tables to replace
+  the default lens shading tables.
  <tr valign="top"><td rowspan="6">70<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the preview port resolution. Parts of this value may be
   overwritten by the component if Camplus needs to apply additional
