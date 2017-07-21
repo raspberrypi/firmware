@@ -2636,5 +2636,20 @@ some components accepting any value >= nFrameHeight. Those ports/components will
 respond to OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.
 */
 
+typedef struct OMX_CCMTYPE {
+   OMX_S32 sCcm[3][3];
+   OMX_S32 soffsets[3];
+} OMX_PARAM_CCMTYPE;
+
+typedef struct OMX_PARAM_CUSTOMCCMTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_BOOL bEnabled;          /**< Enable the custom CCM. */
+   OMX_S32 xColorMatrix[3][3]; /**< Stored in signed Q16 format */
+   OMX_S32 nColorOffset[3];    /**<  */
+} OMX_PARAM_CUSTOMCCMTYPE;
+
 #endif
 /* File EOF */
