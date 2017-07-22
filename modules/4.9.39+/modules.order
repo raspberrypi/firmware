@@ -142,6 +142,10 @@ kernel/drivers/gpu/drm/drm_kms_helper.ko
 kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/vc4/vc4.ko
 kernel/drivers/gpu/drm/udl/udl.ko
+kernel/drivers/gpu/drm/tinydrm/core/tinydrm.ko
+kernel/drivers/gpu/drm/tinydrm/mipi-dbi.ko
+kernel/drivers/gpu/drm/tinydrm/mi0283qt.ko
+kernel/drivers/gpu/drm/tinydrm/repaper.ko
 kernel/drivers/base/regmap/regmap-mmio.ko
 kernel/drivers/block/pktcdvd.ko
 kernel/drivers/block/nbd.ko
