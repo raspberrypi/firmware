@@ -55566,7 +55566,7 @@
 80b78ae4 t __irf_start
 80b78ae4 T __security_initcall_end
 80b78ae4 T __security_initcall_start
-80b78b69 t __irf_end
+80b78b6a t __irf_end
 80b78b70 T __initramfs_size
 80b79000 D __per_cpu_load
 80b79000 D __per_cpu_start

@@ -54167,7 +54167,7 @@ c08a4830 T __initramfs_start
 c08a4830 t __irf_start
 c08a4830 T __security_initcall_end
 c08a4830 T __security_initcall_start
-c08a48b5 t __irf_end
+c08a48b6 t __irf_end
 c08a48b8 T __initramfs_size
 c08a6000 D __data_loc
 c08a6000 D __init_end
