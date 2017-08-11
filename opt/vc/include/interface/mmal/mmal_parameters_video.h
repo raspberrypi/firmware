@@ -503,6 +503,9 @@ typedef struct MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T {
    MMAL_PARAMETER_HEADER_T hdr;
 
    MMAL_SOURCE_PATTERN_T pattern;
+   uint32_t param;                              /**< Colour for PATTERN_COLOUR mode */
+   uint32_t framecount;                         /**< Number of frames to produce. 0 for continuous. */
+   MMAL_RATIONAL_T framerate;                   /**< Framerate used when determining buffer timestamps */
 } MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T;
 
 

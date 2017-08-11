@@ -573,7 +573,7 @@ Setting this config forces a sync of data to the filesystem.<p>
 </dl>
 <a name="OMX_IndexConfigBrcmUseProprietaryCallback"><h2>Force use of proprietary callback</h2></a>
 <tt>OMX_IndexConfigBrcmUseProprietaryCallback</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BRCMUSEPROPRIETARYTUNNELTYPE</tt><p>
 
@@ -3284,7 +3284,7 @@ This configures the physical camera interface type.<p>
 </dl>
 <a name="OMX_IndexParamCameraPoolToEncoderFunction"><h2>Camera and Video Encoder communication</h2></a>
 <tt>OMX_IndexParamCameraPoolToEncoderFunction</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="camera.html">camera</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="camera.html">camera</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 <pre>
 typedef struct OMX_PARAM_CAMERAPOOLTOENCODERFUNCTIONTYPE {
@@ -3521,6 +3521,29 @@ typedef struct OMX_PARAM_CAPTURESTATETYPE
   
  <p>
 
+<a name="OMX_IndexParamCcmShift"><h2>Set/retrieve a shift value to be applied to the input colour correction matrix</h2></a>
+<tt>OMX_IndexParamCcmShift</tt><br>
+Used by: <a href="isp.html">isp</a><p>
+
+<pre>
+typedef struct OMX_PARAM_S32TYPE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_S32 nS32;
+} OMX_PARAM_S32TYPE;
+</pre><p>
+ This allows the use of data packed into the least significant bits of
+  a 16 bit word. Value is the number of positions to shift left. Max shift of 5.
+  
+ <p>
+
+<dl>
+<dt><tt>nSize</tt><dd>Size of this structure, in Bytes 
+<dt><tt>nVersion</tt><dd>OMX specification version information 
+<dt><tt>nPortIndex</tt><dd>port that this structure applies to 
+<dt><tt>nS32</tt><dd>S32 value 
+</dl>
 <a name="OMX_IndexParamCodecConfig"><h2>Codec Configuration</h2></a>
 <tt>OMX_IndexParamCodecConfig</tt><br>
 Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
@@ -3602,6 +3625,29 @@ This index uses the standard IL structure <tt>OMX_PARAM_COMPONENTROLETYPE</tt><p
  
  <p>
 
+<a name="OMX_IndexParamCustomCcm"><h2>Set/retrieve a custom colour conversion matrix for the input data</h2></a>
+<tt>OMX_IndexParamCustomCcm</tt><br>
+Used by: <a href="isp.html">isp</a><p>
+
+<pre>
+typedef struct OMX_PARAM_CUSTOMCCMTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_BOOL bEnabled;
+   OMX_S32 xColorMatrix[3][3];
+   OMX_S32 nColorOffset[3];
+} OMX_PARAM_CUSTOMCCMTYPE;
+</pre><p>
+ 
+ <p>
+
+<dl>
+<dt><tt>bEnabled</tt><dd>Enable the custom CCM. 
+<dt><tt>xColorMatrix</tt><dd>Stored in signed Q16 format 
+<dt><tt>nColorOffset</tt><dd>
+</dl>
 <a name="OMX_IndexParamDisableVllPool"><h2>Controlling use of memory for loadable modules</h2></a>
 <tt>OMX_IndexParamDisableVllPool</tt><br>
 Used by: <a href="camera.html">camera</a><p>
@@ -3748,6 +3794,30 @@ This indicates whether the stream is 2d (1 channel) or stereoscopic (2 channels)
   
  <p>
 
+<a name="OMX_IndexParamOutputShift"><h2>Set/retrieve an additional shift parameter applied at the output of the ISP</h2></a>
+<tt>OMX_IndexParamOutputShift</tt><br>
+Used by: <a href="isp.html">isp</a><p>
+
+<pre>
+typedef struct OMX_PARAM_S32TYPE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_S32 nS32;
+} OMX_PARAM_S32TYPE;
+</pre><p>
+ This is to allow packing of values into fewer bits (eg 10 bit packed in
+  the LSBs of a 16 bit word). Value is the number of bits to shift left.
+  The range will vary based on output format.
+  
+ <p>
+
+<dl>
+<dt><tt>nSize</tt><dd>Size of this structure, in Bytes 
+<dt><tt>nVersion</tt><dd>OMX specification version information 
+<dt><tt>nPortIndex</tt><dd>port that this structure applies to 
+<dt><tt>nS32</tt><dd>S32 value 
+</dl>
 <a name="OMX_IndexParamPortMaxFrameSize"><h2>Specifying maximum frame size</h2></a>
 <tt>OMX_IndexParamPortMaxFrameSize</tt><br>
 Used by: <a href="camera.html">camera</a><p>

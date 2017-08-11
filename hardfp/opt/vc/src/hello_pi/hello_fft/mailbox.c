@@ -44,6 +44,7 @@ void *mapmem(unsigned base, unsigned size)
    int mem_fd;
    unsigned offset = base % PAGE_SIZE;
    base = base - offset;
+   size = size + offset;
    /* open /dev/mem */
    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
       printf("can't open /dev/mem\nThis program should be run as root. Try prefixing command with: sudo\n");
@@ -69,6 +70,9 @@ void *mapmem(unsigned base, unsigned size)
 
 void unmapmem(void *addr, unsigned size)
 {
+   const intptr_t offset = (intptr_t)addr % PAGE_SIZE;
+   addr = (char *)addr - offset;
+   size = size + offset;
    int s = munmap(addr, size);
    if (s != 0) {
       printf("munmap error %d\n", s);

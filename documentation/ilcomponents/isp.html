@@ -48,33 +48,52 @@
 </table><td>
 
 <h1>OMX.broadcom.isp</h1>
-<table cellspacing="0" cellpadding="2"><tr>
-  <td cellpadding="0">
-<table border="0" cellborder="1" cellspacing="0">
-<tr><td border="1" port="360" bgcolor="pink">360</td></tr>
-</table></td>
-<td bgcolor="grey" border="1">isp</td>  <td cellpadding="0">
-<table border="0" cellborder="1" cellspacing="0">
-<tr><td border="1" port="361" bgcolor="pink">361</td></tr>
-</table></td>
-</tr></table><p>
+<p>
 <p>
 This component wraps the ISP (Image Sensor Processor) hardware block to
 offer hardware accelerated format conversion and resizing.
+It has one input port taking Bayer, YUV or RGB images in numerous different formats.
+It has two output ports:
+Port 361 supports various RGB and YUV formats.
+Port 362 is off the low res resizer which can only downscale. Due to this
+port 362 must be at a lower resolution to port 361. If set to a higher resolution
+then the port will effectively be disabled and no ouput produced. It also doesn't have
+the colour conversion block, and so only supports YUV formats.
+<p>
+Port 361 is treated as the main output - the pipeline will stall until an output
+buffer is available on that port. That includes if port 361 is disabled then no
+processing will occur.
+If no output buffer is available on port 362 when both an input buffer and
+port 361 output buffer are available, the frame will be processed with the low
+resolution output disabled.
 <p>
 Please note that this component has been developed for use under MMAL. It has
 not been tested at all under IL, so there may be unexpected behaviour under IL.
-It is also not considered to be production quality code - please use with caution.
+It is also not considered to be production quality code yet - please use with caution.
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="6">360<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="9">360<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Set this to control the input size of the image. Typically this is
   called by the component itself when this port is tunnelled with an
   appropriate output port. The stripe height a multiple of 16, and
   >= <tt>nFrameHeight</tt>.
  <tr valign="top"><td><tt>OMX_IndexConfigCommonInputCrop</tt>
 <td> Allows cropping at the input. Cropping can be changed at any time.
+  Cropping dimensions can not exceed the image size set via
+  the image will result in the crop width/height being initially clipped,
+  but if the clipped width/height is <= 0, then the whole crop region
+  will be ignored.
+  A region with x, y, width, and height all of 0 is interpreted as no
+  cropping (ie width and height set to image width/height).
+  Please note that this is applied BEFORE any mirror operations have
+  been performed via OMX_IndexConfigCommonMirror.
+ <tr valign="top"><td><tt>OMX_IndexConfigCommonMirror</tt>
+<td> Query / set the mirroring requirements for images.
+  Please note that this is currently restricted to being set before
+  both input and high res ports are active.
+  Also note that this is applied AFTER any cropping has been performed
+  via OMX_IndexConfigCommonInputCrop.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmBayerOrder">OMX_IndexParamBrcmBayerOrder</a></tt>
 <td> Set / query the Bayer order for the incoming data.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraPoolToEncoderFunction">OMX_IndexParamCameraPoolToEncoderFunction</a></tt>
@@ -84,6 +103,12 @@ It is also not considered to be production quality code - please use with cautio
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmSupportsUnalignedSliceheight">OMX_IndexParamBrcmSupportsUnalignedSliceheight</a></tt>
 <td> Retrieves the capabilites of this component to allow any
   nSliceHeight value >= nHeight.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCcmShift">OMX_IndexParamCcmShift</a></tt>
+<td> Set/retrieve a shift value to be applied to the input colour correction matrix.
+  This allows the use of data packed into the least significant bits of
+  a 16 bit word. Value is the number of positions to shift left. Max shift of 5.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCustomCcm">OMX_IndexParamCustomCcm</a></tt>
+<td> Set/retrieve a custom colour conversion matrix for the input data.
  <tr valign="top"><td rowspan="1">361<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the size of the output image
@@ -93,13 +118,23 @@ It is also not considered to be production quality code - please use with cautio
   <tt>nStride</tt> must be a multiple of 32, or a
   multiple of 64 for RGBA32 format.
   FIXME: Correct the list of supported formats
- <tr valign="top"><td rowspan="2">360  361<td><tt>OMX_IndexParamImagePortFormat</tt>
+ <tr valign="top"><td rowspan="1">362<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Query this to show what the output size will be. This port
+  must be at a lower resolution than 361, and only supports YUV
+  formats, not the RGB formats that port 361 does.
+ <tr valign="top"><td rowspan="2">360  361  362<td><tt>OMX_IndexParamImagePortFormat</tt>
 <td> Set / query the image port format used.  These ports support RGB565,
   RGBA32 or YUV420 raw bitmap formats.
   FIXME: Correct the list of supported formats
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
 <td> Set/retrieve the image colour space that buffers on the port should be
   processed with.
+  FIXME: Implement me.
+ <tr valign="top"><td rowspan="1">361  362<td><tt><a href="prop.html#OMX_IndexParamOutputShift">OMX_IndexParamOutputShift</a></tt>
+<td> Set/retrieve an additional shift parameter applied at the output of the ISP.
+  This is to allow packing of values into fewer bits (eg 10 bit packed in
+  the LSBs of a 16 bit word). Value is the number of bits to shift left.
+  The range will vary based on output format.
  </table>
 
 </table>
