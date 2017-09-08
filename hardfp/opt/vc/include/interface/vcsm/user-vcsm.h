@@ -453,6 +453,8 @@ struct vcsm_user_clean_invalid2_s {
 
 int vcsm_clean_invalid2( struct vcsm_user_clean_invalid2_s *s );
 
+unsigned int vcsm_import_dmabuf( int dmabuf, char *name );
+
 #ifdef __cplusplus
 }
 #endif

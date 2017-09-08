@@ -97,6 +97,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** YUV 4:2:0 planar, 16bit/component.
 */
 #define MMAL_ENCODING_I420_16          MMAL_FOURCC('i','4','2','0')
+/** YUV 4:2:0 planar, 10bit/component as least sig 10bits of 16 bit words.
+*/
+#define MMAL_ENCODING_I420_10          MMAL_FOURCC('i','4','1','0')
 
 //Bayer formats
 //FourCC values copied from V4L2 where defined.
@@ -141,6 +144,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * of YUV_UV_16 video.
  */
 #define MMAL_ENCODING_YUVUV64_16      MMAL_FOURCC('S','A','1','6')
+/** 10 bit SAND Video format, packed as least sig 10 bits of 16 bit words.
+ */
+#define MMAL_ENCODING_YUVUV64_10      MMAL_FOURCC('S','A','1','0')
 
 /** VideoCore opaque image format, image handles are returned to
  * the host but not the actual image data.
