@@ -151,6 +151,9 @@ typedef struct service_info_tag {
    void *vll_handle;                /* VLL handle; NULL when unloaded or a "static VLL" in build */
 } SERVICE_INFO_T;
 
+// Pagelist structure for copy callback
+struct pagelist_struct;
+
 /******************************************************************************
  Global funcs - implementation is specific to which side you are on (local / remote)
  *****************************************************************************/
@@ -342,7 +345,7 @@ int32_t vchi_bulk_queue_receive_reloc_func( const VCHI_SERVICE_HANDLE_T handle,
                                        uint32_t data_size,
                                        const VCHI_FLAGS_T flags,
                                        void * const bulk_handle,
-                                       int (*copy_pagelist)() );
+                                       int copy_pagelist(char *vcptr, const struct pagelist_struct *pagelist));
 
 // Routine to queue up data ready for transfer to the other (once they have signalled they are ready)
 extern int32_t vchi_bulk_queue_transmit( VCHI_SERVICE_HANDLE_T handle,

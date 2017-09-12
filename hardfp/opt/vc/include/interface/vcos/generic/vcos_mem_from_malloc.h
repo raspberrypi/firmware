@@ -68,6 +68,12 @@ void * vcos_malloc_aligned(VCOS_UNSIGNED size, VCOS_UNSIGNED align, const char *
    return vcos_generic_mem_alloc_aligned(size, align, description);
 }
 
+/* Returns invalid result, do not use */
+
+VCOS_INLINE_IMPL
+unsigned long VCOS_DEPRECATED("returns invalid result") vcos_get_free_mem(void) {
+   return 0;
+}
 
 #endif /* VCOS_INLINE_BODIES */
 

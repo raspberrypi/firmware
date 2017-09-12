@@ -133,7 +133,7 @@ typedef struct vchiq_config_struct {
 
 typedef struct vchiq_instance_struct *VCHIQ_INSTANCE_T;
 typedef void (*VCHIQ_REMOTE_USE_CALLBACK_T)(void* cb_arg);
-
+struct pagelist_struct;
 
 extern VCHIQ_STATUS_T vchiq_initialise(VCHIQ_INSTANCE_T *pinstance);
 extern VCHIQ_STATUS_T vchiq_initialise_fd(VCHIQ_INSTANCE_T *pinstance, int dev_vchiq_fd);
@@ -173,7 +173,8 @@ extern VCHIQ_STATUS_T vchiq_bulk_transmit_handle(VCHIQ_SERVICE_HANDLE_T service,
    VCHIQ_BULK_MODE_T mode);
 extern VCHIQ_STATUS_T vchiq_bulk_receive_handle(VCHIQ_SERVICE_HANDLE_T service,
    VCHI_MEM_HANDLE_T handle, void *offset, int size, void *userdata,
-   VCHIQ_BULK_MODE_T mode, int (*copy_pagelist)());
+   VCHIQ_BULK_MODE_T mode,
+   int copy_pagelist(char *vcptr, const struct pagelist_struct *pagelist));
 extern int   vchiq_get_client_id(VCHIQ_SERVICE_HANDLE_T service);
 extern void *vchiq_get_service_userdata(VCHIQ_SERVICE_HANDLE_T service);
 extern int   vchiq_get_service_fourcc(VCHIQ_SERVICE_HANDLE_T service);
