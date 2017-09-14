@@ -1250,7 +1250,6 @@
 0xff327d70	crypto_alloc_shash	vmlinux	EXPORT_SYMBOL_GPL
 0x73676621	crypto_alloc_ahash	vmlinux	EXPORT_SYMBOL_GPL
 0x32e6ab05	crypto_alg_extsize	vmlinux	EXPORT_SYMBOL_GPL
-0xf5c987cf	nfs_pgio_data_destroy	vmlinux	EXPORT_SYMBOL_GPL
 0x38639300	of_overlay_destroy	vmlinux	EXPORT_SYMBOL_GPL
 0x3c2b68f7	of_changeset_apply	vmlinux	EXPORT_SYMBOL_GPL
 0xaa453ff2	sdio_unregister_driver	vmlinux	EXPORT_SYMBOL_GPL
