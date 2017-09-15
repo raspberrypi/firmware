@@ -439,6 +439,22 @@ struct vcsm_user_clean_invalid_s {
 
 int vcsm_clean_invalid( struct vcsm_user_clean_invalid_s *s );
 
+struct vcsm_user_clean_invalid2_s {
+	unsigned char op_count;
+	unsigned char zero[3];
+	struct vcsm_user_clean_invalid2_block_s {
+		unsigned short invalidate_mode;
+		unsigned short block_count;
+		void *   start_address;
+		unsigned int block_size;
+		unsigned int inter_block_stride;
+	} s[0];
+};
+
+int vcsm_clean_invalid2( struct vcsm_user_clean_invalid2_s *s );
+
+unsigned int vcsm_import_dmabuf( int dmabuf, char *name );
+
 #ifdef __cplusplus
 }
 #endif

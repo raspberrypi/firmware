@@ -143,8 +143,10 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_FormatYVU420PackedPlanar,
     OMX_COLOR_FormatYVU420PackedSemiPlanar,
     OMX_COLOR_FormatRawBayer16bit,
-    OMX_COLOR_FormatYUV420_16PackedPlanar,
-    OMX_COLOR_FormatYUVUV64_16,
+    OMX_COLOR_FormatYUV420_16PackedPlanar,  /**< YUV420, 16bit/component */
+    OMX_COLOR_FormatYUVUV64_16,             /**< YUVUV, 16bit/component */
+    OMX_COLOR_FormatYUV420_10PackedPlanar,  /**< YUV420, 10bit/component as least sig 10bits of 16 bit words */
+    OMX_COLOR_FormatYUVUV64_10,             /**< YUVUV, 10bit/component as least sig 10bits of 16 bit words */
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
