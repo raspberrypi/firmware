@@ -18,21 +18,15 @@
 <a href="image_decode.html">image_decode</a><br>
 <a href="image_encode.html">image_encode</a><br>
 <a href="image_fx.html">image_fx</a><br>
-<a href="image_read.html">image_read</a><br>
-<a href="image_write.html">image_write</a><br>
 <a href="resize.html">resize</a><br>
 <a href="source.html">source</a><br>
 <a href="transition.html">transition</a><br>
-<a href="write_still.html">write_still</a><br>
 <tr><td bgcolor="#c0e0e0">
 <a href="clock.html">clock</a><br>
 <a href="null_sink.html">null_sink</a><br>
 <a href="text_scheduler.html">text_scheduler</a><br>
 <a href="visualisation.html">visualisation</a><br>
 <tr><td bgcolor="#e0c0c0">
-<a href="read_media.html">read_media</a><br>
-<a href="write_media.html">write_media</a><br>
-<tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
 <a href="isp.html">isp</a><br>
@@ -42,7 +36,7 @@
 <a href="video_render.html">video_render</a><br>
 <a href="video_scheduler.html">video_scheduler</a><br>
 <a href="video_splitter.html">video_splitter</a><br>
-<tr><td bgcolor="#e0c0c0">
+<tr><td bgcolor="#c0e0e0">
 <a href="prop.html">Custom Index</a><br>
 <a href="metadata.html">Metadata</a><br>
 </table><td>
@@ -72,15 +66,6 @@ typedef struct OMX_CONFIG_AFASSISTTYPE {
 Set the mode to adopt for the autofocus assist light.
  <tt>OMX_AFAssistTorch</tt> will turn the AF assist light on permanently, allowing
  it to be used as a torch.<p>
-
-<a name="OMX_IndexConfigAsynchronousFailureURI"><h2>Asynchronous Failure Filename</h2></a>
-<tt>OMX_IndexConfigAsynchronousFailureURI</tt><br>
-Used by: <a href="write_still.html">write_still</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_CONTENTURITYPE</tt><p>
-
-This allows the client to query for the filename that cause an asynchronous
- output error.<p>
 
 <a name="OMX_IndexConfigAudioMonoTrackControl"><h2>Dual Mono Control</h2></a>
 <tt>OMX_IndexConfigAudioMonoTrackControl</tt><br>
@@ -229,7 +214,7 @@ A track change is complete for an input port when a buffer flagged with <tt>OMX_
 
 <a name="OMX_IndexConfigBrcmAudioTrackGaplessPlayback"><h2>Encoder/decoder delay and padding information for gapless playback.</h2></a>
 <tt>OMX_IndexConfigBrcmAudioTrackGaplessPlayback</tt><br>
-Used by: <a href="audio_decode.html">audio_decode</a>, <a href="read_media.html">read_media</a><p>
+Used by: <a href="audio_decode.html">audio_decode</a><p>
 
 <pre>
 typedef struct OMX_CONFIG_BRCMAUDIOTRACKGAPLESSPLAYBACKTYPE {
@@ -412,29 +397,6 @@ This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
  
  <p>
 
-<a name="OMX_IndexConfigBrcmIOPerfStats"><h2>Query I/O performance statistics</h2></a>
-<tt>OMX_IndexConfigBrcmIOPerfStats</tt><br>
-Used by: <a href="write_still.html">write_still</a>, <a href="write_media.html">write_media</a><p>
-
-<pre>
-typedef struct OMX_CONFIG_BRCMIOPERFSTATSTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_BOOL bEnabled;
-   OMX_BRCM_PERFSTATS write;
-   OMX_BRCM_PERFSTATS flush;
-   OMX_BRCM_PERFSTATS wait;
-} OMX_CONFIG_BRCMIOPERFSTATSTYPE;</pre><p>
-A sink component can gather various statistics about I/O (eg. file media) performance that can be used by
- clients for debugging purposes.  The <tt>bEnabled</tt> field is used to turn the gathering of statistics
- on/off.<p>
-
-<dl>
-<dt><tt>bEnabled</tt><dd>Enable/disable I/O performance statistics 
-<dt><tt>write</tt><dd>count:bytes     num:microseconds 
-<dt><tt>flush</tt><dd>count:frequency num:microseconds waiting to flush data 
-<dt><tt>wait</tt><dd>count:frequency num:microseconds waiting in calling function 
-</dl>
 <a name="OMX_IndexConfigBrcmMinimumProcessingLatency"><h2>Processing Latency Bound</h2></a>
 <tt>OMX_IndexConfigBrcmMinimumProcessingLatency</tt><br>
 Used by: <a href="audio_mixer.html">audio_mixer</a><p>
@@ -451,17 +413,6 @@ Query/set the difference between the actual media time and when the
  component stops waiting for input or output packets from active
  streams and continues with processing (to maintain a constant
  processing rate).<p>
-
-<a name="OMX_IndexConfigBrcmOutputBufferFullCount"><h2>Query the number of times the output buffer has filled up</h2></a>
-<tt>OMX_IndexConfigBrcmOutputBufferFullCount</tt><br>
-Used by: <a href="write_media.html">write_media</a><p>
-
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
-
-This is a rough guide to whether or not the output destination (SD card typically) is keeping up. This
-  configuration value can be monitored via <tt>OMX_IndexConfigRequestCallback</tt>.
-  
- <p>
 
 <a name="OMX_IndexConfigBrcmPoolMemAllocSize"><h2>Pool memory usage values</h2></a>
 <tt>OMX_IndexConfigBrcmPoolMemAllocSize</tt><br>
@@ -493,7 +444,7 @@ Ports that gather statistics for debugging and diagnostics
 
 <a name="OMX_IndexConfigBrcmPortStats"><h2>Query port statistics</h2></a>
 <tt>OMX_IndexConfigBrcmPortStats</tt><br>
-Used by: <a href="source.html">source</a>, <a href="null_sink.html">null_sink</a>, <a href="write_media.html">write_media</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="source.html">source</a>, <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 <pre>
 typedef struct OMX_CONFIG_BRCMPORTSTATSTYPE {
@@ -535,7 +486,7 @@ This specifies whether the failure to load the register file should be treated a
   
  <p>
 
-<a name="OMX_IndexConfigBrcmRenderStats"><h2>Render port statistics</h2></a>
+<a name="OMX_IndexConfigBrcmRenderStats"><h2>Retrieve statistics from this renderer</h2></a>
 <tt>OMX_IndexConfigBrcmRenderStats</tt><br>
 Used by: <a href="video_render.html">video_render</a><p>
 
@@ -552,25 +503,11 @@ typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
    OMX_U32 nPixelClock;
    OMX_U32 nHvsStatus;
    OMX_U32 dummy0[2];
-} OMX_CONFIG_BRCMRENDERSTATSTYPE;</pre><p>
-This provides statistics from the renderer to allow more accurate synchronisation
- between the scheduler and display VSYNC.<p>
+} OMX_CONFIG_BRCMRENDERSTATSTYPE;
+</pre><p>
+ 
+ <p>
 
-<a name="OMX_IndexConfigBrcmSyncOutput"><h2>Forcing a write sync</h2></a>
-<tt>OMX_IndexConfigBrcmSyncOutput</tt><br>
-Used by: <a href="write_still.html">write_still</a><p>
-
-<pre>
-typedef struct OMX_CONFIG_BRCMSYNCOUTPUTTYPE {
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-}  OMX_CONFIG_BRCMSYNCOUTPUTTYPE;</pre><p>
-Setting this config forces a sync of data to the filesystem.<p>
-
-<dl>
-<dt><tt>nSize</tt><dd>Size of this structure, in Bytes 
-<dt><tt>nVersion</tt><dd>OMX specification version information 
-</dl>
 <a name="OMX_IndexConfigBrcmUseProprietaryCallback"><h2>Force use of proprietary callback</h2></a>
 <tt>OMX_IndexConfigBrcmUseProprietaryCallback</tt><br>
 Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
@@ -738,6 +675,31 @@ The viewfinder port can be executing, but will only emit the snapshot images ass
   
  <p>
 
+<a name="OMX_IndexConfigCameraAnalogGain"><h2>Manual camera analog gain</h2></a>
+<tt>OMX_IndexConfigCameraAnalogGain</tt><br>
+Used by: <a href="camera.html">camera</a><p>
+
+<pre>
+typedef struct OMX_CONFIG_CAMERAGAINTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_U32 xGain;
+   OMX_BOOL bAutoGain;
+} OMX_CONFIG_CAMERAGAINTYPE;
+</pre><p>
+ When bAutoGain is set to OMX_FALSE, xGain will be used to set the
+  camera analog gain. Requires OMX_IndexConfigCommonExposureValue
+  bAutoSensitivity to be set to true (ie ISO control overrides this
+  control).
+  
+ <p>
+
+<dl>
+<dt><tt>xGain</tt><dd>Gain to be applied, stored as Q16 format 
+<dt><tt>bAutoGain</tt><dd>Whether gain is set automatically 
+</dl>
 <a name="OMX_IndexConfigCameraCaptureAbortsAutoFocus"><h2>Starting a capture aborts AF</h2></a>
 <tt>OMX_IndexConfigCameraCaptureAbortsAutoFocus</tt><br>
 Used by: <a href="camera.html">camera</a><p>
@@ -749,6 +711,18 @@ Query / set whether setting the capture bit will abort any AF cycle that is in p
   
  <p>
 
+<a name="OMX_IndexConfigCameraDigitalGain"><h2>Manual digital gain.</h2></a>
+<tt>OMX_IndexConfigCameraDigitalGain</tt><br>
+Used by: <a href="camera.html">camera</a>, <a href="isp.html">isp</a><p>
+
+This index uses the standard IL structure <tt>OMX_CONFIG_CAMERAGAINTYPE</tt><p>
+
+Configures the digital gain within the ISP pipeline.<p>
+
+<dl>
+<dt><tt>xGain</tt><dd>Gain to be applied, stored as Q16 format 
+<dt><tt>bAutoGain</tt><dd>Whether gain is set automatically 
+</dl>
 <a name="OMX_IndexConfigCameraEnableStatsPass"><h2>Query / set whether a separate stats pass should be done before each capture</h2></a>
 <tt>OMX_IndexConfigCameraEnableStatsPass</tt><br>
 Used by: <a href="camera.html">camera</a><p>
@@ -1273,18 +1247,6 @@ Query / set the sharpening/softening of the output image.  -100 = max softening.
   
  <p>
 
-<a name="OMX_IndexConfigConfirmView"><h2>It is only applicable to DivX DRM rental files</h2></a>
-<tt>OMX_IndexConfigConfirmView</tt><br>
-Used by: <a href="read_media.html">read_media</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-This is a boolean config parameter.  Setting this to TRUE will continue the playback of
-  a rental file, while setting to FALSE has no effect, and the host
-  application is expected to stop the playback afterwards.
-  
- <p>
-
 <a name="OMX_IndexConfigContrastEnhance"><h2>Enable / disable contrast enhancement</h2></a>
 <tt>OMX_IndexConfigContrastEnhance</tt><br>
 Used by: <a href="camera.html">camera</a><p>
@@ -1294,21 +1256,35 @@ This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
  
  <p>
 
-<a name="OMX_IndexConfigCustomAwbGains"><h2>Custom AWB Gains</h2></a>
+<a name="OMX_IndexConfigCustomAwbGains"><h2>Manual AWB Gains.</h2></a>
 <tt>OMX_IndexConfigCustomAwbGains</tt><br>
-Used by: <a href="camera.html">camera</a><p>
+Used by: <a href="camera.html">camera</a>, <a href="isp.html">isp</a><p>
 
 <pre>
 typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
    OMX_U32 nSize;
+                                            configuration data */
    OMX_VERSIONTYPE nVersion;
    OMX_U32 xGainR;
    OMX_U32 xGainB;
-} OMX_CONFIG_CUSTOMAWBGAINSTYPE;
-</pre><p>
- Allows client to set AWB gains.
-  
- <p>
+} OMX_CONFIG_CUSTOMAWBGAINSTYPE;</pre><p>
+/* OMX_IndexConfigBrcmRenderStats: Render port statistics */
+ typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_BOOL nValid;
+    OMX_U32 nMatch;
+    OMX_U32 nPeriod;
+    OMX_U32 nPhase;
+    OMX_U32 nPixelClockNominal;
+    OMX_U32 nPixelClock;
+    OMX_U32 nHvsStatus;
+    OMX_U32 dummy0[2];
+ } OMX_CONFIG_BRCMRENDERSTATSTYPE;
+ /*
+ This provides statistics from the renderer to allow more accurate synchronisation
+ between the scheduler and display VSYNC.<p>
 
 <dl>
 <dt><tt>nSize</tt><dd>size of the structure in bytes, including
@@ -1499,29 +1475,6 @@ Query / set the parameters for the box to be drawn around faces/focus regions.<p
 <dt><tt>sAfFailPrimaryFaceColour</tt><dd>YUV colour for the primary face 
 <dt><tt>sAfFailOtherFaceColour</tt><dd>YUV colour for the all other faces 
 <dt><tt>sAfFailFocusRegionColour</tt><dd>YUV colour for focus regions 
-</dl>
-<a name="OMX_IndexConfigDrmView"><h2>View information for DRM rental files</h2></a>
-<tt>OMX_IndexConfigDrmView</tt><br>
-Used by: <a href="read_media.html">read_media</a>, <a href="read_media.html">read_media</a><p>
-
-<pre>
-typedef struct OMX_CONFIG_DRMVIEWTYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nCurrentView;
-   OMX_U32 nMaxView;
-} OMX_CONFIG_DRMVIEWTYPE;</pre><p>
-This structure contains information about the number of available
- views in the selected DRM rental file, which typically have a given
- maximum view count.  It allows the user to explicitly agree to playing
- the file, which will increment the number of current views the file
- has had.<p>
-
-<dl>
-<dt><tt>nSize</tt><dd>Size of this structure, in Bytes 
-<dt><tt>nVersion</tt><dd>OMX specification version information 
-<dt><tt>nCurrentView</tt><dd>Current view count 
-<dt><tt>nMaxView</tt><dd>Max. no. of view allowed 
 </dl>
 <a name="OMX_IndexConfigDynamicRangeExpansion"><h2>Configure image dynamic range expansion processing</h2></a>
 <tt>OMX_IndexConfigDynamicRangeExpansion</tt><br>
@@ -1729,31 +1682,6 @@ This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 This control can be supported to enable the client to request that the component works
  to minimise fragmentation of output buffers.<p>
 
-<a name="OMX_IndexConfigPlayMode"><h2>Play Mode</h2></a>
-<tt>OMX_IndexConfigPlayMode</tt><br>
-Used by: <a href="read_media.html">read_media</a><p>
-
-<pre>
-typedef enum OMX_PLAYMODETYPE {
-   OMX_PLAYMODE_NORMAL,
-   OMX_PLAYMODE_FF,
-   OMX_PLAYMODE_REW,
-   OMX_PLAYMODE_DUMMY = 0x7FFFFFFF
-} OMX_PLAYMODETYPE;
-
-typedef struct OMX_CONFIG_PLAYMODETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_PLAYMODETYPE eMode;
-} OMX_CONFIG_PLAYMODETYPE;</pre><p>
-The playmode affects which frames are extracted from the media file
- and passed on the output ports. <tt>OMX_PLAYMODE_NORMAL</tt> will
- extract all frames, <tt>OMX_PLAYMODE_FF</tt> extracts only IDR frames
- when video is present, or only occasional packets of audio if no video
- is present. <tt>OMX_PLAYMODE_REW</tt> is similar to
- <tt>OMX_PLAYMODE_FF</tt> but extracts packets in reverse time
- order.<p>
-
 <a name="OMX_IndexConfigPortCapturing"><h2>Per-port capturing state</h2></a>
 <tt>OMX_IndexConfigPortCapturing</tt><br>
 Used by: <a href="camera.html">camera</a><p>
@@ -1841,7 +1769,7 @@ This will only happen if the codec is currently loaded.  To perform this operati
 
 <a name="OMX_IndexConfigRequestCallback"><h2>Enable config change notifications.</h2></a>
 <tt>OMX_IndexConfigRequestCallback</tt><br>
-Used by: <a href="audio_mixer.html">audio_mixer</a>, <a href="null_sink.html">null_sink</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="camera.html">camera</a>, <a href="video_decode.html">video_decode</a><p>
+Used by: <a href="audio_mixer.html">audio_mixer</a>, <a href="null_sink.html">null_sink</a>, <a href="camera.html">camera</a>, <a href="video_decode.html">video_decode</a><p>
 
 <pre>
 typedef struct OMX_CONFIG_REQUESTCALLBACKTYPE
@@ -2042,19 +1970,9 @@ Query / set whether the camera component will ensure that the camera module has 
   
  <p>
 
-<a name="OMX_IndexParamAsynchronousOutput"><h2>Asynchronous Output</h2></a>
-<tt>OMX_IndexParamAsynchronousOutput</tt><br>
-Used by: <a href="write_still.html">write_still</a><p>
-
-This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
-
-The allows the client to specify to a component that is writing files
- that this writing may happen asynchronously, including opening and closing
- of files.<p>
-
 <a name="OMX_IndexParamAudioDdp"><h2>Query / set the DDP format of this port</h2></a>
 <tt>OMX_IndexParamAudioDdp</tt><br>
-Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_render.html">audio_render</a>, <a href="read_media.html">read_media</a><p>
+Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_render.html">audio_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_AUDIO_PARAM_DDPTYPE</tt><p>
 
@@ -2149,9 +2067,18 @@ The IL standard does not support a way to specify the Bayer order of Bayer image
 <dl>
 <dt><tt>nPortIndex</tt><dd>port that this structure applies to 
 </dl>
+<a name="OMX_IndexParamBrcmBlackLevel"><h2>Specify the level to be treated as black</h2></a>
+<tt>OMX_IndexParamBrcmBlackLevel</tt><br>
+Used by: <a href="isp.html">isp</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
+
+ 
+ <p>
+
 <a name="OMX_IndexParamBrcmCRC"><h2>Query for the latest CRC for input data on this port</h2></a>
 <tt>OMX_IndexParamBrcmCRC</tt><br>
-Used by: <a href="null_sink.html">null_sink</a>, <a href="write_media.html">write_media</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
@@ -2160,7 +2087,7 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
 <a name="OMX_IndexParamBrcmCRCEnable"><h2>Query / set whether this component should calcualte CRCs on output data</h2></a>
 <tt>OMX_IndexParamBrcmCRCEnable</tt><br>
-Used by: <a href="null_sink.html">null_sink</a>, <a href="write_media.html">write_media</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
@@ -2236,7 +2163,7 @@ typedef struct OMX_PARAM_BRCMCONFIGFILETYPE {
 </dl>
 <a name="OMX_IndexParamBrcmDataUnit"><h2>Data Unit</h2></a>
 <tt>OMX_IndexParamBrcmDataUnit</tt><br>
-Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_DATAUNITTYPE</tt><p>
 
@@ -2252,7 +2179,7 @@ The data unit is an indication to components connected to this
 
 <a name="OMX_IndexParamBrcmDisableEXIF"><h2>Disable generation of EXIF data</h2></a>
 <tt>OMX_IndexParamBrcmDisableEXIF</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="write_still.html">write_still</a><p>
+Used by: <a href="image_encode.html">image_encode</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
@@ -2271,31 +2198,6 @@ typedef struct OMX_PARAM_BRCMDISABLEPROPRIETARYTUNNELSTYPE {
    OMX_BOOL bUseBuffers;
 }  OMX_PARAM_BRCMDISABLEPROPRIETARYTUNNELSTYPE;</pre><p>
 Tell a source component to refuse to support proprietary tunnelling. Buffers will be used instead.<p>
-
-<a name="OMX_IndexParamBrcmDrmEncryption"><h2>Set DRM encryption scheme</h2></a>
-<tt>OMX_IndexParamBrcmDrmEncryption</tt><br>
-Used by: <a href="write_media.html">write_media</a><p>
-
-<pre>
-typedef enum OMX_BRCMDRMENCRYPTIONTYPE
-{
-   OMX_DrmEncryptionNone = 0,
-   OMX_DrmEncryptionHdcp2,
-   OMX_DrmEncryptionKhronosExtensions = 0x6F000000,
-   OMX_DrmEncryptionVendorStartUnused = 0x7F000000,
-   OMX_DrmEncryptionRangeMax = 0x7FFFFFFF
-} OMX_BRCMDRMENCRYPTIONTYPE;
-
-typedef struct OMX_PARAM_BRCMDRMENCRYPTIONTYPE
-{
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nPortIndex;
-   OMX_BRCMDRMENCRYPTIONTYPE eEncryption;
-   OMX_U32 nConfigDataLen;
-   OMX_U8 configData[1];
-} OMX_PARAM_BRCMDRMENCRYPTIONTYPE;</pre><p>
-Query/set the DRM encryption scheme used by a port writing out data.<p>
 
 <a name="OMX_IndexParamBrcmDroppablePFrames"><h2>Require the encoder to select alternate PFrames as not droppable PFrames</h2></a>
 <tt>OMX_IndexParamBrcmDroppablePFrames</tt><br>
@@ -2338,7 +2240,7 @@ Set the packet loss rate used by the end to end distortion estimator.<p>
 </dl>
 <a name="OMX_IndexParamBrcmEnableIJGTableScaling"><h2>JPEG Quality Table Setting.</h2></a>
 <tt>OMX_IndexParamBrcmEnableIJGTableScaling</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="write_still.html">write_still</a><p>
+Used by: <a href="image_encode.html">image_encode</a><p>
 
 <pre>
 typedef struct OMX_PARAM_IJGSCALINGTYPE {
@@ -2460,28 +2362,23 @@ e. we will not wait for the images to be returned from the pool, but instead rel
   
  <p>
 
-<a name="OMX_IndexParamBrcmLensShadingOverride"><h2>Override the lens shading table</h2></a>
+<a name="OMX_IndexParamBrcmLensShadingOverride"><h2>Override or set a lens shading table.</h2></a>
 <tt>OMX_IndexParamBrcmLensShadingOverride</tt><br>
-Used by: <a href="camera.html">camera</a><p>
+Used by: <a href="camera.html">camera</a>, <a href="isp.html">isp</a><p>
 
-<pre>
-typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
+This index uses the standard IL structure <tt>OMX_PARAM_LENSSHADINGOVERRIDETYPE</tt><p>
 
-   OMX_BOOL bEnabled;
-   OMX_U32 nGridCellSize;
-   OMX_U32 nWidth;
-   OMX_U32 nStride;
-   OMX_U32 nHeight;
-   OMX_U32 nMemHandleTable;
-   OMX_U32 nRefTransform;
-} OMX_PARAM_LENSSHADINGOVERRIDETYPE;
-</pre><p>
- Mechanism for the client to provide lens shading tables to replace
-  the default lens shading tables.
-  
- <p>
+Allows the lens shading grid to be set.
+ Configuration is based on a similar system to the OMAP3 ISP.
+ A grid of gains is required for each of the 4 Bayer channels, with each value covering
+ a nGridCellSize square of pixels.
+ nWidth and nHeight should be equal or greater than the sensor resolution. In the
+ case of the camera component, the firmware will crop the table based on the preconfigured
+ mode set. nStride allows additional horizontal padding to be including in the table.
+ nMemHandleTable needs to be set to a MEM_HANDLE_T, allocated via VC-SM or similar allocator.
+ nRefTransform should be set to the transform in force when the reference table was
+ captured. This allows correct compensation when the sensor is subsequently used with
+ an alternate transform.<p>
 
 <dl>
 <dt><tt>bEnabled</tt><dd>Enable the override grid 
@@ -2501,30 +2398,6 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 The default value is zero. 
  <p>
 
-<a name="OMX_IndexParamBrcmMaxFileSize"><h2>Limit the maximum file size that can be generated</h2></a>
-<tt>OMX_IndexParamBrcmMaxFileSize</tt><br>
-Used by: <a href="write_media.html">write_media</a><p>
-
-<pre>
-typedef struct OMX_PARAM_BRCMU64TYPE {
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_U32 nLowPart;
-    OMX_U32 nHighPart;
-} OMX_PARAM_BRCMU64TYPE;
-</pre><p>
-An error will be reported when this size is reached.
-  
- <p>
-
-<dl>
-<dt><tt>nSize</tt><dd>Size of this structure, in Bytes 
-<dt><tt>nVersion</tt><dd>OMX specification version information 
-<dt><tt>nPortIndex</tt><dd>port that this structure applies to 
-<dt><tt>nLowPart</tt><dd>low bits of the unsigned 64 bit value 
-<dt><tt>nHighPart</tt><dd>high bits of the unsigned 64 bit value 
-</dl>
 <a name="OMX_IndexParamBrcmMaxFrameSkips"><h2>Frame timestamp jumps</h2></a>
 <tt>OMX_IndexParamBrcmMaxFrameSkips</tt><br>
 Used by: <a href="null_sink.html">null_sink</a><p>
@@ -2551,21 +2424,6 @@ Used by: <a href="video_encode.html">video_encode</a><p>
 This index uses the standard IL structure <tt>OMX_CONFIG_BOOLEANTYPE</tt><p>
 
 With this enabled, those encoders that support it will produce NALs in separate OMX buffers.
-  
- <p>
-
-<a name="OMX_IndexParamBrcmOutputBufferSize"><h2>Query / set the output buffering size in bytes</h2></a>
-<tt>OMX_IndexParamBrcmOutputBufferSize</tt><br>
-Used by: <a href="write_media.html">write_media</a><p>
-
-<pre>
-typedef struct OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE {
-   OMX_U32 nSize;
-   OMX_VERSIONTYPE nVersion;
-   OMX_U32 nBufferSize;
-} OMX_PARAM_BRCMOUTPUTBUFFERSIZETYPE;
-</pre><p>
-This is a hint to the underlying handler, and may be ignored.
   
  <p>
 
@@ -2607,7 +2465,7 @@ This structure allows a description of the range that pixel values may
 
 <a name="OMX_IndexParamBrcmRetainMemory"><h2>Controlling memory use on state transition</h2></a>
 <tt>OMX_IndexParamBrcmRetainMemory</tt><br>
-Used by: <a href="write_still.html">write_still</a>, <a href="write_still.html">write_still</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="video_encode.html">video_encode</a><p>
 
 <pre>
 typedef struct OMX_PARAM_BRCMRETAINMEMORYTYPE
@@ -2708,7 +2566,7 @@ This parameter is used by clients to hint the CPU that a component thread should
 </dl>
 <a name="OMX_IndexParamBrcmThumbnail"><h2>Control generation of thumbnail</h2></a>
 <tt>OMX_IndexParamBrcmThumbnail</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="write_still.html">write_still</a><p>
+Used by: <a href="image_encode.html">image_encode</a><p>
 
 <pre>
 typedef struct OMX_PARAM_BRCMTHUMBNAILTYPE {
@@ -3546,7 +3404,7 @@ typedef struct OMX_PARAM_S32TYPE {
 </dl>
 <a name="OMX_IndexParamCodecConfig"><h2>Codec Configuration</h2></a>
 <tt>OMX_IndexParamCodecConfig</tt><br>
-Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="read_media.html">read_media</a>, <a href="write_media.html">write_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
+Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_encode.html">audio_encode</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
 
 <pre>
 typedef struct OMX_PARAM_CODECCONFIGTYPE {
@@ -3618,7 +3476,7 @@ Specifies what to use as timestamps in the absence of a clock component.<p>
 
 <a name="OMX_IndexParamComponentName"><h2>Sets the component name to be used in internal logging messages</h2></a>
 <tt>OMX_IndexParamComponentName</tt><br>
-Used by: <a href="read_media.html">read_media</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_COMPONENTROLETYPE</tt><p>
 
@@ -3646,7 +3504,7 @@ typedef struct OMX_PARAM_CUSTOMCCMTYPE {
 <dl>
 <dt><tt>bEnabled</tt><dd>Enable the custom CCM. 
 <dt><tt>xColorMatrix</tt><dd>Stored in signed Q16 format 
-<dt><tt>nColorOffset</tt><dd>
+<dt><tt>nColorOffset</tt><dd>CCM offsets 
 </dl>
 <a name="OMX_IndexParamDisableVllPool"><h2>Controlling use of memory for loadable modules</h2></a>
 <tt>OMX_IndexParamDisableVllPool</tt><br>

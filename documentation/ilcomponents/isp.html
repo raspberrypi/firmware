@@ -18,21 +18,15 @@
 <a href="image_decode.html">image_decode</a><br>
 <a href="image_encode.html">image_encode</a><br>
 <a href="image_fx.html">image_fx</a><br>
-<a href="image_read.html">image_read</a><br>
-<a href="image_write.html">image_write</a><br>
 <a href="resize.html">resize</a><br>
 <a href="source.html">source</a><br>
 <a href="transition.html">transition</a><br>
-<a href="write_still.html">write_still</a><br>
 <tr><td bgcolor="#c0e0e0">
 <a href="clock.html">clock</a><br>
 <a href="null_sink.html">null_sink</a><br>
 <a href="text_scheduler.html">text_scheduler</a><br>
 <a href="visualisation.html">visualisation</a><br>
 <tr><td bgcolor="#e0c0c0">
-<a href="read_media.html">read_media</a><br>
-<a href="write_media.html">write_media</a><br>
-<tr><td bgcolor="#c0e0e0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
 <a href="isp.html">isp</a><br>
@@ -42,7 +36,7 @@
 <a href="video_render.html">video_render</a><br>
 <a href="video_scheduler.html">video_scheduler</a><br>
 <a href="video_splitter.html">video_splitter</a><br>
-<tr><td bgcolor="#e0c0c0">
+<tr><td bgcolor="#c0e0e0">
 <a href="prop.html">Custom Index</a><br>
 <a href="metadata.html">Metadata</a><br>
 </table><td>
@@ -73,7 +67,7 @@ It is also not considered to be production quality code yet - please use with ca
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="9">360<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="10">360<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Set this to control the input size of the image. Typically this is
   called by the component itself when this port is tunnelled with an
   appropriate output port. The stripe height a multiple of 16, and
@@ -109,6 +103,11 @@ It is also not considered to be production quality code yet - please use with ca
   a 16 bit word. Value is the number of positions to shift left. Max shift of 5.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCustomCcm">OMX_IndexParamCustomCcm</a></tt>
 <td> Set/retrieve a custom colour conversion matrix for the input data.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigCameraDigitalGain">OMX_IndexConfigCameraDigitalGain</a></tt>
+<td> Manual pipe digital gain.
+  bAutoGain is not applicable to this component and will be ignored.
+  xGain will always be used to set the digital gain within the pipe.
+  This parameter only applies to Bayer input formats.
  <tr valign="top"><td rowspan="1">361<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the size of the output image
@@ -135,6 +134,15 @@ It is also not considered to be production quality code yet - please use with ca
   This is to allow packing of values into fewer bits (eg 10 bit packed in
   the LSBs of a 16 bit word). Value is the number of bits to shift left.
   The range will vary based on output format.
+ <tr valign="top"><td rowspan="3">&nbsp;<td><tt><a href="prop.html#OMX_IndexConfigCustomAwbGains">OMX_IndexConfigCustomAwbGains</a></tt>
+<td> Custom AWB Gains.
+  Allows client to set AWB gains.
+  This parameter only applies to Bayer input formats.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmLensShadingOverride">OMX_IndexParamBrcmLensShadingOverride</a></tt>
+<td> Set the lens shading table.
+  Allows the client to provide a lens shading grid.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmBlackLevel">OMX_IndexParamBrcmBlackLevel</a></tt>
+<td> Specify the level to be treated as black.
  </table>
 
 </table>
