@@ -7264,7 +7264,6 @@
 0xd62c833f	schedule_timeout	vmlinux	EXPORT_SYMBOL
 0xdf36aaed	DWC_TASK_SCHEDULE	vmlinux	EXPORT_SYMBOL
 0x1f87fbc3	regmap_get_reg_stride	vmlinux	EXPORT_SYMBOL_GPL
-0x54725fe2	vc_cma_size	vmlinux	EXPORT_SYMBOL
 0x93e3d9c3	rtl_send_smps_action	drivers/net/wireless/realtek/rtlwifi/rtlwifi	EXPORT_SYMBOL
 0xfb49ac17	mtd_ooblayout_count_freebytes	drivers/mtd/mtd	EXPORT_SYMBOL_GPL
 0x65ccb6f0	call_netevent_notifiers	vmlinux	EXPORT_SYMBOL_GPL
