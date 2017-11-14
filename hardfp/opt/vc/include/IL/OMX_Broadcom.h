@@ -2383,6 +2383,7 @@ typedef struct OMX_PARAM_BRCMVIDEODECODECONFIGVD3TYPE {
 Codec specific configuration block to set up internal state in a non-standard manner.
 */
 
+/* OMX_IndexConfigCustomAwbGains: Manual AWB Gains. */
 typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
    OMX_U32 nSize;                      /**< size of the structure in bytes, including
                                             configuration data */
@@ -2390,6 +2391,8 @@ typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
    OMX_U32 xGainR;                     /**< Red gain - 16p16 */
    OMX_U32 xGainB;                     /**< Blue gain - 16p16 */
 } OMX_CONFIG_CUSTOMAWBGAINSTYPE;
+
+/* OMX_IndexConfigCustomAwbGains: Manual AWB Gains. */
 
 /* OMX_IndexConfigBrcmRenderStats: Render port statistics */
 typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
@@ -2596,6 +2599,33 @@ The IL standard does not support a way to specify the Bayer order of Bayer image
 This control adds that missing functionality.
 */
 
+/* OMX_IndexParamBrcmLensShadingOverride: Override or set a lens shading table.*/
+/*
+Allows the lens shading grid to be set.
+Configuration is based on a similar system to the OMAP3 ISP.
+A grid of gains is required for each of the 4 Bayer channels, with each value covering
+a nGridCellSize square of pixels.
+nWidth and nHeight should be equal or greater than the sensor resolution. In the
+case of the camera component, the firmware will crop the table based on the preconfigured
+mode set. nStride allows additional horizontal padding to be including in the table.
+nMemHandleTable needs to be set to a MEM_HANDLE_T, allocated via VC-SM or similar allocator.
+nRefTransform should be set to the transform in force when the reference table was
+captured. This allows correct compensation when the sensor is subsequently used with
+an alternate transform.
+*/
+typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;                     /**< Enable the override grid */
+   OMX_U32 nGridCellSize;                 /**< size of each grid element. Assumes square grid */
+   OMX_U32 nWidth;                        /**< grid width */
+   OMX_U32 nStride;                       /**< grid stride (allows for padding) */
+   OMX_U32 nHeight;                       /**< grid height */
+   OMX_U32 nMemHandleTable;               /**< Handle for grid */
+   OMX_U32 nRefTransform;                 /**< Reference transform taken from raw header */
+} OMX_PARAM_LENSSHADINGOVERRIDETYPE;
+
 /* OMX_IndexConfigBrcmPowerMonitor: Deprecated.*/
 /*
 Deprecated. Do not use.
@@ -2622,6 +2652,34 @@ Most components require an nSliceHeight value which is a multiple of 16, but
 some components accepting any value >= nFrameHeight. Those ports/components will
 respond to OMX_GetParameter on this index with no error and bEnabled set to OMX_TRUE.
 */
+
+typedef struct OMX_CCMTYPE {
+   OMX_S32 sCcm[3][3];
+   OMX_S32 soffsets[3];
+} OMX_PARAM_CCMTYPE;
+
+typedef struct OMX_PARAM_CUSTOMCCMTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_BOOL bEnabled;          /**< Enable the custom CCM. */
+   OMX_S32 xColorMatrix[3][3]; /**< Stored in signed Q16 format */
+   OMX_S32 nColorOffset[3];    /**< CCM offsets */
+} OMX_PARAM_CUSTOMCCMTYPE;
+
+/* OMX_IndexConfigCameraDigitalGain: Manual digital gain. */
+/*
+Configures the digital gain within the ISP pipeline.
+*/
+typedef struct OMX_CONFIG_CAMERAGAINTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_U32 xGain;             /**< Gain to be applied, stored as Q16 format */
+   OMX_BOOL bAutoGain;        /**< Whether gain is set automatically */
+} OMX_CONFIG_CAMERAGAINTYPE;
 
 #endif
 /* File EOF */

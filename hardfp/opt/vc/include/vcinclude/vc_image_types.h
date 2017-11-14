@@ -29,5 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define __VC_INCLUDE_IMAGE_TYPES_H__
 
 #include "interface/vctypes/vc_image_types.h"
+#include "interface/vctypes/vc_image_structs.h"
 
 #endif /* __VC_INCLUDE_IMAGE_TYPES_H__ */
