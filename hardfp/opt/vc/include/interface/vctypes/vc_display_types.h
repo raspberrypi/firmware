@@ -107,6 +107,8 @@ typedef struct
    uint32_t dsi_video_mode;
    // Select HVS channel (usually 0).
    uint32_t hvs_channel;
+   // transform required to get the display correctly oriented landscape
+   uint32_t transform;
 } DISPLAY_INFO_T;
 
 #endif /* __VC_INCLUDE_IMAGE_TYPES_H__ */
