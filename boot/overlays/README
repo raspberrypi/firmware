@@ -689,6 +689,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         ds3231                  Select the DS3231 device
 
+        m41t62                  Select the M41T62 device
+
         mcp7940x                Select the MCP7940x device
 
         mcp7941x                Select the MCP7941x device
@@ -754,8 +756,8 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BMP280, TMP102
-                                or LM75
+Params: addr                    Set the address for the BME280, BMP280, TMP102,
+                                HDC100X or LM75
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -766,6 +768,9 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102
 
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
+
+        hdc100x                 Select the Texas Instruments HDC100x temp sensor
+                                Valid addresses 0x40-0x43, default 0x40
 
         htu21                   Select the HTU21 temperature and humidity sensor
 
@@ -779,6 +784,12 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102
 
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
+
+        tsl4531                 Select the AMS TSL4531 digital ambient light
+                                sensor
+
+        veml6070                Select the Vishay VEML6070 ultraviolet light
+                                sensor
 
 
 Name:   i2c0-bcm2708
@@ -1014,6 +1025,17 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
 
         xohms                   Touchpanel sensitivity (X-plate resistance)
+
+
+Name:   papirus
+Info:   PaPiRus ePaper Screen by Pi Supply (both HAT and pHAT)
+Load:   dtoverlay=papirus,<param>=<val>
+Params: panel                   Display panel (required):
+                                1.44": e1144cs021
+                                2.0":  e2200cs021
+                                2.7":  e2271cs021
+
+        speed                   Display SPI bus speed
 
 
 [ The pcf2127-rtc overlay has been deleted. See i2c-rtc. ]
@@ -1277,8 +1299,12 @@ Params: speed                   Display SPI bus speed
 
 Name:   rpi-ft5406
 Info:   Official Raspberry Pi display touchscreen
-Load:   dtoverlay=rpi-ft5406
-Params: <None>
+Load:   dtoverlay=rpi-ft5406,<param>=<val>
+Params: touchscreen-size-x      Touchscreen X resolution (default 800)
+        touchscreen-size-y      Touchscreen Y resolution (default 600);
+        touchscreen-inverted-x  Invert touchscreen X coordinates (default 0);
+        touchscreen-inverted-y  Invert touchscreen Y coordinates (default 0);
+        touchscreen-swapped-x-y Swap X and Y cordinates (default 0);
 
 
 Name:   rpi-proto
