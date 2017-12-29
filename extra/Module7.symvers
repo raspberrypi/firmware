@@ -685,6 +685,7 @@
 0x50439e51	deregister_atm_ioctl	net/atm/atm	EXPORT_SYMBOL
 0xf2c43f3f	zlib_deflate	lib/zlib_deflate/zlib_deflate	EXPORT_SYMBOL
 0xbbe8d404	__secpath_destroy	vmlinux	EXPORT_SYMBOL
+0x21e89fa4	shash_no_setkey	vmlinux	EXPORT_SYMBOL_GPL
 0x594cde67	trace_seq_putmem_hex	vmlinux	EXPORT_SYMBOL_GPL
 0x24fdac79	wake_bit_function	vmlinux	EXPORT_SYMBOL
 0x839430b2	__register_cpu_notifier	vmlinux	EXPORT_SYMBOL
