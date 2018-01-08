@@ -504,6 +504,27 @@ Params: gpio_pin                Input pin number. Default is 18.
                                 ir-keytable), defaults to "rc-rc6-mce"
 
 
+Name:   gpio-key
+Info:   This is a generic overlay for activating GPIO keypresses using
+        the gpio-keys library and this dtoverlay. Multiple keys can be
+        set up using multiple calls to the overlay for configuring
+        additional buttons or joysticks. You can see available keycodes
+        at https://github.com/torvalds/linux/blob/v4.12/include/uapi/
+        linux/input-event-codes.h#L64
+Load:   dtoverlay=gpio-key,<param>=<val>
+Params: gpio                    GPIO pin to trigger on (default 3)
+        active_low              When this is 1 (active low), a falling
+                                edge generates a key down event and a
+                                rising edge generates a key up event.
+                                When this is 0 (active high), this is
+                                reversed. The default is 1 (active low)
+        gpio_pull               Desired pull-up/down state (off, down, up)
+                                Default is "up". Note that the default pin
+                                (GPIO3) has an external pullup
+        label                   Set a label for the key
+        keycode                 Set the key code for the button
+
+
 Name:   gpio-poweroff
 Info:   Drives a GPIO high or low on poweroff (including halt). Enabling this
         overlay will prevent the ability to boot by driving GPIO3 low.
@@ -983,6 +1004,15 @@ Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
         spi<n>-<m>-speed        integer, set the spi bus speed for this device
 
 
+Name:   mcp3202
+Info:   Configures MCP3202 A/D converters
+        For devices on spi1 or spi2, the interfaces should be enabled
+        with one of the spi1-1/2/3cs and/or spi2-1/2/3cs overlays.
+Load:   dtoverlay=mcp3202,<param>[=<val>]
+Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
+        spi<n>-<m>-speed        integer, set the spi bus speed for this device
+
+
 Name:   media-center
 Info:   Media Center HAT - 2.83" Touch Display + extras by Pi Supply
 Load:   dtoverlay=media-center,<param>=<val>
@@ -991,6 +1021,7 @@ Params: speed                   Display SPI bus speed
         fps                     Delay between frame updates
         xohms                   Touchpanel sensitivity (X-plate resistance)
         swapxy                  Swap x and y axis
+        backlight               Change backlight GPIO pin {e.g. 12, 18}
         gpio_out_pin            GPIO for output (default "17")
         gpio_in_pin             GPIO for input (default "18")
         gpio_in_pull            Pull up/down/off on the input pin
@@ -1276,6 +1307,29 @@ Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
                                 (default 4).
         rotary0_pin_b           GPIO connected to rotary encoder channel B
                                 (default 17).
+        relative_axis           register a relative axis rather than an
+                                absolute one. Relative axis will only
+                                generate +1/-1 events on the input device,
+                                hence no steps need to be passed.
+        linux_axis              the input subsystem axis to map to this
+                                rotary encoder. Defaults to 0 (ABS_X / REL_X)
+        rollover                Automatic rollover when the rotary value
+                                becomes greater than the specified steps or
+                                smaller than 0. For absolute axis only.
+        steps-per-period        Number of steps (stable states) per period.
+                                The values have the following meaning:
+                                1: Full-period mode (default)
+                                2: Half-period mode
+                                4: Quarter-period mode
+        steps                   Number of steps in a full turnaround of the
+                                encoder. Only relevant for absolute axis.
+                                Defaults to 24 which is a typical value for
+                                such devices.
+        wakeup                  Boolean, rotary encoder can wake up the
+                                system.
+        encoding                String, the method used to encode steps.
+                                Supported are "gray" (the default and more
+                                common) and "binary".
 
 
 Name:   rpi-backlight
@@ -1305,6 +1359,7 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
         xohms                   Touchpanel sensitivity (X-plate resistance)
         swapxy                  Swap x and y axis
+        backlight               Change backlight GPIO pin {e.g. 12, 18}
 
 
 Name:   rpi-ft5406
