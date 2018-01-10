@@ -8640,6 +8640,7 @@
 0xb90facdf	skb_copy_and_csum_datagram_msg	vmlinux	EXPORT_SYMBOL
 0x62798ea0	sbitmap_queue_init_node	vmlinux	EXPORT_SYMBOL_GPL
 0xaec655c7	alloc_pages_exact	vmlinux	EXPORT_SYMBOL
+0x685e31ca	groups_sort	vmlinux	EXPORT_SYMBOL
 0xdff07e46	hid_parse_report	vmlinux	EXPORT_SYMBOL_GPL
 0x80d00519	genpd_dev_pm_attach	vmlinux	EXPORT_SYMBOL_GPL
 0x09ef0488	ieee80211_rx_irqsafe	net/mac80211/mac80211	EXPORT_SYMBOL
