@@ -81,7 +81,7 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
 <td> Used to set up proprietary communication with the previous component.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
 <td> Forces use of proprietary tunnelling between ports.
- <tr valign="top"><td rowspan="43">201<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="44">201<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query / set the output format.  <tt>eCompressionFormat</tt> specifies
   the format to which to encode.  <tt>nBitrate</tt> specifies the target
   bit rate (unless overridden by <tt>OMX_IndexParamVideoBitrate</tt>). The
@@ -208,6 +208,11 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
   Requests an I-frame to be encoded next (it doesn't force a P-frame
   to be coded next if we are at the OMX_IndexConfigVideoAVCIntraPeriod
   value).
+ <tr valign="top"><td><tt>OMX_IndexParamBrcmDroppableRunLength</tt>
+<td> When used in conjunction with OMX_IndexParamBrcmDroppablePFrames, set the number
+  of P frames to be treated as droppable before a reference is inserted. A value of
+  1 is equivalent to OMX_IndexParamBrcmDroppablePFrames=OMX_FALSE, and if the value
+  exceeds nPFrames in OMX_IndexParamVideoAvc then all P frames will be droppable.
  <tr valign="top"><td rowspan="2">200  201<td><tt><a href="prop.html#OMX_IndexConfigBrcmPortStats">OMX_IndexConfigBrcmPortStats</a></tt>
 <td> Return port statistics.
  <tr valign="top"><td><tt>OMX_IndexParamVideoPortFormat</tt>
