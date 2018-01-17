@@ -515,6 +515,27 @@ Params: gpio_pin                Output GPIO (default 18)
                                 Default is "0" (active-high).
 
 
+Name:   gpio-key
+Info:   This is a generic overlay for activating GPIO keypresses using
+        the gpio-keys library and this dtoverlay. Multiple keys can be
+        set up using multiple calls to the overlay for configuring
+        additional buttons or joysticks. You can see available keycodes
+        at https://github.com/torvalds/linux/blob/v4.12/include/uapi/
+        linux/input-event-codes.h#L64
+Load:   dtoverlay=gpio-key,<param>=<val>
+Params: gpio                    GPIO pin to trigger on (default 3)
+        active_low              When this is 1 (active low), a falling
+                                edge generates a key down event and a
+                                rising edge generates a key up event.
+                                When this is 0 (active high), this is
+                                reversed. The default is 1 (active low)
+        gpio_pull               Desired pull-up/down state (off, down, up)
+                                Default is "up". Note that the default pin
+                                (GPIO3) has an external pullup
+        label                   Set a label for the key
+        keycode                 Set the key code for the button
+
+
 Name:   gpio-poweroff
 Info:   Drives a GPIO high or low on poweroff (including halt). Enabling this
         overlay will prevent the ability to boot by driving GPIO3 low.
@@ -1310,6 +1331,29 @@ Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
                                 (default 4).
         rotary0_pin_b           GPIO connected to rotary encoder channel B
                                 (default 17).
+        relative_axis           register a relative axis rather than an
+                                absolute one. Relative axis will only
+                                generate +1/-1 events on the input device,
+                                hence no steps need to be passed.
+        linux_axis              the input subsystem axis to map to this
+                                rotary encoder. Defaults to 0 (ABS_X / REL_X)
+        rollover                Automatic rollover when the rotary value
+                                becomes greater than the specified steps or
+                                smaller than 0. For absolute axis only.
+        steps-per-period        Number of steps (stable states) per period.
+                                The values have the following meaning:
+                                1: Full-period mode (default)
+                                2: Half-period mode
+                                4: Quarter-period mode
+        steps                   Number of steps in a full turnaround of the
+                                encoder. Only relevant for absolute axis.
+                                Defaults to 24 which is a typical value for
+                                such devices.
+        wakeup                  Boolean, rotary encoder can wake up the
+                                system.
+        encoding                String, the method used to encode steps.
+                                Supported are "gray" (the default and more
+                                common) and "binary".
 
 
 Name:   rpi-backlight
@@ -1627,8 +1671,19 @@ Params: speed                   Display SPI bus speed
                 dtoverlay=tinylcd35,touch,touchgpio=3
 
 
+Name:   uart0
+Info:   Change the pin usage of uart0
+Load:   dtoverlay=uart0,<param>=<val>
+Params: txd0_pin                GPIO pin for TXD0 (14, 32 or 36 - default 14)
+
+        rxd0_pin                GPIO pin for RXD0 (15, 33 or 37 - default 15)
+
+        pin_func                Alternative pin function - 4(Alt0) for 14&15,
+                                7(Alt3) for 32&33, 6(Alt2) for 36&37
+
+
 Name:   uart1
-Info:   Enable uart1 in place of uart0
+Info:   Change the pin usage of uart1
 Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
