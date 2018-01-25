@@ -9244,6 +9244,7 @@
 0xb5afa5e8	device_attach	vmlinux	EXPORT_SYMBOL_GPL
 0xc468b732	tty_port_open	vmlinux	EXPORT_SYMBOL
 0x07fd7e25	dma_get_any_slave_channel	vmlinux	EXPORT_SYMBOL_GPL
+0x3142529c	arm_local_intc	vmlinux	EXPORT_SYMBOL_GPL
 0x3f8085cf	snd_pcm_hw_param_last	sound/core/snd-pcm	EXPORT_SYMBOL
 0x89484a85	fbtft_register_backlight	drivers/staging/fbtft/fbtft	EXPORT_SYMBOL
 0xad3f06f4	part_round_stats	vmlinux	EXPORT_SYMBOL_GPL
