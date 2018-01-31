@@ -292,6 +292,15 @@ unsigned int vcsm_vc_hdl_from_ptr( void *usr_ptr );
 unsigned int vcsm_vc_hdl_from_hdl( unsigned int handle );
 
 
+/* Retrieves a videocore (bus) address from a opaque handle
+** pointer.
+**
+** Returns:        0 on error
+**                 a non-zero videocore address on success.
+*/
+unsigned int vcsm_vc_addr_from_hdl( unsigned int handle );
+
+
 /* Retrieves a user opaque handle from a mapped user address
 ** pointer.
 **
