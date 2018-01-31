@@ -387,7 +387,6 @@ fail_win:
    gx_priv_destroy_native_window(h);
 fail_create_native_win:
    vcos_free(h);
-   gx_priv_restore(&save);
    return status;
 }
 
