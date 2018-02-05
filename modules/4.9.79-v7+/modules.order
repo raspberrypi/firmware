@@ -1162,6 +1162,7 @@ kernel/sound/usb/snd-usbmidi-lib.ko
 kernel/sound/usb/misc/snd-ua101.ko
 kernel/sound/usb/caiaq/snd-usb-caiaq.ko
 kernel/sound/usb/6fire/snd-usb-6fire.ko
+kernel/sound/usb/hiface/snd-usb-hiface.ko
 kernel/sound/soc/snd-soc-core.ko
 kernel/sound/soc/codecs/snd-soc-adau1701.ko
 kernel/sound/soc/codecs/snd-soc-adau1977.ko
