@@ -13,7 +13,7 @@ below (check the appropriate directories for more specific licence details):
     sources, released under the GPL (see `boot/COPYING.linux`)
 * debug: pre-built modules for the kernel_debug.img (`boot/COPYING.linux`)
 * documentation/ilcomponents: OpenMax IL documentation (`boot/LICENCE.broadcom`)
-* extra: System.map files for the provided kernel builds (see `boot/COPYING.linux`),
+* extra: System.map files for the provided kernel builds (`boot/COPYING.linux`),
   and dt-blob.dts (`boot/LICENCE.broadcom`)
 * hardfp/opt/vc: userspace VideoCoreIV libraries built for the armv6 hardfp ABI
   (`opt/vc/LICENCE`)
