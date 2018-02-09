@@ -516,6 +516,17 @@ Params: gpio_pin                Input pin number. Default is 18.
                                 ir-keytable), defaults to "rc-rc6-mce"
 
 
+Name:   gpio-ir-tx
+Info:   Use GPIO pin as bit-banged infrared transmitter output.
+        This is an alternative to "pwm-ir-tx". gpio-ir-tx doesn't require
+        a PWM so it can be used together with onboard analog audio.
+Load:   dtoverlay=gpio-ir-tx,<param>=<val>
+Params: gpio_pin                Output GPIO (default 18)
+
+        invert                  "1" = invert the output (make it active-low).
+                                Default is "0" (active-high).
+
+
 Name:   gpio-key
 Info:   This is a generic overlay for activating GPIO keypresses using
         the gpio-keys library and this dtoverlay. Multiple keys can be
@@ -797,6 +808,9 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102,
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
 
+        hdc100x                 Select the Texas Instruments HDC100x temp sensor
+                                Valid addresses 0x40-0x43, default 0x40
+
         htu21                   Select the HTU21 temperature and humidity sensor
 
         lm75                    Select the Maxim LM75 temperature sensor
@@ -809,9 +823,6 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102,
 
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
-
-        hdc100x                 Select the Texas Instruments HDC100x temp sensor
-                                Valid addresses 0x40-0x43, default 0x40
 
         tsl4531                 Select the AMS TSL4531 digital ambient light
                                 sensor
@@ -1304,6 +1315,19 @@ Params: pin                     Output pin (default 18) - see table
         clock                   PWM clock frequency (informational)
 
 
+Name:   pwm-ir-tx
+Info:   Use GPIO pin as pwm-assisted infrared transmitter output.
+        This is an alternative to "gpio-ir-tx". pwm-ir-tx makes use
+        of PWM0 to reduce the CPU load during transmission compared to
+        gpio-ir-tx which uses bit-banging.
+        Legal pin,function combinations are:
+          12,4(Alt0) 18,2(Alt5) 40,4(Alt0) 52,5(Alt1)
+Load:   dtoverlay=pwm-ir-tx,<param>=<val>
+Params: gpio_pin                Output GPIO (default 18)
+
+        func                    Pin function (default 2 = Alt5)
+
+
 Name:   qca7000
 Info:   I2SE's Evaluation Board for PLC Stamp micro
 Load:   dtoverlay=qca7000,<param>=<val>
@@ -1382,8 +1406,12 @@ Params: speed                   Display SPI bus speed
 
 Name:   rpi-ft5406
 Info:   Official Raspberry Pi display touchscreen
-Load:   dtoverlay=rpi-ft5406
-Params: <None>
+Load:   dtoverlay=rpi-ft5406,<param>=<val>
+Params: touchscreen-size-x      Touchscreen X resolution (default 800)
+        touchscreen-size-y      Touchscreen Y resolution (default 600);
+        touchscreen-inverted-x  Invert touchscreen X coordinates (default 0);
+        touchscreen-inverted-y  Invert touchscreen Y coordinates (default 0);
+        touchscreen-swapped-x-y Swap X and Y cordinates (default 0);
 
 
 Name:   rpi-proto
