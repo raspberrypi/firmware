@@ -693,6 +693,13 @@ Params: i2c_gpio_sda            GPIO used for I2C data (default "23")
         i2c_gpio_delay_us       Clock delay in microseconds
                                 (default "2" = ~100kHz)
 
+        bus                     Set to a unique, non-zero value if wanting
+                                multiple i2c-gpio busses. If set, will be used
+                                as the preferred bus number (/dev/i2c-<n>). If
+                                not set, the default value is 0, but the bus
+                                number will be dynamically assigned - probably
+                                3.
+
 
 Name:   i2c-mux
 Info:   Adds support for a number of I2C bus multiplexers on i2c_arm
@@ -1440,12 +1447,21 @@ Params: <None>
 
 Name:   sc16is750-i2c
 Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
-        Enables the chip on I2C1 at 0x48. To select another address,
-        please refer to table 10 in reference manual.
-
+        Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
+        select another address, please refer to table 10 in reference manual.
 Load:   dtoverlay=sc16is750-i2c,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
         addr                    Address (default 0x48)
+
+
+Name:   sc16is752-i2c
+Info:   Overlay for the NXP SC16IS752 dual UART with I2C Interface
+        Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
+        select another address, please refer to table 10 in reference manual.
+Load:   dtoverlay=sc16is752-i2c,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+        addr                    Address (default 0x48)
+        xtal                    On-board crystal frequency (default 14745600)
 
 
 Name:   sc16is752-spi1
@@ -1712,6 +1728,13 @@ Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
         rxd1_pin                GPIO pin for RXD1 (15, 33 or 41 - default 15)
+
+
+Name:   upstream-aux-interrupt
+Info:   Allow usage of downstream .dtb with upstream kernel by binding AUX
+        devices directly to the shared AUX interrupt line.
+Load:   dtoverlay=upstream-aux-interrupt
+Params: <None>
 
 
 Name:   vc4-fkms-v3d
