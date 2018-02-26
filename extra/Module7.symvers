@@ -408,6 +408,7 @@
 0x8885103d	drm_kms_helper_hotplug_event	drivers/gpu/drm/drm_kms_helper	EXPORT_SYMBOL
 0x61aad57e	usb_sg_init	vmlinux	EXPORT_SYMBOL_GPL
 0x758e470d	usb_sg_wait	vmlinux	EXPORT_SYMBOL_GPL
+0x48bca0dd	usb_urb_ep_type_check	vmlinux	EXPORT_SYMBOL_GPL
 0x3d5997d9	jbd2_journal_flush	vmlinux	EXPORT_SYMBOL
 0x4d44609c	invalidate_bdev	vmlinux	EXPORT_SYMBOL
 0x9aeacb87	ring_buffer_iter_empty	vmlinux	EXPORT_SYMBOL_GPL
