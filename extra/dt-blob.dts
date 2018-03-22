@@ -1322,7 +1322,7 @@
          }; // pin_defines
       }; // pins
 
-      pins_3b3 { // XXX pins_3bplus Pi 3 Model B+ rev 1.0
+      pins_3bplus {
          pin_config {
             pin@default {
                polarity = "active_high";
