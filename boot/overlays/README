@@ -89,6 +89,10 @@ Params:
         audio                   Set to "on" to enable the onboard ALSA audio
                                 interface (default "off")
 
+        eee                     Enable Energy Efficient Ethernet support for
+                                compatible devices (default "on"). See also
+                                "tx_lpi_timer".
+
         i2c_arm                 Set to "on" to enable the ARM's i2c interface
                                 (default "off")
 
@@ -124,6 +128,10 @@ Params:
                                 SD card (default 1)
 
         sd_debug                Enable debug output from SD driver (default off)
+
+        tx_lpi_timer            Set the delay in microseconds between going idle
+                                and entering the low power state (default 600).
+                                Requires EEE to be enabled - see "eee".
 
         uart0                   Set to "off" to disable uart0 (default "on")
 
@@ -337,6 +345,12 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 better voice quality. (default Off)
 
 
+Name:   applepi-dac
+Info:   Configures the Orchard Audio ApplePi-DAC audio card
+Load:   dtoverlay=applepi-dac
+Params: <None>
+
+
 Name:   at86rf233
 Info:   Configures the Atmel AT86RF233 802.15.4 low-power WPAN transceiver,
         connected to spi0.0
@@ -462,6 +476,18 @@ Params: int_pin                 GPIO used for INT (default 39)
         speed                   SPI bus speed (default 12000000)
 
 
+Name:   exc3000
+Info:   Enables I2C connected EETI EXC3000 multiple touch controller using
+        GPIO 4 (pin 7 on GPIO header) for interrupt.
+Load:   dtoverlay=exc3000,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        sizex                   Touchscreen size x (default 4096)
+        sizey                   Touchscreen size y (default 4096)
+        invx                    Touchscreen inverted x axis
+        invy                    Touchscreen inverted y axis
+        swapxy                  Touchscreen swapped x y axis
+
+
 Name:   fe-pi-audio
 Info:   Configures the Fe-Pi Audio Sound Card
 Load:   dtoverlay=fe-pi-audio
@@ -496,6 +522,27 @@ Params: gpio_pin                Input pin number. Default is 18.
 
         rc-map-name             Default rc keymap (can also be changed by
                                 ir-keytable), defaults to "rc-rc6-mce"
+
+
+Name:   gpio-key
+Info:   This is a generic overlay for activating GPIO keypresses using
+        the gpio-keys library and this dtoverlay. Multiple keys can be
+        set up using multiple calls to the overlay for configuring
+        additional buttons or joysticks. You can see available keycodes
+        at https://github.com/torvalds/linux/blob/v4.12/include/uapi/
+        linux/input-event-codes.h#L64
+Load:   dtoverlay=gpio-key,<param>=<val>
+Params: gpio                    GPIO pin to trigger on (default 3)
+        active_low              When this is 1 (active low), a falling
+                                edge generates a key down event and a
+                                rising edge generates a key up event.
+                                When this is 0 (active high), this is
+                                reversed. The default is 1 (active low)
+        gpio_pull               Desired pull-up/down state (off, down, up)
+                                Default is "up". Note that the default pin
+                                (GPIO3) has an external pullup
+        label                   Set a label for the key
+        keycode                 Set the key code for the button
 
 
 Name:   gpio-poweroff
@@ -745,8 +792,8 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BMP280, TMP102
-                                or LM75
+Params: addr                    Set the address for the BME280, BMP280, TMP102,
+                                HDC100X, LM75 or SHT3x
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -770,6 +817,19 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102
 
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
+
+        hdc100x                 Select the Texas Instruments HDC100x temp sensor
+                                Valid addresses 0x40-0x43, default 0x40
+
+        tsl4531                 Select the AMS TSL4531 digital ambient light
+                                sensor
+
+        veml6070                Select the Vishay VEML6070 ultraviolet light
+                                sensor
+
+        sht3x                   Select the Sensiron SHT3x temperature and
+                                humidity sensor. Valid addresses 0x44-0x45,
+                                default 0x44
 
 
 Name:   i2c0-bcm2708
@@ -902,6 +962,12 @@ Params: gpio_out_pin            GPIO for output (default "17")
                                 (default "off")
 
 
+Name:   mbed-dac
+Info:   Configures the mbed AudioCODEC (TLV320AIC23B)
+Load:   dtoverlay=mbed-dac
+Params: <None>
+
+
 Name:   mcp23017
 Info:   Configures the MCP23017 I2C GPIO expander
 Load:   dtoverlay=mcp23017,<param>=<val>
@@ -962,6 +1028,40 @@ Info:   Configures MCP3008 A/D converters
 Load:   dtoverlay=mcp3008,<param>[=<val>]
 Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
         spi<n>-<m>-speed        integer, set the spi bus speed for this device
+
+
+Name:   mcp3202
+Info:   Configures MCP3202 A/D converters
+        For devices on spi1 or spi2, the interfaces should be enabled
+        with one of the spi1-1/2/3cs and/or spi2-1/2/3cs overlays.
+Load:   dtoverlay=mcp3202,<param>[=<val>]
+Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
+        spi<n>-<m>-speed        integer, set the spi bus speed for this device
+
+
+Name:   media-center
+Info:   Media Center HAT - 2.83" Touch Display + extras by Pi Supply
+Load:   dtoverlay=media-center,<param>=<val>
+Params: speed                   Display SPI bus speed
+        rotate                  Display rotation {0,90,180,270}
+        fps                     Delay between frame updates
+        xohms                   Touchpanel sensitivity (X-plate resistance)
+        swapxy                  Swap x and y axis
+        backlight               Change backlight GPIO pin {e.g. 12, 18}
+        gpio_out_pin            GPIO for output (default "17")
+        gpio_in_pin             GPIO for input (default "18")
+        gpio_in_pull            Pull up/down/off on the input pin
+                                (default "down")
+        sense                   Override the IR receive auto-detection logic:
+                                 "0" = force active-high
+                                 "1" = force active-low
+                                 "-1" = use auto-detection
+                                (default "-1")
+        softcarrier             Turn the software carrier "on" or "off"
+                                (default "on")
+        invert                  "on" = invert the output pin (default "off")
+        debug                   "on" = enable additional debug messages
+                                (default "off")
 
 
 Name:   midi-uart0
@@ -1229,10 +1329,33 @@ Params: <None>
 Name:   rotary-encoder
 Info:   Overlay for GPIO connected rotary encoder.
 Load:   dtoverlay=rotary-encoder,<param>=<val>
-Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
+Params: pin_a                   GPIO connected to rotary encoder channel A
                                 (default 4).
-        rotary0_pin_b           GPIO connected to rotary encoder channel B
+        pin_b                   GPIO connected to rotary encoder channel B
                                 (default 17).
+        relative_axis           register a relative axis rather than an
+                                absolute one. Relative axis will only
+                                generate +1/-1 events on the input device,
+                                hence no steps need to be passed.
+        linux_axis              the input subsystem axis to map to this
+                                rotary encoder. Defaults to 0 (ABS_X / REL_X)
+        rollover                Automatic rollover when the rotary value
+                                becomes greater than the specified steps or
+                                smaller than 0. For absolute axis only.
+        steps-per-period        Number of steps (stable states) per period.
+                                The values have the following meaning:
+                                1: Full-period mode (default)
+                                2: Half-period mode
+                                4: Quarter-period mode
+        steps                   Number of steps in a full turnaround of the
+                                encoder. Only relevant for absolute axis.
+                                Defaults to 24 which is a typical value for
+                                such devices.
+        wakeup                  Boolean, rotary encoder can wake up the
+                                system.
+        encoding                String, the method used to encode steps.
+                                Supported are "gray" (the default and more
+                                common) and "binary".
 
 
 Name:   rpi-backlight
@@ -1262,6 +1385,7 @@ Params: speed                   Display SPI bus speed
         debug                   Debug output level {0-7}
         xohms                   Touchpanel sensitivity (X-plate resistance)
         swapxy                  Swap x and y axis
+        backlight               Change backlight GPIO pin {e.g. 12, 18}
 
 
 Name:   rpi-ft5406
@@ -1545,8 +1669,19 @@ Params: speed                   Display SPI bus speed
                 dtoverlay=tinylcd35,touch,touchgpio=3
 
 
+Name:   uart0
+Info:   Change the pin usage of uart0
+Load:   dtoverlay=uart0,<param>=<val>
+Params: txd0_pin                GPIO pin for TXD0 (14, 32 or 36 - default 14)
+
+        rxd0_pin                GPIO pin for RXD0 (15, 33 or 37 - default 15)
+
+        pin_func                Alternative pin function - 4(Alt0) for 14&15,
+                                7(Alt3) for 32&33, 6(Alt2) for 36&37
+
+
 Name:   uart1
-Info:   Enable uart1 in place of uart0
+Info:   Change the pin usage of uart1
 Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 

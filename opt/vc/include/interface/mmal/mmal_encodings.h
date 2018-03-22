@@ -101,6 +101,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #define MMAL_ENCODING_I420_10          MMAL_FOURCC('i','4','1','0')
 
+/** YUV 4:2:0 planar but with U and V in side-by-side format
+ *   So U and V have same pitch as Y, but V = U + pitch/2
+*/
+#define MMAL_ENCODING_I420_S           MMAL_FOURCC('I','4','2','S')
+
 //Bayer formats
 //FourCC values copied from V4L2 where defined.
 //10 bit per pixel packed Bayer formats.

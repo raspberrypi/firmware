@@ -130,6 +130,8 @@ typedef struct MMAL_BUFFER_HEADER_T
 #define MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED    (1<<10)
 /** Signals the output buffer won't be used, just update reference frames */
 #define MMAL_BUFFER_HEADER_FLAG_DECODEONLY             (1<<11)
+/** Signals that the end of the current payload ends a NAL */
+#define MMAL_BUFFER_HEADER_FLAG_NAL_END                (1<<12)
 /** User flags - can be passed in and will get returned */
 #define MMAL_BUFFER_HEADER_FLAG_USER0                  (1<<28)
 #define MMAL_BUFFER_HEADER_FLAG_USER1                  (1<<29)
