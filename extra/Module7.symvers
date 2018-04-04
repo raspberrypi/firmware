@@ -12226,6 +12226,7 @@
 0x42df6449	bus_find_device_by_name	vmlinux	EXPORT_SYMBOL_GPL
 0x6499829b	add_random_ready_callback	vmlinux	EXPORT_SYMBOL
 0x2772a546	dummy_con	vmlinux	EXPORT_SYMBOL_GPL
+0x5500d26e	sysfs_create_link_nowarn	vmlinux	EXPORT_SYMBOL_GPL
 0xdb653020	snd_soc_dapm_sync_unlocked	sound/soc/snd-soc-core	EXPORT_SYMBOL_GPL
 0xaf01c1eb	snd_timer_global_free	sound/core/snd-timer	EXPORT_SYMBOL
 0xa9398696	usb_ftdi_elan_edset_flush	drivers/usb/misc/ftdi-elan	EXPORT_SYMBOL_GPL
