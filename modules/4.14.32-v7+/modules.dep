@@ -142,6 +142,7 @@ kernel/drivers/regulator/fixed.ko:
 kernel/drivers/regulator/arizona-ldo1.ko:
 kernel/drivers/regulator/arizona-micsupp.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/drivers/tty/serial/sc16is7xx.ko:
+kernel/drivers/tty/serdev/serdev.ko:
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko: kernel/drivers/misc/bcm2835_smi.ko
 kernel/drivers/gpu/drm/panel/panel-simple.ko: kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko: kernel/drivers/gpu/drm/drm.ko
@@ -1019,11 +1020,11 @@ kernel/drivers/hwmon/sht3x.ko: kernel/lib/crc8.ko kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/hwmon/shtc1.ko: kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/hwmon/tmp102.ko: kernel/drivers/hwmon/hwmon.ko
 kernel/drivers/bluetooth/hci_vhci.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/bluetooth/hci_uart.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/bluetooth/hci_uart.ko: kernel/drivers/bluetooth/btbcm.ko kernel/drivers/tty/serdev/serdev.ko kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bcm203x.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/bluetooth/bpa10x.ko: kernel/drivers/bluetooth/hci_uart.ko kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/bluetooth/bpa10x.ko: kernel/drivers/bluetooth/hci_uart.ko kernel/drivers/bluetooth/btbcm.ko kernel/drivers/tty/serdev/serdev.ko kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/bfusb.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/bluetooth/btusb.ko: kernel/drivers/bluetooth/btrtl.ko kernel/drivers/bluetooth/btbcm.ko kernel/drivers/bluetooth/btintel.ko kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
+kernel/drivers/bluetooth/btusb.ko: kernel/drivers/bluetooth/btrtl.ko kernel/drivers/bluetooth/btintel.ko kernel/drivers/bluetooth/btbcm.ko kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/btintel.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/ath3k.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/bluetooth/btmrvl.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/net/rfkill/rfkill.ko

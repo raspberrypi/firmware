@@ -139,6 +139,7 @@ kernel/drivers/regulator/fixed.ko
 kernel/drivers/regulator/arizona-ldo1.ko
 kernel/drivers/regulator/arizona-micsupp.ko
 kernel/drivers/tty/serial/sc16is7xx.ko
+kernel/drivers/tty/serdev/serdev.ko
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
 kernel/drivers/gpu/drm/panel/panel-simple.ko
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko

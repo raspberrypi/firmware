@@ -29137,7 +29137,7 @@ c0682ab8 r __func__.31117
 c0682acc r tty_ldiscs_seq_ops
 c0682adc R tty_ldiscs_proc_fops
 c0682b54 r default_client_ops
-c0682b5c r __func__.26569
+c0682b5c r __func__.26566
 c0682b74 r baud_table
 c0682bf0 r baud_bits
 c0682c6c r ptm_unix98_ops
@@ -59929,10 +59929,10 @@ c0a4e188 b __key.31541
 c0a4e188 b __key.31542
 c0a4e188 b tty_ldiscs
 c0a4e200 b __key.25651
+c0a4e200 b __key.26292
+c0a4e200 b __key.26293
+c0a4e200 b __key.26294
 c0a4e200 b __key.26295
-c0a4e200 b __key.26296
-c0a4e200 b __key.26297
-c0a4e200 b __key.26298
 c0a4e200 b ptm_driver
 c0a4e204 b pts_driver
 c0a4e208 b ptmx_cdev
