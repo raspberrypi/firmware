@@ -18,6 +18,6 @@ below (check the appropriate directories for more specific licence details):
 * hardfp/opt/vc: userspace VideoCoreIV libraries built for the armv6 hardfp ABI
   (`opt/vc/LICENCE`)
 * modules: pre-built modules for kernel.img (`boot/COPYING.linux`)
-* opt/vc: includes userspace libraries for the VideCoreIV - EGL/GLES/OpenVG 
+*/vc: includes userspace libraries for the VideCoreIV - EGL/GLES/OpenVG 
   etc. (`opt/vc/LICENCE`)
 * modules: make a change
