@@ -20,3 +20,4 @@ below (check the appropriate directories for more specific licence details):
 * modules: pre-built modules for kernel.img (`boot/COPYING.linux`)
 * opt/vc: includes userspace libraries for the VideCoreIV - EGL/GLES/OpenVG 
   etc. (`opt/vc/LICENCE`)
+*
