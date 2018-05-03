@@ -45,7 +45,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define B_888_MASK      (0x000000FF)
 #define ALPHA_888_MASK  (0xFF000000)
 #define GRAPHICS_RGBA32( r, g, b, a ) GRAPHICS_RGBA888( r, g, b, a )
-#define GRAPHICS_RGBA888( r, g, b, a ) ( (((a) << (8+8+8)) & ALPHA_888_MASK) | (((b) << (8+8)) & R_888_MASK) | (((g) << 8) & G_888_MASK) | ((r) & B_888_MASK) )
+#define GRAPHICS_RGBA888( r, g, b, a ) ( (((a) << (8+8+8)) & ALPHA_888_MASK) | (((r) << (8+8)) & R_888_MASK) | (((g) << 8) & G_888_MASK) | ((b) & B_888_MASK) )
 #define GRAPHICS_TRANSPARENT_COLOUR 0x00000001UL
 
 //resource defs
