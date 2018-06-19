@@ -119,7 +119,7 @@ on the fly.
   the port. Only the highest level is reported for each supported profile.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
 <td> Query / set the pixel aspect ratio of the source content.
- <tr valign="top"><td rowspan="11">131<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="12">131<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Once we have the details of the output format, this will be
   populated. Details are acquired via codec-specific headers, which are
   either exchanged using the <tt>OMX_IndexParamCodecConfig</tt> when tunnelling
@@ -158,6 +158,8 @@ on the fly.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamNumOutputChannels">OMX_IndexParamNumOutputChannels</a></tt>
 <td> Query for the number of output channels in the decoded stream.  This indicates
   whether the stream is 2d (1 channel) or stereoscopic (2 channels).
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
+<td> Retrieve the image colour space of the video produced by this port.
  <tr valign="top"><td rowspan="1">130 131<td><tt>OMX_IndexParamVideoPortFormat</tt>
 <td> Query / set the port format.  The input port supports a wide range of
   compressed video format, the output port supports only raw non-encoded
