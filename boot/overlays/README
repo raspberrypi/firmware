@@ -826,6 +826,10 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf8563                 Select the PCF8563 device
 
+        addr                    Sets the address for the RTC. Note that the
+                                device must be configured to use the specified
+                                address.
+
         trickle-diode-type      Diode type for trickle charge - "standard" or
                                 "schottky" (ABx80x only)
 
@@ -850,6 +854,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         ds3231                  Select the DS3231 device
 
+        m41t62                  Select the M41T62 device
+
         mcp7940x                Select the MCP7940x device
 
         mcp7941x                Select the MCP7941x device
@@ -859,6 +865,10 @@ Params: abx80x                  Select one of the ABx80x family:
         pcf8523                 Select the PCF8523 device
 
         pcf8563                 Select the PCF8563 device
+
+        addr                    Sets the address for the RTC. Note that the
+                                device must be configured to use the specified
+                                address.
 
         trickle-diode-type      Diode type for trickle charge - "standard" or
                                 "schottky" (ABx80x only)
@@ -1948,11 +1958,11 @@ Name:   vc4-fkms-v3d
 Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
         display stack.
 Load:   dtoverlay=vc4-fkms-v3d,<param>
-Params: cma-256                 CMA is 256MB, 256MB-aligned (needs 1GB)
-        cma-192                 CMA is 192MB, 256MB-aligned (needs 1GB)
-        cma-128                 CMA is 128MB, 128MB-aligned
-        cma-96                  CMA is 96MB, 128MB-aligned
-        cma-64                  CMA is 64MB, 64MB-aligned
+Params: cma-256                 CMA is 256MB (needs 1GB)
+        cma-192                 CMA is 192MB (needs 1GB)
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
 
 
 Name:   vc4-kms-v3d
@@ -1960,11 +1970,17 @@ Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
         booting to GUI while this overlay is in use will cause interesting
         lockups.
 Load:   dtoverlay=vc4-kms-v3d,<param>
-Params: cma-256                 CMA is 256MB, 256MB-aligned (needs 1GB)
-        cma-192                 CMA is 192MB, 256MB-aligned (needs 1GB)
-        cma-128                 CMA is 128MB, 128MB-aligned
-        cma-96                  CMA is 96MB, 128MB-aligned
-        cma-64                  CMA is 64MB, 64MB-aligned
+Params: cma-256                 CMA is 256MB (needs 1GB)
+        cma-192                 CMA is 192MB (needs 1GB)
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+
+
+Name:   vc4-kms-kippah-7inch
+Info:   Enable the Adafruit DPI Kippah with the 7" Ontat panel attached.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-kippah-7inch
 
 
 Name:   vga666
