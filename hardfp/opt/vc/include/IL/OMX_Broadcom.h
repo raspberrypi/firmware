@@ -2681,5 +2681,30 @@ typedef struct OMX_CONFIG_CAMERAGAINTYPE {
    OMX_BOOL bAutoGain;        /**< Whether gain is set automatically */
 } OMX_CONFIG_CAMERAGAINTYPE;
 
+/* OMX_IndexParamMinimumAlignment: Query component alignment requirements. */
+/*
+Allows the component to be queried for the minimum alignment (in bytes) required
+on a port for a given color format.
+Used by the MMAL framework to allow a reduction in the padding.
+*/
+
+typedef struct OMX_PARAM_MINALIGNTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_COLOR_FORMATTYPE eColorFormat;  /**< Format being queried */
+   OMX_U32 nMinHorizontalAlign;  /**< Minimum horizontal alignment required in bytes */
+   OMX_U32 nMinVerticalAlign;    /**< Minimum vertical alignment required in bytes */
+} OMX_PARAM_MINALIGNTYPE;
+
+/* OMX_IndexParamRemoveImagePadding: Query component padding requirements */
+/*
+Queries whether the component can remove all padding from images, or can
+accept images with no padding.
+Used by the MMAL framework predominantly.
+Superceded by OMX_IndexParamMinimumAlignment.
+*/
+
 #endif
 /* File EOF */

@@ -538,6 +538,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigCameraAnalogGain,                          /**< reference: OMX_CONFIG_CAMERAGAINTYPE */
     OMX_IndexConfigCameraDigitalGain,                         /**< reference: OMX_CONFIG_CAMERAGAINTYPE */
     OMX_IndexConfigBrcmDroppableRunLength,                    /**< reference: OMX_PARAM_U32TYPE */
+    OMX_IndexParamMinimumAlignment,                           /**< reference: OMX_PARAM_MINALIGNTYPE */
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;
 
