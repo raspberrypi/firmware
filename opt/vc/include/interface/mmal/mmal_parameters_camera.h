@@ -782,6 +782,35 @@ typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T
    char text[MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3];
 } MMAL_PARAMETER_CAMERA_ANNOTATE_V3_T;
 
+#define MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V4 256
+typedef struct MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;
+   MMAL_BOOL_T show_shutter;
+   MMAL_BOOL_T show_analog_gain;
+   MMAL_BOOL_T show_lens;
+   MMAL_BOOL_T show_caf;
+   MMAL_BOOL_T show_motion;
+   MMAL_BOOL_T show_frame_num;
+   MMAL_BOOL_T enable_text_background;
+   MMAL_BOOL_T custom_background_colour;
+   uint8_t     custom_background_Y;
+   uint8_t     custom_background_U;
+   uint8_t     custom_background_V;
+   uint8_t     dummy1;
+   MMAL_BOOL_T custom_text_colour;
+   uint8_t     custom_text_Y;
+   uint8_t     custom_text_U;
+   uint8_t     custom_text_V;
+   uint8_t     text_size;
+   char text[MMAL_CAMERA_ANNOTATE_MAX_TEXT_LEN_V3];
+   uint32_t    justify; //0=centre, 1=left, 2=right
+   uint32_t    x_offset; //Offset from the justification edge
+   uint32_t    y_offset;
+} MMAL_PARAMETER_CAMERA_ANNOTATE_V4_T;
+
 typedef enum MMAL_STEREOSCOPIC_MODE_T {
    MMAL_STEREOSCOPIC_MODE_NONE = 0,
    MMAL_STEREOSCOPIC_MODE_SIDE_BY_SIDE = 1,

@@ -266,6 +266,9 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_U8 nTextV;
    OMX_U8 nTextSize;
    OMX_U8 sText[OMX_BRCM_MAXANNOTATETEXTLEN];
+   OMX_BRCMANNOTATEJUSTIFYTYPE eJustify;
+   OMX_U32 nXOffset;
+   OMX_U32 nYOffset;
 } OMX_CONFIG_BRCMANNOTATETYPE;
 </pre><p>
  Query / set the paramters concerning the anotation overlay.
@@ -3644,7 +3647,7 @@ This parameter is used to control the size of pool that the component
 
 <a name="OMX_IndexParamMinimumAlignment"><h2>Query component alignment requirements.</h2></a>
 <tt>OMX_IndexParamMinimumAlignment</tt><br>
-Used by: <a href="isp.html">isp</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_MINALIGNTYPE</tt><p>
 
