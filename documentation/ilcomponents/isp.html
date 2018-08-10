@@ -121,7 +121,9 @@ It is also not considered to be production quality code yet - please use with ca
 <td> Query this to show what the output size will be. This port
   must be at a lower resolution than 361, and only supports YUV
   formats, not the RGB formats that port 361 does.
- <tr valign="top"><td rowspan="2">360  361  362<td><tt>OMX_IndexParamImagePortFormat</tt>
+ <tr valign="top"><td rowspan="3">360  361  362<td><tt><a href="prop.html#OMX_IndexParamMinimumAlignment">OMX_IndexParamMinimumAlignment</a></tt>
+<td> Query the minimum alignment that the component requries on the port.
+ <tr valign="top"><td><tt>OMX_IndexParamImagePortFormat</tt>
 <td> Set / query the image port format used.  These ports support RGB565,
   RGBA32 or YUV420 raw bitmap formats.
   FIXME: Correct the list of supported formats

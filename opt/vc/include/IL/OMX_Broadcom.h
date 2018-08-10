@@ -63,13 +63,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMX_BUFFERFLAG_CODECSIDEINFO 0x00002000
 
 // for use in buffer headers - indicated the timestamp is a DTS rather than PTS
-#define OMX_BUFFERFLAG_TIME_IS_DTS 0x000004000
+#define OMX_BUFFERFLAG_TIME_IS_DTS 0x00004000
 
 // for use in buffer headers - signals that a video picture is interlaced
-#define OMX_BUFFERFLAG_INTERLACED 0x000010000
+#define OMX_BUFFERFLAG_INTERLACED 0x00010000
 
 // Signals that the top field of the current interlaced frame should be displayed first
-#define OMX_BUFFERFLAG_TOP_FIELD_FIRST 0x000020000
+#define OMX_BUFFERFLAG_TOP_FIELD_FIRST 0x00020000
+
+// User flags that can be set by the application and will be passed by most
+// components as an alternative to buffer marks.
+#define OMX_BUFFERFLAG_USR0      0x10000000
+#define OMX_BUFFERFLAG_USR1      0x20000000
+#define OMX_BUFFERFLAG_USR2      0x40000000
+#define OMX_BUFFERFLAG_USR3      0x80000000
+#define OMX_BUFFERFLAG_USR_FLAGS 0xF0000000
 
 /**
  * Macros to convert to <code>OMX_TICKS</code> from a signed 64 bit value and
@@ -2413,6 +2421,13 @@ This provides statistics from the renderer to allow more accurate synchronisatio
 between the scheduler and display VSYNC.
 */
 
+typedef enum OMX_BRCMANNOTATEJUSTIFYTYPE {
+   OMX_ANNOTATE_CENTRE = 0,
+   OMX_ANNOTATE_LEFT = 1,
+   OMX_ANNOTATE_RIGHT = 2,
+   OMX_ANNOTATE_MAX = 0x7FFFFFFF,
+} OMX_BRCMANNOTATEJUSTIFYTYPE;
+
 #define OMX_BRCM_MAXANNOTATETEXTLEN 256
 typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_U32 nSize;
@@ -2436,6 +2451,9 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_U8 nTextV;
    OMX_U8 nTextSize;   /**< Text size: 6-150 pixels */
    OMX_U8 sText[OMX_BRCM_MAXANNOTATETEXTLEN];
+   OMX_BRCMANNOTATEJUSTIFYTYPE eJustify;
+   OMX_U32 nXOffset;
+   OMX_U32 nYOffset;
 } OMX_CONFIG_BRCMANNOTATETYPE;
 
 /* OMX_IndexParamBrcmStereoscopicMode: Stereoscopic camera support */
@@ -2680,6 +2698,31 @@ typedef struct OMX_CONFIG_CAMERAGAINTYPE {
    OMX_U32 xGain;             /**< Gain to be applied, stored as Q16 format */
    OMX_BOOL bAutoGain;        /**< Whether gain is set automatically */
 } OMX_CONFIG_CAMERAGAINTYPE;
+
+/* OMX_IndexParamMinimumAlignment: Query component alignment requirements. */
+/*
+Allows the component to be queried for the minimum alignment (in bytes) required
+on a port for a given color format.
+Used by the MMAL framework to allow a reduction in the padding.
+*/
+
+typedef struct OMX_PARAM_MINALIGNTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+   OMX_U32 nPortIndex;
+
+   OMX_COLOR_FORMATTYPE eColorFormat;  /**< Format being queried */
+   OMX_U32 nMinHorizontalAlign;  /**< Minimum horizontal alignment required in bytes */
+   OMX_U32 nMinVerticalAlign;    /**< Minimum vertical alignment required in bytes */
+} OMX_PARAM_MINALIGNTYPE;
+
+/* OMX_IndexParamRemoveImagePadding: Query component padding requirements */
+/*
+Queries whether the component can remove all padding from images, or can
+accept images with no padding.
+Used by the MMAL framework predominantly.
+Superceded by OMX_IndexParamMinimumAlignment.
+*/
 
 #endif
 /* File EOF */

@@ -182,6 +182,15 @@ VCOS_STATIC_INLINE void vcos_log_set_level(VCOS_LOG_CAT_T *category, VCOS_LOG_LE
    category->level = level;
 }
 
+
+/** Set the logging levels for many categories at once.
+  *
+  * Set lots of categorys from a string cat:lev,cat:lev This can 
+  * be used at startup time to set a bunch of category levels from
+  * a single string.  Used with C(vcos_logging_level)
+  */
+VCOSPRE_ void VCOSPOST_ vcos_log_set_level_all(char *levels);
+
 #define vcos_log_dump_mem(cat,label,addr,voidMem,numBytes)  do { if (vcos_is_log_enabled(cat,VCOS_LOG_TRACE)) vcos_log_dump_mem_impl(cat,label,addr,voidMem,numBytes); } while (0)
 
 void vcos_log_dump_mem_impl( const VCOS_LOG_CAT_T *cat,

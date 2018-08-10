@@ -72,6 +72,22 @@ uint32_t mmalil_buffer_flags_to_mmal(OMX_U32 flags);
  */
 OMX_U32 mmalil_buffer_flags_to_omx(uint32_t flags);
 
+/** Convert MMAL buffer header type video specific flags into OMX buffer header
+ * flags.
+ *
+ * @param flags OMX buffer header flags.
+ * @return MMAL buffer header video specific flags.
+ */
+uint32_t mmalil_video_buffer_flags_to_mmal(OMX_U32 flags);
+
+/** Convert OMX buffer header flags into MMAL buffer header type video specific
+ * flags.
+ *
+ * @param flags MMAL buffer header video specific flags.
+ * @return OMX buffer header flags.
+ */
+OMX_U32 mmalil_video_buffer_flags_to_omx(uint32_t flags);
+
 /** Convert a MMAL buffer header into an OMX buffer header.
  * Note that only the fields which have a direct mapping between OMX and MMAL are converted.
  *
@@ -86,7 +102,6 @@ void mmalil_buffer_header_to_omx(OMX_BUFFERHEADERTYPE *omx, MMAL_BUFFER_HEADER_T
  * @param omx  Pointer to the source OMX buffer header.
  */
 void mmalil_buffer_header_to_mmal(MMAL_BUFFER_HEADER_T *mmal, OMX_BUFFERHEADERTYPE *omx);
-
 
 OMX_PORTDOMAINTYPE mmalil_es_type_to_omx_domain(MMAL_ES_TYPE_T type);
 MMAL_ES_TYPE_T mmalil_omx_domain_to_es_type(OMX_PORTDOMAINTYPE domain);

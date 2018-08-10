@@ -266,6 +266,9 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_U8 nTextV;
    OMX_U8 nTextSize;
    OMX_U8 sText[OMX_BRCM_MAXANNOTATETEXTLEN];
+   OMX_BRCMANNOTATEJUSTIFYTYPE eJustify;
+   OMX_U32 nXOffset;
+   OMX_U32 nYOffset;
 } OMX_CONFIG_BRCMANNOTATETYPE;
 </pre><p>
  Query / set the paramters concerning the anotation overlay.
@@ -3642,6 +3645,21 @@ This parameter is used to control the size of pool that the component
  can be reset by setting this parameter with all three fields set to
  zero.<p>
 
+<a name="OMX_IndexParamMinimumAlignment"><h2>Query component alignment requirements.</h2></a>
+<tt>OMX_IndexParamMinimumAlignment</tt><br>
+Used by: <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_MINALIGNTYPE</tt><p>
+
+Allows the component to be queried for the minimum alignment (in bytes) required
+ on a port for a given color format.
+ Used by the MMAL framework to allow a reduction in the padding.<p>
+
+<dl>
+<dt><tt>eColorFormat</tt><dd>Format being queried 
+<dt><tt>nMinHorizontalAlign</tt><dd>Minimum horizontal alignment required in bytes 
+<dt><tt>nMinVerticalAlign</tt><dd>Minimum vertical alignment required in bytes 
+</dl>
 <a name="OMX_IndexParamNumOutputChannels"><h2>Query for the number of output channels in the decoded stream</h2></a>
 <tt>OMX_IndexParamNumOutputChannels</tt><br>
 Used by: <a href="video_decode.html">video_decode</a><p>
@@ -3694,26 +3712,16 @@ This parameter uses internal configuration to determine used, so should not be c
   
  <p>
 
-<a name="OMX_IndexParamRemoveImagePadding"><h2>Remove image padding</h2></a>
+<a name="OMX_IndexParamRemoveImagePadding"><h2>Query component padding requirements</h2></a>
 <tt>OMX_IndexParamRemoveImagePadding</tt><br>
-Used by: <a href="camera.html">camera</a><p>
+Used by: <a href="camera.html">camera</a>, <a href="video_render.html">video_render</a><p>
 
-<pre>
-typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_BOOL bEnabled;
-} OMX_CONFIG_PORTBOOLEANTYPE;
-</pre><p>
- Normally the components will require nStride and nSliceHeight to be
-  padded to an appropriate multiple of N for performance reasons.
-  If a performance hit can be accepted, this parameter can remove the
-  restriction and run with nStride = (nFrameWidth * bytes_per_pixel), and
-  nSliceHeight = nFrameHeight, even if nFrameWidth and nFrameHeight are
-  not appropriate multiples.
-  
- <p>
+This index uses the standard IL structure <tt>OMX_CONFIG_PORTBOOLEANTYPE</tt><p>
+
+Queries whether the component can remove all padding from images, or can
+ accept images with no padding.
+ Used by the MMAL framework predominantly.
+ Superceded by OMX_IndexParamMinimumAlignment.<p>
 
 <a name="OMX_IndexParamResize"><h2>Resize Control</h2></a>
 <tt>OMX_IndexParamResize</tt><br>

@@ -44,7 +44,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   * - \ref create
   * - \ref port
   * - \ref buf
-  * - \ref metadata
   * - \ref queue
   * - \ref pool
   * - \ref param
@@ -92,7 +91,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   * MMAL lets clients create multi-media components (video encoders,
   * video decoders, camera, and so-on) using a common API. Clients exchange
   * data with components using buffer headers. A buffer header
-  * has a pointer to the payload data and optional metadata.
+  * has a pointer to the payload data.
   * Buffer headers are sent to and received from ports that are provided by components.
   *
   * A typical decoder component would have a single input port and a
@@ -158,13 +157,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   * \note The current number of buffers and their size (\ref MMAL_PORT_T::buffer_num and \ref
   * MMAL_PORT_T::buffer_size) are not modified by MMAL, and must be updated by the client as
   * required after changes to a port's format.
-  *
-  * \subsection metadata Buffer Metadata
-  *
-  * The API provides a way for clients or components to associate metadata with buffer headers.
-  * A camera component could for example store information like exposure time or focal length
-  * as metadata within the buffer header containing the frame just captured.
-  * \note This area needs more work
   *
   * \subsection queue Queues of Buffer Headers
   *
@@ -365,7 +357,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "mmal_port.h"
 #include "mmal_component.h"
 #include "mmal_parameters.h"
-#include "mmal_metadata.h"
 #include "mmal_queue.h"
 #include "mmal_pool.h"
 #include "mmal_events.h"

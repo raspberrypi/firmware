@@ -38,34 +38,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define NUMFRAMES 300
 #define WIDTH     640
-#define PITCH     ((WIDTH+31)&~31)
 #define HEIGHT    ((WIDTH)*9/16)
-#define HEIGHT16  ((HEIGHT+15)&~15)
-#define SIZE      ((WIDTH * HEIGHT16 * 3)/2)
 
 // generate an animated test card in YUV format
 static int
-generate_test_card(void *buf, OMX_U32 * filledLen, int frame)
+generate_test_card(void *buf, OMX_U32 * filledLen, int frame, OMX_PARAM_PORTDEFINITIONTYPE *def)
 {
    int i, j;
-   char *y = buf, *u = y + PITCH * HEIGHT16, *v =
-      u + (PITCH >> 1) * (HEIGHT16 >> 1);
+   OMX_VIDEO_PORTDEFINITIONTYPE *vid = &def->format.video;
+   char *y = buf;
+   char *u = y + vid->nStride * vid->nSliceHeight;
+   char *v = u + (vid->nStride >> 1) * (vid->nSliceHeight >> 1);
 
-   for (j = 0; j < HEIGHT / 2; j++) {
-      char *py = y + 2 * j * PITCH;
-      char *pu = u + j * (PITCH >> 1);
-      char *pv = v + j * (PITCH >> 1);
-      for (i = 0; i < WIDTH / 2; i++) {
-	 int z = (((i + frame) >> 4) ^ ((j + frame) >> 4)) & 15;
-	 py[0] = py[1] = py[PITCH] = py[PITCH + 1] = 0x80 + z * 0x8;
-	 pu[0] = 0x00 + z * 0x10;
-	 pv[0] = 0x80 + z * 0x30;
-	 py += 2;
-	 pu++;
-	 pv++;
+   for (j = 0; j < vid->nFrameHeight / 2; j++) {
+      char *py = y + 2 * j * vid->nStride;
+      char *pu = u + j * (vid->nStride >> 1);
+      char *pv = v + j * (vid->nStride >> 1);
+      for (i = 0; i < vid->nFrameWidth / 2; i++) {
+         int z = (((i + frame) >> 4) ^ ((j + frame) >> 4)) & 15;
+         py[0] = py[1] = py[vid->nStride] = py[vid->nStride + 1] = 0x80 + z * 0x8;
+         pu[0] = 0x00 + z * 0x10;
+         pv[0] = 0x80 + z * 0x30;
+         py += 2;
+         pu++;
+         pv++;
       }
    }
-   *filledLen = SIZE;
+   *filledLen = (vid->nStride * vid->nSliceHeight * 3) >> 1;
    return 1;
 }
 
@@ -73,20 +72,20 @@ static void
 print_def(OMX_PARAM_PORTDEFINITIONTYPE def)
 {
    printf("Port %u: %s %u/%u %u %u %s,%s,%s %ux%u %ux%u @%u %u\n",
-	  def.nPortIndex,
-	  def.eDir == OMX_DirInput ? "in" : "out",
-	  def.nBufferCountActual,
-	  def.nBufferCountMin,
-	  def.nBufferSize,
-	  def.nBufferAlignment,
-	  def.bEnabled ? "enabled" : "disabled",
-	  def.bPopulated ? "populated" : "not pop.",
-	  def.bBuffersContiguous ? "contig." : "not cont.",
-	  def.format.video.nFrameWidth,
-	  def.format.video.nFrameHeight,
-	  def.format.video.nStride,
-	  def.format.video.nSliceHeight,
-	  def.format.video.xFramerate, def.format.video.eColorFormat);
+          def.nPortIndex,
+          def.eDir == OMX_DirInput ? "in" : "out",
+          def.nBufferCountActual,
+          def.nBufferCountMin,
+          def.nBufferSize,
+          def.nBufferAlignment,
+          def.bEnabled ? "enabled" : "disabled",
+          def.bPopulated ? "populated" : "not pop.",
+          def.bBuffersContiguous ? "contig." : "not cont.",
+          def.format.video.nFrameWidth,
+          def.format.video.nFrameHeight,
+          def.format.video.nStride,
+          def.format.video.nSliceHeight,
+          def.format.video.xFramerate, def.format.video.eColorFormat);
 }
 
 static int
@@ -117,13 +116,13 @@ video_encode_test(char *outputfilename)
 
    // create video_encode
    r = ilclient_create_component(client, &video_encode, "video_encode",
-				 ILCLIENT_DISABLE_ALL_PORTS |
-				 ILCLIENT_ENABLE_INPUT_BUFFERS |
-				 ILCLIENT_ENABLE_OUTPUT_BUFFERS);
+                                 ILCLIENT_DISABLE_ALL_PORTS |
+                                 ILCLIENT_ENABLE_INPUT_BUFFERS |
+                                 ILCLIENT_ENABLE_OUTPUT_BUFFERS);
    if (r != 0) {
       printf
-	 ("ilclient_create_component() for video_encode failed with %x!\n",
-	  r);
+         ("ilclient_create_component() for video_encode failed with %x!\n",
+          r);
       exit(1);
    }
    list[0] = video_encode;
@@ -136,9 +135,9 @@ video_encode_test(char *outputfilename)
 
    if (OMX_GetParameter
        (ILC_GET_HANDLE(video_encode), OMX_IndexParamPortDefinition,
-	&def) != OMX_ErrorNone) {
+        &def) != OMX_ErrorNone) {
       printf("%s:%d: OMX_GetParameter() for video_encode port 200 failed!\n",
-	     __FUNCTION__, __LINE__);
+             __FUNCTION__, __LINE__);
       exit(1);
    }
 
@@ -148,18 +147,18 @@ video_encode_test(char *outputfilename)
    def.format.video.nFrameWidth = WIDTH;
    def.format.video.nFrameHeight = HEIGHT;
    def.format.video.xFramerate = 30 << 16;
-   def.format.video.nSliceHeight = def.format.video.nFrameHeight;
+   def.format.video.nSliceHeight = ALIGN_UP(def.format.video.nFrameHeight, 16);
    def.format.video.nStride = def.format.video.nFrameWidth;
    def.format.video.eColorFormat = OMX_COLOR_FormatYUV420PackedPlanar;
 
    print_def(def);
 
    r = OMX_SetParameter(ILC_GET_HANDLE(video_encode),
-			OMX_IndexParamPortDefinition, &def);
+                        OMX_IndexParamPortDefinition, &def);
    if (r != OMX_ErrorNone) {
       printf
-	 ("%s:%d: OMX_SetParameter() for video_encode port 200 failed with %x!\n",
-	  __FUNCTION__, __LINE__, r);
+         ("%s:%d: OMX_SetParameter() for video_encode port 200 failed with %x!\n",
+          __FUNCTION__, __LINE__, r);
       exit(1);
    }
 
@@ -171,11 +170,11 @@ video_encode_test(char *outputfilename)
 
    printf("OMX_SetParameter for video_encode:201...\n");
    r = OMX_SetParameter(ILC_GET_HANDLE(video_encode),
-			OMX_IndexParamVideoPortFormat, &format);
+                        OMX_IndexParamVideoPortFormat, &format);
    if (r != OMX_ErrorNone) {
       printf
-	 ("%s:%d: OMX_SetParameter() for video_encode port 201 failed with %x!\n",
-	  __FUNCTION__, __LINE__, r);
+         ("%s:%d: OMX_SetParameter() for video_encode port 201 failed with %x!\n",
+          __FUNCTION__, __LINE__, r);
       exit(1);
    }
 
@@ -217,8 +216,8 @@ video_encode_test(char *outputfilename)
    printf("encode to idle...\n");
    if (ilclient_change_component_state(video_encode, OMX_StateIdle) == -1) {
       printf
-	 ("%s:%d: ilclient_change_component_state(video_encode, OMX_StateIdle) failed",
-	  __FUNCTION__, __LINE__);
+         ("%s:%d: ilclient_change_component_state(video_encode, OMX_StateIdle) failed",
+          __FUNCTION__, __LINE__);
    }
 
    printf("enabling port buffers for 200...\n");
@@ -246,45 +245,41 @@ video_encode_test(char *outputfilename)
    do {
       buf = ilclient_get_input_buffer(video_encode, 200, 1);
       if (buf == NULL) {
-	 printf("Doh, no buffers for me!\n");
-      }
-      else {
-	 /* fill it */
-	 generate_test_card(buf->pBuffer, &buf->nFilledLen, framenumber++);
+         printf("Doh, no buffers for me!\n");
+      } else {
+         /* fill it */
+         generate_test_card(buf->pBuffer, &buf->nFilledLen, framenumber++, &def);
 
-	 if (OMX_EmptyThisBuffer(ILC_GET_HANDLE(video_encode), buf) !=
-	     OMX_ErrorNone) {
-	    printf("Error emptying buffer!\n");
-	 }
+         if (OMX_EmptyThisBuffer(ILC_GET_HANDLE(video_encode), buf) !=
+             OMX_ErrorNone) {
+            printf("Error emptying buffer!\n");
+         }
 
-	 out = ilclient_get_output_buffer(video_encode, 201, 1);
+         out = ilclient_get_output_buffer(video_encode, 201, 1);
 
-	 r = OMX_FillThisBuffer(ILC_GET_HANDLE(video_encode), out);
-	 if (r != OMX_ErrorNone) {
-	    printf("Error filling buffer: %x\n", r);
-	 }
+         if (out != NULL) {
+            if (out->nFlags & OMX_BUFFERFLAG_CODECCONFIG) {
+               int i;
+               for (i = 0; i < out->nFilledLen; i++)
+                  printf("%x ", out->pBuffer[i]);
+               printf("\n");
+            }
 
-	 if (out != NULL) {
-	    if (out->nFlags & OMX_BUFFERFLAG_CODECCONFIG) {
-	       int i;
-	       for (i = 0; i < out->nFilledLen; i++)
-		  printf("%x ", out->pBuffer[i]);
-	       printf("\n");
-	    }
+            r = fwrite(out->pBuffer, 1, out->nFilledLen, outf);
+            if (r != out->nFilledLen) {
+               printf("fwrite: Error emptying buffer: %d!\n", r);
+            } else {
+               printf("Writing frame %d/%d, len %u\n", framenumber, NUMFRAMES, out->nFilledLen);
+            }
+            out->nFilledLen = 0;
+         } else {
+            printf("Not getting it :(\n");
+         }
 
-	    r = fwrite(out->pBuffer, 1, out->nFilledLen, outf);
-	    if (r != out->nFilledLen) {
-	       printf("fwrite: Error emptying buffer: %d!\n", r);
-	    }
-	    else {
-	       printf("Writing frame %d/%d\n", framenumber, NUMFRAMES);
-	    }
-	    out->nFilledLen = 0;
-	 }
-	 else {
-	    printf("Not getting it :(\n");
-	 }
-
+         r = OMX_FillThisBuffer(ILC_GET_HANDLE(video_encode), out);
+         if (r != OMX_ErrorNone) {
+            printf("Error sending buffer for filling: %x\n", r);
+         }
       }
    }
    while (framenumber < NUMFRAMES);

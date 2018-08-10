@@ -96,6 +96,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                transparent_colour: 1,
                unused_26_31      : 6;
       unsigned int arg;
+      int vpitch;
    } VC_IMAGE_EXTRA_RGBA_T;
 
    typedef struct vc_image_extra_pal_s {
