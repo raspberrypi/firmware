@@ -1037,6 +1037,7 @@ kernel/drivers/hwmon/ds1621.ko
 kernel/drivers/hwmon/ina2xx.ko
 kernel/drivers/hwmon/jc42.ko
 kernel/drivers/hwmon/lm75.ko
+kernel/drivers/hwmon/rpi-poe-fan.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/sht3x.ko
 kernel/drivers/hwmon/shtc1.ko

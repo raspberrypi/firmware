@@ -8993,6 +8993,9 @@ alias of:N*T*Cdallas,ds1775C* lm75
 alias of:N*T*Cdallas,ds1775 lm75
 alias of:N*T*Cadi,adt75C* lm75
 alias of:N*T*Cadi,adt75 lm75
+alias platform:rpi-poe-fan rpi_poe_fan
+alias of:N*T*Crpi-poe-fanC* rpi_poe_fan
+alias of:N*T*Crpi-poe-fan rpi_poe_fan
 alias i2c:sht21 sht21
 alias i2c:sts3x sht3x
 alias i2c:sht3x sht3x
