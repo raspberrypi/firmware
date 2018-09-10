@@ -100,6 +100,8 @@ extern "C" {
  * the connection itself but is used by the the graph utility to specify that
  * the buffer should be sent to the input port from with the port callback. */
 #define MMAL_CONNECTION_FLAG_DIRECT 0x10
+/** Specify that the connection should not modify the port formats. */
+#define MMAL_CONNECTION_FLAG_KEEP_PORT_FORMATS 0x20
 /* @} */
 
 /** Forward type definition for a connection */
