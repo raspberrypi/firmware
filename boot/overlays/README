@@ -563,6 +563,14 @@ Load:   dtoverlay=googlevoicehat-soundcard
 Params: <None>
 
 
+Name:   gpio-fan
+Info:   Configure a GPIO pin to control a cooling fan.
+Load:   dtoverlay=gpio-fan,<param>=<val>
+Params: gpiopin                 GPIO used to control the fan (default 12)
+        temp                    Temperature at which the fan switches on, in
+                                millicelcius (default 55000)
+
+
 Name:   gpio-ir
 Info:   Use GPIO pin as rc-core style infrared receiver input. The rc-core-
         based gpio_ir_recv driver maps received keys directly to a
@@ -1275,15 +1283,7 @@ Info:   Omnivision OV5647 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=ov5647,<param>=<val>
-Params: cam0-pwdn               GPIO used to control the sensor powerdown line.
-
-        cam0-led                GPIO used to control the sensor led
-                                Both these fields should be automatically filled
-                                in by the firmware to reflect the default GPIO
-                                configuration of the particular Pi variant in
-                                use.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
 
 
