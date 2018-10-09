@@ -55,10 +55,10 @@ insufficient space for the whole message in the fifo, and none of the message is
 sent.
 ******************************************************************************/
 
-/*  send command to general command serivce */
+/*  send command to general command service */
 VCHPRE_ int VCHPOST_ vc_gencmd_send( const char *format, ... );
 
-/*  get resonse from general command serivce */
+/*  get response from general command service */
 VCHPRE_ int VCHPOST_ vc_gencmd_read_response(char *response, int maxlen);
 
 /* convenience function to send command and receive the response */
