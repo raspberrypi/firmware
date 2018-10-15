@@ -880,7 +880,6 @@
 0xbe40ace9	irlmp_discovery_request	drivers/staging/irda/net/irda	EXPORT_SYMBOL
 0xc2ef6e74	ssb_device_is_enabled	drivers/ssb/ssb	EXPORT_SYMBOL
 0x1a12c2a9	rpc_unlink	vmlinux	EXPORT_SYMBOL_GPL
-0xfbc9978d	pskb_trim_rcsum_slow	vmlinux	EXPORT_SYMBOL
 0x41b3f0fc	touchscreen_set_mt_pos	vmlinux	EXPORT_SYMBOL
 0x128e1048	locks_in_grace	vmlinux	EXPORT_SYMBOL_GPL
 0xbb705212	module_refcount	vmlinux	EXPORT_SYMBOL
