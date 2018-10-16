@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>hvs</title>
+<body>
+<table border="0" cellpadding="10"><tr valign="top"><td>
+<table border="0" cellspacing="0" cellpadding="1"><tr>
+<td bgcolor="#e0c0c0"><a href="index.html">Top</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="audio_capture.html">audio_capture</a><br>
+<a href="audio_decode.html">audio_decode</a><br>
+<a href="audio_encode.html">audio_encode</a><br>
+<a href="audio_lowpower.html">audio_lowpower</a><br>
+<a href="audio_mixer.html">audio_mixer</a><br>
+<a href="audio_processor.html">audio_processor</a><br>
+<a href="audio_render.html">audio_render</a><br>
+<a href="audio_splitter.html">audio_splitter</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="image_decode.html">image_decode</a><br>
+<a href="image_encode.html">image_encode</a><br>
+<a href="image_fx.html">image_fx</a><br>
+<a href="resize.html">resize</a><br>
+<a href="source.html">source</a><br>
+<a href="transition.html">transition</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="clock.html">clock</a><br>
+<a href="null_sink.html">null_sink</a><br>
+<a href="text_scheduler.html">text_scheduler</a><br>
+<a href="visualisation.html">visualisation</a><br>
+<tr><td bgcolor="#e0c0c0">
+<a href="camera.html">camera</a><br>
+<a href="egl_render.html">egl_render</a><br>
+<a href="hvs.html">hvs</a><br>
+<a href="isp.html">isp</a><br>
+<a href="rawcam.html">rawcam</a><br>
+<a href="video_decode.html">video_decode</a><br>
+<a href="video_encode.html">video_encode</a><br>
+<a href="video_render.html">video_render</a><br>
+<a href="video_scheduler.html">video_scheduler</a><br>
+<a href="video_splitter.html">video_splitter</a><br>
+<tr><td bgcolor="#c0e0e0">
+<a href="prop.html">Custom Index</a><br>
+<a href="metadata.html">Metadata</a><br>
+</table><td>
+
+<h1>OMX.broadcom.hvs</h1>
+<p>
+<p>
+This component wraps the HVS (Hardware Video Scalar) hardware block to
+offer hardware accelerated format conversion, blending, and resizing.
+It has four inputs port taking numerous different formats, and one output port
+which supports various RGB formats.
+<p>
+Port 380 can be considered the master input port. When both ports 380 and 385
+have a bufferthen the component will generate the output buffer based on the
+current set of buffers and parameters.
+The additional input ports are used for providing extra items to be composed
+into the output image. The ports are double-bufferred, only returning a buffer
+once a new one has been sent to replace it. Sending an empty buffer to
+these ports will return the current buffer and stop that port contributing to
+the output image.
+<p>
+Please note that this component has been developed for use under MMAL. It has
+not been tested at all under IL, so there may be unexpected behaviour under IL.
+It is also not considered to be production quality code yet - please use with caution.
+<p>
+<p>
+<table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
+<tr valign="top"><td rowspan="6">380  381  382  383  384<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Set this to control the geometry and format of the input buffers.
+  The stripe height requirements vary based on format, but must be
+  >= <tt>nFrameHeight</tt>.
+  As an exception to the IL spec, this component supports updating this parameter
+  in any state. Buffer presented to the port will be interpreted with the settings
+  defined when the buffer is presented.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigDisplayRegion">OMX_IndexConfigDisplayRegion</a></tt>
+<td> Setting this config allows control over how buffers passed on that port
+  contribute to the output frame.
+  Source rectangles may currently not take into account any cropping required by
+  a decoder.
+  It does not support the OMX_DISPLAY_MODE_FILL and OMX_DISPLAY_MODE_LETTERBOX
+  flags.
+  It assumes that OMX_DISPLAY_SET_NOASPECT is set, ie it will distort the image to
+  map the source/source rectangle into the destination rectangle.
+  Buffers will be displayed with the value of OMX_IndexConfigDisplayRegion set at
+  the point the buffer is submitted, even if it is subsequently updated.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
+<td> Set/retrieve the image colour space settings that images received on
+  this port should be rendered with.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamCameraPoolToEncoderFunction">OMX_IndexParamCameraPoolToEncoderFunction</a></tt>
+<td> Used to set up proprietary communication with the previous component.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmUseProprietaryCallback">OMX_IndexConfigBrcmUseProprietaryCallback</a></tt>
+<td> Forces use of proprietary tunnelling between ports.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmSupportsUnalignedSliceheight">OMX_IndexParamBrcmSupportsUnalignedSliceheight</a></tt>
+<td> Retrieves the capabilites of this component to allow any
+  nSliceHeight value >= nHeight.
+ <tr valign="top"><td rowspan="1">385<td><tt>OMX_IndexParamPortDefinition</tt>
+<td> Set / query this to control the geometry and format of the output buffers.
+ <tr valign="top"><td rowspan="2">380  381  382  383  384  385<td><tt><a href="prop.html#OMX_IndexParamMinimumAlignment">OMX_IndexParamMinimumAlignment</a></tt>
+<td> Query the minimum alignment that the component requries on the port.
+ <tr valign="top"><td><tt>OMX_IndexParamVideoPortFormat</tt>
+<td> Set / query the image port format used.
+ </table>
+
+</table>
+</body>
+</html>

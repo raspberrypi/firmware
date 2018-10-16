@@ -239,20 +239,6 @@ typedef vcos_fourcc_t FOURCC_T;
 #define VCOS_EXTERN_C_END
 #endif
 
-/** Variable attribute indicating the variable must be emitted even if it appears unused. */
-#if defined(__GNUC__) || defined(_VCOS_METAWARE)
-# define VCOS_ATTR_USED  __attribute__ ((used))
-#else
-# define VCOS_ATTR_USED
-#endif
-
-/** Variable attribute requiring specific alignment. */
-#if defined(__GNUC__) || defined(_VCOS_METAWARE)
-# define VCOS_ATTR_ALIGNED(n)  __attribute__ ((aligned(n)))
-#else
-# define VCOS_ATTR_ALIGNED(n)
-#endif
-
 /** Define a function as a weak alias to another function.
  * @param ret_type     Function return type.
  * @param alias_name   Name of the alias.

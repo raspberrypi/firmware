@@ -29,6 +29,7 @@
 <tr><td bgcolor="#e0c0c0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="hvs.html">hvs</a><br>
 <a href="isp.html">isp</a><br>
 <a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
@@ -93,14 +94,19 @@ a platform video display device.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigLatencyTarget">OMX_IndexConfigLatencyTarget</a></tt>
 <td> Query / set the filter values used when tracking phase offset between
   presentation and vsync by changing HDMI pixel output frequency.
- <tr valign="top"><td rowspan="3">70<td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
+ <tr valign="top"><td rowspan="5">70<td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
 <td> Set/retrieve the image colour space settings that images received on
   this port should be rendered with.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexConfigBrcmRenderStats">OMX_IndexConfigBrcmRenderStats</a></tt>
 <td> Retrieve statistics from this renderer.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamMinimumAlignment">OMX_IndexParamMinimumAlignment</a></tt>
+<td> Query the minimum alignment that the component requries on the port.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmSupportsUnalignedSliceheight">OMX_IndexParamBrcmSupportsUnalignedSliceheight</a></tt>
 <td> Retrieves the capabilites of this component to allow any
   nSliceHeight value >= nHeight.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamRemoveImagePadding">OMX_IndexParamRemoveImagePadding</a></tt>
+<td> Queries whether this component requires padding on the image (it doesn't).
+  Superceded by OMX_IndexParamMinimumAlignment.
  <tr valign="top"><td rowspan="1">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamComponentName">OMX_IndexParamComponentName</a></tt>
 <td> Sets the component name to be used in internal logging messages.
  </table>

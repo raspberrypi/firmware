@@ -29,6 +29,7 @@
 <tr><td bgcolor="#e0c0c0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="hvs.html">hvs</a><br>
 <a href="isp.html">isp</a><br>
 <a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
@@ -266,6 +267,9 @@ typedef struct OMX_CONFIG_BRCMANNOTATETYPE {
    OMX_U8 nTextV;
    OMX_U8 nTextSize;
    OMX_U8 sText[OMX_BRCM_MAXANNOTATETEXTLEN];
+   OMX_BRCMANNOTATEJUSTIFYTYPE eJustify;
+   OMX_U32 nXOffset;
+   OMX_U32 nYOffset;
 } OMX_CONFIG_BRCMANNOTATETYPE;
 </pre><p>
  Query / set the paramters concerning the anotation overlay.
@@ -510,7 +514,7 @@ typedef struct OMX_CONFIG_BRCMRENDERSTATSTYPE {
 
 <a name="OMX_IndexConfigBrcmUseProprietaryCallback"><h2>Force use of proprietary callback</h2></a>
 <tt>OMX_IndexConfigBrcmUseProprietaryCallback</tt><br>
-Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_encode.html">image_encode</a>, <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_BRCMUSEPROPRIETARYTUNNELTYPE</tt><p>
 
@@ -1294,7 +1298,7 @@ typedef struct OMX_CONFIG_CUSTOMAWBGAINSTYPE {
 </dl>
 <a name="OMX_IndexConfigDisplayRegion"><h2>Display Region</h2></a>
 <tt>OMX_IndexConfigDisplayRegion</tt><br>
-Used by: <a href="video_render.html">video_render</a><p>
+Used by: <a href="hvs.html">hvs</a>, <a href="video_render.html">video_render</a><p>
 
 <pre>
 typedef enum OMX_DISPLAYTRANSFORMTYPE{
@@ -1342,6 +1346,14 @@ typedef enum OMX_DISPLAYSETTYPE {
    OMX_DISPLAY_SET_ALPHA = 0x400,
    OMX_DISPLAY_SET_DUMMY = 0x7FFFFFFF
 } OMX_DISPLAYSETTYPE;
+
+typedef enum OMX_DISPLAYASPECTFLAGSTYPE {
+  OMX_DISPLAY_ALPHA_FLAGS_NONE = 0,
+  // Alpha values are already premultiplied
+  OMX_DISPLAY_ALPHA_FLAGS_PREMULT = 130,
+  // Mix the per pixel alpha (if present) and the per plane alpha.
+  OMX_DISPLAY_ALPHA_FLAGS_MIX = 131,
+} OMX_DISPLAYASPECTFLAGSTYPE;
 
 typedef struct OMX_CONFIG_DISPLAYREGIONTYPE {
    OMX_U32 nSize;
@@ -2535,7 +2547,7 @@ Mainly used by the MMAL framework.
 
 <a name="OMX_IndexParamBrcmSupportsUnalignedSliceheight"><h2>Unaligned nSliceHeight support</h2></a>
 <tt>OMX_IndexParamBrcmSupportsUnalignedSliceheight</tt><br>
-Used by: <a href="isp.html">isp</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_PORTBOOLEANTYPE</tt><p>
 
@@ -3142,7 +3154,7 @@ This configures the physical camera interface type.<p>
 </dl>
 <a name="OMX_IndexParamCameraPoolToEncoderFunction"><h2>Camera and Video Encoder communication</h2></a>
 <tt>OMX_IndexParamCameraPoolToEncoderFunction</tt><br>
-Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="camera.html">camera</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
+Used by: <a href="image_fx.html">image_fx</a>, <a href="resize.html">resize</a>, <a href="null_sink.html">null_sink</a>, <a href="camera.html">camera</a>, <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a>, <a href="video_splitter.html">video_splitter</a><p>
 
 <pre>
 typedef struct OMX_PARAM_CAMERAPOOLTOENCODERFUNCTIONTYPE {
@@ -3425,7 +3437,7 @@ This parameter contains opaque data in a format specified by Broadcom
 
 <a name="OMX_IndexParamColorSpace"><h2>Colour space information</h2></a>
 <tt>OMX_IndexParamColorSpace</tt><br>
-Used by: <a href="image_decode.html">image_decode</a>, <a href="camera.html">camera</a>, <a href="isp.html">isp</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="image_decode.html">image_decode</a>, <a href="camera.html">camera</a>, <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_decode.html">video_decode</a>, <a href="video_render.html">video_render</a><p>
 
 <pre>
 typedef enum OMX_COLORSPACETYPE
@@ -3642,6 +3654,21 @@ This parameter is used to control the size of pool that the component
  can be reset by setting this parameter with all three fields set to
  zero.<p>
 
+<a name="OMX_IndexParamMinimumAlignment"><h2>Query component alignment requirements.</h2></a>
+<tt>OMX_IndexParamMinimumAlignment</tt><br>
+Used by: <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
+
+This index uses the standard IL structure <tt>OMX_PARAM_MINALIGNTYPE</tt><p>
+
+Allows the component to be queried for the minimum alignment (in bytes) required
+ on a port for a given color format.
+ Used by the MMAL framework to allow a reduction in the padding.<p>
+
+<dl>
+<dt><tt>eColorFormat</tt><dd>Format being queried 
+<dt><tt>nMinHorizontalAlign</tt><dd>Minimum horizontal alignment required in bytes 
+<dt><tt>nMinVerticalAlign</tt><dd>Minimum vertical alignment required in bytes 
+</dl>
 <a name="OMX_IndexParamNumOutputChannels"><h2>Query for the number of output channels in the decoded stream</h2></a>
 <tt>OMX_IndexParamNumOutputChannels</tt><br>
 Used by: <a href="video_decode.html">video_decode</a><p>
@@ -3694,26 +3721,16 @@ This parameter uses internal configuration to determine used, so should not be c
   
  <p>
 
-<a name="OMX_IndexParamRemoveImagePadding"><h2>Remove image padding</h2></a>
+<a name="OMX_IndexParamRemoveImagePadding"><h2>Query component padding requirements</h2></a>
 <tt>OMX_IndexParamRemoveImagePadding</tt><br>
-Used by: <a href="camera.html">camera</a><p>
+Used by: <a href="camera.html">camera</a>, <a href="video_render.html">video_render</a><p>
 
-<pre>
-typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_BOOL bEnabled;
-} OMX_CONFIG_PORTBOOLEANTYPE;
-</pre><p>
- Normally the components will require nStride and nSliceHeight to be
-  padded to an appropriate multiple of N for performance reasons.
-  If a performance hit can be accepted, this parameter can remove the
-  restriction and run with nStride = (nFrameWidth * bytes_per_pixel), and
-  nSliceHeight = nFrameHeight, even if nFrameWidth and nFrameHeight are
-  not appropriate multiples.
-  
- <p>
+This index uses the standard IL structure <tt>OMX_CONFIG_PORTBOOLEANTYPE</tt><p>
+
+Queries whether the component can remove all padding from images, or can
+ accept images with no padding.
+ Used by the MMAL framework predominantly.
+ Superceded by OMX_IndexParamMinimumAlignment.<p>
 
 <a name="OMX_IndexParamResize"><h2>Resize Control</h2></a>
 <tt>OMX_IndexParamResize</tt><br>

@@ -29,6 +29,7 @@
 <tr><td bgcolor="#e0c0c0">
 <a href="camera.html">camera</a><br>
 <a href="egl_render.html">egl_render</a><br>
+<a href="hvs.html">hvs</a><br>
 <a href="isp.html">isp</a><br>
 <a href="rawcam.html">rawcam</a><br>
 <a href="video_decode.html">video_decode</a><br>
@@ -119,7 +120,11 @@ on the fly.
   the port. Only the highest level is reported for each supported profile.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmPixelAspectRatio">OMX_IndexParamBrcmPixelAspectRatio</a></tt>
 <td> Query / set the pixel aspect ratio of the source content.
- <tr valign="top"><td rowspan="11">131<td><tt>OMX_IndexParamPortDefinition</tt>
+ <tr valign="top"><td rowspan="1">130 131<td><tt>OMX_IndexParamVideoPortFormat</tt>
+<td> Query / set the port format.  The input port supports a wide range of
+  compressed video format, the output port supports only raw non-encoded
+  video.
+ <tr valign="top"><td rowspan="12">131<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Once we have the details of the output format, this will be
   populated. Details are acquired via codec-specific headers, which are
   either exchanged using the <tt>OMX_IndexParamCodecConfig</tt> when tunnelling
@@ -158,10 +163,8 @@ on the fly.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamNumOutputChannels">OMX_IndexParamNumOutputChannels</a></tt>
 <td> Query for the number of output channels in the decoded stream.  This indicates
   whether the stream is 2d (1 channel) or stereoscopic (2 channels).
- <tr valign="top"><td rowspan="1">130 131<td><tt>OMX_IndexParamVideoPortFormat</tt>
-<td> Query / set the port format.  The input port supports a wide range of
-  compressed video format, the output port supports only raw non-encoded
-  video.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
+<td> Retrieve the image colour space of the video produced by this port.
  <tr valign="top"><td rowspan="14">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
 <td> Query / set the location of an externally allocated image pool to use
   for output frames. Defaults to NULL, causing the component to allocate

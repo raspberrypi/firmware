@@ -89,6 +89,20 @@ Params:
         audio                   Set to "on" to enable the onboard ALSA audio
                                 interface (default "off")
 
+        eee                     Enable Energy Efficient Ethernet support for
+                                compatible devices (default "on"). See also
+                                "tx_lpi_timer".
+
+        eth_led0                Set mode of LED0 (usually orange) (default
+                                "1"). The legal values are:
+                                0=link/activity          1=link1000/activity
+                                2=link100/activity       3=link10/activity
+                                4=link100/1000/activity  5=link10/1000/activity
+                                6=link10/100/activity    14=off    15=on
+
+        eth_led1                Set mode of LED1 (usually green) (default
+                                "6"). See eth_led0 for legal values.
+
         i2c_arm                 Set to "on" to enable the ARM's i2c interface
                                 (default "off")
 
@@ -124,6 +138,13 @@ Params:
                                 SD card (default 1)
 
         sd_debug                Enable debug output from SD driver (default off)
+
+        sdio_overclock          Clock (in MHz) to use when the MMC framework
+                                requests 50MHz for the SDIO/WiFi interface.
+
+        tx_lpi_timer            Set the delay in microseconds between going idle
+                                and entering the low power state (default 600).
+                                Requires EEE to be enabled - see "eee".
 
         uart0                   Set to "off" to disable uart0 (default "on")
 
@@ -296,6 +317,12 @@ Load:   dtoverlay=allo-digione
 Params: <None>
 
 
+Name:   allo-katana-dac-audio
+Info:   Configures the Allo Katana DAC audio card
+Load:   dtoverlay=allo-katana-dac-audio
+Params: <None>
+
+
 Name:   allo-piano-dac-pcm512x-audio
 Info:   Configures the Allo Piano DAC (2.0/2.1) audio cards.
         (NB. This initial support is for 2.0 channel audio ONLY! ie. stereo.
@@ -357,8 +384,9 @@ Params: interrupt               GPIO used for INT (default 23)
 
 Name:   audioinjector-addons
 Info:   Configures the audioinjector.net audio add on soundcards
-Load:   dtoverlay=audioinjector-addons
-Params: <None>
+Load:   dtoverlay=audioinjector-addons,<param>=<val>
+Params: non-stop-clocks         Keeps the clocks running even when the stream
+                                is paused or stopped (default off)
 
 
 Name:   audioinjector-wm8731-audio
@@ -374,6 +402,13 @@ Params: swap_lr                 Reverse the channel allocation, which will also
                                 swap the audio jack outputs (default off)
         enable_jack             Don't switch off the audio jack output
                                 (default off)
+
+
+Name:   balena-fin
+Info:   Overlay that enables WiFi, Bluetooth and the GPIO expander on the
+        Balena Fin board.
+Load:   dtoverlay=balena-fin
+Params: <None>
 
 
 Name:   bmp085_i2c-sensor
@@ -548,6 +583,13 @@ Params: gpio                    GPIO pin to trigger on (default 3)
         keycode                 Set the key code for the button
 
 
+Name:   gpio-no-irq
+Info:   Use this overlay to disable all GPIO interrupts, which can be useful
+        for user-space GPIO edge detection systems.
+Load:   dtoverlay=gpio-no-irq
+Params: <None>
+
+
 Name:   gpio-poweroff
 Info:   Drives a GPIO high or low on poweroff (including halt). Enabling this
         overlay will prevent the ability to boot by driving GPIO3 low.
@@ -560,6 +602,9 @@ Params: gpiopin                 GPIO for signalling (default 26)
                                 custom dt-blob.bin to prevent a power-down
                                 during the boot process, and that a reboot
                                 will also cause the pin to go low.
+        input                   Set if the gpio pin should be configured as
+                                an input.
+        export                  Set to export the configured pin to sysfs
 
 
 Name:   gpio-shutdown
@@ -609,6 +654,27 @@ Params: <None>
 Name:   hifiberry-dacplus
 Info:   Configures the HifiBerry DAC+ audio card
 Load:   dtoverlay=hifiberry-dacplus,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-dacplus,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        slave                   Force DAC+ Pro into slave mode, using Pi as
+                                master for bit clock and frame clock.
+
+
+Name:   hifiberry-dacplusadc
+Info:   Configures the HifiBerry DAC+ADC audio card
+Load:   dtoverlay=hifiberry-dacplusadc,<param>=<val>
 Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 Digital volume control. Enable with
                                 "dtoverlay=hifiberry-dacplus,24db_digital_gain"
@@ -692,6 +758,13 @@ Params: i2c_gpio_sda            GPIO used for I2C data (default "23")
 
         i2c_gpio_delay_us       Clock delay in microseconds
                                 (default "2" = ~100kHz)
+
+        bus                     Set to a unique, non-zero value if wanting
+                                multiple i2c-gpio busses. If set, will be used
+                                as the preferred bus number (/dev/i2c-<n>). If
+                                not set, the default value is 0, but the bus
+                                number will be dynamically assigned - probably
+                                3.
 
 
 Name:   i2c-mux
@@ -795,8 +868,8 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BMP280, TMP102,
-                                HDC100X, LM75 or SHT3x
+Params: addr                    Set the address for the BME280, BMP280, DS1621,
+                                HDC100X, LM75, SHT3x or TMP102
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -808,6 +881,9 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102,
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
 
+        ds1621                  Select the Dallas Semiconductors DS1621 temp
+                                sensor. Valid addresses 0x48-0x4f, default 0x48
+
         hdc100x                 Select the Texas Instruments HDC100x temp sensor
                                 Valid addresses 0x40-0x43, default 0x40
 
@@ -817,6 +893,10 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102,
                                 Valid addresses 0x48-0x4f, default 0x4f
 
         lm75addr                Deprecated - use addr parameter instead
+
+        sht3x                   Select the Sensiron SHT3x temperature and
+                                humidity sensor. Valid addresses 0x44-0x45,
+                                default 0x44
 
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
@@ -830,14 +910,11 @@ Params: addr                    Set the address for the BME280, BMP280, TMP102,
         veml6070                Select the Vishay VEML6070 ultraviolet light
                                 sensor
 
-        sht3x                   Select the Sensiron SHT3x temperature and
-                                humidity sensor. Valid addresses 0x44-0x45,
-                                default 0x44
-
 
 Name:   i2c0-bcm2708
-Info:   Enable the i2c_bcm2708 driver for the i2c0 bus. Not all pin combinations
-        are usable on all platforms.
+Info:   Change i2c0 pin usage. Not all pin combinations are usable on all
+        platforms - platforms other then Compute Modules can only use this
+        to disable transaction combining.
 Load:   dtoverlay=i2c0-bcm2708,<param>=<val>
 Params: sda0_pin                GPIO pin for SDA0 (deprecated - use pins_*)
         scl0_pin                GPIO pin for SCL0 (deprecated - use pins_*)
@@ -845,15 +922,22 @@ Params: sda0_pin                GPIO pin for SDA0 (deprecated - use pins_*)
         pins_28_29              Use pins 28 and 29
         pins_44_45              Use pins 44 and 45
         pins_46_47              Use pins 46 and 47
+        combine                 Allow transactions to be combined (default
+                                "yes")
 
 
 Name:   i2c1-bcm2708
+Info:   Change i2c1 pin usage. Not all pin combinations are usable on all
+        platforms - platforms other then Compute Modules can only use this
+        to disable transaction combining.
 Info:   Enable the i2c_bcm2708 driver for the i2c1 bus
 Load:   dtoverlay=i2c1-bcm2708,<param>=<val>
 Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
         scl1_pin                GPIO pin for SCL1 (3 or 45 - default 3)
         pin_func                Alternative pin function (4 (alt0), 6 (alt2) -
                                 default 4)
+        combine                 Allow transactions to be combined (default
+                                "yes")
 
 
 Name:   i2s-gpio28-31
@@ -913,6 +997,15 @@ Params: card_name               Override the default, "IQAudIODigi", card name.
                                 dai stream name.
 
 
+Name:   jedec-spi-nor
+Info:   Adds support for JEDEC-compliant SPI NOR flash devices.  (Note: The
+        "jedec,spi-nor" kernel driver was formerly known as "m25p80".)
+Load:   dtoverlay=jedec-spi-nor,<param>=<val>
+Params: flash-spi<n>-<m>        Enables flash device on SPI<n>, CS#<m>.
+        flash-fastr-spi<n>-<m>  Enables flash device with fast read capability
+                                on SPI<n>, CS#<m>.
+
+
 Name:   justboom-dac
 Info:   Configures the JustBoom DAC HAT, Amp HAT, DAC Zero and Amp Zero audio
         cards
@@ -963,6 +1056,31 @@ Params: gpio_out_pin            GPIO for output (default "17")
 
         debug                   "on" = enable additional debug messages
                                 (default "off")
+
+
+Name:   ltc294x
+Info:   Adds support for the ltc294x family of battery gauges
+Load:   dtoverlay=ltc294x,<param>=<val>
+Params: ltc2941                 Select the ltc2941 device
+
+        ltc2942                 Select the ltc2942 device
+
+        ltc2943                 Select the ltc2943 device
+
+        ltc2944                 Select the ltc2944 device
+
+        resistor-sense          The sense resistor value in milli-ohms.
+                                Can be a 32-bit negative value when the battery
+                                has been connected to the wrong end of the
+                                resistor.
+
+        prescaler-exponent      Range and accuracy of the gauge. The value is
+                                programmed into the chip only if it differs
+                                from the current setting.
+                                For LTC2941 only:
+                                - Default value is 128
+                                - the exponent is in the range 0-7 (default 7)
+                                See the datasheet for more information.
 
 
 Name:   mbed-dac
@@ -1175,6 +1293,13 @@ Load:   dtoverlay=pi3-miniuart-bt
 Params: <None>
 
 
+Name:   pibell
+Info:   Configures the pibell audio card.
+Load:   dtoverlay=pibell,<param>=<val>
+Params: alsaname                Set the name as it appears in ALSA (default
+                                "PiBell")
+
+
 Name:   piscreen
 Info:   PiScreen display by OzzMaker.com
 Load:   dtoverlay=piscreen,<param>=<val>
@@ -1272,7 +1397,10 @@ Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
 Load:   dtoverlay=pps-gpio,<param>=<val>
 Params: gpiopin                 Input GPIO (default "18")
         assert_falling_edge     When present, assert is indicated by a falling
-                                edge, rather than by a rising edge
+                                edge, rather than by a rising edge (default
+                                off)
+        capture_clear           Generate clear events on the trailing edge
+                                (default off)
 
 
 Name:   pwm
@@ -1336,18 +1464,12 @@ Params: int_pin                 GPIO pin for interrupt signal (default 23)
         speed                   SPI bus speed (default 12 MHz)
 
 
-Name:   raspidac3
-Info:   Configures the RaspiDAV Rev.3x audio card
-Load:   dtoverlay=raspidac3
-Params: <None>
-
-
 Name:   rotary-encoder
 Info:   Overlay for GPIO connected rotary encoder.
 Load:   dtoverlay=rotary-encoder,<param>=<val>
-Params: rotary0_pin_a           GPIO connected to rotary encoder channel A
+Params: pin_a                   GPIO connected to rotary encoder channel A
                                 (default 4).
-        rotary0_pin_b           GPIO connected to rotary encoder channel B
+        pin_b                   GPIO connected to rotary encoder channel B
                                 (default 17).
         relative_axis           register a relative axis rather than an
                                 absolute one. Relative axis will only
@@ -1414,6 +1536,12 @@ Params: touchscreen-size-x      Touchscreen X resolution (default 800)
         touchscreen-swapped-x-y Swap X and Y cordinates (default 0);
 
 
+Name:   rpi-poe
+Info:   Raspberry Pi POE HAT
+Load:   dtoverlay=rpi-poe
+Params: <None>
+
+
 Name:   rpi-proto
 Info:   Configures the RPi Proto audio card
 Load:   dtoverlay=rpi-proto
@@ -1440,12 +1568,21 @@ Params: <None>
 
 Name:   sc16is750-i2c
 Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
-        Enables the chip on I2C1 at 0x48. To select another address,
-        please refer to table 10 in reference manual.
-
+        Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
+        select another address, please refer to table 10 in reference manual.
 Load:   dtoverlay=sc16is750-i2c,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
         addr                    Address (default 0x48)
+
+
+Name:   sc16is752-i2c
+Info:   Overlay for the NXP SC16IS752 dual UART with I2C Interface
+        Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
+        select another address, please refer to table 10 in reference manual.
+Load:   dtoverlay=sc16is752-i2c,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+        addr                    Address (default 0x48)
+        xtal                    On-board crystal frequency (default 14745600)
 
 
 Name:   sc16is752-spi1
@@ -1514,6 +1651,16 @@ Params: overclock_50            Clock (in MHz) to use when the MMC framework
                                 (default 1)
 
         debug                   Enable debug output (default off)
+
+        poll_once               Looks for a card once after booting. Useful
+                                for network booting scenarios to avoid the
+                                overhead of continuous polling. N.B. Using
+                                this option restricts the system to using a
+                                single card per boot (or none at all).
+                                (default off)
+
+        enable                  Set to off to completely disable the interface
+                                (default on)
 
 
 Name:   smi
@@ -1658,6 +1805,31 @@ Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
                                 is 'okay' or enabled).
 
 
+Name:   superaudioboard
+Info:   Configures the SuperAudioBoard sound card
+Load:   dtoverlay=superaudioboard,<param>=<val>
+Params: gpiopin                 GPIO pin for codec reset
+
+
+Name:   sx150x
+Info:   Configures the Semtech SX150X I2C GPIO expanders.
+Load:   dtoverlay=sx150x,<param>=<val>
+Params: sx150<x>-<n>-<m>        Enables SX150X device on I2C#<n> with slave
+                                address <m>. <x> may be 1-9. <n> may be 0 or 1.
+                                Permissible values of <m> (which is denoted in
+                                hex) depend on the device variant. For SX1501,
+                                SX1502, SX1504 and SX1505, <m> may be 20 or 21.
+                                For SX1503 and SX1506, <m> may be 20. For
+                                SX1507 and SX1509, <m> may be 3E, 3F, 70 or 71.
+                                For SX1508, <m> may be 20, 21, 22 or 23.
+
+        sx150<x>-<n>-<m>-int-gpio
+                                Integer, enables interrupts on SX150X device on
+                                I2C#<n> with slave address <m>, specifies
+                                the GPIO pin to which NINT output of SX150X is
+                                connected.
+
+
 Name:   tinylcd35
 Info:   3.5" Color TFT Display by www.tinylcd.com
         Options: Touch, RTC, keypad
@@ -1689,6 +1861,14 @@ Params: speed                   Display SPI bus speed
                 dtoverlay=tinylcd35,touch,touchgpio=3
 
 
+Name:   tpm-slb9670
+Info:   Enables support for Infineon SLB9670 Trusted Platform Module add-on
+        boards, which can be used as a secure key storage and hwrng,
+        available as "Iridium SLB9670" by Infineon and "LetsTrust TPM" by pi3g.
+Load:   dtoverlay=tpm-slb9670
+Params: <None>
+
+
 Name:   uart0
 Info:   Change the pin usage of uart0
 Load:   dtoverlay=uart0,<param>=<val>
@@ -1706,6 +1886,21 @@ Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
         rxd1_pin                GPIO pin for RXD1 (15, 33 or 41 - default 15)
+
+
+Name:   upstream
+Info:   Allow usage of downstream .dtb with upstream kernel. Comprises
+        vc4-kms-v3d, dwc2 and upstream-aux-interrupt overlays.
+Load:   dtoverlay=upstream
+Params: <None>
+
+
+Name:   upstream-aux-interrupt
+Info:   Allow usage of downstream .dtb with upstream kernel by binding AUX
+        devices directly to the shared AUX interrupt line. One of the parts
+        of the 'upstream' overlay
+Load:   dtoverlay=upstream-aux-interrupt
+Params: <None>
 
 
 Name:   vc4-fkms-v3d

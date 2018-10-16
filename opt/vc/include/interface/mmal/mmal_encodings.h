@@ -101,6 +101,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #define MMAL_ENCODING_I420_10          MMAL_FOURCC('i','4','1','0')
 
+/** YUV 4:2:0 planar but with U and V in side-by-side format
+ *   So U and V have same pitch as Y, but V = U + pitch/2
+*/
+#define MMAL_ENCODING_I420_S           MMAL_FOURCC('I','4','2','S')
+
 //Bayer formats
 //FourCC values copied from V4L2 where defined.
 //10 bit per pixel packed Bayer formats.
@@ -123,7 +128,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SRGGB12P   MMAL_FOURCC('p','R','1','2')  //RGGB
 
 //16 bit per pixel Bayer formats.
-#define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('R','G','1','6')  //BGGR
+#define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('B','G','1','6')  //BGGR
 #define MMAL_ENCODING_BAYER_SGBRG16    MMAL_FOURCC('G','B','1','6')  //GBRG
 #define MMAL_ENCODING_BAYER_SGRBG16    MMAL_FOURCC('G','R','1','6')  //GRBG
 #define MMAL_ENCODING_BAYER_SRGGB16    MMAL_FOURCC('R','G','1','6')  //RGGB

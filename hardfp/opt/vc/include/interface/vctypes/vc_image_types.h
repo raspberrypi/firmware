@@ -118,6 +118,7 @@ typedef enum
    
    VC_IMAGE_YUV420_16,  /* YUV4:2:0 planar, 16bit values */
    VC_IMAGE_YUV_UV_16,  /* YUV4:2:0 codec format, 16bit values */
+   VC_IMAGE_YUV420_S,   /* YUV4:2:0 with U,V in side-by-side format */
 
    VC_IMAGE_MAX,     //bounds for error checking
    VC_IMAGE_FORCE_ENUM_16BIT = 0xffff,
