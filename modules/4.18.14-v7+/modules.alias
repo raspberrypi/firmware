@@ -9775,8 +9775,8 @@ alias of:N*T*Ciqaudio,iqaudio-dacC* snd_soc_rpi_pcm512x_soundcard
 alias of:N*T*Ciqaudio,iqaudio-dac snd_soc_rpi_pcm512x_soundcard
 alias of:N*T*Cdionaudio,dionaudio-loco-v2C* snd_soc_rpi_pcm512x_soundcard
 alias of:N*T*Cdionaudio,dionaudio-loco-v2 snd_soc_rpi_pcm512x_soundcard
-alias of:N*T*Callo,allo-piano-dacC* snd_soc_rpi_pcm512x_soundcard
-alias of:N*T*Callo,allo-piano-dac snd_soc_rpi_pcm512x_soundcard
+alias of:N*T*Callo,piano-dacC* snd_soc_rpi_pcm512x_soundcard
+alias of:N*T*Callo,piano-dac snd_soc_rpi_pcm512x_soundcard
 alias fs-oprofilefs oprofile
 alias act_xt act_ipt
 alias sch_clsact sch_ingress

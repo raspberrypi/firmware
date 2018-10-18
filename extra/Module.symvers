@@ -887,7 +887,6 @@
 0x8a8cb4e8	usb_composite_probe	drivers/usb/gadget/libcomposite	EXPORT_SYMBOL_GPL
 0xd5dbc330	ssb_device_is_enabled	drivers/ssb/ssb	EXPORT_SYMBOL
 0x4b8e3bd4	rpc_unlink	vmlinux	EXPORT_SYMBOL_GPL
-0x6ce55f65	pskb_trim_rcsum_slow	vmlinux	EXPORT_SYMBOL
 0x6b2e8075	arch_set_freq_scale	vmlinux	EXPORT_SYMBOL_GPL
 0xcf9b558d	touchscreen_set_mt_pos	vmlinux	EXPORT_SYMBOL
 0xa1bf9c65	locks_in_grace	vmlinux	EXPORT_SYMBOL_GPL

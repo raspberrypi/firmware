@@ -231,7 +231,7 @@ kernel/drivers/net/wireless/realtek/rtlwifi/rtlwifi.ko: kernel/net/mac80211/mac8
 kernel/drivers/net/wireless/realtek/rtlwifi/rtl_usb.ko: kernel/drivers/net/wireless/realtek/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192c/rtl8192c-common.ko: kernel/drivers/net/wireless/realtek/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192cu/rtl8192cu.ko: kernel/drivers/net/wireless/realtek/rtlwifi/rtl_usb.ko kernel/drivers/net/wireless/realtek/rtlwifi/rtl8192c/rtl8192c-common.ko kernel/drivers/net/wireless/realtek/rtlwifi/rtlwifi.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
-kernel/drivers/net/wireless/realtek/rtl8192cu/8192cu.ko:
+kernel/drivers/net/wireless/realtek/rtl8192cu/8192cu.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/realtek/rtl8xxxu/rtl8xxxu.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/zydas/zd1211rw/zd1211rw.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/wireless/zydas/zd1201.ko: kernel/net/wireless/cfg80211.ko kernel/net/rfkill/rfkill.ko

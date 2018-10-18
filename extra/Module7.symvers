@@ -895,7 +895,6 @@
 0x3eacee7a	usb_composite_probe	drivers/usb/gadget/libcomposite	EXPORT_SYMBOL_GPL
 0x1b5554d7	ssb_device_is_enabled	drivers/ssb/ssb	EXPORT_SYMBOL
 0xd789506e	rpc_unlink	vmlinux	EXPORT_SYMBOL_GPL
-0x9113e159	pskb_trim_rcsum_slow	vmlinux	EXPORT_SYMBOL
 0x023acb27	arch_set_freq_scale	vmlinux	EXPORT_SYMBOL_GPL
 0xcf9b558d	touchscreen_set_mt_pos	vmlinux	EXPORT_SYMBOL
 0xa1d2642e	locks_in_grace	vmlinux	EXPORT_SYMBOL_GPL
