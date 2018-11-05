@@ -263,6 +263,9 @@ typedef enum OMX_DISPLAYSETTYPE {
 
 typedef enum OMX_DISPLAYASPECTFLAGSTYPE {
   OMX_DISPLAY_ALPHA_FLAGS_NONE = 0,
+  // All layers below and including this one will be ignored (used for screen
+  // blanking in full screen rendering)
+  OMX_DISPLAY_ALPHA_FLAGS_DISCARD_LOWER_LAYERS = 1<<29,
   // Alpha values are already premultiplied
   OMX_DISPLAY_ALPHA_FLAGS_PREMULT = 1<<30,
   // Mix the per pixel alpha (if present) and the per plane alpha.
