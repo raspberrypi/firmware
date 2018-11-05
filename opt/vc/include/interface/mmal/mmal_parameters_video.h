@@ -154,13 +154,18 @@ typedef enum MMAL_DISPLAYSET_T {
    MMAL_DISPLAY_SET_DUMMY = 0x7FFFFFFF
 } MMAL_DISPLAYSET_T;
 
-typedef enum MMAL_DISPLAYASPECTFLAGS {
+typedef enum MMAL_DISPLAYALPHAFLAGS_T {
   MMAL_DISPLAY_ALPHA_FLAGS_NONE = 0,
+  /**< Discard all lower layers as if this layer were fullscreen and completely
+   * opaque. This flag removes the lower layers from the display list, therefore
+   * avoiding using resources in wasted effort.
+   */
+  MMAL_DISPLAY_ALPHA_FLAGS_DISCARD_LOWER_LAYERS = 1<<29,
   /**< Alpha values are already premultiplied */
   MMAL_DISPLAY_ALPHA_FLAGS_PREMULT = 1<<30,
   /**< Mix the per pixel alpha (if present) and the per plane alpha. */
   MMAL_DISPLAY_ALPHA_FLAGS_MIX = 1<<31,
-} MMAL_DISPLAYASPECTFLAGS_T;
+} MMAL_DISPLAYALPHAFLAGS_T;
 
 /**
 This config sets the output display device, as well as the region used
@@ -224,7 +229,7 @@ typedef struct MMAL_DISPLAYREGION_T {
    MMAL_BOOL_T copyprotect_required;
    /** Bits 7-0: Level of opacity of the layer, where zero is fully transparent and
     * 255 is fully opaque.
-    * Bits 31-8: Flags from \code MMAL_DISPLAYASPECTFLAGS_T for alpha mode selection.
+    * Bits 31-8: Flags from \code MMAL_DISPLAYALPHAFLAGS_T for alpha mode selection.
     */
    uint32_t alpha;
 } MMAL_DISPLAYREGION_T;
