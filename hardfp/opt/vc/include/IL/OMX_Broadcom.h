@@ -261,6 +261,17 @@ typedef enum OMX_DISPLAYSETTYPE {
    OMX_DISPLAY_SET_DUMMY = 0x7FFFFFFF
 } OMX_DISPLAYSETTYPE;
 
+typedef enum OMX_DISPLAYASPECTFLAGSTYPE {
+  OMX_DISPLAY_ALPHA_FLAGS_NONE = 0,
+  // All layers below and including this one will be ignored (used for screen
+  // blanking in full screen rendering)
+  OMX_DISPLAY_ALPHA_FLAGS_DISCARD_LOWER_LAYERS = 1<<29,
+  // Alpha values are already premultiplied
+  OMX_DISPLAY_ALPHA_FLAGS_PREMULT = 1<<30,
+  // Mix the per pixel alpha (if present) and the per plane alpha.
+  OMX_DISPLAY_ALPHA_FLAGS_MIX = 1<<31,
+} OMX_DISPLAYASPECTFLAGSTYPE;
+
 typedef struct OMX_CONFIG_DISPLAYREGIONTYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
