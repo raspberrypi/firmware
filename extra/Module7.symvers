@@ -1835,6 +1835,7 @@
 0xa90297a8	vchiq_connect	vmlinux	EXPORT_SYMBOL
 0x24eb7e32	leds_list	vmlinux	EXPORT_SYMBOL_GPL
 0xd6e7dfb5	mmc_start_areq	vmlinux	EXPORT_SYMBOL
+0x8d1a7a65	do_clone_file_range	vmlinux	EXPORT_SYMBOL
 0x9f9fc828	dump_page	vmlinux	EXPORT_SYMBOL
 0x183622f2	proc_douintvec_minmax	vmlinux	EXPORT_SYMBOL_GPL
 0x903b78c1	qtree_get_next_id	fs/quota/quota_tree	EXPORT_SYMBOL
