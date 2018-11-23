@@ -68,7 +68,7 @@ It is also not considered to be production quality code yet - please use with ca
 <p>
 <p>
 <table border="1" cellspacing="0" cellpadding="2"><tr><td>Port<td>Index<td>Notes
-<tr valign="top"><td rowspan="10">360<td><tt>OMX_IndexParamPortDefinition</tt>
+<tr valign="top"><td rowspan="11">360<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Set this to control the input size of the image. Typically this is
   called by the component itself when this port is tunnelled with an
   appropriate output port. The stripe height a multiple of 16, and
@@ -109,6 +109,10 @@ It is also not considered to be production quality code yet - please use with ca
   bAutoGain is not applicable to this component and will be ignored.
   xGain will always be used to set the digital gain within the pipe.
   This parameter only applies to Bayer input formats.
+ <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmIspBlockOverride">OMX_IndexParamBrcmIspBlockOverride</a></tt>
+<td> Disables ISP blocks.
+  Query / set a bitmask that can disable ISP processing blocks.
+  Blocks can NOT be enabled if they haven't been configured in the tuning.
  <tr valign="top"><td rowspan="1">361<td><tt>OMX_IndexParamPortDefinition</tt>
 <td> Query this to show what the output size will be. Set to alter the
   number of buffers to be used, or change the size of the output image
