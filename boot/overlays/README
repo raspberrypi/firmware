@@ -98,6 +98,11 @@ Params:
                                 compatible devices (default "on"). See also
                                 "tx_lpi_timer".
 
+        eth_downshift_after     Set the number of auto-negotiation failures
+                                after which the 1000Mbps modes are disabled.
+                                Legal values are 2, 3, 4, 5 and 0, where
+                                0 means never downshift (default 2).
+
         eth_led0                Set mode of LED0 (usually orange) (default
                                 "1"). The legal values are:
                                 0=link/activity          1=link1000/activity
@@ -107,6 +112,10 @@ Params:
 
         eth_led1                Set mode of LED1 (usually green) (default
                                 "6"). See eth_led0 for legal values.
+
+        eth_max_speed           Set the maximum speed a link is allowed
+                                to negotiate. Legal values are 10, 100 and
+                                1000 (default 1000).
 
         i2c_arm                 Set to "on" to enable the ARM's i2c interface
                                 (default "off")
@@ -277,7 +286,9 @@ Info:   Analog Devices ADV7282M analogue video to CSI2 bridge.
         Uses Unicam1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=adv7282m,<param>=<val>
-Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
         addr                    Overrides the I2C address (default 0x21)
 
@@ -286,7 +297,9 @@ Name:   adv728x-m
 Info:   Analog Devices ADV728[0|1|2]-M analogue video to CSI2 bridges.
         This is a wrapper for adv7282m, and defaults to ADV7282M.
 Load:   dtoverlay=adv728x-m,<param>=<val>
-Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
         addr                    Overrides the I2C address (default 0x21)
         adv7280m                Select ADV7280-M.
@@ -1324,6 +1337,9 @@ Params: cam0-pwdn               GPIO used to control the sensor powerdown line.
                                 configuration of the particular Pi variant in
                                 use.
 
+        i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+
         i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
 
@@ -1948,6 +1964,9 @@ Params: 4lane                   Use 4 lanes (only applicable to Compute Modules
         link-frequency          Set the link frequency. Only values of 297000000
                                 (574Mbit/s) and 486000000 (972Mbit/s - default)
                                 are supported by the driver.
+
+        i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
 
         i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
