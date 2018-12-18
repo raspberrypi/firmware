@@ -146,7 +146,11 @@ will also have <tt>OMX_BUFFERFLAG_ENDOFFRAME</tt> set.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVC_LowDelayHRDEnable">OMX_IndexParamBrcmVideoAVC_LowDelayHRDEnable</a></tt>
 <td> Enable/Disable setting low_delay_hrd flag in H.264 header. "big_pictures" that violate the nominal CPB removal times due to the number of bits used by an access unit are permitted when the flag is set.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCInlineHeaderEnable">OMX_IndexParamBrcmVideoAVCInlineHeaderEnable</a></tt>
-<td> Enable SPS/PPS insertion in the encoder bitstream. If this property is set then SPS/PPS will be output before each IDR frame or P=intrarefresh frame
+<td> Enable SPS/PPS insertion in the encoder bitstream. If this property is set then SPS/PPS
+  will be output before each IDR frame or P=intrarefresh frame.
+  Whilst designated as a Param, this property can now be changed while the component
+  and/or port is executing. The setting will be forwarded on to the codec to take
+  effect after the next IDR or P=intrarefresh frame.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCSPSTimingEnable">OMX_IndexParamBrcmVideoAVCSPSTimingEnable</a></tt>
 <td> Enable the insertion of timing information into the SPS based on the specified output port frame rate.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoAVCInlineVectorsEnable">OMX_IndexParamBrcmVideoAVCInlineVectorsEnable</a></tt>
