@@ -12341,6 +12341,7 @@
 0xff3daf18	rt2800_gain_calibration	drivers/net/wireless/ralink/rt2x00/rt2800lib	EXPORT_SYMBOL_GPL
 0xdb120f1e	ath9k_hw_disable	drivers/net/wireless/ath/ath9k/ath9k_hw	EXPORT_SYMBOL
 0xab163b00	ath_printk	drivers/net/wireless/ath/ath	EXPORT_SYMBOL
+0x2f38e4d3	xfrm_state_free	vmlinux	EXPORT_SYMBOL
 0x307bf04d	nf_hook_entries_delete_raw	vmlinux	EXPORT_SYMBOL_GPL
 0x368cbf9e	netlink_ack	vmlinux	EXPORT_SYMBOL
 0x4d4066cd	sock_get_timestamp	vmlinux	EXPORT_SYMBOL
