@@ -382,6 +382,9 @@ static void init_shaders(CUBE_STATE_T *state)
                              vertex_data, GL_STATIC_DRAW);
         glVertexAttribPointer(state->attr_vertex, 4, GL_FLOAT, 0, 16, 0);
         glEnableVertexAttribArray(state->attr_vertex);
+        glVertexAttribPointer(state->attr_vertex2, 4, GL_FLOAT, 0, 16, 0);
+        glEnableVertexAttribArray(state->attr_vertex2);
+
         check();
 }
 

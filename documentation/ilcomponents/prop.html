@@ -2652,7 +2652,11 @@ typedef struct OMX_CONFIG_PORTBOOLEANTYPE{
     OMX_BOOL bEnabled;
 } OMX_CONFIG_PORTBOOLEANTYPE;
 </pre><p>
-If this property is set then SPS/PPS will be output before each IDR frame or P=intrarefresh frame 
+If this property is set then SPS/PPS will be output before each IDR frame or P=intrarefresh frame.
+  Whilst designated as a Param, this property can now be changed while the component
+  and/or port is executing. The setting will be forwarded on to the codec to take
+  effect after the next IDR or P=intrarefresh frame.
+  
  <p>
 
 <a name="OMX_IndexParamBrcmVideoAVCInlineVectorsEnable"><h2>Enable insertion of vectors into the bitstream</h2></a>
@@ -3660,7 +3664,7 @@ This parameter is used to control the size of pool that the component
 
 <a name="OMX_IndexParamMinimumAlignment"><h2>Query component alignment requirements.</h2></a>
 <tt>OMX_IndexParamMinimumAlignment</tt><br>
-Used by: <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
+Used by: <a href="image_encode.html">image_encode</a>, <a href="hvs.html">hvs</a>, <a href="isp.html">isp</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_MINALIGNTYPE</tt><p>
 
