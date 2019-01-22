@@ -1202,6 +1202,8 @@ Params: gpiopin                 Gpio pin connected to the INTA output of the
 
         addr                    I2C address of the MCP23017 (default: 0x20)
 
+        mcp23008                Configure an MCP23008 instead.
+
 
 Name:   mcp23s17
 Info:   Configures the MCP23S08/17 SPI GPIO expanders.
@@ -1263,6 +1265,22 @@ Info:   Configures MCP3202 A/D converters
 Load:   dtoverlay=mcp3202,<param>[=<val>]
 Params: spi<n>-<m>-present      boolean, configure device at spi<n>, cs<m>
         spi<n>-<m>-speed        integer, set the spi bus speed for this device
+
+
+Name:   mcp342x
+Info:   Overlay for activation of Microchip MCP3421-3428 ADCs over I2C
+Load:   dtoverlay=mcp342x,<param>=<val>
+Params: addr                    I2C bus address of device, for devices with
+                                addresses that are configurable, e.g. by
+                                hardware links (default=0x68)
+        mcp3421                 The device is an MCP3421
+        mcp3422                 The device is an MCP3422
+        mcp3423                 The device is an MCP3423
+        mcp3424                 The device is an MCP3424
+        mcp3425                 The device is an MCP3425
+        mcp3426                 The device is an MCP3426
+        mcp3427                 The device is an MCP3427
+        mcp3428                 The device is an MCP3428
 
 
 Name:   media-center
@@ -1927,6 +1945,37 @@ Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
         cs2_spidev              Set to 'disabled' to stop the creation of a
                                 userspace device node /dev/spidev2.2 (default
                                 is 'okay' or enabled).
+
+
+Name:   ssd1306
+Info:   Overlay for activation of SSD1306 over I2C OLED display framebuffer.
+Load:   dtoverlay=ssd1306,<param>=<val>
+Params: address                 Location in display memory of first character.
+                                (default=0)
+        width                   Width of display. (default=128)
+        height                  Height of display. (default=64)
+        offset                  virtual channel a. (default=0)
+        normal                  Has no effect on displays tested. (default=not
+                                set)
+        sequential              Set this if every other scan line is missing.
+                                (default=not set)
+        remapped                Set this if display is garbled. (default=not
+                                set)
+        inverted                Set this if display is inverted and mirrored.
+                                (default=not set)
+
+        Examples:
+        Typical usage for 128x64 display: dtoverlay=ssd1306,inverted
+
+        Typical usage for 128x32 display: dtoverlay=ssd1306,inverted,sequential
+
+        i2c_baudrate=400000 will speed up the display.
+
+        i2c_baudrate=1000000 seems to work even though it's not officially
+        supported by the hardware, and is faster still.
+
+        For more information refer to the device datasheet at:
+        https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf
 
 
 Name:   superaudioboard
