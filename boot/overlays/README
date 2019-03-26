@@ -1030,6 +1030,9 @@ Params: addr                    Set the address for the BME280, BMP280, DS1621,
 
         lm75addr                Deprecated - use addr parameter instead
 
+        max17040                Select the Maxim Integrated MAX17040 battery
+                                monitor
+
         sht3x                   Select the Sensiron SHT3x temperature and
                                 humidity sensor. Valid addresses 0x44-0x45,
                                 default 0x44
@@ -1725,6 +1728,7 @@ Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
 Load:   dtoverlay=sc16is750-i2c,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
         addr                    Address (default 0x48)
+        xtal                    On-board crystal frequency (default 14745600)
 
 
 Name:   sc16is752-i2c
@@ -1784,6 +1788,9 @@ Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
 
         gpios_34_37             Select GPIOs 34-37 for 1-bit mode. Must be used
                                 with bus_width=1.
+
+        gpios_34_39             Select GPIOs 34-39 for 4-bit mode. Must be used
+                                with bus_width=4 (the default).
 
 
 Name:   sdio-1bit

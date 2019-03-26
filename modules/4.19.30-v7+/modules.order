@@ -862,6 +862,7 @@ kernel/drivers/media/radio/wl128x/fm_drv.ko
 kernel/drivers/media/radio/tea575x.ko
 kernel/drivers/power/supply/ds2760_battery.ko
 kernel/drivers/power/supply/ltc2941-battery-gauge.ko
+kernel/drivers/power/supply/max17040_battery.ko
 kernel/drivers/watchdog/gpio_wdt.ko
 kernel/drivers/md/linear.ko
 kernel/drivers/md/raid0.ko
@@ -1319,6 +1320,7 @@ kernel/net/netfilter/xt_rateest.ko
 kernel/net/netfilter/xt_realm.ko
 kernel/net/netfilter/xt_recent.ko
 kernel/net/netfilter/xt_sctp.ko
+kernel/net/netfilter/xt_socket.ko
 kernel/net/netfilter/xt_state.ko
 kernel/net/netfilter/xt_statistic.ko
 kernel/net/netfilter/xt_string.ko
@@ -1352,6 +1354,7 @@ kernel/net/netfilter/ipvs/ip_vs_ftp.ko
 kernel/net/netfilter/ipvs/ip_vs_pe_sip.ko
 kernel/net/ipv4/netfilter/nf_nat_ipv4.ko
 kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko
+kernel/net/ipv4/netfilter/nf_socket_ipv4.ko
 kernel/net/ipv4/netfilter/nf_tproxy_ipv4.ko
 kernel/net/ipv4/netfilter/nf_log_ipv4.ko
 kernel/net/ipv4/netfilter/nf_reject_ipv4.ko
@@ -1402,6 +1405,7 @@ kernel/net/ipv6/netfilter/ip6table_raw.ko
 kernel/net/ipv6/netfilter/ip6table_nat.ko
 kernel/net/ipv6/netfilter/nf_nat_ipv6.ko
 kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko
+kernel/net/ipv6/netfilter/nf_socket_ipv6.ko
 kernel/net/ipv6/netfilter/nf_tproxy_ipv6.ko
 kernel/net/ipv6/netfilter/nf_log_ipv6.ko
 kernel/net/ipv6/netfilter/nf_reject_ipv6.ko

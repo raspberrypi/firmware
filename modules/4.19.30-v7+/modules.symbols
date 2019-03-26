@@ -682,6 +682,7 @@ alias symbol:snd_ctl_free_one snd
 alias symbol:videobuf_read_stop videobuf_core
 alias symbol:i2400m_setup i2400m
 alias symbol:iio_channel_release industrialio
+alias symbol:nf_sk_lookup_slow_v6 nf_socket_ipv6
 alias symbol:ath9k_hw_set_interrupts ath9k_hw
 alias symbol:ieee802154_hdr_peek ieee802154
 alias symbol:cryptd_ablkcipher_queued cryptd
@@ -2735,6 +2736,7 @@ alias symbol:nand_ooblayout_sp_ops nand
 alias symbol:ieee80211_resume_disconnect mac80211
 alias symbol:vb2_discard_done videobuf2_common
 alias symbol:nf_ct_helper_expectfn_unregister nf_conntrack
+alias symbol:nf_sk_lookup_slow_v4 nf_socket_ipv4
 alias symbol:iscsi_host_get_param libiscsi
 alias symbol:register_ip_vs_app ip_vs
 alias symbol:drm_ht_remove drm

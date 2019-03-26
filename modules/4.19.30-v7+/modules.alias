@@ -8154,6 +8154,12 @@ alias of:N*T*Clltc,ltc2942C* ltc2941_battery_gauge
 alias of:N*T*Clltc,ltc2942 ltc2941_battery_gauge
 alias of:N*T*Clltc,ltc2941C* ltc2941_battery_gauge
 alias of:N*T*Clltc,ltc2941 ltc2941_battery_gauge
+alias i2c:max77836-battery max17040_battery
+alias i2c:max17040 max17040_battery
+alias of:N*T*Cmaxim,max77836-batteryC* max17040_battery
+alias of:N*T*Cmaxim,max77836-battery max17040_battery
+alias of:N*T*Cmaxim,max17040C* max17040_battery
+alias of:N*T*Cmaxim,max17040 max17040_battery
 alias of:N*T*Clinux,wdt-gpioC* gpio_wdt
 alias of:N*T*Clinux,wdt-gpio gpio_wdt
 alias md-level--1 linear
@@ -10193,6 +10199,8 @@ alias ip6t_recent xt_recent
 alias ipt_recent xt_recent
 alias ip6t_sctp xt_sctp
 alias ipt_sctp xt_sctp
+alias ip6t_socket xt_socket
+alias ipt_socket xt_socket
 alias ip6t_state xt_state
 alias ipt_state xt_state
 alias ip6t_statistic xt_statistic
