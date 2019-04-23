@@ -1013,6 +1013,9 @@ Params: abx80x                  Select one of the ABx80x family:
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
 
+        backup-switchover-mode  Backup power supply switch mode. Must be 0 for
+                                off or 1 for Vdd < VBackup (RV3028 only)
+
 
 Name:   i2c-rtc-gpio
 Info:   Adds support for a number of I2C Real Time Clock devices
@@ -1146,6 +1149,17 @@ Load:   dtoverlay=i2s-gpio28-31
 Params: <None>
 
 
+Name:   ilitek251x
+Info:   Enables I2C connected Ilitek 251x multiple touch controller using
+        GPIO 4 (pin 7 on GPIO header) for interrupt.
+Load:   dtoverlay=ilitek251x,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        sizex                   Touchscreen size x, horizontal resolution of
+                                touchscreen (in pixels)
+        sizey                   Touchscreen size y, vertical resolution of
+                                touchscreen (in pixels)
+
+
 Name:   iqaudio-dac
 Info:   Configures the IQaudio DAC audio card
 Load:   dtoverlay=iqaudio-dac,<param>
@@ -1260,6 +1274,15 @@ Params: ltc2941                 Select the ltc2941 device
                                 - Default value is 128
                                 - the exponent is in the range 0-7 (default 7)
                                 See the datasheet for more information.
+
+
+Name:   max98357a
+Info:   Configures the Maxim MAX98357A I2S DAC
+Load:   dtoverlay=max98357a,<param>=<val>
+Params: no-sdmode               Driver does not manage the state of the DAC's
+                                SD_MODE pin (i.e. chip is always on).
+        sdmode-pin              integer, GPIO pin connected to the SD_MODE input
+                                of the DAC (default GPIO4 if parameter omitted).
 
 
 Name:   mbed-dac
