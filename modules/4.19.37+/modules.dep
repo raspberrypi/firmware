@@ -894,6 +894,7 @@ kernel/drivers/mmc/host/mmc_spi.ko: kernel/lib/crc7.ko kernel/drivers/mmc/host/o
 kernel/drivers/mmc/host/of_mmc_spi.ko:
 kernel/drivers/leds/trigger/ledtrig-transient.ko:
 kernel/drivers/leds/trigger/ledtrig-camera.ko:
+kernel/drivers/leds/trigger/ledtrig-netdev.ko:
 kernel/drivers/leds/leds-pca963x.ko:
 kernel/drivers/leds/leds-is31fl32xx.ko:
 kernel/drivers/hid/uhid.ko:
