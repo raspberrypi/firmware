@@ -56,23 +56,29 @@ have its contents deleted (or commented out).
 Using Overlays
 ==============
 
-Overlays are loaded using the "dtoverlay" directive. As an example, consider
-the popular lirc-rpi module, the Linux Infrared Remote Control driver. In the
-pre-DT world this would be loaded from /etc/modules, with an explicit
-"modprobe lirc-rpi" command, or programmatically by lircd. With DT enabled,
-this becomes a line in config.txt:
+Overlays are loaded using the "dtoverlay" config.txt setting. As an example,
+consider I2C Real Time Clock drivers. In the pre-DT world these would be loaded
+by writing a magic string comprising a device identifier and an I2C address to
+a special file in /sys/class/i2c-adapter, having first loaded the driver for
+the I2C interface and the RTC device - something like this:
 
-    dtoverlay=lirc-rpi
+    modprobe i2c-bcm2835
+    modprobe rtc-ds1307
+    echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device
 
-This causes the file /boot/overlays/lirc-rpi.dtbo to be loaded. By
-default it will use GPIOs 17 (out) and 18 (in), but this can be modified using
-DT parameters:
+With DT enabled, this becomes a line in config.txt:
 
-    dtoverlay=lirc-rpi,gpio_out_pin=17,gpio_in_pin=13
+    dtoverlay=i2c-rtc,ds1307
 
-Parameters always have default values, although in some cases (e.g. "w1-gpio")
-it is necessary to provided multiple overlays in order to get the desired
-behaviour. See the list of overlays below for a description of the parameters
+This causes the file /boot/overlays/i2c-rtc.dtbo to be loaded and a "node"
+describing the DS1307 I2C device to be added to the Device Tree for the Pi. By
+default it usees address 0x68, but this can be modified with an additional DT
+parameter:
+
+    dtoverlay=i2c-rtc,ds1307,addr=0x68
+
+Parameters usually have default values, although certain parameters are
+mandatory. See the list of overlays below for a description of the parameters
 and their defaults.
 
 The Overlay and Parameter Reference
@@ -292,7 +298,9 @@ Info:   Analog Devices ADV7282M analogue video to CSI2 bridge.
         Uses Unicam1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=adv7282m,<param>=<val>
-Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
         addr                    Overrides the I2C address (default 0x21)
 
@@ -301,7 +309,9 @@ Name:   adv728x-m
 Info:   Analog Devices ADV728[0|1|2]-M analogue video to CSI2 bridges.
         This is a wrapper for adv7282m, and defaults to ADV7282M.
 Load:   dtoverlay=adv728x-m,<param>=<val>
-Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
         addr                    Overrides the I2C address (default 0x21)
         adv7280m                Select ADV7280-M.
@@ -521,6 +531,59 @@ Load:   dtoverlay=dpi24
 Params: <None>
 
 
+Name:   draws
+Info:   Configures the NW Digital Radio DRAWS Hat
+
+        The board includes an ADC to measure various board values and also
+        provides two analog user inputs on the expansion header.  The ADC
+        can be configured for various sample rates and gain values to adjust
+        the input range.  Tables describing the two parameters follow.
+
+        ADC Gain Values:
+            0 = +/- 6.144V
+            1 = +/- 4.096V
+            2 = +/- 2.048V
+            3 = +/- 1.024V
+            4 = +/- 0.512V
+            5 = +/- 0.256V
+            6 = +/- 0.256V
+            7 = +/- 0.256V
+
+        ADC Datarate Values:
+            0 = 128sps
+            1 = 250sps
+            2 = 490sps
+            3 = 920sps
+            4 = 1600sps (default)
+            5 = 2400sps
+            6 = 3300sps
+            7 = 3300sps
+Load:   dtoverlay=draws,<param>=<val>
+Params: draws_adc_ch4_gain      Sets the full scale resolution of the ADCs
+                                input voltage sensor (default 1)
+
+        draws_adc_ch4_datarate  Sets the datarate of the ADCs input voltage
+                                sensor
+
+        draws_adc_ch5_gain      Sets the full scale resolution of the ADCs
+                                5V rail voltage sensor (default 1)
+
+        draws_adc_ch5_datarate  Sets the datarate of the ADCs 4V rail voltage
+                                sensor
+
+        draws_adc_ch6_gain      Sets the full scale resolution of the ADCs
+                                AIN2 input (default 2)
+
+        draws_adc_ch6_datarate  Sets the datarate of the ADCs AIN2 input
+
+        draws_adc_ch7_gain      Sets the full scale resolution of the ADCs
+                                AIN3 input (default 2)
+
+        draws_adc_ch7_datarate  Sets the datarate of the ADCs AIN3 input
+
+        alsaname                Name of the ALSA audio device (default "draws")
+
+
 Name:   dwc-otg
 Info:   Selects the dwc_otg USB controller driver which has fiq support. This
         is the default on all except the Pi Zero which defaults to dwc2.
@@ -608,7 +671,7 @@ Load:   dtoverlay=gpio-ir,<param>=<val>
 Params: gpio_pin                Input pin number. Default is 18.
 
         gpio_pull               Desired pull-up/down state (off, down, up)
-                                Default is "down".
+                                Default is "up".
 
         rc-map-name             Default rc keymap (can also be changed by
                                 ir-keytable), defaults to "rc-rc6-mce"
@@ -769,6 +832,27 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 master for bit clock and frame clock.
 
 
+Name:   hifiberry-dacplusadc
+Info:   Configures the HifiBerry DAC+ADC audio card
+Load:   dtoverlay=hifiberry-dacplusadc,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-dacplus,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        slave                   Force DAC+ Pro into slave mode, using Pi as
+                                master for bit clock and frame clock.
+
+
 Name:   hifiberry-digi
 Info:   Configures the HifiBerry Digi and Digi+ audio card
 Load:   dtoverlay=hifiberry-digi
@@ -836,6 +920,12 @@ Params: speed                   Display SPI bus speed
         resetgpio               GPIO used to reset controller
 
         ledgpio                 GPIO used to control backlight
+
+
+Name:   i-sabre-q2m
+Info:   Configures the Audiophonics I-SABRE Q2M DAC
+Load:   dtoverlay=i-sabre-q2m
+Params: <None>
 
 
 Name:   i2c-bcm2708
@@ -908,6 +998,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf8563                 Select the PCF8563 device
 
+        rv3028                  Select the Micro Crystal RV3028 device
+
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified
                                 address.
@@ -916,10 +1008,13 @@ Params: abx80x                  Select one of the ABx80x family:
                                 "schottky" (ABx80x only)
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
-                                ABx80x)
+                                ABx80x, RV3028)
 
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
+
+        backup-switchover-mode  Backup power supply switch mode. Must be 0 for
+                                off or 1 for Vdd < VBackup (RV3028 only)
 
 
 Name:   i2c-rtc-gpio
@@ -999,6 +1094,9 @@ Params: addr                    Set the address for the BME280, BMP280, DS1621,
 
         lm75addr                Deprecated - use addr parameter instead
 
+        max17040                Select the Maxim Integrated MAX17040 battery
+                                monitor
+
         sht3x                   Select the Sensiron SHT3x temperature and
                                 humidity sensor. Valid addresses 0x44-0x45,
                                 default 0x44
@@ -1048,6 +1146,23 @@ Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
 Name:   i2s-gpio28-31
 Info:   move I2S function block to GPIO 28 to 31
 Load:   dtoverlay=i2s-gpio28-31
+Params: <None>
+
+
+Name:   ilitek251x
+Info:   Enables I2C connected Ilitek 251x multiple touch controller using
+        GPIO 4 (pin 7 on GPIO header) for interrupt.
+Load:   dtoverlay=ilitek251x,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        sizex                   Touchscreen size x, horizontal resolution of
+                                touchscreen (in pixels)
+        sizey                   Touchscreen size y, vertical resolution of
+                                touchscreen (in pixels)
+
+
+Name:   iqaudio-codec
+Info:   Configures the IQaudio Codec audio card
+Load:   dtoverlay=iqaudio-codec
 Params: <None>
 
 
@@ -1138,29 +1253,8 @@ Params: <None>
 
 
 Name:   lirc-rpi
-Info:   Configures lirc-rpi (Linux Infrared Remote Control for Raspberry Pi)
-        Consult the module documentation for more details.
-Load:   dtoverlay=lirc-rpi,<param>=<val>
-Params: gpio_out_pin            GPIO for output (default "17")
-
-        gpio_in_pin             GPIO for input (default "18")
-
-        gpio_in_pull            Pull up/down/off on the input pin
-                                (default "down")
-
-        sense                   Override the IR receive auto-detection logic:
-                                 "0" = force active-high
-                                 "1" = force active-low
-                                 "-1" = use auto-detection
-                                (default "-1")
-
-        softcarrier             Turn the software carrier "on" or "off"
-                                (default "on")
-
-        invert                  "on" = invert the output pin (default "off")
-
-        debug                   "on" = enable additional debug messages
-                                (default "off")
+Info:   This overlay has been deprecated and removed - see gpio-ir
+Load:   <Deprecated>
 
 
 Name:   ltc294x
@@ -1186,6 +1280,15 @@ Params: ltc2941                 Select the ltc2941 device
                                 - Default value is 128
                                 - the exponent is in the range 0-7 (default 7)
                                 See the datasheet for more information.
+
+
+Name:   max98357a
+Info:   Configures the Maxim MAX98357A I2S DAC
+Load:   dtoverlay=max98357a,<param>=<val>
+Params: no-sdmode               Driver does not manage the state of the DAC's
+                                SD_MODE pin (i.e. chip is always on).
+        sdmode-pin              integer, GPIO pin connected to the SD_MODE input
+                                of the DAC (default GPIO4 if parameter omitted).
 
 
 Name:   mbed-dac
@@ -1356,7 +1459,10 @@ Info:   Omnivision OV5647 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=ov5647,<param>=<val>
-Params: i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
+Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+
+        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
 
 
@@ -1430,6 +1536,12 @@ Info:   Configures the pibell audio card.
 Load:   dtoverlay=pibell,<param>=<val>
 Params: alsaname                Set the name as it appears in ALSA (default
                                 "PiBell")
+
+
+Name:   piglow
+Info:   Configures the PiGlow by pimoroni.com
+Load:   dtoverlay=piglow
+Params: <None>
 
 
 Name:   piscreen
@@ -1712,6 +1824,7 @@ Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
 Load:   dtoverlay=sc16is750-i2c,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
         addr                    Address (default 0x48)
+        xtal                    On-board crystal frequency (default 14745600)
 
 
 Name:   sc16is752-i2c
@@ -1771,6 +1884,9 @@ Params: sdio_overclock          SDIO Clock (in MHz) to use when the MMC
 
         gpios_34_37             Select GPIOs 34-37 for 1-bit mode. Must be used
                                 with bus_width=1.
+
+        gpios_34_39             Select GPIOs 34-39 for 4-bit mode. Must be used
+                                with bus_width=4 (the default).
 
 
 Name:   sdio-1bit
@@ -2015,6 +2131,9 @@ Params: 4lane                   Use 4 lanes (only applicable to Compute Modules
                                 (574Mbit/s) and 486000000 (972Mbit/s - default)
                                 are supported by the driver.
 
+        i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
+                                Useful on Compute Modules.
+
         i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
                                 This is required for Pi B+, 2, 0, and 0W.
 
@@ -2084,6 +2203,12 @@ Load:   dtoverlay=uart1,<param>=<val>
 Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
         rxd1_pin                GPIO pin for RXD1 (15, 33 or 41 - default 15)
+
+
+Name:   udrc
+Info:   Configures the NW Digital Radio UDRC Hat
+Load:   dtoverlay=udrc,<param>=<val>
+Params: alsaname                Name of the ALSA audio device (default "udrc")
 
 
 Name:   upstream
