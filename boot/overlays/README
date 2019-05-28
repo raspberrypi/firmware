@@ -205,12 +205,6 @@ Params:
         and the other i2c baudrate parameters.
 
 
-Name:   3dlab-nano-player
-Info:   Configures the 3Dlab Nano Player
-Load:   dtoverlay=3dlab-nano-player
-Params: <None>
-
-
 Name:   adau1977-adc
 Info:   Overlay for activation of ADAU1977 ADC codec over I2C for control
         and I2S for data.
@@ -2212,18 +2206,16 @@ Params: alsaname                Name of the ALSA audio device (default "udrc")
 
 
 Name:   upstream
-Info:   Allow usage of downstream .dtb with upstream kernel. Comprises
-        vc4-kms-v3d, dwc2 and upstream-aux-interrupt overlays.
+Info:   Allow usage of downstream .dtb with upstream kernel. Comprises the
+        vc4-kms-v3d and dwc2 overlays.
 Load:   dtoverlay=upstream
 Params: <None>
 
 
 Name:   upstream-aux-interrupt
-Info:   Allow usage of downstream .dtb with upstream kernel by binding AUX
-        devices directly to the shared AUX interrupt line. One of the parts
-        of the 'upstream' overlay
-Load:   dtoverlay=upstream-aux-interrupt
-Params: <None>
+Info:   This overlay has been deprecated and removed because it is no longer
+        necessary.
+Load:   <Deprecated>
 
 
 Name:   vc4-fkms-v3d
