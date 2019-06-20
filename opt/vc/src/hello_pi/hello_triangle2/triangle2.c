@@ -42,6 +42,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "EGL/egl.h"
 #include "EGL/eglext.h"
 
+#include "revision.h"
+
 typedef struct
 {
    uint32_t screen_width;
@@ -489,6 +491,12 @@ int main ()
    int terminate = 0;
    GLfloat cx, cy;
    bcm_host_init();
+
+   if (get_processor_id() == PROCESSOR_BCM2838)
+   {
+      puts("This demo application is not available on the Pi4\n\n");
+      exit(0);
+   }
 
    // Clear application state
    memset( state, 0, sizeof( *state ) );

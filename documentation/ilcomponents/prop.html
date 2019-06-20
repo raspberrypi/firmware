@@ -1995,16 +1995,17 @@ This index uses the standard IL structure <tt>OMX_AUDIO_PARAM_DDPTYPE</tt><p>
   
  <p>
 
-<a name="OMX_IndexParamAudioDts"><h2>Query / set the DTS format of this port</h2></a>
+<a name="OMX_IndexParamAudioDts"><h2>Query / set the properties of the encoded stream for DTS data</h2></a>
 <tt>OMX_IndexParamAudioDts</tt><br>
 Used by: <a href="audio_decode.html">audio_decode</a>, <a href="audio_render.html">audio_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_AUDIO_PARAM_DTSTYPE</tt><p>
 
- 
+ Supported on the output port for when pass through mode is enabled.
+  
  <p>
 
-<a name="OMX_IndexParamBrcmAlignHoriz"><h2>Query / set the horizonal alignment of the input buffer to be a given multiple of bytes in width</h2></a>
+<a name="OMX_IndexParamBrcmAlignHoriz"><h2>Query / set the horizonal alignment of the output buffer to be a given multiple of bytes in width</h2></a>
 <tt>OMX_IndexParamBrcmAlignHoriz</tt><br>
 Used by: <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
 
@@ -2016,7 +2017,7 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
   
  <p>
 
-<a name="OMX_IndexParamBrcmAlignVert"><h2>Query / set the vertical alignment of the input buffer to be a given multiple of rows in height</h2></a>
+<a name="OMX_IndexParamBrcmAlignVert"><h2>Query / set the vertical alignment of the output buffer to be a given multiple of rows in height</h2></a>
 <tt>OMX_IndexParamBrcmAlignVert</tt><br>
 Used by: <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a><p>
 
@@ -2091,7 +2092,7 @@ This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
  
  <p>
 
-<a name="OMX_IndexParamBrcmCRC"><h2>Query for the latest CRC for output data on this port</h2></a>
+<a name="OMX_IndexParamBrcmCRC"><h2>Query for the latest CRC for input data on this port</h2></a>
 <tt>OMX_IndexParamBrcmCRC</tt><br>
 Used by: <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a><p>
 
@@ -2267,13 +2268,15 @@ typedef struct OMX_PARAM_IJGSCALINGTYPE {
 The boolean <tt>bEnabled</tt> value determines whether the component uses
  the standard IJG quality tables when encoding images.<p>
 
-<a name="OMX_IndexParamBrcmExtraBuffers"><h2>Sets the number of buffers to allocate beyond the default of 5</h2></a>
+<a name="OMX_IndexParamBrcmExtraBuffers"><h2>Sets the number of buffers to allocate beyond the number determined by the codec</h2></a>
 <tt>OMX_IndexParamBrcmExtraBuffers</tt><br>
 Used by: <a href="image_fx.html">image_fx</a>, <a href="video_decode.html">video_decode</a><p>
 
 This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
 
- 
+ This defaults to 2 (one on the display, one in the video scheduler) but it may
+  sometimes be necessary to increase this.
+  
  <p>
 
 <a name="OMX_IndexParamBrcmFlushCallbackId"><h2>Specifies a user callback for flush notification</h2></a>
@@ -2442,14 +2445,13 @@ With this enabled, those encoders that support it will produce NALs in separate 
   
  <p>
 
-<a name="OMX_IndexParamBrcmPixelAspectRatio"><h2>Allows configuring the pixel aspect ratio</h2></a>
+<a name="OMX_IndexParamBrcmPixelAspectRatio"><h2>Query / set the pixel aspect ratio of the source content</h2></a>
 <tt>OMX_IndexParamBrcmPixelAspectRatio</tt><br>
 Used by: <a href="null_sink.html">null_sink</a>, <a href="video_decode.html">video_decode</a>, <a href="video_decode.html">video_decode</a>, <a href="video_encode.html">video_encode</a>, <a href="video_render.html">video_render</a><p>
 
 This index uses the standard IL structure <tt>OMX_CONFIG_POINTTYPE</tt><p>
 
-Allowed values are: 1:1, 10:11, 16:11, 40:33, 59:54, and 118:81.
-  
+ 
  <p>
 
 <a name="OMX_IndexParamBrcmPixelValueRange"><h2>Describing the pixel value range</h2></a>

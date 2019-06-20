@@ -2,7 +2,7 @@
 if [ "$DISPLAY" == "" ]; then
 	export DISPLAY=":0.0"
 fi
-CMD="which lxpanelctl >/dev/null 2>&1 && lxpanelctl alsastart >/dev/null"
+CMD="which lxpanelctl >/dev/null 2>&1 && lxpanelctl command volumealsabt start >/dev/null"
 if [ $EUID -eq 0 ]; then
 	if [ "$SUDO_USER" != "" ]; then
 		user=$SUDO_USER

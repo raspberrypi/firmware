@@ -40,13 +40,23 @@ static COMPONENT_T* egl_render = NULL;
 
 static void* eglImage = 0;
 
+int thread_run = 0;
+
 void my_fill_buffer_done(void* data, COMPONENT_T* comp)
 {
-  if (OMX_FillThisBuffer(ilclient_get_handle(egl_render), eglBuffer) != OMX_ErrorNone)
-   {
-      printf("OMX_FillThisBuffer failed in callback\n");
-      exit(1);
+
+   OMX_STATETYPE state;
+
+   if (OMX_GetState(ILC_GET_HANDLE(egl_render), &state) != OMX_ErrorNone) {
+      printf("OMX_FillThisBuffer failed while getting egl_render component state\n");
+      return;
    }
+
+   if (state != OMX_StateExecuting)
+      return;
+
+   if (OMX_FillThisBuffer(ilclient_get_handle(egl_render), eglBuffer) != OMX_ErrorNone)
+      printf("OMX_FillThisBuffer failed in callback\n");
 }
 
 
@@ -64,6 +74,7 @@ void *video_decode_test(void* arg)
 
    OMX_VIDEO_PARAM_PORTFORMATTYPE format;
    OMX_TIME_CONFIG_CLOCKSTATETYPE cstate;
+   OMX_ERRORTYPE omx_err;
    COMPONENT_T *video_decode = NULL, *video_scheduler = NULL, *clock = NULL;
    COMPONENT_T *list[5];
    TUNNEL_T tunnel[4];
@@ -71,6 +82,8 @@ void *video_decode_test(void* arg)
    FILE *in;
    int status = 0;
    unsigned int data_len = 0;
+
+   thread_run = 1;
 
    memset(list, 0, sizeof(list));
    memset(tunnel, 0, sizeof(tunnel));
@@ -215,6 +228,9 @@ void *video_decode_test(void* arg)
          if(!data_len)
             break;
 
+         if(!thread_run)
+            break;
+
          buf->nFilledLen = data_len;
          data_len = 0;
 
@@ -254,8 +270,22 @@ void *video_decode_test(void* arg)
    ilclient_teardown_tunnels(tunnel);
 
    ilclient_state_transition(list, OMX_StateIdle);
-   ilclient_state_transition(list, OMX_StateLoaded);
+   
+   /*
+    * To cleanup egl_render, we need to first disable its output port, then
+    * free the output eglBuffer, and finally request the state transition
+    * from to Loaded.
+    */
+   omx_err = OMX_SendCommand(ILC_GET_HANDLE(egl_render), OMX_CommandPortDisable, 221, NULL);
+   if (omx_err != OMX_ErrorNone)
+      printf("Failed OMX_SendCommand\n");
+   
+   omx_err = OMX_FreeBuffer(ILC_GET_HANDLE(egl_render), 221, eglBuffer);
+   if(omx_err != OMX_ErrorNone)
+      printf("OMX_FreeBuffer failed\n");
 
+   ilclient_state_transition(list, OMX_StateLoaded);
+   
    ilclient_cleanup_components(list);
 
    OMX_Deinit();

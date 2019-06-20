@@ -42,6 +42,9 @@ extern "C" {
 /** Initialise the shared memory system */
 MMAL_STATUS_T mmal_vc_shm_init(void);
 
+/** Release the shared memory system */
+void mmal_vc_shm_exit(void);
+
 /** Allocate a shared memory buffer */
 uint8_t *mmal_vc_shm_alloc(uint32_t size);
 
