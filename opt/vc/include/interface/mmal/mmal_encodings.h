@@ -144,6 +144,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * of YUV_UV video.
  */
 #define MMAL_ENCODING_YUVUV128         MMAL_FOURCC('S','A','N','D')
+/** HEVC codec format. YUV 420, 10bpc, arranged with 3 values packed into
+ * 4 bytes with 2 bits of padding.
+ * The image is split into columns or 128 bytes / 96 samples wide, with the
+ * column of luma first, followed by the column of sample interleaved chroma.
+ */
+#define MMAL_ENCODING_YUV10_COL	       MMAL_FOURCC('Y','1','0','C')
 /** 16 bit SAND Video (YUVUV64_16) format.
  * This format is *not* opaque - if requested you will receive full frames
  * of YUV_UV_16 video.

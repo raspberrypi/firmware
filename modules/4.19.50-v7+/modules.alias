@@ -8849,7 +8849,6 @@ alias hid:b0005g*v0000057Ep00000306 hid_wiimote
 alias of:N*T*Cbrcm,bcm2835-audioC* snd_bcm2835
 alias of:N*T*Cbrcm,bcm2835-audio snd_bcm2835
 alias platform:bcm2835-camera bcm2835_v4l2
-alias platform:vcsm-cma vc_sm_cma
 alias platform:bcm2835-codec bcm2835_codec
 alias usb:v049Fp0033d*dc*dsc*dp*ic*isc*ip*in* prism2_usb
 alias usb:v067Cp1022d*dc*dsc*dp*ic*isc*ip*in* prism2_usb

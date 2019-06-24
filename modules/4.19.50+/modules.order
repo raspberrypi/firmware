@@ -967,7 +967,6 @@ kernel/drivers/of/of_mdio.ko
 kernel/drivers/staging/vc04_services/bcm2835-audio/snd-bcm2835.ko
 kernel/drivers/staging/vc04_services/bcm2835-camera/bcm2835-v4l2.ko
 kernel/drivers/staging/vc04_services/vchiq-mmal/bcm2835-mmal-vchiq.ko
-kernel/drivers/staging/vc04_services/vc-sm-cma/vc-sm-cma.ko
 kernel/drivers/staging/vc04_services/bcm2835-codec/bcm2835-codec.ko
 kernel/drivers/staging/wlan-ng/prism2_usb.ko
 kernel/drivers/staging/rtl8712/r8712u.ko

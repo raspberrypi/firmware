@@ -1526,7 +1526,6 @@ alias symbol:fl6_sock_lookup ipv6
 alias symbol:ieee80211_sched_scan_results mac80211
 alias symbol:usb_otg_descriptor_init libcomposite
 alias symbol:nand_decode_ext_id nand
-alias symbol:vc_sm_cma_free vc_sm_cma
 alias symbol:cx2341x_mpeg_ctrls cx2341x
 alias symbol:cfg80211_sched_scan_stopped cfg80211
 alias symbol:ocfs2_stack_glue_register ocfs2_stackglue
@@ -2763,7 +2762,6 @@ alias symbol:tpm2_probe tpm
 alias symbol:dm_cell_unlock_v2 dm_bio_prison
 alias symbol:fsg_common_set_sysfs usb_f_mass_storage
 alias symbol:speakup_start_ttys speakup
-alias symbol:vc_sm_cma_import_dmabuf vc_sm_cma
 alias symbol:nf_l4proto_log_invalid nf_conntrack
 alias symbol:wpan_phy_free ieee802154
 alias symbol:ip_set_extensions ip_set
@@ -3865,7 +3863,6 @@ alias symbol:regulatory_hint cfg80211
 alias symbol:tinydrm_spi_bpw_supported tinydrm
 alias symbol:vb2_verify_memory_type videobuf2_common
 alias symbol:phy_ethtool_set_eee libphy
-alias symbol:vc_sm_cma_int_handle vc_sm_cma
 alias symbol:nf_conncount_cache_free nf_conncount
 alias symbol:nf_ct_netns_put nf_conntrack
 alias symbol:snd_compr_stop_error snd_compress

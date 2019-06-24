@@ -59,6 +59,7 @@ kernel/drivers/char/broadcom/vcio.ko
 kernel/drivers/char/broadcom/bcm2835-gpiomem.ko
 kernel/drivers/char/hw_random/rng-core.ko
 kernel/drivers/char/hw_random/bcm2835-rng.ko
+kernel/drivers/char/hw_random/iproc-rng200.ko
 kernel/drivers/cpufreq/cpufreq_performance.ko
 kernel/drivers/cpufreq/cpufreq_powersave.ko
 kernel/drivers/cpufreq/cpufreq_userspace.ko

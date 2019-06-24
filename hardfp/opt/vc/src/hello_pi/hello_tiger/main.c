@@ -50,6 +50,8 @@
 #	include "EGL/egl.h"
 #endif
 
+#include "revision.h"
+
 #include "tiger.h"
 
 /*--------------------------------------------------------------*/
@@ -484,6 +486,13 @@ int main(void)
 {
    uint32_t width, height;
    bcm_host_init();
+
+   if (get_processor_id() == PROCESSOR_BCM2838)
+   {
+      puts("This demo application is not available on the Pi4\n\n");
+      exit(0);
+   }
+
    int s;
 
    static EGL_DISPMANX_WINDOW_T nativewindow;

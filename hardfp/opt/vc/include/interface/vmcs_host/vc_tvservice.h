@@ -151,6 +151,7 @@ VCHPRE_ void vc_tv_unregister_callback_full(TVSERVICE_CALLBACK_T callback, void 
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_get_state(TV_GET_STATE_RESP_T *tvstate);
+VCHPRE_ int VCHPOST_ vc_tv_get_state_id(uint32_t display_id, TV_GET_STATE_RESP_T *tvstate);
 
 /**
  * <DFN>vc_tv_get_display_state</DFN> is used to obtain the current TV display
@@ -166,6 +167,7 @@ VCHPRE_ int VCHPOST_ vc_tv_get_state(TV_GET_STATE_RESP_T *tvstate);
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_get_display_state(TV_DISPLAY_STATE_T *tvstate);
+VCHPRE_ int VCHPOST_ vc_tv_get_display_state_id(uint32_t display_id, TV_DISPLAY_STATE_T *tvstate);
 
 /**
  * Use <DFN>vc_tv_hdmi_power_on_preferred</DFN> if you don't care what resolutions
@@ -181,12 +183,14 @@ VCHPRE_ int VCHPOST_ vc_tv_get_display_state(TV_DISPLAY_STATE_T *tvstate);
  *
  **/
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_preferred( void );
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_preferred_id(uint32_t display_id);
 
 /**
  * Same as above, but tell the TV to enter 3D mode. The TV will go to 2D mode
  * if the preferred mode doesn't support 3D.
  **/
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_preferred_3d( void );
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_preferred_3d_id(uint32_t display_id);
 
 /**
  * Use <DFN>vc_tv_hdmi_power_on_best</DFN> to power on HDMI at best matched resolution
@@ -210,12 +214,16 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_preferred_3d( void );
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best(uint32_t width, uint32_t height, uint32_t frame_rate,
                                               HDMI_INTERLACED_T scan_mode, EDID_MODE_MATCH_FLAG_T match_flags);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_id(uint32_t display_id, uint32_t width, uint32_t height, uint32_t frame_rate,
+                                                 HDMI_INTERLACED_T scan_mode, EDID_MODE_MATCH_FLAG_T match_flags);
 
 /**
  * Same as above, but tell the TV to enter 3D mode. The TV will go to 2D mode
  * if no suitable 3D mode can be found.
  **/
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_3d(uint32_t width, uint32_t height, uint32_t frame_rate,
+                                              HDMI_INTERLACED_T scan_mode, EDID_MODE_MATCH_FLAG_T match_flags);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_3d_id(uint32_t display_id, uint32_t width, uint32_t height, uint32_t frame_rate,
                                               HDMI_INTERLACED_T scan_mode, EDID_MODE_MATCH_FLAG_T match_flags);
 
 /**
@@ -233,6 +241,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_best_3d(uint32_t width, uint32_t height
  * @return same as <DFN>vc_tv_hdmi_power_on_preferred</DFN>
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_new(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_new_id(uint32_t display_id, HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
 
 /**
  * <DFN>vc_tv_sdtv_power_on</DFN> is used to turn on analogue TV. HDMI will
@@ -246,6 +255,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_new(HDMI_MODE_T mode, HDMI_RES
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_sdtv_power_on(SDTV_MODE_T mode, SDTV_OPTIONS_T *options);
+VCHPRE_ int VCHPOST_ vc_tv_sdtv_power_on_id(uint32_t display_id, SDTV_MODE_T mode, SDTV_OPTIONS_T *options);
 
 /**
  * <DFN>vc_tv_power_off</DFN> is used to turn off either analogue or HDMI output.
@@ -258,6 +268,7 @@ VCHPRE_ int VCHPOST_ vc_tv_sdtv_power_on(SDTV_MODE_T mode, SDTV_OPTIONS_T *optio
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_power_off( void );
+VCHPRE_ int VCHPOST_ vc_tv_power_off_id(uint32_t display_id);
 
 /**
  * <DFN>vc_tv_hdmi_get_supported_modes</DFN> is used to get a list of supported
@@ -284,6 +295,12 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_new(HDMI_RES_GROUP_T group,
                                                     uint32_t max_supported_modes,
                                                     HDMI_RES_GROUP_T *preferred_group,
                                                     uint32_t *preferred_mode);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_new_id(uint32_t display_id,
+                                                           HDMI_RES_GROUP_T group,
+                                                           TV_SUPPORTED_MODE_NEW_T *supported_modes,
+                                                           uint32_t max_supported_modes,
+                                                           HDMI_RES_GROUP_T *preferred_group,
+                                                    uint32_t *preferred_mode);
 /**
  * <DFN>vc_tv_hdmi_mode_supported</DFN> is used to query whether a particular mode
  * is supported or not.
@@ -296,6 +313,8 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_new(HDMI_RES_GROUP_T group,
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_mode_supported(HDMI_RES_GROUP_T group,
+                                               uint32_t mode);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_mode_supported_id(uint32_t display_d, HDMI_RES_GROUP_T group,
                                                uint32_t mode);
 
 /**
@@ -321,6 +340,8 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_mode_supported(HDMI_RES_GROUP_T group,
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_audio_supported(uint32_t audio_format, uint32_t num_channels,
                                                 EDID_AudioSampleRate fs, uint32_t bitrate);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_audio_supported_id(uint32_t display_id, uint32_t audio_format, uint32_t num_channels,
+                                                EDID_AudioSampleRate fs, uint32_t bitrate);
 
 /**
  * Use <DFN>vc_tv_enable_copyprotect</DFN> to turn on copy protection.
@@ -335,6 +356,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_audio_supported(uint32_t audio_format, uint32_t 
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_enable_copyprotect(uint32_t cp_mode, uint32_t timeout);
+VCHPRE_ int VCHPOST_ vc_tv_enable_copyprotect_id(uint32_t display_id, uint32_t cp_mode, uint32_t timeout);
 
 /**
  * Use <DFN>vc_tv_disable_copyprotect</DFN> to turn off copy protection
@@ -345,6 +367,7 @@ VCHPRE_ int VCHPOST_ vc_tv_enable_copyprotect(uint32_t cp_mode, uint32_t timeout
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_disable_copyprotect( void );
+VCHPRE_ int VCHPOST_ vc_tv_disable_copyprotect_id(uint32_t display_id);
 
 /**
  * Use <DFN>vc_tv_show_info</DFN> to show or hide info screen.
@@ -356,6 +379,7 @@ VCHPRE_ int VCHPOST_ vc_tv_disable_copyprotect( void );
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_show_info(uint32_t show);
+VCHPRE_ int VCHPOST_ vc_tv_show_info_id(uint32_t display_id, uint32_t show);
 
 /**
  * <DFN>vc_tv_hdmi_get_av_latency</DFN> is used to get the AV latency
@@ -370,6 +394,7 @@ VCHPRE_ int VCHPOST_ vc_tv_show_info(uint32_t show);
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_av_latency( void );
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_av_latency_id(uint32_t display_id);
 
 /**
  * Use <DFN>vc_tv_hdmi_set_hdcp_key</DFN> to download HDCP key to HDCP middleware
@@ -380,6 +405,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_av_latency( void );
  *         Callback indicates the validity of key
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_key(const uint8_t *key);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_key_id(uint32_t display_id, const uint8_t *key);
 
 /**
  * Use <DFN>vc_tv_hdmi_set_hdcp_revoked_list</DFN> to download SRM
@@ -394,6 +420,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_key(const uint8_t *key);
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_revoked_list(const uint8_t *list, uint32_t num_keys);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_revoked_list_id(uint32_t display_id, const uint8_t *list, uint32_t num_keys);
 
 /**
  * <DFN>vc_tv_hdmi_set_spd</DFN> is used to set the SPD infoframe.
@@ -408,6 +435,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_hdcp_revoked_list(const uint8_t *list, uint3
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_spd(const char *manufacturer, const char *description, HDMI_SPD_TYPE_CODE_T type);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_spd_id(uint32_t display_id, const char *manufacturer, const char *description, HDMI_SPD_TYPE_CODE_T type);
 
 /**
  * <DFN>vc_tv_hdmi_set_display_options</DFN> is used to set the
@@ -428,6 +456,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_spd(const char *manufacturer, const char *de
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_display_options(HDMI_ASPECT_T aspect, uint32_t left_bar_width, uint32_t right_bar_width, uint32_t top_bar_height, uint32_t bottom_bar_height, uint32_t overscan_flags);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_display_options_id(uint32_t display_id, HDMI_ASPECT_T aspect, uint32_t left_bar_width, uint32_t right_bar_width, uint32_t top_bar_height, uint32_t bottom_bar_height, uint32_t overscan_flags);
 
 /**
  * Use <DFN>vc_tv_test_mode_start</DFN> to generate test signal.
@@ -442,6 +471,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_display_options(HDMI_ASPECT_T aspect, uint32
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_test_mode_start(uint32_t colour, TV_TEST_MODE_T test_mode);
+VCHPRE_ int VCHPOST_ vc_tv_test_mode_start_id(uint32_t display_id, uint32_t colour, TV_TEST_MODE_T test_mode);
 
 /**
  * Use <DFN>vc_tv_test_mode_stop</DFN> to stop the test signal and power down
@@ -453,6 +483,7 @@ VCHPRE_ int VCHPOST_ vc_tv_test_mode_start(uint32_t colour, TV_TEST_MODE_T test_
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_test_mode_stop( void );
+VCHPRE_ int VCHPOST_ vc_tv_test_mode_stop_id(uint32_t display_id);
 
 /**
  * <DFN>vc_tv_hdmi_ddc_read</DFN> allows an host application to read EDID
@@ -469,6 +500,7 @@ VCHPRE_ int VCHPOST_ vc_tv_test_mode_stop( void );
  *
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_ddc_read(uint32_t offset, uint32_t length, uint8_t *buffer);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_ddc_read_id(uint32_t display_id, uint32_t offset, uint32_t length, uint8_t *buffer);
 
 /**
  * Sets the TV state to attached.
@@ -477,6 +509,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_ddc_read(uint32_t offset, uint32_t length, uint8
  * @param attached  non-zero if the TV is attached or zero for unplugged.
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_attached(uint32_t attached);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_attached_id(uint32_t display_id, uint32_t attached);
 
 /**
  * Sets one of the HDMI properties. HDMI properties persist
@@ -487,6 +520,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_attached(uint32_t attached);
  * @return zero if successful, non-zero otherwise
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property(const HDMI_PROPERTY_PARAM_T *property);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property_id(uint32_t display_id, const HDMI_PROPERTY_PARAM_T *property);
 
 /**
  * Gets the current value of an HDMI property.
@@ -496,6 +530,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_set_property(const HDMI_PROPERTY_PARAM_T *proper
  * @return zero if success (param1/param2 will be set), non-zero otherwise (param1/param2 will not be set)
  */
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(HDMI_PROPERTY_PARAM_T *property);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property_id(uint32_t display_id, HDMI_PROPERTY_PARAM_T *property);
 
 /**
  * Converts the notification reason to a string.
@@ -504,6 +539,7 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_property(HDMI_PROPERTY_PARAM_T *property);
  * @return  The notification reason as a string.
  */
 VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
+VCHPRE_ const char* vc_tv_notification_name_id(uint32_t display_id, VC_HDMI_NOTIFY_T reason);
 
 /**
  * Get the unique device ID from the EDID
@@ -511,6 +547,14 @@ VCHPRE_ const char* vc_tv_notification_name(VC_HDMI_NOTIFY_T reason);
  * @return zero if successful, non-zero if failed.
  */
 VCHPRE_ int VCHPOST_  vc_tv_get_device_id(TV_DEVICE_ID_T *id);
+VCHPRE_ int VCHPOST_  vc_tv_get_device_id_id(uint32_t display_id, TV_DEVICE_ID_T *id);
+
+/**
+ * Get list of attached devices
+ * @param pointer to attached devices struc
+ * @return zero if successful, non-zero if failed.
+ */
+VCHPRE_ int VCHPOST_ vc_tv_get_attached_devices(TV_ATTACHED_DEVICES_T *devices);
 
 // temporary: maintain backwards compatibility
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
@@ -518,7 +562,15 @@ VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes(HDMI_RES_GROUP_T group,
                                                     uint32_t max_supported_modes,
                                                     HDMI_RES_GROUP_T *preferred_group,
                                                     uint32_t *preferred_mode);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_get_supported_modes_id(uint32_t display_id,
+                                                       HDMI_RES_GROUP_T group,
+                                                       TV_SUPPORTED_MODE_T *supported_modes,
+                                                       uint32_t max_supported_modes,
+                                                       HDMI_RES_GROUP_T *preferred_group,
+                                                       uint32_t *preferred_mode);
+
 // temporary: maintain backwards compatibility
 VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit(HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
+VCHPRE_ int VCHPOST_ vc_tv_hdmi_power_on_explicit_id(uint32_t display_id, HDMI_MODE_T mode, HDMI_RES_GROUP_T group, uint32_t code);
 
 #endif

@@ -6,7 +6,10 @@ libs/ilclient/libilclient.a:
 libs/vgfont/libvgfont.a:
 	$(MAKE) -C libs/vgfont
 
-apps: libs/ilclient/libilclient.a libs/vgfont/libvgfont.a
+libs/revision/librevision.a:
+	$(MAKE) -C libs/revision
+
+apps: libs/ilclient/libilclient.a libs/vgfont/libvgfont.a libs/revision/librevision.a
 	$(MAKE) -C hello_world
 	$(MAKE) -C hello_triangle
 	$(MAKE) -C hello_triangle2
@@ -25,6 +28,7 @@ apps: libs/ilclient/libilclient.a libs/vgfont/libvgfont.a
 clean:
 	$(MAKE) -C libs/ilclient clean
 	$(MAKE) -C libs/vgfont clean
+	$(MAKE) -C libs/revision clean
 	$(MAKE) -C hello_world clean
 	$(MAKE) -C hello_triangle clean
 	$(MAKE) -C hello_triangle2 clean

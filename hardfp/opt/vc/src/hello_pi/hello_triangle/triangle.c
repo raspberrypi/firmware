@@ -42,6 +42,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "cube_texture_and_coords.h"
 
+#include "revision.h"
+
 #define PATH "./"
 
 #define IMAGE_SIZE 128
@@ -527,6 +529,12 @@ static void exit_func(void)
 int main ()
 {
    bcm_host_init();
+
+   if (get_processor_id() == PROCESSOR_BCM2838)
+   {
+      puts("This demo application is not available on the Pi4\n\n");
+      exit(0);
+   }
 
    // Clear application state
    memset( state, 0, sizeof( *state ) );
