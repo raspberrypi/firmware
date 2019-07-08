@@ -273,6 +273,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_COLOR_SPACE_BT470_2_BG    MMAL_FOURCC('Y','_','B','G')
 /** JPEG JFIF, but with 16..255 luma */
 #define MMAL_COLOR_SPACE_JFIF_Y16_255  MMAL_FOURCC('Y','Y','1','6')
+/** Rec2020 */
+#define MMAL_COLOR_SPACE_REC2020       MMAL_FOURCC('2','0','2','0')
 /* @} MmalColorSpace List */
 
 #endif /* MMAL_ENCODINGS_H */
