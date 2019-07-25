@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VC_GENCMD_DEFS_H
 
 //Format of reply message is error code followed by a string
-#define GENCMDSERVICE_MSGFIFO_SIZE 1024
+#define GENCMDSERVICE_MSGFIFO_SIZE (4096 - 4)
 
 #define VC_GENCMD_VER   1
 
