@@ -2208,7 +2208,8 @@
                type = "absent";
             };
             pin_define@SIO_1V8_SEL {
-               type = "absent";
+               type = "external";
+               number = <4>;
             };
             pin_define@PWML {
                type = "internal";
