@@ -10171,6 +10171,8 @@ alias of:N*T*Chifiberry,hifiberry-dacplusadcC* snd_soc_hifiberry_dacplusadc
 alias of:N*T*Chifiberry,hifiberry-dacplusadc snd_soc_hifiberry_dacplusadc
 alias of:N*T*Chifiberry,hifiberry-dacplusadcproC* snd_soc_hifiberry_dacplusadcpro
 alias of:N*T*Chifiberry,hifiberry-dacplusadcpro snd_soc_hifiberry_dacplusadcpro
+alias of:N*T*Chifiberry,dacplusdspC* snd_soc_hifiberry_dacplusdsp
+alias of:N*T*Chifiberry,dacplusdsp snd_soc_hifiberry_dacplusdsp
 alias of:N*T*Cjustboom,justboom-dacC* snd_soc_justboom_dac
 alias of:N*T*Cjustboom,justboom-dac snd_soc_justboom_dac
 alias of:N*T*Cwlf,rpi-cirrusC* snd_soc_rpi_cirrus
@@ -10219,6 +10221,8 @@ alias of:N*T*Chifiberry,hifiberry-dacC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-dac snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-ampC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-amp snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberrydacplusdsp,hifiberrydacplusdsp-soundcardC* snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberrydacplusdsp,hifiberrydacplusdsp-soundcard snd_soc_rpi_simple_soundcard
 alias of:N*T*Cgooglevoicehat,googlevoicehat-soundcardC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Cgooglevoicehat,googlevoicehat-soundcard snd_soc_rpi_simple_soundcard
 alias of:N*T*Cadi,adau1977-adcC* snd_soc_rpi_simple_soundcard

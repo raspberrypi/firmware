@@ -1186,6 +1186,7 @@ kernel/sound/soc/bcm/snd-soc-googlevoicehat-codec.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplus.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusadc.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusadcpro.ko
+kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusdsp.ko
 kernel/sound/soc/bcm/snd-soc-justboom-dac.ko
 kernel/sound/soc/bcm/snd-soc-rpi-cirrus.ko
 kernel/sound/soc/bcm/snd-soc-rpi-proto.ko
