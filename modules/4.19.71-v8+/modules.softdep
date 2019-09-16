@@ -1,0 +1,15 @@
+# Soft dependencies extracted from modules themselves.
+softdep cifs pre: ccm
+softdep cifs pre: aead2
+softdep cifs pre: sha512
+softdep cifs pre: sha256
+softdep cifs pre: cmac
+softdep cifs pre: aes
+softdep cifs pre: nls
+softdep cifs pre: md5
+softdep cifs pre: md4
+softdep cifs pre: hmac
+softdep cifs pre: ecb
+softdep cifs pre: des
+softdep cifs pre: arc4
+softdep ppp_mppe pre: arc4
