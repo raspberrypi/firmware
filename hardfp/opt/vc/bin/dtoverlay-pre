@@ -1,17 +1,13 @@
 #!/bin/bash
-if [ "$DISPLAY" == "" ]; then
-	export DISPLAY=":0.0"
+
+if ! hash lxpanelctl 2> /dev/null; then
+	exit 0
 fi
-CMD="which lxpanelctl >/dev/null 2>&1 && lxpanelctl command volumealsabt stop >/dev/null"
-if [ $EUID -eq 0 ]; then
-	if [ "$SUDO_USER" != "" ]; then
-		user=$SUDO_USER
-	elif [ "$LOGNAME" != "" ]; then
-		user=$LOGNAME
-	else
-		user=pi
-	fi
-	exec su $user -c "$CMD"
-else
-	exec $CMD
-fi
+
+CMD="lxpanelctl command volumealsabt stop >/dev/null"
+
+for PID in $(pgrep -x lxpanel); do
+	eval "$(grep -z "DISPLAY=" "/proc/$PID/environ" | tr -d '\0')"
+	user="$(ps -p "$PID" -o uname=)"
+	su "$user" -c "$CMD"
+done

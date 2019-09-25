@@ -59,15 +59,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       VC_IMAGE_YUVINFO_CSC_SMPTE_170M      = VC_IMAGE_YUVINFO_CSC_ITUR_BT601,
 
       /* co-sited flags, assumed interstitial if not co-sited [2 bits] */
-      VC_IMAGE_YUVINFO_H_COSITED      = 256,
-      VC_IMAGE_YUVINFO_V_COSITED      = 512,
+      VC_IMAGE_YUVINFO_H_COSITED      = 1<<8,
+      VC_IMAGE_YUVINFO_V_COSITED      = 1<<9,
 
-      VC_IMAGE_YUVINFO_TOP_BOTTOM     = 1024,
-      VC_IMAGE_YUVINFO_DECIMATED      = 2048,
-      VC_IMAGE_YUVINFO_PACKED         = 4096,
+      VC_IMAGE_YUVINFO_TOP_BOTTOM     = 1<<10,
+      VC_IMAGE_YUVINFO_DECIMATED      = 1<<11,
+      VC_IMAGE_YUVINFO_PACKED         = 1<<12,
+
+      /* For YUVUV enforce use the tall mode to keep the column stride below 64k */
+      VC_IMAGE_YUVINFO_TALL_YUVUV     = 1<<13,
 
       /* Certain YUV image formats can either be V/U interleaved or U/V interleaved */
-      VC_IMAGE_YUVINFO_IS_VU          = 0x8000,
+      VC_IMAGE_YUVINFO_IS_VU          = 1<<15,
 
       /* Force Metaware to use 16 bits */
       VC_IMAGE_YUVINFO_FORCE_ENUM_16BIT = 0xffff,
