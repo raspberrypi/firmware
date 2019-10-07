@@ -9441,6 +9441,7 @@
 0xd163cade	dm_tm_commit	drivers/md/persistent-data/dm-persistent-data	EXPORT_SYMBOL_GPL
 0x48b62a57	drm_dp_link_train_channel_eq_delay	drivers/gpu/drm/drm_kms_helper	EXPORT_SYMBOL
 0x313fbccd	drm_dev_fini	drivers/gpu/drm/drm	EXPORT_SYMBOL
+0xa27edfeb	btrtl_shutdown_realtek	drivers/bluetooth/btrtl	EXPORT_SYMBOL_GPL
 0x222e7ce2	sysfs_streq	vmlinux	EXPORT_SYMBOL
 0xaacb9a4f	cache_purge	vmlinux	EXPORT_SYMBOL_GPL
 0x3f7d4e23	dbs_update	vmlinux	EXPORT_SYMBOL_GPL
