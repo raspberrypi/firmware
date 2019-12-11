@@ -112,10 +112,10 @@ typedef struct
 {
    uint32_t magic;
    uint32_t msgid;
-   struct MMAL_CONTROL_SERVICE_T *control_service;       /** Handle to the control service */
+   uint32_t control_service;       /** Handle to the control service (unused) */
 
    union {
-      struct MMAL_WAITER_T *waiter;    /** User-land wait structure, passed back */
+      uint32_t waiter;             /** User-land wait structure, passed back */
    } u;
 
    MMAL_STATUS_T status;            /** Result code, passed back */
@@ -152,7 +152,7 @@ typedef struct
 typedef struct
 {
    mmal_worker_msg_header header;
-   void *client_component;             /** Client component */
+   uint32_t client_component;          /** Client component */
    char name[128];
    uint32_t pid;                       /**< For debug */
 } mmal_worker_component_create;
@@ -206,6 +206,71 @@ typedef struct
 } mmal_worker_port_info_get;
 vcos_static_assert(sizeof(mmal_worker_port_info_get) <= MMAL_WORKER_MAX_MSG_LEN);
 
+typedef struct
+{
+   MMAL_ES_TYPE_T type;           /**< Type of the elementary stream */
+
+   MMAL_FOURCC_T encoding;        /**< FourCC specifying the encoding of the elementary stream.
+                                    * See the \ref MmalEncodings "pre-defined encodings" for some
+                                    * examples.
+                                    */
+   MMAL_FOURCC_T encoding_variant;/**< FourCC specifying the specific encoding variant of
+                                    * the elementary stream. See the \ref MmalEncodingVariants
+                                    * "pre-defined encoding variants" for some examples.
+                                    */
+
+   uint32_t es; /**< Type specific information for the elementary stream */
+
+   uint32_t bitrate;              /**< Bitrate in bits per second */
+   uint32_t flags;                /**< Flags describing properties of the elementary stream.
+                                    * See \ref elementarystreamflags "Elementary stream flags".
+                                    */
+
+   uint32_t extradata_size;       /**< Size of the codec specific data */
+   uint32_t extradata;           /**< Codec specific data */
+
+} MMAL_VC_ES_FORMAT_T;
+
+typedef struct
+{
+   uint32_t priv;                    /**< Private member used by the framework */
+   uint32_t name;                    /**< Port name. Used for debugging purposes (Read Only) */
+
+   MMAL_PORT_TYPE_T type;            /**< Type of the port (Read Only) */
+   uint16_t index;                   /**< Index of the port in its type list (Read Only) */
+   uint16_t index_all;               /**< Index of the port in the list of all ports (Read Only) */
+
+   uint32_t is_enabled;              /**< Indicates whether the port is enabled or not (Read Only) */
+   uint32_t format;                  /**< Format of the elementary stream */
+
+   uint32_t buffer_num_min;          /**< Minimum number of buffers the port requires (Read Only).
+                                          This is set by the component. */
+   uint32_t buffer_size_min;         /**< Minimum size of buffers the port requires (Read Only).
+                                          This is set by the component. */
+   uint32_t buffer_alignment_min;    /**< Minimum alignment requirement for the buffers (Read Only).
+                                          A value of zero means no special alignment requirements.
+                                          This is set by the component. */
+   uint32_t buffer_num_recommended;  /**< Number of buffers the port recommends for optimal performance (Read Only).
+                                          A value of zero means no special recommendation.
+                                          This is set by the component. */
+   uint32_t buffer_size_recommended; /**< Size of buffers the port recommends for optimal performance (Read Only).
+                                          A value of zero means no special recommendation.
+                                          This is set by the component. */
+   uint32_t buffer_num;              /**< Actual number of buffers the port will use.
+                                          This is set by the client. */
+   uint32_t buffer_size;             /**< Actual maximum size of the buffers that will be sent
+                                          to the port. This is set by the client. */
+
+   uint32_t component;               /**< Component this port belongs to (Read Only) */
+   uint32_t userdata;                /**< Field reserved for use by the client */
+
+   uint32_t capabilities;            /**< Flags describing the capabilities of a port (Read Only).
+                                       * Bitwise combination of \ref portcapabilities "Port capabilities"
+                                       * values.
+                                       */
+
+} MMAL_VC_PORT_T;
+
 /** Component port info. Used to set port info.
   */
 typedef struct
@@ -214,8 +279,8 @@ typedef struct
    uint32_t component_handle;          /**< Which component */
    MMAL_PORT_TYPE_T port_type;         /**< Type of port */
    uint32_t index;                     /**< Which port of given type to get */
-   MMAL_PORT_T port;
-   MMAL_ES_FORMAT_T format;
+   MMAL_VC_PORT_T port;
+   MMAL_VC_ES_FORMAT_T format;
    MMAL_ES_SPECIFIC_FORMAT_T es;
    uint8_t  extradata[MMAL_FORMAT_EXTRADATA_MAX_SIZE];
 } mmal_worker_port_info_set;
@@ -231,8 +296,8 @@ typedef struct
    uint32_t index;                     /**< Which port of given type to get */
    int32_t found;                      /**< Did we find anything? */
    uint32_t port_handle;               /**< Handle to use for this port */
-   MMAL_PORT_T port;
-   MMAL_ES_FORMAT_T format;
+   MMAL_VC_PORT_T port;
+   MMAL_VC_ES_FORMAT_T format;
    MMAL_ES_SPECIFIC_FORMAT_T es;
    uint8_t  extradata[MMAL_FORMAT_EXTRADATA_MAX_SIZE];
 } mmal_worker_port_info;
@@ -285,7 +350,7 @@ typedef struct
    /** Action parameter */
    union {
       struct {
-         MMAL_PORT_T port;
+         MMAL_VC_PORT_T port;
       } enable;
       struct {
          uint32_t component_handle;
@@ -357,8 +422,40 @@ struct MMAL_DRIVER_BUFFER_T
    uint32_t port_handle;         /**< Index into array of ports for this component */
 
    /** Client side uses this to get back to its context structure. */
-   struct MMAL_VC_CLIENT_BUFFER_CONTEXT_T *client_context;
+   uint32_t client_context;
 };
+
+typedef struct MMAL_VC_BUFFER_HEADER_T
+{
+   uint32_t next;             /**< Used to link several buffer headers together */
+
+   uint32_t priv;             /**< Data private to the framework */
+
+   uint32_t cmd;              /**< Defines what the buffer header contains. This is a FourCC
+                                   with 0 as a special value meaning stream data */
+
+   uint32_t data;             /**< Pointer to the start of the payload buffer (should not be
+                                   changed by component) */
+   uint32_t alloc_size;       /**< Allocated size in bytes of payload buffer */
+   uint32_t length;           /**< Number of bytes currently used in the payload buffer (starting
+                                   from offset) */
+   uint32_t offset;           /**< Offset in bytes to the start of valid data in the payload buffer */
+
+   uint32_t flags;            /**< Flags describing properties of a buffer header (see
+                                   \ref bufferheaderflags "Buffer header flags") */
+
+   int64_t  pts;              /**< Presentation timestamp in microseconds. \ref MMAL_TIME_UNKNOWN
+                                   is used when the pts is unknown. */
+   int64_t  dts;              /**< Decode timestamp in microseconds (dts = pts, except in the case
+                                   of video streams with B frames). \ref MMAL_TIME_UNKNOWN
+                                   is used when the dts is unknown. */
+
+   /** Type specific data that's associated with a payload buffer */
+   uint32_t type;
+
+   uint32_t user_data;           /**< Field reserved for use by the client */
+
+} MMAL_VC_BUFFER_HEADER_T;
 
 /** Receive a buffer from the host.
   *
@@ -382,7 +479,7 @@ typedef struct mmal_worker_buffer_from_host
    struct MMAL_DRIVER_BUFFER_T drvbuf_ref;
 
    /** the buffer header itself */
-   MMAL_BUFFER_HEADER_T buffer_header;
+   MMAL_VC_BUFFER_HEADER_T buffer_header;
    MMAL_BUFFER_HEADER_TYPE_SPECIFIC_T buffer_header_type_specific;
 
    MMAL_BOOL_T is_zero_copy;
@@ -411,16 +508,28 @@ typedef struct mmal_worker_event_to_host
 {
    mmal_worker_msg_header header;
 
-   struct MMAL_COMPONENT_T *client_component;
+   uint32_t client_component;
    uint32_t port_type;
    uint32_t port_num;
 
    uint32_t cmd;
    uint32_t length;
    uint8_t data[MMAL_WORKER_EVENT_SPACE];
-   MMAL_BUFFER_HEADER_T *delayed_buffer;  /* Only used to remember buffer for bulk rx */
+   MMAL_BUFFER_HEADER_T *delayed_buffer;  /* Only used to remember buffer for bulk rx */  // FIXME
 } mmal_worker_event_to_host;
 vcos_static_assert(sizeof(mmal_worker_event_to_host) <= MMAL_WORKER_MAX_MSG_LEN);
+
+typedef struct mmal_worker_event_format_changed
+{
+   uint32_t buffer_size_min;         /**< Minimum size of buffers the port requires */
+   uint32_t buffer_num_min;          /**< Minimum number of buffers the port requires */
+   uint32_t buffer_size_recommended; /**< Size of buffers the port recommends for optimal performance.
+                                          A value of zero means no special recommendation. */
+   uint32_t buffer_num_recommended;  /**< Number of buffers the port recommends for optimal
+                                          performance. A value of zero means no special recommendation. */
+
+   uint32_t format;                  /**< New elementary stream format */
+} mmal_worker_event_format_changed;
 
 typedef struct
 {
@@ -515,7 +624,7 @@ static inline void mmal_vc_buffer_header_to_msg(mmal_worker_buffer_from_host *ms
    msg->buffer_header.pts           = header->pts;
    msg->buffer_header.dts           = header->dts;
    msg->buffer_header.alloc_size    = header->alloc_size;
-   msg->buffer_header.data          = header->data;
+   msg->buffer_header.data          = (uintptr_t)header->data;
    msg->buffer_header_type_specific = *header->type;
 }
 
@@ -529,6 +638,18 @@ static inline void mmal_vc_msg_to_buffer_header(MMAL_BUFFER_HEADER_T *header,
    header->pts    = msg->buffer_header.pts;
    header->dts    = msg->buffer_header.dts;
    *header->type  = msg->buffer_header_type_specific;
+}
+
+static inline void mmal_vc_copy_es_format_from_vc(MMAL_VC_ES_FORMAT_T *src, MMAL_ES_FORMAT_T *dest)
+{
+   // IPC MMAL_VC_ES_FORMAT_T is not necessarily the same as MMAL_ES_FORMAT_T,
+   // so copy fields individually.
+   dest->type = src->type;
+   dest->encoding = src->encoding;
+   dest->encoding_variant = src->encoding_variant;
+   dest->bitrate = src->bitrate;
+   dest->flags = src->flags;
+   dest->extradata_size = src->extradata_size;
 }
 
 #endif
