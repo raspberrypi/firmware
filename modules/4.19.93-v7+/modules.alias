@@ -9706,6 +9706,10 @@ alias of:N*T*Cti,ads1115C* ti_ads1015
 alias of:N*T*Cti,ads1115 ti_ads1015
 alias of:N*T*Cti,ads1015C* ti_ads1015
 alias of:N*T*Cti,ads1015 ti_ads1015
+alias i2c:bme680 bme680_i2c
+alias acpi*:BME0680:* bme680_i2c
+alias spi:bme680 bme680_spi
+alias acpi*:BME0680:* bme680_spi
 alias of:N*T*Cdht11C* dht11
 alias of:N*T*Cdht11 dht11
 alias i2c:hdc1080 hdc100x

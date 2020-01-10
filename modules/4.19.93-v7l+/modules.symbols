@@ -2249,6 +2249,7 @@ alias symbol:ath9k_hw_set_gpio ath9k_hw
 alias symbol:ip_tunnel_setup ip_tunnel
 alias symbol:mtd_del_partition mtd
 alias symbol:snd_soc_dapm_get_enum_double snd_soc_core
+alias symbol:bme680_regmap_config bme680_core
 alias symbol:dm_sm_disk_create dm_persistent_data
 alias symbol:extcon_get_property extcon_core
 alias symbol:usb_wwan_chars_in_buffer usb_wwan
@@ -2800,6 +2801,7 @@ alias symbol:ieee80211_resume_disconnect mac80211
 alias symbol:vb2_discard_done videobuf2_common
 alias symbol:nf_ct_helper_expectfn_unregister nf_conntrack
 alias symbol:nf_sk_lookup_slow_v4 nf_socket_ipv4
+alias symbol:bme680_core_probe bme680_core
 alias symbol:iscsi_host_get_param libiscsi
 alias symbol:register_ip_vs_app ip_vs
 alias symbol:drm_ht_remove drm
