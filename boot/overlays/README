@@ -128,7 +128,7 @@ Params:
                                 8=Link                   9=Activity
 
         eth_led1                Set mode of LED1 (usually green) (Pi3B+ default
-                                "6", Pi4 default "0"). See eth_led0 for legal
+                                "6", Pi4 default "8"). See eth_led0 for legal
                                 values.
 
         eth_max_speed           Set the maximum speed a link is allowed
@@ -1078,6 +1078,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf8523                 Select the PCF8523 device
 
+        pcf85363                Select the PCF85363 device
+
         pcf8563                 Select the PCF8563 device
 
         rv3028                  Select the Micro Crystal RV3028 device
@@ -1157,10 +1159,13 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure and temperature
         sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BMP280, DS1621,
-                                HDC100X, LM75, SHT3x or TMP102
+Params: addr                    Set the address for the BME280, BME680, BMP280,
+                                DS1621, HDC100X, LM75, SHT3x or TMP102
 
         bme280                  Select the Bosch Sensortronic BME280
+                                Valid addresses 0x76-0x77, default 0x76
+
+        bme680                  Select the Bosch Sensortronic BME680
                                 Valid addresses 0x76-0x77, default 0x76
 
         bmp085                  Select the Bosch Sensortronic BMP085
@@ -1386,6 +1391,26 @@ Load:   dtoverlay=jedec-spi-nor,<param>=<val>
 Params: flash-spi<n>-<m>        Enables flash device on SPI<n>, CS#<m>.
         flash-fastr-spi<n>-<m>  Enables flash device with fast read capability
                                 on SPI<n>, CS#<m>.
+
+
+Name:   justboom-both
+Info:   Simultaneous usage of an justboom-dac and justboom-digi based
+        card
+Load:   dtoverlay=justboom-both,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=justboom-dac,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
 
 
 Name:   justboom-dac

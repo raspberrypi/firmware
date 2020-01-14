@@ -2120,8 +2120,10 @@
             pin@p128 { function = "output"; termination = "no_pulling"; }; // BT_ON
             pin@p129 { function = "output"; termination = "no_pulling"; }; // WL_ON
             pin@p130 { function = "output"; termination = "no_pulling"; polarity = "active_low"; startup_state = "active"; }; // PWR_LED (RED)
+            pin@p131 { function = "output"; termination = "no_pulling"; }; // GLOBAL_RESET
             pin@p132 { function = "output"; termination = "no_pulling"; }; // SD VDDIO
             pin@p133 { function = "output"; termination = "no_pulling"; }; // Camera shutdown
+            pin@p134 { function = "output"; termination = "no_pulling"; startup_state = "active"; }; // SD_PWR_ON
          }; // pin_config
 
          pin_defines {
@@ -2192,6 +2194,10 @@
                type = "external";
                number = <1>;
             };
+            pin_define@GLOBAL_RESET {
+               type = "external";
+               number = <3>;
+            };
             pin_define@SMPS_SDA {
                type = "absent";
             };
@@ -2210,6 +2216,10 @@
             pin_define@SIO_1V8_SEL {
                type = "external";
                number = <4>;
+            };
+            pin_define@SD_PWR_ON {
+               type = "external";
+               number = <6>;
             };
             pin_define@PWML {
                type = "internal";
