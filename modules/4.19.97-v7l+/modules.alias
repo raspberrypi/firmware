@@ -362,9 +362,6 @@ alias platform:clk-hifiberry-dachd clk_hifiberry_dachd
 alias i2c:dachd-clk clk_hifiberry_dachd
 alias of:N*T*Chifiberry,dachd-clkC* clk_hifiberry_dachd
 alias of:N*T*Chifiberry,dachd-clk clk_hifiberry_dachd
-alias platform:reg-fixed-voltage fixed
-alias of:N*T*Cregulator-fixedC* fixed
-alias of:N*T*Cregulator-fixed fixed
 alias platform:arizona-ldo1 arizona_ldo1
 alias platform:arizona-micsupp arizona_micsupp
 alias spi:sc16is7xx sc16is7xx

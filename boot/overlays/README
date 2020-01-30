@@ -109,27 +109,28 @@ Params:
                                 Legal values are 2, 3, 4, 5 and 0, where
                                 0 means never downshift (default 2). Pi3B+ only.
 
-        eth_led0                Set mode of LED0 (usually orange). The legal
-                                values are:
+        eth_led0                Set mode of LED0 - amber on Pi3B+ (default "1"),
+                                green on Pi4 (default "0").
+                                The legal values are:
 
                                 Pi3B+
 
-                                0=link/activity    1=link1000/activity (default)
+                                0=link/activity          1=link1000/activity
                                 2=link100/activity       3=link10/activity
                                 4=link100/1000/activity  5=link10/1000/activity
                                 6=link10/100/activity    14=off    15=on
 
                                 Pi4
 
-                                0=Speed/Activity (default)       1=Speed
-                                2=Speed/Flash activity   3=FDX
+                                0=Speed/Activity         1=Speed
+                                2=Flash activity         3=FDX
                                 4=Off                    5=On
                                 6=Alt                    7=Speed/Flash
                                 8=Link                   9=Activity
 
-        eth_led1                Set mode of LED1 (usually green) (Pi3B+ default
-                                "6", Pi4 default "8"). See eth_led0 for legal
-                                values.
+        eth_led1                Set mode of LED1 - green on Pi3B (default "6"),
+                                amber on Pi4 (default "8"). See eth_led0 for
+                                legal values.
 
         eth_max_speed           Set the maximum speed a link is allowed
                                 to negotiate. Legal values are 10, 100 and
@@ -163,6 +164,13 @@ Params:
 
         sd_overclock            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
+
+        sd_poll_once            Looks for a card once after booting. Useful
+                                for network booting scenarios to avoid the
+                                overhead of continuous polling. N.B. Using
+                                this option restricts the system to using a
+                                single card per boot (or none at all).
+                                (default off)
 
         sd_force_pio            Disable DMA support for SD driver (default off)
 
@@ -906,6 +914,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusadc
@@ -927,6 +937,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusadcpro
@@ -948,6 +960,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ADC Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusdsp

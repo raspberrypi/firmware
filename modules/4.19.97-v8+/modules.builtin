@@ -240,6 +240,7 @@ kernel/drivers/pci/controller/pcie-brcmstb.ko
 kernel/drivers/pci/controller/pcie-brcmstb-bounce64.ko
 kernel/drivers/pps/pps_core.ko
 kernel/drivers/ptp/ptp.ko
+kernel/drivers/regulator/fixed.ko
 kernel/drivers/regulator/gpio-regulator.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/scsi_transport_iscsi.ko

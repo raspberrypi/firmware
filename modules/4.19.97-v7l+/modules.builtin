@@ -236,6 +236,7 @@ kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/of/of_mdio.ko
 kernel/drivers/pci/controller/pcie-brcmstb.ko
 kernel/drivers/pci/controller/pcie-brcmstb-bounce.ko
+kernel/drivers/regulator/fixed.ko
 kernel/drivers/regulator/gpio-regulator.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/scsi_transport_iscsi.ko
