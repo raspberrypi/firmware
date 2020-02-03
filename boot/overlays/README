@@ -109,27 +109,28 @@ Params:
                                 Legal values are 2, 3, 4, 5 and 0, where
                                 0 means never downshift (default 2). Pi3B+ only.
 
-        eth_led0                Set mode of LED0 (usually orange). The legal
-                                values are:
+        eth_led0                Set mode of LED0 - amber on Pi3B+ (default "1"),
+                                green on Pi4 (default "0").
+                                The legal values are:
 
                                 Pi3B+
 
-                                0=link/activity    1=link1000/activity (default)
+                                0=link/activity          1=link1000/activity
                                 2=link100/activity       3=link10/activity
                                 4=link100/1000/activity  5=link10/1000/activity
                                 6=link10/100/activity    14=off    15=on
 
                                 Pi4
 
-                                0=Speed/Activity (default)       1=Speed
-                                2=Speed/Flash activity   3=FDX
+                                0=Speed/Activity         1=Speed
+                                2=Flash activity         3=FDX
                                 4=Off                    5=On
                                 6=Alt                    7=Speed/Flash
                                 8=Link                   9=Activity
 
-        eth_led1                Set mode of LED1 (usually green) (Pi3B+ default
-                                "6", Pi4 default "8"). See eth_led0 for legal
-                                values.
+        eth_led1                Set mode of LED1 - green on Pi3B (default "6"),
+                                amber on Pi4 (default "8"). See eth_led0 for
+                                legal values.
 
         eth_max_speed           Set the maximum speed a link is allowed
                                 to negotiate. Legal values are 10, 100 and
@@ -163,6 +164,13 @@ Params:
 
         sd_overclock            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
+
+        sd_poll_once            Looks for a card once after booting. Useful
+                                for network booting scenarios to avoid the
+                                overhead of continuous polling. N.B. Using
+                                this option restricts the system to using a
+                                single card per boot (or none at all).
+                                (default off)
 
         sd_force_pio            Disable DMA support for SD driver (default off)
 
@@ -439,6 +447,29 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
         glb_mclk                This option is only with Kali board. If enabled,
                                 MCLK for Kali is used and PLL is disabled for
                                 better voice quality. (default Off)
+
+
+Name:   anyspi
+Info:   Universal device tree overlay for SPI devices
+
+        Just specify the SPI address and device name ("compatible" property).
+        This overlay lacks any device-specific parameter support!
+
+        For devices on spi1 or spi2, the interfaces should be enabled
+        with one of the spi1-1/2/3cs and/or spi2-1/2/3cs overlays.
+
+        Examples:
+        1. SPI NOR flash on spi0.1, maximum SPI clock frequency 45MHz:
+            dtoverlay=anyspi:spi0-1,dev="jedec,spi-nor",speed=45000000
+        2. MCP3204 ADC on spi1.2, maximum SPI clock frequency 500kHz:
+            dtoverlay=anyspi:spi1-2,dev="microchip,mcp3204"
+Load:   dtoverlay=anyspi,<param>=<val>
+Params: spi<n>-<m>              Configure device at spi<n>, cs<m>
+                                (boolean, required)
+        dev                     Set device name to search compatible module
+                                (string, required)
+        speed                   Set SPI clock frequency in Hz
+                                (integer, optional, default 500000)
 
 
 Name:   apds9960
@@ -883,6 +914,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusadc
@@ -904,6 +937,8 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusadcpro
@@ -925,11 +960,19 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 that does not result in clipping/distortion!)
         slave                   Force DAC+ADC Pro into slave mode, using Pi as
                                 master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
 
 
 Name:   hifiberry-dacplusdsp
 Info:   Configures the HifiBerry DAC+DSP audio card
 Load:   dtoverlay=hifiberry-dacplusdsp
+Params: <None>
+
+
+Name:   hifiberry-dacplushd
+Info:   Configures the HifiBerry DAC+ HD audio card
+Load:   dtoverlay=hifiberry-dacplushd
 Params: <None>
 
 
