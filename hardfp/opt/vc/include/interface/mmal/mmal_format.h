@@ -105,6 +105,10 @@ typedef union
  * The following flags describe properties of an elementary stream */
 /* @{ */
 #define MMAL_ES_FORMAT_FLAG_FRAMED       0x1 /**< The elementary stream will already be framed */
+#define MMAL_ES_FORMAT_FLAG_COL_FMTS_WIDTH_IS_COL_STRIDE 0x2 /**< For column formats we ideally want to pass in the
+                                             column stride. This hasn't been the past behaviour, so require a
+                                             new flag to be set should es->video.width be the column stride
+                                             (in lines) instead of an ignored width value. */
 /* @} */
 
 /** \name Undefined encoding value.
