@@ -2083,15 +2083,21 @@ The IL standard does not support a way to specify the Bayer order of Bayer image
 <dl>
 <dt><tt>nPortIndex</tt><dd>port that this structure applies to 
 </dl>
-<a name="OMX_IndexParamBrcmBlackLevel"><h2>Specify the level to be treated as black</h2></a>
+<a name="OMX_IndexParamBrcmBlackLevel"><h2>Manual black level parameters.</h2></a>
 <tt>OMX_IndexParamBrcmBlackLevel</tt><br>
 Used by: <a href="isp.html">isp</a><p>
 
-This index uses the standard IL structure <tt>OMX_PARAM_U32TYPE</tt><p>
+This index uses the standard IL structure <tt>OMX_PARAM_BLACKLEVELTYPE</tt><p>
 
- 
- <p>
+Configures the black level within the ISP pipeline.<p>
 
+<dl>
+<dt><tt>bEnabled</tt><dd>Enable black level subtraction 
+<dt><tt>nBlackLevelR</tt><dd>Black level of red channel 
+<dt><tt>nBlackLevelG</tt><dd>Black level of green channel 
+<dt><tt>nBlackLevelB</tt><dd>Black level of blue channel 
+<dt><tt>nBitDepth</tt><dd>Bit depth - refer to comments in code where used 
+</dl>
 <a name="OMX_IndexParamBrcmCRC"><h2>Query for the latest CRC for input data on this port</h2></a>
 <tt>OMX_IndexParamBrcmCRC</tt><br>
 Used by: <a href="null_sink.html">null_sink</a>, <a href="video_encode.html">video_encode</a><p>
@@ -2402,10 +2408,12 @@ Allows the lens shading grid to be set.
 <dt><tt>bEnabled</tt><dd>Enable the override grid 
 <dt><tt>nGridCellSize</tt><dd>size of each grid element. Assumes square grid 
 <dt><tt>nWidth</tt><dd>grid width 
-<dt><tt>nStride</tt><dd>grid stride (allows for padding) 
+<dt><tt>nStride</tt><dd>grid stride (allows for padding) in *samples* (not bytes) 
 <dt><tt>nHeight</tt><dd>grid height 
 <dt><tt>nMemHandleTable</tt><dd>Handle for grid 
 <dt><tt>nRefTransform</tt><dd>Reference transform taken from raw header 
+<dt><tt>bCornerSampled</tt><dd>Are grids sampled at cell corners, or centres 
+<dt><tt>eLsGainFormat</tt><dd>Format of the gain tables 
 </dl>
 <a name="OMX_IndexParamBrcmMaxCorruptMBs"><h2>Sets the maximum number of corrupt macroblocks allowed</h2></a>
 <tt>OMX_IndexParamBrcmMaxCorruptMBs</tt><br>
