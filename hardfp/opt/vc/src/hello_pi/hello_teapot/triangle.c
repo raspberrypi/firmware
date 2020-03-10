@@ -46,6 +46,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "triangle.h"
 #include <pthread.h>
 
+#include <signal.h>
+
+#include "revision.h"
 
 #define PATH "./"
 
@@ -94,6 +97,8 @@ static CUBE_STATE_T _state, *state=&_state;
 
 static void* eglImage = 0;
 static pthread_t thread1;
+
+extern int thread_run;
 
 
 /***********************************************************
@@ -416,6 +421,10 @@ static void init_textures(CUBE_STATE_T *state)
 static void exit_func(void)
 // Function to be passed to atexit().
 {
+	
+   thread_run = 0;
+   pthread_join(thread1, NULL);
+	
    if (eglImage != 0)
    {
       if (!eglDestroyImageKHR(state->display, (EGLImageKHR) eglImage))
@@ -435,12 +444,27 @@ static void exit_func(void)
    printf("\ncube closed\n");
 } // exit_func()
 
+void sig_handler(int signo) {
+
+   terminate = 1;
+
+}
+
 //==============================================================================
 
 int main ()
 {
    bcm_host_init();
+
+   if (get_processor_id() == PROCESSOR_BCM2838)
+   {
+      puts("This demo application is not available on the Pi4\n\n");
+      exit(0);
+   }
+
    printf("Note: ensure you have sufficient gpu_mem configured\n");
+   
+   signal(SIGINT, sig_handler);
 
    // Clear application state
    memset( state, 0, sizeof( *state ) );

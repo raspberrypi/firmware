@@ -531,7 +531,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamBrcmIspBlockOverride,                       /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamBrcmSupportsUnalignedSliceheight,           /**< reference: OMX_CONFIG_PORTBOOLEANTYPE */
     OMX_IndexParamBrcmLensShadingOverride,                    /**< reference: OMX_PARAM_LENSSHADINGOVERRIDETYPE */
-    OMX_IndexParamBrcmBlackLevel,                             /**< reference: OMX_PARAM_U32TYPE */
+    OMX_IndexParamBrcmBlackLevel,                             /**< reference: OMX_PARAM_BLACKLEVELTYPE */
     OMX_IndexParamOutputShift,                                /**< reference: OMX_PARAM_S32TYPE */
     OMX_IndexParamCcmShift,                                   /**< reference: OMX_PARAM_S32TYPE */
     OMX_IndexParamCustomCcm,                                  /**< reference: OMX_PARAM_CUSTOMCCMTYPE */
@@ -539,6 +539,11 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigCameraDigitalGain,                         /**< reference: OMX_CONFIG_CAMERAGAINTYPE */
     OMX_IndexConfigBrcmDroppableRunLength,                    /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamMinimumAlignment,                           /**< reference: OMX_PARAM_MINALIGNTYPE */
+    OMX_IndexParamDenoise,                                    /**< reference: OMX_PARAM_DENOISETYPE */
+    OMX_IndexParamSharpen,                                    /**< reference: OMX_PARAM_SHARPENTYPE */
+    OMX_IndexParamGreenEq,                                    /**< reference: OMX_PARAM_GREENEQTYPE */
+    OMX_IndexParamDpc,                                        /**< reference: OMX_PARAM_DPCTYPE */
+    OMX_IndexParamGamma,                                      /**< reference: OMX_PARAM_GAMMATYPE */
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;
 

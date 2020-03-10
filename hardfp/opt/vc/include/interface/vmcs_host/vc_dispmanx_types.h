@@ -57,11 +57,17 @@ typedef uint32_t DISPMANX_PROTECTION_T;
 */
 #define DISPMANX_ID_MAIN_LCD  0
 #define DISPMANX_ID_AUX_LCD   1
-#define DISPMANX_ID_HDMI      2
+#define DISPMANX_ID_HDMI0     2
+// deprecated, but support for backwards compatibility
+#define DISPMANX_ID_HDMI      DISPMANX_ID_HDMI0
 #define DISPMANX_ID_SDTV      3
 #define DISPMANX_ID_FORCE_LCD 4
 #define DISPMANX_ID_FORCE_TV  5
 #define DISPMANX_ID_FORCE_OTHER 6 /* non-default display */
+#define DISPMANX_ID_HDMI1     7
+#define DISPMANX_ID_FORCE_TV2 8
+
+#define DISPMANX_ID_MAX       DISPMANX_ID_FORCE_TV2   // should always be the last on.
 
 /* Return codes. Nonzero ones indicate failure. */
 typedef enum {

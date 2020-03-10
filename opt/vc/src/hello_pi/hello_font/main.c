@@ -36,6 +36,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "bcm_host.h"
 #include "vgfont.h"
 
+#include "revision.h"
+
 static const char *strnchr(const char *str, size_t len, char c)
 {
    const char *e = str + len;
@@ -96,6 +98,12 @@ int main(void)
    int LAYER=1;
    bcm_host_init();
    int s;
+
+   if (get_processor_id() == PROCESSOR_BCM2838)
+   {
+      puts("This demo application is not available on the Pi4\n\n");
+      exit(0);
+   }
 
    s = gx_graphics_init(".");
    assert(s == 0);

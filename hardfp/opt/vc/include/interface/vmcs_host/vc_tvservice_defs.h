@@ -72,9 +72,15 @@ typedef enum {
    VC_TV_GET_DISPLAY_STATE,
    VC_TV_QUERY_SUPPORTED_MODES_ACTUAL,
    VC_TV_GET_DEVICE_ID,
-   //Add more commands here
+
+   VC_TV_GET_ATTACHED_DEVICES,
+//Add more commands here
+
    VC_TV_END_OF_LIST
 } VC_TV_CMD_CODE_T;
+
+// Define a bit in the command that sets whether command contains a display ID
+#define TVSERVICE_COMMAND_HAS_DISPLAY_ID (1 << 31)
 
 //Parameters for each command (padded to multiple of 16 bytes)
 //See vc_hdmi.h and vc_sdtv.h for details
@@ -353,5 +359,12 @@ typedef struct {
 enum {
    VC_LCD_ATTACHED_DEFAULT    = (1 <<22),  /**<LCD display is attached and default */
 };
+
+#define TV_MAX_ATTACHED_DISPLAYS 16
+typedef struct {
+   int32_t num_attached;        /** How many devices are attached **/
+   uint8_t display_number[TV_MAX_ATTACHED_DISPLAYS];  /** The display number of attached devices in order
+                                    Display number example  DISPMANX_ID_MAIN_LCD, see vc_dispmanx_types.h **/
+} TV_ATTACHED_DEVICES_T;
 
 #endif

@@ -53,6 +53,50 @@ unsigned bcm_host_get_sdram_address(void);
 #include "interface/vmcs_host/vc_cecservice.h"
 #include "interface/vmcs_host/vcgencmd.h"
 
+/* Returns the type of the Pi being used
+*/
+#define BCM_HOST_BOARD_TYPE_MODELA 0
+#define BCM_HOST_BOARD_TYPE_MODELB 1
+#define BCM_HOST_BOARD_TYPE_MODELAPLUS 2
+#define BCM_HOST_BOARD_TYPE_MODELBPLUS 3
+#define BCM_HOST_BOARD_TYPE_PI2MODELB 4
+#define BCM_HOST_BOARD_TYPE_ALPHA 5
+#define BCM_HOST_BOARD_TYPE_CM 6
+#define BCM_HOST_BOARD_TYPE_CM2 7
+#define BCM_HOST_BOARD_TYPE_PI3MODELB 8
+#define BCM_HOST_BOARD_TYPE_PI0 9
+#define BCM_HOST_BOARD_TYPE_CM3 0xa
+#define BCM_HOST_BOARD_TYPE_CUSTOM 0xb
+#define BCM_HOST_BOARD_TYPE_PI0W 0xc
+#define BCM_HOST_BOARD_TYPE_PI3MODELBPLUS 0xd
+#define BCM_HOST_BOARD_TYPE_PI3MODELAPLUS 0xe
+#define BCM_HOST_BOARD_TYPE_FPGA 0xf
+#define BCM_HOST_BOARD_TYPE_CM3PLUS 0x10
+#define BCM_HOST_BOARD_TYPE_PI4MODELB 0x11
+
+extern int bcm_host_get_model_type(void);
+
+/* Returns 1 if model is  Pi4
+*/
+extern int bcm_host_is_model_pi4(void);
+
+/* Returns 1 if fkms is active (dtoverlay=v3d-fkms-vc4)
+*/
+extern int bcm_host_is_fkms_active(void);
+
+/* Returns 1 if kms is active (dtoverlay=v3d-kms-vc4)
+*/
+extern int bcm_host_is_kms_active(void);
+
+/* returns the processor ID
+*/
+#define BCM_HOST_PROCESSOR_BCM2835 0
+#define BCM_HOST_PROCESSOR_BCM2836 1
+#define BCM_HOST_PROCESSOR_BCM2837 2
+#define BCM_HOST_PROCESSOR_BCM2838 3
+
+extern int bcm_host_get_processor_id(void);
+
 #ifdef __cplusplus
 }
 #endif

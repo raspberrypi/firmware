@@ -144,6 +144,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * of YUV_UV video.
  */
 #define MMAL_ENCODING_YUVUV128         MMAL_FOURCC('S','A','N','D')
+/** HEVC codec format. YUV 420, 10bpc, arranged with 3 values packed into
+ * 4 bytes with 2 bits of padding.
+ * The image is split into columns or 128 bytes / 96 samples wide, with the
+ * column of luma first, followed by the column of sample interleaved chroma.
+ */
+#define MMAL_ENCODING_YUV10_COL	       MMAL_FOURCC('Y','1','0','C')
 /** 16 bit SAND Video (YUVUV64_16) format.
  * This format is *not* opaque - if requested you will receive full frames
  * of YUV_UV_16 video.
@@ -161,6 +167,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** An EGL image handle
  */
 #define MMAL_ENCODING_EGL_IMAGE        MMAL_FOURCC('E','G','L','I')
+
+/** ISP image statistics format
+ */
+#define MMAL_ENCODING_BRCM_STATS       MMAL_FOURCC('S','T','A','T')
 
 /* }@ */
 
@@ -267,6 +277,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_COLOR_SPACE_BT470_2_BG    MMAL_FOURCC('Y','_','B','G')
 /** JPEG JFIF, but with 16..255 luma */
 #define MMAL_COLOR_SPACE_JFIF_Y16_255  MMAL_FOURCC('Y','Y','1','6')
+/** Rec2020 */
+#define MMAL_COLOR_SPACE_REC2020       MMAL_FOURCC('2','0','2','0')
 /* @} MmalColorSpace List */
 
 #endif /* MMAL_ENCODINGS_H */

@@ -47,6 +47,7 @@ typedef enum {
    HDMI_RES_GROUP_CEA     = 1, /**< CEA - HDMI device */
    HDMI_RES_GROUP_DMT     = 2, /**< DMT - computer monitors */
    HDMI_RES_GROUP_CEA_3D  = 3, /* deprecated */
+   HDMI_RES_GROUP_CUSTOM  = 4, /**< Custom timings from the client */
 
 } HDMI_RES_GROUP_T;
 
@@ -54,7 +55,8 @@ typedef enum {
    (((g) == HDMI_RES_GROUP_INVALID) ? "Invalid" : \
    (((g) == HDMI_RES_GROUP_CEA) ? "CEA" : \
    (((g) == HDMI_RES_GROUP_DMT) ? "DMT" : \
-    "Unknown")))
+   (((g) == HDMI_RES_GROUP_CUSTOM) ? "Custom" : \
+    "Unknown"))))
 
 /**
  *  CEA 861 defined video code and aspect ratios for various HDMI modes
@@ -69,7 +71,8 @@ typedef enum {
    HDMI_ASPECT_16_10    = 5, /**< 16:10*/
    HDMI_ASPECT_15_9     = 6, /**< 15:9 */
    HDMI_ASPECT_64_27    = 7, /**< 64:27 */
-   HDMI_ASPECT_21_9     = HDMI_ASPECT_64_27 /**< 21:9 is jargon, 64:27 is the actual aspect ratio */
+   HDMI_ASPECT_21_9     = HDMI_ASPECT_64_27, /**< 21:9 is jargon, 64:27 is the actual aspect ratio */
+   HDMI_ASPECT_256_135  = 8, /**< 256:135 */
    /* More aspect ratio values may be added here if defined by CEA in future */
 } HDMI_ASPECT_T;
 

@@ -150,6 +150,7 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_FormatYUV420_UVSideBySide,    /**< YUV420, but with U and V in side-by-side format */
     OMX_COLOR_Format32bitXRGB8888,
     OMX_COLOR_Format32bitXBGR8888,
+    OMX_COLOR_FormatYUV10bitColumn,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 
@@ -507,6 +508,7 @@ typedef enum OMX_WHITEBALCONTROLTYPE {
     OMX_WhiteBalControlIncandescent,
     OMX_WhiteBalControlFlash,
     OMX_WhiteBalControlHorizon,
+    OMX_WhiteBalControlGreyWorld,
     OMX_WhiteBalControlKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */ 
     OMX_WhiteBalControlVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
     OMX_WhiteBalControlMax = 0x7FFFFFFF

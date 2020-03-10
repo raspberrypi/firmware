@@ -54,19 +54,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       VC_IMAGE_YUVINFO_CSC_ITUR_BT470_2_M  = 6,  /* ITU-R BT.470-2 System M */
       VC_IMAGE_YUVINFO_CSC_ITUR_BT470_2_BG = 7,  /* ITU-R BT.470-2 System B,G */
       VC_IMAGE_YUVINFO_CSC_JPEG_JFIF_Y16_255 = 8, /* JPEG JFIF, but with 16..255 luma */
+      VC_IMAGE_YUVINFO_CSC_REC_2020        = 9,   /* Rec 2020 */
       VC_IMAGE_YUVINFO_CSC_CUSTOM          = 15,  /* Custom colour matrix follows header */
       VC_IMAGE_YUVINFO_CSC_SMPTE_170M      = VC_IMAGE_YUVINFO_CSC_ITUR_BT601,
 
       /* co-sited flags, assumed interstitial if not co-sited [2 bits] */
-      VC_IMAGE_YUVINFO_H_COSITED      = 256,
-      VC_IMAGE_YUVINFO_V_COSITED      = 512,
+      VC_IMAGE_YUVINFO_H_COSITED      = 1<<8,
+      VC_IMAGE_YUVINFO_V_COSITED      = 1<<9,
 
-      VC_IMAGE_YUVINFO_TOP_BOTTOM     = 1024,
-      VC_IMAGE_YUVINFO_DECIMATED      = 2048,
-      VC_IMAGE_YUVINFO_PACKED         = 4096,
+      VC_IMAGE_YUVINFO_TOP_BOTTOM     = 1<<10,
+      VC_IMAGE_YUVINFO_DECIMATED      = 1<<11,
+      VC_IMAGE_YUVINFO_PACKED         = 1<<12,
+
+      /* For YUVUV enforce use the tall mode to keep the column stride below 64k */
+      VC_IMAGE_YUVINFO_TALL_YUVUV     = 1<<13,
+      /* For YUVUV pad the offset for the chroma planes to a 4k page (otherwise use vpitch) */
+      VC_IMAGE_YUVINFO_YUVUV_4K_CHROMA_ALIGN = 1<<14,
 
       /* Certain YUV image formats can either be V/U interleaved or U/V interleaved */
-      VC_IMAGE_YUVINFO_IS_VU          = 0x8000,
+      VC_IMAGE_YUVINFO_IS_VU          = 1<<15,
 
       /* Force Metaware to use 16 bits */
       VC_IMAGE_YUVINFO_FORCE_ENUM_16BIT = 0xffff,
@@ -83,6 +89,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VC_IMAGE_YUV_UV_16_STRIPE_WIDTH (1 << VC_IMAGE_YUV_UV_16_STRIPE_WIDTH_LOG2)
 #define VC_IMAGE_YUV_UV_16_STRIPE_STRIDE_LOG2 7
 #define VC_IMAGE_YUV_UV_16_STRIPE_STRIDE (1 << VC_IMAGE_YUV_UV_16_STRIPE_STRIDE_LOG2)
+
+#define VC_IMAGE_YUV10COL_STRIPE_WIDTH_PIXELS 96
+#define VC_IMAGE_YUV10COL_STRIPE_WIDTH_BYTES_LOG2 7
+#define VC_IMAGE_YUV10COL_STRIPE_WIDTH_BYTES (1 << VC_IMAGE_YUV10COL_STRIPE_WIDTH_BYTES_LOG2)
 
    /* The image structure. */
    typedef struct vc_image_extra_uv_s {
@@ -116,6 +126,7 @@ unsigned int cube_map           : 1;
       unsigned short order;
       unsigned short format;
       int block_length;
+      unsigned short vpitch;
    } VC_IMAGE_EXTRA_BAYER_T;
 
 //The next block can be used with Visual C++
