@@ -126,6 +126,7 @@ unsigned int cube_map           : 1;
       unsigned short order;
       unsigned short format;
       int block_length;
+      unsigned short vpitch;
    } VC_IMAGE_EXTRA_BAYER_T;
 
 //The next block can be used with Visual C++

@@ -66,6 +66,7 @@ typedef enum OMX_IMAGE_CODINGTYPE {
 
     OMX_IMAGE_CodingTGA,
     OMX_IMAGE_CodingPPM,
+    OMX_IMAGE_CodingBrcmStatistics, /**< Statistics from the Brcm ISP */
 
     OMX_IMAGE_CodingMax = 0x7FFFFFFF
 } OMX_IMAGE_CODINGTYPE;

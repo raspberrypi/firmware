@@ -141,7 +141,7 @@ enum {
    MMAL_PARAMETER_JPEG_RESTART_INTERVAL,     /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
    MMAL_PARAMETER_CAMERA_ISP_BLOCK_OVERRIDE, /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
    MMAL_PARAMETER_LENS_SHADING_OVERRIDE,     /**< Takes a @ref MMAL_PARAMETER_LENS_SHADING_T */
-   MMAL_PARAMETER_BLACK_LEVEL,               /**< Takes a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_BLACK_LEVEL,               /**< Takes a @ref MMAL_PARAMETER_UINT32_T  or @ref MMAL_PARAMETER_BLACK_LEVEL_T */
    MMAL_PARAMETER_RESIZE_PARAMS,             /**< Takes a @ref MMAL_PARAMETER_RESIZE_T */
    MMAL_PARAMETER_CROP,                      /**< Takes a @ref MMAL_PARAMETER_CROP_T */
    MMAL_PARAMETER_OUTPUT_SHIFT,              /**< Takes a @ref MMAL_PARAMETER_INT32_T */
@@ -149,6 +149,11 @@ enum {
    MMAL_PARAMETER_CUSTOM_CCM,                /**< Takes a @ref MMAL_PARAMETER_CUSTOM_CCM_T */
    MMAL_PARAMETER_ANALOG_GAIN,               /**< Takes a @ref MMAL_PARAMETER_RATIONAL_T */
    MMAL_PARAMETER_DIGITAL_GAIN,              /**< Takes a @ref MMAL_PARAMETER_RATIONAL_T */
+   MMAL_PARAMETER_DENOISE,                   /**< Takes a @ref MMAL_PARAMETER_DENOISE_T */
+   MMAL_PARAMETER_SHARPEN,                   /**< Takes a @ref MMAL_PARAMETER_SHARPEN_T */
+   MMAL_PARAMETER_GREEN_EQ,                  /**< Takes a @ref MMAL_PARAMETER_GREEN_EQ_T */
+   MMAL_PARAMETER_DPC,                       /**< Tales a @ref MMAP_PARAMETER_DPC_T */
+   MMAL_PARAMETER_GAMMA,                     /**< Tales a @ref MMAP_PARAMETER_GAMMA_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -945,6 +950,34 @@ typedef struct MMAL_PARAMETER_LENS_SHADING_T
    uint32_t ref_transform;
 } MMAL_PARAMETER_LENS_SHADING_T;
 
+typedef enum MMAL_PARAM_LS_GAIN_FORMAT_TYPE_T
+{
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U0P8_1 = 0,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U1P7_0 = 1,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U1P7_1 = 2,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U2P6_0 = 3,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U2P6_1 = 4,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U3P5_0 = 5,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U3P5_1 = 6,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_U4P10  = 7,
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_DUMMY  = 0x7FFFFFFF
+} MMAL_PARAM_LS_GAIN_FORMAT_TYPE_T;
+
+typedef struct MMAL_PARAMETER_LENS_SHADING_V2_T
+{
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enabled;
+   uint32_t grid_cell_size;
+   uint32_t grid_width;
+   uint32_t grid_stride;
+   uint32_t grid_height;
+   uint32_t mem_handle_table;
+   uint32_t ref_transform;
+   MMAL_BOOL_T corner_sampled;
+   MMAL_PARAM_LS_GAIN_FORMAT_TYPE_T gain_format;
+} MMAL_PARAMETER_LENS_SHADING_V2_T;
+
 /*
 The mode determines the kind of resize.
 MMAL_RESIZE_BOX allow the max_width and max_height to set a bounding box into
@@ -993,5 +1026,64 @@ typedef struct MMAL_PARAMETER_CUSTOM_CCM_T {
    MMAL_BOOL_T enable;           /**< Enable the custom CCM. */
    MMAL_PARAMETER_CCM_T ccm;     /**< CCM to be used. */
 } MMAL_PARAMETER_CUSTOM_CCM_T;
+
+typedef struct MMAL_PARAMETER_BLACK_LEVEL_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable denoise parameters. */
+   uint16_t black_level_r;              /**< Black level of red channel (out of 16 bits). */
+   uint16_t black_level_g;              /**< Black level of green channel (out of 16 bits). */
+   uint16_t black_level_b;              /**< Black level of blue channel (out of 16 bits). */
+} MMAL_PARAMETER_BLACK_LEVEL_T;
+
+typedef struct MMAL_PARAMETER_DENOISE_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable denoise parameters. */
+   uint32_t constant;                   /**< Constant offset of the noise profile. */
+   MMAL_RATIONAL_T slope;               /**< Slope of the noise profile. */
+   MMAL_RATIONAL_T strength;            /**< Denoise strength. */
+} MMAL_PARAMETER_DENOISE_T;
+
+typedef struct MMAL_PARAMETER_SHARPEN_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable sharpening parameters. */
+   MMAL_RATIONAL_T threshold;           /**< Threshold when sharpening starts. */
+   MMAL_RATIONAL_T strength;            /**< Rate at which sharpening ramps. */
+   MMAL_RATIONAL_T limit;               /**< Limit to total sharpening. */
+} MMAL_PARAMETER_SHARPEN_T;
+
+typedef struct MMAL_PARAMETER_GREEN_EQ_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable Green Equalisation parameters. */
+   uint32_t offset;                     /**< Offset of Green Equalisation threshold. */
+   MMAL_RATIONAL_T slope;               /**< Rate at which Green Equalisation threshold ramps. */
+} MMAL_PARAMETER_GREEN_EQ_T;
+
+typedef enum MMAL_DPC_MODE_T {
+   MMAL_DPC_MODE_OFF =    0,
+   MMAL_DPC_MODE_NORMAL = 1,
+   MMAL_DPC_MODE_STRONG = 2,
+   MMAL_DPC_MODE_MAX =    0x7FFFFFFF,
+} MMAL_DPC_MODE_T;
+
+typedef struct MMAL_PARAMETER_DPC_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable DPC parameters. */
+   MMAL_DPC_MODE_T strength;            /**< DPC strength. */
+} MMAL_PARAMETER_DPC_T;
+
+#define MMAL_NUM_GAMMA_PTS 33
+
+typedef struct MMAL_PARAMETER_GAMMA_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable gamma parameters. */
+   uint16_t X[MMAL_NUM_GAMMA_PTS];      /**< X values (16 bit range) */
+   uint16_t Y[MMAL_NUM_GAMMA_PTS];      /**< Y values (16 bit range) */
+} MMAL_PARAMETER_GAMMA_T;
 
 #endif  /* MMAL_PARAMETERS_CAMERA_H */

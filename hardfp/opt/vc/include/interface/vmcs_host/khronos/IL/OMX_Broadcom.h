@@ -2643,6 +2643,18 @@ nRefTransform should be set to the transform in force when the reference table w
 captured. This allows correct compensation when the sensor is subsequently used with
 an alternate transform.
 */
+typedef enum OMX_LSGAINFORMATTYPE {
+   OMX_LSGAINFORMAT_U0P8_1 = 0,       /**< Gains are u0.8 format with a base of 1 */
+   OMX_LSGAINFORMAT_U1P7_0 = 1,       /**< Gains are u1.7 format with a base of 0 */
+   OMX_LSGAINFORMAT_U1P7_1 = 2,       /**< Gains are u1.7 format with a base of 1 */
+   OMX_LSGAINFORMAT_U2P6_0 = 3,       /**< Gains are u2.6 format with a base of 0 */
+   OMX_LSGAINFORMAT_U2P6_1 = 4,       /**< Gains are u2.6 format with a base of 1 */
+   OMX_LSGAINFORMAT_U3P5_0 = 5,       /**< Gains are u3.5 format with a base of 0 */
+   OMX_LSGAINFORMAT_U3P5_1 = 6,       /**< Gains are u3.5 format with a base of 1 */
+   OMX_LSGAINFORMAT_U4P10  = 7,       /**< Gains are u4.10 format with a base of 0 (note: 16-bit values) */
+   OMX_LSGAINFORMAT_DUMMY  = 0x7FFFFFFF
+} OMX_LSGAINFORMATTYPE;
+
 typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
    OMX_U32 nSize;
    OMX_VERSIONTYPE nVersion;
@@ -2650,10 +2662,12 @@ typedef struct OMX_PARAM_LENSSHADINGOVERRIDETYPE {
    OMX_BOOL bEnabled;                     /**< Enable the override grid */
    OMX_U32 nGridCellSize;                 /**< size of each grid element. Assumes square grid */
    OMX_U32 nWidth;                        /**< grid width */
-   OMX_U32 nStride;                       /**< grid stride (allows for padding) */
+   OMX_U32 nStride;                       /**< grid stride (allows for padding) in *samples* (not bytes) */
    OMX_U32 nHeight;                       /**< grid height */
    OMX_U32 nMemHandleTable;               /**< Handle for grid */
    OMX_U32 nRefTransform;                 /**< Reference transform taken from raw header */
+   OMX_BOOL bCornerSampled;               /**< Are grids sampled at cell corners, or centres */
+   OMX_LSGAINFORMATTYPE eLsGainFormat;    /**< Format of the gain tables */
 } OMX_PARAM_LENSSHADINGOVERRIDETYPE;
 
 /* OMX_IndexConfigBrcmPowerMonitor: Deprecated.*/
@@ -2735,6 +2749,89 @@ accept images with no padding.
 Used by the MMAL framework predominantly.
 Superceded by OMX_IndexParamMinimumAlignment.
 */
+
+/* OMX_IndexParamBrcmBlackLevel: Manual black level parameters. */
+/*
+Configures the black level within the ISP pipeline.
+*/
+typedef struct OMX_PARAM_BLACKLEVELTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable black level subtraction */
+   OMX_U16 nBlackLevelR;      /**< Black level of red channel */
+   OMX_U16 nBlackLevelG;      /**< Black level of green channel */
+   OMX_U16 nBlackLevelB;      /**< Black level of blue channel */
+   OMX_U16 nBitDepth;         /**< Bit depth - refer to comments in code where used */
+} OMX_PARAM_BLACKLEVELTYPE;
+
+/* OMX_IndexParamDenoise: Manual denoise parameters. */
+/*
+Configures the spatial denoise block within the ISP pipeline.
+*/
+typedef struct OMX_PARAM_DENOISETYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable spatial denoise */
+   OMX_U32 nConstant;         /**< Constant noise offset */
+   OMX_U32 nSlope;            /**< Slope of the noise profile, Q16 format */
+   OMX_U32 nStrength;         /**< Strength of denoising, Q16 format with 0 = off */
+} OMX_PARAM_DENOISETYPE;
+
+/* OMX_IndexParamSharpen: Manual sharpen parameters. */
+/*
+Configures the sharpening block within the ISP pipeline.
+*/
+typedef struct OMX_PARAM_SHARPENTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable sharpening */
+   OMX_U32 nThreshold;        /**< Threshold factor at which sharpening starts, 8p8 */
+   OMX_U32 nStrength;         /**< Strength factor controlling the rate at which it ramps, 8p8 */
+   OMX_U32 nLimit;            /**< Maxmimum amount of sharpening, use 0 to disable, 8p8 */
+} OMX_PARAM_SHARPENTYPE;
+
+/* OMX_IndexParamGreenEq: Manual Green Equalisation parameters. */
+/*
+Configures the Green Equalisation block within the ISP pipeline.
+*/
+typedef struct OMX_PARAM_GREENEQTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable Green Equalisation */
+   OMX_U32 nOffset;           /**< Offset of Green Equalisation threshold. */
+   OMX_U32 nSlope;            /**< Slope of Green Equalisation threshold against pixel value, 0p16 */
+} OMX_PARAM_GREENEQTYPE;
+
+/* OMX_IndexParamDpc: Manual DPC (defective pixel correction) parameters. */
+/*
+Configures the DPC block within the ISP pipeline.
+*/
+typedef struct OMX_PARAM_DPCTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable DPC (automatic defective pixel correction) */
+   OMX_U32 nStrength;         /**< Strength (0 = off, 1 = normal, 2 = strong) */
+} OMX_PARAM_DPCTYPE;
+
+/* OMX_IndexParamGamma: Manual gamma parameters. */
+/*
+Configures the gamma block within the ISP pipeline.
+*/
+#define OMX_NUM_GAMMA_PTS 33
+
+typedef struct OMX_PARAM_GAMMATYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;             /**< Enable gamma */
+   OMX_U16 nX[OMX_NUM_GAMMA_PTS]; /**< X coordinates (16 bit range) */
+   OMX_U16 nY[OMX_NUM_GAMMA_PTS]; /**< Y coordinates (16 bit range) */
+} OMX_PARAM_GAMMATYPE;
 
 #endif
 /* File EOF */
