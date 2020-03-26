@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // these go in command word of gpu_job_s
 // EXECUTE_VPU and EXECUTE_QPU are valid from host
-enum { EXECUTE_NONE, EXECUTE_VPU, EXECUTE_QPU, EXECUTE_SYNC };
+enum { EXECUTE_NONE, EXECUTE_VPU, EXECUTE_QPU, EXECUTE_SYNC, LAUNCH_VPU1 };
 
 struct vpu_job_s {
    // these are function address and parameters for vpu job
