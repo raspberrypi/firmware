@@ -1261,6 +1261,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
 
+        sps30                   Select the Sensirion SPS30 particulate matter
+                                sensor. Fixed address 0x69.
+
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
 
@@ -2034,12 +2037,20 @@ Name:   rpi-poe
 Info:   Raspberry Pi PoE HAT fan
 Load:   dtoverlay=rpi-poe,<param>[=<val>]
 Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
-                                turns on (default 50000)
+                                turns on (default 40000)
         poe_fan_temp0_hyst      Temperature delta (in millicelcius) at which
-                                the fan turns off (default 5000)
+                                the fan turns off (default 2000)
         poe_fan_temp1           Temperature (in millicelcius) at which the fan
-                                speeds up (default 55000)
+                                speeds up (default 45000)
         poe_fan_temp1_hyst      Temperature delta (in millicelcius) at which
+                                the fan slows down (default 2000)
+        poe_fan_temp2           Temperature (in millicelcius) at which the fan
+                                speeds up (default 50000)
+        poe_fan_temp2_hyst      Temperature delta (in millicelcius) at which
+                                the fan slows down (default 2000)
+        poe_fan_temp3           Temperature (in millicelcius) at which the fan
+                                speeds up (default 55000)
+        poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
                                 the fan slows down (default 5000)
 
 
@@ -2058,6 +2069,13 @@ Params: <None>
 Name:   rpi-tv
 Info:   Raspberry Pi TV HAT
 Load:   dtoverlay=rpi-tv
+Params: <None>
+
+
+Name:   rpivid-v4l2
+Info:   Load the V4L2 stateless video decoder driver for the HEVC block,
+        disabling the memory mapped devices in the process.
+Load:   dtoverlay=rpivid-v4l2
 Params: <None>
 
 
@@ -2662,9 +2680,7 @@ Params: <None>
 
 
 Name:   vc4-kms-v3d
-Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
-        booting to GUI while this overlay is in use will cause interesting
-        lockups.
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver.
 Load:   dtoverlay=vc4-kms-v3d,<param>
 Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
@@ -2672,6 +2688,20 @@ Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-96                  CMA is 96MB
         cma-64                  CMA is 64MB
         audio                   Enable or disable audio over HDMI (default "on")
+
+
+Name:   vc4-kms-v3d-pi4
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver for Pi4.
+Load:   dtoverlay=vc4-kms-v3d-pi4,<param>
+Params: cma-256                 CMA is 256MB
+        cma-192                 CMA is 192MB
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+        audio                   Enable or disable audio over HDMI0 (default
+                                "on")
+        audio1                  Enable or disable audio over HDMI1 (default
+                                "on")
 
 
 Name:   vga666
