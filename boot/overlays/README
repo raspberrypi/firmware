@@ -159,6 +159,10 @@ Params:
         spi                     Set to "on" to enable the spi interfaces
                                 (default "off")
 
+        spi_dma4                Use to enable 40-bit DMA on spi interfaces
+                                (the assigned value doesn't matter)
+                                (2711 only)
+
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
 
@@ -331,22 +335,14 @@ Info:   Analog Devices ADV7282M analogue video to CSI2 bridge.
         Uses Unicam1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=adv7282m,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-        addr                    Overrides the I2C address (default 0x21)
+Params: addr                    Overrides the I2C address (default 0x21)
 
 
 Name:   adv728x-m
 Info:   Analog Devices ADV728[0|1|2]-M analogue video to CSI2 bridges.
         This is a wrapper for adv7282m, and defaults to ADV7282M.
 Load:   dtoverlay=adv728x-m,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-        addr                    Overrides the I2C address (default 0x21)
+Params: addr                    Overrides the I2C address (default 0x21)
         adv7280m                Select ADV7280-M.
         adv7281m                Select ADV7281-M.
         adv7281ma               Select ADV7281-MA.
@@ -552,6 +548,19 @@ Params: <None>
 Name:   bmp085_i2c-sensor
 Info:   This overlay is now deprecated - see i2c-sensor
 Load:   <Deprecated>
+
+
+Name:   cma
+Info:   Set custom CMA sizes, only use if you know what you are doing, might
+        clash with other overlays like vc4-fkms-v3d and vc4-kms-v3d.
+Load:   dtoverlay=cma,<param>=<val>
+Params: cma-256                 CMA is 256MB (needs 1GB)
+        cma-192                 CMA is 192MB (needs 1GB)
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
 
 
 Name:   dht11
@@ -1014,6 +1023,12 @@ Load:   dtoverlay=hifiberry-digi-pro
 Params: <None>
 
 
+Name:   highperi
+Info:   Enables "High Peripheral" mode
+Load:   dtoverlay=highperi
+Params: <None>
+
+
 Name:   hy28a
 Info:   HY28A - 2.8" TFT LCD Display Module by HAOYU Electronics
         Default values match Texy's display shield
@@ -1267,6 +1282,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
 
+        sps30                   Select the Sensirion SPS30 particulate matter
+                                sensor. Fixed address 0x69.
+
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
 
@@ -1291,11 +1309,8 @@ Params: pins_0_1                Use pins 0 and 1 (default)
 
 
 Name:   i2c0-bcm2708
-Info:   Deprecated, legacy version of i2c0, from which it inherits its
-        parameters, just adding the explicit individual pin specifiers.
+Info:   Deprecated, legacy version of i2c0.
 Load:   <Deprecated>
-Params: sda0_pin                GPIO pin for SDA0 (deprecated - use pins_*)
-        scl0_pin                GPIO pin for SCL0 (deprecated - use pins_*)
 
 
 Name:   i2c1
@@ -1310,13 +1325,8 @@ Params: pins_2_3                Use pins 2 and 3 (default)
 
 
 Name:   i2c1-bcm2708
-Info:   Deprecated, legacy version of i2c1, from which it inherits its
-        parameters, just adding the explicit individual pin specifiers.
+Info:   Deprecated, legacy version of i2c1.
 Load:   <Deprecated>
-Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
-        scl1_pin                GPIO pin for SCL1 (3 or 45 - default 3)
-        pin_func                Alternative pin function (4 (alt0), 6 (alt2) -
-                                default 4)
 
 
 Name:   i2c3
@@ -1376,12 +1386,8 @@ Name:   imx219
 Info:   Sony IMX219 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
-Load:   dtoverlay=imx219,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+Load:   dtoverlay=imx219
+Params: <None>
 
 
 Name:   iqaudio-codec
@@ -1445,12 +1451,8 @@ Name:   irs1125
 Info:   Infineon irs1125 TOF camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
-Load:   dtoverlay=irs1125,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+Load:   dtoverlay=irs1125
+Params: <None>
 
 
 Name:   jedec-spi-nor
@@ -1735,12 +1737,8 @@ Name:   ov5647
 Info:   Omnivision OV5647 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
-Load:   dtoverlay=ov5647,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+Load:   dtoverlay=ov5647
+Params: <None>
 
 
 Name:   papirus
@@ -2072,6 +2070,13 @@ Params: <None>
 Name:   rpi-tv
 Info:   Raspberry Pi TV HAT
 Load:   dtoverlay=rpi-tv
+Params: <None>
+
+
+Name:   rpivid-v4l2
+Info:   Load the V4L2 stateless video decoder driver for the HEVC block,
+        disabling the memory mapped devices in the process.
+Load:   dtoverlay=rpivid-v4l2
 Params: <None>
 
 
@@ -2540,12 +2545,6 @@ Params: 4lane                   Use 4 lanes (only applicable to Compute Modules
                                 (574Mbit/s) and 486000000 (972Mbit/s - default)
                                 are supported by the driver.
 
-        i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-
 
 Name:   tc358743-audio
 Info:   Used in combination with the tc358743-fast overlay to route the audio
@@ -2657,6 +2656,13 @@ Info:   This overlay has been deprecated and removed because it is no longer
 Load:   <Deprecated>
 
 
+Name:   upstream-pi4
+Info:   Allow usage of downstream .dtb with upstream kernel on Pi 4. Comprises
+        the vc4-kms-v3d-pi4 and dwc2 overlays.
+Load:   dtoverlay=upstream-pi4
+Params: <None>
+
+
 Name:   vc4-fkms-v3d
 Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
         display stack.
@@ -2666,6 +2672,8 @@ Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
         cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
 
 
 Name:   vc4-kms-kippah-7inch
@@ -2676,16 +2684,32 @@ Params: <None>
 
 
 Name:   vc4-kms-v3d
-Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
-        booting to GUI while this overlay is in use will cause interesting
-        lockups.
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver.
 Load:   dtoverlay=vc4-kms-v3d,<param>
 Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
         cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
         audio                   Enable or disable audio over HDMI (default "on")
+
+
+Name:   vc4-kms-v3d-pi4
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver for Pi4.
+Load:   dtoverlay=vc4-kms-v3d-pi4,<param>
+Params: cma-256                 CMA is 256MB
+        cma-192                 CMA is 192MB
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
+        audio                   Enable or disable audio over HDMI0 (default
+                                "on")
+        audio1                  Enable or disable audio over HDMI1 (default
+                                "on")
 
 
 Name:   vga666
