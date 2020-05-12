@@ -68,6 +68,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       /* For YUVUV enforce use the tall mode to keep the column stride below 64k */
       VC_IMAGE_YUVINFO_TALL_YUVUV     = 1<<13,
+      /* For YUVUV pad the offset for the chroma planes to a 4k page (otherwise use vpitch) */
+      VC_IMAGE_YUVINFO_YUVUV_4K_CHROMA_ALIGN = 1<<14,
 
       /* Certain YUV image formats can either be V/U interleaved or U/V interleaved */
       VC_IMAGE_YUVINFO_IS_VU          = 1<<15,
@@ -124,6 +126,7 @@ unsigned int cube_map           : 1;
       unsigned short order;
       unsigned short format;
       int block_length;
+      unsigned short vpitch;
    } VC_IMAGE_EXTRA_BAYER_T;
 
 //The next block can be used with Visual C++
