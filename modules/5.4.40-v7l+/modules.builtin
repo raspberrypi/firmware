@@ -1,3 +1,4 @@
+kernel/mm/zpool.ko
 kernel/fs/binfmt_script.ko
 kernel/fs/mbcache.ko
 kernel/fs/autofs/autofs4.ko
@@ -43,6 +44,8 @@ kernel/crypto/des_generic.ko
 kernel/crypto/aes_generic.ko
 kernel/crypto/crc32c_generic.ko
 kernel/crypto/crc32_generic.ko
+kernel/crypto/lzo.ko
+kernel/crypto/lzo-rle.ko
 kernel/crypto/rng.ko
 kernel/crypto/asymmetric_keys/public_key.ko
 kernel/crypto/asymmetric_keys/x509_key_parser.ko
@@ -297,6 +300,7 @@ kernel/lib/crypto/libaes.ko
 kernel/lib/crypto/libdes.ko
 kernel/lib/fonts/font.ko
 kernel/lib/lz4/lz4_decompress.ko
+kernel/lib/lzo/lzo_compress.ko
 kernel/lib/lzo/lzo_decompress.ko
 kernel/lib/mpi/mpi.ko
 kernel/lib/xz/xz_dec.ko

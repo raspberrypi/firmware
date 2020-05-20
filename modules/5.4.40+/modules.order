@@ -1,7 +1,9 @@
 kernel/arch/arm/crypto/aes-arm.ko
 kernel/arch/arm/crypto/sha1-arm.ko
 kernel/kernel/configs.ko
+kernel/mm/zbud.ko
 kernel/mm/zsmalloc.ko
+kernel/mm/z3fold.ko
 kernel/fs/quota/quota_v1.ko
 kernel/fs/quota/quota_v2.ko
 kernel/fs/quota/quota_tree.ko
@@ -104,8 +106,6 @@ kernel/crypto/deflate.ko
 kernel/crypto/michael_mic.ko
 kernel/crypto/authenc.ko
 kernel/crypto/authencesn.ko
-kernel/crypto/lzo.ko
-kernel/crypto/lzo-rle.ko
 kernel/crypto/lz4.ko
 kernel/crypto/drbg.ko
 kernel/crypto/jitterentropy_rng.ko
@@ -555,6 +555,7 @@ kernel/drivers/media/i2c/mt9v011.ko
 kernel/drivers/media/i2c/ir-kbd-i2c.ko
 kernel/drivers/media/i2c/tc358743.ko
 kernel/drivers/media/i2c/imx219.ko
+kernel/drivers/media/i2c/imx477.ko
 kernel/drivers/media/tuners/tuner-xc2028.ko
 kernel/drivers/media/tuners/tuner-simple.ko
 kernel/drivers/media/tuners/tuner-types.ko
@@ -1596,7 +1597,6 @@ kernel/lib/math/cordic.ko
 kernel/lib/crypto/libaes.ko
 kernel/lib/crypto/libarc4.ko
 kernel/lib/crypto/libsha256.ko
-kernel/lib/lzo/lzo_compress.ko
 kernel/lib/lz4/lz4_compress.ko
 kernel/lib/crc-ccitt.ko
 kernel/lib/crc7.ko

@@ -3,7 +3,9 @@ kernel/arch/arm/crypto/aes-arm-bs.ko: kernel/crypto/crypto_simd.ko kernel/crypto
 kernel/arch/arm/crypto/sha1-arm.ko:
 kernel/arch/arm/crypto/sha1-arm-neon.ko: kernel/arch/arm/crypto/sha1-arm.ko
 kernel/kernel/configs.ko:
+kernel/mm/zbud.ko:
 kernel/mm/zsmalloc.ko:
+kernel/mm/z3fold.ko:
 kernel/fs/quota/quota_v1.ko:
 kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
 kernel/fs/quota/quota_tree.ko:
@@ -75,7 +77,7 @@ kernel/fs/ocfs2/ocfs2_stack_user.ko: kernel/fs/dlm/dlm.ko kernel/fs/ocfs2/ocfs2_
 kernel/fs/ocfs2/dlmfs/ocfs2_dlmfs.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko kernel/fs/ocfs2/ocfs2_stackglue.ko
 kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko:
 kernel/fs/ocfs2/dlm/ocfs2_dlm.ko: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.ko
-kernel/fs/btrfs/btrfs.ko: kernel/crypto/xor.ko kernel/arch/arm/lib/xor-neon.ko kernel/lib/zstd/zstd_decompress.ko kernel/lib/zstd/zstd_compress.ko kernel/lib/xxhash.ko kernel/lib/lzo/lzo_compress.ko kernel/lib/raid6/raid6_pq.ko kernel/lib/zlib_deflate/zlib_deflate.ko
+kernel/fs/btrfs/btrfs.ko: kernel/crypto/xor.ko kernel/arch/arm/lib/xor-neon.ko kernel/lib/zstd/zstd_decompress.ko kernel/lib/zstd/zstd_compress.ko kernel/lib/xxhash.ko kernel/lib/raid6/raid6_pq.ko kernel/lib/zlib_deflate/zlib_deflate.ko
 kernel/fs/gfs2/gfs2.ko:
 kernel/crypto/seqiv.ko:
 kernel/crypto/echainiv.ko:
@@ -100,8 +102,6 @@ kernel/crypto/deflate.ko: kernel/lib/zlib_deflate/zlib_deflate.ko
 kernel/crypto/michael_mic.ko:
 kernel/crypto/authenc.ko:
 kernel/crypto/authencesn.ko: kernel/crypto/authenc.ko
-kernel/crypto/lzo.ko: kernel/lib/lzo/lzo_compress.ko
-kernel/crypto/lzo-rle.ko: kernel/lib/lzo/lzo_compress.ko
 kernel/crypto/lz4.ko: kernel/lib/lz4/lz4_compress.ko
 kernel/crypto/drbg.ko:
 kernel/crypto/jitterentropy_rng.ko:
@@ -543,6 +543,7 @@ kernel/drivers/media/i2c/mt9v011.ko: kernel/drivers/media/v4l2-core/videodev.ko 
 kernel/drivers/media/i2c/ir-kbd-i2c.ko:
 kernel/drivers/media/i2c/tc358743.ko: kernel/drivers/media/v4l2-core/v4l2-dv-timings.ko kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko kernel/drivers/media/cec/cec.ko
 kernel/drivers/media/i2c/imx219.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko
+kernel/drivers/media/i2c/imx477.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko
 kernel/drivers/media/tuners/tuner-xc2028.ko:
 kernel/drivers/media/tuners/tuner-simple.ko: kernel/drivers/media/tuners/tuner-types.ko
 kernel/drivers/media/tuners/tuner-types.ko:
@@ -1584,7 +1585,6 @@ kernel/arch/arm/lib/xor-neon.ko:
 kernel/lib/math/cordic.ko:
 kernel/lib/crypto/libarc4.ko:
 kernel/lib/crypto/libsha256.ko:
-kernel/lib/lzo/lzo_compress.ko:
 kernel/lib/lz4/lz4_compress.ko:
 kernel/lib/crc-ccitt.ko:
 kernel/lib/crc7.ko:

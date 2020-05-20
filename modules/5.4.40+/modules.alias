@@ -3,6 +3,9 @@ alias crypto-aes aes_arm
 alias aes aes_arm
 alias crypto-sha1 sha1_arm
 alias sha1 sha1_arm
+alias zpool-zbud zbud
+alias zpool-zsmalloc zsmalloc
+alias zpool-z3fold z3fold
 alias nfs-layouttype4-5 blocklayoutdriver
 alias nfs-layouttype4-3 blocklayoutdriver
 alias nfs-layouttype4-4 nfs_layout_flexfiles
@@ -140,10 +143,6 @@ alias crypto-authenc authenc
 alias authenc authenc
 alias crypto-authencesn authencesn
 alias authencesn authencesn
-alias crypto-lzo lzo
-alias lzo lzo
-alias crypto-lzo-rle lzo_rle
-alias lzo-rle lzo_rle
 alias crypto-lz4 lz4
 alias lz4 lz4
 alias crypto-stdrng drbg
@@ -6964,6 +6963,8 @@ alias of:N*T*Ctoshiba,tc358743C* tc358743
 alias of:N*T*Ctoshiba,tc358743 tc358743
 alias of:N*T*Csony,imx219C* imx219
 alias of:N*T*Csony,imx219 imx219
+alias of:N*T*Csony,imx477C* imx477
+alias of:N*T*Csony,imx477 imx477
 alias spi:msi001 msi001
 alias i2c:mt2060 mt2060
 alias i2c:tda18212 tda18212
