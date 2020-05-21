@@ -104,6 +104,8 @@ enum {
    MMAL_PARAMETER_VIDEO_SOURCE_PATTERN,         /**< Take a @ref MMAL_PARAMETER_SOURCE_PATTERN_T */
    MMAL_PARAMETER_VIDEO_ENCODE_SEPARATE_NAL_BUFS,  /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T */
    MMAL_PARAMETER_VIDEO_DROPPABLE_PFRAME_LENGTH,   /**< Take a @ref MMAL_PARAMETER_UINT32_T */
+   MMAL_PARAMETER_VIDEO_STALL_THRESHOLD,           /**< Take a @ref MMAL_PARAMETER_VIDEO_STALL_T */
+   MMAL_PARAMETER_VIDEO_ENCODE_HEADERS_WITH_FRAME, /**< Take a @ref MMAL_PARAMETER_BOOLEAN_T */
 };
 
 /** Display transformations.
@@ -524,5 +526,11 @@ typedef struct MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T {
    MMAL_RATIONAL_T framerate;                   /**< Framerate used when determining buffer timestamps */
 } MMAL_PARAMETER_VIDEO_SOURCE_PATTERN_T;
 
+typedef struct MMAL_PARAMETER_VIDEO_STALL_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T stalled;     /**< Whether we are stalled */
+   uint32_t delay;          /**< Delay in real time (us) from last buffer to current time */
+} MMAL_PARAMETER_VIDEO_STALL_T;
 
 #endif
