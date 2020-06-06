@@ -48,6 +48,11 @@
 This component wraps the ISP (Image Sensor Processor) hardware block to
 offer hardware accelerated format conversion and resizing.
 It has one input port taking Bayer, YUV or RGB images in numerous different formats.
+Monochrome sensors using the normal CSI-2 pixel format packings are also supported,
+however what is normally the Bayer part of the processing is still in Bayer mode,
+therefore the same parameters need to be applied to all 4 channels to avoid strange
+colour effects.
+<p>
 It has three output ports:
 Port 361 supports various RGB and YUV formats.
 Port 362 is off the low res resizer which can only downscale. Due to this
