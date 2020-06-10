@@ -127,6 +127,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SGBRG12P   MMAL_FOURCC('p','G','1','2')  //GBRG
 #define MMAL_ENCODING_BAYER_SRGGB12P   MMAL_FOURCC('p','R','1','2')  //RGGB
 
+//14 bit per pixel Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR14P   MMAL_FOURCC('p','B','E','E')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG14P   MMAL_FOURCC('p','G','E','E')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG14P   MMAL_FOURCC('p','g','E','E')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB14P   MMAL_FOURCC('p','R','E','E')  //RGGB
+
 //16 bit per pixel Bayer formats.
 #define MMAL_ENCODING_BAYER_SBGGR16    MMAL_FOURCC('B','G','1','6')  //BGGR
 #define MMAL_ENCODING_BAYER_SGBRG16    MMAL_FOURCC('G','B','1','6')  //GBRG
@@ -138,6 +144,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SGBRG10DPCM8 MMAL_FOURCC('b','G','A','8')  //GBRG
 #define MMAL_ENCODING_BAYER_SGRBG10DPCM8 MMAL_FOURCC('B','D','1','0')  //GRBG
 #define MMAL_ENCODING_BAYER_SRGGB10DPCM8 MMAL_FOURCC('b','R','A','8')  //RGGB
+
+//MIPI packed monochrome images
+#define MMAL_ENCODING_GREY    MMAL_FOURCC('G', 'R', 'E', 'Y') //8bpp Greyscale
+#define MMAL_ENCODING_Y10P    MMAL_FOURCC('Y', '1', '0', 'P') //10bpp  Greyscale, MIPI RAW10 packed
+#define MMAL_ENCODING_Y12P    MMAL_FOURCC('Y', '1', '2', 'P') //12bpp  Greyscale, MIPI RAW12 packed
+#define MMAL_ENCODING_Y14P    MMAL_FOURCC('Y', '1', '4', 'P') //14bpp  Greyscale, MIPI RAW14 packed
+#define MMAL_ENCODING_Y16     MMAL_FOURCC('Y', '1', '6', ' ') //16bpp  Greyscale
 
 /** SAND Video (YUVUV128) format, native format understood by VideoCore.
  * This format is *not* opaque - if requested you will receive full frames

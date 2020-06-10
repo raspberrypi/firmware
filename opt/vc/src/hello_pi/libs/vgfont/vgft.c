@@ -266,6 +266,8 @@ static VGfloat adjustments_y[CHAR_COUNT_MAX];
 // and get a final adjustment based on the next character past char_count, or 
 // else just assume that this is the end of the text and add no final 
 // adjustment.
+//
+// Returns silently in some error cases.  Assert fails in some error cases.
 
 static void draw_chars(VGFT_FONT_T *font, const char *text, int char_count, VGbitfield paint_modes, int peek) {
    // Put in first character
@@ -325,6 +327,11 @@ static void draw_line(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text,
    draw_chars(font, curr_text, chars_left, paint_modes, 0);
 }
 
+// Draw multiple lines of text, starting from the given x and y.  The x and y
+// correspond to the lower left corner of the first line of text, without
+// descenders.  Unfortunately, for multiline text, this ends up in the middle of
+// the y-extent of the block.
+
 void vgft_font_draw(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, unsigned text_length, VGbitfield paint_modes)
 {
    VGfloat descent = float_from_26_6(font->ft_face->size->metrics.descender);
@@ -348,7 +355,8 @@ void vgft_font_draw(VGFT_FONT_T *font, VGfloat x, VGfloat y, const char *text, u
    }
 }
 
-// Get text extents for a single line
+// Get text extents for a single line.  Returns silently in some error cases.
+// Assert fails in some error cases.
 
 static void line_extents(VGFT_FONT_T *font, VGfloat *x, VGfloat *y, const char *text, int chars_count)
 {
