@@ -92,6 +92,12 @@ Name:   <The base DTB>
 Info:   Configures the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
+        ant1                    Select antenna 1 (default). CM4 only.
+
+        ant2                    Select antenna 2. CM4 only.
+
+        noant                   Disable both antennas. CM4 only.
+
         audio                   Set to "on" to enable the onboard ALSA audio
                                 interface (default "off")
 
@@ -156,8 +162,19 @@ Params:
         i2s                     Set to "on" to enable the i2s interface
                                 (default "off")
 
+        krnbt                   Set to "on" to enable autoprobing of Bluetooth
+                                driver without need of hciattach/btattach
+                                (default "off")
+
+        krnbt_baudrate          Set the baudrate of the PL011 UART when used
+                                with krnbt=on
+
         spi                     Set to "on" to enable the spi interfaces
                                 (default "off")
+
+        spi_dma4                Use to enable 40-bit DMA on spi interfaces
+                                (the assigned value doesn't matter)
+                                (2711 only)
 
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
@@ -331,22 +348,14 @@ Info:   Analog Devices ADV7282M analogue video to CSI2 bridge.
         Uses Unicam1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=adv7282m,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-        addr                    Overrides the I2C address (default 0x21)
+Params: addr                    Overrides the I2C address (default 0x21)
 
 
 Name:   adv728x-m
 Info:   Analog Devices ADV728[0|1|2]-M analogue video to CSI2 bridges.
         This is a wrapper for adv7282m, and defaults to ADV7282M.
 Load:   dtoverlay=adv728x-m,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-        addr                    Overrides the I2C address (default 0x21)
+Params: addr                    Overrides the I2C address (default 0x21)
         adv7280m                Select ADV7280-M.
         adv7281m                Select ADV7281-M.
         adv7281ma               Select ADV7281-MA.
@@ -552,6 +561,19 @@ Params: <None>
 Name:   bmp085_i2c-sensor
 Info:   This overlay is now deprecated - see i2c-sensor
 Load:   <Deprecated>
+
+
+Name:   cma
+Info:   Set custom CMA sizes, only use if you know what you are doing, might
+        clash with other overlays like vc4-fkms-v3d and vc4-kms-v3d.
+Load:   dtoverlay=cma,<param>=<val>
+Params: cma-256                 CMA is 256MB (needs 1GB)
+        cma-192                 CMA is 192MB (needs 1GB)
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
 
 
 Name:   dht11
@@ -838,6 +860,7 @@ Params: gpiopin                 GPIO for signalling (default 26)
 Name:   gpio-shutdown
 Info:   Initiates a shutdown when GPIO pin changes. The given GPIO pin
         is configured as an input key that generates KEY_POWER events.
+
         This event is handled by systemd-logind by initiating a
         shutdown. Systemd versions older than 225 need an udev rule
         enable listening to the input device:
@@ -846,13 +869,41 @@ Info:   Initiates a shutdown when GPIO pin changes. The given GPIO pin
                         SUBSYSTEMS=="platform", DRIVERS=="gpio-keys", \
                         ATTRS{keys}=="116", TAG+="power-switch"
 
+        Alternatively this event can be handled also on systems without
+        systemd, just by traditional SysV init daemon. KEY_POWER event
+        (keycode 116) needs to be mapped to KeyboardSignal on console
+        and then kb::kbrequest inittab action which is triggered by
+        KeyboardSignal from console can be configured to issue system
+        shutdown. Steps for this configuration are:
+
+            Add following lines to the /etc/console-setup/remap.inc file:
+
+                # Key Power as special keypress
+                keycode 116 = KeyboardSignal
+
+            Then add following lines to /etc/inittab file:
+
+                # Action on special keypress (Key Power)
+                kb::kbrequest:/sbin/shutdown -t1 -a -h -P now
+
+            And finally reload configuration by calling following commands:
+
+                # dpkg-reconfigure console-setup
+                # service console-setup reload
+                # init q
+
         This overlay only handles shutdown. After shutdown, the system
         can be powered up again by driving GPIO3 low. The default
         configuration uses GPIO3 with a pullup, so if you connect a
         button between GPIO3 and GND (pin 5 and 6 on the 40-pin header),
-        you get a shutdown and power-up button.
+        you get a shutdown and power-up button. Please note that
+        Raspberry Pi 1 Model B rev 1 uses GPIO1 instead of GPIO3.
 Load:   dtoverlay=gpio-shutdown,<param>=<val>
 Params: gpio_pin                GPIO pin to trigger on (default 3)
+                                For Raspberry Pi 1 Model B rev 1 set this
+                                explicitly to value 1, e.g.:
+
+                                    dtoverlay=gpio-shutdown,gpio_pin=1
 
         active_low              When this is 1 (active low), a falling
                                 edge generates a key down event and a
@@ -864,7 +915,8 @@ Params: gpio_pin                GPIO pin to trigger on (default 3)
                                 Default is "up".
 
                                 Note that the default pin (GPIO3) has an
-                                external pullup.
+                                external pullup. Same applies for GPIO1
+                                on Raspberry Pi 1 Model B rev 1.
 
         debounce                Specify the debounce interval in milliseconds
                                 (default 100)
@@ -1014,6 +1066,12 @@ Load:   dtoverlay=hifiberry-digi-pro
 Params: <None>
 
 
+Name:   highperi
+Info:   Enables "High Peripheral" mode
+Load:   dtoverlay=highperi
+Params: <None>
+
+
 Name:   hy28a
 Info:   HY28A - 2.8" TFT LCD Display Module by HAOYU Electronics
         Default values match Texy's display shield
@@ -1151,6 +1209,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf8563                 Select the PCF8563 device
 
+        rv1805                  Select the Micro Crystal RV1805 device
+
         rv3028                  Select the Micro Crystal RV3028 device
 
         addr                    Sets the address for the RTC. Note that the
@@ -1158,10 +1218,10 @@ Params: abx80x                  Select one of the ABx80x family:
                                 address.
 
         trickle-diode-type      Diode type for trickle charge - "standard" or
-                                "schottky" (ABx80x only)
+                                "schottky" (ABx80x and RV1805 only)
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
-                                ABx80x, RV3028)
+                                ABx80x, RV1805, RV3028)
 
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
@@ -1198,6 +1258,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf8563                 Select the PCF8563 device
 
+        rv1805                  Select the Micro Crystal RV1805 device
+
         rv3028                  Select the Micro Crystal RV3028 device
 
         addr                    Sets the address for the RTC. Note that the
@@ -1205,10 +1267,10 @@ Params: abx80x                  Select one of the ABx80x family:
                                 address.
 
         trickle-diode-type      Diode type for trickle charge - "standard" or
-                                "schottky" (ABx80x only)
+                                "schottky" (ABx80x and RV1805 only)
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
-                                ABx80x, RV3028)
+                                ABx80x, RV1805, RV3028)
 
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
@@ -1267,6 +1329,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
         si7020                  Select the Silicon Labs Si7013/20/21 humidity/
                                 temperature sensor
 
+        sps30                   Select the Sensirion SPS30 particulate matter
+                                sensor. Fixed address 0x69.
+
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
 
@@ -1291,11 +1356,8 @@ Params: pins_0_1                Use pins 0 and 1 (default)
 
 
 Name:   i2c0-bcm2708
-Info:   Deprecated, legacy version of i2c0, from which it inherits its
-        parameters, just adding the explicit individual pin specifiers.
+Info:   Deprecated, legacy version of i2c0.
 Load:   <Deprecated>
-Params: sda0_pin                GPIO pin for SDA0 (deprecated - use pins_*)
-        scl0_pin                GPIO pin for SCL0 (deprecated - use pins_*)
 
 
 Name:   i2c1
@@ -1310,13 +1372,8 @@ Params: pins_2_3                Use pins 2 and 3 (default)
 
 
 Name:   i2c1-bcm2708
-Info:   Deprecated, legacy version of i2c1, from which it inherits its
-        parameters, just adding the explicit individual pin specifiers.
+Info:   Deprecated, legacy version of i2c1.
 Load:   <Deprecated>
-Params: sda1_pin                GPIO pin for SDA1 (2 or 44 - default 2)
-        scl1_pin                GPIO pin for SCL1 (3 or 45 - default 3)
-        pin_func                Alternative pin function (4 (alt0), 6 (alt2) -
-                                default 4)
 
 
 Name:   i2c3
@@ -1377,11 +1434,33 @@ Info:   Sony IMX219 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=imx219,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 180)
 
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+
+Name:   imx290
+Info:   Sony IMX290 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants. NB This currently uses 4 CSI2 data lanes and therefore will
+        only work on a CM.
+Load:   dtoverlay=imx290,<param>
+Params: 4lane                   Enable 4 CSI2 lanes. This requires a Compute
+                                Module (1, 3, or 4).
+        clock-frequency         Sets the clock frequency to match that used on
+                                the board.
+                                Modules from Vision Components use 37.125MHz
+                                (the default), whilst those from Innomaker use
+                                74.25MHz.
+        mono                    Denote that the module is a mono sensor.
+
+
+Name:   imx477
+Info:   Sony IMX477 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=imx477,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 180)
 
 
 Name:   iqaudio-codec
@@ -1445,12 +1524,8 @@ Name:   irs1125
 Info:   Infineon irs1125 TOF camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
-Load:   dtoverlay=irs1125,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+Load:   dtoverlay=irs1125
+Params: <None>
 
 
 Name:   jedec-spi-nor
@@ -1698,8 +1773,9 @@ Info:   Switch the onboard Bluetooth function on Pi 3B, 3B+, 3A+, 4B and Zero W
         in which case use /dev/serial1 instead because it will always be
         correct. Furthermore, you must also set core_freq and core_freq_min to
         the same value in config.txt or the miniuart will not work.
-Load:   dtoverlay=miniuart-bt
-Params: <None>
+Load:   dtoverlay=miniuart-bt,<param>=<val>
+Params: krnbt                   Set to "on" to enable autoprobing of Bluetooth
+                                driver without need of hciattach/btattach
 
 
 Name:   mmc
@@ -1736,11 +1812,24 @@ Info:   Omnivision OV5647 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
         variants.
 Load:   dtoverlay=ov5647,<param>=<val>
-Params: i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
 
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
+
+Name:   ov7251
+Info:   Omnivision OV7251 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=ov7251
+Params: <None>
+
+
+Name:   ov9281
+Info:   Omnivision OV9281 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=ov9281
+Params: <None>
 
 
 Name:   papirus
@@ -2075,6 +2164,13 @@ Load:   dtoverlay=rpi-tv
 Params: <None>
 
 
+Name:   rpivid-v4l2
+Info:   Load the V4L2 stateless video decoder driver for the HEVC block,
+        disabling the memory mapped devices in the process.
+Load:   dtoverlay=rpivid-v4l2
+Params: <None>
+
+
 Name:   rra-digidac1-wm8741-audio
 Info:   Configures the Red Rocks Audio DigiDAC1 soundcard
 Load:   dtoverlay=rra-digidac1-wm8741-audio
@@ -2101,6 +2197,14 @@ Params: int_pin                 GPIO used for IRQ (default 24)
         xtal                    On-board crystal frequency (default 14745600)
 
 
+Name:   sc16is752-spi0
+Info:   Overlay for the NXP SC16IS752 Dual UART with SPI Interface
+        Enables the chip on SPI0.
+Load:   dtoverlay=sc16is752-spi0,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
+        xtal                    On-board crystal frequency (default 14745600)
+
+
 Name:   sc16is752-spi1
 Info:   Overlay for the NXP SC16IS752 Dual UART with SPI Interface
         Enables the chip on SPI1.
@@ -2109,6 +2213,7 @@ Info:   Overlay for the NXP SC16IS752 Dual UART with SPI Interface
 
 Load:   dtoverlay=sc16is752-spi1,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
+        xtal                    On-board crystal frequency (default 14745600)
 
 
 Name:   sdhost
@@ -2540,12 +2645,6 @@ Params: 4lane                   Use 4 lanes (only applicable to Compute Modules
                                 (574Mbit/s) and 486000000 (972Mbit/s - default)
                                 are supported by the driver.
 
-        i2c_pins_0_1            Use pins 0&1 for the I2C instead of 44&45.
-                                Useful on Compute Modules.
-
-        i2c_pins_28_29          Use pins 28&29 for the I2C instead of 44&45.
-                                This is required for Pi B+, 2, 0, and 0W.
-
 
 Name:   tc358743-audio
 Info:   Used in combination with the tc358743-fast overlay to route the audio
@@ -2657,6 +2756,13 @@ Info:   This overlay has been deprecated and removed because it is no longer
 Load:   <Deprecated>
 
 
+Name:   upstream-pi4
+Info:   Allow usage of downstream .dtb with upstream kernel on Pi 4. Comprises
+        the vc4-kms-v3d-pi4 and dwc2 overlays.
+Load:   dtoverlay=upstream-pi4
+Params: <None>
+
+
 Name:   vc4-fkms-v3d
 Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
         display stack.
@@ -2666,6 +2772,8 @@ Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
         cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
 
 
 Name:   vc4-kms-kippah-7inch
@@ -2676,16 +2784,34 @@ Params: <None>
 
 
 Name:   vc4-kms-v3d
-Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver. Running startx or
-        booting to GUI while this overlay is in use will cause interesting
-        lockups.
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver.
 Load:   dtoverlay=vc4-kms-v3d,<param>
 Params: cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
         cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
         audio                   Enable or disable audio over HDMI (default "on")
+        noaudio                 Disable all HDMI audio (default "off")
+
+
+Name:   vc4-kms-v3d-pi4
+Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver for Pi4.
+Load:   dtoverlay=vc4-kms-v3d-pi4,<param>
+Params: cma-256                 CMA is 256MB
+        cma-192                 CMA is 192MB
+        cma-128                 CMA is 128MB
+        cma-96                  CMA is 96MB
+        cma-64                  CMA is 64MB
+        cma-size                CMA size in bytes, 4MB aligned
+        cma-default             Use upstream's default value
+        audio                   Enable or disable audio over HDMI0 (default
+                                "on")
+        audio1                  Enable or disable audio over HDMI1 (default
+                                "on")
+        noaudio                 Disable all HDMI audio (default "off")
 
 
 Name:   vga666

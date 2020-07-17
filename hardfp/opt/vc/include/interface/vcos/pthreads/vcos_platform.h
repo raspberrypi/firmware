@@ -447,7 +447,7 @@ void vcos_thread_attr_setautostart(VCOS_THREAD_ATTR_T *attrs, VCOS_UNSIGNED auto
 
 VCOS_INLINE_IMPL
 VCOS_LLTHREAD_T *vcos_llthread_current(void) {
-   return (VCOS_LLTHREAD_T *)pthread_self();
+   return (VCOS_LLTHREAD_T *)(uintptr_t)pthread_self();
 }
 
 VCOS_INLINE_IMPL
