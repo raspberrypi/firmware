@@ -86,6 +86,7 @@ kernel/drivers/leds/trigger/ledtrig-backlight.ko
 kernel/drivers/leds/trigger/ledtrig-gpio.ko
 kernel/drivers/leds/trigger/ledtrig-default-on.ko
 kernel/drivers/leds/trigger/ledtrig-input.ko
+kernel/drivers/leds/trigger/ledtrig-actpwr.ko
 kernel/drivers/mailbox/bcm2835-mailbox.ko
 kernel/drivers/media/rc/rc-core.ko
 kernel/drivers/media/rc/keymaps/rc-adstech-dvb-t-pci.ko

@@ -1160,6 +1160,7 @@ alias symbol:v4l2_m2m_ioctl_reqbufs v4l2_mem2mem
 alias symbol:cx231xx_capture_start cx231xx
 alias symbol:snd_timer_stop snd_timer
 alias symbol:tpm_send tpm
+alias symbol:v4l2_fwnode_device_parse v4l2_fwnode
 alias symbol:dib3000mc_i2c_enumeration dib3000mc
 alias symbol:dm_bm_unlock dm_persistent_data
 alias symbol:fuse_do_open fuse
@@ -2552,6 +2553,7 @@ alias symbol:nf_ct_helper_expectfn_register nf_conntrack
 alias symbol:__cfg80211_send_event_skb cfg80211
 alias symbol:snd_soc_dapm_mixer_update_power snd_soc_core
 alias symbol:ubi_unregister_volume_notifier ubi
+alias symbol:v4l2_ctrl_new_fwnode_properties videodev
 alias symbol:extcon_get_edev_by_phandle extcon_core
 alias symbol:fbtft_write_gpio16_wr fbtft
 alias symbol:btracker_create dm_cache
