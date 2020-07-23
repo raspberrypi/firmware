@@ -10056,6 +10056,12 @@ alias spi:bme280 bmp280_spi
 alias spi:bmp280 bmp280_spi
 alias spi:bmp181 bmp280_spi
 alias spi:bmp180 bmp280_spi
+alias spi:max31855 maxim_thermocouple
+alias spi:max6675 maxim_thermocouple
+alias of:N*T*Cmaxim,max31855C* maxim_thermocouple
+alias of:N*T*Cmaxim,max31855 maxim_thermocouple
+alias of:N*T*Cmaxim,max6675C* maxim_thermocouple
+alias of:N*T*Cmaxim,max6675 maxim_thermocouple
 alias char-major-116-* snd
 alias devname:snd/timer snd_timer
 alias char-major-116-33 snd_timer
