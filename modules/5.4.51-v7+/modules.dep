@@ -1115,6 +1115,7 @@ kernel/drivers/iio/light/veml6070.ko: kernel/drivers/iio/industrialio.ko
 kernel/drivers/iio/pressure/bmp280.ko: kernel/drivers/iio/industrialio.ko
 kernel/drivers/iio/pressure/bmp280-i2c.ko: kernel/drivers/iio/pressure/bmp280.ko kernel/drivers/iio/industrialio.ko kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/iio/pressure/bmp280-spi.ko: kernel/drivers/iio/pressure/bmp280.ko kernel/drivers/iio/industrialio.ko
+kernel/drivers/iio/temperature/maxim_thermocouple.ko: kernel/drivers/iio/buffer/industrialio-triggered-buffer.ko kernel/drivers/iio/buffer/kfifo_buf.ko kernel/drivers/iio/industrialio.ko
 kernel/drivers/iio/industrialio.ko:
 kernel/drivers/mux/mux-core.ko:
 kernel/sound/core/snd.ko:
