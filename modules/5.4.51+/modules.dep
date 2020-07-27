@@ -111,7 +111,10 @@ kernel/crypto/drbg.ko:
 kernel/crypto/jitterentropy_rng.ko:
 kernel/crypto/ghash-generic.ko: kernel/crypto/gf128mul.ko
 kernel/crypto/af_alg.ko:
+kernel/crypto/algif_hash.ko: kernel/crypto/af_alg.ko
 kernel/crypto/algif_skcipher.ko: kernel/crypto/af_alg.ko
+kernel/crypto/algif_rng.ko: kernel/crypto/af_alg.ko
+kernel/crypto/algif_aead.ko: kernel/crypto/af_alg.ko
 kernel/crypto/zstd.ko: kernel/lib/zstd/zstd_decompress.ko kernel/lib/zstd/zstd_compress.ko kernel/lib/xxhash.ko
 kernel/crypto/ecc.ko:
 kernel/crypto/essiv.ko: kernel/crypto/authenc.ko

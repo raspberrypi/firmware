@@ -107,7 +107,10 @@ kernel/crypto/drbg.ko
 kernel/crypto/jitterentropy_rng.ko
 kernel/crypto/ghash-generic.ko
 kernel/crypto/af_alg.ko
+kernel/crypto/algif_hash.ko
 kernel/crypto/algif_skcipher.ko
+kernel/crypto/algif_rng.ko
+kernel/crypto/algif_aead.ko
 kernel/crypto/zstd.ko
 kernel/crypto/ecc.ko
 kernel/crypto/essiv.ko
