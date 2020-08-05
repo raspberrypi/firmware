@@ -107,7 +107,10 @@ kernel/crypto/drbg.ko:
 kernel/crypto/jitterentropy_rng.ko:
 kernel/crypto/ghash-generic.ko: kernel/crypto/gf128mul.ko
 kernel/crypto/af_alg.ko:
+kernel/crypto/algif_hash.ko: kernel/crypto/af_alg.ko
 kernel/crypto/algif_skcipher.ko: kernel/crypto/af_alg.ko
+kernel/crypto/algif_rng.ko: kernel/crypto/af_alg.ko
+kernel/crypto/algif_aead.ko: kernel/crypto/af_alg.ko
 kernel/crypto/zstd.ko: kernel/lib/zstd/zstd_decompress.ko kernel/lib/zstd/zstd_compress.ko kernel/lib/xxhash.ko
 kernel/crypto/ecc.ko:
 kernel/crypto/essiv.ko: kernel/crypto/authenc.ko
@@ -887,6 +890,7 @@ kernel/drivers/power/supply/ltc2941-battery-gauge.ko:
 kernel/drivers/power/supply/max17040_battery.ko:
 kernel/drivers/hwmon/ds1621.ko:
 kernel/drivers/hwmon/gpio-fan.ko:
+kernel/drivers/hwmon/iio_hwmon.ko: kernel/drivers/iio/industrialio.ko
 kernel/drivers/hwmon/ina2xx.ko: kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/hwmon/jc42.ko:
 kernel/drivers/hwmon/lm75.ko: kernel/drivers/base/regmap/regmap-i2c.ko

@@ -8531,6 +8531,8 @@ alias i2c:ds1621 ds1621
 alias platform:gpio-fan gpio_fan
 alias of:N*T*Cgpio-fanC* gpio_fan
 alias of:N*T*Cgpio-fan gpio_fan
+alias of:N*T*Ciio-hwmonC* iio_hwmon
+alias of:N*T*Ciio-hwmon iio_hwmon
 alias i2c:ina231 ina2xx
 alias i2c:ina230 ina2xx
 alias i2c:ina226 ina2xx
