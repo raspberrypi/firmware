@@ -80,8 +80,8 @@ int main(int argc, char *argv[]) {
         for (j=0; j<jobs; j++) {
             base = fft->in + j*fft->step; // input buffer
             for (i=0; i<N; i++) base[i].re = base[i].im = 0;
-            freq = j+1;
-            base[freq].re = base[N-freq].re = 0.5;
+            freq = (j+1) & (N/2-1);
+            base[freq].re += base[(N-freq) & (N-1)].re = 0.5;
         }
 
         usleep(1); // Yield to OS
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
         tsq[0]=tsq[1]=0;
         for (j=0; j<jobs; j++) {
             base = fft->out + j*fft->step; // output buffer
-            freq = j+1;
+            freq = (j+1) & (N/2-1);
             for (i=0; i<N; i++) {
                 double re = cos(2*GPU_FFT_PI*freq*i/N);
                 tsq[0] += pow(re, 2);
