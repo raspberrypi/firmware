@@ -62,6 +62,8 @@ kernel/drivers/cpufreq/cpufreq_powersave.ko
 kernel/drivers/cpufreq/cpufreq_userspace.ko
 kernel/drivers/cpufreq/cpufreq_ondemand.ko
 kernel/drivers/cpufreq/cpufreq_conservative.ko
+kernel/drivers/cpufreq/cpufreq-dt.ko
+kernel/drivers/cpufreq/raspberrypi-cpufreq.ko
 kernel/drivers/dma/virt-dma.ko
 kernel/drivers/dma/bcm2708-dmaengine.ko
 kernel/drivers/dma/bcm2835-dma.ko

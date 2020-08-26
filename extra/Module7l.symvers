@@ -2318,6 +2318,7 @@
 0xeb13128b	lc_del	lib/lru_cache	EXPORT_SYMBOL	
 0x53afc9a7	ieee80211_iter_keys_rcu	net/mac80211/mac80211	EXPORT_SYMBOL	
 0x554e182a	snd_soc_component_set_jack	sound/soc/snd-soc-core	EXPORT_SYMBOL_GPL	
+0xc07a0fea	i2c_hid_ll_driver	drivers/hid/i2c-hid/i2c-hid	EXPORT_SYMBOL_GPL	
 0x899e79f9	cec_s_conn_info	drivers/media/cec/cec	EXPORT_SYMBOL_GPL	
 0xdafc31c5	dvb_dmx_swfilter_packets	drivers/media/dvb-core/dvb-core	EXPORT_SYMBOL	
 0xd7821846	ocfs2_plock	fs/ocfs2/ocfs2_stackglue	EXPORT_SYMBOL_GPL	

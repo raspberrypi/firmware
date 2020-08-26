@@ -999,6 +999,7 @@ kernel/drivers/hid/hid-zydacron.ko
 kernel/drivers/hid/wacom.ko
 kernel/drivers/hid/hid-waltop.ko
 kernel/drivers/hid/hid-wiimote.ko
+kernel/drivers/hid/i2c-hid/i2c-hid.ko
 kernel/drivers/staging/vc04_services/bcm2835-audio/snd-bcm2835.ko
 kernel/drivers/staging/vc04_services/bcm2835-camera/bcm2835-v4l2.ko
 kernel/drivers/staging/vc04_services/vchiq-mmal/bcm2835-mmal-vchiq.ko
@@ -1107,6 +1108,7 @@ kernel/drivers/iio/buffer/kfifo_buf.ko
 kernel/drivers/iio/chemical/bme680_core.ko
 kernel/drivers/iio/chemical/bme680_i2c.ko
 kernel/drivers/iio/chemical/bme680_spi.ko
+kernel/drivers/iio/chemical/sps30.ko
 kernel/drivers/iio/common/ms_sensors/ms_sensors_i2c.ko
 kernel/drivers/iio/humidity/dht11.ko
 kernel/drivers/iio/humidity/hdc100x.ko

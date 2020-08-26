@@ -2019,6 +2019,7 @@ alias symbol:gether_setup_name_default u_ether
 alias symbol:snd_seq_event_port_detach snd_seq
 alias symbol:ath9k_hw_btcoex_init_mci ath9k_hw
 alias symbol:drm_mode_is_420_also drm
+alias symbol:i2c_hid_ll_driver i2c_hid
 alias symbol:ath6kl_info ath6kl_core
 alias symbol:ZSTD_isFrame zstd_decompress
 alias symbol:drm_edid_duplicate drm
