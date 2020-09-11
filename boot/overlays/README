@@ -134,7 +134,7 @@ Params:
                                 6=Alt                    7=Speed/Flash
                                 8=Link                   9=Activity
 
-        eth_led1                Set mode of LED1 - green on Pi3B (default "6"),
+        eth_led1                Set mode of LED1 - green on Pi3B+ (default "6"),
                                 amber on Pi4 (default "8"). See eth_led0 for
                                 legal values.
 
@@ -259,6 +259,14 @@ Params: activelow               Set to "on" to invert the sense of the LED
                                 (in case you want to connect it to an external
                                 device)
                                 REQUIRED
+
+
+Name:   adafruit18
+Info:   Overlay for the SPI-connected Adafruit 1.8" display (based on the
+        ST7735R chip). It includes support for the "green tab" version.
+Load:   dtoverlay=adafruit18,<param>=<val>
+Params: green                   Use the adafruit18_green variant.
+        rotate                  Display rotation {0,90,180,270}
 
 
 Name:   adau1977-adc
@@ -1346,6 +1354,13 @@ Name:   i2c0
 Info:   Change i2c0 pin usage. Not all pin combinations are usable on all
         platforms - platforms other then Compute Modules can only use this
         to disable transaction combining.
+        Do NOT use in conjunction with dtparam=i2c_vc=on. From the 5.4 kernel
+        onwards the base DT includes the use of i2c_mux_pinctrl to expose two
+        muxings of BSC0 - GPIOs 0&1, and whichever combination is used for the
+        camera and display connectors. This overlay disables that mux and
+        configures /dev/i2c0 to point at whichever set of pins is requested.
+        dtparam=i2c_vc=on will try and enable the mux, so combining the two
+        will cause conflicts.
 Load:   dtoverlay=i2c0,<param>=<val>
 Params: pins_0_1                Use pins 0 and 1 (default)
         pins_28_29              Use pins 28 and 29
@@ -2251,6 +2266,13 @@ Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
 
 
+Name:   sainsmart18
+Info:   Overlay for the SPI-connected Sainsmart 1.8" display (based on the
+        ST7735R chip).
+Load:   dtoverlay=sainsmart18,<param>=<val>
+Params: rotate                  Display rotation {0,90,180,270}
+
+
 Name:   sc16is750-i2c
 Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
         Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
@@ -2902,6 +2924,8 @@ Params: cma-256                 CMA is 256MB
         audio1                  Enable or disable audio over HDMI1 (default
                                 "on")
         noaudio                 Disable all HDMI audio (default "off")
+        composite               Enable the composite output (disables all other
+                                outputs)
 
 
 Name:   vga666
