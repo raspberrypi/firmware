@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if ! hash lxpanelctl 2> /dev/null; then
+	exit 0
+fi
+
+CMD="lxpanelctl command volumealsabt start > /dev/null"
+
+for PID in $(pgrep -x lxpanel); do
+	eval "$(grep -z "DISPLAY=" "/proc/$PID/environ" | tr -d '\0')"
+	user="$(ps -p "$PID" -o uname=)"
+	su "$user" -c "$CMD"
+done
