@@ -151,6 +151,12 @@ typedef enum OMX_COLOR_FORMATTYPE {
     OMX_COLOR_Format32bitXRGB8888,
     OMX_COLOR_Format32bitXBGR8888,
     OMX_COLOR_FormatYUV10bitColumn,
+    OMX_COLOR_FormatRawBayer14bit,
+    OMX_COLOR_FormatRawGrey8bit,
+    OMX_COLOR_FormatRawGrey10bit,
+    OMX_COLOR_FormatRawGrey12bit,
+    OMX_COLOR_FormatRawGrey14bit,
+    OMX_COLOR_FormatRawGrey16bit,
     OMX_COLOR_FormatMax = 0x7FFFFFFF
 } OMX_COLOR_FORMATTYPE;
 

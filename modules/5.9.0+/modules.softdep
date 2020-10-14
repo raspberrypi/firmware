@@ -1,0 +1,17 @@
+# Soft dependencies extracted from modules themselves.
+softdep cifs gcm
+softdep cifs ccm
+softdep cifs aead2
+softdep cifs sha512
+softdep cifs sha256
+softdep cifs cmac
+softdep cifs aes
+softdep cifs nls
+softdep cifs md5
+softdep cifs md4
+softdep cifs hmac
+softdep cifs ecb
+softdep btrfs pre: blake2b-256
+softdep btrfs pre: sha256
+softdep btrfs pre: xxhash64
+softdep btrfs pre: crc32c

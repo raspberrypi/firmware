@@ -1,1 +1,1 @@
-Linux version 5.4.35-v8+ (dom@buildbot) (gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.9)) #1313 SMP PREEMPT Mon Apr 27 22:28:43 BST 2020
+Linux version 5.9.0-v8+ (dom@buildbot) (aarch64-linux-gnu-gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #1351 SMP PREEMPT Wed Oct 14 12:50:37 BST 2020

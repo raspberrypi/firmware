@@ -1,1 +1,1 @@
-Linux version 5.4.35-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1313 SMP Mon Apr 27 22:16:03 BST 2020
+Linux version 5.9.0-v7+ (dom@buildbot) (arm-linux-gnueabihf-gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #1351 SMP Wed Oct 14 12:46:10 BST 2020
