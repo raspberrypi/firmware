@@ -53,6 +53,7 @@ kernel/fs/binfmt_misc.ko:
 kernel/fs/dlm/dlm.ko:
 kernel/fs/reiserfs/reiserfs.ko:
 kernel/fs/squashfs/squashfs.ko:
+kernel/fs/exfat/exfat.ko:
 kernel/fs/isofs/isofs.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/fs/hfsplus/hfsplus.ko: kernel/drivers/cdrom/cdrom.ko
 kernel/fs/hfs/hfs.ko: kernel/drivers/cdrom/cdrom.ko
@@ -151,6 +152,7 @@ kernel/drivers/pinctrl/pinctrl-mcp23s08_i2c.ko: kernel/drivers/pinctrl/pinctrl-m
 kernel/drivers/pinctrl/pinctrl-mcp23s08_spi.ko: kernel/drivers/pinctrl/pinctrl-mcp23s08.ko
 kernel/drivers/pinctrl/pinctrl-mcp23s08.ko:
 kernel/drivers/gpio/gpio-arizona.ko:
+kernel/drivers/gpio/gpio-fsm.ko:
 kernel/drivers/gpio/gpio-mockup.ko:
 kernel/drivers/gpio/gpio-pca953x.ko: kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/gpio/gpio-pcf857x.ko:

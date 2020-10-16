@@ -57,6 +57,7 @@ alias nls_iso8859-8 nls_cp1255
 alias fs-binfmt_misc binfmt_misc
 alias fs-reiserfs reiserfs
 alias fs-squashfs squashfs
+alias fs-exfat exfat
 alias iso9660 isofs
 alias fs-iso9660 isofs
 alias fs-hfsplus hfsplus
@@ -259,6 +260,9 @@ alias of:N*T*Cmicrochip,mcp23s17 pinctrl_mcp23s08_spi
 alias of:N*T*Cmicrochip,mcp23s08C* pinctrl_mcp23s08_spi
 alias of:N*T*Cmicrochip,mcp23s08 pinctrl_mcp23s08_spi
 alias platform:arizona-gpio gpio_arizona
+alias platform:gpio-fsm gpio_fsm
+alias of:N*T*Crpi,gpio-fsmC* gpio_fsm
+alias of:N*T*Crpi,gpio-fsm gpio_fsm
 alias i2c:xra1202 gpio_pca953x
 alias i2c:tca9554 gpio_pca953x
 alias i2c:tca9539 gpio_pca953x
