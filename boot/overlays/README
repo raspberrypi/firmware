@@ -134,7 +134,7 @@ Params:
                                 6=Alt                    7=Speed/Flash
                                 8=Link                   9=Activity
 
-        eth_led1                Set mode of LED1 - green on Pi3B (default "6"),
+        eth_led1                Set mode of LED1 - green on Pi3B+ (default "6"),
                                 amber on Pi4 (default "8"). See eth_led0 for
                                 legal values.
 
@@ -259,6 +259,21 @@ Params: activelow               Set to "on" to invert the sense of the LED
                                 (in case you want to connect it to an external
                                 device)
                                 REQUIRED
+
+
+Name:   adafruit18
+Info:   Overlay for the SPI-connected Adafruit 1.8" display (based on the
+        ST7735R chip). It includes support for the "green tab" version.
+Load:   dtoverlay=adafruit18,<param>=<val>
+Params: green                   Use the adafruit18_green variant.
+        rotate                  Display rotation {0,90,180,270}
+        speed                   SPI bus speed in Hz (default 4000000)
+        fps                     Display frame rate in Hz
+        bgr                     Enable BGR mode (default off)
+        debug                   Debug output level {0-7}
+        dc_pin                  GPIO pin for D/C (default 24)
+        reset_pin               GPIO pin for RESET (default 25)
+        led_pin                 GPIO used to control backlight (default 18)
 
 
 Name:   adau1977-adc
@@ -567,7 +582,11 @@ Name:   cma
 Info:   Set custom CMA sizes, only use if you know what you are doing, might
         clash with other overlays like vc4-fkms-v3d and vc4-kms-v3d.
 Load:   dtoverlay=cma,<param>=<val>
-Params: cma-256                 CMA is 256MB (needs 1GB)
+Params: cma-512                 CMA is 512MB (needs 1GB)
+        cma-448                 CMA is 448MB (needs 1GB)
+        cma-384                 CMA is 384MB (needs 1GB)
+        cma-320                 CMA is 320MB (needs 1GB)
+        cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
@@ -746,6 +765,21 @@ Name:   fe-pi-audio
 Info:   Configures the Fe-Pi Audio Sound Card
 Load:   dtoverlay=fe-pi-audio
 Params: <None>
+
+
+Name:   fsm-demo
+Info:   A demonstration of the gpio-fsm driver. The GPIOs are chosen to work
+        nicely with a "traffic-light" display of red, amber and green LEDs on
+        GPIOs 7, 8 and 25 respectively.
+Load:   dtoverlay=fsm-demo,<param>=<val>
+Params: fsm_debug               Enable debug logging (default off)
+
+
+Name:   ghost-amp
+Info:   An overlay for the Ghost amplifier.
+Load:   dtoverlay=ghost-amp,<param>=<val>
+Params: fsm_debug               Enable debug logging of the GPIO FSM (default
+                                off)
 
 
 Name:   goodix
@@ -1213,6 +1247,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         rv3028                  Select the Micro Crystal RV3028 device
 
+        sd3078                  Select the ZXW Shenzhen whwave SD3078 device
+
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified
                                 address.
@@ -1346,6 +1382,13 @@ Name:   i2c0
 Info:   Change i2c0 pin usage. Not all pin combinations are usable on all
         platforms - platforms other then Compute Modules can only use this
         to disable transaction combining.
+        Do NOT use in conjunction with dtparam=i2c_vc=on. From the 5.4 kernel
+        onwards the base DT includes the use of i2c_mux_pinctrl to expose two
+        muxings of BSC0 - GPIOs 0&1, and whichever combination is used for the
+        camera and display connectors. This overlay disables that mux and
+        configures /dev/i2c0 to point at whichever set of pins is requested.
+        dtparam=i2c_vc=on will try and enable the mux, so combining the two
+        will cause conflicts.
 Load:   dtoverlay=i2c0,<param>=<val>
 Params: pins_0_1                Use pins 0 and 1 (default)
         pins_28_29              Use pins 28 and 29
@@ -1377,7 +1420,7 @@ Load:   <Deprecated>
 
 
 Name:   i2c3
-Info:   Enable the i2c3 bus
+Info:   Enable the i2c3 bus. BCM2711 only.
 Load:   dtoverlay=i2c3,<param>
 Params: pins_2_3                Use GPIOs 2 and 3
         pins_4_5                Use GPIOs 4 and 5 (default)
@@ -1386,7 +1429,7 @@ Params: pins_2_3                Use GPIOs 2 and 3
 
 
 Name:   i2c4
-Info:   Enable the i2c4 bus
+Info:   Enable the i2c4 bus. BCM2711 only.
 Load:   dtoverlay=i2c4,<param>
 Params: pins_6_7                Use GPIOs 6 and 7
         pins_8_9                Use GPIOs 8 and 9 (default)
@@ -1395,7 +1438,7 @@ Params: pins_6_7                Use GPIOs 6 and 7
 
 
 Name:   i2c5
-Info:   Enable the i2c5 bus
+Info:   Enable the i2c5 bus. BCM2711 only.
 Load:   dtoverlay=i2c5,<param>
 Params: pins_10_11              Use GPIOs 10 and 11
         pins_12_13              Use GPIOs 12 and 13 (default)
@@ -1404,7 +1447,7 @@ Params: pins_10_11              Use GPIOs 10 and 11
 
 
 Name:   i2c6
-Info:   Enable the i2c6 bus
+Info:   Enable the i2c6 bus. BCM2711 only.
 Load:   dtoverlay=i2c6,<param>
 Params: pins_0_1                Use GPIOs 0 and 1
         pins_22_23              Use GPIOs 22 and 23 (default)
@@ -1873,6 +1916,42 @@ Params: panel                   Display panel (required):
         speed                   Display SPI bus speed
 
 
+Name:   pca953x
+Info:   TI PCA953x family of I2C GPIO expanders. Default is for NXP PCA9534.
+Load:   dtoverlay=pca953x,<param>=<val>
+Params: addr                    I2C address of expander. Default 0x20.
+        pca6416                 Select the NXP PCA6416 (16 bit)
+        pca9505                 Select the NXP PCA9505 (40 bit)
+        pca9535                 Select the NXP PCA9535 (16 bit)
+        pca9536                 Select the NXP PCA9536 or TI PCA9536 (4 bit)
+        pca9537                 Select the NXP PCA9537 (4 bit)
+        pca9538                 Select the NXP PCA9538 (8 bit)
+        pca9539                 Select the NXP PCA9539 (16 bit)
+        pca9554                 Select the NXP PCA9554 (8 bit)
+        pca9555                 Select the NXP PCA9555 (16 bit)
+        pca9556                 Select the NXP PCA9556 (8 bit)
+        pca9557                 Select the NXP PCA9557 (8 bit)
+        pca9574                 Select the NXP PCA9574 (8 bit)
+        pca9575                 Select the NXP PCA9575 (16 bit)
+        pca9698                 Select the NXP PCA9698 (40 bit)
+        pca16416                Select the NXP PCA16416 (16 bit)
+        pca16524                Select the NXP PCA16524 (24 bit)
+        pca19555a               Select the NXP PCA19555A (16 bit)
+        max7310                 Select the Maxim MAX7310 (8 bit)
+        max7312                 Select the Maxim MAX7312 (16 bit)
+        max7313                 Select the Maxim MAX7313 (16 bit)
+        max7315                 Select the Maxim MAX7315 (8 bit)
+        pca6107                 Select the TI PCA6107 (8 bit)
+        tca6408                 Select the TI TCA6408 (8 bit)
+        tca6416                 Select the TI TCA6416 (16 bit)
+        tca6424                 Select the TI TCA6424 (24 bit)
+        tca9539                 Select the TI TCA9539 (16 bit)
+        tca9554                 Select the TI TCA9554 (8 bit)
+        cat9554                 Select the Onnn CAT9554 (8 bit)
+        pca9654                 Select the Onnn PCA9654 (8 bit)
+        xra1202                 Select the Exar XRA1202 (8 bit)
+
+
 [ The pcf2127-rtc overlay has been deleted. See i2c-rtc. ]
 
 
@@ -1911,6 +1990,14 @@ Info:   Configures the pibell audio card.
 Load:   dtoverlay=pibell,<param>=<val>
 Params: alsaname                Set the name as it appears in ALSA (default
                                 "PiBell")
+
+
+Name:   pifacedigital
+Info:   Configures the PiFace Digital mcp23s17 GPIO port expander.
+Load:   dtoverlay=pifacedigital,<param>=<val>
+Params: spi-present-mask        8-bit integer, bitmap indicating MCP23S17 SPI0
+                                CS0 address. PiFace Digital supports addresses
+                                0-3, which can be configured with JP1 and JP2.
 
 
 Name:   piglow
@@ -2207,6 +2294,19 @@ Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
 
 
+Name:   sainsmart18
+Info:   Overlay for the SPI-connected Sainsmart 1.8" display (based on the
+        ST7735R chip).
+Load:   dtoverlay=sainsmart18,<param>=<val>
+Params: rotate                  Display rotation {0,90,180,270}
+        speed                   SPI bus speed in Hz (default 4000000)
+        fps                     Display frame rate in Hz
+        bgr                     Enable BGR mode (default off)
+        debug                   Debug output level {0-7}
+        dc_pin                  GPIO pin for D/C (default 24)
+        reset_pin               GPIO pin for RESET (default 25)
+
+
 Name:   sc16is750-i2c
 Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
         Enables the chip on I2C1 at 0x48 (or the "addr" parameter value). To
@@ -2368,11 +2468,27 @@ Load:   dtoverlay=spi-rtc,<param>=<val>
 Params: pcf2123                 Select the PCF2123 device
 
 
-Name:   spi0-cs
-Info:   Allows the (software) CS pins for SPI0 to be changed
-Load:   dtoverlay=spi0-cs,<param>=<val>
+Name:   spi0-1cs
+Info:   Only use one CS pin for SPI0
+Load:   dtoverlay=spi0-1cs,<param>=<val>
+Params: cs0_pin                 GPIO pin for CS0 (default 8)
+        no_miso                 Don't claim and use the MISO pin (9), freeing
+                                it for other uses.
+
+
+Name:   spi0-2cs
+Info:   Change the CS pins for SPI0
+Load:   dtoverlay=spi0-2cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 8)
         cs1_pin                 GPIO pin for CS1 (default 7)
+        no_miso                 Don't claim and use the MISO pin (9), freeing
+                                it for other uses.
+
+
+Name:   spi0-cs
+Info:   This overlay has been renamed spi0-2cs, keeping spi0-cs as an
+        alias for backwards compatibility.
+Load:   <Deprecated>
 
 
 Name:   spi0-hw-cs
@@ -2483,7 +2599,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 43 - BCM SPI2_CE0).
 Name:   spi3-1cs
 Info:   Enables spi3 with a single chip select (CS) line and associated spidev
         dev node. The gpio pin number for the CS line and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi3-1cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 0 - BCM SPI3_CE0).
         cs0_spidev              Set to 'off' to prevent the creation of a
@@ -2494,7 +2610,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 0 - BCM SPI3_CE0).
 Name:   spi3-2cs
 Info:   Enables spi3 with two chip select (CS) lines and associated spidev
         dev nodes. The gpio pin numbers for the CS lines and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi3-2cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 0 - BCM SPI3_CE0).
         cs1_pin                 GPIO pin for CS1 (default 24 - BCM SPI3_CE1).
@@ -2509,7 +2625,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 0 - BCM SPI3_CE0).
 Name:   spi4-1cs
 Info:   Enables spi4 with a single chip select (CS) line and associated spidev
         dev node. The gpio pin number for the CS line and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi4-1cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 4 - BCM SPI4_CE0).
         cs0_spidev              Set to 'off' to prevent the creation of a
@@ -2520,7 +2636,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 4 - BCM SPI4_CE0).
 Name:   spi4-2cs
 Info:   Enables spi4 with two chip select (CS) lines and associated spidev
         dev nodes. The gpio pin numbers for the CS lines and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi4-2cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 4 - BCM SPI4_CE0).
         cs1_pin                 GPIO pin for CS1 (default 25 - BCM SPI4_CE1).
@@ -2535,7 +2651,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 4 - BCM SPI4_CE0).
 Name:   spi5-1cs
 Info:   Enables spi5 with a single chip select (CS) line and associated spidev
         dev node. The gpio pin numbers for the CS lines and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi5-1cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 12 - BCM SPI5_CE0).
         cs0_spidev              Set to 'off' to prevent the creation of a
@@ -2546,7 +2662,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 12 - BCM SPI5_CE0).
 Name:   spi5-2cs
 Info:   Enables spi5 with two chip select (CS) lines and associated spidev
         dev nodes. The gpio pin numbers for the CS lines and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi5-2cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 12 - BCM SPI5_CE0).
         cs1_pin                 GPIO pin for CS1 (default 26 - BCM SPI5_CE1).
@@ -2561,7 +2677,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 12 - BCM SPI5_CE0).
 Name:   spi6-1cs
 Info:   Enables spi6 with a single chip select (CS) line and associated spidev
         dev node. The gpio pin number for the CS line and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi6-1cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI6_CE0).
         cs0_spidev              Set to 'off' to prevent the creation of a
@@ -2572,7 +2688,7 @@ Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI6_CE0).
 Name:   spi6-2cs
 Info:   Enables spi6 with two chip select (CS) lines and associated spidev
         dev nodes. The gpio pin numbers for the CS lines and spidev device node
-        creation are configurable.
+        creation are configurable. BCM2711 only.
 Load:   dtoverlay=spi6-2cs,<param>=<val>
 Params: cs0_pin                 GPIO pin for CS0 (default 18 - BCM SPI6_CE0).
         cs1_pin                 GPIO pin for CS1 (default 27 - BCM SPI6_CE1).
@@ -2744,25 +2860,25 @@ Params: txd1_pin                GPIO pin for TXD1 (14, 32 or 40 - default 14)
 
 
 Name:   uart2
-Info:   Enable uart 2 on GPIOs 0-3
+Info:   Enable uart 2 on GPIOs 0-3. BCM2711 only.
 Load:   dtoverlay=uart2,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 2-3 (default off)
 
 
 Name:   uart3
-Info:   Enable uart 3 on GPIOs 4-7
+Info:   Enable uart 3 on GPIOs 4-7. BCM2711 only.
 Load:   dtoverlay=uart3,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 6-7 (default off)
 
 
 Name:   uart4
-Info:   Enable uart 4 on GPIOs 8-11
+Info:   Enable uart 4 on GPIOs 8-11. BCM2711 only.
 Load:   dtoverlay=uart4,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 10-11 (default off)
 
 
 Name:   uart5
-Info:   Enable uart 5 on GPIOs 12-15
+Info:   Enable uart 5 on GPIOs 12-15. BCM2711 only.
 Load:   dtoverlay=uart5,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 14-15 (default off)
 
@@ -2797,7 +2913,11 @@ Name:   vc4-fkms-v3d
 Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
         display stack.
 Load:   dtoverlay=vc4-fkms-v3d,<param>
-Params: cma-256                 CMA is 256MB (needs 1GB)
+Params: cma-512                 CMA is 512MB (needs 1GB)
+        cma-448                 CMA is 448MB (needs 1GB)
+        cma-384                 CMA is 384MB (needs 1GB)
+        cma-320                 CMA is 320MB (needs 1GB)
+        cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
@@ -2816,7 +2936,11 @@ Params: <None>
 Name:   vc4-kms-v3d
 Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver.
 Load:   dtoverlay=vc4-kms-v3d,<param>
-Params: cma-256                 CMA is 256MB (needs 1GB)
+Params: cma-512                 CMA is 512MB (needs 1GB)
+        cma-448                 CMA is 448MB (needs 1GB)
+        cma-384                 CMA is 384MB (needs 1GB)
+        cma-320                 CMA is 320MB (needs 1GB)
+        cma-256                 CMA is 256MB (needs 1GB)
         cma-192                 CMA is 192MB (needs 1GB)
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
@@ -2830,7 +2954,11 @@ Params: cma-256                 CMA is 256MB (needs 1GB)
 Name:   vc4-kms-v3d-pi4
 Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver for Pi4.
 Load:   dtoverlay=vc4-kms-v3d-pi4,<param>
-Params: cma-256                 CMA is 256MB
+Params: cma-512                 CMA is 512MB
+        cma-448                 CMA is 448MB
+        cma-384                 CMA is 384MB
+        cma-320                 CMA is 320MB
+        cma-256                 CMA is 256MB
         cma-192                 CMA is 192MB
         cma-128                 CMA is 128MB
         cma-96                  CMA is 96MB
@@ -2842,6 +2970,8 @@ Params: cma-256                 CMA is 256MB
         audio1                  Enable or disable audio over HDMI1 (default
                                 "on")
         noaudio                 Disable all HDMI audio (default "off")
+        composite               Enable the composite output (disables all other
+                                outputs)
 
 
 Name:   vga666

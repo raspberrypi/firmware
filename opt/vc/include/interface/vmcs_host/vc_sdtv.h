@@ -59,6 +59,8 @@ typedef enum SDTV_MODE_T_
 
    SDTV_MODE_PROGRESSIVE = 0x10, /**<240p progressive output*/
 
+   SDTV_MODE_PAL_N      = 0x40, /**<Use PAL-N instead of normal PAL*/
+
    SDTV_MODE_OFF        = 0x80,
    SDTV_MODE_FORCE_32BIT = 0x80000000
 } SDTV_MODE_T;
