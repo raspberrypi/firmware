@@ -9748,6 +9748,7 @@
 0x89c64711	bd_finish_claiming	vmlinux	EXPORT_SYMBOL	
 0x43d0d4c3	dummy_irq_chip	vmlinux	EXPORT_SYMBOL_GPL	
 0x4eac5fc1	cpu_mitigations_auto_nosmt	vmlinux	EXPORT_SYMBOL_GPL	
+0x8f678b07	__stack_chk_guard	vmlinux	EXPORT_SYMBOL	
 0x4c960ea5	hci_uart_unregister_device	drivers/bluetooth/hci_uart	EXPORT_SYMBOL_GPL	
 0x1118371d	devm_usb_get_phy_by_phandle	vmlinux	EXPORT_SYMBOL_GPL	
 0x7ee0f92a	usb_hcd_start_port_resume	vmlinux	EXPORT_SYMBOL_GPL	
