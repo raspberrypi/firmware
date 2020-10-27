@@ -167,6 +167,8 @@ kernel/drivers/clk/clk-hifiberry-dachd.ko: kernel/drivers/base/regmap/regmap-i2c
 kernel/drivers/regulator/arizona-ldo1.ko:
 kernel/drivers/regulator/arizona-micsupp.ko: kernel/sound/soc/snd-soc-core.ko kernel/sound/core/snd-compress.ko kernel/sound/core/snd-pcm-dmaengine.ko kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko
 kernel/drivers/tty/serial/sc16is7xx.ko: kernel/drivers/base/regmap/regmap-spi.ko kernel/drivers/base/regmap/regmap-i2c.ko
+kernel/drivers/char/broadcom/bcm2835_smi_dev.ko: kernel/drivers/misc/bcm2835_smi.ko
+kernel/drivers/char/broadcom/rpivid-mem.ko:
 kernel/drivers/char/tpm/tpm.ko:
 kernel/drivers/char/tpm/tpm_tis_core.ko: kernel/drivers/char/tpm/tpm.ko
 kernel/drivers/char/tpm/tpm_tis_spi.ko: kernel/drivers/char/tpm/tpm_tis_core.ko kernel/drivers/char/tpm/tpm.ko

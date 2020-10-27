@@ -167,6 +167,8 @@ kernel/drivers/clk/clk-hifiberry-dachd.ko
 kernel/drivers/regulator/arizona-ldo1.ko
 kernel/drivers/regulator/arizona-micsupp.ko
 kernel/drivers/tty/serial/sc16is7xx.ko
+kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
+kernel/drivers/char/broadcom/rpivid-mem.ko
 kernel/drivers/char/tpm/tpm.ko
 kernel/drivers/char/tpm/tpm_tis_core.ko
 kernel/drivers/char/tpm/tpm_tis_spi.ko

@@ -9966,6 +9966,7 @@
 0x30517f3c	do_map_probe	drivers/mtd/chips/chipreg	EXPORT_SYMBOL	
 0x6204a003	drm_dp_mst_allocate_vcpi	drivers/gpu/drm/drm_kms_helper	EXPORT_SYMBOL	
 0x76f40744	ocfs2_dlm_lvb	fs/ocfs2/ocfs2_stackglue	EXPORT_SYMBOL_GPL	
+0x8f678b07	__stack_chk_guard	vmlinux	EXPORT_SYMBOL	
 0x4eac5fc1	cpu_mitigations_auto_nosmt	vmlinux	EXPORT_SYMBOL_GPL	
 0x3bdd6590	dummy_irq_chip	vmlinux	EXPORT_SYMBOL_GPL	
 0x91062b63	lookup_positive_unlocked	vmlinux	EXPORT_SYMBOL	
