@@ -29,9 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VCHOST_H
 
 #include "vchost_platform_config.h"
-#include "vcfilesys_defs.h"
 #include "interface/vcos/vcos.h" //for VCHPRE_ abd VCHPOST_ macro's for func declaration
-#include "interface/vmcs_host/vc_fileservice_defs.h" // for VC_O_XXX file definitions
 #include "interface/vchi/vchi.h"
 
 #define UNUSED_PARAMETER(x) ((void)(x))/* macro to suppress not use warning */
@@ -158,74 +156,6 @@ VCHPRE_ void VCHPOST_ vc_lock_obtain(void *lock);
 // Release a lock. Anyone can call this, even if they didn't obtain the lock first.
 
 VCHPRE_ void VCHPOST_ vc_lock_release(void *lock);
-
-/*---------------------------------------------------------------------------*/
-/* File system related functions */
-/*---------------------------------------------------------------------------*/
-
-// Initialises the host dependent file system functions for use
-VCHPRE_ void VCHPOST_ vc_hostfs_init(void);
-VCHPRE_ void VCHPOST_ vc_hostfs_exit(void);
-
-// Low level file system functions equivalent to close(), lseek(), open(), read() and write()
-VCHPRE_ int VCHPOST_ vc_hostfs_close(int fildes);
-
-VCHPRE_ long VCHPOST_ vc_hostfs_lseek(int fildes, long offset, int whence);
-
-VCHPRE_ int64_t VCHPOST_ vc_hostfs_lseek64(int fildes, int64_t offset, int whence);
-
-VCHPRE_ int VCHPOST_ vc_hostfs_open(const char *path, int vc_oflag);
-
-VCHPRE_ int VCHPOST_ vc_hostfs_read(int fildes, void *buf, unsigned int nbyte);
-
-VCHPRE_ int VCHPOST_ vc_hostfs_write(int fildes, const void *buf, unsigned int nbyte);
-
-// Ends a directory listing iteration
-VCHPRE_ int VCHPOST_ vc_hostfs_closedir(void *dhandle);
-
-// Formats the drive that contains the given path
-VCHPRE_ int VCHPOST_ vc_hostfs_format(const char *path);
-
-// Returns the amount of free space on the drive that contains the given path
-VCHPRE_ int VCHPOST_ vc_hostfs_freespace(const char *path);
-VCHPRE_ int64_t VCHPOST_ vc_hostfs_freespace64(const char *path);
-
-// Gets the attributes of the named file
-VCHPRE_ int VCHPOST_ vc_hostfs_get_attr(const char *path, fattributes_t *attr);
-
-// Creates a new directory
-VCHPRE_ int VCHPOST_ vc_hostfs_mkdir(const char *path);
-
-// Starts a directory listing iteration
-VCHPRE_ void * VCHPOST_ vc_hostfs_opendir(const char *dirname);
-
-// Directory listing iterator
-VCHPRE_ struct dirent * VCHPOST_ vc_hostfs_readdir_r(void *dhandle, struct dirent *result);
-
-// Deletes a file or (empty) directory
-VCHPRE_ int VCHPOST_ vc_hostfs_remove(const char *path);
-
-// Renames a file, provided the new name is on the same file system as the old
-VCHPRE_ int VCHPOST_ vc_hostfs_rename(const char *oldfile, const char *newfile);
-
-// Sets the attributes of the named file
-VCHPRE_ int VCHPOST_ vc_hostfs_set_attr(const char *path, fattributes_t attr);
-
-// Truncates a file at its current position
-VCHPRE_ int VCHPOST_ vc_hostfs_setend(int fildes);
-
-// Returns the total amount of space on the drive that contains the given path
-VCHPRE_ int VCHPOST_ vc_hostfs_totalspace(const char *path);
-VCHPRE_ int64_t VCHPOST_ vc_hostfs_totalspace64(const char *path);
-
-// Return millisecond resolution system time, only used for differences
-VCHPRE_ int VCHPOST_ vc_millitime(void);
-
-// Invalidates any cluster chains in the FAT that are not referenced in any directory structures
-VCHPRE_ void VCHPOST_ vc_hostfs_scandisk(const char *path);
-
-// Checks whether or not a FAT filesystem is corrupt or not. If fix_errors is TRUE behaves exactly as vc_filesys_scandisk.
-VCHPRE_ int VCHPOST_ vc_hostfs_chkdsk(const char *path, int fix_errors);
 
 /*---------------------------------------------------------------------------*/
 /* These functions only need to be implemented for the test system. */
