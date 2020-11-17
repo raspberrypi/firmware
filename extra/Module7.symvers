@@ -12042,6 +12042,7 @@
 0xadfae6da	hci_mgmt_chan_unregister	net/bluetooth/bluetooth	EXPORT_SYMBOL	
 0xcc609c83	snd_rawmidi_receive	sound/core/snd-rawmidi	EXPORT_SYMBOL	
 0xdae459d6	ssb_pmu_set_ldo_voltage	drivers/ssb/ssb	EXPORT_SYMBOL	
+0x3f7431c3	can_rx_offload_add_manual	drivers/net/can/can-dev	EXPORT_SYMBOL_GPL	
 0x51ff328e	drm_framebuffer_remove	drivers/gpu/drm/drm	EXPORT_SYMBOL	
 0xc6cf3edb	inet_csk_complete_hashdance	vmlinux	EXPORT_SYMBOL	
 0xcfe84997	dev_getfirstbyhwtype	vmlinux	EXPORT_SYMBOL	
