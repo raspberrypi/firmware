@@ -420,6 +420,12 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 slave"
 
 
+Name:   allo-boss2-dac-audio
+Info:   Configures the Allo Boss2 DAC audio card
+Load:   dtoverlay=allo-boss2-dac-audio
+Params: <None>
+
+
 Name:   allo-digione
 Info:   Configures the Allo Digione audio card
 Load:   dtoverlay=allo-digione
@@ -1251,6 +1257,10 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf2129                 Select the PCF2129 device
 
+        pcf85063                Select the PCF85063 device
+
+        pcf85063a               Select the PCF85063A device
+
         pcf8523                 Select the PCF8523 device
 
         pcf85363                Select the PCF85363 device
@@ -1262,6 +1272,10 @@ Params: abx80x                  Select one of the ABx80x family:
         rv3028                  Select the Micro Crystal RV3028 device
 
         sd3078                  Select the ZXW Shenzhen whwave SD3078 device
+
+        i2c0                    Choose the I2C0 bus on GPIOs 0&1
+
+        i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
 
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified

@@ -165,7 +165,7 @@ on the fly.
   whether the stream is 2d (1 channel) or stereoscopic (2 channels).
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamColorSpace">OMX_IndexParamColorSpace</a></tt>
 <td> Retrieve the image colour space of the video produced by this port.
- <tr valign="top"><td rowspan="14">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
+ <tr valign="top"><td rowspan="15">&nbsp;<td><tt><a href="prop.html#OMX_IndexParamImagePoolExternal">OMX_IndexParamImagePoolExternal</a></tt>
 <td> Query / set the location of an externally allocated image pool to use
   for output frames. Defaults to NULL, causing the component to allocate
   a pool when active.
@@ -219,6 +219,9 @@ on the fly.
 <td> Query / set a limit to the number of frames that can be stored inside the codec.
  <tr valign="top"><td><tt><a href="prop.html#OMX_IndexParamBrcmVideoDecodeConfigVD3">OMX_IndexParamBrcmVideoDecodeConfigVD3</a></tt>
 <td> Codec specific configuration.
+ <tr valign="top"><td><tt>OMX_IndexConfigBrcmVideoCheckTimestamps</tt>
+<td> Query /set whether the codec should sanity check the timestamps to ensure they
+  always increase.
  </table>
 
 </table>
