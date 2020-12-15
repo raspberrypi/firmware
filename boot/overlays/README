@@ -739,6 +739,20 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
 
 
+Name:   edt-ft5406
+Info:   Overlay for the EDT FT5406 touchscreen on the CSI/DSI I2C interface.
+        This works with the Raspberry Pi 7" touchscreen when not being polled
+        by the firmware.
+        You MUST use either "disable_touchscreen=1" or "ignore_lcd=1" in
+        config.txt to stop the firmware polling the touchscreen.
+Load:   dtoverlay=edt-ft5406,<param>=<val>
+Params: sizex                   Touchscreen size x (default 800)
+        sizey                   Touchscreen size y (default 480)
+        invx                    Touchscreen inverted x axis
+        invy                    Touchscreen inverted y axis
+        swapxy                  Touchscreen swapped x y axis
+
+
 Name:   enc28j60
 Info:   Overlay for the Microchip ENC28J60 Ethernet Controller on SPI0
 Load:   dtoverlay=enc28j60,<param>=<val>
@@ -1680,20 +1694,19 @@ Params: no-sdmode               Driver does not manage the state of the DAC's
 
 
 Name:   maxtherm
-Info:   Configure a MAX6675 or MAX31855 thermocouple as an IIO device.
+Info:   Configure a MAX6675, MAX31855 or MAX31856 thermocouple as an IIO device.
 
         For devices on spi1 or spi2, the interfaces should be enabled
         with one of the spi1-1/2/3cs and/or spi2-1/2/3cs overlays.
         The overlay expects to disable the relevant spidev node, so also using
         e.g. cs0_spidev=off is unnecessary.
 
-        Note:   with the 5.7 kernel (and later) there will also be
-                overlays for MAX31855E, MAX31855J, MAX31855K,
-                MAX31885N, MAX31855R, MAX31855S and MAX31855T.
-
         Example:
         MAX31855 on /dev/spidev0.0
             dtoverlay=maxtherm,spi0-0,max31855
+        MAX31856 using a type J thermocouple on /dev/spidev2.1
+            dtoverlay=spi2-2cs
+            dtoverlay=maxtherm,spi2-1,max31856,type_j
 
 Load:   dtoverlay=maxtherm,<param>=<val>
 Params: spi<n>-<m>              Configure device at spi<n>, cs<m>
@@ -1707,6 +1720,15 @@ Params: spi<n>-<m>              Configure device at spi<n>, cs<m>
         max31855r               Enable support for the MAX31855R
         max31855s               Enable support for the MAX31855S
         max31855t               Enable support for the MAX31855T
+        max31856                Enable support for the MAX31856 (with type K)
+        type_b                  Select a type B sensor for max31856
+        type_e                  Select a type E sensor for max31856
+        type_j                  Select a type J sensor for max31856
+        type_k                  Select a type K sensor for max31856
+        type_n                  Select a type N sensor for max31856
+        type_r                  Select a type R sensor for max31856
+        type_s                  Select a type S sensor for max31856
+        type_t                  Select a type T sensor for max31856
 
 
 Name:   mbed-dac
@@ -1898,6 +1920,7 @@ Name:   mpu6050
 Info:   Overlay for i2c connected mpu6050 imu
 Load:   dtoverlay=mpu6050,<param>=<val>
 Params: interrupt               GPIO pin for interrupt (default 4)
+        addr                    I2C address of the device (default 0x68)
 
 
 Name:   mz61581
@@ -2949,6 +2972,14 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
         cma-default             Use upstream's default value
 
 
+Name:   vc4-kms-dsi-7inch
+Info:   Enable the Raspberry Pi DSI 7" screen.
+        Use edt-ft5406 for the touchscreen element.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-7inch
+Params: <None>
+
+
 Name:   vc4-kms-kippah-7inch
 Info:   Enable the Adafruit DPI Kippah with the 7" Ontat panel attached.
         Requires vc4-kms-v3d to be loaded.
@@ -2972,6 +3003,8 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
         cma-default             Use upstream's default value
         audio                   Enable or disable audio over HDMI (default "on")
         noaudio                 Disable all HDMI audio (default "off")
+        nocomposite             Disable the composite video output (default
+                                "off")
 
 
 Name:   vc4-kms-v3d-pi4
