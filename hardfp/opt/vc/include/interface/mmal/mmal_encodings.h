@@ -145,12 +145,35 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MMAL_ENCODING_BAYER_SGRBG10DPCM8 MMAL_FOURCC('B','D','1','0')  //GRBG
 #define MMAL_ENCODING_BAYER_SRGGB10DPCM8 MMAL_FOURCC('b','R','A','8')  //RGGB
 
+//10 bit per pixel unpacked (16bit) Bayer formats.
+#define MMAL_ENCODING_BAYER_SBGGR10    MMAL_FOURCC('B','G','1','0')  //BGGR
+#define MMAL_ENCODING_BAYER_SGRBG10    MMAL_FOURCC('B','A','1','0')  //GRBG
+#define MMAL_ENCODING_BAYER_SGBRG10    MMAL_FOURCC('G','B','1','0')  //GBRG
+#define MMAL_ENCODING_BAYER_SRGGB10    MMAL_FOURCC('R','G','1','0')  //RGGB
+
+//12 bit per pixel unpacked (16bit) Bayer formats
+#define MMAL_ENCODING_BAYER_SBGGR12    MMAL_FOURCC('B','G','1','2')  //BGGR
+#define MMAL_ENCODING_BAYER_SGRBG12    MMAL_FOURCC('B','A','1','2')  //GRBG
+#define MMAL_ENCODING_BAYER_SGBRG12    MMAL_FOURCC('G','B','1','2')  //GBRG
+#define MMAL_ENCODING_BAYER_SRGGB12    MMAL_FOURCC('R','G','1','2')  //RGGB
+
+//14 bit per pixel unpacked (16bit) Bayer formats
+#define MMAL_ENCODING_BAYER_SBGGR14    MMAL_FOURCC('B','G','1','4')  //BGGR
+#define MMAL_ENCODING_BAYER_SGBRG14    MMAL_FOURCC('G','B','1','4')  //GBRG
+#define MMAL_ENCODING_BAYER_SGRBG14    MMAL_FOURCC('G','R','1','4')  //GRBG
+#define MMAL_ENCODING_BAYER_SRGGB14    MMAL_FOURCC('R','G','1','4')  //RGGB
+
 //MIPI packed monochrome images
 #define MMAL_ENCODING_GREY    MMAL_FOURCC('G', 'R', 'E', 'Y') //8bpp Greyscale
 #define MMAL_ENCODING_Y10P    MMAL_FOURCC('Y', '1', '0', 'P') //10bpp  Greyscale, MIPI RAW10 packed
 #define MMAL_ENCODING_Y12P    MMAL_FOURCC('Y', '1', '2', 'P') //12bpp  Greyscale, MIPI RAW12 packed
 #define MMAL_ENCODING_Y14P    MMAL_FOURCC('Y', '1', '4', 'P') //14bpp  Greyscale, MIPI RAW14 packed
 #define MMAL_ENCODING_Y16     MMAL_FOURCC('Y', '1', '6', ' ') //16bpp  Greyscale
+//Unpacked monochrome formats (16bit per sample, but only N LSBs used)
+#define MMAL_ENCODING_Y10     MMAL_FOURCC('Y', '1', '0', ' ') //10bpp Greyscale
+#define MMAL_ENCODING_Y12     MMAL_FOURCC('Y', '1', '2', ' ') //12bpp Greyscale
+#define MMAL_ENCODING_Y14     MMAL_FOURCC('Y', '1', '4', ' ') //14bpp Greyscale
+
 
 /** SAND Video (YUVUV128) format, native format understood by VideoCore.
  * This format is *not* opaque - if requested you will receive full frames
