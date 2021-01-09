@@ -1914,8 +1914,8 @@ Params: speed                   Display SPI bus speed
 
 Name:   merus-amp
 Info:   Configures the merus-amp audio card
-Load:   dtoverlay=merus-amp
-Params: <None>
+Load:   dtoverlay=merus-amp,<param>=<val>
+Params: spioff                  Turn SPI bus off
 
 
 Name:   midi-uart0
@@ -2504,11 +2504,19 @@ Info:   This overlay is now deprecated. Use the sd_* dtparams in the
 Load:   <Deprecated>
 
 
-Name:   seeed-can-fd-hat
-Info:   Overlay for Seeed Studio CAN BUS FD HAT with two CAN FD channels and an
-        RTC.
+Name:   seeed-can-fd-hat-v1
+Info:   Overlay for Seeed Studio CAN BUS FD HAT with two CAN FD channels
+        (based on the mcp2517fd).
+        https://www.seeedstudio.com/2-Channel-CAN-BUS-FD-Shield-for-Raspberry-Pi-p-4072.html
+Load:   dtoverlay=seeed-can-fd-hat-v1
+Params: <None>
+
+
+Name:   seeed-can-fd-hat-v2
+Info:   Overlay for Seeed Studio CAN BUS FD HAT with two CAN FD channels
+        (based on the mcp2518fd) and an RTC.
         https://www.seeedstudio.com/CAN-BUS-FD-HAT-for-Raspberry-Pi-p-4742.html
-Load:   dtoverlay=seeed-can-fd-hat
+Load:   dtoverlay=seeed-can-fd-hat-v2
 Params: <None>
 
 
@@ -3117,6 +3125,13 @@ Load:   dtoverlay=wittypi,<param>=<val>
 Params: led_gpio                GPIO for LED (default "17")
         led_trigger             Choose which activity the LED tracks (default
                                 "default-on")
+
+
+Name:   wm8960-soundcard
+Info:   Overlay for the Waveshare wm8960 soundcard
+Load:   dtoverlay=wm8960-soundcard,<param>=<val>
+Params: alsaname                Changes the card name in ALSA
+        compatible              Changes the codec compatibility
 
 
 Troubleshooting
