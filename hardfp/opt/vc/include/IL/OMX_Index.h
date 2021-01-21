@@ -544,6 +544,7 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamGreenEq,                                    /**< reference: OMX_PARAM_GREENEQTYPE */
     OMX_IndexParamDpc,                                        /**< reference: OMX_PARAM_DPCTYPE */
     OMX_IndexParamGamma,                                      /**< reference: OMX_PARAM_GAMMATYPE */
+    OMX_IndexParamCdn,                                        /**< reference: OMX_PARAM_CDNTYPE */
     OMX_IndexParamCodecHeadersWithFrame,                      /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexConfigBrcmVideoCheckTimestamps,                  /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexMax = 0x7FFFFFFF

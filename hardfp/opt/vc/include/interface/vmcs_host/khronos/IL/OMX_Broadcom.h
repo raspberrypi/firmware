@@ -2765,6 +2765,24 @@ typedef struct OMX_PARAM_BLACKLEVELTYPE {
    OMX_U16 nBitDepth;         /**< Bit depth - refer to comments in code where used */
 } OMX_PARAM_BLACKLEVELTYPE;
 
+/* OMX_IndexParamCdn: Manual colour denoise parameters. */
+/*
+Configures the colour denoise software stages running after the ISP pipeline.
+*/
+typedef enum OMX_CDNMODE {
+   OMX_CDN_FAST = 0,
+   OMX_CDN_HIGH_QUALITY = 1,
+   OMX_CDN_DUMMY  = 0x7FFFFFFF
+} OMX_CDNMODE;
+
+typedef struct OMX_PARAM_CDNTYPE {
+   OMX_U32 nSize;
+   OMX_VERSIONTYPE nVersion;
+
+   OMX_BOOL bEnabled;         /**< Enable colour denoise */
+   OMX_CDNMODE eMode;         /**< Colour denoise operating mode. */
+} OMX_PARAM_CDNTYPE;
+
 /* OMX_IndexParamDenoise: Manual denoise parameters. */
 /*
 Configures the spatial denoise block within the ISP pipeline.
