@@ -154,6 +154,7 @@ enum {
    MMAL_PARAMETER_GREEN_EQ,                  /**< Takes a @ref MMAL_PARAMETER_GREEN_EQ_T */
    MMAL_PARAMETER_DPC,                       /**< Tales a @ref MMAP_PARAMETER_DPC_T */
    MMAL_PARAMETER_GAMMA,                     /**< Tales a @ref MMAP_PARAMETER_GAMMA_T */
+   MMAL_PARAMETER_CDN,                       /**< Takes a @ref MMAL_PARAMETER_CDN_T */
 };
 
 /** Thumbnail configuration parameter type */
@@ -1035,6 +1036,19 @@ typedef struct MMAL_PARAMETER_BLACK_LEVEL_T {
    uint16_t black_level_g;              /**< Black level of green channel (out of 16 bits). */
    uint16_t black_level_b;              /**< Black level of blue channel (out of 16 bits). */
 } MMAL_PARAMETER_BLACK_LEVEL_T;
+
+typedef enum MMAL_PARAM_CDN_MODE_T {
+   MMAL_PARAM_CDN_FAST = 0,
+   MMAL_PARAM_CDN_HIGH_QUALITY = 1,
+   MMAL_PARAM_CDN_DUMMY  = 0x7FFFFFFF
+} MMAL_PARAM_CDN_MODE_T;
+
+typedef struct MMAL_PARAMETER_CDN_T {
+   MMAL_PARAMETER_HEADER_T hdr;
+
+   MMAL_BOOL_T enable;                  /**< Enable colour denoise parameters. */
+   MMAL_PARAM_CDN_MODE_T mode;          /**< Colour denoise mode of operation. */
+} MMAL_PARAMETER_CDN_T;
 
 typedef struct MMAL_PARAMETER_DENOISE_T {
    MMAL_PARAMETER_HEADER_T hdr;

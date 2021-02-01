@@ -1836,10 +1836,12 @@
                type = "absent";
             };
             pin_define@ID_SDA {
-               type = "absent";
+               type = "internal";
+               number = <0>;
             };
             pin_define@ID_SCL {
-               type = "absent";
+               type = "internal";
+               number = <1>;
             };
          }; // pin_defines
       }; // pins
