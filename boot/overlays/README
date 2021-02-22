@@ -2131,6 +2131,18 @@ Load:   dtoverlay=pifi-40
 Params: <None>
 
 
+Name:   pifi-dac-hd
+Info:   Configures the PiFi DAC HD
+Load:   dtoverlay=pifi-dac-hd
+Params: <None>
+
+
+Name:   pifi-dac-zero
+Info:   Configures the PiFi DAC Zero
+Load:   dtoverlay=pifi-dac-zero
+Params: <None>
+
+
 Name:   pifi-mini-210
 Info:   Configures the PiFi Mini stereo amplifier
 Load:   dtoverlay=pifi-mini-210
@@ -3120,10 +3132,20 @@ Params: cma-512                 CMA is 512MB
                                 outputs)
 
 
+Name:   vc4-kms-vga666
+Info:   Enable the VGA666 (resistor ladder ADC) for the vc4-kms-v3d driver.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-vga666,<param>
+Params: ddc                     Enables GPIOs 0&1 as the I2C to read the EDID
+                                from the display. NB These are NOT 5V tolerant
+                                GPIOs, therefore level shifters are required.
+
+
 Name:   vga666
 Info:   Overlay for the Fen Logic VGA666 board
         This uses GPIOs 2-21 (so no I2C), and activates the output 2-3 seconds
         after the kernel has started.
+        NOT for use with vc4-kms-v3d.
 Load:   dtoverlay=vga666
 Params: <None>
 
