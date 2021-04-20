@@ -2378,6 +2378,7 @@ alias usb:v04DDp8007d*dc*dsc*dp*ic02isc06ip00in* cdc_ether
 alias usb:v04DDp8006d*dc*dsc*dp*ic02isc06ip00in* cdc_ether
 alias usb:v04DDp8005d*dc*dsc*dp*ic02isc06ip00in* cdc_ether
 alias usb:v04DDp8004d*dc*dsc*dp*ic02isc06ip00in* cdc_ether
+alias usb:v0BDAp8153d*dc*dsc*dp*ic02isc06ip00in* r8153_ecm
 alias usb:v*p*d*dc*dsc*dp*ic02isc0Cip07in* cdc_eem
 alias usb:v0586p3427d*dc*dsc*dp*ic*isc*ip*in* dm9601
 alias usb:v0A46p1269d*dc*dsc*dp*ic*isc*ip*in* dm9601

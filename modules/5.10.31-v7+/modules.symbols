@@ -1854,6 +1854,7 @@ alias symbol:udpv6_encap_enable ipv6
 alias symbol:drm_gem_lock_reservations drm
 alias symbol:inet_diag_msg_attrs_fill inet_diag
 alias symbol:nft_fib_init nft_fib
+alias symbol:rtl8152_get_version r8152
 alias symbol:fuse_abort_conn fuse
 alias symbol:of_drm_get_panel_orientation drm
 alias symbol:dvb_dmx_swfilter_raw dvb_core

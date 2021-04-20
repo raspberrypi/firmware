@@ -294,6 +294,7 @@ kernel/drivers/net/usb/hso.ko: kernel/net/rfkill/rfkill.ko
 kernel/drivers/net/usb/asix.ko:
 kernel/drivers/net/usb/ax88179_178a.ko:
 kernel/drivers/net/usb/cdc_ether.ko:
+kernel/drivers/net/usb/r8153_ecm.ko: kernel/drivers/net/usb/cdc_ether.ko
 kernel/drivers/net/usb/cdc_eem.ko:
 kernel/drivers/net/usb/dm9601.ko:
 kernel/drivers/net/usb/sr9700.ko:
