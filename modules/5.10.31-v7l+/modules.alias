@@ -775,6 +775,8 @@ alias of:N*T*Cboe,tv080wum-nl0C* panel_simple
 alias of:N*T*Cboe,tv080wum-nl0 panel_simple
 alias of:N*T*Cauo,b080uan01C* panel_simple
 alias of:N*T*Cauo,b080uan01 panel_simple
+alias of:N*T*Cjdi,lt070me05000C* panel_jdi_lt070me05000
+alias of:N*T*Cjdi,lt070me05000 panel_jdi_lt070me05000
 alias of:N*T*Craspberrypi,7inch-touchscreen-panelC* panel_raspberrypi_touchscreen
 alias of:N*T*Craspberrypi,7inch-touchscreen-panel panel_raspberrypi_touchscreen
 alias of:N*T*Cvga-connectorC* display_connector

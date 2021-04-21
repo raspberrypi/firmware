@@ -184,6 +184,7 @@ kernel/drivers/char/tpm/tpm.ko:
 kernel/drivers/char/tpm/tpm_tis_core.ko: kernel/drivers/char/tpm/tpm.ko
 kernel/drivers/char/tpm/tpm_tis_spi.ko: kernel/drivers/char/tpm/tpm_tis_core.ko kernel/drivers/char/tpm/tpm.ko
 kernel/drivers/gpu/drm/panel/panel-simple.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko kernel/drivers/video/backlight/backlight.ko
+kernel/drivers/gpu/drm/panel/panel-jdi-lt070me05000.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/gpu/drm/bridge/display-connector.ko: kernel/drivers/gpu/drm/drm.ko kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/gpu/drm/bridge/simple-bridge.ko: kernel/drivers/gpu/drm/drm_kms_helper.ko kernel/drivers/gpu/drm/drm.ko kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko kernel/drivers/video/fbdev/core/syscopyarea.ko kernel/drivers/video/fbdev/core/sysfillrect.ko kernel/drivers/video/fbdev/core/sysimgblt.ko kernel/drivers/video/fbdev/core/fb_sys_fops.ko kernel/drivers/video/backlight/backlight.ko
