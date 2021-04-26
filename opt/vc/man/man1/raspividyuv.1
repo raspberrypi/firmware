@@ -1,0 +1,276 @@
+.TH RASPIVIDYUV 1
+.
+.SH NAME
+raspividyuv \- records unencoded video with the Pi Camera Module
+.
+.
+.SH SYNOPSIS
+.SY raspividyuv
+.OP \-3d mode
+.OP \-3dswap
+.OP \-ISO value
+.OP \-a flags|text
+.OP \-ae size,fg,bg
+.OP \-ag value
+.OP \-awb mode
+.OP \-awbg b,r
+.OP \-br value
+.OP \-cfx u:v
+.OP \-co value
+.OP \-cs camera
+.OP \-d ms
+.OP \-dg value
+.OP \-dn screen
+.OP \-drc value
+.OP \-ev value
+.OP \-ex mode
+.OP \-f
+.OP \-fli mode
+.OP \-fps fps
+.OP \-gps
+.OP \-h size
+.OP \-hf
+.OP \-i state
+.OP \-ifx effect
+.OP \-k
+.OP \-l
+.OP \-md mode
+.OP \-mm mode
+.OP \-n
+.OP \-o filename
+.OP \-op opacity
+.OP \-p x,y,w,h
+.OP \-pts filename
+.OP \-roi x,y,w,h
+.OP \-rot value
+.OP \-s
+.OP \-sa value
+.OP \-set
+.OP \-sh value
+.OP \-ss value
+.OP \-t ms
+.OP \-td on,off
+.OP \-v
+.OP \-vf
+.OP \-w size
+.YS
+.
+.SY raspividyuv
+.OP \-?
+.SY raspividyuv
+.OP \-\-help
+.YS
+.
+.
+.SH DESCRIPTION
+.B raspividyuv
+is a command line utility for recording unencoded video frames from the
+Raspberry Pi Camera Module (any version), in YUV format by default (see
+.BR [YUV] ).
+It has numerous options which can be used to customize the recording, the
+preview display, or to perform more complex operations like video streaming.
+.
+.
+.SH OPTIONS
+The options documented in the following sections are specific to the
+.B raspividyuv
+utility, or commonly used with it. For full details of the other options (which
+are common to all the camera utilities), please refer to the
+.BR raspicam (7)
+manual page.
+.
+.
+.SH GENERAL OPTIONS
+.
+.TP
+.BR \-? ", " \-\-help
+Display a concise description of all parameters
+.
+.TP
+.BR \-d ", " \-\-demo " [\fIms\fR]"
+This options cycles through the range of camera options. No recording is taken,
+and the demo will end at the end of the timeout period, irrespective of whether
+all the options have been cycled. The time between cycles should be specified
+as a millisecond value.
+.
+.TP
+.BR \-fps ", " \-\-framerate " \fIfps\fR"
+Specifies the frames per second to record. At present, the minimum frame rate
+allowed is 2fps, and the maximum is 30fps. This is likely to change in the
+future.
+.
+.TP
+.BR \-h ", " \-\-height " \fIsize\fR"
+Set the video height to
+.IR size .
+.
+.TP
+.BR \-i ", " \-\-initial " \fIstate\fR"
+Define whether the camera will start paused or will immediately start
+recording. Valid states are
+.I record
+or
+.IR pause .
+Note that if you are using a simple timeout (without
+.I \-\-timed
+or
+.I \-\-keypress
+or other options to activate recording), and
+.I \-\-initial
+is set to
+.IR pause ,
+no output will be recorded.
+.
+.TP
+.BR \-k ", " \-\-keypress
+On each press of the Enter key, the recording will be paused or restarted.
+Pressing X then Enter will stop recording and close the application. Note that
+the timeout value
+.RI ( \-t )
+will be used to signal the end of recording, but is only checked after each
+Enter keypress; so if the system is waiting for a keypress, even if the timeout
+has expired, it will still wait for the keypress before exiting.
+.
+.TP
+.BR \-l ", " \-\-listen
+When using a network connection as the
+.IR \-\-output ,
+this option will make the sytem wait for a connection from the remote system
+before sending data.
+.
+.TP
+.BR \-y ", " \-\-luma
+Only outputs the luma (Y) channel of the YUV image. This is effectively the
+black and white, or intensity, part of the image. See
+.B [YUV]
+for more information.
+.
+.TP
+.BR \-o ", " \-\-output " \fIfilename\fR"
+Specify the output filename. If not specified, no file is saved. If the
+filename is \(lq\-\(rq, then all output is sent to stdout.
+.
+To connect to a remote IPv4 host, use
+.I tcp
+or
+.I udp
+followed by the required IP Address. e.g.
+.I tcp://192.168.1.2:1234
+or
+.IR udp://192.168.1.2:1234 .
+.IP
+To listen on a TCP port (IPv4) and wait for an incoming connection use the
+.I \-\-listen
+option, e.g.
+.I raspividyuv \-l \-o tcp://0.0.0.0:3333
+will bind to all network interfaces,
+.I raspividyuv \-l \-o tcp://192.168.1.1:3333
+will bind to a local IPv4.
+.
+.TP
+.BR \-pts ", " \-\-save-pts " \fIfilename\fR"
+Saves timestamp information to the specified file. Useful as an input file to
+.BR mkvmerge (1).
+.
+.TP
+.BR \-rgb ", " \-\-rgb
+This option forces the video to be saved as RGB data with 8 bits per channel,
+rather than YUV420.
+.
+Note that the video frames saved in
+.B raspividyuv
+are padded to a horizontal size divisible by 32, so there may be unused bytes
+at the end of each line. Buffers are also padded vertically to be divisible by
+16, and in the YUV mode, each plane of Y,U,V is padded in this way.
+.
+.TP
+.BR \-s ", " \-\-signal
+Sending a
+.I USR1
+signal to the
+.B raspividyuv
+process will toggle between recording and paused. This can be done using the
+.BR killall (1)
+command, as below:
+.IP
+.EX
+killall -USR1 raspividyuv
+.EE
+.IP
+Note that the timeout value will be used to indicate the end of recording, but
+is only checked after each receipt of the
+.I USR1
+signal; so if the system is waiting for a signal, even if the timeout has
+expired, it will still wait for the signal before exiting.
+.
+.TP
+.BR \-td ", " \-\-timed " \fIon,off\fR"
+This options allows the video capture to be paused and restarted at particular
+time intervals. Two values are required: the on time and the off time, both
+measured in milliseconds. On time is the amount of time the video is captured,
+and off time is the amount it is paused. The total runtime of the application
+is defined by the timeout option
+.RI ( \-t ).
+Note that the runtime may go slightly over the timeout setting depending on the
+on and off times.
+.IP
+For example:
+.IP
+.EX
+raspividyuv \-o test.h264 \-t 25000 \-\-timed 2500,5000
+.EE
+.IP
+This will alternate between recording for 2500ms (2.5s), then pausing for
+5000ms (5s) gaps, until 25000ms (25s) have elapsed.  The resulting recording
+will only be 10s long, since 4 segments of 2.5s = 10s, separated by 3 gaps of
+5s = 15s, for a total of 25s:
+.IP
+.EX
+Seconds            1                   2
+ 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+RRRRR..........RRRRR..........RRRRR..........RRRRR
+.EE
+.
+.TP
+.BR \-t ", " \-\-timeout " \fIms\fR"
+The total length of time that the program will run for. If not specified, the
+default is 5000ms (5 seconds). If set to 0, the application will run
+indefinitely until stopped with Ctrl-C.
+.
+.TP
+.BR \-v ", " \-\-verbose
+Outputs debugging/information messages during the program run.
+.
+.
+.SH EXIT STATUS
+.
+.IP 0
+Application ran successfully
+.RB ( EX_OK )
+.IP 64
+Bad command line parameter
+.RB ( EX_USAGE )
+.IP 70
+Software or camera error
+.RB ( EX_SOFTWARE )
+.IP 130
+Application terminated by Ctrl-C
+.
+.
+.SH SEE ALSO
+.BR raspicam (7),
+.BR raspistill (1),
+.BR raspivid (1),
+.BR raspiyuv (1),
+.BR vcgencmd (1),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/\:documentation/\:raspbian/\:applications/\:camera.md
+.
+.TP
+.B [YUV]
+https://en.wikipedia.org/wiki/YUV

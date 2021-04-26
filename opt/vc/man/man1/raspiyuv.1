@@ -1,0 +1,234 @@
+.TH RASPIYUV 1
+.
+.SH NAME
+raspiyuv \- takes unencoded still captures with the Pi Camera Module
+.
+.
+.SH SYNOPSIS
+.SY raspiyuv
+.OP \-3d mode
+.OP \-3dswap
+.OP \-a flags|text
+.OP \-ae size,fg,bg
+.OP \-ag value
+.OP \-awb mode
+.OP \-awbg b,r
+.OP \-bm
+.OP \-br value
+.OP \-cfx u:v
+.OP \-co value
+.OP \-cs camera
+.OP \-dec
+.OP \-dg value
+.OP \-dn screen
+.OP \-drc value
+.OP \-ev value
+.OP \-ex mode
+.OP \-f
+.OP \-fli mode
+.OP \-fp
+.OP \-gps
+.OP \-h size
+.OP \-hf
+.OP \-ifx effect
+.OP \-ISO value
+.OP \-k
+.OP \-l filename
+.OP \-md mode
+.OP \-mm mode
+.OP \-n
+.OP \-o filename
+.OP \-op opacity
+.OP \-p x,y,w,h
+.OP \-roi x,y,w,h
+.OP \-rot value
+.OP \-s
+.OP \-sa value
+.OP \-set
+.OP \-sh value
+.OP \-ss value
+.OP \-st
+.OP \-t ms
+.OP \-tl ms
+.OP \-v
+.OP \-vf
+.OP \-w size
+.YS
+.
+.SY raspiyuv
+.OP \-?
+.SY raspiyuv
+.OP \-\-help
+.YS
+.
+.
+.SH DESCRIPTION
+.B raspiyuv
+is a command line utility for capturing unencoded still images from the
+Raspberry Pi Camera Module (any version), in YUV format by default (see
+.BR [YUV] ).
+It has numerous options which can be used to customize the capture process, the
+preview display, or to perform more complex operations like time-lapse or
+triggered captures.
+.
+.
+.SH OPTIONS
+The options documented in the following sections are specific to the
+.B raspiyuv
+utility, or commonly used with it. For full details of the other options (which
+are common to all the camera utilities), please refer to the
+.BR raspicam (7)
+manual page.
+.
+.
+.SH GENERAL OPTIONS
+.
+.TP
+.BR \-? ", " \-\-help
+Display a concise description of all parameters
+.
+.TP
+.BR \-bgr ", " \-\-bgr
+Saves the image data as BGR data rather than YUV. See
+.B \-\-rgb
+below for more information.
+.
+.TP
+.BR \-bm ", " \-\-burst
+Sets burst capture mode. This prevents the camera from returning to preview
+mode in between captures, meaning that captures can be taken closer together.
+.
+.TP
+.BR \-fp ", " \-\-fullpreview
+This runs the preview using the full resolution capture mode. Maximum frames
+per second in this mode is 15fps, and the preview will have the same field of
+view as the capture. Captures should happen more quickly, as no mode change
+should be required. This feature is currently under development.
+.
+.TP
+.BR \-h ", " \-\-height " \fIsize\fR"
+Set the image height to
+.IR size .
+.
+.TP
+.BR \-k ", " \-\-keypress
+The camera is run for the requested time
+.RI ( \-t ),
+and a capture can be initiated throughout that time by pressing the Enter key.
+Pressing X then Enter will exit the application before the timeout is reached.
+If the timeout is set to 0, the camera will run indefinitely until the user
+presses X then Enter. Using the verbose option
+.RI ( \-v )
+will display a prompt asking for user input, otherwise no prompt is displayed.
+.
+.TP
+.BR \-l ", " \-\-latest " \fIfilename\fR"
+Makes a file system link under this name to the latest frame.
+.
+.TP
+.BR \-y ", " \-\-luma
+Only outputs the luma (Y) channel of the YUV image. This is effectively the
+black and white, or intensity, part of the image. See
+.B [YUV]
+for more information.
+.
+.TP
+.BR \-o ", " \-\-output " \fIfilename\fR"
+Specifies the output filename. If not specified, no file is saved.
+If the filename is \(lq\-\(rq, then all output is send to stdout.
+.
+.TP
+.BR \-rgb ", " \-\-rgb
+This option forces the image to be saved as RGB data with 8 bits per channel,
+rather than YUV420.
+.
+Note that the image buffers saved in
+.B raspiyuv
+are padded to a horizontal size divisible by 32, so there may be unused bytes
+at the end of each line. Buffers are also padded vertically to be divisible by
+16, and in the YUV mode, each plane of Y,U,V is padded in this way.
+.
+.TP
+.BR \-s ", " \-\-signal
+The camera is run for the requested time
+.RI ( -t ),
+and a capture can be initiated throughout that time by sending a USR1 signal to
+the camera process. This can be done using the
+.BR killall (1)
+command. For example:
+.IP
+.EX
+killall -USR1 raspiyuv
+.EE
+.
+.TP
+.BR \-v ", " \-\-verbose
+Outputs debugging/information messages during the program run.
+.
+.TP
+.BR \-w ", " \-\-width " \fIsize\fR"
+Set the image width to
+.IR size .
+.
+.
+.SH TIMELAPSE OPTIONS
+.
+.TP
+.BR \-tl ", " \-\-timelapse " \fIms\fR"
+The specific value is the time between shots in milliseconds. Note that you
+should specify
+.I %04d
+at the point in the filename where you want a frame count number to appear. So,
+for example, the code below will produce a capture every 2 seconds, over a
+total period of 30s, named \(lqimage0001.jpg\(rq, \(lqimage0002.jpg\(rq and so
+on, through to \(lqimage0015.jpg\(rq:
+.IP
+.EX
+-t 30000 -tl 2000 -o image%04d.jpg
+.EE
+.IP
+Note that the
+.I %04d
+indicates a 4-digit number, with leading zeroes added to make the required
+number of digits. So, for example,
+.I %08d
+would result in an 8-digit number.
+.
+If a timelapse value of 0 is entered, the application will take pictures as
+fast as possible. Note that there's an minimum enforced pause of 30ms between
+captures to ensure that exposure calculations can be made.
+.
+.
+.SH EXIT STATUS
+.
+.IP 0
+Application ran successfully
+.RB ( EX_OK )
+.IP 64
+Bad command line parameter
+.RB ( EX_USAGE )
+.IP 70
+Software or camera error
+.RB ( EX_SOFTWARE )
+.IP 130
+Application terminated by Ctrl-C
+.
+.
+.SH SEE ALSO
+.BR raspicam (7),
+.BR raspistill (1),
+.BR raspivid (1),
+.BR raspividyuv (1),
+.BR vcgencmd (1),
+.B [YUV],
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/\:documentation/\:raspbian/\:applications/\:camera.md
+.
+.TP
+.B [YUV]
+https://en.wikipedia.org/wiki/YUV

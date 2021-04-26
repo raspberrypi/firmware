@@ -1,0 +1,66 @@
+.TH DTPARAM 1
+.
+.SH NAME
+dtparam \- mainpulate parameters of the base device-tree
+.
+.
+.SH SYNOPSIS
+.SY dtparam
+.RI [ param=val \|.\|.\|.]
+.YS
+.
+.SY dtparam
+.B \-h
+.RI [ param ]
+.YS
+.
+.
+.SH DESCRIPTION
+.B dtparam
+is a command line utility for manipulating the base device-tree's parameters.
+For example, it can be used to enable the SPI or I2C interfaces at runtime
+without rebooting.
+If
+.B dtparam
+is run without any argument, it prints the names of all base device-tree
+parameters and their description.
+.
+.
+.SH OPTIONS
+.
+.TP
+.BR \-h " [\fIparam\fR]"
+If given without
+.I param
+displays help on the application overall. If
+.I param
+is specified, prints help about that parameter in the base device-tree.
+.
+.
+.SH EXAMPLES
+.
+.TP
+.B sudo dtparam spi=on
+Enable the SPI interface on the GPIO header. Note that root privileges are
+usually required for manipulating the base device-tree (hence, sudo in the
+example).
+.
+.TP
+.B dtparam -h spi
+Print help about the "spi" parameter.
+.
+.TP
+.B sudo dtparam audio=off
+Disable the audio output.
+.
+.
+.SH SEE ALSO
+.BR dtoverlay (1),
+.BR dtmerge (1),
+.B [DTREE]
+.
+.
+.SH REFERENCES
+.TP
+.B [DTREE]
+https://www.raspberrypi.org/documentation/configuration/device-tree.md

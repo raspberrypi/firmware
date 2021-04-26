@@ -1,0 +1,155 @@
+.TH TVSERVICE 1
+.
+.SH NAME
+tvservice \- get and set information from attached displays
+.
+.
+.SH SYNOPSIS
+.SY tvservice
+.OP \-a
+.OP \-c "mode aspect p"
+.OP \-d filename
+.OP \-e "group mode drive"
+.OP \-j
+.OP \-l
+.OP \-m group
+.OP \-M
+.OP \-n
+.OP \-o
+.OP \-p
+.OP \-s
+.OP \-t
+.OP \-v id
+.YS
+.
+.SY tvservice
+.B \-h
+.SY tvservice
+.B \-\-help
+.YS
+.
+.
+.SH DESCRIPTION
+.B tvservice
+is a command line application used to get and set information about the
+display, targeted mainly at HDMI video and audio.
+.
+Typing
+.B tvservice
+by itself will display a list of available command line options.
+.
+.
+.SH OPTIONS
+.
+.TP
+.BR \-a ", " \-\-audio
+Shows the current settings for the audio mode, including channels, sample rate
+and sample size.
+.
+.TP
+.BR \-c ", " \-\-sdtvon " \(dq\fImode aspect \fR[\fIP\fR]\(dq"
+Power on the SDTV (composite output) with the specified
+.IR mode ,
+PAL or NSTC, and the specified
+.IR aspect ,
+4:3, 14:9, 16:9. The optional \(lqP\(rq parameter can be used to specify
+progressive mode. 
+.
+.TP
+.BR \-d ", " \-\-dumpid " \fIfilename\fR"
+Save the current EDID to the specified filename. You can then use
+.BR edid-decode (1)
+to display the data in a human readable form. See
+.B [EDID]
+for more information on the EDID contents.
+.
+.TP
+.BR \-e ", " \-\-explicit " \(dq\fIgroup mode drive\fR\(dq"
+Power on the HDMI display with the specified settings.
+.
+The
+.I group
+option can be one of CEA, DMT, CEA_3D_SBS, CEA_3D_TB, CEA_3D_FP, or CEA_3D_FS;
+.I mode
+is one of the modes returned from the
+.B \-\-modes
+option. Finally,
+.I drive
+can be HDMI or DVI. 
+.
+.TP
+.BR \-j ", " \-\-json
+When used in combination with the
+.B \-\-modes
+option, displays the mode information in JSON format. 
+.
+.TP
+.BR \-l ", " \-\-list
+Lists all attached displays and their display ID.
+.
+.TP
+.BR \-m ", " \-\-modes " \fIgroup\fR"
+Shows a list of display modes available in the specified
+.IR group ,
+which can be either CEA or DMT.
+.
+.TP
+.BR \-M ", " \-\-monitor
+Monitors for any HDMI events, for example unplugging or attaching.
+.
+.TP
+.BR \-n ", " \-\-name
+Extracts the display name from the EDID data and shows it.
+.
+.TP
+.BR \-o ", " \-\-off
+Powers off the display output.
+.IP
+.B Important Note:
+Powering off the output using this command will also destroy any
+framebuffers/dispmanx layers associated with the display. These are NOT
+re-established with a subsequent power on, so will result in a blank screen.
+.IP
+A better option is to use the
+.BR vcgencmd (1)
+.B display_power
+option, as this will retain any framebuffers, so when the power is turned back
+on the display will be the returned to the previous power on state.
+.
+.TP
+.BR \-p ", " \-\-preferred
+Power on the HDMI output with preferred settings.
+.
+.TP
+.BR \-s ", " \-\-status
+Shows the current settings for the display mode, including mode, resolution,
+and frequency.
+.
+.TP
+.BR \-t ", " \-\-ntsc
+Use 59.94Hz (NTSC frequency) rather than 60Hz for HDMI mode.
+.
+.TP
+.BR \-v ", " \-\-device " \fIid\fR"
+Specifies the ID of the device to use; see the output of
+.B \-\-list
+for available IDs.
+.
+.
+.SH SEE ALSO
+.BR vcgencmd (1),
+.BR edid-decode (1)
+.
+.PP
+Full documentation at
+.BR [SOURCE] .
+.
+.
+.SH REFERENCES
+.TP
+.B [EDID]
+https://en.wikipedia.org/wiki/Extended_Display_Identification_Data
+.
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/documentation/raspbian/applications/tvservice.md
