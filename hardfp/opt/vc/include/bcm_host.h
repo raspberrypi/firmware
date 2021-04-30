@@ -73,6 +73,8 @@ unsigned bcm_host_get_sdram_address(void);
 #define BCM_HOST_BOARD_TYPE_FPGA 0xf
 #define BCM_HOST_BOARD_TYPE_CM3PLUS 0x10
 #define BCM_HOST_BOARD_TYPE_PI4MODELB 0x11
+#define BCM_HOST_BOARD_TYPE_PI400 0x13
+#define BCM_HOST_BOARD_TYPE_CM4 0x14
 
 extern int bcm_host_get_model_type(void);
 

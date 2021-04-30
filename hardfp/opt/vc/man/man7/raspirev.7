@@ -1,0 +1,332 @@
+.TH RASPIREV 7
+.
+.SH NAME
+raspirev \- Raspberry Pi revision codes
+.
+.
+.SH DESCRIPTION
+Each distinct Raspberry Pi model revision has a unique revision code. You can
+look up a Raspberry Pi's revision code by running:
+.PP
+.EX
+$ \fBcat /proc/cpuinfo\fR
+.EE
+.PP
+The last three lines show the hardware type, the revision code, and the Pi's
+unique serial number. For example:
+.PP
+.EX
+Hardware    : BCM2835
+Revision    : a02082
+Serial      : 00000000765fc593
+.EE
+.PP
+.B Note:
+As of the 4.9 kernel, all Pis report BCM2835, even those with BCM2836, BCM2837
+and BCM2711 processors. You should not use this string to detect the processor.
+Decode the revision code using the information below, or read
+.I /sys/firmware/devicetree/base/model
+.
+.
+.SH OLD-STYLE REVISION CODES
+The first set of Raspberry Pi models were given sequential hex revision codes
+from 0002 to 0015:
+.TS
+tab(|);
+l l l l l .
+Code|Model|Revision|RAM|Manufacturer
+\_|\_|\_|\_|\_
+0002|B|1.0|256MB|Egoman
+0003|B|1.0|256MB|Egoman
+0004|B|2.0|256MB|Sony UK
+0005|B|2.0|256MB|Qisda
+0006|B|2.0|256MB|Egoman
+0007|A|2.0|256MB|Egoman
+0008|A|2.0|256MB|Sony UK
+0009|A|2.0|256MB|Qisda
+000d|B|2.0|512MB|Egoman
+000e|B|2.0|512MB|Sony UK
+000f|B|2.0|512MB|Egoman
+0010|B+|1.2|512MB|Sony UK
+0011|CM1|1.0|512MB|Sony UK
+0012|A+|1.1|256MB|Sony UK
+0013|B+|1.2|512MB|Embest
+0014|CM1|1.0|512MB|Embest
+0015|A+|1.1|256MB/512MB|Embest
+.TE
+.
+.
+.SH NEW-STYLE REVISION CODES
+With the launch of the Raspberry Pi 2, new-style revision codes were
+introduced. Rather than being sequential, each bit of the hex code represents a
+piece of information about the revision:
+.PP
+.EX
+NOQuuuWuFMMMCCCCPPPPTTTTTTTTRRRR
+.EE
+.
+.TP
+.B N
+Overvoltage
+.PD 0
+.RS
+.TP
+.B 0
+Overvoltage allowed
+.TP
+.B 1
+Overvoltage disallowed
+.RE
+.PD
+.
+.TP
+.B O
+OTP Programming; see
+.BR raspiotp (7)
+.PD 0
+.RS
+.TP
+.B 0
+OTP programming allowed
+.TP
+.B 1
+OTP programming disallowed
+.RE
+.PD
+.
+.TP
+.B Q
+OTP Reading; see
+.BR raspiotp (7)
+.PD 0
+.RS
+.TP
+.B 0
+OTP reading allowed
+.TP
+.B 1
+OTP reading disallowed
+.RE
+.PD
+.
+.TP
+.BR uuu
+Unused
+.
+.TP
+.B W
+Warranty bit
+.PD 0
+.RS
+.TP
+.B 0
+Warranty is intact
+.TP
+.B 1
+Warranty has been voided by overclocking
+.RE
+.PD
+.
+.TP
+.B u
+Unused
+.
+.TP
+.B F
+New flag
+.PD 0
+.RS
+.TP
+.B 1
+new-style revision
+.TP
+.B 0
+old-style revision
+.RE
+.PD
+.
+.TP
+.B MMM
+Memory size
+.PD 0
+.RS
+.TP
+.B 0
+256MB
+.TP
+.B 1
+512MB
+.TP
+.B 2
+1GB
+.TP
+.B 3
+2GB
+.TP
+.B 4
+4GB
+.TP
+.B 5
+8GB
+.RE
+.PD
+.
+.TP
+.B CCCC
+Manufacturer
+.PD 0
+.RS
+.TP
+.B 0
+Sony UK
+.TP
+.B 1
+Egoman
+.TP
+.B 2
+Embest
+.TP
+.B 3
+Sony Japan
+.TP
+.B 4
+Embest
+.TP
+.B 5
+Stadium
+.RE
+.PD
+.
+.TP
+.B PPPP
+Processor
+.PD 0
+.RS
+.TP
+.B 0
+BCM2835
+.TP
+.B 1
+BCM2836
+.TP
+.B 2
+BCM2837
+.TP
+.B 3
+BCM2711
+.RE
+.PD
+.
+.TP
+.B TTTTTTTT
+Type
+.PD 0
+.RS
+.TP
+.B 0
+A
+.TP
+.B 1
+B
+.TP
+.B 2
+A+
+.TP
+.B 3
+B+
+.TP
+.B 4
+2B
+.TP
+.B 5
+Alpha (early prototype)
+.TP
+.B 6
+CM1
+.TP
+.B 8
+3B
+.TP
+.B 9
+Zero
+.TP
+.B a
+CM3
+.TP
+.B c
+Zero W
+.TP
+.B d
+3B+
+.TP
+.B e
+3A+
+.TP
+.B f
+Internal use only
+.TP
+.B 10
+CM3+
+.TP
+.B 11
+4B
+.TP
+.B 13
+400
+.TP
+.B 14
+CM4
+.RE
+.PD
+.
+.TP
+.B RRRR
+Revision (0, 1, 2, etc.)
+.PP
+New-style revision codes in use at the time of writing:
+.TS
+tab(|);
+l l l l l .
+Code|Model|Revision|RAM|Manufacturer
+\_|\_|\_|\_|\_
+900021|A+|1.1|512MB|Sony UK
+900032|B+|1.2|512MB|Sony UK
+900092|Zero|1.2|512MB|Sony UK
+900093|Zero|1.3|512MB|Sony UK
+9000c1|Zero W|1.1|512MB|Sony UK
+9020e0|3A+|1.0|512MB|Sony UK
+920092|Zero|1.2|512MB|Embest
+920093|Zero|1.3|512MB|Embest
+900061|CM|1.1|512MB|Sony UK
+a01040|2B|1.0|1GB|Sony UK
+a01041|2B|1.1|1GB|Sony UK
+a02082|3B|1.2|1GB|Sony UK
+a020a0|CM3|1.0|1GB|Sony UK
+a020d3|3B+|1.3|1GB|Sony UK
+a02042|2B (BCM2837)|1.2|1GB|Sony UK
+a21041|2B|1.1|1GB|Embest
+a22042|2B (BCM2837)|1.2|1GB|Embest
+a22082|3B|1.2|1GB|Embest
+a220a0|CM3|1.0|1GB|Embest
+a32082|3B|1.2|1GB|Sony Japan
+a52082|3B|1.2|1GB|Stadium
+a22083|3B|1.3|1GB|Embest
+a02100|CM3+|1.0|1GB|Sony UK
+a03111|4B|1.1|1GB|Sony UK
+b03111|4B|1.1|2GB|Sony UK
+b03112|4B|1.2|2GB|Sony UK
+c03111|4B|1.1|4GB|Sony UK
+c03112|4B|1.2|4GB|Sony UK
+d03114|4B|1.4|8GB|Sony UK
+.TE
+.
+.
+.SH SEE ALSO
+.BR raspiotp (7),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/documentation/hardware/raspberrypi/revision-codes/README.md

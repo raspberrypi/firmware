@@ -1,0 +1,153 @@
+.TH DTOVERLAY 1
+.
+.SH NAME
+dtoverlay \- load a device-tree overlay
+.
+.
+.SH SYNOPSIS
+.SY dtoverlay
+.OP \-d dir
+.OP \-p string
+.OP \-v
+.OP \-D
+.OP \-r
+.OP \-R
+.OP \-l
+.OP \-a
+.RI [ overlay " [" param=val \|.\|.\|.]]
+.YS
+.
+.SY dtoverlay
+.B \-h
+.RI [ overlay " [" param ]]
+.YS
+.
+.
+.SH DESCRIPTION
+.B dtoverlay
+is a command line utility for manipulating the system's runtime device-tree by
+adding or removing overlays.
+It can also customize the base device-tree or overlays by setting parameters
+within them.
+See
+.B [DTREE]
+for more information.
+.
+.PP
+By default, without the
+.B -r
+or
+.B -R
+options, the application adds the specified overlay. Manipulation of
+active device-tree overlays usually requires root privileges.
+.
+.
+.SH OPTIONS
+.
+.TP
+.BR \-a
+Lists all defined device-tree overlays, placing a "*" next to those that are
+currently loaded.
+.
+.TP
+.BR \-d " \fIdir\fR"
+Specifies an alternate location path from which to load overlays. The utility
+defaults to "/boot/overlays" or "/flash/overlays".
+.
+.TP
+.BR \-D
+Dry-run; prepares the specified overlay but doesn't apply it. The resulting
+prepared overlay is saved as "dry-run.dtbo".
+.
+.TP
+.BR \-h [\fIoverlay\fR] [\fIparam\fR]
+If given without
+.I overlay
+or
+.I param
+displays help on the application overall. If
+.I overlay
+is specified, prints help on that overlay. Finally, if
+.I param
+is also specified, prints help on that parameter of the overlay. To query
+parameters on the base overlay, specify "dtparam" as the
+.IR overlay .
+.
+.TP
+.BR \-l
+Lists all currently loaded device-tree overlays, in the order they were loaded.
+This also specifies the index of each overlay.
+.
+.TP
+.BR \-p " \fIstring\fR"
+Override the platform's "compatible" string, normally read from
+"/proc/device-tree/compatible". This is used with the overlay map to determine
+which platform-specific overlay to read (if necessary).
+.
+.TP
+.BR \-r
+Remove overlay. With this option, the utility will remove the specified
+overlay. If no overlay is given, the last overlay loaded will be removed.
+Overlays can be specified by name or by index.
+.
+.TP
+.BR \-R
+Remove the specified overlay, and all subsequent overlays that were loaded
+after it. If no overlay is given, all overlays will be removed. Overlays can
+be specified by name or by index.
+.
+.TP
+.BR \-v
+Verbose operation; the utility will produce more output.
+.
+.
+.SH EXAMPLES
+.
+.TP
+.B sudo dtoverlay w1-gpio
+Load the w1-gpio overlay (to enable Dallas 1-Wire on GPIO4). Note that root
+privileges are usually required for manipulating the device-tree overlays
+(hence, sudo in the example).
+.
+.TP
+.B dtoverlay -l
+Show the loaded overlays.
+.
+.TP
+.B sudo dtoverlay -r
+Remove the last loaded overlay.
+.
+.TP
+.B sudo dtoverlay gpio-shutdown gpio_pin=7 active_low=0 gpio_pull=down
+Load the gpio-shutdown overlay specifying that it should pull GPIO7 down and
+monitor it for a rising edge to initiate shutdown.
+.
+.TP
+.B dtoverlay -h gpio-shutdown
+Display help for the gpio-shutdown overlay
+.
+.TP
+.B sudo dtoverlay -r gpio-shutdown
+Remove the gpio-shutdown overlay, wherever it is in the load order.
+.
+.
+.SH HOOKS
+.B dtoverlay
+attempts to call two executables (shell scripts by default) during its
+operation:
+.B dtoverlay-pre
+prior to making device-tree modifications, and
+.B dtoverlay-post
+afterwards. Each executable is optional and will be ignored if not present.
+.
+.
+.SH SEE ALSO
+.BR dtparam (1),
+.BR dtmerge (1),
+.B [DTREE]
+.
+.
+.SH REFERENCES
+.TP
+.B [DTREE]
+https://www.raspberrypi.org/documentation/configuration/device-tree.md

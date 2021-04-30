@@ -1,0 +1,72 @@
+.TH DTMERGE 1
+.
+.SH NAME
+dtmerge \- merge an overlay or parameters into a base device-tree
+.
+.
+.SH SYNOPSIS
+.SY dtmerge
+.OP \-d
+.I base-dtb
+.I merged-dtb
+.I overlay-dtb
+.RI [ param=val \|.\|.\|.]
+.YS
+.
+.SY dtmerge
+.B \-h
+.YS
+.
+.
+.SH DESCRIPTION
+.B dtmerge
+is a command line utility for merging overlays and/or device-tree parameters
+with a base device-tree.
+See
+.B [DTREE]
+for more information.
+.
+.PP
+The base device-tree (in dtb format) is always specified as the first
+(non-option) argument.
+The second argument is the output filename, which will also be in dtb format.
+The third argument provides the name of the overlay to merge into the base
+tree.
+If this is "-" then no overlay is used and the utility will simply customize
+the base tree with any parameters given.
+.
+.
+.SH OPTIONS
+.
+.TP
+.BR \-d
+Show debug output during operation.
+.
+.TP
+.BR \-h
+Displays help on the application.
+.
+.
+.SH EXAMPLES
+.
+.TP
+.B dtmerge /boot/bcm2711-rpi-4-b.dtb out.dtb - spi=on i2c=on
+Produce a device-tree for the Raspberry Pi 4 in "out.dtb" which has the SPI and
+I2C interfaces activated.
+.
+.TP
+.B dtmerge /boot/bcm2710-rpi-3-b-plus.dtb out.dtb /boot/overlays/gpio-shutdown.dtbo
+Produce a device-tree for the Raspberry Pi 3+ in "out.dtb" which includes the
+GPIO shutdown overlay (with all parameters set to their default).
+.
+.
+.SH SEE ALSO
+.BR dtoverlay (1),
+.BR dtparam (1),
+.B [DTREE]
+.
+.
+.SH REFERENCES
+.TP
+.B [DTREE]
+https://www.raspberrypi.org/documentation/configuration/device-tree.md
