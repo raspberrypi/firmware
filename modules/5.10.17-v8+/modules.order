@@ -931,6 +931,7 @@ kernel/drivers/media/radio/tef6862.ko
 kernel/drivers/media/radio/radio-wl1273.ko
 kernel/drivers/media/radio/wl128x/fm_drv.ko
 kernel/drivers/media/radio/tea575x.ko
+kernel/drivers/power/supply/rpi_poe_power.ko
 kernel/drivers/power/supply/ds2760_battery.ko
 kernel/drivers/power/supply/ltc2941-battery-gauge.ko
 kernel/drivers/power/supply/max17040_battery.ko

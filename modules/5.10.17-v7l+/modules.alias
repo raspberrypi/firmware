@@ -8800,6 +8800,9 @@ alias i2c:radio-tea5764 radio_tea5764
 alias i2c:saa7706h saa7706h
 alias i2c:tef6862 tef6862
 alias platform:wl1273_fm_radio radio_wl1273
+alias platform:rpi-poe-power-supply rpi_poe_power
+alias of:N*T*Craspberrypi,rpi-poe-power-supplyC* rpi_poe_power
+alias of:N*T*Craspberrypi,rpi-poe-power-supply rpi_poe_power
 alias w1-family-0x30 ds2760_battery
 alias i2c:ltc2944 ltc2941_battery_gauge
 alias i2c:ltc2943 ltc2941_battery_gauge
