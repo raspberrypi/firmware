@@ -1482,11 +1482,15 @@ Params: abx80x                  Select one of the ABx80x family:
 
 
 Name:   i2c-sensor
-Info:   Adds support for a number of I2C barometric pressure and temperature
-        sensors on i2c_arm
+Info:   Adds support for a number of I2C barometric pressure, temperature,
+        light level and chemical sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BME680, BMP280,
-                                DS1621, HDC100X, LM75, SHT3x or TMP102
+Params: addr                    Set the address for the BH1750, BME280, BME680,
+                                BMP280, CCS811, DS1621, HDC100X, LM75, SHT3x or
+                                TMP102
+
+        bh1750                  Select the Rohm BH1750 ambient light sensor
+                                Valid addresses 0x23 or 0x5c, default 0x23
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -1500,6 +1504,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
 
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
+
+        ccs811                  Select the AMS CCS811 digital gas sensor
+                                Valid addresses 0x5a-0x5b, default 0x5b
 
         ds1621                  Select the Dallas Semiconductors DS1621 temp
                                 sensor. Valid addresses 0x48-0x4f, default 0x48
@@ -2498,6 +2505,27 @@ Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
                                 the fan slows down (default 5000)
 
 
+Name:   rpi-poe-plus
+Info:   Raspberry Pi PoE+ HAT fan
+Load:   dtoverlay=rpi-poe-plus,<param>[=<val>]
+Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
+                                turns on (default 40000)
+        poe_fan_temp0_hyst      Temperature delta (in millicelcius) at which
+                                the fan turns off (default 2000)
+        poe_fan_temp1           Temperature (in millicelcius) at which the fan
+                                speeds up (default 45000)
+        poe_fan_temp1_hyst      Temperature delta (in millicelcius) at which
+                                the fan slows down (default 2000)
+        poe_fan_temp2           Temperature (in millicelcius) at which the fan
+                                speeds up (default 50000)
+        poe_fan_temp2_hyst      Temperature delta (in millicelcius) at which
+                                the fan slows down (default 2000)
+        poe_fan_temp3           Temperature (in millicelcius) at which the fan
+                                speeds up (default 55000)
+        poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
+                                the fan slows down (default 5000)
+
+
 Name:   rpi-proto
 Info:   Configures the RPi Proto audio card
 Load:   dtoverlay=rpi-proto
@@ -2985,6 +3013,17 @@ Params: speed                   SPI bus speed (default 10000000)
         dc_pin                  GPIO pin for D/C (default 24)
         reset_pin               GPIO pin for RESET (default 25)
         height                  Display height (32 or 64; default 64)
+
+
+Name:   ssd1331-spi
+Info:   Overlay for SSD1331 OLED via SPI using fbtft staging driver.
+Load:   dtoverlay=ssd1331-spi,<param>=<val>
+Params: speed                   SPI bus speed (default 4500000)
+        rotate                  Display rotation (0, 90, 180 or 270; default 0)
+        fps                     Delay between frame updates (default 25)
+        debug                   Debug output level (0-7; default 0)
+        dc_pin                  GPIO pin for D/C (default 24)
+        reset_pin               GPIO pin for RESET (default 25)
 
 
 Name:   ssd1351-spi
