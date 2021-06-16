@@ -363,6 +363,7 @@ alias symbol:hci_recv_frame bluetooth
 alias symbol:synth_buffer_getc speakup
 alias symbol:ar9003_paprd_init_table ath9k_hw
 alias symbol:dm_cache_policy_get_name dm_cache
+alias symbol:snd_pcm_create_iec958_consumer_default snd_pcm
 alias symbol:snd_soc_dai_set_tristate snd_soc_core
 alias symbol:ZSTD_compressBegin zstd_compress
 alias symbol:ar9003_hw_bb_watchdog_dbg_info ath9k_hw
@@ -548,6 +549,7 @@ alias symbol:arizona_dvfs_sysclk_ev snd_soc_arizona
 alias symbol:asoc_simple_parse_convert snd_soc_simple_card_utils
 alias symbol:dm_rh_dec dm_region_hash
 alias symbol:drm_dev_put drm
+alias symbol:snd_pcm_fill_iec958_consumer_hw_params snd_pcm
 alias symbol:drm_mode_create_tile_group drm
 alias symbol:gspca_disconnect gspca_main
 alias symbol:rt2800_config_pairwise_key rt2800lib
@@ -2200,6 +2202,7 @@ alias symbol:xt_register_matches x_tables
 alias symbol:drm_ioctl_kernel drm
 alias symbol:mipi_dbi_enable_flush drm_mipi_dbi
 alias symbol:rfkill_init_sw_state rfkill
+alias symbol:snd_pcm_fill_iec958_consumer snd_pcm
 alias symbol:lbs_stop_card libertas
 alias symbol:snd_dmaengine_pcm_refine_runtime_hwparams snd_pcm_dmaengine
 alias symbol:snd_rawmidi_set_ops snd_rawmidi
@@ -3074,6 +3077,7 @@ alias symbol:ath9k_hw_numtxpending ath9k_hw
 alias symbol:drm_connector_init drm
 alias symbol:fbtft_dbg_hex fbtft
 alias symbol:hostap_set_multicast_list_queue hostap
+alias symbol:snd_pcm_create_iec958_consumer snd_pcm
 alias symbol:snd_timer_instance_new snd_timer
 alias symbol:fsg_fs_bulk_out_desc usb_f_mass_storage
 alias symbol:dm_bm_checksum dm_persistent_data
@@ -5482,6 +5486,7 @@ alias symbol:drm_crtc_check_viewport drm
 alias symbol:snd_mpu401_uart_interrupt snd_mpu401_uart
 alias symbol:__SCK__tp_func_vb2_qbuf videobuf2_common
 alias symbol:drm_mode_vrefresh drm
+alias symbol:snd_pcm_create_iec958_consumer_hw_params snd_pcm
 alias symbol:v4l2_s_parm_cap videodev
 alias symbol:drm_client_modeset_probe drm
 alias symbol:drm_primary_helper_destroy drm_kms_helper

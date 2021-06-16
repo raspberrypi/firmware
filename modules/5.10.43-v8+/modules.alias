@@ -11225,6 +11225,7 @@ alias of:N*T*Cmaxim,max98360aC* snd_soc_max98357a
 alias of:N*T*Cmaxim,max98360a snd_soc_max98357a
 alias of:N*T*Cmaxim,max98357aC* snd_soc_max98357a
 alias of:N*T*Cmaxim,max98357a snd_soc_max98357a
+alias platform:hdmi-audio-codec snd_soc_hdmi_codec
 alias i2c:pcm179x snd_soc_pcm179x_i2c
 alias of:N*T*Cti,pcm1792aC* snd_soc_pcm179x_i2c
 alias of:N*T*Cti,pcm1792a snd_soc_pcm179x_i2c

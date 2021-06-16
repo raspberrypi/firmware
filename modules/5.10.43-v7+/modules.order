@@ -1216,6 +1216,7 @@ kernel/sound/soc/codecs/snd-soc-ics43432.ko
 kernel/sound/soc/codecs/snd-soc-i-sabre-codec.ko
 kernel/sound/soc/codecs/snd-soc-ma120x0p.ko
 kernel/sound/soc/codecs/snd-soc-max98357a.ko
+kernel/sound/soc/codecs/snd-soc-hdmi-codec.ko
 kernel/sound/soc/codecs/snd-soc-pcm179x-codec.ko
 kernel/sound/soc/codecs/snd-soc-pcm179x-i2c.ko
 kernel/sound/soc/codecs/snd-soc-pcm186x.ko
