@@ -3436,6 +3436,7 @@ alias symbol:drm_bridge_chain_disable drm
 alias symbol:__devm_regmap_init_i2c regmap_i2c
 alias symbol:bcm2835_smi_set_address bcm2835_smi
 alias symbol:cfg80211_roamed cfg80211
+alias symbol:drm_atomic_get_new_or_current_crtc_state drm
 alias symbol:drm_atomic_helper_damage_iter_next drm_kms_helper
 alias symbol:iscsi_segment_seek_sg libiscsi_tcp
 alias symbol:nf_ct_frag6_gather nf_defrag_ipv6
@@ -5607,6 +5608,7 @@ alias symbol:ip6_datagram_connect ipv6
 alias symbol:wpan_phy_register ieee802154
 alias symbol:ip6_dst_lookup ipv6
 alias symbol:ath_hw_cycle_counters_update ath
+alias symbol:drm_atomic_get_old_or_current_crtc_state drm
 alias symbol:drm_atomic_helper_commit_planes drm_kms_helper
 alias symbol:fbtft_write_gpio16_wr_latched fbtft
 alias symbol:rtl92c_dm_init rtl8192c_common
