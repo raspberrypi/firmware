@@ -78,7 +78,7 @@ unsigned bcm_host_get_sdram_address(void);
 
 extern int bcm_host_get_model_type(void);
 
-/* Returns 1 if model is  Pi4
+/* Returns 1 if host belongs to the Pi4 family (4B, 400 and CM4)
 */
 extern int bcm_host_is_model_pi4(void);
 
@@ -95,7 +95,8 @@ extern int bcm_host_is_kms_active(void);
 #define BCM_HOST_PROCESSOR_BCM2835 0
 #define BCM_HOST_PROCESSOR_BCM2836 1
 #define BCM_HOST_PROCESSOR_BCM2837 2
-#define BCM_HOST_PROCESSOR_BCM2838 3
+#define BCM_HOST_PROCESSOR_BCM2838 3 /* Deprecated name */
+#define BCM_HOST_PROCESSOR_BCM2711 3
 
 extern int bcm_host_get_processor_id(void);
 
