@@ -326,8 +326,10 @@ kernel/drivers/net/dummy.ko:
 kernel/drivers/net/wireguard/wireguard.ko: kernel/lib/crypto/libchacha20poly1305.ko kernel/arch/arm64/crypto/chacha-neon.ko kernel/arch/arm64/crypto/poly1305-neon.ko kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko kernel/lib/crypto/libcurve25519-generic.ko kernel/lib/crypto/libblake2s.ko kernel/lib/crypto/libblake2s-generic.ko kernel/net/ipv6/ipv6.ko kernel/lib/crypto/libchacha.ko
 kernel/drivers/net/ifb.ko:
 kernel/drivers/net/macvlan.ko:
+kernel/drivers/net/macvtap.ko: kernel/drivers/net/macvlan.ko kernel/drivers/net/tap.ko
 kernel/drivers/net/netconsole.ko:
 kernel/drivers/net/tun.ko:
+kernel/drivers/net/tap.ko:
 kernel/drivers/net/veth.ko:
 kernel/drivers/net/vxlan.ko: kernel/net/ipv6/ip6_udp_tunnel.ko kernel/net/ipv4/udp_tunnel.ko
 kernel/drivers/net/vrf.ko: kernel/net/ipv6/ipv6.ko
@@ -1152,7 +1154,7 @@ kernel/drivers/bluetooth/btbcm.ko: kernel/net/bluetooth/bluetooth.ko kernel/cryp
 kernel/drivers/bluetooth/btrtl.ko: kernel/net/bluetooth/bluetooth.ko kernel/crypto/ecdh_generic.ko kernel/crypto/ecc.ko kernel/net/rfkill/rfkill.ko
 kernel/drivers/ssb/ssb.ko:
 kernel/drivers/bcma/bcma.ko:
-kernel/drivers/vhost/vhost_net.ko: kernel/drivers/net/tun.ko kernel/drivers/vhost/vhost.ko kernel/drivers/vhost/vhost_iotlb.ko
+kernel/drivers/vhost/vhost_net.ko: kernel/drivers/net/tun.ko kernel/drivers/vhost/vhost.ko kernel/drivers/vhost/vhost_iotlb.ko kernel/drivers/net/tap.ko
 kernel/drivers/vhost/vhost.ko: kernel/drivers/vhost/vhost_iotlb.ko
 kernel/drivers/vhost/vhost_iotlb.ko:
 kernel/drivers/iio/adc/mcp320x.ko: kernel/drivers/iio/industrialio.ko

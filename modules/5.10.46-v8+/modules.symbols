@@ -617,6 +617,7 @@ alias symbol:efuse_shadow_read rtlwifi
 alias symbol:hostap_80211_rx hostap
 alias symbol:lg2160_attach lg2160
 alias symbol:snd_dmaengine_pcm_pointer_no_residue snd_pcm_dmaengine
+alias symbol:tap_del_queues tap
 alias symbol:drm_client_buffer_vunmap drm
 alias symbol:mlog_not_bits ocfs2_nodemanager
 alias symbol:snd_soc_dapm_del_routes snd_soc_core
@@ -878,6 +879,7 @@ alias symbol:inet6_csk_xmit ipv6
 alias symbol:iscsi_pool_free libiscsi
 alias symbol:md_bitmap_end_sync md_mod
 alias symbol:snd_dmaengine_pcm_pointer snd_pcm_dmaengine
+alias symbol:tap_free_minor tap
 alias symbol:md_done_sync md_mod
 alias symbol:drm_atomic_helper_connector_duplicate_state drm_kms_helper
 alias symbol:snd_pcm_new snd_pcm
@@ -1002,6 +1004,7 @@ alias symbol:channel5g_80m rtlwifi
 alias symbol:nf_nat_snmp_hook nf_conntrack_snmp
 alias symbol:register_atmdevice_notifier atm
 alias symbol:rtl_init_core rtlwifi
+alias symbol:tap_get_minor tap
 alias symbol:btracker_complete dm_cache
 alias symbol:inet6_release ipv6
 alias symbol:snd_timer_global_new snd_timer
@@ -2254,6 +2257,7 @@ alias symbol:p54_free_common p54common
 alias symbol:cast_s4 cast_common
 alias symbol:cfg80211_iftype_allowed cfg80211
 alias symbol:iio_update_buffers industrialio
+alias symbol:tap_handle_frame tap
 alias symbol:ata_sas_port_stop libata
 alias symbol:rfkill_set_sw_state rfkill
 alias symbol:LZ4_compress_fast lz4_compress
@@ -2988,6 +2992,7 @@ alias symbol:drm_panel_add drm
 alias symbol:em28xx_tuner_callback em28xx
 alias symbol:mipi_dbi_command_buf drm_mipi_dbi
 alias symbol:nfnl_acct_overquota nfnetlink_acct
+alias symbol:tap_destroy_cdev tap
 alias symbol:aarp_send_ddp appletalk
 alias symbol:fbtft_init_display fbtft
 alias symbol:v4l2_ctrl_new_custom videodev
@@ -4037,6 +4042,7 @@ alias symbol:snd_soc_component_async_complete snd_soc_core
 alias symbol:xt_tee_enabled x_tables
 alias symbol:v4l2_async_unregister_subdev videodev
 alias symbol:snd_major snd
+alias symbol:tap_queue_resize tap
 alias symbol:iio_device_release_direct_mode industrialio
 alias symbol:mt76x2_eeprom_init mt76x2_common
 alias symbol:v4l2_event_dequeue videodev
@@ -4165,6 +4171,7 @@ alias symbol:drm_property_create_blob drm
 alias symbol:media_remove_intf_link mc
 alias symbol:xt_check_match x_tables
 alias symbol:ip_tunnel_encap_add_ops ip_tunnel
+alias symbol:tap_get_socket tap
 alias symbol:ieee80211_nan_func_match mac80211
 alias symbol:cx24113_agc_callback cx24113
 alias symbol:rt2x00queue_flush_queue rt2x00lib
@@ -5263,6 +5270,7 @@ alias symbol:o2net_register_handler ocfs2_nodemanager
 alias symbol:nft_meta_get_init nf_tables
 alias symbol:snd_soc_component_exit_regmap snd_soc_core
 alias symbol:vhost_add_used_n vhost
+alias symbol:tap_create_cdev tap
 alias symbol:drm_gem_shmem_free_object drm
 alias symbol:hci_mgmt_chan_register bluetooth
 alias symbol:put_mtd_device mtd
@@ -5498,6 +5506,7 @@ alias symbol:rt2x00mac_tx rt2x00lib
 alias symbol:rtl92c_phy_sw_chnl_callback rtl8192c_common
 alias symbol:dm_block_data dm_persistent_data
 alias symbol:iio_read_channel_offset industrialio
+alias symbol:tap_get_ptr_ring tap
 alias symbol:tpg_init v4l2_tpg
 alias symbol:ata_sas_port_start libata
 alias symbol:bcma_chipco_gpio_outen bcma

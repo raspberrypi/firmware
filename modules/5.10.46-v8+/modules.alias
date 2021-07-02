@@ -2900,6 +2900,7 @@ alias net-pf-16-proto-16-family-wireguard wireguard
 alias rtnl-link-wireguard wireguard
 alias rtnl-link-ifb ifb
 alias rtnl-link-macvlan macvlan
+alias rtnl-link-macvtap macvtap
 alias devname:net/tun tun
 alias char-major-10-200 tun
 alias rtnl-link-veth veth
@@ -7330,6 +7331,8 @@ alias of:N*T*Csony,imx290-monoC* imx290
 alias of:N*T*Csony,imx290-mono imx290
 alias of:N*T*Csony,imx290C* imx290
 alias of:N*T*Csony,imx290 imx290
+alias of:N*T*Csony,imx378C* imx477
+alias of:N*T*Csony,imx378 imx477
 alias of:N*T*Csony,imx477C* imx477
 alias of:N*T*Csony,imx477 imx477
 alias spi:msi001 msi001

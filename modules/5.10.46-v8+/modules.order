@@ -326,8 +326,10 @@ kernel/drivers/net/dummy.ko
 kernel/drivers/net/wireguard/wireguard.ko
 kernel/drivers/net/ifb.ko
 kernel/drivers/net/macvlan.ko
+kernel/drivers/net/macvtap.ko
 kernel/drivers/net/netconsole.ko
 kernel/drivers/net/tun.ko
+kernel/drivers/net/tap.ko
 kernel/drivers/net/veth.ko
 kernel/drivers/net/vxlan.ko
 kernel/drivers/net/vrf.ko
