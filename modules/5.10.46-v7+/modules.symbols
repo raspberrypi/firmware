@@ -5273,7 +5273,6 @@ alias symbol:drm_writeback_signal_completion drm
 alias symbol:iscsi_session_failure libiscsi
 alias symbol:ssb_pmu_set_ldo_voltage ssb
 alias symbol:usbip_header_correct_endian usbip_core
-alias symbol:drm_atomic_helper_legacy_gamma_set drm_kms_helper
 alias symbol:drm_fb_helper_fini drm_kms_helper
 alias symbol:snd_soc_bytes_get snd_soc_core
 alias symbol:snd_soc_info_enum_double snd_soc_core
