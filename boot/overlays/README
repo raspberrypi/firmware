@@ -622,6 +622,12 @@ Info:   This overlay is now deprecated - see i2c-sensor
 Load:   <Deprecated>
 
 
+Name:   cap1106
+Info:   Enables the ability to use the cap1106 touch sensor as a keyboard
+Load:   dtoverlay=cap1106,<param>=<val>
+Params: int_pin                 GPIO pin for interrupt signal (default 23)
+
+
 Name:   chipdip-i2s-master-dac
 Info:   Configures Raspberry PI to work as I2S slave with BCLK=64Fs.
 Load:   dtoverlay=chipdip-i2s-master-dac
@@ -2725,6 +2731,16 @@ Params: speed                   SPI bus speed (default 4000000)
         dc_pin                  GPIO pin for D/C (default 24)
         reset_pin               GPIO pin for RESET (default 25)
         height                  Display height (32 or 64; default 64)
+
+
+Name:   si446x-spi0
+Info:   Overlay for Si446x UHF Transceiver via SPI using si446x driver.
+        The driver is currently out-of-tree at
+        https://github.com/sunipkmukherjee/silabs.git
+Load:   dtoverlay=si446x-spi0,<param>=<val>
+Params: speed                   SPI bus speed (default 4000000)
+        int_pin                 GPIO pin for interrupts (default 17)
+        reset_pin               GPIO pin for RESET (default 27)
 
 
 Name:   smi
