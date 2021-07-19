@@ -11324,6 +11324,9 @@ alias of:N*T*Cwlf,wm8741 snd_soc_wm8741
 alias i2c:wm8804 snd_soc_wm8804_i2c
 alias of:N*T*Cwlf,wm8804C* snd_soc_wm8804_i2c
 alias of:N*T*Cwlf,wm8804 snd_soc_wm8804_i2c
+alias of:N*T*Cwlf,wm8960C* snd_soc_wm8960
+alias of:N*T*Cwlf,wm8960 snd_soc_wm8960
+alias i2c:wm8960 snd_soc_wm8960
 alias of:N*T*Cti,tpa6140a2C* snd_soc_tpa6130a2
 alias of:N*T*Cti,tpa6140a2 snd_soc_tpa6130a2
 alias of:N*T*Cti,tpa6130a2C* snd_soc_tpa6130a2

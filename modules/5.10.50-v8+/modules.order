@@ -1259,6 +1259,7 @@ kernel/sound/soc/codecs/snd-soc-wm8731.ko
 kernel/sound/soc/codecs/snd-soc-wm8741.ko
 kernel/sound/soc/codecs/snd-soc-wm8804.ko
 kernel/sound/soc/codecs/snd-soc-wm8804-i2c.ko
+kernel/sound/soc/codecs/snd-soc-wm8960.ko
 kernel/sound/soc/codecs/snd-soc-wm-adsp.ko
 kernel/sound/soc/codecs/snd-soc-tpa6130a2.ko
 kernel/sound/soc/generic/snd-soc-simple-card-utils.ko
