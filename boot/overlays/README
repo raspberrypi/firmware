@@ -622,6 +622,18 @@ Info:   This overlay is now deprecated - see i2c-sensor
 Load:   <Deprecated>
 
 
+Name:   cap1106
+Info:   Enables the ability to use the cap1106 touch sensor as a keyboard
+Load:   dtoverlay=cap1106,<param>=<val>
+Params: int_pin                 GPIO pin for interrupt signal (default 23)
+
+
+Name:   chipdip-i2s-master-dac
+Info:   Configures Raspberry PI to work as I2S slave with BCLK=64Fs.
+Load:   dtoverlay=chipdip-i2s-master-dac
+Params: <None>
+
+
 Name:   cma
 Info:   Set custom CMA sizes, only use if you know what you are doing, might
         clash with other overlays like vc4-fkms-v3d and vc4-kms-v3d.
@@ -692,6 +704,14 @@ Info:   Overlay for a generic 18-bit DPI display
         This uses GPIOs 0-21 (so no I2C, uart etc.), and activates the output
         2-3 seconds after the kernel has started.
 Load:   dtoverlay=dpi18
+Params: <None>
+
+
+Name:   dpi18cpadhi
+Info:   Overlay for a generic 18-bit DPI display (in 'mode 6' connection scheme)
+        This uses GPIOs 0-9,12-17,20-25 (so no I2C, uart etc.), and activates
+        the output 3-3 seconds after the kernel has started.
+Load:   dtoverlay=dpi18cpadhi
 Params: <None>
 
 
@@ -914,6 +934,62 @@ Params: gpio                    GPIO pin to trigger on (default 3)
         keycode                 Set the key code for the button
 
 
+
+Name:   gpio-led
+Info:   This is a generic overlay for activating LEDs (or any other component)
+        by a GPIO pin. Multiple LEDs can be set up using multiple calls to the
+        overlay. While there are many existing methods to activate LEDs on the
+        RPi, this method offers some advantages:
+        1) Does not require any userspace programs.
+        2) LEDs can be connected to the kernel's led-trigger framework,
+           and drive the LED based on triggers such as cpu load, heartbeat,
+           kernel panic, key input, timers and others.
+        3) LED can be tied to the input state of another GPIO pin.
+        4) The LED is setup early during the kernel boot process (useful
+           for cpu/heartbeat/panic triggers).
+
+        Typical electrical connection is:
+           RPI-GPIO.19  ->  LED  -> 300ohm resister  -> RPI-GND
+        The GPIO pin number can be changed with the 'gpio=' parameter.
+
+        To control an LED from userspace, write a 0 or 1 value:
+           echo 1 > /sys/class/leds/myled1/brightness
+        The 'myled1' name can be changed with the 'label=' parameter.
+
+        To connect the LED to a kernel trigger from userspace:
+           echo cpu > /sys/class/leds/myled1/trigger
+           echo heartbeat > /sys/class/leds/myled1/trigger
+           echo none > /sys/class/leds/myled1/trigger
+        To connect the LED to GPIO.26 pin (physical pin 37):
+           echo gpio > /sys/class/leds/myled1/trigger
+           echo 26 > /sys/class/leds/myled1/gpio
+        Available triggers:
+           cat /sys/class/leds/myled1/trigger
+
+        More information about the Linux kernel LED/Trigger system:
+           https://www.kernel.org/doc/Documentation/leds/leds-class.rst
+           https://www.kernel.org/doc/Documentation/leds/ledtrig-oneshot.rst
+Load:   dtoverlay=gpio-led,<param>=<val>
+Params: gpio                    GPIO pin connected to the LED (default 19)
+        label                   The label for this LED. It will appear under
+                                /sys/class/leds/<label> . Default 'myled1'.
+        trigger                 Set the led-trigger to connect to this LED.
+                                default 'none' (LED is user-controlled).
+                                Some possible triggers:
+                                 cpu - CPU load (all CPUs)
+                                 cpu0 - CPU load of first CPU.
+                                 mmc - disk activity (all disks)
+                                 panic - turn on on kernel panic
+                                 heartbeat - indicate system health
+                                 gpio - connect to a GPIO input pin (note:
+                                        currently the GPIO PIN can not be set
+                                        using overlay parameters, must be
+                                        done in userspace, see examples above.
+        active_low              Set to 1 to turn invert the LED control
+                                (writing 0 to /sys/class/leds/XXX/brightness
+                                will turn on the GPIO/LED). Default '0'.
+
+
 Name:   gpio-no-bank0-irq
 Info:   Use this overlay to disable GPIO interrupts for GPIOs in bank 0 (0-27),
         which can be useful for UIO drivers.
@@ -931,8 +1007,15 @@ Params: <None>
 
 
 Name:   gpio-poweroff
-Info:   Drives a GPIO high or low on poweroff (including halt). Enabling this
-        overlay will prevent the ability to boot by driving GPIO3 low.
+Info:   Drives a GPIO high or low on poweroff (including halt). Using this
+        overlay interferes with the normal power-down sequence, preventing the
+        kernel from resetting the SoC (a necessary step in a normal power-off
+        or reboot). This also disables the ability to trigger a boot by driving
+        GPIO3 low.
+
+        Users of this overlay are required to provide an external mechanism to
+        switch off the power supply when signalled - failure to do so results
+        in a kernel BUG, increased power consumption and undefined behaviour.
 Load:   dtoverlay=gpio-poweroff,<param>=<val>
 Params: gpiopin                 GPIO for signalling (default 26)
 
@@ -1311,6 +1394,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         ds1339                  Select the DS1339 device
 
+        ds1340                  Select the DS1340 device
+
         ds3231                  Select the DS3231 device
 
         m41t62                  Select the M41T62 device
@@ -1372,6 +1457,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         ds1339                  Select the DS1339 device
 
+        ds1340                  Select the DS1340 device
+
         ds3231                  Select the DS3231 device
 
         m41t62                  Select the M41T62 device
@@ -1384,13 +1471,21 @@ Params: abx80x                  Select one of the ABx80x family:
 
         pcf2129                 Select the PCF2129 device
 
+        pcf85063                Select the PCF85063 device
+
+        pcf85063a               Select the PCF85063A device
+
         pcf8523                 Select the PCF8523 device
+
+        pcf85363                Select the PCF85363 device
 
         pcf8563                 Select the PCF8563 device
 
         rv1805                  Select the Micro Crystal RV1805 device
 
         rv3028                  Select the Micro Crystal RV3028 device
+
+        sd3078                  Select the ZXW Shenzhen whwave SD3078 device
 
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified
@@ -1417,11 +1512,15 @@ Params: abx80x                  Select one of the ABx80x family:
 
 
 Name:   i2c-sensor
-Info:   Adds support for a number of I2C barometric pressure and temperature
-        sensors on i2c_arm
+Info:   Adds support for a number of I2C barometric pressure, temperature,
+        light level and chemical sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BME280, BME680, BMP280,
-                                DS1621, HDC100X, LM75, SHT3x or TMP102
+Params: addr                    Set the address for the BH1750, BME280, BME680,
+                                BMP280, CCS811, DS1621, HDC100X, LM75, SHT3x or
+                                TMP102
+
+        bh1750                  Select the Rohm BH1750 ambient light sensor
+                                Valid addresses 0x23 or 0x5c, default 0x23
 
         bme280                  Select the Bosch Sensortronic BME280
                                 Valid addresses 0x76-0x77, default 0x76
@@ -1435,6 +1534,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
 
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
+
+        ccs811                  Select the AMS CCS811 digital gas sensor
+                                Valid addresses 0x5a-0x5b, default 0x5b
 
         ds1621                  Select the Dallas Semiconductors DS1621 temp
                                 sensor. Valid addresses 0x48-0x4f, default 0x48
@@ -1461,6 +1563,9 @@ Params: addr                    Set the address for the BME280, BME680, BMP280,
 
         sps30                   Select the Sensirion SPS30 particulate matter
                                 sensor. Fixed address 0x69.
+
+        sgp30                   Select the Sensirion SGP30 VOC sensor.
+                                Fixed address 0x58.
 
         tmp102                  Select the Texas Instruments TMP102 temp sensor
                                 Valid addresses 0x48-0x4b, default 0x48
@@ -1589,6 +1694,15 @@ Params: 4lane                   Enable 4 CSI2 lanes. This requires a Compute
                                 (the default), whilst those from Innomaker use
                                 74.25MHz.
         mono                    Denote that the module is a mono sensor.
+
+
+Name:   imx378
+Info:   Sony IMX378 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=imx378,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 180)
 
 
 Name:   imx477
@@ -1942,8 +2056,8 @@ Params: speed                   Display SPI bus speed
 
 Name:   merus-amp
 Info:   Configures the merus-amp audio card
-Load:   dtoverlay=merus-amp,<param>=<val>
-Params: spioff                  Turn SPI bus off
+Load:   dtoverlay=merus-amp
+Params: <None>
 
 
 Name:   midi-uart0
@@ -1958,6 +2072,17 @@ Info:   Configures UART1 (ttyS0) so that a requested 38.4kbaud actually gets
         31.25kbaud, the frequency required for MIDI
 Load:   dtoverlay=midi-uart1
 Params: <None>
+
+
+Name:   minipitft13
+Info:   Overlay for AdaFruit Mini Pi 1.3" TFT via SPI using fbtft driver.
+Load:   dtoverlay=minipitft13,<param>=<val>
+Params: speed                   SPI bus speed (default 32000000)
+        rotate                  Display rotation (0, 90, 180 or 270; default 0)
+        width                   Display width (default 240)
+        height                  Display height (default 240)
+        fps                     Delay between frame updates (default 25)
+        debug                   Debug output level (0-7; default 0)
 
 
 Name:   miniuart-bt
@@ -2075,6 +2200,13 @@ Params: addr                    I2C address of expander. Default 0x20.
         cat9554                 Select the Onnn CAT9554 (8 bit)
         pca9654                 Select the Onnn PCA9654 (8 bit)
         xra1202                 Select the Exar XRA1202 (8 bit)
+
+
+Name:   pcie-32bit-dma
+Info:   Force PCIe config to support 32bit DMA addresses at the expense of
+        having to bounce buffers.
+Load:   dtoverlay=pcie-32bit-dma
+Params: <None>
 
 
 [ The pcf2127-rtc overlay has been deleted. See i2c-rtc. ]
@@ -2601,6 +2733,16 @@ Params: speed                   SPI bus speed (default 4000000)
         height                  Display height (32 or 64; default 64)
 
 
+Name:   si446x-spi0
+Info:   Overlay for Si446x UHF Transceiver via SPI using si446x driver.
+        The driver is currently out-of-tree at
+        https://github.com/sunipkmukherjee/silabs.git
+Load:   dtoverlay=si446x-spi0,<param>=<val>
+Params: speed                   SPI bus speed (default 4000000)
+        int_pin                 GPIO pin for interrupts (default 17)
+        reset_pin               GPIO pin for RESET (default 27)
+
+
 Name:   smi
 Info:   Enables the Secondary Memory Interface peripheral. Uses GPIOs 2-25!
 Load:   dtoverlay=smi
@@ -2634,7 +2776,17 @@ Params: <None>
 Name:   spi-rtc
 Info:   Adds support for a number of SPI Real Time Clock devices
 Load:   dtoverlay=spi-rtc,<param>=<val>
-Params: pcf2123                 Select the PCF2123 device
+Params: ds3232                  Select the DS3232 device
+        ds3234                  Select the DS3234 device
+        pcf2123                 Select the PCF2123 device
+
+        spi0_0                  Use spi0.0 (default)
+        spi0_1                  Use spi0.1
+        spi1_0                  Use spi1.0
+        spi1_1                  Use spi1.1
+        spi2_0                  Use spi2.0
+        spi2_1                  Use spi2.1
+        cs_high                 This device requires an active-high CS
 
 
 Name:   spi0-1cs
@@ -2912,6 +3064,17 @@ Params: speed                   SPI bus speed (default 10000000)
         height                  Display height (32 or 64; default 64)
 
 
+Name:   ssd1331-spi
+Info:   Overlay for SSD1331 OLED via SPI using fbtft staging driver.
+Load:   dtoverlay=ssd1331-spi,<param>=<val>
+Params: speed                   SPI bus speed (default 4500000)
+        rotate                  Display rotation (0, 90, 180 or 270; default 0)
+        fps                     Delay between frame updates (default 25)
+        debug                   Debug output level (0-7; default 0)
+        dc_pin                  GPIO pin for D/C (default 24)
+        reset_pin               GPIO pin for RESET (default 25)
+
+
 Name:   ssd1351-spi
 Info:   Overlay for SSD1351 OLED via SPI using fbtft staging driver.
 Load:   dtoverlay=ssd1351-spi,<param>=<val>
@@ -3058,6 +3221,16 @@ Load:   dtoverlay=udrc,<param>=<val>
 Params: alsaname                Name of the ALSA audio device (default "udrc")
 
 
+Name:   ugreen-dabboard
+Info:   Configures the ugreen-dabboard I2S overlay
+        This is a simple overlay based on the simple-audio-card and the dmic
+        codec. It has the speciality that it is configured to use the codec
+        as a master I2S device. It works for example with the Si468x DAB
+        receiver on the uGreen DABBoard.
+Load:   dtoverlay=ugreen-dabboard,<param>=<val>
+Params: card-name               Override the default, "dabboard", card name.
+
+
 Name:   upstream
 Info:   Allow usage of downstream .dtb with upstream kernel. Comprises the
         vc4-kms-v3d and dwc2 overlays.
@@ -3095,11 +3268,39 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
         cma-default             Use upstream's default value
 
 
+Name:   vc4-kms-dpi-at056tn53v1
+Info:   Enable an Innolux 5.6in VGA TFT connected to DPI interface under KMS.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dpi-at056tn53v1
+Params: <None>
+
+
 Name:   vc4-kms-dsi-7inch
 Info:   Enable the Raspberry Pi DSI 7" screen.
         Use edt-ft5406 for the touchscreen element.
         Requires vc4-kms-v3d to be loaded.
 Load:   dtoverlay=vc4-kms-dsi-7inch
+Params: <None>
+
+
+Name:   vc4-kms-dsi-lt070me05000
+Info:   Enable a JDI LT070ME05000 DSI display on DSI1.
+        Note that this is a 4 lane DSI device, so it will only work on a Compute
+        Module.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-lt070me05000,<param>
+Params: reset                   GPIO for the reset signal (default 17)
+        enable                  GPIO for the enable signal (default 4)
+        dcdc-en                 GPIO for the DC-DC converter enable (default 5)
+
+
+Name:   vc4-kms-dsi-lt070me05000-v2
+Info:   Enable a JDI LT070ME05000 DSI display on DSI1 using Harlab's V2
+        interface board.
+        Note that this is a 4 lane DSI device, so it will only work on a Compute
+        Module.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-lt070me05000-v2
 Params: <None>
 
 

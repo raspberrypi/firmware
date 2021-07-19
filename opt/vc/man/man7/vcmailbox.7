@@ -1,0 +1,2237 @@
+.TH VCMAILBOX 7
+.
+.SH NAME
+vcmailbox \- the VideoCore mailbox property interface
+.
+.
+.SH DESCRIPTION
+.
+The mailbox can be used by the ARM on the Raspberry Pi to communicate with the
+VideoCore processor.
+From the command line, the
+.BR vcmailbox (1)
+can be used for this purpose.
+The mailbox operates a simple request / response protocol:
+.
+.IP \(bu 3
+The response overwrites the request.
+.RS
+.IP \(bu 3
+The callee is not allowed to return a different buffer address, this allows the
+caller to make independent asynchronous requests.
+.RE
+.
+.IP \(bu
+The buffer itself is 16-byte aligned as only the upper 28 bits of the address
+can be passed via the mailbox.
+.
+.IP \(bu
+All u64/u32/u16 values are in host CPU endian order.
+.
+.IP \(bu
+Unknown tags are ignored (the response bit will not be set).
+.
+.IP \(bu
+Response may include unsolicited tags.
+.
+.IP \(bu
+Response tag lengths may be longer than expected if additional information is
+provided in a future format.
+.RS
+.IP \(bu 3
+The response is truncated to the provided buffer length.
+.IP \(bu
+Incompatible changes require a new tag so that where the buffer is the size
+required by a previous version the truncated part should be readable as per the
+previous version.
+.IP \(bu
+Response length indicates the desired length even when it is longer than the
+buffer size filled.
+.IP \(bu
+Tag value length can be used to infer the version of the request/response.
+.RE
+.
+.IP \(bu
+Tags should be processed in order except where an interface requires multiple
+tags for a single operation (like the frame buffer).
+.
+.
+.SS Mailbox messages
+.
+.IP \(bu 3
+The mailbox interface has 28 bits (MSB) available for the value and 4 bits
+(LSB) for the channel.
+.RS
+.IP \(bu 3
+Request message: 28 bits (MSB) buffer address
+.IP \(bu
+Response message: 28 bits (MSB) buffer address
+.RE
+.
+.IP \(bu
+Channels 8 and 9 are used.
+.RS
+.IP \(bu 3
+Channel 8: Request from ARM for response by VC
+.IP \(bu
+Channel 9: Request from VC for response by ARM (none currently defined)
+.RE
+.
+.
+.SS Buffer contents
+.
+.
+.TP
+.B u32
+buffer size in bytes (including the header values, the end tag and
+padding)
+.
+.TP
+.B u32
+buffer request/response code
+.RS
+.PP
+Request codes:
+.PD 0
+.TP 12
+.B 0x00000000
+process request
+.TP
+.B \&
+All other values reserved
+.PD
+.PP
+Response codes:
+.PD 0
+.TP 12
+.B 0x80000000
+request successful
+.TP
+.B 0x80000001
+error parsing request buffer (partial response)
+.TP
+.B \&
+All other values reserved
+.PD
+.RE
+.
+.TP
+.B u8\|.\|.\|.
+sequence of concatenated tags
+.
+.TP
+.B u32
+0x0 (end tag)
+.
+.TP
+.B u8\|.\|.\|.
+padding
+.
+.
+.SS Tag format
+.
+.TP
+.B u32
+tag identifier
+.
+.TP
+.B u32
+value buffer size in bytes
+.
+.TP
+.B u32
+Request codes:
+.PD 0
+.RS
+.TP 12
+.B b31 clear
+request
+.TP
+.B b30-b0
+reserved
+.RE
+.PD
+.IP
+Response codes:
+.PD 0
+.RS
+.TP 12
+.B b31 set
+response
+.TP
+.B b30-b0
+value length in bytes
+.RE
+.PD
+.
+.TP
+.B u8\|.\|.\|.
+value buffer
+.
+.TP
+.B u8\|.\|.\|.
+padding to align the tag to 32 bits.
+.
+.
+.SH VIDEOCORE TAGS
+.
+.
+.SS Get firmware revision
+.PD 0
+.TP 12
+.B Tag:
+0x00000001
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+firmware revision
+.RE
+.PD
+.
+.
+.SH HARDWARE TAGS
+.
+.SS Get board model
+.PD 0
+.TP 12
+.B Tag:
+0x00010001
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+board model
+.RE
+.PD
+.
+.SS Get board revision
+.PD 0
+.TP 12
+.B Tag:
+0x00010002
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+board revision
+.RE
+.PD
+.
+.SS Get board MAC address
+.PD 0
+.TP 12
+.B Tag:
+0x00010003
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+6 bytes
+.RS
+.TP
+.B u8...
+MAC address in network byte order
+.RE
+.PD
+.
+.SS Get board serial
+.PD 0
+.TP 12
+.B Tag:
+0x00010004
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u64
+board serial
+.RE
+.PD
+.
+.SS Get ARM memory
+.PD 0
+.TP 12
+.B Tag:
+0x00010005
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+base address in bytes
+.TP
+.B u32
+size in bytes
+.RE
+.PD
+.
+.PP
+Future formats may specify multiple base+size combinations.
+.
+.SS Get VC memory
+.PD 0
+.TP 12
+.B Tag:
+0x00010006
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+base address in bytes
+.TP
+.B u32
+size in bytes
+.RE
+.PD
+.
+.PP
+Future formats may specify multiple base+size combinations.
+.
+.SS Get clocks
+.PD 0
+.TP 12
+.B Tag:
+0x00010007
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+variable bytes (multiple of 8)
+.RS
+.TP
+.B u32
+parent clock id (0 for a root clock)
+.TP
+.B u32
+clock id
+.TP
+.B (repeated)
+.RE
+.PD
+.
+.PP
+Returns all clocks that exist
+.IR "in top-down, breadth-first order" .
+Clocks that depend on another clock should be defined as children of that clock. Clocks that depend on no other clocks should have no parent. Clock IDs are as in the
+.B CLOCK TAGS
+section below.
+.
+.
+.SH CONFIG TAGS
+.
+.SS Get command line
+.PD 0
+.TP 12
+.B Tag:
+0x00050001
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+variable bytes
+.RS
+.TP
+.B u8...
+ASCII command line string
+.RE
+.PD
+.
+.PP
+Caller should not assume the string is null terminated.
+.
+.
+.SH SHARED RESOURCE MANAGEMENT TAGS
+.
+.SS Get DMA channels
+.PD 0
+.TP 12
+.B Tag:
+0x00060001
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+mask
+.RS
+.TP 12
+.B Bits 0-15
+DMA channels 0-15 (0=do not use, 1=usable)
+.TP
+.B Bits 16-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.PP
+Caller assumes that the VC has enabled all the usable DMA channels.
+.
+.
+.SH POWER TAGS
+.
+.SS Unique device IDs
+.PD 0
+.TP 12
+.B 0x00000000
+SD Card
+.TP
+.B 0x00000001
+UART0
+.TP
+.B 0x00000002
+UART1
+.TP
+.B 0x00000003
+USB HCD
+.TP
+.B 0x00000004
+I2C0
+.TP
+.B 0x00000005
+I2C1
+.TP
+.B 0x00000006
+I2C2
+.TP
+.B 0x00000007
+SPI
+.TP
+.B 0x00000008
+CCP2TX
+.TP
+.B 0x00000009
+Unknown (RPi4)
+.TP
+.B 0x0000000a
+Unknown (RPi4)
+.PD
+.
+.SS Get power state
+.PD 0
+.TP 12
+.B Tag:
+0x00020001
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+device id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+device id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=device exists, 1=device does not exist
+.TP
+.B Bits 2-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.PP
+Response indicates current state.
+.
+.SS Get timing
+.PD 0
+.TP 12
+.B Tag:
+0x00020002
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+device id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+device id
+.TP
+.B u32
+enable wait time in microseconds
+.RE
+.PD
+.
+.PP
+Response indicates wait time required after turning a device on before power is stable. Returns 0 wait time if the device does not exist.
+.
+.SS Set power state
+.PD 0
+.TP 12
+.B Tag:
+0x00028001
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+device id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=do not wait, 1=wait
+.TP
+.B Bits 2-31
+reserved for future use (set to 0)
+.RE
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+device id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=device exists, 1=device does not exist
+.TP
+.B Bits 2-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.PP
+Response indicates new state, with/without waiting for the power to become stable.
+.
+.
+.SH CLOCK TAGS
+.
+.SS Unique clock IDs
+.PD 0
+.TP 12
+.B 0x00000000
+reserved
+.TP
+.B 0x00000001
+EMMC
+.TP
+.B 0x00000002
+UART
+.TP
+.B 0x00000003
+ARM
+.TP
+.B 0x00000004
+CORE
+.TP
+.B 0x00000005
+V3D
+.TP
+.B 0x00000006
+H264
+.TP
+.B 0x00000007
+ISP
+.TP
+.B 0x00000008
+SDRAM
+.TP
+.B 0x00000009
+PIXEL
+.TP
+.B 0x0000000a
+PWM
+.TP
+.B 0x0000000b
+HEVC
+.TP
+.B 0x0000000c
+EMMC2
+.TP
+.B 0x0000000d
+M2MC
+.TP
+.B 0x0000000e
+PIXEL_BVB
+.PD
+.
+.PP
+All clocks are the
+.I base clocks
+for those peripherals, e.g. 3MHz for UART, 50/100MHz for EMMC, not the dividers applied using the peripheral.
+.
+.SS Get clock state
+.PD 0
+.TP 12
+.B Tag:
+0x00030001
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+clock id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=clock exists, 1=clock does not exist
+.TP
+.B Bits 2-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.SS Set clock state
+.PD 0
+.TP 12
+.B Tag:
+0x00038001
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=clock exists, 1=clock does not exist
+.TP
+.B Bits 2-31
+reserved for future use (set to 0)
+.RE
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bit 1
+0=clock exists, 1=clock does not exist
+.TP
+.B Bits 2-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.SS Get clock rate
+.PD 0
+.TP 12
+.B Tag:
+0x00030002
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+clock id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+rate (in Hz)
+.RE
+.PD
+.
+.PP
+Next enable rate should be returned even if the clock is not running. A rate of 0 is returned if the clock does not exist.
+.
+.SS Set clock rate
+.PD 0
+.TP 12
+.B Tag:
+0x00038002
+.TP
+.B Request:
+12 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+rate (in Hz)
+.TP
+.B u32
+skip setting turbo
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+rate (in Hz)
+.RE
+.PD
+.
+.PP
+Next supported enable rate should be returned even if the clock is not running. A rate of 0 is returned if the clock does not exist. The clock rate may be clamped to the supported range.
+.
+.PP
+By default when setting arm freq above default, other turbo settings will be enabled (e.g. voltage, sdram and gpu frequencies). You can disable this effect by setting "skip setting turbo" to 1.
+.
+.SS Get max clock rate
+.PD 0
+.TP 12
+.B Tag:
+0x00030004
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+clock id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+rate (in Hz)
+.RE
+.PD
+.
+.PP
+Return the maximum supported clock rate for the given clock. Clocks should not be set higher than this.
+.
+.SS Get min clock rate
+.PD 0
+.TP 12
+.B Tag:
+0x00030007
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+clock id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+clock id
+.TP
+.B u32
+rate (in Hz)
+.RE
+.PD
+.
+.PP
+Return the minimum supported clock rate for the given clock. This may be used when idle.
+.
+.SS Get turbo
+.PD 0
+.TP 12
+.B Tag:
+0x00030009
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+id
+.TP
+.B u32
+level
+.RE
+.PD
+.
+.PP
+Get the turbo state for index id. id should be 0. level will be zero for non-turbo and one for turbo.
+.
+.SS Set turbo
+.PD 0
+.TP 12
+.B Tag:
+0x00038009
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+id
+.TP
+.B u32
+level
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+id
+.TP
+.B u32
+level
+.RE
+.PD
+.
+.PP
+Set the turbo state for index id. id should be zero. level will be zero for non-turbo and one for turbo.
+This will cause GPU clocks to be set to maximum when enabled and minimum when disabled.
+.
+.
+.SH VOLTAGE TAGS
+.
+.SS Unique voltage IDs
+.PD 0
+.TP 12
+.B 0x00000000
+reserved
+.TP
+.B 0x00000001
+Core
+.TP
+.B 0x00000002
+SDRAM_C
+.TP
+.B 0x00000003
+SDRAM_P
+.TP
+.B 0x00000004
+SDRAM_I
+.PD
+.
+.SS Get voltage
+.PD 0
+.TP 12
+.B Tag:
+0x00030003
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+voltage id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+voltage id
+.TP
+.B u32
+value (offset from 1.2V in units of 0.025V)
+.RE
+.PD
+.
+.PP
+The voltage value may be clamped to the supported range.
+A value of 0x80000000 means the id was not valid.
+.
+.SS Set voltage
+.PD 0
+.TP 12
+.B Tag:
+0x00038003
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+voltage id
+.TP
+.B u32
+value (offset from 1.2V in units of 0.025V)
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+voltage id
+.TP
+.B u32
+value (offset from 1.2V in units of 0.025V)
+.RE
+.PD
+.
+.PP
+The voltage value may be clamped to the supported range.
+A value of 0x80000000 means the id was not valid.
+.
+.SS Get max voltage
+.PD 0
+.TP 12
+.B Tag:
+0x00030005
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+voltage id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+voltage id
+.TP
+.B u32
+value (offset from 1.2V in units of 0.025V)
+.RE
+.PD
+.
+.PP
+Return the maximum supported voltage rate for the given id. Voltages should not be set higher than this.
+.
+.SS Get min voltage
+.PD 0
+.TP 12
+.B Tag:
+0x00030008
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+voltage id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+voltage id
+.TP
+.B u32
+value (offset from 1.2V in units of 0.025V)
+.RE
+.PD
+.
+.PP
+Return the minimum supported voltage rate for the given id. This may be used when idle.
+.
+.SS Get temperature
+.PD 0
+.TP 12
+.B Tag:
+0x00030006
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+temperature id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+temperature id
+.TP
+.B u32
+value
+.RE
+.PD
+.
+.PP
+Return the temperature of the SoC in thousandths of a degree C. id should be zero.
+.
+.SS Get max temperature
+.PD 0
+.TP 12
+.B Tag:
+0x0003000a
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+temperature id
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+temperature id
+.TP
+.B u32
+value
+.RE
+.PD
+.
+.PP
+Return the maximum safe temperature of the SoC in thousandths of a degree C. id should be zero.
+Overclock may be disabled above this temperature.
+.
+.SS Allocate memory
+.PD 0
+.TP 12
+.B Tag:
+0x0003000c
+.TP
+.B Request:
+12 bytes
+.RS
+.TP
+.B u32
+size
+.TP
+.B u32
+alignment
+.TP
+.B u32
+flags
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+handle
+.RE
+.PD
+.
+.PP
+Allocates contiguous memory on the GPU. size and alignment are in bytes. flags contain:
+.
+.PP
+.TS
+l l l .
+Name	Value	Comments
+\_	\_	\_
+MEM_FLAG_NORMAL	0	normal allocating alias; don't use from ARM
+MEM_FLAG_DISCARDABLE	1 << 0	can be resized to 0 at any time; use for cached data
+MEM_FLAG_DIRECT	1 << 2	0xC alias uncached
+MEM_FLAG_COHERENT	1 << 3	0x8 alias; non-allocating in L2 but coherent
+MEM_FLAG_L1_NONALLOCATING	3 << 2	Allocating in L2
+MEM_FLAG_ZERO	1 << 4	Initialise buffer to all zeros
+MEM_FLAG_NO_INIT	1 << 5	Don't initialise; default is initialise to all ones
+MEM_FLAG_HINT_PERMALOCK	1 << 6	Likely to be locked for long periods of time
+.TE
+.
+.SS Lock memory
+.PD 0
+.TP 12
+.B Tag:
+0x0003000d
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+handle
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+bus address
+.RE
+.PD
+.
+.PP
+Lock buffer in place, and return a bus address. Must be done before memory can be accessed
+.
+.SS Unlock memory
+.PD 0
+.TP 12
+.B Tag:
+0x0003000e
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+handle
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+status
+.RE
+.PD
+.
+.PP
+Unlock buffer. It retains contents, but may move. Needs to be locked before next use.
+status=0 is success.
+.
+.SS Release Memory
+.PD 0
+.TP 12
+.B Tag:
+0x0003000f
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+handle
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+status
+.RE
+.PD
+.
+.PP
+Free the memory buffer. status=0 is success.
+.
+.SS Execute Code
+.PD 0
+.TP 12
+.B Tag:
+0x00030010
+.TP
+.B Request:
+28 bytes
+.RS
+.TP
+.B u32
+function pointer
+.TP
+.B u32
+r0
+.TP
+.B u32
+r1
+.TP
+.B u32
+r2
+.TP
+.B u32
+r3
+.TP
+.B u32
+r4
+.TP
+.B u32
+r5
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+r0
+.RE
+.PD
+.
+.PP
+Calls the function at given (bus) address and with arguments given. E.g.
+r0 = fn(r0, r1, r2, r3, r4, r5);
+It blocks until call completes. The (GPU) instruction cache is implicitly flushed.
+Setting the lsb of function pointer address will suppress the instruction cache flush if you know the buffer hasn't changed since last execution.
+.
+.SS Get Dispmanx Resource mem handle
+.PD 0
+.TP 12
+.B Tag:
+0x00030014
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+dispmanx resource handle
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+0 is successful
+.TP
+.B u32
+mem handle for resource
+.RE
+.PD
+.
+.PP
+Gets the mem_handle associated with a created dispmanx resource.
+This can be locked and the memory directly written from the arm to avoid having to copy the image data to GPU.
+.
+.SS Get EDID block
+.PD 0
+.TP 12
+.B Tag:
+0x00030020
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+block number
+.RE
+.TP
+.B Response:
+136 bytes
+.RS
+.TP
+.B u32
+block number
+.TP
+.B u32
+status
+.TP
+.B u8\|.\|.\|.
+EDID block
+.RE
+.PD
+.
+.PP
+This reads the specified EDID block from attached HDMI/DVI device.
+There will always be at least one block of 128 bytes, but there may be additional blocks. You should keep requesting blocks (starting from 0) until the status returned is non-zero.
+.
+.
+.SH FRAME BUFFER TAGS
+.
+.IP \(bu 3
+All tags in the request are processed in one operation.
+.IP \(bu
+It is not valid to mix Test tags with Get/Set tags in the same operation and no tags will be returned.
+.IP \(bu
+Get tags will be processed after all Set tags.
+.IP \(bu
+If an allocate buffer tag is omitted when setting parameters, then no change occurs unless it can be accommodated without changing the buffer base or size.
+.IP \(bu
+When an allocate buffer response is returned, the old buffer area (if the base or size has changed) is implicitly freed.
+.
+.PP
+For example:
+.
+.IP 1. 3
+The current values/defaults are loaded into a temporary struct
+.
+.IP 2.
+The tags are used to overwrite some or all of the values
+.
+.IP 3.
+Validation of Test/Set tags occurs
+.
+.IP 4.
+The Set changes are applied and responses based on the requested Get/Test/Set tags are written to the buffer
+.
+Duplicating the same tag in one request/response is prohibited. The expected result is either an error or implementation specified undefined behaviour (such as only using the last instance of the tag).
+.PD
+.
+.SS Allocate buffer
+.PD 0
+.TP 12
+.B Tag:
+0x00040001
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+alignment in bytes
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+frame buffer base address in bytes
+.TP
+.B u32
+frame buffer size in bytes
+.RE
+.PD
+.
+.PP
+If the requested alignment is unsupported then the current base and size (which may be 0 if not allocated) is returned and no change occurs.
+.
+.SS Release buffer
+.PD 0
+.TP 12
+.B Tag:
+0x00048001
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+0 bytes
+.PD
+.
+.PP
+Releases and disables the frame buffer.
+.
+.SS Blank screen
+.PD 0
+.TP 12
+.B Tag:
+0x00040002
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bits 1-31
+reserved for future use (set to 0)
+.RE
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state
+.RS
+.TP 12
+.B Bit 0
+0=off, 1=on
+.TP
+.B Bits 1-31
+reserved for future use
+.RE
+.RE
+.PD
+.
+.SS Get physical (display) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00040003
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+Note that the "physical (display)" size is the size of the allocated buffer in memory, not the resolution of the video signal sent to the display device.
+.
+.SS Test physical (display) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00044003
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set physical (display) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00048003
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. May be the previous width/height or 0 for unsupported.
+.
+.
+.SS Get virtual (buffer) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00040004
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+Note that the "virtual (buffer)" size is the portion of buffer that is sent to the display device, not the resolution the buffer itself. This may be smaller than the allocated buffer size in order to implement panning.
+.
+.SS Test virtual (buffer) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00044004
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set virtual (buffer) width/height
+.PD 0
+.TP 12
+.B Tag:
+0x00048004
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+width in pixels
+.TP
+.B u32
+height in pixels
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. May be the previous width/height or 0 for unsupported.
+.
+.SS Get depth
+.PD 0
+.TP 12
+.B Tag:
+0x00040005
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+bits per pixel
+.RE
+.PD
+.
+.PP
+Test depth
+.PD 0
+.TP 12
+.B Tag:
+0x00044005
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+bits per pixel
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+bits per pixel
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set depth
+.PD 0
+.TP 12
+.B Tag:
+0x00048005
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+bits per pixel
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+bits per pixel
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. May be the previous depth or 0 for unsupported.
+.
+.SS Get pixel order
+.PD 0
+.TP 12
+.B Tag:
+0x00040006
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state
+.RS
+.TP
+.B 0x0
+BGR
+.TP
+.B 0x1
+RGB
+.RE
+.RE
+.PD
+.
+.SS Test pixel order
+.PD 0
+.TP 12
+.B Tag:
+0x00044006
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set pixel order
+.PD 0
+.TP 12
+.B Tag:
+0x00048006
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked.
+.
+.SS Get alpha mode
+.PD 0
+.TP 12
+.B Tag:
+0x00040007
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state
+.RS
+.TP
+.B 0x0
+Alpha channel enabled (0 = fully opaque)
+.TP
+.B 0x1
+Alpha channel reversed (0 = fully transparent)
+.TP
+.B 0x2
+Alpha channel ignored
+.RE
+.RE
+.PD
+.
+.SS Test alpha mode
+.PD 0
+.TP 12
+.B Tag:
+0x00044007
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set alpha mode
+.PD 0
+.TP 12
+.B Tag:
+0x00048007
+.TP
+.B Request:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+state (as above)
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked.
+.
+.SS Get pitch
+.PD 0
+.TP 12
+.B Tag:
+0x00040008
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+bytes per line
+.RE
+.PD
+.
+.SS Get virtual offset
+.PD 0
+.TP 12
+.B Tag:
+0x00040009
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+X in pixels
+.TP
+.B u32
+Y in pixels
+.RE
+.PD
+.
+.SS Test virtual offset
+.PD 0
+.TP 12
+.B Tag:
+0x00044009
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+X in pixels
+.TP
+.B u32
+Y in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+X in pixels
+.TP
+.B u32
+Y in pixels
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set virtual offset
+.PD 0
+.TP 12
+.B Tag:
+0x00048009
+.TP
+.B Request:
+8 bytes
+.RS
+.TP
+.B u32
+X in pixels
+.TP
+.B u32
+Y in pixels
+.RE
+.TP
+.B Response:
+8 bytes
+.RS
+.TP
+.B u32
+X in pixels
+.TP
+.B u32
+Y in pixels
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. May be the previous offset or 0 for unsupported.
+.
+.SS Get overscan
+.PD 0
+.TP 12
+.B Tag:
+0x0004000a
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+16 bytes
+.RS
+.TP
+.B u32
+top in pixels
+.TP
+.B u32
+bottom in pixels
+.TP
+.B u32
+left in pixels
+.TP
+.B u32
+right in pixels
+.RE
+.PD
+.
+.SS Test overscan
+.PD 0
+.TP 12
+.B Tag:
+0x0004400a
+.TP
+.B Request:
+16 bytes
+.RS
+.TP
+.B u32
+top in pixels
+.TP
+.B u32
+bottom in pixels
+.TP
+.B u32
+left in pixels
+.TP
+.B u32
+right in pixels
+.RE
+.TP
+.B Response:
+16 bytes
+.RS
+.TP
+.B u32
+top in pixels
+.TP
+.B u32
+bottom in pixels
+.TP
+.B u32
+left in pixels
+.TP
+.B u32
+right in pixels
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set overscan
+.PD 0
+.TP 12
+.B Tag:
+0x0004800a
+.TP
+.B Request:
+16 bytes
+.RS
+.TP
+.B u32
+top in pixels
+.TP
+.B u32
+bottom in pixels
+.TP
+.B u32
+left in pixels
+.TP
+.B u32
+right in pixels
+.RE
+.TP
+.B Response:
+16 bytes
+.RS
+.TP
+.B u32
+top in pixels
+.TP
+.B u32
+bottom in pixels
+.TP
+.B u32
+left in pixels
+.TP
+.B u32
+right in pixels
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. May be the previous overscan or 0 for unsupported.
+.
+.SS Get palette
+.PD 0
+.TP 12
+.B Tag:
+0x0004000b
+.TP
+.B Request:
+0 bytes
+.TP
+.B Response:
+1024 bytes
+.RS
+.TP
+.B u32...
+RGBA palette values (index 0 to 255)
+.RE
+.PD
+.
+.SS Test palette
+.PD 0
+.TP 12
+.B Tag:
+0x0004400b
+.TP
+.B Request:
+24 bytes..1032 bytes
+.RS
+.TP
+.B u32
+offset: first palette index to set (0-255)
+.TP
+.B u32
+length: number of palette entries to set (1-256)
+.TP
+.B u32...
+RGBA palette values (offset to offset+length-1)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+0=valid, 1=invalid
+.RE
+.PD
+.
+.PP
+Response is the same as the request (or modified), to indicate if this configuration is supported (in combination with all the other settings). Does not modify the current hardware or frame buffer state.
+.
+.SS Set palette
+.PD 0
+.TP 12
+.B Tag:
+0x0004800b
+.TP
+.B Request:
+24 bytes..1032 bytes
+.RS
+.TP
+.B u32
+offset: first palette index to set (0-255)
+.TP
+.B u32
+length: number of palette entries to set (1-256)
+.TP
+.B u32...
+RGBA palette values (offset to offset+length-1)
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+0=valid, 1=invalid
+.RE
+.PD
+.
+.PP
+The response may not be the same as the request so it must be checked. Palette changes should not be partially applied.
+.
+.SS Set Cursor Info
+.PD 0
+.TP 12
+.B Tag:
+0x00008010
+.TP
+.B Request:
+24 bytes
+.RS
+.TP
+.B u32
+width
+.TP
+.B u32
+height
+.TP
+.B u32
+(unused)
+.TP
+.B u32
+pointer to pixels
+.TP
+.B u32
+hotspotX
+.TP
+.B u32
+hotspotY
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+0=valid, 1=invalid
+.RE
+.PD
+.
+.PP
+Format is 32bpp (ARGB).
+Width and height should be >= 16 and (width * height) <= 64.
+.
+.SS Set Cursor State
+.PD 0
+.TP 12
+.B Tag:
+0x00008011
+.TP
+.B Request:
+16 bytes
+.RS
+.TP
+.B u32
+enable (1=visible, 0=invisible)
+.TP
+.B u32
+x
+.TP
+.B u32
+y
+.TP
+.B u32
+flags; 0=display coords, 1=framebuffer coords
+.RE
+.TP
+.B Response:
+4 bytes
+.RS
+.TP
+.B u32
+0=valid, 1=invalid
+.RE
+.PD
+.
+.PP
+if Set Cursor Info hasn't been called a default cursor will be used (64x64 with hotspot at 0,0).

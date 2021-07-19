@@ -1,0 +1,482 @@
+.TH RASPIVID 1
+.
+.SH NAME
+raspivid \- records H264 video with the Pi Camera Module
+.
+.
+.SH SYNOPSIS
+.SY raspivid
+.OP \-3d mode
+.OP \-3dswap
+.OP \-ISO value
+.OP \-a flags|text
+.OP \-ae size,fg,bg
+.OP \-ag value
+.OP \-awb mode
+.OP \-awbg b,r
+.OP \-b bps
+.OP \-br value
+.OP \-c
+.OP \-cd name
+.OP \-cfx u:v
+.OP \-co value
+.OP \-cs camera
+.OP \-d ms
+.OP \-dg value
+.OP \-dn screen
+.OP \-drc value
+.OP \-e
+.OP \-ev value
+.OP \-ex mode
+.OP \-f
+.OP \-fl
+.OP \-fli mode
+.OP \-fps fps
+.OP \-g frames
+.OP \-gps
+.OP \-h size
+.OP \-hf
+.OP \-i state
+.OP \-if type
+.OP \-ifx effect
+.OP \-ih
+.OP \-k
+.OP \-l
+.OP \-lev level
+.OP \-md mode
+.OP \-mm mode
+.OP \-n
+.OP \-o filename
+.OP \-op opacity
+.OP \-p x,y,w,h
+.OP \-pf profile
+.OP \-pts filename
+.OP \-qp num
+.OP \-r filename
+.OP \-rf format
+.OP \-roi x,y,w,h
+.OP \-rot value
+.OP \-s
+.OP \-sa value
+.OP \-set
+.OP \-sg ms
+.OP \-sh value
+.OP \-sl num
+.OP \-sn num
+.OP \-sp
+.OP \-ss value
+.OP \-stm
+.OP \-t ms
+.OP \-td on,off
+.OP \-v
+.OP \-vf
+.OP \-w size
+.OP \-wr num
+.OP \-x filename
+.YS
+.
+.SY raspivid
+.OP \-?
+.SY raspivid
+.OP \-\-help
+.YS
+.
+.
+.SH DESCRIPTION
+.B raspivid
+is a command line utility for recording video from the Raspberry Pi Camera
+Module (any version). It has numerous options which can be used to customize
+the recording, the preview display, or to perform more complex operations like
+circular buffering and video streaming.
+.
+.
+.SH OPTIONS
+The options documented in the following sections are specific to the
+.B raspivid
+utility, or commonly used with it. For full details of the other options (which
+are common to all the camera utilities), please refer to the
+.BR raspicam (7)
+manual page.
+.
+.
+.SH GENERAL OPTIONS
+.
+.TP
+.BR \-? ", " \-\-help
+Display a concise description of all parameters
+.
+.TP
+.BR \-b ", " \-\-bitrate " \fIbps\fR"
+Use bits per second, so 10Mbits/s would be
+.IR "\-b 10000000" .
+For H264, 1080p30 a high quality bitrate would be 15Mbits/s or more.
+Maximum bitrate is 25Mbits/s
+.RI ( "\-b 25000000" ),
+but much over 17Mbits/s won't show noticeable improvement at 1080p30.
+.
+.TP
+.BR \-c ", " \-\-circular
+Select circular buffer mode. All encoded data is stored in a circular buffer
+until a trigger is activated, then the buffer is saved. 
+.
+.TP
+.BR \-cd ", " \-\-codec " \fIname\fR"
+Specifies the encoder codec to use. Options are
+.I H264
+and
+.IR MJPEG .
+H264 can encode up to 1080p, whereas MJPEG can encode upto the sensor size, but
+at decreased framerates due to the higher processing and storage requirements. 
+.
+.TP
+.BR \-d ", " \-\-demo " [\fIms\fR]"
+This options cycles through the range of camera options. No recording is taken,
+and the demo will end at the end of the timeout period, irrespective of whether
+all the options have been cycled. The time between cycles should be specified
+as a millisecond value.
+.
+.TP
+.BR \-fl ", " \-\-flush
+Forces a flush of output data buffers as soon as video data is written. This
+bypasses any OS caching of written data, and can decrease latency.
+.
+.TP
+.BR \-fps ", " \-\-framerate " \fIfps\fR"
+Specifies the frames per second to record. At present, the minimum frame rate
+allowed is 2fps, and the maximum is 30fps. This is likely to change in the
+future.
+.
+.TP
+.BR \-h ", " \-\-height " \fIsize\fR"
+Set the video height to
+.IR size .
+.
+.TP
+.BR \-if ", " \-\-irefresh " \fItype\fR"
+Sets the H264 intra-refresh type. Possible types are:
+.RS
+.IP \(bu 2
+.I cyclic
+.IP \(bu
+.I adaptive
+.IP \(bu
+.I both
+.IP \(bu
+.I cyclicrows
+.RE
+.
+.TP
+.BR \-i ", " \-\-initial " \fIstate\fR"
+Define whether the camera will start paused or will immediately start
+recording. Valid states are
+.I record
+or
+.IR pause .
+Note that if you are using a simple timeout (without
+.I \-\-timed
+or
+.I \-\-keypress
+or other options to activate recording), and
+.I \-\-initial
+is set to
+.IR pause ,
+no output will be recorded.
+.
+.TP
+.BR \-ih ", " \-\-inline
+Forces the stream to include PPS and SPS headers on every I-frame. Needed for
+certain streaming cases e.g. Apple HLS. These headers are small, so don't
+greatly increase the file size.
+.
+.TP
+.BR \-g ", " \-\-intra " \fIframes\fR"
+Sets the intra refresh period (GoP) rate for the recorded video. H264 video
+uses a complete frame (I-frame) every intra refresh period, from which
+subsequent frames are based. This option specifies the number of frames between
+each I-frame. Larger numbers here will reduce the size of the resulting video,
+and smaller numbers make the stream less error-prone.
+.
+.TP
+.BR \-k ", " \-\-keypress
+On each press of the Enter key, the recording will be paused or restarted.
+Pressing X then Enter will stop recording and close the application. Note that
+the timeout value
+.RI ( \-t )
+will be used to signal the end of recording, but is only checked after each
+Enter keypress; so if the system is waiting for a keypress, even if the timeout
+has expired, it will still wait for the keypress before exiting.
+.
+.TP
+.BR \-lev ", " \-\-level " \fIlevel\fR"
+Specifies the H264 encoder level to use for encoding. Options are
+.IR 4 ,
+.IR 4.1 ,
+and
+.IR 4.2 .
+.
+.TP
+.BR \-l ", " \-\-listen
+When using a network connection as the
+.IR \-\-output ,
+this option will make the sytem wait for a connection from the remote system
+before sending data.
+.
+.TP
+.BR \-o ", " \-\-output " \fIfilename\fR"
+Specify the output filename. If not specified, no file is saved. If the
+filename is \(lq\-\(rq, then all output is sent to stdout.
+.
+To connect to a remote IPv4 host, use
+.I tcp
+or
+.I udp
+followed by the required IP Address. e.g.
+.I tcp://192.168.1.2:1234
+or
+.IR udp://192.168.1.2:1234 .
+.IP
+To listen on a TCP port (IPv4) and wait for an incoming connection use the
+.I \-\-listen
+option, e.g.
+.I raspivid \-l \-o tcp://0.0.0.0:3333
+will bind to all network interfaces,
+.I raspivid \-l \-o tcp://192.168.1.1:3333
+will bind to a local IPv4.
+.
+.TP
+.BR \-e ", " \-\-penc
+Switch on this option to display the preview after compression. This will show
+any compression artefacts in the preview window. In normal operation, the
+preview will show the camera output prior to being compressed. This option is
+not guaranteed to work in future releases.
+.
+.TP
+.BR \-pf ", " \-\-profile " \fIprofile\fR"
+Sets the H264 profile to be used for the encoding. Options are:
+.RS
+.IP \(bu 2
+.I baseline
+.IP \(bu
+.I main
+.IP \(bu
+.I high
+.RE
+.
+.TP
+.BR \-qp ", " \-\-qp " \fInum\fR"
+Sets the initial quantisation parameter for the stream. Varies from
+approximately 10 to 40, and will greatly affect the quality of the recording.
+Higher values reduce quality and decrease file size. Combine this setting with
+a bitrate of 0 to set a completely variable bitrate.
+.
+.TP
+.BR \-r ", " \-\-raw " \fIfilename\fR"
+Specify the output file name for any raw data files requested.
+.
+.TP
+.BR \-rf " ," \-\-raw\-format " \fIformat\fR"
+Specify the raw format to be used if raw output is requested. Valid formats are
+.IR yuv ,
+.IR rgb ,
+and
+.IR grey .
+.I grey
+simply saves the Y channel of the YUV image.
+.
+.TP
+.BR \-pts ", " \-\-save-pts " \fIfilename\fR"
+Saves timestamp information to the specified file. Useful as an input file to
+.BR mkvmerge (1).
+.
+.TP
+.BR \-sg ", " \-\-segment " \fIms\fR"
+Rather than creating a single file, the file is split into segments of
+approximately the number of milliseconds specified. In order to provide
+different filenames, you should add
+.I %04d
+or similar at the point in the filename where you want a segment count number
+to appear e.g:
+.IP
+.EX
+\-\-segment 3000 \-o video%04d.h264
+.EE
+.IP
+will produce video clips of approximately 3000ms (3s) long, named
+\(lqvideo0001.h264\(rq, \(lqvideo0002.h264\(rq etc.  The clips should be
+seamless (no frame drops between clips), but the accuracy of each clip length
+will depend on the intraframe period, as the segments will always start on an
+I-frame. They will therefore always be equal or longer to the specified period.
+.IP
+The most recent version of
+.B raspivid
+will also allow the file name to be time-based, rather than using a segment
+number. For example:
+.IP
+.EX
+\-\-segment 3000 \-o video_%c.h264
+.EE
+.IP
+will produce file names formatted like so:
+\(lqvideo_Fri Jul 20 16:23:48 2018.h264\(rq
+.IP
+There are many different formatting options available - see
+.BR strftime (3)
+for a full list. Note than the
+.I %d
+and
+.I %u
+options are not available, as they are used for the segment number formatting,
+and that some combinations may produce invalid file names.
+.
+.TP
+.BR \-s ", " \-\-signal
+Sending a
+.I USR1
+signal to the
+.B raspivid
+process will toggle between recording and paused. This can be done using the
+.BR killall (1)
+command, as below:
+.IP
+.EX
+killall -USR1 raspivid
+.EE
+.IP
+Note that the timeout value will be used to indicate the end of recording, but
+is only checked after each receipt of the
+.I USR1
+signal; so if the system is waiting for a signal, even if the timeout has
+expired, it will still wait for the signal before exiting.
+.
+.TP
+.BR \-sl ", " \-\-slices " \fInum\fR"
+Sets the number of horizontal slices per frame. The default is 1 (no slices).
+.
+.TP
+.BR \-sp ", " \-\-split
+When in
+.I \-\-signal
+or
+.I \-\-keypress
+mode, each time recording is restarted, a new file is created.
+.
+.TP
+.BR \-stm ", " \-\-spstimings
+Insert timing information into the SPS block.
+.
+.TP
+.BR \-sn ", " \-\-start " \fInum\fR"
+When outputting segments (with
+.IR \-\-segment ),
+this is the initial segment number, giving the ability to resume a previous
+recording from a given segment. The default value is 1.
+.
+.TP
+.BR \-td ", " \-\-timed " \fIon,off\fR"
+This options allows the video capture to be paused and restarted at particular
+time intervals. Two values are required: the on time and the off time, both
+measured in milliseconds. On time is the amount of time the video is captured,
+and off time is the amount it is paused. The total runtime of the application
+is defined by the timeout option
+.RI ( \-t ).
+Note that the runtime may go slightly over the timeout setting depending on the
+on and off times.
+.IP
+For example:
+.IP
+.EX
+raspivid \-o test.h264 \-t 25000 \-\-timed 2500,5000
+.EE
+.IP
+This will alternate between recording for 2500ms (2.5s), then pausing for
+5000ms (5s) gaps, until 25000ms (25s) have elapsed.  The resulting recording
+will only be 10s long, since 4 segments of 2.5s = 10s, separated by 3 gaps of
+5s = 15s, for a total of 25s:
+.IP
+.EX
+Seconds            1                   2
+ 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+RRRRR..........RRRRR..........RRRRR..........RRRRR
+.EE
+.
+.TP
+.BR \-t ", " \-\-timeout " \fIms\fR"
+The total length of time that the program will run for. If not specified, the
+default is 5000ms (5 seconds). If set to 0, the application will run
+indefinitely until stopped with Ctrl-C.
+.
+.TP
+.BR \-x ", " \-\-vectors " \fIfilename\fR"
+Turns on output of motion vectors from the H264 encoder to the specified file
+name.
+.
+.TP
+.BR \-v ", " \-\-verbose
+Outputs debugging/information messages during the program run.
+.
+.TP
+.BR \-wr ", " \-\-wrap " \fInum\fR"
+When outputting segments, this is the maximum the segment number can reach
+before it's reset to 1, giving the ability to keep recording segments, but
+overwriting the oldest one. So if set to 4, in the
+.I \-\-segment
+example above, the files produced will be \(lqvideo0001.h264\(rq,
+\(lqvideo0002.h264\(rq, \(lqvideo0003.h264\(rq, and \(lqvideo0004.h264\(rq.
+Once \(lqvideo0004.h264\(rq is recorded, the count will reset to 1, and
+\(lqvideo0001.h264\(rq will be overwritten.
+.
+.
+.SH EXIT STATUS
+.
+.IP 0
+Application ran successfully
+.RB ( EX_OK )
+.IP 64
+Bad command line parameter
+.RB ( EX_USAGE )
+.IP 70
+Software or camera error
+.RB ( EX_SOFTWARE )
+.IP 130
+Application terminated by Ctrl-C
+.
+.
+.SH EXAMPLES
+.
+Image size and preview settings are the same as for still captures. The default
+size for video recording is 1080p (1920x1080).
+.
+.TP
+.B raspivid \-t 5000 \-o video.h264
+Record a 5s clip with default settings (1080p30).
+.
+.TP
+.B raspivid \-t 5000 \-o video.h264 \-b 3500000
+Record a 5s clip at a specified bitrate (3.5Mbits/s).
+.
+.TP
+.B raspivid \-t 5000 \-o video.h264 \-f 5
+Record a 5s clip at a specified framerate (5fps).
+.
+.TP
+.B raspivid \-t 5000 \-o \-
+Encode a 5s camera stream and send the image data to stdout.
+.
+.TP
+.B raspivid \-t 5000 \-o \- > my_file.h264
+Encode a 5s camera stream and send the image data to a file.
+.
+.
+.SH SEE ALSO
+.BR raspicam (7),
+.BR raspistill (1),
+.BR raspividyuv (1),
+.BR raspiyuv (1),
+.BR vcgencmd (1),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/\:documentation/\:raspbian/\:applications/\:camera.md
