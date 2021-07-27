@@ -11438,6 +11438,8 @@ alias of:N*T*Cjustboom,justboom-digiC* snd_soc_rpi_wm8804_soundcard
 alias of:N*T*Cjustboom,justboom-digi snd_soc_rpi_wm8804_soundcard
 alias of:N*T*Cpifi,pifi-40C* snd_soc_pifi_40
 alias of:N*T*Cpifi,pifi-40 snd_soc_pifi_40
+alias of:N*T*Cchipdip,chipdip-dacC* snd_soc_chipdip_dac
+alias of:N*T*Cchipdip,chipdip-dac snd_soc_chipdip_dac
 alias act_xt act_ipt
 alias sch_clsact sch_ingress
 alias ematch-kind-1 em_cmp

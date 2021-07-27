@@ -1297,6 +1297,7 @@ kernel/sound/soc/bcm/snd-soc-fe-pi-audio.ko
 kernel/sound/soc/bcm/snd-soc-rpi-simple-soundcard.ko
 kernel/sound/soc/bcm/snd-soc-rpi-wm8804-soundcard.ko
 kernel/sound/soc/bcm/snd-soc-pifi-40.ko
+kernel/sound/soc/bcm/snd-soc-chipdip-dac.ko
 kernel/net/core/pktgen.ko
 kernel/net/802/p8022.ko
 kernel/net/802/psnap.ko
