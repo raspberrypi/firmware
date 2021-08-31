@@ -1390,6 +1390,8 @@ Params: abx80x                  Select one of the ABx80x family:
                                   AB0801, AB0803, AB0804, AB0805,
                                   AB1801, AB1803, AB1804, AB1805
 
+        bq32000                 Select the TI BQ32000 device
+
         ds1307                  Select the DS1307 device
 
         ds1339                  Select the DS1339 device
@@ -1434,6 +1436,9 @@ Params: abx80x                  Select one of the ABx80x family:
                                 device must be configured to use the specified
                                 address.
 
+        trickle-diode-disable   Do not use the internal trickle charger diode
+                                (BQ32000 only)
+
         trickle-diode-type      Diode type for trickle charge - "standard" or
                                 "schottky" (ABx80x and RV1805 only)
 
@@ -1454,6 +1459,8 @@ Load:   dtoverlay=i2c-rtc-gpio,<param>=<val>
 Params: abx80x                  Select one of the ABx80x family:
                                   AB0801, AB0803, AB0804, AB0805,
                                   AB1801, AB1803, AB1804, AB1805
+
+        bq32000                 Select the TI BQ32000 device
 
         ds1307                  Select the DS1307 device
 
@@ -1494,6 +1501,9 @@ Params: abx80x                  Select one of the ABx80x family:
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified
                                 address.
+
+        trickle-diode-disable   Do not use the internal trickle charger diode
+                                (BQ32000 only)
 
         trickle-diode-type      Diode type for trickle charge - "standard" or
                                 "schottky" (ABx80x and RV1805 only)
@@ -2088,6 +2098,34 @@ Load:   dtoverlay=midi-uart1
 Params: <None>
 
 
+Name:   midi-uart2
+Info:   Configures UART2 (ttyAMA1) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart2
+Params: <None>
+
+
+Name:   midi-uart3
+Info:   Configures UART3 (ttyAMA2) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart3
+Params: <None>
+
+
+Name:   midi-uart4
+Info:   Configures UART4 (ttyAMA3) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart4
+Params: <None>
+
+
+Name:   midi-uart5
+Info:   Configures UART5 (ttyAMA4) so that a requested 38.4kbaud actually gets
+        31.25kbaud, the frequency required for MIDI
+Load:   dtoverlay=midi-uart5
+Params: <None>
+
+
 Name:   minipitft13
 Info:   Overlay for AdaFruit Mini Pi 1.3" TFT via SPI using fbtft driver.
 Load:   dtoverlay=minipitft13,<param>=<val>
@@ -2466,7 +2504,7 @@ Params: gpio_pin                Output GPIO (default 18)
 
 
 Name:   qca7000
-Info:   I2SE's Evaluation Board for PLC Stamp micro
+Info:   in-tech's Evaluation Board for PLC Stamp micro
 Load:   dtoverlay=qca7000,<param>=<val>
 Params: int_pin                 GPIO pin for interrupt signal (default 23)
 
