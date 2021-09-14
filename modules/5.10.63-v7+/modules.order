@@ -175,6 +175,7 @@ kernel/drivers/clk/clk-hifiberry-dachd.ko
 kernel/drivers/regulator/fixed.ko
 kernel/drivers/regulator/arizona-ldo1.ko
 kernel/drivers/regulator/arizona-micsupp.ko
+kernel/drivers/regulator/rpi-panel-attiny-regulator.ko
 kernel/drivers/tty/serial/sc16is7xx.ko
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
 kernel/drivers/char/tpm/tpm.ko
@@ -185,6 +186,7 @@ kernel/drivers/gpu/drm/panel/panel-jdi-lt070me05000.ko
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko
 kernel/drivers/gpu/drm/bridge/display-connector.ko
 kernel/drivers/gpu/drm/bridge/simple-bridge.ko
+kernel/drivers/gpu/drm/bridge/tc358762.ko
 kernel/drivers/gpu/drm/tiny/ili9225.ko
 kernel/drivers/gpu/drm/tiny/ili9341.ko
 kernel/drivers/gpu/drm/tiny/mi0283qt.ko
