@@ -2944,6 +2944,12 @@ alias spi:mcp2510 mcp251x
 alias usb:v12D6p0444d*dc*dsc*dp*ic*isc*ip*in* ems_usb
 alias usb:v1209p2323d*dc*dsc*dp*ic*isc*ip*in00* gs_usb
 alias usb:v1D50p606Fd*dc*dsc*dp*ic*isc*ip*in00* gs_usb
+alias usb:v0C72p0014d*dc*dsc*dp*ic*isc*ip*in* peak_usb
+alias usb:v0C72p0013d*dc*dsc*dp*ic*isc*ip*in* peak_usb
+alias usb:v0C72p0011d*dc*dsc*dp*ic*isc*ip*in* peak_usb
+alias usb:v0C72p0012d*dc*dsc*dp*ic*isc*ip*in* peak_usb
+alias usb:v0C72p000Dd*dc*dsc*dp*ic*isc*ip*in* peak_usb
+alias usb:v0C72p000Cd*dc*dsc*dp*ic*isc*ip*in* peak_usb
 alias rtnl-link-vcan vcan
 alias tty-ldisc-17 slcan
 alias devname:ppp ppp_generic
