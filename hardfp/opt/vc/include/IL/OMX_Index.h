@@ -539,6 +539,8 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexConfigCameraDigitalGain,                         /**< reference: OMX_CONFIG_CAMERAGAINTYPE */
     OMX_IndexConfigBrcmDroppableRunLength,                    /**< reference: OMX_PARAM_U32TYPE */
     OMX_IndexParamMinimumAlignment,                           /**< reference: OMX_PARAM_MINALIGNTYPE */
+
+    // 0x7f000110
     OMX_IndexParamDenoise,                                    /**< reference: OMX_PARAM_DENOISETYPE */
     OMX_IndexParamSharpen,                                    /**< reference: OMX_PARAM_SHARPENTYPE */
     OMX_IndexParamGreenEq,                                    /**< reference: OMX_PARAM_GREENEQTYPE */
@@ -547,6 +549,8 @@ typedef enum OMX_INDEXTYPE {
     OMX_IndexParamCdn,                                        /**< reference: OMX_PARAM_CDNTYPE */
     OMX_IndexParamCodecHeadersWithFrame,                      /**< reference: OMX_CONFIG_BOOLEANTYPE */
     OMX_IndexConfigBrcmVideoCheckTimestamps,                  /**< reference: OMX_CONFIG_BOOLEANTYPE */
+    OMX_IndexParamBrcmStopOnColourSpaceAndPARChange,          /**< reference: OMX_CONFIG_BOOLEANTYPE */
+
     OMX_IndexMax = 0x7FFFFFFF
 } OMX_INDEXTYPE;
 
