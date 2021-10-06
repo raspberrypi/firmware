@@ -1972,7 +1972,6 @@
 0xcfa08045	ip6_find_1stfragopt	vmlinux	EXPORT_SYMBOL	
 0x22837198	sock_no_recvmsg	vmlinux	EXPORT_SYMBOL	
 0x7781f771	sk_ns_capable	vmlinux	EXPORT_SYMBOL	
-0x95d36f63	rpi_firmware_transaction	vmlinux	EXPORT_SYMBOL_GPL	
 0x2e4a24e0	spi_controller_resume	vmlinux	EXPORT_SYMBOL_GPL	
 0xdf96ef9b	devm_regulator_register_notifier	vmlinux	EXPORT_SYMBOL_GPL	
 0x67df7ed8	devm_regulator_bulk_unregister_supply_alias	vmlinux	EXPORT_SYMBOL_GPL	

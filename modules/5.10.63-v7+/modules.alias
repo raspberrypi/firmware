@@ -7285,6 +7285,8 @@ alias of:N*T*Csony,imx378C* imx477
 alias of:N*T*Csony,imx378 imx477
 alias of:N*T*Csony,imx477C* imx477
 alias of:N*T*Csony,imx477 imx477
+alias of:N*T*Csony,imx519C* imx519
+alias of:N*T*Csony,imx519 imx519
 alias spi:msi001 msi001
 alias i2c:mt2060 mt2060
 alias i2c:tda18212 tda18212
