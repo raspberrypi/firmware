@@ -598,6 +598,7 @@ kernel/drivers/media/i2c/tc358743.ko: kernel/drivers/media/v4l2-core/v4l2-dv-tim
 kernel/drivers/media/i2c/imx219.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko
 kernel/drivers/media/i2c/imx290.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko kernel/drivers/base/regmap/regmap-i2c.ko
 kernel/drivers/media/i2c/imx477.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko
+kernel/drivers/media/i2c/imx519.ko: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko kernel/drivers/media/v4l2-core/videodev.ko kernel/drivers/media/mc/mc.ko
 kernel/drivers/media/tuners/tuner-xc2028.ko:
 kernel/drivers/media/tuners/tuner-simple.ko: kernel/drivers/media/tuners/tuner-types.ko
 kernel/drivers/media/tuners/tuner-types.ko:

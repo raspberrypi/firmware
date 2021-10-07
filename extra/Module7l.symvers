@@ -1950,7 +1950,6 @@
 0x565fa2ff	ip6_find_1stfragopt	vmlinux	EXPORT_SYMBOL	
 0x0ab6e5f5	sock_no_recvmsg	vmlinux	EXPORT_SYMBOL	
 0xc2b1b26d	sk_ns_capable	vmlinux	EXPORT_SYMBOL	
-0x95d36f63	rpi_firmware_transaction	vmlinux	EXPORT_SYMBOL_GPL	
 0xa7ecd416	spi_controller_resume	vmlinux	EXPORT_SYMBOL_GPL	
 0x619b07e7	devm_regulator_register_notifier	vmlinux	EXPORT_SYMBOL_GPL	
 0x0ae8e914	devm_regulator_bulk_unregister_supply_alias	vmlinux	EXPORT_SYMBOL_GPL	
