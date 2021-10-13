@@ -15,3 +15,4 @@ softdep btrfs pre: blake2b-256
 softdep btrfs pre: sha256
 softdep btrfs pre: xxhash64
 softdep btrfs pre: crc32c
+softdep r8169 pre: realtek

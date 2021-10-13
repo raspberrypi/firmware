@@ -228,11 +228,13 @@ kernel/drivers/spi/spi-bcm2835.ko
 kernel/drivers/spi/spi-bcm2835aux.ko
 kernel/drivers/spi/spi-bitbang.ko
 kernel/drivers/spi/spi-gpio.ko
+kernel/drivers/net/phy/realtek.ko
 kernel/drivers/net/mdio/mdio-bitbang.ko
 kernel/drivers/net/ethernet/microchip/enc28j60.ko
 kernel/drivers/net/ethernet/qualcomm/qca_7k_common.ko
 kernel/drivers/net/ethernet/qualcomm/qcaspi.ko
 kernel/drivers/net/ethernet/qualcomm/qcauart.ko
+kernel/drivers/net/ethernet/realtek/r8169.ko
 kernel/drivers/net/ethernet/wiznet/w5100.ko
 kernel/drivers/net/ethernet/wiznet/w5100-spi.ko
 kernel/drivers/net/hamradio/mkiss.ko
