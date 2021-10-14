@@ -7746,6 +7746,7 @@
 0x6c386a80	iptunnel_xmit	vmlinux	EXPORT_SYMBOL_GPL	
 0x40f7684e	inet_frag_destroy	vmlinux	EXPORT_SYMBOL	
 0x30c8efad	ipv4_sk_update_pmtu	vmlinux	EXPORT_SYMBOL_GPL	
+0x063e9296	rpi_firmware_put	vmlinux	EXPORT_SYMBOL_GPL	
 0x209fa9b0	rpi_firmware_get	vmlinux	EXPORT_SYMBOL_GPL	
 0x1ec6603a	of_i2c_get_board_info	vmlinux	EXPORT_SYMBOL_GPL	
 0x57a231cc	usb_decode_ctrl	vmlinux	EXPORT_SYMBOL_GPL	

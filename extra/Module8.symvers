@@ -8489,6 +8489,7 @@
 0x89f49635	inet_frag_destroy	vmlinux	EXPORT_SYMBOL	
 0x7cce7f4d	ipv4_sk_update_pmtu	vmlinux	EXPORT_SYMBOL_GPL	
 0x2e6f2ec2	rpi_firmware_get	vmlinux	EXPORT_SYMBOL_GPL	
+0x063e9296	rpi_firmware_put	vmlinux	EXPORT_SYMBOL_GPL	
 0x3fb433b4	of_i2c_get_board_info	vmlinux	EXPORT_SYMBOL_GPL	
 0x4531624f	usb_decode_ctrl	vmlinux	EXPORT_SYMBOL_GPL	
 0x877e1620	nfs_drop_inode	vmlinux	EXPORT_SYMBOL_GPL	
