@@ -1,0 +1,461 @@
+.TH RASPISTILL 1
+.
+.SH NAME
+raspistill \- takes still JPEG captures with the Pi Camera Module
+.
+.
+.SH SYNOPSIS
+.SY raspistill
+.OP \-3d mode
+.OP \-3dswap
+.OP \-a flags|text
+.OP \-ae size,fg,bg
+.OP \-ag value
+.OP \-awb mode
+.OP \-awbg b,r
+.OP \-bm
+.OP \-br value
+.OP \-cfx u:v
+.OP \-co value
+.OP \-cs camera
+.OP \-d ms
+.OP \-dec
+.OP \-dg value
+.OP \-dn screen
+.OP \-drc value
+.OP \-dt
+.OP \-e format
+.OP \-ev value
+.OP \-ex mode
+.OP \-f
+.OP \-fli mode
+.OP \-fp
+.OP \-fs num
+.OP \-g
+.OP \-gc
+.OP \-gps
+.OP \-gs scene
+.OP \-gw x,y,w,h
+.OP \-h size
+.OP \-hf
+.OP \-ifx effect
+.OP \-ISO value
+.OP \-k
+.OP \-l filename
+.OP \-md mode
+.OP \-mm mode
+.OP \-n
+.OP \-o filename
+.OP \-op opacity
+.OP \-p x,y,w,h
+.OP \-q quality
+.OP \-r
+.OP \-roi x,y,w,h
+.OP \-rot value
+.OP \-rs num
+.OP \-s
+.OP \-sa value
+.OP \-set
+.OP \-sh value
+.OP \-ss value
+.OP \-st
+.OP \-t ms
+.OP \-th x:y:q
+.OP \-tl ms
+.OP \-ts
+.OP \-v
+.OP \-vf
+.OP \-w size
+.OP \-x key=value
+.YS
+.
+.SY raspistill
+.OP \-?
+.SY raspistill
+.OP \-\-help
+.YS
+.
+.
+.SH DESCRIPTION
+.B raspistill
+is a command line utility for capturing still images from the Raspberry Pi
+Camera Module (any version). It has numerous options which can be used to
+customize the capture process, the preview display, or to perform more complex
+operations like time-lapse or triggered captures.
+.
+.
+.SH OPTIONS
+The options documented in the following sections are specific to the
+.B raspistill
+utility, or commonly used with it. For full details of the other options (which
+are common to all the camera utilities), please refer to the
+.BR raspicam (7)
+manual page.
+.
+.
+.SH GENERAL OPTIONS
+.
+.TP
+.BR \-? ", " \-\-help
+Display a concise description of all parameters
+.
+.TP
+.BR \-bm ", " \-\-burst
+Sets burst capture mode. This prevents the camera from returning to preview
+mode in between captures, meaning that captures can be taken closer together.
+.
+.TP
+.BR \-d ", " \-\-demo " [\fIms\fR]"
+This options cycles through the range of camera options. No capture is taken,
+and the demo will end at the end of the timeout period, irrespective of whether
+all the options have been cycled. The time between cycles should be specified
+as a millisecond value.
+.
+.TP
+.BR \-e ", " \-\-encoding " \fIformat\fR"
+Valid options are
+.IR jpg " (default),"
+.IR bmp ,
+.IR gif ", and"
+.IR png .
+Note that only the JPEG format
+.RI ( "-e jpg" )
+is hardware accelerated. All other image types will take much longer to save.
+Also note that the filename suffix is completely ignored when deciding the
+encoding of a file.
+.
+.TP
+.BR \-x ", " \-\-exif " \fIkey=value\fR"
+Allows the insertion of specific EXIF tags into the JPEG image. You can have up
+to 32 EXIF tag entries. This is useful for tasks like adding GPS metadata. For
+example, to set the longitude:
+.IP
+.EX
+--exif GPS.GPSLongitude=5/1,10/1,15/1
+.EE
+.IP
+would set the longitude to 5 degs, 10 minutes, 15 seconds. See
+.B [EXIF]
+documentation for more details on the range of tags available; the supported
+tags are as follows:
+.RS
+.TP
+.B IFD0.
+.TQ
+.B IFD1.
+ImageWidth, ImageLength, BitsPerSample, Compression, PhotometricInterpretation,
+ImageDescription, Make, Model, StripOffsets, Orientation, SamplesPerPixel,
+RowsPerString, StripByteCounts, XResolution, YResolution, PlanarConfiguration,
+ResolutionUnit, TransferFunction, Software, DateTime, Artist, WhitePoint,
+PrimaryChromaticities, JPEGInterchangeFormat, JPEGInterchangeFormatLength,
+YCbCrCoefficients, YCbCrSubSampling, YCbCrPositioning, ReferenceBlackWhite,
+Copyright
+.TP
+.B EXIF.
+ExposureTime, FNumber, ExposureProgram, SpectralSensitivity, ISOSpeedRatings,
+OECF, ExifVersion, DateTimeOriginal, DateTimeDigitized,
+ComponentsConfiguration, CompressedBitsPerPixel, ShutterSpeedValue,
+ApertureValue, BrightnessValue, ExposureBiasValue, MaxApertureValue,
+SubjectDistance, MeteringMode, LightSource, Flash, FocalLength, SubjectArea,
+MakerNote, UserComment, SubSecTime, SubSecTimeOriginal, SubSecTimeDigitized,
+FlashpixVersion, ColorSpace, PixelXDimension, PixelYDimension,
+RelatedSoundFile, FlashEnergy, SpatialFrequencyResponse, FocalPlaneXResolution,
+FocalPlaneYResolution, FocalPlaneResolutionUnit, SubjectLocation,
+ExposureIndex, SensingMethod, FileSource, SceneType, CFAPattern,
+CustomRendered, ExposureMode, WhiteBalance, DigitalZoomRatio,
+FocalLengthIn35mmFilm, SceneCaptureType, GainControl, Contrast, Saturation,
+Sharpness, DeviceSettingDescription, SubjectDistanceRange, ImageUniqueID
+.TP
+.B GPS.
+GPSVersionID, GPSLatitudeRef, GPSLatitude, GPSLongitudeRef, GPSLongitude,
+GPSAltitudeRef, GPSAltitude, GPSTimeStamp, GPSSatellites, GPSStatus,
+GPSMeasureMode, GPSDOP, GPSSpeedRef, GPSSpeed, GPSTrackRef, GPSTrack,
+GPSImgDirectionRef, GPSImgDirection, GPSMapDatum, GPSDestLatitudeRef,
+GPSDestLatitude, GPSDestLongitudeRef, GPSDestLongitude, GPSDestBearingRef,
+GPSDestBearing, GPSDestDistanceRef, GPSDestDistance, GPSProcessingMethod,
+GPSAreaInformation, GPSDateStamp, GPSDifferential
+.TP
+.B EINT.
+InteroperabilityIndex, InteroperabilityVersion, RelatedImageFileFormat,
+RelatedImageWidth, RelatedImageLength
+.RE
+.
+.TP
+.BR \-fp ", " \-\-fullpreview
+This runs the preview using the full resolution capture mode. Maximum frames
+per second in this mode is 15fps, and the preview will have the same field of
+view as the capture. Captures should happen more quickly, as no mode change
+should be required. This feature is currently under development.
+.
+.TP
+.BR \-h ", " \-\-height " \fIsize\fR"
+Set the image height to
+.IR size .
+.
+.TP
+.BR \-k ", " \-\-keypress
+The camera is run for the requested time
+.RI ( \-t ),
+and a capture can be initiated throughout that time by pressing the Enter key.
+Pressing X then Enter will exit the application before the timeout is reached.
+If the timeout is set to 0, the camera will run indefinitely until the user
+presses X then Enter. Using the verbose option
+.RI ( \-v )
+will display a prompt asking for user input, otherwise no prompt is displayed.
+.
+.TP
+.BR \-l ", " \-\-latest " \fIfilename\fR"
+Makes a file system link under this name to the latest frame.
+.
+.TP
+.BR \-o ", " \-\-output " \fIfilename\fR"
+Specifies the output filename. If not specified, no file is saved.
+If the filename is \(lq\-\(rq, then all output is send to stdout.
+.
+.TP
+.BR \-q ", " \-\-quality " \fIvalue\fR"
+Sets the JPEG compression quality from 0 to 100. 100 is nearly uncompressed, 75
+is a good all-round value.
+.
+.TP
+.BR \-r ", " \-\-raw
+This option inserts the raw Bayer data from the camera into the JPEG metadata.
+.
+.TP
+.BR \-rs ", " \-\-restart " \fInum\fR"
+Sets the JPEG restart marker interval to a specific value. Can be useful for
+lossy transport streams because it allows a broken JPEG file to still be
+partially displayed.
+.
+.TP
+.BR \-s ", " \-\-signal
+The camera is run for the requested time
+.RI ( -t ),
+and a capture can be initiated throughout that time by sending a USR1 signal to
+the camera process. This can be done using the
+.BR killall (1)
+command. For example:
+.IP
+.EX
+killall -USR1 raspistill
+.EE
+.
+.TP
+.BR \-th ", " \-\-thumb " \fIx:y:q\fR"
+Allows specification of the thumbnail image inserted into the JPEG file. If not
+specified, defaults are a size of 64x48 at quality 35.
+.
+If
+.I \-\-thumb none
+is specified, no thumbnail information will be placed in the file. This reduces
+the file size slightly.
+.
+.TP
+.BR \-t ", " \-\-timeout " \fIms\fR"
+The program will run for the specified length of time, in milliseconds.
+It then takes the capture and saves it if an output is specified. If a timeout
+value is not specified, then it is set to 5 seconds
+.RI ( "\-t 5000" ).
+Note that low values (less than 500ms, although it can depend on other
+settings) may not give enough time for the camera to start up and provide
+enough frames for the automatic algorithms like AWB and AGC to provide accurate
+results.
+.
+If set to 0, the preview will run indefinitely, until stopped with Ctrl-C. In
+this case no capture is made. 
+.
+.TP
+.BR \-v ", " \-\-verbose
+Outputs debugging/information messages during the program run.
+.
+.TP
+.BR \-w ", " \-\-width " \fIsize\fR"
+Set the image width to
+.IR size .
+.
+.
+.SH TIMELAPSE OPTIONS
+.
+.TP
+.BR \-tl ", " \-\-timelapse " \fIms\fR"
+The specific value is the time between shots in milliseconds. Note that you
+should specify
+.I %04d
+at the point in the filename where you want a frame count number to appear. So,
+for example, the code below will produce a capture every 2 seconds, over a
+total period of 30s, named \(lqimage0001.jpg\(rq, \(lqimage0002.jpg\(rq and so
+on, through to \(lqimage0015.jpg\(rq:
+.IP
+.EX
+-t 30000 -tl 2000 -o image%04d.jpg
+.EE
+.IP
+Note that the
+.I %04d
+indicates a 4-digit number, with leading zeroes added to make the required
+number of digits. So, for example,
+.I %08d
+would result in an 8-digit number.
+.
+If a timelapse value of 0 is entered, the application will take pictures as
+fast as possible. Note that there's an minimum enforced pause of 30ms between
+captures to ensure that exposure calculations can be made.
+.
+.TP
+.BR \-dt ", " \-\-datetime
+Instead of a simple frame number, the timelapse
+.RI ( \-tl )
+filenames will use a date/time value of the format mmddHHMMSS, where mm is the
+month, dd is the day of the month, HH is the hour, MM is the minute, and SS is
+the second.
+.
+.TP
+.BR \-fr ", " \-\-framestart " \fInum\fR"
+Specifies the first frame number in the timelapse
+.RI ( \-tl ).
+Useful if you have already saved a number of frames, and want to start again at
+the next frame.
+.
+.TP
+.BR \-ts ", " \-\-timestamp
+Instead of a simple frame number, the timelapse
+.RI ( \-tl )
+file names will use a single number which is the Unix timestamp, i.e. the
+seconds since 1970.
+.
+.
+.SH GL OPTIONS
+.
+.TP
+.BR \-g ", " \-\-gl
+Draw preview to texture instead of using video render component.
+.
+.TP
+.BR \-gc ", " \-\-glcapture
+Capture the GL frame-buffer instead of the camera image.
+.
+.TP
+.BR \-gs ", " \-\-glscene " \fIscene\fR"
+Select the GL scene which can be
+.IR square ,
+.IR teapot ,
+.IR mirror ,
+.IR yuv ,
+.IR sobel ", or"
+.IR vcsm_square .
+.
+.TP
+.BR \-gw ", " \-\-glwin " \fIx,y,w,h\fR"
+Specifies the GL window settings as an
+.I x,y
+location and a width and height.
+.
+.
+.SH EXIT STATUS
+.
+.IP 0
+Application ran successfully
+.RB ( EX_OK )
+.IP 64
+Bad command line parameter
+.RB ( EX_USAGE )
+.IP 70
+Software or camera error
+.RB ( EX_SOFTWARE )
+.IP 130
+Application terminated by Ctrl-C
+.
+.
+.SH EXAMPLES
+.
+By default, captures are done at the highest resolution supported by the
+sensor. This can be changed using the
+.I \-w
+and
+.I \-h
+command line options.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg
+Take a default capture after 2s (times are specified in milliseconds) on the
+viewfinder, saving in image.jpg.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-w 640 \-h 480
+Take a capture at a different resolution.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-q 5
+Reduce the quality considerably to reduce file size.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-p 100,100,300,200
+Force the preview to appear at coordinate 100,100, with width 300 pixels and
+height 200 pixels.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-n
+Disable the preview entirely.
+.
+.TP
+.B raspistill \-t 2000 \-o image.png –e png
+Save the image as a PNG file (lossless compression, but slower than JPEG). Note
+that the filename suffix is ignored when choosing the image encoding.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-x IFD0.Artist=Boris \-x GPS.GPSAltitude=1235/10
+Add some EXIF information to the JPEG. This sets the Artist tag name to Boris,
+and the GPS altitude to 123.5m. Note that if setting GPS tags you should set as
+a minimum GPSLatitude, GPSLatitudeRef, GPSLongitude, GPSLongitudeRef,
+GPSAltitude, and GPSAltitudeRef.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-ifx emboss
+Set an emboss image effect.
+.
+.TP
+.B raspistill \-t 2000 \-o image.jpg \-cfx 128:128
+Set the U and V channels of the YUV image to specific values (128:128 produces
+a greyscale image).
+.
+.TP
+.B raspistill \-t 2000
+Run preview for 2s, with no saved image.
+.
+.TP
+.B raspistill \-t 600000 \-tl 10000 \-o image_num_%03d_today.jpg \-l latest.jpg
+Take a time-lapse picture, every 10 seconds for 10 minutes (10 minutes =
+600000ms), naming the files \(lqimage_num_001_today.jpg\(rq,
+\(lqimage_num_002_today.jpg\(rq and so on, with the latest picture also
+available under the name \(lqlatest.jpg\(rq.
+.
+.TP
+.B raspistill \-t 2000 \-o \-
+Take a picture and send the image data to stdout.
+.
+.TP
+.B raspistill \-t 2000 \-o \- > my_file.jpg
+Take a picture and send the image data to a file.
+.
+.TP
+.B raspistill \-t 0 \-k \-o my_pics%02d.jpg
+Run the camera forever, taking a picture when Enter is pressed.
+.
+.
+.SH SEE ALSO
+.BR raspicam (7),
+.BR raspivid (1),
+.BR raspividyuv (1),
+.BR raspiyuv (1),
+.BR vcgencmd (1),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [EXIF]
+https://en.wikipedia.org/wiki/Exif
+.
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/\:documentation/\:raspbian/\:applications/\:camera.md

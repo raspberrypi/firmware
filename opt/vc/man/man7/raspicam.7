@@ -1,0 +1,691 @@
+.TH RASPICAM 7
+.
+.SH NAME
+raspicam \- the Raspberry Pi Camera Module and its utilities
+.
+.
+.SH DESCRIPTION
+.
+There are four applications provided:
+.BR raspistill (1),
+.BR raspivid (1),
+.BR raspiyuv (1)
+and
+.BR raspividyuv (1).
+.BR raspistill (1)
+and
+.BR raspiyuv (1)
+are very similar and are intended for capturing images;
+.BR raspivid (1)
+and
+.BR raspvidyuv (1)
+are for recording video.
+The utilities share many common options, which are documented in the sections
+.BR "HARDWARE OPTIONS" ,
+.BR "PREVIEW OPTIONS" ,
+.BR "IMAGE OPTIONS" ,
+and
+.BR "STEREOSCOPIC (3D) OPTIONS"
+below. Within each section, options are listed alphabetically (by the
+long-option's title).
+.PP
+All the applications are driven from the command line, and written to take
+advantage of the MMAL API which runs over OpenMAX. The MMAL API provides an
+easier to use system than that presented by OpenMAX. Note that MMAL is a
+Broadcom-specific API used only on VideoCore 4 systems.
+.PP
+The applications use up to four OpenMAX (MMAL) components: camera, preview,
+encoder, and null_sink. All applications use the camera component;
+.BR raspistill (1)
+uses the Image Encode component;
+.BR raspivid (1)
+uses the Video Encode component; and
+.BR raspiyuv (1)
+and
+.BR raspividyuv (1)
+don't use an encoder, sending their YUV or RGB output directly from the
+camera component to file.
+.PP
+The preview display is optional, but can be used full-screen or directed to a
+specific rectangular area on the display. If preview is disabled, the null_sink
+component is used to 'absorb' the preview frames. The camera must produce
+preview frames even if these aren't required for display, as they're used for
+calculating exposure and white balance settings.
+.PP
+In addition, it's possible to omit the filename option (in which case the
+preview is displayed but no file is written), or to redirect all output to
+stdout.
+.
+.
+.SH GETTING STARTED
+.
+.B Warning:
+Cameras are sensitive to static. Earth yourself prior to handling the PCB. A
+sink tap or similar should suffice if you don’t have an earthing strap.
+.PP
+The camera board attaches to the Raspberry Pi via a 15-way ribbon cable. There
+are only two connections to make: the ribbon cable needs to be attached to the
+camera PCB, and to the Raspberry Pi itself. You need to get the cable the right
+way round, or the camera will not work. On the camera PCB, the blue backing on
+the cable should face away from the PCB, and on the Raspberry Pi it should face
+towards the Ethernet connection (or where the Ethernet connector would be if
+you're using a model A+).
+.PP
+Although the connectors on the PCB and the Pi are different, they work in a
+similar way. On the Raspberry Pi itself, pull up the tabs on each end of the
+connector. It should slide up easily, and be able to pivot around slightly.
+Fully insert the ribbon cable into the slot, ensuring it is set straight, then
+gently press down the tabs to clip it into place. The camera PCB connector also
+requires you to pull the tabs away from the board, gently insert the cable,
+then push the tabs back. The PCB connector can be a little more awkward than
+the one on the Pi itself.
+.
+.
+.SH TROUBLESHOOTING
+.
+If the Camera Module isn't working correctly, there are number of things to
+try:
+.IP \(bu 2
+Is the ribbon cable attached to the Camera Serial Interface (CSI), not the
+Display Serial Interface (DSI)? The ribbon connector will fit into either port.
+The Camera port is located near the HDMI connector.
+.
+.IP \(bu
+Are the ribbon connectors all firmly seated, and are they the right way round?
+They must be straight in their sockets.
+.
+.IP \(bu
+Is the Camera Module connector, between the smaller black Camera Module itself
+and the PCB, firmly attached? Sometimes this connection can come loose during
+transit or when putting the Camera Module in a case. Using a fingernail, flip
+up the connector on the PCB, then reconnect it with gentle pressure. It engages
+with a very slight click. Don't force it; if it doesn't engage, it's probably
+slightly misaligned.
+.
+.IP \(bu
+Have
+.I sudo apt update
+and
+.I sudo apt full-upgrade
+been run?
+.
+.IP \(bu
+Is
+.I start_x=1
+present in the \(lqconfig.txt\(rq boot configuration?
+.
+.IP \(bu
+Is your power supply sufficient? The Camera Module adds about 200-250mA to the
+power requirements of your Raspberry Pi.
+.
+.PP
+Try the following in response to specific error messages:
+.
+.TP
+.B Error : raspistill/raspivid command not found
+This probably means your update/upgrade failed in some way. Try it again.
+.
+.TP
+.B Error : ENOMEM
+The Camera Module is not starting up. Check all connections again.
+.
+.TP
+.B Error : ENOSPC
+The Camera Module is probably running out of GPU memory. Check
+\(lqconfig.txt\(rq on the boot partition. The
+.I gpu_mem
+option should be at least 128.
+.
+.
+.SH HARDWARE OPTIONS
+.
+.TP
+.BR \-cs ", " \-\-camselect " \fIcamera\fR"
+Selects the camera to use on a multi-camera system (currently only Pi
+Compute Modules).
+Use 0 or 1.
+.
+.TP
+.BR \-md ", " \-\-mode " \fImode\fR"
+Sets a specified sensor mode, disabling the automatic selection.
+Possible values depend on the version of the Camera Module being used: 
+.IP
+Version 1.x (OV5647)
+.TS
+tab(|);
+l l l l l l .
+Mode|Size|Aspect|Framerates|FOV|Binning
+\_|\_|\_|\_|\_|\_
+.T&
+n c s s s s .
+0|--- automatic selection ---
+.T&
+n l l l l l .
+1|1920 x 1080|16:9|1 - 30fps|Partial|None
+2|2592 x 1944|4:3|1 - 15fps|Full|None
+3|2592 x 1944|4:3|0.1666 - 1fps|Full|None
+4|1296 x 972|4:3|1 - 42fps|Full|2 x 2
+5|1296 x 730|16:9|1 - 49fps|Full|2 x 2
+6|640 x 480|4:3|42.1 - 60fps|Full|2 x 2 + skip
+7|640 x 480|4:3|60.1 - 90fps|Full|2 x 2 + skip
+.TE
+.IP
+Version 2.x (IMX219)
+.TS
+tab(|);
+l l l l l l .
+Mode|Size|Aspect|Framerates|FOV|Binning
+\_|\_|\_|\_|\_|\_
+.T&
+n c s s s s .
+0|--- automatic selection ---
+.T&
+n l l l l l .
+1|1920 x 1080|16:9|0.1 - 30fps|Partial|None
+2|3280 x 2464|4:3|0.1 - 15fps|Full|None
+3|3280 x 2464|4:3|0.1 - 15fps|Full|None
+4|1640 x 1232|4:3|0.1 - 40fps|Full|2 x 2
+5|1640 x 922|16:9|0.1 - 40fps|Full|2 x 2
+6|1280 x 720|16:9|40 - 90fps|Partial|2 x 2
+7|640 x 480|4:3|40 - 200fps*|Partial|2 x 2
+.TE
+.IP
+* For frame rates over 120fps, it is necessary to turn off automatic exposure
+and gain control using
+.IR "-ex off" .
+Doing so should achieve the higher frame rates, but exposure time and gains
+will need to be set to fixed values supplied by the user.
+.IP
+HQ Camera (IMX477)
+.TS
+tab(|);
+l l l l l l .
+Mode|Size|Aspect|Framerates|FOV|Binning
+\_|\_|\_|\_|\_|\_
+.T&
+n c s s s s .
+0|--- automatic selection ---
+.T&
+n l l l l l .
+1|2028 x 1080|169:90|0.1 - 50fps|Partial|2 x 2
+2|2028 x 1520|4:3|0.1 - 50fps|Full|2 x 2
+3|4056 x 3040|4:3|0.005 - 10fps|Full|None
+4|1012 x 760|4:3|50.1 - 120fps|Full|4 x 4
+.TE
+.
+.TP
+.BR \-gps ", " \-\-gpsdexif
+Applies real-time EXIF information from any attached GPS dongle (using GSPD) to
+the image; requires
+.I libgps.so
+to be installed.
+.
+.
+.SH PREVIEW OPTIONS
+.
+.TP
+.BR \-dn ", " \-\-dispnum " \fIscreen\fR"
+Specifies which display the camera preview should appear on, using dispmanx /
+tvservice numbering (see the output of
+.I tvservice -l
+or the
+.I display_power
+command under
+.BR vcgencmd (1)
+for more information).
+.
+.TP
+.BR \-f ", " \-\-fullscreen
+Forces the preview window to use the whole screen. Note that the aspect ratio
+of the incoming image will be retained, so there may be bars on some edges.
+.
+.TP
+.BR \-n ", " \-\-nopreview
+Disables the preview window completely. Note that even though the preview is
+disabled, the camera will still be producing frames, so will be using power.
+.
+.TP
+.BR \-op ", " \-\-opacity " \fIvalue\fR"
+Sets the opacity of the preview window. 0 = invisible, 255 = fully opaque.
+.
+.TP
+.BR \-p ", " \-\-preview " \fIx,y,w,h\fR"
+Allows the user to define the size of the preview window and its location on
+the screen. Note this will be superimposed over the top of any other
+windows/graphics.
+.
+.
+.SH IMAGE OPTIONS
+.
+.TP
+.BR \-a ", " \-\-annotate " \fIflags|text\fR"
+Adds some text and/or metadata to the picture.
+.IP
+Metadata is indicated using a bitmask notation, so add them together to show
+multiple parameters. For example, 12 will show time (4) and date (8), since
+4+8=12.
+.IP
+Text may include date/time placeholders by using the '%' character, as used by
+.BR strftime (3).
+.RS
+.TP
+.B \-a 4
+Displays the time, "20:09:33"
+.TP
+.B \-a 8
+Displays the date, "10/28/15"
+.TP
+.B \-a 16
+Shutter settings
+.TP
+.B \-a 32
+CAF settings
+.TP
+.B \-a 64
+Gain settings
+.TP
+.B \-a 128
+Lens settings
+.TP
+.B \-a 256
+Motion settings
+.TP
+.B \-a 512
+Frame number
+.TP
+.B \-a 1024
+Black background
+.TP
+.B \-a "ABC"
+Show the specified text, "ABC"
+.TP
+.B \-a "ABC %Y\-%m\-%d"
+Show the specified text, "ABC %Y\-%m\-%d"
+.TP
+.B \-a 4 \-a "ABC %Y\-%m\-%d %X"
+Displays a formatted timestamp, "ABC 2015\-10\-28 20:09:33"
+.TP
+.B \-a 8 \-a "ABC %Y\-%m\-%d %X"
+Also displays a formatted timestamp, "ABC 2015\-10\-28 20:09:33"
+.RE
+.
+.TP
+.BR \-ae ", " \-\-annotateex " \fIsize,fg,bg\fR"
+Specifies annotation size, text color, and background color. Colors are in
+hex YUV format.
+Size ranges from 6 - 160; default is 32. Asking for an invalid size should give
+you the default.
+.IP
+For example, to obtain size 32 white text on a black background:
+.IP
+.EX
+-ae 32,0xff,0x808000 -a "Annotation text"
+.EE
+.IP
+Or for size 10 black text on a white background:
+.IP
+.EX
+-ae 10,0x00,0x8080FF -a "Annotation text"
+.EE
+.
+.TP
+.BR \-ag ", " \-\-analoggain " \fIvalue\fR"
+Sets the analog gain value directly on the sensor (floating point value from
+1.0 to 8.0 for the OV5647 sensor on V1 Camera Module, and 1.0 to 12.0 for the
+IMX219 sensor on V1 Camera Module and the IMX447 on the HQ Camera).
+.
+.TP
+.BR \-awb ", " \-\-awb " \fImode\fR"
+Modes for which color temperature ranges (in Kelvin) are available have these
+settings in brackets.
+.RS
+.TP
+.B off
+turn off white balance calculation
+.TP
+.B auto
+automatic mode (default)
+.TP
+.B sun
+sunny mode (between 5000K and 6500K)
+.TP
+.B cloud
+cloudy mode (between 6500K and 12000K)
+.TP
+.B shade
+shade mode
+.TP
+.B tungsten
+tungsten lighting mode (between 2500K and 3500K)
+.TP
+.B fluorescent
+fluorescent lighting mode (between 2500K and 4500K)
+.TP
+.B incandescent
+incandescent lighting mode
+.TP
+.B flash
+flash mode
+.TP
+.B horizon
+horizon mode
+.TP
+.B greyworld
+used on the NoIR camera to fix incorrect AWB results due to the lack of the IR
+filter
+.RE
+.IP
+Note that not all of these settings may be implemented, depending on camera
+type.
+.
+.TP
+.BR \-awbg ", " \-\-awbgains " \fIblue,red\fR"
+Sets blue and red gains (as floating point numbers) to be applied when
+.I \-awb off
+is set e.g.
+.I \-awbg 1.5,1.2
+.
+.TP
+.BR \-br ", " \-\-brightness " \fIvalue\fR"
+Sets the brightness of the image, from 0 to 100. 50 is the default.
+.
+.TP
+.BR \-cfx ", " \-\-colfx " \fIu:v\fR"
+The supplied U and V parameters (range 0 - 255) are applied to the U and Y
+channels of the image. For example,
+.I \-\-colfx 128:128
+should result in a monochrome image.
+.
+.TP
+.BR \-co ", " \-\-contrast " \fIvalue\fR"
+Sets the contrast of the image, from -100 to 100. 0 is the default.
+.
+.TP
+.BR \-dg ", " \-\-digitalgain " \fIvalue\fR"
+Sets the digital gain value applied by the ISP (floating point value from 1.0
+to 64.0, but values over about 4.0 will produce overexposed images).
+.
+.TP
+.BR \-drc ", " \-\-drc " \fIvalue\fR"
+Dynamic range control (DRC) changes the images by increasing the range of dark
+areas, and decreasing the brighter areas. This can improve the image in low
+light areas. Valid values are
+.IR off " (default), " low ", " med ", or " high.
+.
+.TP
+.BR \-ev ", " \-\-ev " \fIvalue\fR"
+Sets the exposure value compensation, from -10 to 10. 0 is the default.
+.
+.TP
+.BR \-ex ", " \-\-exposure " \fImode\fR"
+Sets the exposure mode of the camera. Possible options are:
+.RS
+.TP
+.B auto
+use automatic exposure mode (default)
+.TP
+.B night
+select setting for night shooting
+.TP
+.B nightpreview
+<undocumented>
+.TP
+.B backlight
+select setting for backlit subject
+.TP
+.B spotlight
+<undocumented>
+.TP
+.B sports
+select setting for sports (fast shutter etc.)
+.TP
+.B snow
+select setting optimized for snowy scenery
+.TP
+.B beach
+select setting optimized for beach
+.TP
+.B verylong
+select setting for long exposures
+.TP
+.B fixedfps
+constrain fps to a fixed value
+.TP
+.B antishake
+select "antishake" mode
+.TP
+.B fireworks
+select setting optimized for fireworks
+.RE
+.IP
+Note that not all of these settings may be implemented, depending on camera
+tuning.
+.
+.TP
+.BR \-fli ", " \-\-flicker " \fImode\fR"
+Set a mode to compensate for lights flickering at the mains frequency, which
+can be seen as a dark horizontal band across an image. Flicker avoidance locks
+the exposure time to a multiple of the mains flicker frequency (8.33ms for
+60Hz, or 10ms for 50Hz). This means that images can be noisier as the control
+algorithm has to increase the gain instead of exposure time should it wish for
+an intermediate exposure value.
+.I auto
+can be confused by external factors, therefore it is preferable to leave this
+setting off unless actually required.
+.IP
+Possible options are:
+.RS
+.TP
+.B off
+turn off flicker avoidance
+.TP
+.B auto
+automatically detect mains frequency
+.TP
+.B 50hz
+set avoidance at 50Hz
+.TP
+.B 60hz
+set avoidance at 60Hz
+.RE
+.
+.TP
+.BR \-hf ", " \-\-hflip
+Flips the preview and saved image horizontally.
+.
+.TP
+.BR \-ifx ", " \-\-imxfx " \fIeffect\fR"
+Set an effect to be applied to the image:
+.RS
+.TP
+.B none
+no effect (default)
+.TP
+.B negative
+invert the image colors
+.TP
+.B solarise
+solarize the image
+.TP
+.B posterise
+posterize the image
+.TP
+.B whiteboard
+whiteboard effect
+.TP
+.B blackboard
+blackboard effect
+.TP
+.B sketch
+sketch effect
+.TP
+.B denoise
+denoise the image
+.TP
+.B emboss
+emboss the image
+.TP
+.B oilpaint
+oil paint effect
+.TP
+.B hatch
+hatch sketch effect
+.TP
+.B gpen
+graphite sketch effect
+.TP
+.B pastel
+pastel effect
+.TP
+.B watercolour
+watercolor effect
+.TP
+.B film
+film grain effect
+.TP
+.B blur
+blur the image
+.TP
+.B saturation
+saturate the image color
+.TP
+.B colourswap
+not fully implemented
+.TP
+.B washedout
+not fully implemented
+.TP
+.B colourpoint
+not fully implemented
+.TP
+.B colourbalance
+not fully implemented
+.TP
+.B cartoon
+not fully implemented
+.RE
+.IP
+Note that not all of these settings may be available in all circumstances.
+.
+.TP
+.BR \-ISO ", " \-\-ISO " \fIvalue\fR"
+Sets the ISO to be used for captures, from 100 to 800. The default is
+automatic.
+.
+.TP
+.BR \-mm ", " \-\-metering " \fImode\fR"
+Specify the metering mode used for the preview and capture:
+.RS
+.TP
+.B average
+average the whole frame for metering
+.TP
+.B spot
+spot metering in the center of the frame
+.TP
+.B backlit
+assume a backlit image
+.TP
+.B matrix
+matrix metering
+.RE
+.
+.TP
+.BR \-roi ", " \-\-roi " \fIx,y,w,h\fR"
+Allows the specification of the area of the sensor to be used as the source for
+the preview and capture. This is defined as x,y for the top-left corner, and a
+width and height, with all values in normalised coordinates (0.0 - 1.0). So, to
+set a ROI at halfway across and down the sensor, and a width and height of a
+quarter of the sensor, use:
+.IP
+.EX
+-roi 0.5,0.5,0.25,0.25
+.EE
+.
+.TP
+.BR \-rot ", " \-\-rotation " \fIvalue\fR"
+Sets the rotation of the image in the viewfinder and resulting image. This can
+take any value from 0 upwards, but due to hardware constraints only 0, 90, 180,
+and 270 degree rotations are supported.
+.
+.TP
+.BR \-sa ", " \-\-saturation " \fIvalue\fR"
+Sets the color saturation of the image, from -100 to 100. 0 is the default.
+.
+.TP
+.BR \-set ", " \-\-settings
+Retrieves the current camera settings and writes them to stdout.
+.
+.TP
+.BR \-sh ", " \-\-sharpness " \fIvalue\fR"
+Sets the sharpness of the image, from -100 to 100. 0 is the default.
+.
+.TP
+.BR \-ss ", " \-\-shutter " \fIvalue\fR"
+Sets the shutter open time to the specified value (in microseconds). Shutter
+speed limits are as follows:
+.TS
+tab(|);
+l l .
+Camera Model|Max (microseconds)
+\_|\_
+.T&
+l n .
+Version 1.x (OV5647)|6000000\& (6s)
+Version 2.x (IMX219)|10000000\& (10s)
+HQ (IMX477)|200000000\& (200s)
+.TE
+.IP
+Using values above these maximums will result in undefined behaviour.
+.
+.TP
+.BR \-st ", " \-\-stats
+Force recomputation of statistics on stills capture pass. Digital gain and AWB
+are recomputed based on the actual capture frame statistics, rather than the
+preceding preview frame.
+.
+.TP
+.BR \-vf ", " \-\-vflip
+Flips the preview and saved image horizontally.
+.
+.TP
+.BR \-vs ", " \-\-vstab
+In video mode only, turns on video stabilisation.
+.
+.
+.SH STEREOSCOPIC (3D) OPTIONS
+.
+.TP
+.BR \-3dswap ", " \-\-3dswap
+Swaps the camera order used in stereoscopic imaging;
+.B NOTE:
+currently not working.
+.
+.TP
+.BR \-dec ", " \-\-decimate
+Halves the width and height of the stereo image.
+.
+.TP
+.BR \-3d ", " \-\-stereo " \fImode\fR"
+Select the specified stereo imaging mode;
+.I sbs
+selects side-by-side mode,
+.I tb
+selects top/bottom mode;
+.I off
+turns off stereo mode (the default).
+.
+.
+.SH SEE ALSO
+.BR raspistill (1),
+.BR raspiyuv (1),
+.BR raspivid (1),
+.BR raspividyuv (1),
+.BR vcgencmd (1),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/\:documentation/\:raspbian/\:applications/\:camera.md

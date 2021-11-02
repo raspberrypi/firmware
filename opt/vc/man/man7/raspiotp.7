@@ -1,0 +1,228 @@
+.TH RASPIOTP 7
+.
+.SH NAME
+raspiotp \- the Raspberry Pi OTP register bits
+.
+.
+.SH DESCRIPTION
+.
+All SoCs used by the Raspberry Pi range have a inbuilt One-Time Programmable
+(OTP) memory block. 
+It is 66 32-bit values long, although only a few locations have
+factory-programmed data.
+The
+.BR vcgencmd (1)
+utility can be used to display the contents of the OTP like so:
+.PP
+.EX
+$ \fBvcgencmd otp_dump\fR
+.EE
+.
+.
+.SH OTP REGISTERS
+This list contains the publicly available information on the registers. If a
+register or bit is not defined here, then it is not public.
+.
+.TP
+.B 17
+bootmode register
+.RS
+.TP
+.B Bit 1
+sets the oscillator frequency to 19.2MHz
+.TP
+.B Bit 3
+enables pull ups on the SDIO pins
+.TP
+.B Bit 19
+enables GPIO bootmode
+.TP
+.B Bit 20
+sets the bank to check for GPIO bootmode
+.TP
+.B Bit 21
+enables booting from SD card
+.TP
+.B Bit 22
+sets the bank to boot from
+.TP
+.B Bit 28
+enables USB device booting
+.TP
+.B Bit 29
+enables USB host booting (ethernet and mass storage)
+.RE
+.
+.TP
+.B 18
+copy of bootmode register
+.
+.TP
+.B 28
+serial number
+.
+.TP
+.B 29
+~(serial number)
+.
+.TP
+.B 30
+revision code;
+.
+.BR raspirev (7)
+.TP
+.B 36-43
+customer OTP values (see
+.B INDUSTRIAL USE
+below)
+.
+.TP
+.B 45
+MPG2 decode key
+.
+.TP
+.B 46
+WVC1 decode key
+.
+.TP
+.B 64-65
+MAC address; if set, system will use this in preference to the automatically generated address based on the serial number
+.
+.TP
+.B 66
+advanced boot register
+.RS
+.TP
+.B Bits 0-6
+GPIO for ETH_CLK output pin
+.TP
+.B Bit 7
+enables ETH_CLK output
+.TP
+.B Bits 8-14
+GPIO for LAN_RUN output pin
+.TP
+.B Bit 15
+enables LAN_RUN output
+.TP
+.B Bit 24
+extends USB HUB timeout parameter
+.TP
+.B Bit 25
+ETH_CLK frequency: 0=25MHz, 1=24MHz
+.RE
+.
+.
+.SH INDUSTRIAL USE
+The Raspberry Pi is often used as part of another product. This section
+describes some extra facilities available to use other capabilities of the Pi.
+.
+.SS Customer OTP settings
+There are a number of OTP values that can be used. To see a list of all the OTP
+values, you can use:
+.PP
+.EX
+$ \fBvcgencmd otp_dump\fR
+.EE
+.PP
+In register locations 36 to 43 (inclusive), there are eight rows of 32 bits
+available for the customer (detailed in
+.B OTP REGISTERS
+above).
+.PP
+To program these bits, you will need to use the vcmailbox. This is a Linux
+driver interface to the firmware which will handle the programming of the rows.
+To do this, please refer to the documentation at [MAILBOX], and the
+.BR vcmailbox (1)
+example application. For example:
+.PP
+.EX
+$ \fBvcmailbox 0x00010004 8 8 0 0\fR
+0x00000020 0x80000000 0x00010004 0x00000008 0x800000008 0xnnnnnnnn
+0x00000000 0x00000000
+.EE
+.PP
+The above uses the
+.B GET_BOARD_SERIAL
+tag (detailed under [MAILBOX]) with a request size of 8 bytes and response
+size of 8 bytes (sending two integers for the request 0, 0). The response to
+this will be two integers (0x00000020 and 0x80000000) followed by the tag code,
+the request length, the response length (with the 31st bit set to indicate that
+it is a response) then the 64 bit serial number (where the MS 32bits are always
+0).
+.PP
+To set the customer OTP values you will need to use the
+.B SET_CUSTOMER_OTP
+(0x38021) tag as follows:
+.PP
+.EX
+$ \fBvcmailbox 0x00038021 \fI[8+rows*4] [8+rows*4] [start] [rows] [value]\fR ...
+.EE
+.TP
+.B start
+the first row to program from 0-7
+.TP
+.B rows
+number of rows to program
+.TP
+.B value
+each value to program
+.PP
+So, to program OTP customer rows 4, 5, and 6 to 0x11111111, 0x22222222,
+0x33333333 respectively, you would use:
+.PP
+.EX
+$ \fBvcmailbox 0x00038021 20 20 4 3 0x11111111 0x22222222 0x33333333\fR
+.EE
+.PP
+This will then program rows 40, 41, and 42. To read the values back, you can
+use:
+.PP
+.EX
+$ \fBvcmailbox 0x00030021 20 20 4 3 0 0 0\fR
+0x0000002c 0x80000000 0x00030021 0x00000014 0x80000014 0x00000000
+0x00000003 0x11111111 0x22222222 0x33333333
+.EE
+.PP
+If you'd like to integrate this functionality into your own code, you should be
+able to achieve this by using the vcmailbox.c code as an example.
+.
+.SS Locking the OTP changes
+It is possible to lock the OTP changes to avoid them being edited again. This
+can be done using a special argument with the OTP write mailbox:
+.PP
+.EX
+$ \fBvcmailbox 0x00038021 8 8 0xffffffff 0xaffe0000\fR
+.EE
+.PP
+Once locked, the customer OTP values can no longer be altered. Note that this
+locking operation is irreversible.
+.
+.SS Making customer OTP bits unreadable
+It is possible to prevent the customer OTP bits from being read at all. This
+can be done using a special argument with the OTP write mailbox:
+.PP
+.EX
+$ \fBvcmailbox 0x00038021 8 8 0xffffffff 0xaffebabe\fR
+.EE
+.PP
+This operation is unlikely to be useful for the vast majority of users, and is
+irreversible.
+.
+.
+.SH SEE ALSO
+.BR vcgencmd (1),
+.BR raspirev (7),
+.B [SOURCE]
+.
+.
+.SH REFERENCES
+.TP
+.B [MAILBOX]
+https://github.com/raspberrypi/firmware/wiki/Mailbox-property-interface
+.
+.TP
+.B [SOURCE]
+https://www.raspberrypi.org/documentation/hardware/raspberrypi/otpbits.md
+and
+https://www.raspberrypi.org/documentation/hardware/industrial/README.md
