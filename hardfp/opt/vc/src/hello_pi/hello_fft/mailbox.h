@@ -34,7 +34,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 int mbox_open();
 void mbox_close(int file_desc);
 
-unsigned get_version(int file_desc);
 unsigned mem_alloc(int file_desc, unsigned size, unsigned align, unsigned flags);
 unsigned mem_free(int file_desc, unsigned handle);
 unsigned mem_lock(int file_desc, unsigned handle);

@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define BUS_TO_PHYS(x) ((x)&~0xC0000000)
 
-// V3D spec: http://www.broadcom.com/docs/support/videocore/VideoCoreIV-AG100-R.pdf
+// V3D spec: https://docs.broadcom.com/doc/12358545
 #define V3D_L2CACTL (0xC00020>>2)
 #define V3D_SLCACTL (0xC00024>>2)
 #define V3D_SRQPC   (0xC00430>>2)
