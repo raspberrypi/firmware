@@ -59,6 +59,7 @@ alias smb3 cifs
 alias fs-smb3 cifs
 alias fs-cifs cifs
 alias fs-ntfs ntfs
+alias fs-ntfs3 ntfs3
 alias fs-jffs2 jffs2
 alias fs-ubifs ubifs
 alias devname:fuse fuse
@@ -91,6 +92,8 @@ alias crypto-cmac cmac
 alias cmac cmac
 alias crypto-xcbc xcbc
 alias xcbc xcbc
+alias crypto-md4 md4
+alias md4 md4
 alias crypto-md5 md5
 alias md5 md5
 alias crypto-wp256 wp512

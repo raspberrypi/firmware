@@ -61,7 +61,9 @@ kernel/fs/nfsd/nfsd.ko
 kernel/fs/smbfs_common/cifs_arc4.ko
 kernel/fs/smbfs_common/cifs_md4.ko
 kernel/fs/cifs/cifs.ko
+kernel/fs/ksmbd/ksmbd.ko
 kernel/fs/ntfs/ntfs.ko
+kernel/fs/ntfs3/ntfs3.ko
 kernel/fs/jffs2/jffs2.ko
 kernel/fs/ubifs/ubifs.ko
 kernel/fs/fuse/fuse.ko
@@ -87,6 +89,7 @@ kernel/crypto/crypto_user.ko
 kernel/crypto/cmac.ko
 kernel/crypto/hmac.ko
 kernel/crypto/xcbc.ko
+kernel/crypto/md4.ko
 kernel/crypto/md5.ko
 kernel/crypto/sha256_generic.ko
 kernel/crypto/sha512_generic.ko
