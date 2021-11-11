@@ -496,6 +496,7 @@ kernel/drivers/usb/usbip/usbip-vudc.ko
 kernel/drivers/usb/roles/roles.ko
 kernel/drivers/input/keyboard/cap11xx.ko
 kernel/drivers/input/keyboard/gpio_keys.ko
+kernel/drivers/input/keyboard/tca8418_keypad.ko
 kernel/drivers/input/keyboard/matrix_keypad.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/iforce/iforce-usb.ko

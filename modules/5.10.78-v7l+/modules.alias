@@ -6769,6 +6769,9 @@ alias i2c:cap1106 cap11xx
 alias platform:gpio-keys gpio_keys
 alias of:N*T*Cgpio-keysC* gpio_keys
 alias of:N*T*Cgpio-keys gpio_keys
+alias i2c:tca8418 tca8418_keypad
+alias of:N*T*Cti,tca8418C* tca8418_keypad
+alias of:N*T*Cti,tca8418 tca8418_keypad
 alias platform:matrix-keypad matrix_keypad
 alias of:N*T*Cgpio-matrix-keypadC* matrix_keypad
 alias of:N*T*Cgpio-matrix-keypad matrix_keypad
