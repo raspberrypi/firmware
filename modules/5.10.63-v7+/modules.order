@@ -461,11 +461,15 @@ kernel/drivers/usb/gadget/function/u_serial.ko
 kernel/drivers/usb/gadget/function/usb_f_serial.ko
 kernel/drivers/usb/gadget/function/usb_f_obex.ko
 kernel/drivers/usb/gadget/function/u_ether.ko
+kernel/drivers/usb/gadget/function/usb_f_ncm.ko
 kernel/drivers/usb/gadget/function/usb_f_ecm.ko
+kernel/drivers/usb/gadget/function/usb_f_eem.ko
 kernel/drivers/usb/gadget/function/usb_f_ecm_subset.ko
 kernel/drivers/usb/gadget/function/usb_f_rndis.ko
 kernel/drivers/usb/gadget/function/usb_f_mass_storage.ko
+kernel/drivers/usb/gadget/function/usb_f_fs.ko
 kernel/drivers/usb/gadget/function/u_audio.ko
+kernel/drivers/usb/gadget/function/usb_f_uac1.ko
 kernel/drivers/usb/gadget/function/usb_f_uac2.ko
 kernel/drivers/usb/gadget/function/usb_f_uvc.ko
 kernel/drivers/usb/gadget/function/usb_f_midi.ko

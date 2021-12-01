@@ -6644,10 +6644,15 @@ alias usbfunc:Loopback usb_f_ss_lb
 alias usbfunc:SourceSink usb_f_ss_lb
 alias usbfunc:gser usb_f_serial
 alias usbfunc:obex usb_f_obex
+alias usbfunc:ncm usb_f_ncm
 alias usbfunc:ecm usb_f_ecm
+alias usbfunc:eem usb_f_eem
 alias usbfunc:geth usb_f_ecm_subset
 alias usbfunc:rndis usb_f_rndis
 alias usbfunc:mass_storage usb_f_mass_storage
+alias usbfunc:ffs usb_f_fs
+alias fs-functionfs usb_f_fs
+alias usbfunc:uac1 usb_f_uac1
 alias usbfunc:uac2 usb_f_uac2
 alias usbfunc:uvc usb_f_uvc
 alias usbfunc:midi usb_f_midi

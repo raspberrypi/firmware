@@ -901,6 +901,7 @@ alias symbol:i2400m_dev_reset_handle i2400m
 alias symbol:snd_soc_unregister_dai snd_soc_core
 alias symbol:ssb_admatch_size ssb
 alias symbol:v4l2_mc_create_media_graph videodev
+alias symbol:ffs_single_dev usb_f_fs
 alias symbol:iio_write_channel_attribute industrialio
 alias symbol:dm_table_device_name dm_mod
 alias symbol:drm_atomic_nonblocking_commit drm
@@ -2348,6 +2349,7 @@ alias symbol:atrtr_get_dev appletalk
 alias symbol:drm_atomic_helper_disable_planes_on_crtc drm_kms_helper
 alias symbol:ZSTD_adjustCParams zstd_compress
 alias symbol:drm_gem_create_mmap_offset_size drm
+alias symbol:ffs_name_dev usb_f_fs
 alias symbol:iio_read_const_attr industrialio
 alias symbol:__cast5_encrypt cast5_generic
 alias symbol:em28xx_write_ac97 em28xx
@@ -4751,6 +4753,7 @@ alias symbol:dm_bufio_get_client dm_bufio
 alias symbol:cfg80211_rx_unprot_mlme_mgmt cfg80211
 alias symbol:nf_conncount_list_init nf_conncount
 alias symbol:nft_fwd_dup_netdev_offload nf_dup_netdev
+alias symbol:ffs_lock usb_f_fs
 alias symbol:rt2x00queue_unpause_queue rt2x00lib
 alias symbol:tpm_chip_unregister tpm
 alias symbol:unregister_pppox_proto pppox

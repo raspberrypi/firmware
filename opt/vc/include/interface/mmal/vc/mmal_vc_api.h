@@ -233,6 +233,7 @@ MMAL_STATUS_T mmal_vc_compact(MMAL_VC_COMPACT_MODE_T mode, uint32_t *duration);
  */
 MMAL_STATUS_T mmal_vc_lmk(uint32_t alloc_size);
 
+void mmal_register_component_videocore(void);
 #ifdef __cplusplus
 }
 #endif

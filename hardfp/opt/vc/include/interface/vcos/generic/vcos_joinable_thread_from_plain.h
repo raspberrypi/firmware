@@ -180,7 +180,7 @@ void vcos_thread_attr_setautostart(VCOS_THREAD_ATTR_T *attrs, VCOS_UNSIGNED auto
 
 VCOS_INLINE_IMPL
 VCOS_THREAD_T *vcos_thread_current(void) {
-   VCOS_THREAD_T *ret =  (VCOS_THREAD_T*)vcos_llthread_current();
+   VCOS_THREAD_T *ret =  (VCOS_THREAD_T*) (void *) vcos_llthread_current();
    /*If we're called from a non-vcos thread, this assert will fail.
     *XXX FIXME why is this commented out?
     *vcos_assert(ret->magic == VCOS_THREAD_MAGIC);
