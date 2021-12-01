@@ -4380,6 +4380,7 @@
 0xbf041102	register_vt_notifier	vmlinux	EXPORT_SYMBOL_GPL	
 0xbb14eb31	bcmp	vmlinux	EXPORT_SYMBOL	
 0x71fce27b	badblocks_show	vmlinux	EXPORT_SYMBOL_GPL	
+0xc0dfe732	inode_update_time	vmlinux	EXPORT_SYMBOL	
 0x0c8d08be	get_unmapped_area	vmlinux	EXPORT_SYMBOL	
 0x1469eb94	add_to_page_cache_lru	vmlinux	EXPORT_SYMBOL_GPL	
 0xb9e8e2cc	in6addr_sitelocal_allrouters	vmlinux	EXPORT_SYMBOL	
