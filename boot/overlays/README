@@ -3517,7 +3517,7 @@ Params: ctsrts                  Enable CTS/RTS on GPIOs 10-11 (default off)
 
 
 Name:   uart5
-Info:   Enable uart 5 on GPIOs 12-15. BCM2711 only.
+Info:   Enable uart 5 on GPIOs 12-13. BCM2711 only.
 Load:   dtoverlay=uart5,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 14-15 (default off)
 
