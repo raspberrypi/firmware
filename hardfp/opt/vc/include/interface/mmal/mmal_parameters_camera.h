@@ -155,6 +155,7 @@ enum {
    MMAL_PARAMETER_DPC,                       /**< Tales a @ref MMAP_PARAMETER_DPC_T */
    MMAL_PARAMETER_GAMMA,                     /**< Tales a @ref MMAP_PARAMETER_GAMMA_T */
    MMAL_PARAMETER_CDN,                       /**< Takes a @ref MMAL_PARAMETER_CDN_T */
+   MMAL_PARAMETER_JPEG_IJG_SCALING,          /**< Takes a @ref MMAL_PARAMETER_BOOLEAN_T */
 };
 
 /** Thumbnail configuration parameter type */

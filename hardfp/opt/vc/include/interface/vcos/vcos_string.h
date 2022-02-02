@@ -99,6 +99,17 @@ VCOSPRE_ size_t VCOSPOST_ vcos_safe_strcpy(char *dst, const char *src, size_t ds
 #define VCOS_SAFE_STRCPY(dst, src, offset) \
    vcos_safe_strcpy(dst, src, sizeof(dst) + ((char (*)[sizeof(dst)])dst - &(dst)), offset)
 
+/** Copies at most srclen characters from string src to dst at the specified offset.
+  * Output is truncated to fit in dstlen bytes, i.e. the string is at most
+  * (buflen - 1) characters long. Unlike strncpy, exactly one NUL is written
+  * to dst, which is always NUL-terminated.
+  * Returns the string length before/without truncation.
+  */
+VCOSPRE_ size_t VCOSPOST_ vcos_safe_strncpy(char *dst, const char *src, size_t srclen, size_t dstlen, size_t offset);
+
+#define VCOS_SAFE_STRNCPY(dst, src, srclen, offset)			\
+   vcos_safe_strncpy(dst, src, srclen, sizeof(dst) + ((char (*)[sizeof(dst)])dst - &(dst)), offset)
+
 VCOS_STATIC_INLINE
 int vcos_strlen(const char *s) { return (int)strlen(s); }
 
