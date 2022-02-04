@@ -1997,6 +1997,19 @@ Params: card_name               Override the default, "IQAudIODigi", card name.
                                 dai stream name.
 
 
+Name:   iqs550
+Info:   Enables I2C connected Azoteq IQS550 trackpad/touchscreen controller
+        using GPIO 4 (pin 7 on GPIO header) for interrupt.
+Load:   dtoverlay=iqs550,<param>=<val>
+Params: interrupt               GPIO used for interrupt (default 4)
+        reset                   GPIO used for reset (optional)
+        sizex                   Touchscreen size x (default 800)
+        sizey                   Touchscreen size y (default 480)
+        invx                    Touchscreen inverted x axis
+        invy                    Touchscreen inverted y axis
+        swapxy                  Touchscreen swapped x y axis
+
+
 Name:   irs1125
 Info:   Infineon irs1125 TOF camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
@@ -2851,6 +2864,8 @@ Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
                                 speeds up (default 55000)
         poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
                                 the fan slows down (default 5000)
+        i2c                     Control the fan via Linux I2C drivers instead of
+                                the firmware.
 
 
 Name:   rpi-poe-plus
@@ -2872,6 +2887,8 @@ Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
                                 speeds up (default 55000)
         poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
                                 the fan slows down (default 5000)
+        i2c                     Control the fan via Linux I2C drivers instead of
+                                the firmware.
 
 
 Name:   rpi-proto
