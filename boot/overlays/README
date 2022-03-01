@@ -2689,6 +2689,10 @@ Params: speed                   Display SPI bus speed
 
         debug                   Debug output level {0-7}
 
+        drm                     Force the use of the hx8357d DRM driver (by
+                                default the fb_hx8357d framebuffer driver will
+                                be used in preference if available)
+
 
 Name:   pps-gpio
 Info:   Configures the pps-gpio (pulse-per-second time signal via GPIO).
@@ -3877,6 +3881,26 @@ Params: int_pin                 GPIO used for INT (default 25)
         speed                   SPI bus speed (default 30000000)
 
         cs                      SPI bus Chip Select (default 0)
+
+
+Name:   waveshare-can-fd-hat-mode-a
+Info:   Overlay for the Waveshare 2-Channel Isolated CAN FD Expansion HAT
+        for Raspberry Pi, Multi Protections. Use this overlay when the
+        HAT is configured in Mode A (Default), with can0 on spi0.0
+        and can1 on spi1.0.
+        https://www.waveshare.com/2-ch-can-fd-hat.htm
+Load:   dtoverlay=waveshare-can-fd-hat-mode-a
+Params: <None>
+
+
+Name:   waveshare-can-fd-hat-mode-b
+Info:   Overlay for the Waveshare 2-Channel Isolated CAN FD Expansion HAT
+        for Raspberry Pi, Multi Protections. Use this overlay when the
+        HAT is configured in Mode B (requires hardware modification), with
+        can0 on spi0.0 and can1 on spi0.1.
+        https://www.waveshare.com/2-ch-can-fd-hat.htm
+Load:   dtoverlay=waveshare-can-fd-hat-mode-b
+Params: <None>
 
 
 Name:   wittypi
