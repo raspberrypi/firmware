@@ -4979,6 +4979,7 @@ alias symbol:drm_mode_create_suggested_offset_properties drm
 alias symbol:iio_buffer_put industrialio
 alias symbol:drm_mode_object_put drm
 alias symbol:ieee80211_ave_rssi mac80211
+alias symbol:drm_plane_create_chroma_siting_properties drm
 alias symbol:_rtl92c_phy_init_bb_rf_register_definition rtl8192c_common
 alias symbol:drm_mm_print drm
 alias symbol:ath9k_hw_setopmode ath9k_hw
