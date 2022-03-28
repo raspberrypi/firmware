@@ -1849,6 +1849,86 @@
          }; // pin_defines
       }; // pins
 
+      pins_cm4s { // Pi 4 CM4S
+         pin_config {
+            pin@default {
+               polarity = "active_high";
+               termination = "pull_down";
+               startup_state = "inactive";
+               function = "input";
+            }; // pin
+            pin@p14 { function = "uart0";  termination = "no_pulling"; drive_strength_mA = < 8 >; }; // TX uart0
+            pin@p15 { function = "uart0";  termination = "pull_up"; drive_strength_mA = < 8 >; }; // RX uart0
+            pin@p46 { function = "output"; termination = "pull_up"; polarity="active_low"; }; // activity LED
+         }; // pin_config
+
+         pin_defines {
+            pin_define@HDMI_CONTROL_ATTACHED {
+               type = "absent";
+            };
+            pin_define@EMMC_ENABLE {
+               type = "internal";
+               number = <49>;
+            };
+            pin_define@NUM_CAMERAS {
+               type = "internal";
+               number = <0>;
+            };
+            pin_define@POWER_LOW {
+               type = "absent";
+            };
+            pin_define@LEDS_DISK_ACTIVITY {
+               type = "internal";
+               number = <46>;
+            };
+            pin_define@LAN_RUN {
+               type = "absent";
+            };
+            pin_define@BT_ON {
+               type = "absent";
+            };
+            pin_define@WL_ON {
+               type = "absent";
+            };
+            pin_define@SMPS_SDA {
+               type = "absent";
+            };
+            pin_define@SMPS_SCL {
+               type = "absent";
+            };
+            pin_define@ETH_CLK {
+               type = "absent";
+            };
+            pin_define@WL_LPO_CLK {
+               type = "absent";
+            };
+            pin_define@USB_LIMIT_1A2 {
+               type = "absent";
+            };
+            pin_define@SIO_1V8_SEL {
+               type = "absent";
+            };
+            pin_define@PWML {
+               type = "absent";
+            };
+            pin_define@PWMR {
+               type = "absent";
+            };
+            pin_define@SAFE_MODE {
+               type = "absent";
+            };
+            pin_define@SD_CARD_DETECT {
+               type = "absent";
+            };
+            pin_define@ID_SDA {
+               type = "absent";
+            };
+            pin_define@ID_SCL {
+               type = "absent";
+            };
+         }; // pin_defines
+      }; // pins
+
       pins_pi0 { // Pi zero
          pin_config {
             pin@default {
