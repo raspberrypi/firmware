@@ -195,6 +195,7 @@ kernel/drivers/gpu/drm/panel/panel-tdo-y17p.ko
 kernel/drivers/gpu/drm/bridge/display-connector.ko
 kernel/drivers/gpu/drm/bridge/simple-bridge.ko
 kernel/drivers/gpu/drm/bridge/tc358762.ko
+kernel/drivers/gpu/drm/tiny/panel-mipi-dbi.ko
 kernel/drivers/gpu/drm/tiny/hx8357d.ko
 kernel/drivers/gpu/drm/tiny/ili9225.ko
 kernel/drivers/gpu/drm/tiny/ili9341.ko

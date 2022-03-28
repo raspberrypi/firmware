@@ -866,6 +866,9 @@ alias of:N*T*Cdumb-vga-dacC* simple_bridge
 alias of:N*T*Cdumb-vga-dac simple_bridge
 alias of:N*T*Ctoshiba,tc358762C* tc358762
 alias of:N*T*Ctoshiba,tc358762 tc358762
+alias of:N*T*Cpanel-mipi-dbi-spiC* panel_mipi_dbi
+alias of:N*T*Cpanel-mipi-dbi-spi panel_mipi_dbi
+alias spi:panel-mipi-dbi-spi panel_mipi_dbi
 alias of:N*T*Cadafruit,yx350hv15C* hx8357d
 alias of:N*T*Cadafruit,yx350hv15 hx8357d
 alias spi:yx350hv15 hx8357d

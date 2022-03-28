@@ -663,6 +663,7 @@ alias symbol:arizona_lhpf1_mode snd_soc_arizona
 alias symbol:drm_gem_handle_delete drm
 alias symbol:nft_flowtable_lookup nf_tables
 alias symbol:ocfs2_cluster_hangup ocfs2_stackglue
+alias symbol:of_get_drm_panel_display_mode drm
 alias symbol:rtl92c_phy_iq_calibrate rtl8192c_common
 alias symbol:snd_soc_dpcm_get_substream snd_soc_core
 alias symbol:ssb_dma_translation ssb
