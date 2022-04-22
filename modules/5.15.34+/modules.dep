@@ -680,6 +680,7 @@ kernel/drivers/media/rc/gpio-ir-tx.ko.xz:
 kernel/drivers/media/rc/pwm-ir-tx.ko.xz:
 kernel/drivers/media/rc/iguanair.ko.xz:
 kernel/drivers/media/rc/ttusbir.ko.xz:
+kernel/drivers/media/rc/ir_toy.ko.xz:
 kernel/drivers/media/common/b2c2/b2c2-flexcop.ko.xz: kernel/drivers/media/dvb-frontends/s5h1420.ko.xz kernel/drivers/media/dvb-frontends/cx24113.ko.xz kernel/drivers/media/dvb-frontends/cx24123.ko.xz kernel/drivers/media/dvb-core/dvb-core.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/common/siano/smsmdtv.ko.xz:
 kernel/drivers/media/common/siano/smsdvb.ko.xz: kernel/drivers/media/common/siano/smsmdtv.ko.xz kernel/drivers/media/dvb-core/dvb-core.ko.xz kernel/drivers/media/mc/mc.ko.xz
@@ -1421,6 +1422,7 @@ kernel/net/netfilter/nft_fib_netdev.ko.xz: kernel/net/ipv4/netfilter/nft_fib_ipv
 kernel/net/netfilter/nft_socket.ko.xz: kernel/net/ipv4/netfilter/nf_socket_ipv4.ko.xz kernel/net/ipv6/netfilter/nf_socket_ipv6.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nfnetlink.ko.xz kernel/net/ipv6/ipv6.ko.xz
 kernel/net/netfilter/nft_osf.ko.xz: kernel/net/netfilter/nfnetlink_osf.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nfnetlink.ko.xz
 kernel/net/netfilter/nft_tproxy.ko.xz: kernel/net/ipv6/netfilter/nf_tproxy_ipv6.ko.xz kernel/net/ipv4/netfilter/nf_tproxy_ipv4.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko.xz kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko.xz kernel/net/netfilter/nfnetlink.ko.xz kernel/net/ipv6/ipv6.ko.xz
+kernel/net/netfilter/nft_synproxy.ko.xz: kernel/net/netfilter/nf_synproxy_core.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nf_conntrack.ko.xz kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko.xz kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko.xz kernel/net/netfilter/nfnetlink.ko.xz
 kernel/net/netfilter/nft_chain_nat.ko.xz: kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nf_nat.ko.xz kernel/net/netfilter/nf_conntrack.ko.xz kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko.xz kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko.xz kernel/net/netfilter/nfnetlink.ko.xz
 kernel/net/netfilter/nft_dup_netdev.ko.xz: kernel/net/netfilter/nf_dup_netdev.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nfnetlink.ko.xz
 kernel/net/netfilter/nft_fwd_netdev.ko.xz: kernel/net/netfilter/nf_dup_netdev.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nfnetlink.ko.xz

@@ -674,6 +674,7 @@ kernel/drivers/media/rc/gpio-ir-tx.ko
 kernel/drivers/media/rc/pwm-ir-tx.ko
 kernel/drivers/media/rc/iguanair.ko
 kernel/drivers/media/rc/ttusbir.ko
+kernel/drivers/media/rc/ir_toy.ko
 kernel/drivers/media/common/b2c2/b2c2-flexcop.ko
 kernel/drivers/media/common/siano/smsmdtv.ko
 kernel/drivers/media/common/siano/smsdvb.ko
@@ -1415,6 +1416,7 @@ kernel/net/netfilter/nft_fib_netdev.ko
 kernel/net/netfilter/nft_socket.ko
 kernel/net/netfilter/nft_osf.ko
 kernel/net/netfilter/nft_tproxy.ko
+kernel/net/netfilter/nft_synproxy.ko
 kernel/net/netfilter/nft_chain_nat.ko
 kernel/net/netfilter/nft_dup_netdev.ko
 kernel/net/netfilter/nft_fwd_netdev.ko

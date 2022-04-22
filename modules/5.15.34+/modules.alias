@@ -3221,6 +3221,8 @@ alias usb:v108Cp0168d*dc*dsc*dp*ic*isc*ip*in* cdc_acm
 alias usb:v108Cp0159d*dc*dsc*dp*ic*isc*ip*in* cdc_acm
 alias usb:v058Bp0041d*dc*dsc*dp*ic*isc*ip*in* cdc_acm
 alias usb:v04E8p685Dd*dc*dsc*dp*ic*isc*ip*in* cdc_acm
+alias usb:v04D8pF58Bd*dc*dsc*dp*ic*isc*ip*in* cdc_acm
+alias usb:v04D8pFD08d*dc*dsc*dp*ic*isc*ip*in* cdc_acm
 alias usb:v03EBp0030d*dc*dsc*dp*ic*isc*ip*in* cdc_acm
 alias usb:v04E7p6651d*dc*dsc*dp*ic02isc02ipFFin* cdc_acm
 alias usb:v0421p03CDd*dc*dsc*dp*ic02isc02ipFFin* cdc_acm
@@ -7562,6 +7564,8 @@ alias of:N*T*Cpwm-ir-txC* pwm_ir_tx
 alias of:N*T*Cpwm-ir-tx pwm_ir_tx
 alias usb:v1781p0938d*dc*dsc*dp*ic*isc*ip*in* iguanair
 alias usb:v0B48p2003d*dc*dsc*dp*ic*isc*ip*in* ttusbir
+alias usb:v04D8pF58Bd*dc*dsc*dp*ic0Aisc*ip*in* ir_toy
+alias usb:v04D8pFD08d*dc*dsc*dp*ic0Aisc*ip*in* ir_toy
 alias of:N*T*Cbrcm,bcm2835-unicamC* bcm2835_unicam
 alias of:N*T*Cbrcm,bcm2835-unicam bcm2835_unicam
 alias usb:v13D3p3224d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_vp7045
@@ -11286,6 +11290,8 @@ alias nft-expr-5-fib nft_fib_netdev
 alias nft-expr-socket nft_socket
 alias nft-expr-osf nft_osf
 alias nft-expr-tproxy nft_tproxy
+alias nft-obj-10 nft_synproxy
+alias nft-expr-synproxy nft_synproxy
 alias nft-chain-1-nat nft_chain_nat
 alias nft-chain-10-nat nft_chain_nat
 alias nft-chain-2-nat nft_chain_nat
