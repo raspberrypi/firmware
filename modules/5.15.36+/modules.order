@@ -223,6 +223,7 @@ kernel/drivers/block/cryptoloop.ko
 kernel/drivers/block/drbd/drbd.ko
 kernel/drivers/block/zram/zram.ko
 kernel/drivers/misc/eeprom/at24.ko
+kernel/drivers/misc/eeprom/at25.ko
 kernel/drivers/misc/eeprom/eeprom_93cx6.ko
 kernel/drivers/misc/ti-st/st_drv.ko
 kernel/drivers/misc/bcm2835_smi.ko
@@ -789,6 +790,9 @@ kernel/drivers/media/usb/gspca/gspca_vc032x.ko
 kernel/drivers/media/usb/gspca/gspca_vicam.ko
 kernel/drivers/media/usb/gspca/gspca_xirlink_cit.ko
 kernel/drivers/media/usb/gspca/gspca_zc3xx.ko
+kernel/drivers/media/usb/gspca/m5602/gspca_m5602.ko
+kernel/drivers/media/usb/gspca/stv06xx/gspca_stv06xx.ko
+kernel/drivers/media/usb/gspca/gl860/gspca_gl860.ko
 kernel/drivers/media/usb/pwc/pwc.ko
 kernel/drivers/media/usb/cpia2/cpia2.ko
 kernel/drivers/media/usb/au0828/au0828.ko
