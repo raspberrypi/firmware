@@ -8974,6 +8974,14 @@ alias i2c:ds1721 ds1621
 alias i2c:ds1631 ds1621
 alias i2c:ds1625 ds1621
 alias i2c:ds1621 ds1621
+alias i2c:emc2301 emc2305
+alias i2c:emc2302 emc2305
+alias i2c:emc2303 emc2305
+alias i2c:emc2305 emc2305
+alias of:N*T*Cmicrochip,emc2301C* emc2305
+alias of:N*T*Cmicrochip,emc2301 emc2305
+alias of:N*T*Cmicrochip,emc2305C* emc2305
+alias of:N*T*Cmicrochip,emc2305 emc2305
 alias platform:gpio-fan gpio_fan
 alias of:N*T*Cgpio-fanC* gpio_fan
 alias of:N*T*Cgpio-fan gpio_fan
