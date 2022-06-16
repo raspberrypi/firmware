@@ -35,7 +35,7 @@ VideoCore OS Abstraction Layer - basic types
 #define VCOS_VERSION   1
 
 #include <stddef.h>
-#if defined(__unix__) && !defined(__ANDROID__)
+#if defined(__unix__) && !defined(__ANDROID__) && !defined(STATIC_ANALYSIS)
 #include "interface/vcos/pthreads/vcos_platform_types.h"
 #else
 #include "vcos_platform_types.h"

@@ -234,7 +234,7 @@ unsigned int cube_map           : 1;
    };
 
 
-# ifdef __COVERITY__
+# if defined(STATIC_ANALYSIS) && STATIC_ANALYSIS
    /* Currently battling with the size of enums when running through static analysis stage */
    typedef int vc_image_t_size_check[(sizeof(VC_IMAGE_T) == 68) * 2 - 1];
 # else
