@@ -1879,6 +1879,7 @@ alias symbol:ata_host_start libata
 alias symbol:br_multicast_has_querier_anywhere bridge
 alias symbol:ieee80211_tx_prepare_skb mac80211
 alias symbol:nf_conntrack_helper_unregister nf_conntrack
+alias symbol:__max730x_remove gpio_max730x
 alias symbol:fsg_common_remove_lun usb_f_mass_storage
 alias symbol:usb_serial_generic_unthrottle usbserial
 alias symbol:v4l2_async_notifier_register v4l2_async
@@ -2596,6 +2597,7 @@ alias symbol:ahci_host_activate libahci
 alias symbol:ath_regd_get_band_ctl ath
 alias symbol:cfg80211_classify8021d cfg80211
 alias symbol:fb_sys_read fb_sys_fops
+alias symbol:__max730x_probe gpio_max730x
 alias symbol:__media_device_usb_init mc
 alias symbol:dm_cache_policy_create dm_cache
 alias symbol:hci_resume_dev bluetooth

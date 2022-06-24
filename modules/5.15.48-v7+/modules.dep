@@ -108,7 +108,6 @@ kernel/crypto/cast_common.ko.xz:
 kernel/crypto/cast5_generic.ko.xz: kernel/crypto/cast_common.ko.xz
 kernel/crypto/chacha_generic.ko.xz: kernel/lib/crypto/libchacha.ko.xz
 kernel/crypto/poly1305_generic.ko.xz: kernel/lib/crypto/libpoly1305.ko.xz
-kernel/crypto/deflate.ko.xz:
 kernel/crypto/michael_mic.ko.xz:
 kernel/crypto/authenc.ko.xz:
 kernel/crypto/authencesn.ko.xz: kernel/crypto/authenc.ko.xz
@@ -156,6 +155,9 @@ kernel/drivers/pinctrl/pinctrl-mcp23s08_spi.ko.xz: kernel/drivers/pinctrl/pinctr
 kernel/drivers/pinctrl/pinctrl-mcp23s08.ko.xz:
 kernel/drivers/gpio/gpio-arizona.ko.xz:
 kernel/drivers/gpio/gpio-fsm.ko.xz:
+kernel/drivers/gpio/gpio-max7300.ko.xz: kernel/drivers/gpio/gpio-max730x.ko.xz
+kernel/drivers/gpio/gpio-max7301.ko.xz: kernel/drivers/gpio/gpio-max730x.ko.xz
+kernel/drivers/gpio/gpio-max730x.ko.xz:
 kernel/drivers/gpio/gpio-mockup.ko.xz:
 kernel/drivers/gpio/gpio-pca953x.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/gpio/gpio-pcf857x.ko.xz:

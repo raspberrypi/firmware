@@ -111,7 +111,6 @@ kernel/crypto/cast_common.ko
 kernel/crypto/cast5_generic.ko
 kernel/crypto/chacha_generic.ko
 kernel/crypto/poly1305_generic.ko
-kernel/crypto/deflate.ko
 kernel/crypto/michael_mic.ko
 kernel/crypto/authenc.ko
 kernel/crypto/authencesn.ko
@@ -159,6 +158,9 @@ kernel/drivers/pinctrl/pinctrl-mcp23s08_spi.ko
 kernel/drivers/pinctrl/pinctrl-mcp23s08.ko
 kernel/drivers/gpio/gpio-arizona.ko
 kernel/drivers/gpio/gpio-fsm.ko
+kernel/drivers/gpio/gpio-max7300.ko
+kernel/drivers/gpio/gpio-max7301.ko
+kernel/drivers/gpio/gpio-max730x.ko
 kernel/drivers/gpio/gpio-mockup.ko
 kernel/drivers/gpio/gpio-pca953x.ko
 kernel/drivers/gpio/gpio-pcf857x.ko

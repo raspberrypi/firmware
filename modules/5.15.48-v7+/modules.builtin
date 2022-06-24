@@ -29,6 +29,8 @@ kernel/fs/nls/nls_ascii.ko
 kernel/fs/autofs/autofs4.ko
 kernel/fs/cachefiles/cachefiles.ko
 kernel/fs/f2fs/f2fs.ko
+kernel/fs/pstore/pstore.ko
+kernel/fs/pstore/ramoops.ko
 kernel/crypto/crypto.ko
 kernel/crypto/crypto_algapi.ko
 kernel/crypto/aead.ko
@@ -50,6 +52,7 @@ kernel/crypto/cts.ko
 kernel/crypto/xts.ko
 kernel/crypto/des_generic.ko
 kernel/crypto/aes_generic.ko
+kernel/crypto/deflate.ko
 kernel/crypto/crc32c_generic.ko
 kernel/crypto/crc32_generic.ko
 kernel/crypto/lzo.ko
@@ -76,6 +79,7 @@ kernel/lib/libcrc32c.ko
 kernel/lib/xxhash.ko
 kernel/lib/zlib_inflate/zlib_inflate.ko
 kernel/lib/zlib_deflate/zlib_deflate.ko
+kernel/lib/reed_solomon/reed_solomon.ko
 kernel/lib/lzo/lzo_compress.ko
 kernel/lib/lzo/lzo_decompress.ko
 kernel/lib/lz4/lz4_decompress.ko

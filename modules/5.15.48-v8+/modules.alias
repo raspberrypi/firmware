@@ -170,8 +170,6 @@ alias crypto-poly1305-generic poly1305_generic
 alias poly1305-generic poly1305_generic
 alias crypto-poly1305 poly1305_generic
 alias poly1305 poly1305_generic
-alias crypto-deflate deflate
-alias deflate deflate
 alias crypto-michael_mic michael_mic
 alias michael_mic michael_mic
 alias crypto-authenc authenc
@@ -245,6 +243,8 @@ alias platform:arizona-gpio gpio_arizona
 alias platform:gpio-fsm gpio_fsm
 alias of:N*T*Crpi,gpio-fsmC* gpio_fsm
 alias of:N*T*Crpi,gpio-fsm gpio_fsm
+alias i2c:max7300 gpio_max7300
+alias spi:max7301 gpio_max7301
 alias of:N*T*Cgpio-mockupC* gpio_mockup
 alias of:N*T*Cgpio-mockup gpio_mockup
 alias i2c:xra1202 gpio_pca953x
