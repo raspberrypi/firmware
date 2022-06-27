@@ -158,6 +158,7 @@ kernel/drivers/net/phy/mdio_devres.ko
 kernel/drivers/net/phy/libphy.ko
 kernel/drivers/net/phy/bcm7xxx.ko
 kernel/drivers/net/phy/bcm-phy-lib.ko
+kernel/drivers/net/phy/bcm-phy-ptp.ko
 kernel/drivers/net/phy/broadcom.ko
 kernel/drivers/net/phy/fixed_phy.ko
 kernel/drivers/net/phy/micrel.ko
