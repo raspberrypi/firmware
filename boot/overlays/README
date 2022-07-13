@@ -729,6 +729,12 @@ Params: gpiopin                 GPIO connected to the sensor's DATA output.
                                 (default 4)
 
 
+Name:   dionaudio-kiwi
+Info:   Configures the Dion Audio KIWI STREAMER
+Load:   dtoverlay=dionaudio-kiwi
+Params: <None>
+
+
 Name:   dionaudio-loco
 Info:   Configures the Dion Audio LOCO DAC-AMP
 Load:   dtoverlay=dionaudio-loco
@@ -1045,6 +1051,26 @@ Info:   A demonstration of the gpio-fsm driver. The GPIOs are chosen to work
         GPIOs 7, 8 and 25 respectively.
 Load:   dtoverlay=fsm-demo,<param>=<val>
 Params: fsm_debug               Enable debug logging (default off)
+
+
+Name:   gc9a01
+Info:   Enables GalaxyCore's GC9A01 single chip driver based displays on
+        SPI0 as fb1, using GPIOs DC=25, RST=27 and BL=18 (physical
+        GPIO header pins 22, 13 and 12 respectively) in addition to the
+        SPI0 pins DIN=10, CLK=11 and CS=8 (physical GPIO header pins 19,
+        23 and 24 respectively).
+Load:   dtoverlay=gc9a01,<param>=<val>
+Params: speed                   Display SPI bus speed
+
+        rotate                  Display rotation {0,90,180,270}
+
+        width                   Width of the display
+
+        height                  Height of the display
+
+        fps                     Delay between frame updates
+
+        debug                   Debug output level {0-7}
 
 
 Name:   ghost-amp

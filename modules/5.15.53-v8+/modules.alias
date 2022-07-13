@@ -11715,6 +11715,8 @@ alias of:N*T*Cmerus,merus-ampC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Cmerus,merus-amp snd_soc_rpi_simple_soundcard
 alias of:N*T*Crpi,rpi-dacC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Crpi,rpi-dac snd_soc_rpi_simple_soundcard
+alias of:N*T*Cdionaudio,dionaudio-kiwiC* snd_soc_rpi_simple_soundcard
+alias of:N*T*Cdionaudio,dionaudio-kiwi snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-dacC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-dac snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-ampC* snd_soc_rpi_simple_soundcard
