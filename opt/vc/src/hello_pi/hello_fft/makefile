@@ -27,10 +27,10 @@ F = -lrt -lm -ldl
 all:	hello_fft.bin hello_fft_2d.bin
 
 hello_fft.bin:	$(S) $(C1D) $(H1D)
-	gcc -o hello_fft.bin $(F) $(C1D)
+	gcc -o hello_fft.bin $(C1D) $(F)
 
 hello_fft_2d.bin:	$(S) hex/shader_trans.hex $(C2D) $(H2D)
-	gcc -o hello_fft_2d.bin $(F) $(C2D)
+	gcc -o hello_fft_2d.bin $(C2D) $(F)
 
 clean:
 	rm -f *.bin

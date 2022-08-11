@@ -582,6 +582,36 @@ Load:   dtoverlay=applepi-dac
 Params: <None>
 
 
+Name:   arducam-64mp
+Info:   Arducam 64MP camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=arducam-64mp,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
+Name:   arducam-pivariety
+Info:   Arducam Pivariety camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=arducam-pivariety,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
 Name:   at86rf233
 Info:   Configures the Atmel AT86RF233 802.15.4 low-power WPAN transceiver,
         connected to spi0.0
@@ -599,6 +629,12 @@ Info:   Configures the audioinjector.net audio add on soundcards
 Load:   dtoverlay=audioinjector-addons,<param>=<val>
 Params: non-stop-clocks         Keeps the clocks running even when the stream
                                 is paused or stopped (default off)
+
+
+Name:   audioinjector-bare-i2s
+Info:   Configures the audioinjector.net audio bare i2s soundcard
+Load:   dtoverlay=audioinjector-bare-i2s
+Params: <None>
 
 
 Name:   audioinjector-isolated-soundcard
@@ -691,6 +727,12 @@ Info:   Overlay for the DHT11/DHT21/DHT22 humidity/temperature sensors
 Load:   dtoverlay=dht11,<param>=<val>
 Params: gpiopin                 GPIO connected to the sensor's DATA output.
                                 (default 4)
+
+
+Name:   dionaudio-kiwi
+Info:   Configures the Dion Audio KIWI STREAMER
+Load:   dtoverlay=dionaudio-kiwi
+Params: <None>
 
 
 Name:   dionaudio-loco
@@ -1011,6 +1053,26 @@ Load:   dtoverlay=fsm-demo,<param>=<val>
 Params: fsm_debug               Enable debug logging (default off)
 
 
+Name:   gc9a01
+Info:   Enables GalaxyCore's GC9A01 single chip driver based displays on
+        SPI0 as fb1, using GPIOs DC=25, RST=27 and BL=18 (physical
+        GPIO header pins 22, 13 and 12 respectively) in addition to the
+        SPI0 pins DIN=10, CLK=11 and CS=8 (physical GPIO header pins 19,
+        23 and 24 respectively).
+Load:   dtoverlay=gc9a01,<param>=<val>
+Params: speed                   Display SPI bus speed
+
+        rotate                  Display rotation {0,90,180,270}
+
+        width                   Width of the display
+
+        height                  Height of the display
+
+        fps                     Delay between frame updates
+
+        debug                   Debug output level {0-7}
+
+
 Name:   ghost-amp
 Info:   An overlay for the Ghost amplifier.
 Load:   dtoverlay=ghost-amp,<param>=<val>
@@ -1038,6 +1100,17 @@ Load:   dtoverlay=gpio-fan,<param>=<val>
 Params: gpiopin                 GPIO used to control the fan (default 12)
         temp                    Temperature at which the fan switches on, in
                                 millicelcius (default 55000)
+
+
+Name:   gpio-hog
+Info:   Activate a "hog" for a GPIO - request that the kernel configures it as
+        an output, driven low or high as indicated by the presence or absence
+        of the active_low parameter. Note that a hogged GPIO is not available
+        to other drivers or for gpioset/gpioget.
+Load:   dtoverlay=gpio-hog,<param>=<val>
+Params: gpio                    GPIO pin to hog (default 26)
+        active_low              If set, the hog drives the GPIO low (defaults
+                                to off - the GPIO is driven high)
 
 
 Name:   gpio-ir
@@ -1509,6 +1582,51 @@ Load:   dtoverlay=i2c-bcm2708
 Params: <None>
 
 
+Name:   i2c-fan
+Info:   Adds support for a number of I2C fan controllers
+Load:   dtoverlay=i2c-fan,<param>=<val>
+Params: addr                    Sets the address for the fan controller. Note
+                                that the device must be configured to use the
+                                specified address.
+
+        i2c0                    Choose the I2C0 bus on GPIOs 0&1
+
+        i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
+
+        i2c3                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c4                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c5                    Choose the I2C5 bus (configure with the i2c4
+                                overlay - BCM2711 only)
+
+        i2c6                    Choose the I2C6 bus (configure with the i2c6
+                                overlay - BCM2711 only)
+
+        minpwm                  PWM setting for the fan when the SoC is below
+                                mintemp (range 0-255. default 0)
+        maxpwm                  PWM setting for the fan when the SoC is above
+                                maxtemp (range 0-255. default 255)
+        midtemp                 Temperature (in millicelcius) at which the fan
+                                begins to speed up (default 50000)
+
+        midtemp_hyst            Temperature delta (in millicelcius) below
+                                mintemp at which the fan will drop to minrpm
+                                (default 2000)
+
+        maxtemp                 Temperature (in millicelcius) at which the fan
+                                will be held at maxrpm (default 70000)
+
+        maxtemp_hyst            Temperature delta (in millicelcius) below
+                                maxtemp at which the fan begins to slow down
+                                (default 2000)
+
+        emc2301                 Select the Microchip EMC230x controller family
+                                - EMC2301, EMC2302, EMC2303, EMC2305.
+
+
 Name:   i2c-gpio
 Info:   Adds support for software i2c controller on gpio pins
 Load:   dtoverlay=i2c-gpio,<param>=<val>
@@ -1589,6 +1707,8 @@ Params: abx80x                  Select one of the ABx80x family:
 
         rv3028                  Select the Micro Crystal RV3028 device
 
+        rv8803                  Select the Micro Crystal RV8803 device
+
         sd3078                  Select the ZXW Shenzhen whwave SD3078 device
 
         s35390a                 Select the ABLIC S35390A device
@@ -1596,6 +1716,18 @@ Params: abx80x                  Select one of the ABx80x family:
         i2c0                    Choose the I2C0 bus on GPIOs 0&1
 
         i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
+
+        i2c3                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c4                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c5                    Choose the I2C5 bus (configure with the i2c4
+                                overlay - BCM2711 only)
+
+        i2c6                    Choose the I2C6 bus (configure with the i2c6
+                                overlay - BCM2711 only)
 
         addr                    Sets the address for the RTC. Note that the
                                 device must be configured to use the specified
@@ -1658,6 +1790,8 @@ Params: abx80x                  Select one of the ABx80x family:
         rv1805                  Select the Micro Crystal RV1805 device
 
         rv3028                  Select the Micro Crystal RV3028 device
+
+        rv8803                  Select the Micro Crystal RV8803 device
 
         sd3078                  Select the ZXW Shenzhen whwave SD3078 device
 
@@ -1760,6 +1894,22 @@ Params: addr                    Set the address for the BH1750, BME280, BME680,
 
         veml6070                Select the Vishay VEML6070 ultraviolet light
                                 sensor
+
+        i2c0                    Choose the I2C0 bus on GPIOs 0&1
+
+        i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
+
+        i2c3                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c4                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+
+        i2c5                    Choose the I2C5 bus (configure with the i2c4
+                                overlay - BCM2711 only)
+
+        i2c6                    Choose the I2C6 bus (configure with the i2c6
+                                overlay - BCM2711 only)
 
 
 Name:   i2c0
@@ -1872,6 +2022,24 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         vcm                     Configure a VCM focus drive on the sensor.
 
 
+Name:   imx258
+Info:   Sony IMX258 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=imx258,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 180)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+        vcm                     Configure a VCM focus drive on the sensor.
+        4lane                   Enable 4 CSI2 lanes. This requires a Compute
+                                Module (1, 3, or 4).
+
+
 Name:   imx290
 Info:   Sony IMX290 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
@@ -1890,6 +2058,21 @@ Params: 4lane                   Enable 4 CSI2 lanes. This requires a Compute
                                 2 = external, default external)
         rotation                Mounting rotation of the camera sensor (0 or
                                 180, default 0)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
+Name:   imx296
+Info:   Sony IMX296 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=imx296,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 180)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
         media-controller        Configure use of Media Controller API for
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
@@ -2761,6 +2944,10 @@ Params: speed                   Display SPI bus speed
 
         debug                   Debug output level {0-7}
 
+        drm                     Force the use of the mi0283qt DRM driver (by
+                                default the ili9340 framebuffer driver will
+                                be used in preference if available)
+
 
 Name:   pitft35-resistive
 Info:   Adafruit PiTFT 3.5" resistive touch screen
@@ -2859,6 +3046,35 @@ Info:   in-tech's Evaluation Board for PLC Stamp micro (UART)
 Load:   dtoverlay=qca7000-uart0,<param>=<val>
 Params: baudrate                Set the baudrate for the UART (default
                                 "115200")
+
+
+Name:   ramoops
+Info:   Enable the preservation of crash logs across a reboot. With
+        systemd-pstore enabled (as it is on Raspberry Pi OS) the crash logs
+        are moved to /var/lib/systemd/pstore/ on reboot.
+Load:   dtoverlay=ramoops,<param>=<val>
+Params: base-addr               Where to place the capture buffer (default
+                                0x0b000000)
+        total-size              How much memory to allocate altogether (in
+                                bytes - default 64kB)
+        record-size             How much space to use for each capture, i.e.
+                                total-size / record-size = number of captures
+                                (default 16kB)
+        console-size            Size of non-panic dmesg captures (default 0)
+
+
+Name:   ramoops-pi4
+Info:   The version of the ramoops overlay for the Pi 4 family. It should be
+        loaded automatically if dtoverlay=ramoops is specified on a Pi 4.
+Load:   dtoverlay=ramoops-pi4,<param>=<val>
+Params: base-addr               Where to place the capture buffer (default
+                                0x0b000000)
+        total-size              How much memory to allocate altogether (in
+                                bytes - default 64kB)
+        record-size             How much space to use for each capture, i.e.
+                                total-size / record-size = number of captures
+                                (default 16kB)
+        console-size            Size of non-panic dmesg captures (default 0)
 
 
 Name:   rotary-encoder
@@ -3020,10 +3236,9 @@ Params: <None>
 
 
 Name:   rpivid-v4l2
-Info:   Load the V4L2 stateless video decoder driver for the HEVC block,
-        disabling the memory mapped devices in the process.
-Load:   dtoverlay=rpivid-v4l2
-Params: <None>
+Info:   This overlay has been deprecated and deleted as the V4L2 stateless
+        video decoder driver is enabled by default.
+Load:   <Deprecated>
 
 
 Name:   rra-digidac1-wm8741-audio
@@ -3911,6 +4126,7 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
         noaudio                 Disable all HDMI audio (default "off")
         composite               Enable the composite output (default "off")
                                 N.B. Disables all other outputs on a Pi 4.
+        nohdmi                  Disable HDMI output
 
 
 Name:   vc4-kms-v3d-pi4
@@ -3934,6 +4150,10 @@ Params: cma-512                 CMA is 512MB
         noaudio                 Disable all HDMI audio (default "off")
         composite               Enable the composite output (disables all other
                                 outputs)
+        nohdmi                  Disable both HDMI 0 & 1 outputs
+        nohdmi0                 Disable HDMI 0 output
+        nohdmi1                 Disable HDMI 1 output
+
 
 
 Name:   vc4-kms-vga666

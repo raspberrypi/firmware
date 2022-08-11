@@ -29,9 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "gpu_fft_trans.h"
 #include "hello_fft_2d_bitmap.h"
+#include "mailbox.h"
 
 #define log2_N 9
 #define N (1<<log2_N)
