@@ -1238,6 +1238,7 @@ kernel/drivers/iio/industrialio.ko.xz:
 kernel/drivers/iio/industrialio-configfs.ko.xz:
 kernel/drivers/iio/industrialio-sw-trigger.ko.xz: kernel/drivers/iio/industrialio-configfs.ko.xz
 kernel/drivers/mux/mux-core.ko.xz:
+kernel/drivers/mux/mux-gpio.ko.xz: kernel/drivers/mux/mux-core.ko.xz
 kernel/sound/core/oss/snd-pcm-oss.ko.xz: kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
 kernel/sound/core/snd.ko.xz:
 kernel/sound/core/snd-hwdep.ko.xz: kernel/sound/core/snd.ko.xz

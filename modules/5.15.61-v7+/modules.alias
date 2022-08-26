@@ -10715,6 +10715,8 @@ alias spi:max31856 max31856
 alias of:N*T*Cmaxim,max31856C* max31856
 alias of:N*T*Cmaxim,max31856 max31856
 alias platform:iio-trig-sysfs iio_trig_sysfs
+alias of:N*T*Cgpio-muxC* mux_gpio
+alias of:N*T*Cgpio-mux mux_gpio
 alias sound-service-?-12 snd_pcm_oss
 alias sound-service-?-3 snd_pcm_oss
 alias char-major-116-* snd
