@@ -27,6 +27,7 @@ softdep btrfs pre: blake2b-256
 softdep btrfs pre: sha256
 softdep btrfs pre: xxhash64
 softdep btrfs pre: crc32c
+softdep vc4 pre: snd-soc-hdmi-codec
 softdep arizona_i2c pre: arizona_ldo1
 softdep arizona_spi pre: arizona_ldo1
 softdep r8169 pre: realtek

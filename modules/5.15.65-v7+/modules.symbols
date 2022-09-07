@@ -1427,6 +1427,7 @@ alias symbol:wiphy_read_of_freq_limits cfg80211
 alias symbol:mwifiex_alloc_dma_align_buf mwifiex
 alias symbol:regulatory_set_wiphy_regd cfg80211
 alias symbol:ssb_clockspeed ssb
+alias symbol:drmm_crtc_init_with_planes drm
 alias symbol:drm_modeset_lock_all_ctx drm
 alias symbol:ocfs2_dlm_lock_status ocfs2_stackglue
 alias symbol:roccat_common2_receive hid_roccat_common
@@ -1670,6 +1671,7 @@ alias symbol:vc_sm_cma_free vc_sm_cma
 alias symbol:cx2341x_mpeg_ctrls cx2341x
 alias symbol:drm_fb_xrgb8888_to_rgb565_dstclip drm_kms_helper
 alias symbol:cfg80211_sched_scan_stopped cfg80211
+alias symbol:drmm_of_get_bridge drm_kms_helper
 alias symbol:ocfs2_stack_glue_register ocfs2_stackglue
 alias symbol:dib7000m_pid_filter_ctrl dib7000m
 alias symbol:ieee80211_channel_to_freq_khz cfg80211
@@ -1941,6 +1943,7 @@ alias symbol:fsg_fs_function usb_f_mass_storage
 alias symbol:snd_card_file_add snd
 alias symbol:ath9k_hw_set_txpowerlimit ath9k_hw
 alias symbol:rtl92c_download_fw rtl8192c_common
+alias symbol:drmm_connector_init drm
 alias symbol:chacha_crypt_generic libchacha
 alias symbol:dib9000_set_i2c_adapter dib9000
 alias symbol:tpm_get_timeouts tpm
@@ -2759,6 +2762,7 @@ alias symbol:ieee80211_alloc_hw_nm mac80211
 alias symbol:ax25_bcast ax25
 alias symbol:nf_dup_ipv4 nf_dup_ipv4
 alias symbol:st_register st_drv
+alias symbol:drmm_mutex_init drm
 alias symbol:ipvlan_link_setup ipvlan
 alias symbol:__snd_rawmidi_transmit_ack snd_rawmidi
 alias symbol:ieee80211_beacon_get_tim mac80211
@@ -3042,6 +3046,7 @@ alias symbol:fbtft_dbg_hex fbtft
 alias symbol:hostap_set_multicast_list_queue hostap
 alias symbol:snd_pcm_create_iec958_consumer snd_pcm
 alias symbol:snd_timer_instance_new snd_timer
+alias symbol:drmm_panel_bridge_add drm_kms_helper
 alias symbol:fsg_fs_bulk_out_desc usb_f_mass_storage
 alias symbol:dm_bm_checksum dm_persistent_data
 alias symbol:drm_crtc_create_scaling_filter_property drm
@@ -3266,6 +3271,7 @@ alias symbol:drm_dp_lttpr_max_lane_count drm_kms_helper
 alias symbol:snd_soc_of_parse_node_prefix snd_soc_core
 alias symbol:cdc_ncm_tx_fixup cdc_ncm
 alias symbol:drm_property_create_range drm
+alias symbol:drmm_encoder_init drm
 alias symbol:ieee802154_alloc_hw mac802154
 alias symbol:mt76x02_tx_complete_skb mt76x02_lib
 alias symbol:v4l2_fill_pixfmt_mp videodev
