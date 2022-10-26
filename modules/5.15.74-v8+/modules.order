@@ -966,6 +966,7 @@ kernel/drivers/power/supply/rpi_poe_power.ko
 kernel/drivers/power/supply/ds2760_battery.ko
 kernel/drivers/power/supply/ltc2941-battery-gauge.ko
 kernel/drivers/power/supply/max17040_battery.ko
+kernel/drivers/hwmon/aht10.ko
 kernel/drivers/hwmon/ds1621.ko
 kernel/drivers/hwmon/emc2305.ko
 kernel/drivers/hwmon/gpio-fan.ko

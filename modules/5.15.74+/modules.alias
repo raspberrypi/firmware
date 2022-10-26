@@ -9040,6 +9040,7 @@ alias of:N*T*Cmaxim,max17041C* max17040_battery
 alias of:N*T*Cmaxim,max17041 max17040_battery
 alias of:N*T*Cmaxim,max17040C* max17040_battery
 alias of:N*T*Cmaxim,max17040 max17040_battery
+alias i2c:aht10 aht10
 alias i2c:ds1731 ds1621
 alias i2c:ds1721 ds1621
 alias i2c:ds1631 ds1621
