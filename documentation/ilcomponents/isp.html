@@ -61,9 +61,8 @@ then the port will effectively be disabled and no ouput produced. It also doesn'
 the colour conversion block, and so only supports YUV formats.
 Port 363 provides the image statistics available when a Bayer input format is used.
 <p>
-Port 361 is treated as the main output - the pipeline will stall until an output
-buffer is available on that port. That includes if port 361 is disabled then no
-processing will occur.
+Port 361 is treated as the main output. If this port is in an executing state,
+the pipeline will stall until an output buffer is available.
 If no output buffer is available on port 362 when both an input buffer and
 port 361 output buffer are available, the frame will be processed with the low
 resolution output disabled.
