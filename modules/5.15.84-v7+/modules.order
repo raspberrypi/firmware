@@ -586,6 +586,7 @@ kernel/drivers/media/i2c/arducam_64mp.ko
 kernel/drivers/media/i2c/arducam-pivariety.ko
 kernel/drivers/media/i2c/saa7115.ko
 kernel/drivers/media/i2c/ad5398_vcm.ko
+kernel/drivers/media/i2c/dw9807-vcm.ko
 kernel/drivers/media/i2c/adv7180.ko
 kernel/drivers/media/i2c/tvp5150.ko
 kernel/drivers/media/i2c/tw2804.ko
@@ -610,6 +611,7 @@ kernel/drivers/media/i2c/imx290.ko
 kernel/drivers/media/i2c/imx296.ko
 kernel/drivers/media/i2c/imx477.ko
 kernel/drivers/media/i2c/imx519.ko
+kernel/drivers/media/i2c/imx708.ko
 kernel/drivers/media/tuners/tuner-xc2028.ko
 kernel/drivers/media/tuners/tuner-simple.ko
 kernel/drivers/media/tuners/tuner-types.ko
@@ -1193,6 +1195,7 @@ kernel/drivers/iio/light/veml6070.ko
 kernel/drivers/iio/pressure/bmp280.ko
 kernel/drivers/iio/pressure/bmp280-i2c.ko
 kernel/drivers/iio/pressure/bmp280-spi.ko
+kernel/drivers/iio/pressure/ms5637.ko
 kernel/drivers/iio/temperature/maxim_thermocouple.ko
 kernel/drivers/iio/temperature/max31856.ko
 kernel/drivers/iio/trigger/iio-trig-hrtimer.ko

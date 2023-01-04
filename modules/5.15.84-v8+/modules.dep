@@ -595,6 +595,7 @@ kernel/drivers/media/i2c/arducam_64mp.ko.xz: kernel/drivers/media/v4l2-core/v4l2
 kernel/drivers/media/i2c/arducam-pivariety.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/i2c/saa7115.ko.xz: kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/i2c/ad5398_vcm.ko.xz: kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
+kernel/drivers/media/i2c/dw9807-vcm.ko.xz: kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/i2c/adv7180.ko.xz: kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/i2c/tvp5150.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/media/i2c/tw2804.ko.xz: kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
@@ -619,6 +620,7 @@ kernel/drivers/media/i2c/imx290.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnod
 kernel/drivers/media/i2c/imx296.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/media/i2c/imx477.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/i2c/imx519.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
+kernel/drivers/media/i2c/imx708.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/tuners/tuner-xc2028.ko.xz:
 kernel/drivers/media/tuners/tuner-simple.ko.xz: kernel/drivers/media/tuners/tuner-types.ko.xz
 kernel/drivers/media/tuners/tuner-types.ko.xz:
@@ -1218,6 +1220,7 @@ kernel/drivers/iio/light/veml6070.ko.xz: kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/iio/pressure/bmp280.ko.xz: kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/iio/pressure/bmp280-i2c.ko.xz: kernel/drivers/iio/pressure/bmp280.ko.xz kernel/drivers/iio/industrialio.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/iio/pressure/bmp280-spi.ko.xz: kernel/drivers/iio/pressure/bmp280.ko.xz kernel/drivers/iio/industrialio.ko.xz
+kernel/drivers/iio/pressure/ms5637.ko.xz: kernel/drivers/iio/common/ms_sensors/ms_sensors_i2c.ko.xz kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/iio/temperature/maxim_thermocouple.ko.xz: kernel/drivers/iio/buffer/industrialio-triggered-buffer.ko.xz kernel/drivers/iio/buffer/kfifo_buf.ko.xz kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/iio/temperature/max31856.ko.xz: kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/iio/trigger/iio-trig-hrtimer.ko.xz: kernel/drivers/iio/industrialio-sw-trigger.ko.xz kernel/drivers/iio/industrialio-configfs.ko.xz kernel/drivers/iio/industrialio.ko.xz
