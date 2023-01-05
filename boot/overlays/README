@@ -144,15 +144,21 @@ Params:
                                 See /sys/kernel/debug/raspberrypi_axi_monitor
                                 for the results.
 
-        cam0_reg                Enables CAM 0 regulator. CM1 & 3 only.
+        cam0_reg                Enables CAM 0 regulator.
+                                Only required on CM1 & 3.
 
-        cam0_reg_gpio           Set GPIO for CAM 0 regulator. Default 30.
-                                CM1 & 3 only.
+        cam0_reg_gpio           Set GPIO for CAM 0 regulator.
+                                Default 31 on CM1, 3, and 4S.
+                                Default of GPIO expander 5 on CM4, but override
+                                switches to normal GPIO.
 
-        cam1_reg                Enables CAM 1 regulator. CM1 & 3 only.
+        cam1_reg                Enables CAM 1 regulator.
+                                Only required on CM1 & 3.
 
-        cam1_reg_gpio           Set GPIO for CAM 1 regulator. Default 2.
-                                CM1 & 3 only.
+        cam1_reg_gpio           Set GPIO for CAM 1 regulator.
+                                Default 3 on CM1, 3, and 4S.
+                                Default of GPIO expander 5 on CM4, but override
+                                switches to normal GPIO.
 
         eee                     Enable Energy Efficient Ethernet support for
                                 compatible devices (default "on"). See also
@@ -787,6 +793,22 @@ Load:   dtoverlay=cirrus-wm5102
 Params: <None>
 
 
+Name:   cm-swap-i2c0
+Info:   Largely for Compute Modules 1&3 where the original instructions for
+        adding a camera used GPIOs 0&1 for CAM1 and 28&29 for CAM0, whilst all
+        other platforms use 28&29 (or 44&45) for CAM1.
+        The default assignment through using this overlay is for
+        i2c0 to use 28&29, and i2c10 (aka i2c_csi_dsi) to use 28&29, but the
+        overrides allow this to be changed.
+Load:   dtoverlay=cm-swap-i2c0,<param>=<val>
+Params: i2c0-gpio0              Use GPIOs 0&1 for i2c0
+        i2c0-gpio28             Use GPIOs 28&29 for i2c0 (default)
+        i2c0-gpio44             Use GPIOs 44&45 for i2c0
+        i2c10-gpio0             Use GPIOs 0&1 for i2c0 (default)
+        i2c10-gpio28            Use GPIOs 28&29 for i2c0
+        i2c10-gpio44            Use GPIOs 44&45 for i2c0
+
+
 Name:   cma
 Info:   Set custom CMA sizes, only use if you know what you are doing, might
         clash with other overlays like vc4-fkms-v3d and vc4-kms-v3d.
@@ -870,6 +892,14 @@ Info:   Disable onboard Bluetooth on Pi 3B, 3B+, 3A+, 4B and Zero W, restoring
         N.B. To disable the systemd service that initialises the modem so it
         doesn't use the UART, use 'sudo systemctl disable hciuart'.
 Load:   dtoverlay=disable-bt
+Params: <None>
+
+
+Name:   disable-emmc2
+Info:   Disable EMMC2 controller on BCM2711.
+        The allows the onboard EMMC storage on Compute Module 4 to be disabled
+        e.g. if a fault has occurred.
+Load:   dtoverlay=disable-emmc2
 Params: <None>
 
 
