@@ -984,6 +984,8 @@ kernel/drivers/md/dm-bufio.ko.xz: kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-bio-prison.ko.xz:
 kernel/drivers/md/dm-crypt.ko.xz: kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-delay.ko.xz: kernel/drivers/md/dm-mod.ko.xz
+kernel/drivers/md/dm-multipath.ko.xz: kernel/drivers/md/dm-mod.ko.xz
+kernel/drivers/md/dm-round-robin.ko.xz: kernel/drivers/md/dm-multipath.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-snapshot.ko.xz: kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/persistent-data/dm-persistent-data.ko.xz: kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-mirror.ko.xz: kernel/drivers/md/dm-region-hash.ko.xz kernel/drivers/md/dm-log.ko.xz kernel/drivers/md/dm-mod.ko.xz

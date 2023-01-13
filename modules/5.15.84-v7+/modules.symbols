@@ -7,6 +7,7 @@ alias symbol:snd_dmaengine_pcm_get_chan snd_pcm_dmaengine
 alias symbol:ar9003_paprd_is_done ath9k_hw
 alias symbol:drm_crtc_add_crc_entry drm
 alias symbol:hostap_remove_proc hostap
+alias symbol:dm_register_path_selector dm_multipath
 alias symbol:fsg_show_ro usb_f_mass_storage
 alias symbol:ubi_leb_read ubi
 alias symbol:v4l2_m2m_buf_remove v4l2_mem2mem
@@ -2387,6 +2388,7 @@ alias symbol:xt_counters_alloc x_tables
 alias symbol:drm_fb_blit_dstclip drm_kms_helper
 alias symbol:mt76_rx_aggr_stop mt76
 alias symbol:ct_sip_parse_numerical_param nf_conntrack_sip
+alias symbol:dm_unregister_path_selector dm_multipath
 alias symbol:drm_dp_update_payload_part2 drm_kms_helper
 alias symbol:em28xx_gpio_set em28xx
 alias symbol:snd_soc_pm_ops snd_soc_core

@@ -984,6 +984,8 @@ kernel/drivers/md/dm-bufio.ko
 kernel/drivers/md/dm-bio-prison.ko
 kernel/drivers/md/dm-crypt.ko
 kernel/drivers/md/dm-delay.ko
+kernel/drivers/md/dm-multipath.ko
+kernel/drivers/md/dm-round-robin.ko
 kernel/drivers/md/dm-snapshot.ko
 kernel/drivers/md/persistent-data/dm-persistent-data.ko
 kernel/drivers/md/dm-mirror.ko
