@@ -146,8 +146,13 @@ kernel/drivers/gpio/gpio-max730x.ko.xz:
 kernel/drivers/gpio/gpio-mockup.ko.xz:
 kernel/drivers/gpio/gpio-pca953x.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/gpio/gpio-pcf857x.ko.xz:
+kernel/drivers/pwm/pwm-bcm2835.ko.xz:
+kernel/drivers/pwm/pwm-pca9685.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
+kernel/drivers/pwm/pwm-raspberrypi-poe.ko.xz:
 kernel/drivers/video/backlight/backlight.ko.xz:
 kernel/drivers/video/backlight/gpio_backlight.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/video/backlight/lm3630a_bl.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
+kernel/drivers/video/backlight/pwm_bl.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/video/backlight/rpi_backlight.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/video/fbdev/core/sysfillrect.ko.xz:
 kernel/drivers/video/fbdev/core/syscopyarea.ko.xz:
@@ -672,6 +677,7 @@ kernel/drivers/media/rc/streamzap.ko.xz:
 kernel/drivers/media/rc/rc-loopback.ko.xz:
 kernel/drivers/media/rc/gpio-ir-recv.ko.xz:
 kernel/drivers/media/rc/gpio-ir-tx.ko.xz:
+kernel/drivers/media/rc/pwm-ir-tx.ko.xz:
 kernel/drivers/media/rc/iguanair.ko.xz:
 kernel/drivers/media/rc/ttusbir.ko.xz:
 kernel/drivers/media/rc/ir_toy.ko.xz:
@@ -974,6 +980,7 @@ kernel/drivers/hwmon/iio_hwmon.ko.xz: kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/hwmon/ina2xx.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/hwmon/jc42.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/hwmon/lm75.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
+kernel/drivers/hwmon/pwm-fan.ko.xz:
 kernel/drivers/hwmon/raspberrypi-hwmon.ko.xz:
 kernel/drivers/hwmon/sht21.ko.xz:
 kernel/drivers/hwmon/sht3x.ko.xz: kernel/lib/crc8.ko.xz

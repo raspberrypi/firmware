@@ -147,8 +147,13 @@ kernel/drivers/gpio/gpio-max730x.ko
 kernel/drivers/gpio/gpio-mockup.ko
 kernel/drivers/gpio/gpio-pca953x.ko
 kernel/drivers/gpio/gpio-pcf857x.ko
+kernel/drivers/pwm/pwm-bcm2835.ko
+kernel/drivers/pwm/pwm-pca9685.ko
+kernel/drivers/pwm/pwm-raspberrypi-poe.ko
 kernel/drivers/video/backlight/backlight.ko
 kernel/drivers/video/backlight/gpio_backlight.ko
+kernel/drivers/video/backlight/lm3630a_bl.ko
+kernel/drivers/video/backlight/pwm_bl.ko
 kernel/drivers/video/backlight/rpi_backlight.ko
 kernel/drivers/video/fbdev/core/sysfillrect.ko
 kernel/drivers/video/fbdev/core/syscopyarea.ko
@@ -668,6 +673,7 @@ kernel/drivers/media/rc/streamzap.ko
 kernel/drivers/media/rc/rc-loopback.ko
 kernel/drivers/media/rc/gpio-ir-recv.ko
 kernel/drivers/media/rc/gpio-ir-tx.ko
+kernel/drivers/media/rc/pwm-ir-tx.ko
 kernel/drivers/media/rc/iguanair.ko
 kernel/drivers/media/rc/ttusbir.ko
 kernel/drivers/media/rc/ir_toy.ko
@@ -965,6 +971,7 @@ kernel/drivers/hwmon/iio_hwmon.ko
 kernel/drivers/hwmon/ina2xx.ko
 kernel/drivers/hwmon/jc42.ko
 kernel/drivers/hwmon/lm75.ko
+kernel/drivers/hwmon/pwm-fan.ko
 kernel/drivers/hwmon/raspberrypi-hwmon.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/sht3x.ko
