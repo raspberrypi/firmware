@@ -7218,7 +7218,7 @@
 0xe52c77f8	vchiq_bulk_receive	vmlinux	EXPORT_SYMBOL	
 0x222cd5ab	vchiq_bulk_transmit	vmlinux	EXPORT_SYMBOL	
 0x974263eb	vchiq_connect	vmlinux	EXPORT_SYMBOL	
-0x35724021	vchiq_initialise	vmlinux	EXPORT_SYMBOL	
+0xe931eae8	vchiq_initialise	vmlinux	EXPORT_SYMBOL	
 0xf1e4674e	vchiq_open_service	vmlinux	EXPORT_SYMBOL	
 0x3e10b896	vchiq_release_service	vmlinux	EXPORT_SYMBOL	
 0x97af1beb	vchiq_shutdown	vmlinux	EXPORT_SYMBOL	
@@ -13516,6 +13516,8 @@
 0xae0cf32c	ms_sensors_tp_read_prom	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
 0x240d1ecb	ms_sensors_write_heater	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
 0x6f2740bc	ms_sensors_write_resolution	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
+0xfb1ecbcb	bno055_probe	drivers/iio/imu/bno055/bno055	EXPORT_SYMBOL_GPL	IIO_BNO055
+0x92afecac	bno055_regmap_config	drivers/iio/imu/bno055/bno055	EXPORT_SYMBOL_GPL	IIO_BNO055
 0xb43a29b3	inv_mpu_core_probe	drivers/iio/imu/inv_mpu6050/inv-mpu6050	EXPORT_SYMBOL_GPL	
 0x43e7a9e0	inv_mpu_pmops	drivers/iio/imu/inv_mpu6050/inv-mpu6050	EXPORT_SYMBOL_GPL	
 0xbba5b215	bmp280_common_probe	drivers/iio/pressure/bmp280	EXPORT_SYMBOL	IIO_BMP280

@@ -7007,17 +7007,18 @@
 0x1c9a0ca9	xhci_add_endpoint	vmlinux	EXPORT_SYMBOL_GPL	
 0xf95595a4	xhci_check_bandwidth	vmlinux	EXPORT_SYMBOL_GPL	
 0xc5af4e04	xhci_drop_endpoint	vmlinux	EXPORT_SYMBOL_GPL	
-0x58368035	xhci_gen_setup	vmlinux	EXPORT_SYMBOL_GPL	
+0x32eab8b3	xhci_gen_setup	vmlinux	EXPORT_SYMBOL_GPL	
 0x57d4050a	xhci_get_endpoint_index	vmlinux	EXPORT_SYMBOL_GPL	
-0x3bca09e0	xhci_init_driver	vmlinux	EXPORT_SYMBOL_GPL	
+0xee42bab5	xhci_init_driver	vmlinux	EXPORT_SYMBOL_GPL	
 0xed84a7f4	xhci_reset_bandwidth	vmlinux	EXPORT_SYMBOL_GPL	
-0x9430a5ea	xhci_resume	vmlinux	EXPORT_SYMBOL_GPL	
+0x0fa3e1fc	xhci_resume	vmlinux	EXPORT_SYMBOL_GPL	
 0xb6cac2d2	xhci_run	vmlinux	EXPORT_SYMBOL_GPL	
 0x29cb7ee0	xhci_shutdown	vmlinux	EXPORT_SYMBOL_GPL	
-0x6f1b197f	xhci_suspend	vmlinux	EXPORT_SYMBOL_GPL	
-0x67248f1b	xhci_get_ep_ctx	vmlinux	EXPORT_SYMBOL_GPL	
-0x8c352068	xhci_ext_cap_init	vmlinux	EXPORT_SYMBOL_GPL	
-0xdb89f720	xhci_dbg_trace	vmlinux	EXPORT_SYMBOL_GPL	
+0xbb39dff7	xhci_suspend	vmlinux	EXPORT_SYMBOL_GPL	
+0x05485e5b	xhci_update_hub_device	vmlinux	EXPORT_SYMBOL_GPL	
+0x6e4b264e	xhci_get_ep_ctx	vmlinux	EXPORT_SYMBOL_GPL	
+0xeea52460	xhci_ext_cap_init	vmlinux	EXPORT_SYMBOL_GPL	
+0x9700bbe1	xhci_dbg_trace	vmlinux	EXPORT_SYMBOL_GPL	
 0xd7dccd23	__SCK__tp_func_xhci_dbg_quirks	vmlinux	EXPORT_SYMBOL_GPL	
 0x4c549b36	__traceiter_xhci_dbg_quirks	vmlinux	EXPORT_SYMBOL_GPL	
 0x8c917a61	__tracepoint_xhci_dbg_quirks	vmlinux	EXPORT_SYMBOL_GPL	
@@ -7961,7 +7962,7 @@
 0x16aaf11a	vchiq_bulk_receive	vmlinux	EXPORT_SYMBOL	
 0x57cca09d	vchiq_bulk_transmit	vmlinux	EXPORT_SYMBOL	
 0x1d40d8e0	vchiq_connect	vmlinux	EXPORT_SYMBOL	
-0xf7f50f5e	vchiq_initialise	vmlinux	EXPORT_SYMBOL	
+0xeaf3148e	vchiq_initialise	vmlinux	EXPORT_SYMBOL	
 0x829a96d6	vchiq_open_service	vmlinux	EXPORT_SYMBOL	
 0xc1cea262	vchiq_release_service	vmlinux	EXPORT_SYMBOL	
 0xd9ae0d8b	vchiq_shutdown	vmlinux	EXPORT_SYMBOL	
@@ -14522,6 +14523,8 @@
 0xa17c432a	ms_sensors_tp_read_prom	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
 0xbfd81fee	ms_sensors_write_heater	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
 0x829566af	ms_sensors_write_resolution	drivers/iio/common/ms_sensors/ms_sensors_i2c	EXPORT_SYMBOL	IIO_MEAS_SPEC_SENSORS
+0xcff82104	bno055_probe	drivers/iio/imu/bno055/bno055	EXPORT_SYMBOL_GPL	IIO_BNO055
+0x34f14aa0	bno055_regmap_config	drivers/iio/imu/bno055/bno055	EXPORT_SYMBOL_GPL	IIO_BNO055
 0x9963dc9e	inv_mpu_core_probe	drivers/iio/imu/inv_mpu6050/inv-mpu6050	EXPORT_SYMBOL_GPL	
 0xcff5d340	inv_mpu_pmops	drivers/iio/imu/inv_mpu6050/inv-mpu6050	EXPORT_SYMBOL_GPL	
 0xe53ccf41	bmp280_common_probe	drivers/iio/pressure/bmp280	EXPORT_SYMBOL	IIO_BMP280
