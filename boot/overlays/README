@@ -2005,6 +2005,9 @@ Params: addr                    Set the address for the BH1750, BME280, BME680,
         bmp280                  Select the Bosch Sensortronic BMP280
                                 Valid addresses 0x76-0x77, default 0x76
 
+        bno055                  Select the Bosch Sensortronic BNO055 IMU
+                                Valid address 0x28-0x29, default 0x29
+
         ccs811                  Select the AMS CCS811 digital gas sensor
                                 Valid addresses 0x5a-0x5b, default 0x5b
 
@@ -2070,6 +2073,9 @@ Params: addr                    Set the address for the BH1750, BME280, BME680,
                                 by some jc42 devices - using with an
                                 incompatible device can stop it from being
                                 activated.
+
+        reset_pin               GPIO to be used to reset the device (bno055
+                                only, disabled by default)
 
         sht3x                   Select the Sensirion SHT3x temperature and
                                 humidity sensors. Valid addresses 0x44-0x45,
@@ -4175,6 +4181,14 @@ Info:   Enables support for Infineon SLB9670 Trusted Platform Module add-on
         boards, which can be used as a secure key storage and hwrng,
         available as "Iridium SLB9670" by Infineon and "LetsTrust TPM" by pi3g.
 Load:   dtoverlay=tpm-slb9670
+Params: <None>
+
+
+Name:   tpm-slb9673
+Info:   Enables support for Infineon SLB9673 Trusted Platform Module add-on
+        boards, which can be used as a secure key storage and hwrng
+        via the I2C protocol.
+Load:   dtoverlay=tpm-slb9673
 Params: <None>
 
 
