@@ -4658,6 +4658,7 @@
 0x9367aa89	fb_deferred_io_init	vmlinux	EXPORT_SYMBOL_GPL	
 0x00e31933	fb_deferred_io_mmap	vmlinux	EXPORT_SYMBOL_GPL	
 0x3f91a03d	fb_deferred_io_open	vmlinux	EXPORT_SYMBOL_GPL	
+0xab1d9e73	fb_deferred_io_release	vmlinux	EXPORT_SYMBOL_GPL	
 0x230c794b	fbcon_update_vcs	vmlinux	EXPORT_SYMBOL	
 0x32a76ec1	fbcon_modechange_possible	vmlinux	EXPORT_SYMBOL_GPL	
 0x22ee4eec	cfb_fillrect	vmlinux	EXPORT_SYMBOL	

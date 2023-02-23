@@ -5014,6 +5014,7 @@
 0x2691c945	fb_deferred_io_mmap	vmlinux	EXPORT_SYMBOL_GPL	
 0x7d153352	fb_deferred_io_init	vmlinux	EXPORT_SYMBOL_GPL	
 0x5d07710d	fb_deferred_io_open	vmlinux	EXPORT_SYMBOL_GPL	
+0x6f1c56ee	fb_deferred_io_release	vmlinux	EXPORT_SYMBOL_GPL	
 0xcfa88afe	fb_deferred_io_cleanup	vmlinux	EXPORT_SYMBOL_GPL	
 0xef7d2e32	fbcon_update_vcs	vmlinux	EXPORT_SYMBOL	
 0x872255f3	fbcon_modechange_possible	vmlinux	EXPORT_SYMBOL_GPL	

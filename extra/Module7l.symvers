@@ -5003,6 +5003,7 @@
 0xaf6ad1ef	fb_deferred_io_init	vmlinux	EXPORT_SYMBOL_GPL	
 0x4403d308	fb_deferred_io_mmap	vmlinux	EXPORT_SYMBOL_GPL	
 0x567fdeb4	fb_deferred_io_open	vmlinux	EXPORT_SYMBOL_GPL	
+0x279868fc	fb_deferred_io_release	vmlinux	EXPORT_SYMBOL_GPL	
 0x6632e271	fbcon_update_vcs	vmlinux	EXPORT_SYMBOL	
 0x6946d5ef	fbcon_modechange_possible	vmlinux	EXPORT_SYMBOL_GPL	
 0xd0a119b2	cfb_fillrect	vmlinux	EXPORT_SYMBOL	

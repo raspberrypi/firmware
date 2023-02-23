@@ -4424,6 +4424,7 @@
 0xec343742	fb_deferred_io_init	vmlinux	EXPORT_SYMBOL_GPL	
 0x548835e5	fb_deferred_io_mmap	vmlinux	EXPORT_SYMBOL_GPL	
 0x9e1ca93e	fb_deferred_io_open	vmlinux	EXPORT_SYMBOL_GPL	
+0xdcd0e2e4	fb_deferred_io_release	vmlinux	EXPORT_SYMBOL_GPL	
 0xcd7a8d01	fbcon_update_vcs	vmlinux	EXPORT_SYMBOL	
 0xa220b13c	fbcon_modechange_possible	vmlinux	EXPORT_SYMBOL_GPL	
 0x87040f11	cfb_fillrect	vmlinux	EXPORT_SYMBOL	
