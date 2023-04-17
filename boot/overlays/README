@@ -1248,6 +1248,20 @@ Load:   dtoverlay=googlevoicehat-soundcard
 Params: <None>
 
 
+Name:   gpio-charger
+Info:   This is a generic overlay for detecting charger with GPIO.
+Load:   dtoverlay=gpio-charger,<param>=<val>
+Params: gpio                    GPIO pin to trigger on (default 4)
+        active_low              When this is 1 (active low), a falling
+                                edge generates a charging event and a
+                                rising edge generates a discharging event.
+                                When this is 0 (active high), this is
+                                reversed. The default is 0 (active high)
+        gpio_pull               Desired pull-up/down state (off, down, up)
+                                Default is "down".
+        type                    Set a charger type for the pin. (Default: mains)
+
+
 Name:   gpio-fan
 Info:   Configure a GPIO pin to control a cooling fan.
 Load:   dtoverlay=gpio-fan,<param>=<val>
@@ -3063,6 +3077,17 @@ Params: addr                    I2C address of expander. Default 0x20.
         cat9554                 Select the Onnn CAT9554 (8 bit)
         pca9654                 Select the Onnn PCA9654 (8 bit)
         xra1202                 Select the Exar XRA1202 (8 bit)
+
+
+Name:   pcf857x
+Info:   NXP PCF857x family of I2C GPIO expanders.
+Load:   dtoverlay=pcf857x,<param>=<val>
+Params: addr                    I2C address of expander. Default
+                                depends on model selected.
+        pcf8574                 Select the NXP PCF8574 (8 bit)
+        pcf8574a                Select the NXP PCF8574A (8 bit)
+        pcf8575                 Select the NXP PCF8575 (16 bit)
+        pca8574                 Select the NXP PCA8574 (8 bit)
 
 
 Name:   pcie-32bit-dma
