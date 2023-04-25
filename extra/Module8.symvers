@@ -1262,6 +1262,7 @@
 0x81f372a2	unregister_ftrace_export	vmlinux	EXPORT_SYMBOL_GPL	
 0xb43e092c	trace_array_put	vmlinux	EXPORT_SYMBOL_GPL	
 0x10138352	tracing_on	vmlinux	EXPORT_SYMBOL_GPL	
+0xb42cec94	__trace_array_puts	vmlinux	EXPORT_SYMBOL_GPL	
 0x2d41e6f5	__trace_puts	vmlinux	EXPORT_SYMBOL_GPL	
 0xb1e25684	__trace_bputs	vmlinux	EXPORT_SYMBOL_GPL	
 0x369fcd70	tracing_snapshot	vmlinux	EXPORT_SYMBOL_GPL	

@@ -1258,6 +1258,7 @@
 0x174c6274	ring_buffer_time_stamp	vmlinux	EXPORT_SYMBOL_GPL	
 0x42e9d0da	ring_buffer_unlock_commit	vmlinux	EXPORT_SYMBOL_GPL	
 0xd260af0d	ring_buffer_write	vmlinux	EXPORT_SYMBOL_GPL	
+0xa001933b	__trace_array_puts	vmlinux	EXPORT_SYMBOL_GPL	
 0xb1e25684	__trace_bputs	vmlinux	EXPORT_SYMBOL_GPL	
 0x2d41e6f5	__trace_puts	vmlinux	EXPORT_SYMBOL_GPL	
 0xaaa918c9	ftrace_dump	vmlinux	EXPORT_SYMBOL_GPL	
