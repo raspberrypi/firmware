@@ -1821,7 +1821,6 @@
 0x0ba0b938	vm_brk	vmlinux	EXPORT_SYMBOL	
 0x8a7094ba	vm_brk_flags	vmlinux	EXPORT_SYMBOL	
 0x7b5c8440	vm_munmap	vmlinux	EXPORT_SYMBOL	
-0x9f4c9b55	find_extend_vma	vmlinux	EXPORT_SYMBOL_GPL	
 0x7e29eb73	folio_mkclean	vmlinux	EXPORT_SYMBOL_GPL	
 0xae04012c	__vmalloc	vmlinux	EXPORT_SYMBOL	
 0xc31db0ce	is_vmalloc_addr	vmlinux	EXPORT_SYMBOL	

@@ -1801,7 +1801,6 @@
 0x1be41052	get_unmapped_area	vmlinux	EXPORT_SYMBOL	
 0x5ca8b7dc	find_vma_intersection	vmlinux	EXPORT_SYMBOL	
 0xcea67a00	find_vma	vmlinux	EXPORT_SYMBOL	
-0x96f56d05	find_extend_vma	vmlinux	EXPORT_SYMBOL_GPL	
 0x5b56860c	vm_munmap	vmlinux	EXPORT_SYMBOL	
 0x8a7094ba	vm_brk_flags	vmlinux	EXPORT_SYMBOL	
 0x0ba0b938	vm_brk	vmlinux	EXPORT_SYMBOL	
