@@ -12442,6 +12442,7 @@ alias rpc-auth-gss-krb5i rpcsec_gss_krb5
 alias rpc-auth-gss-krb5 rpcsec_gss_krb5
 alias rtnl-link-vlan 8021q
 alias net-pf-16-proto-16-family-nl80211 cfg80211
+alias net-pf-16-proto-4-type-2-262 mptcp_diag
 alias net-pf-15 af_key
 alias nft-expr-7-reject nft_reject_bridge
 alias rtnl-link-bridge bridge

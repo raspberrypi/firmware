@@ -1687,6 +1687,7 @@ kernel/net/wireless/lib80211_crypt_wep.ko.xz: kernel/net/wireless/lib80211.ko.xz
 kernel/net/wireless/lib80211_crypt_ccmp.ko.xz: kernel/net/wireless/lib80211.ko.xz
 kernel/net/wireless/lib80211_crypt_tkip.ko.xz: kernel/net/wireless/lib80211.ko.xz kernel/lib/crypto/libarc4.ko.xz
 kernel/net/mpls/mpls_gso.ko.xz:
+kernel/net/mptcp/mptcp_diag.ko.xz: kernel/net/ipv4/inet_diag.ko.xz
 kernel/net/llc/llc.ko.xz:
 kernel/net/key/af_key.ko.xz: kernel/net/xfrm/xfrm_algo.ko.xz
 kernel/net/bridge/netfilter/nft_reject_bridge.ko.xz: kernel/net/bridge/bridge.ko.xz kernel/net/802/stp.ko.xz kernel/net/ipv4/netfilter/nf_reject_ipv4.ko.xz kernel/net/ipv6/netfilter/nf_reject_ipv6.ko.xz kernel/net/netfilter/nft_reject.ko.xz kernel/net/netfilter/nf_tables.ko.xz kernel/net/netfilter/nfnetlink.ko.xz kernel/net/llc/llc.ko.xz kernel/net/ipv6/ipv6.ko.xz

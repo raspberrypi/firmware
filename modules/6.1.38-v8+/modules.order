@@ -1687,6 +1687,7 @@ kernel/net/wireless/lib80211_crypt_wep.ko
 kernel/net/wireless/lib80211_crypt_ccmp.ko
 kernel/net/wireless/lib80211_crypt_tkip.ko
 kernel/net/mpls/mpls_gso.ko
+kernel/net/mptcp/mptcp_diag.ko
 kernel/net/llc/llc.ko
 kernel/net/key/af_key.ko
 kernel/net/bridge/netfilter/nft_reject_bridge.ko
