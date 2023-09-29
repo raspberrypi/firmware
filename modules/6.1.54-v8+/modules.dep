@@ -1,4 +1,16 @@
+kernel/arch/arm64/crypto/sha1-ce.ko.xz:
+kernel/arch/arm64/crypto/sha2-ce.ko.xz: kernel/arch/arm64/crypto/sha256-arm64.ko.xz
+kernel/arch/arm64/crypto/sha512-ce.ko.xz: kernel/arch/arm64/crypto/sha512-arm64.ko.xz
+kernel/arch/arm64/crypto/sha3-ce.ko.xz: kernel/crypto/sha3_generic.ko.xz
+kernel/arch/arm64/crypto/sm3-ce.ko.xz: kernel/crypto/sm3.ko.xz
+kernel/arch/arm64/crypto/sm4-ce-cipher.ko.xz: kernel/crypto/sm4.ko.xz
+kernel/arch/arm64/crypto/ghash-ce.ko.xz: kernel/crypto/gf128mul.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/arch/arm64/crypto/aes-ce-cipher.ko.xz: kernel/lib/crypto/libaes.ko.xz
+kernel/arch/arm64/crypto/aes-ce-ccm.ko.xz: kernel/arch/arm64/crypto/aes-ce-cipher.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/arch/arm64/crypto/aes-ce-blk.ko.xz: kernel/arch/arm64/crypto/aes-ce-cipher.ko.xz kernel/lib/crypto/libaes.ko.xz
 kernel/arch/arm64/crypto/aes-neon-blk.ko.xz: kernel/lib/crypto/libaes.ko.xz
+kernel/arch/arm64/crypto/sha256-arm64.ko.xz:
+kernel/arch/arm64/crypto/sha512-arm64.ko.xz:
 kernel/arch/arm64/crypto/chacha-neon.ko.xz: kernel/lib/crypto/libchacha.ko.xz
 kernel/arch/arm64/crypto/poly1305-neon.ko.xz:
 kernel/arch/arm64/crypto/aes-arm64.ko.xz: kernel/crypto/aes_generic.ko.xz kernel/lib/crypto/libaes.ko.xz
@@ -93,6 +105,8 @@ kernel/crypto/hmac.ko.xz:
 kernel/crypto/xcbc.ko.xz:
 kernel/crypto/md4.ko.xz:
 kernel/crypto/md5.ko.xz:
+kernel/crypto/sha3_generic.ko.xz:
+kernel/crypto/sm3.ko.xz:
 kernel/crypto/wp512.ko.xz:
 kernel/crypto/blake2b_generic.ko.xz:
 kernel/crypto/gf128mul.ko.xz:
@@ -107,6 +121,7 @@ kernel/crypto/cryptd.ko.xz:
 kernel/crypto/twofish_generic.ko.xz: kernel/crypto/twofish_common.ko.xz
 kernel/crypto/twofish_common.ko.xz:
 kernel/crypto/aes_generic.ko.xz: kernel/lib/crypto/libaes.ko.xz
+kernel/crypto/sm4.ko.xz:
 kernel/crypto/cast_common.ko.xz:
 kernel/crypto/cast5_generic.ko.xz: kernel/crypto/cast_common.ko.xz
 kernel/crypto/chacha_generic.ko.xz: kernel/lib/crypto/libchacha.ko.xz
@@ -191,6 +206,7 @@ kernel/drivers/char/tpm/tpm.ko.xz:
 kernel/drivers/char/tpm/tpm_tis_core.ko.xz: kernel/drivers/char/tpm/tpm.ko.xz
 kernel/drivers/char/tpm/tpm_tis_spi.ko.xz: kernel/drivers/char/tpm/tpm_tis_core.ko.xz kernel/drivers/char/tpm/tpm.ko.xz
 kernel/drivers/char/tpm/tpm_tis_i2c.ko.xz: kernel/lib/crc-ccitt.ko.xz kernel/drivers/char/tpm/tpm_tis_core.ko.xz kernel/drivers/char/tpm/tpm.ko.xz
+kernel/drivers/char/raspberrypi-gpiomem.ko.xz:
 kernel/drivers/gpu/drm/display/drm_display_helper.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-simple.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-ilitek-ili9806e.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
@@ -213,12 +229,18 @@ kernel/drivers/gpu/drm/tiny/repaper.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper
 kernel/drivers/gpu/drm/tiny/st7586.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_mipi_dbi.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/tiny/st7735r.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_mipi_dbi.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/gud/gud.ko.xz: kernel/drivers/gpu/drm/drm_shmem_helper.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz kernel/lib/lz4/lz4_compress.ko.xz
+kernel/drivers/gpu/drm/rp1/rp1-dsi/drm-rp1-dsi.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/rp1/rp1-dpi/drm-rp1-dpi.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/rp1/rp1-vec/drm-rp1-vec.ko.xz: kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/drm.ko.xz: kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz:
 kernel/drivers/gpu/drm/drm_dma_helper.ko.xz: kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/drm_shmem_helper.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/drm_vram_helper.ko.xz: kernel/drivers/gpu/drm/drm_ttm_helper.ko.xz kernel/drivers/gpu/drm/ttm/ttm.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/drm_ttm_helper.ko.xz: kernel/drivers/gpu/drm/ttm/ttm.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/drm_kms_helper.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/drm_mipi_dbi.ko.xz: kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/ttm/ttm.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/scheduler/gpu-sched.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/v3d/v3d.ko.xz: kernel/drivers/gpu/drm/scheduler/gpu-sched.ko.xz kernel/drivers/gpu/drm/drm_shmem_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/vc4/vc4.ko.xz: kernel/drivers/gpu/drm/display/drm_display_helper.ko.xz kernel/drivers/media/cec/core/cec.ko.xz kernel/drivers/gpu/drm/drm_dma_helper.ko.xz kernel/drivers/gpu/drm/drm_kms_helper.ko.xz kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz kernel/drivers/video/fbdev/core/syscopyarea.ko.xz kernel/drivers/video/fbdev/core/sysfillrect.ko.xz kernel/drivers/video/fbdev/core/sysimgblt.ko.xz kernel/drivers/video/fbdev/core/fb_sys_fops.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
@@ -251,8 +273,9 @@ kernel/drivers/spi/spidev.ko.xz:
 kernel/drivers/spi/spi-bcm2835.ko.xz:
 kernel/drivers/spi/spi-bcm2835aux.ko.xz:
 kernel/drivers/spi/spi-bitbang.ko.xz:
+kernel/drivers/spi/spi-dw.ko.xz:
+kernel/drivers/spi/spi-dw-mmio.ko.xz: kernel/drivers/spi/spi-dw.ko.xz
 kernel/drivers/spi/spi-gpio.ko.xz: kernel/drivers/spi/spi-bitbang.ko.xz
-kernel/drivers/net/phy/phylink.ko.xz:
 kernel/drivers/net/phy/ax88796b.ko.xz:
 kernel/drivers/net/phy/realtek.ko.xz:
 kernel/drivers/net/mdio/mdio-bitbang.ko.xz:
@@ -328,7 +351,7 @@ kernel/drivers/net/usb/kaweth.ko.xz:
 kernel/drivers/net/usb/pegasus.ko.xz:
 kernel/drivers/net/usb/rtl8150.ko.xz:
 kernel/drivers/net/usb/hso.ko.xz: kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/net/usb/asix.ko.xz: kernel/drivers/net/phy/phylink.ko.xz
+kernel/drivers/net/usb/asix.ko.xz:
 kernel/drivers/net/usb/ax88179_178a.ko.xz:
 kernel/drivers/net/usb/cdc_ether.ko.xz:
 kernel/drivers/net/usb/cdc_eem.ko.xz:
@@ -460,7 +483,7 @@ kernel/drivers/usb/gadget/legacy/g_multi.ko.xz: kernel/drivers/usb/gadget/functi
 kernel/drivers/usb/gadget/legacy/g_webcam.ko.xz: kernel/drivers/usb/gadget/libcomposite.ko.xz
 kernel/drivers/usb/gadget/legacy/g_acm_ms.ko.xz: kernel/drivers/usb/gadget/function/usb_f_mass_storage.ko.xz kernel/drivers/usb/gadget/libcomposite.ko.xz
 kernel/drivers/usb/gadget/libcomposite.ko.xz:
-kernel/drivers/usb/dwc2/dwc2.ko.xz: kernel/drivers/usb/roles/roles.ko.xz
+kernel/drivers/usb/dwc2/dwc2.ko.xz:
 kernel/drivers/usb/mon/usbmon.ko.xz:
 kernel/drivers/usb/class/cdc-acm.ko.xz:
 kernel/drivers/usb/class/usblp.ko.xz:
@@ -525,7 +548,6 @@ kernel/drivers/usb/usbip/usbip-core.ko.xz:
 kernel/drivers/usb/usbip/vhci-hcd.ko.xz: kernel/drivers/usb/usbip/usbip-core.ko.xz
 kernel/drivers/usb/usbip/usbip-host.ko.xz: kernel/drivers/usb/usbip/usbip-core.ko.xz
 kernel/drivers/usb/usbip/usbip-vudc.ko.xz: kernel/drivers/usb/usbip/usbip-core.ko.xz
-kernel/drivers/usb/roles/roles.ko.xz:
 kernel/drivers/input/keyboard/cap11xx.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/input/keyboard/gpio_keys.ko.xz:
 kernel/drivers/input/keyboard/tca6416-keypad.ko.xz:
@@ -558,6 +580,7 @@ kernel/drivers/input/misc/cm109.ko.xz:
 kernel/drivers/input/misc/cma3000_d0x.ko.xz:
 kernel/drivers/input/misc/keyspan_remote.ko.xz:
 kernel/drivers/input/misc/powermate.ko.xz:
+kernel/drivers/input/misc/raspberrypi-button.ko.xz:
 kernel/drivers/input/misc/rotary_encoder.ko.xz:
 kernel/drivers/input/misc/uinput.ko.xz:
 kernel/drivers/input/misc/yealink.ko.xz:
@@ -605,6 +628,8 @@ kernel/drivers/rtc/rtc-x1205.ko.xz:
 kernel/drivers/i2c/algos/i2c-algo-bit.ko.xz:
 kernel/drivers/i2c/busses/i2c-bcm2708.ko.xz:
 kernel/drivers/i2c/busses/i2c-bcm2835.ko.xz:
+kernel/drivers/i2c/busses/i2c-designware-core.ko.xz:
+kernel/drivers/i2c/busses/i2c-designware-platform.ko.xz: kernel/drivers/i2c/busses/i2c-designware-core.ko.xz
 kernel/drivers/i2c/busses/i2c-gpio.ko.xz: kernel/drivers/i2c/algos/i2c-algo-bit.ko.xz
 kernel/drivers/i2c/busses/i2c-robotfuzz-osif.ko.xz:
 kernel/drivers/i2c/busses/i2c-tiny-usb.ko.xz:
@@ -723,6 +748,8 @@ kernel/drivers/media/common/ttpci-eeprom.ko.xz:
 kernel/drivers/media/common/cx2341x.ko.xz: kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/common/tveeprom.ko.xz:
 kernel/drivers/media/platform/bcm2835/bcm2835-unicam.ko.xz: kernel/drivers/media/common/videobuf2/videobuf2-dma-contig.ko.xz kernel/drivers/media/v4l2-core/v4l2-dv-timings.ko.xz kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-memops.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-v4l2.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-common.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
+kernel/drivers/media/platform/raspberrypi/pisp_be/pisp-be.ko.xz: kernel/drivers/media/common/videobuf2/videobuf2-dma-contig.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-memops.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-v4l2.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-common.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
+kernel/drivers/media/platform/raspberrypi/rp1_cfe/rp1-cfe.ko.xz: kernel/drivers/media/common/videobuf2/videobuf2-dma-contig.ko.xz kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-memops.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-v4l2.ko.xz kernel/drivers/media/common/videobuf2/videobuf2-common.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/platform/video-mux.ko.xz: kernel/drivers/media/v4l2-core/v4l2-fwnode.ko.xz kernel/drivers/media/v4l2-core/v4l2-async.ko.xz kernel/drivers/mux/mux-core.ko.xz kernel/drivers/media/v4l2-core/videodev.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/usb/b2c2/b2c2-flexcop-usb.ko.xz: kernel/drivers/media/common/b2c2/b2c2-flexcop.ko.xz kernel/drivers/media/dvb-frontends/s5h1420.ko.xz kernel/drivers/media/dvb-frontends/cx24113.ko.xz kernel/drivers/media/dvb-frontends/cx24123.ko.xz kernel/drivers/media/dvb-core/dvb-core.ko.xz kernel/drivers/media/mc/mc.ko.xz
 kernel/drivers/media/usb/dvb-usb/dvb-usb.ko.xz: kernel/drivers/media/dvb-core/dvb-core.ko.xz kernel/drivers/media/mc/mc.ko.xz
@@ -1004,6 +1031,7 @@ kernel/drivers/hwmon/jc42.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/hwmon/lm75.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/hwmon/pwm-fan.ko.xz:
 kernel/drivers/hwmon/raspberrypi-hwmon.ko.xz:
+kernel/drivers/hwmon/rp1-adc.ko.xz:
 kernel/drivers/hwmon/sht21.ko.xz:
 kernel/drivers/hwmon/sht3x.ko.xz: kernel/lib/crc8.ko.xz
 kernel/drivers/hwmon/sht4x.ko.xz: kernel/lib/crc8.ko.xz
@@ -1040,6 +1068,7 @@ kernel/drivers/accessibility/speakup/speakup_soft.ko.xz: kernel/drivers/accessib
 kernel/drivers/accessibility/speakup/speakup.ko.xz:
 kernel/drivers/mmc/host/mmc_spi.ko.xz: kernel/lib/crc7.ko.xz kernel/drivers/mmc/host/of_mmc_spi.ko.xz
 kernel/drivers/mmc/host/of_mmc_spi.ko.xz:
+kernel/drivers/mmc/host/sdhci-of-dwcmshc.ko.xz:
 kernel/drivers/leds/trigger/ledtrig-transient.ko.xz:
 kernel/drivers/leds/trigger/ledtrig-camera.ko.xz:
 kernel/drivers/leds/trigger/ledtrig-netdev.ko.xz:
@@ -1387,6 +1416,7 @@ kernel/sound/soc/bcm/snd-soc-rpi-wm8804-soundcard.ko.xz: kernel/sound/soc/snd-so
 kernel/sound/soc/bcm/snd-soc-pifi-40.ko.xz: kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
 kernel/sound/soc/bcm/snd-soc-chipdip-dac.ko.xz: kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
 kernel/sound/soc/bcm/snd-soc-dacberry400.ko.xz: kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
+kernel/sound/soc/dwc/designware_i2s.ko.xz: kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
 kernel/net/core/pktgen.ko.xz:
 kernel/net/802/p8022.ko.xz: kernel/net/llc/llc.ko.xz
 kernel/net/802/psnap.ko.xz: kernel/net/llc/llc.ko.xz

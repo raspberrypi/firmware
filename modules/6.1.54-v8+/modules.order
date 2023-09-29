@@ -1,4 +1,16 @@
+kernel/arch/arm64/crypto/sha1-ce.ko
+kernel/arch/arm64/crypto/sha2-ce.ko
+kernel/arch/arm64/crypto/sha512-ce.ko
+kernel/arch/arm64/crypto/sha3-ce.ko
+kernel/arch/arm64/crypto/sm3-ce.ko
+kernel/arch/arm64/crypto/sm4-ce-cipher.ko
+kernel/arch/arm64/crypto/ghash-ce.ko
+kernel/arch/arm64/crypto/aes-ce-cipher.ko
+kernel/arch/arm64/crypto/aes-ce-ccm.ko
+kernel/arch/arm64/crypto/aes-ce-blk.ko
 kernel/arch/arm64/crypto/aes-neon-blk.ko
+kernel/arch/arm64/crypto/sha256-arm64.ko
+kernel/arch/arm64/crypto/sha512-arm64.ko
 kernel/arch/arm64/crypto/chacha-neon.ko
 kernel/arch/arm64/crypto/poly1305-neon.ko
 kernel/arch/arm64/crypto/aes-arm64.ko
@@ -93,6 +105,8 @@ kernel/crypto/hmac.ko
 kernel/crypto/xcbc.ko
 kernel/crypto/md4.ko
 kernel/crypto/md5.ko
+kernel/crypto/sha3_generic.ko
+kernel/crypto/sm3.ko
 kernel/crypto/wp512.ko
 kernel/crypto/blake2b_generic.ko
 kernel/crypto/gf128mul.ko
@@ -107,6 +121,7 @@ kernel/crypto/cryptd.ko
 kernel/crypto/twofish_generic.ko
 kernel/crypto/twofish_common.ko
 kernel/crypto/aes_generic.ko
+kernel/crypto/sm4.ko
 kernel/crypto/cast_common.ko
 kernel/crypto/cast5_generic.ko
 kernel/crypto/chacha_generic.ko
@@ -191,6 +206,7 @@ kernel/drivers/char/tpm/tpm.ko
 kernel/drivers/char/tpm/tpm_tis_core.ko
 kernel/drivers/char/tpm/tpm_tis_spi.ko
 kernel/drivers/char/tpm/tpm_tis_i2c.ko
+kernel/drivers/char/raspberrypi-gpiomem.ko
 kernel/drivers/gpu/drm/display/drm_display_helper.ko
 kernel/drivers/gpu/drm/panel/panel-simple.ko
 kernel/drivers/gpu/drm/panel/panel-ilitek-ili9806e.ko
@@ -213,12 +229,18 @@ kernel/drivers/gpu/drm/tiny/repaper.ko
 kernel/drivers/gpu/drm/tiny/st7586.ko
 kernel/drivers/gpu/drm/tiny/st7735r.ko
 kernel/drivers/gpu/drm/gud/gud.ko
+kernel/drivers/gpu/drm/rp1/rp1-dsi/drm-rp1-dsi.ko
+kernel/drivers/gpu/drm/rp1/rp1-dpi/drm-rp1-dpi.ko
+kernel/drivers/gpu/drm/rp1/rp1-vec/drm-rp1-vec.ko
 kernel/drivers/gpu/drm/drm.ko
 kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko
 kernel/drivers/gpu/drm/drm_dma_helper.ko
 kernel/drivers/gpu/drm/drm_shmem_helper.ko
+kernel/drivers/gpu/drm/drm_vram_helper.ko
+kernel/drivers/gpu/drm/drm_ttm_helper.ko
 kernel/drivers/gpu/drm/drm_kms_helper.ko
 kernel/drivers/gpu/drm/drm_mipi_dbi.ko
+kernel/drivers/gpu/drm/ttm/ttm.ko
 kernel/drivers/gpu/drm/scheduler/gpu-sched.ko
 kernel/drivers/gpu/drm/v3d/v3d.ko
 kernel/drivers/gpu/drm/vc4/vc4.ko
@@ -251,8 +273,9 @@ kernel/drivers/spi/spidev.ko
 kernel/drivers/spi/spi-bcm2835.ko
 kernel/drivers/spi/spi-bcm2835aux.ko
 kernel/drivers/spi/spi-bitbang.ko
+kernel/drivers/spi/spi-dw.ko
+kernel/drivers/spi/spi-dw-mmio.ko
 kernel/drivers/spi/spi-gpio.ko
-kernel/drivers/net/phy/phylink.ko
 kernel/drivers/net/phy/ax88796b.ko
 kernel/drivers/net/phy/realtek.ko
 kernel/drivers/net/mdio/mdio-bitbang.ko
@@ -525,7 +548,6 @@ kernel/drivers/usb/usbip/usbip-core.ko
 kernel/drivers/usb/usbip/vhci-hcd.ko
 kernel/drivers/usb/usbip/usbip-host.ko
 kernel/drivers/usb/usbip/usbip-vudc.ko
-kernel/drivers/usb/roles/roles.ko
 kernel/drivers/input/keyboard/cap11xx.ko
 kernel/drivers/input/keyboard/gpio_keys.ko
 kernel/drivers/input/keyboard/tca6416-keypad.ko
@@ -558,6 +580,7 @@ kernel/drivers/input/misc/cm109.ko
 kernel/drivers/input/misc/cma3000_d0x.ko
 kernel/drivers/input/misc/keyspan_remote.ko
 kernel/drivers/input/misc/powermate.ko
+kernel/drivers/input/misc/raspberrypi-button.ko
 kernel/drivers/input/misc/rotary_encoder.ko
 kernel/drivers/input/misc/uinput.ko
 kernel/drivers/input/misc/yealink.ko
@@ -605,6 +628,8 @@ kernel/drivers/rtc/rtc-x1205.ko
 kernel/drivers/i2c/algos/i2c-algo-bit.ko
 kernel/drivers/i2c/busses/i2c-bcm2708.ko
 kernel/drivers/i2c/busses/i2c-bcm2835.ko
+kernel/drivers/i2c/busses/i2c-designware-core.ko
+kernel/drivers/i2c/busses/i2c-designware-platform.ko
 kernel/drivers/i2c/busses/i2c-gpio.ko
 kernel/drivers/i2c/busses/i2c-robotfuzz-osif.ko
 kernel/drivers/i2c/busses/i2c-tiny-usb.ko
@@ -723,6 +748,8 @@ kernel/drivers/media/common/ttpci-eeprom.ko
 kernel/drivers/media/common/cx2341x.ko
 kernel/drivers/media/common/tveeprom.ko
 kernel/drivers/media/platform/bcm2835/bcm2835-unicam.ko
+kernel/drivers/media/platform/raspberrypi/pisp_be/pisp-be.ko
+kernel/drivers/media/platform/raspberrypi/rp1_cfe/rp1-cfe.ko
 kernel/drivers/media/platform/video-mux.ko
 kernel/drivers/media/usb/b2c2/b2c2-flexcop-usb.ko
 kernel/drivers/media/usb/dvb-usb/dvb-usb.ko
@@ -1004,6 +1031,7 @@ kernel/drivers/hwmon/jc42.ko
 kernel/drivers/hwmon/lm75.ko
 kernel/drivers/hwmon/pwm-fan.ko
 kernel/drivers/hwmon/raspberrypi-hwmon.ko
+kernel/drivers/hwmon/rp1-adc.ko
 kernel/drivers/hwmon/sht21.ko
 kernel/drivers/hwmon/sht3x.ko
 kernel/drivers/hwmon/sht4x.ko
@@ -1040,6 +1068,7 @@ kernel/drivers/accessibility/speakup/speakup_soft.ko
 kernel/drivers/accessibility/speakup/speakup.ko
 kernel/drivers/mmc/host/mmc_spi.ko
 kernel/drivers/mmc/host/of_mmc_spi.ko
+kernel/drivers/mmc/host/sdhci-of-dwcmshc.ko
 kernel/drivers/leds/trigger/ledtrig-transient.ko
 kernel/drivers/leds/trigger/ledtrig-camera.ko
 kernel/drivers/leds/trigger/ledtrig-netdev.ko
@@ -1387,6 +1416,7 @@ kernel/sound/soc/bcm/snd-soc-rpi-wm8804-soundcard.ko
 kernel/sound/soc/bcm/snd-soc-pifi-40.ko
 kernel/sound/soc/bcm/snd-soc-chipdip-dac.ko
 kernel/sound/soc/bcm/snd-soc-dacberry400.ko
+kernel/sound/soc/dwc/designware_i2s.ko
 kernel/net/core/pktgen.ko
 kernel/net/802/p8022.ko
 kernel/net/802/psnap.ko

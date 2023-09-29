@@ -526,6 +526,11 @@ alias acpi*:SMO0768:* tpm_tis_spi
 alias i2c:tpm_tis_i2c tpm_tis_i2c
 alias of:N*T*Cinfineon,slb9673C* tpm_tis_i2c
 alias of:N*T*Cinfineon,slb9673 tpm_tis_i2c
+alias platform:rpi-gpiomem raspberrypi_gpiomem
+alias of:N*T*Craspberrypi,gpiomemC* raspberrypi_gpiomem
+alias of:N*T*Craspberrypi,gpiomem raspberrypi_gpiomem
+alias of:N*T*Cbrcm,bcm2835-gpiomemC* raspberrypi_gpiomem
+alias of:N*T*Cbrcm,bcm2835-gpiomem raspberrypi_gpiomem
 alias of:N*T*Cpanel-dpiC* panel_simple
 alias of:N*T*Cpanel-dpi panel_simple
 alias of:N*T*Cyes-optoelectronics,ytc700tlag-05-201cC* panel_simple
@@ -929,6 +934,8 @@ alias of:N*T*Cbrcm,cygnus-vc4C* vc4
 alias of:N*T*Cbrcm,cygnus-vc4 vc4
 alias of:N*T*Cbrcm,bcm2835-vc4C* vc4
 alias of:N*T*Cbrcm,bcm2835-vc4 vc4
+alias of:N*T*Cbrcm,bcm2712-vc6C* vc4
+alias of:N*T*Cbrcm,bcm2712-vc6 vc4
 alias of:N*T*Cbrcm,bcm2711-vc5C* vc4
 alias of:N*T*Cbrcm,bcm2711-vc5 vc4
 alias usb:v17E9p*d*dc*dsc*dp*icFFisc00ip00in* udl

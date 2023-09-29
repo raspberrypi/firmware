@@ -190,6 +190,7 @@ kernel/drivers/char/tpm/tpm.ko.xz:
 kernel/drivers/char/tpm/tpm_tis_core.ko.xz: kernel/drivers/char/tpm/tpm.ko.xz
 kernel/drivers/char/tpm/tpm_tis_spi.ko.xz: kernel/drivers/char/tpm/tpm_tis_core.ko.xz kernel/drivers/char/tpm/tpm.ko.xz
 kernel/drivers/char/tpm/tpm_tis_i2c.ko.xz: kernel/lib/crc-ccitt.ko.xz kernel/drivers/char/tpm/tpm_tis_core.ko.xz kernel/drivers/char/tpm/tpm.ko.xz
+kernel/drivers/char/raspberrypi-gpiomem.ko.xz:
 kernel/drivers/gpu/drm/display/drm_display_helper.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-simple.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-ilitek-ili9806e.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz

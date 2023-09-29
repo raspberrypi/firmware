@@ -136,7 +136,6 @@ kernel/drivers/char/hw_random/bcm2835-rng.ko
 kernel/drivers/char/hw_random/iproc-rng200.ko
 kernel/drivers/char/broadcom/vc_mem.ko
 kernel/drivers/char/broadcom/vcio.ko
-kernel/drivers/char/broadcom/bcm2835-gpiomem.ko
 kernel/drivers/gpu/drm/drm_mipi_dsi.ko
 kernel/drivers/base/firmware_loader/firmware_class.ko
 kernel/drivers/base/regmap/regmap-mmio.ko
