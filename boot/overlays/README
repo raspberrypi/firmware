@@ -173,6 +173,30 @@ Params:
         cooling_fan             Enables the Pi 5 cooling fan (enabled
                                 automatically by the firmware)
 
+        drm_fb0_rp1_dpi         Assign /dev/fb0 to the RP1 DPI output
+
+        drm_fb0_rp1_dsi0        Assign /dev/fb0 to the RP1 DSI0 output
+
+        drm_fb0_rp1_dsi1        Assign /dev/fb0 to the RP1 DSI1 output
+
+        drm_fb0_vc4             Assign /dev/fb0 to the vc4 outputs
+
+        drm_fb1_rp1_dpi         Assign /dev/fb1 to the RP1 DPI output
+
+        drm_fb1_rp1_dsi0        Assign /dev/fb1 to the RP1 DSI0 output
+
+        drm_fb1_rp1_dsi1        Assign /dev/fb1 to the RP1 DSI1 output
+
+        drm_fb1_vc4             Assign /dev/fb1 to the vc4 outputs
+
+        drm_fb2_rp1_dpi         Assign /dev/fb2 to the RP1 DPI output
+
+        drm_fb2_rp1_dsi0        Assign /dev/fb2 to the RP1 DSI0 output
+
+        drm_fb2_rp1_dsi1        Assign /dev/fb2 to the RP1 DSI1 output
+
+        drm_fb2_vc4             Assign /dev/fb2 to the vc4 outputs
+
         eee                     Enable Energy Efficient Ethernet support for
                                 compatible devices (default "on"). See also
                                 "tx_lpi_timer". Pi3B+ only.
@@ -1081,6 +1105,10 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
 
         g-np-tx-fifo-size       Size of non-periodic tx fifo size in gadget
                                 mode
+
+
+Name:   dwc2-pi5
+Info:   See dwc2 (this is the Pi 5 version)
 
 
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
