@@ -1677,7 +1677,7 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
-        slave                   Force DAC+ Pro into slave mode, using Pi as
+        slave                   Force AMP100 into slave mode, using Pi as
                                 master for bit clock and frame clock.
         leds_off                If set to 'true' the onboard indicator LEDs
                                 are switched off at all times.
@@ -1717,7 +1717,7 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
-        slave                   Force DAC+ Pro into slave mode, using Pi as
+        slave                   Force DAC+ into slave mode, using Pi as
                                 master for bit clock and frame clock.
         leds_off                If set to 'true' the onboard indicator LEDs
                                 are switched off at all times.
@@ -1740,7 +1740,7 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
-        slave                   Force DAC+ Pro into slave mode, using Pi as
+        slave                   Force DAC+ADC into slave mode, using Pi as
                                 master for bit clock and frame clock.
         leds_off                If set to 'true' the onboard indicator LEDs
                                 are switched off at all times.
@@ -3934,6 +3934,13 @@ Name:   sdio-1bit
 Info:   This overlay is now deprecated. Use
         "dtoverlay=sdio,bus_width=1,gpios_22_25" instead.
 Load:   <Deprecated>
+
+
+Name:   sdio-pi5
+Info:   Selects the rp1_mmc0 interface and enables it on GPIOs 22-27.
+        Pi 5 only.
+Load:   dtoverlay=sdio-pi5
+Params: <None>
 
 
 Name:   sdtweak
