@@ -5924,6 +5924,7 @@ alias symbol:lbs_host_sleep_cfg libertas
 alias symbol:ppp_register_channel ppp_generic
 alias symbol:dm_device_name dm_mod
 alias symbol:drm_helper_mode_fill_fb_struct drm_kms_helper
+alias symbol:adt7x10_probe adt7x10
 alias symbol:ath_hw_get_listen_time ath
 alias symbol:drm_client_release drm
 alias symbol:mtd_erase mtd
@@ -6133,6 +6134,7 @@ alias symbol:cec_s_phys_addr_from_edid cec
 alias symbol:drm_gem_plane_helper_prepare_fb drm_kms_helper
 alias symbol:ieee80211_get_num_supported_channels cfg80211
 alias symbol:usbip_pack_pdu usbip_core
+alias symbol:adt7x10_dev_pm_ops adt7x10
 alias symbol:drm_mm_scan_init_with_range drm
 alias symbol:iscsi_eh_session_reset libiscsi
 alias symbol:drm_get_format_info drm

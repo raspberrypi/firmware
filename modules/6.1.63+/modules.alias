@@ -9207,6 +9207,8 @@ alias of:N*T*Cmaxim,max17040 max17040_battery
 alias platform:gpio-charger gpio_charger
 alias of:N*T*Cgpio-chargerC* gpio_charger
 alias of:N*T*Cgpio-charger gpio_charger
+alias i2c:adt7420 adt7410
+alias i2c:adt7410 adt7410
 alias i2c:aht10 aht10
 alias of:N*T*Caosong,aht10C* aht10
 alias of:N*T*Caosong,aht10 aht10

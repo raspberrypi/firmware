@@ -984,6 +984,8 @@ kernel/drivers/power/supply/ds2760_battery.ko.xz: kernel/drivers/w1/wire.ko.xz k
 kernel/drivers/power/supply/ltc2941-battery-gauge.ko.xz:
 kernel/drivers/power/supply/max17040_battery.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/power/supply/gpio-charger.ko.xz:
+kernel/drivers/hwmon/adt7x10.ko.xz:
+kernel/drivers/hwmon/adt7410.ko.xz: kernel/drivers/hwmon/adt7x10.ko.xz
 kernel/drivers/hwmon/aht10.ko.xz:
 kernel/drivers/hwmon/drivetemp.ko.xz:
 kernel/drivers/hwmon/ds1621.ko.xz:
