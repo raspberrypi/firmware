@@ -307,6 +307,9 @@ Params:
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
 
+        rtc                     Set to "off" to disable the onboard Real Time
+                                Clock (2712 only, default "on")
+
         rtc_bbat_vchg           Set the RTC backup battery charging voltage in
                                 microvolts. If set to 0 or not specified, the
                                 trickle charger is disabled.
@@ -2520,6 +2523,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         clock-frequency         Sets the clock frequency to match that used on
                                 the board, which should be one of 54000000
                                 (the default), 37125000 or 74250000.
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XTRIG to 0V.
 
 
 Name:   imx327
@@ -2558,6 +2563,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XVS to 0V.
 
 
 Name:   imx462
@@ -2596,6 +2603,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XVS to 0V.
 
 
 Name:   imx519
