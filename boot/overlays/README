@@ -207,7 +207,7 @@ Params:
                                 0 means never downshift (default 2). Pi3B+ only.
 
         eth_led0                Set mode of LED0 - amber on Pi3B+ (default "1"),
-                                green on Pi4 (default "0").
+                                green on Pi4/5 (default "0").
                                 The legal values are:
 
                                 Pi3B+
@@ -217,7 +217,7 @@ Params:
                                 4=link100/1000/activity  5=link10/1000/activity
                                 6=link10/100/activity    14=off    15=on
 
-                                Pi4
+                                Pi4/5
 
                                 0=Speed/Activity         1=Speed
                                 2=Flash activity         3=FDX
@@ -226,12 +226,37 @@ Params:
                                 8=Link                   9=Activity
 
         eth_led1                Set mode of LED1 - green on Pi3B+ (default "6"),
-                                amber on Pi4 (default "8"). See eth_led0 for
+                                amber on Pi4/5 (default "8"). See eth_led0 for
                                 legal values.
 
         eth_max_speed           Set the maximum speed a link is allowed
                                 to negotiate. Legal values are 10, 100 and
                                 1000 (default 1000). Pi3B+ only.
+
+        fan_temp0               Temperature threshold (in millicelcius) for
+                                1st cooling level (default 50000). Pi5 only.
+        fan_temp0_hyst          Temperature hysteresis (in millicelcius) for
+                                1st cooling level (default 5000). Pi5 only.
+        fan_temp0_speed         Fan PWM setting for 1st cooling level (0-255,
+                                default 75). Pi5 only.
+        fan_temp1               Temperature threshold (in millicelcius) for
+                                2nd cooling level (default 60000). Pi5 only.
+        fan_temp1_hyst          Temperature hysteresis (in millicelcius) for
+                                2nd cooling level (default 5000). Pi5 only.
+        fan_temp1_speed         Fan PWM setting for 2nd cooling level (0-255,
+                                default 125). Pi5 only.
+        fan_temp2               Temperature threshold (in millicelcius) for
+                                3rd cooling level (default 67500). Pi5 only.
+        fan_temp2_hyst          Temperature hysteresis (in millicelcius) for
+                                3rd cooling level (default 5000). Pi5 only.
+        fan_temp2_speed         Fan PWM setting for 3rd cooling level (0-255,
+                                default 175). Pi5 only.
+        fan_temp3               Temperature threshold (in millicelcius) for
+                                4th cooling level (default 75000). Pi5 only.
+        fan_temp3_hyst          Temperature hysteresis (in millicelcius) for
+                                4th cooling level (default 5000). Pi5 only.
+        fan_temp3_speed         Fan PWM setting for 4th cooling level (0-255,
+                                default 250). Pi5 only.
 
         hdmi                    Set to "off" to disable the HDMI interface
                                 (default "on")
@@ -306,6 +331,9 @@ Params:
 
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
+
+        rtc                     Set to "off" to disable the onboard Real Time
+                                Clock (2712 only, default "on")
 
         rtc_bbat_vchg           Set the RTC backup battery charging voltage in
                                 microvolts. If set to 0 or not specified, the
