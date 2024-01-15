@@ -976,6 +976,8 @@ alias of:N*T*Cbrcm,cygnus-vc4C* vc4
 alias of:N*T*Cbrcm,cygnus-vc4 vc4
 alias of:N*T*Cbrcm,bcm2835-vc4C* vc4
 alias of:N*T*Cbrcm,bcm2835-vc4 vc4
+alias of:N*T*Cbrcm,bcm2712d0-vc6C* vc4
+alias of:N*T*Cbrcm,bcm2712d0-vc6 vc4
 alias of:N*T*Cbrcm,bcm2712-vc6C* vc4
 alias of:N*T*Cbrcm,bcm2712-vc6 vc4
 alias of:N*T*Cbrcm,bcm2711-vc5C* vc4
