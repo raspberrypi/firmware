@@ -1,0 +1,13 @@
+# Device nodes to trigger on-demand module loading.
+fuse fuse c10:229
+cuse cuse c10:203
+btrfs btrfs-control c10:234
+tun net/tun c10:200
+ppp_generic ppp c108:0
+uinput uinput c10:223
+dm_mod mapper/control c10:236
+uhid uhid c10:239
+hci_vhci vhci c10:137
+snd_timer snd/timer c116:33
+snd_seq snd/seq c116:1
+rfkill rfkill c10:242
