@@ -207,7 +207,7 @@ Params:
                                 0 means never downshift (default 2). Pi3B+ only.
 
         eth_led0                Set mode of LED0 - amber on Pi3B+ (default "1"),
-                                green on Pi4 (default "0").
+                                green on Pi4/5 (default "0").
                                 The legal values are:
 
                                 Pi3B+
@@ -217,7 +217,7 @@ Params:
                                 4=link100/1000/activity  5=link10/1000/activity
                                 6=link10/100/activity    14=off    15=on
 
-                                Pi4
+                                Pi4/5
 
                                 0=Speed/Activity         1=Speed
                                 2=Flash activity         3=FDX
@@ -226,12 +226,37 @@ Params:
                                 8=Link                   9=Activity
 
         eth_led1                Set mode of LED1 - green on Pi3B+ (default "6"),
-                                amber on Pi4 (default "8"). See eth_led0 for
+                                amber on Pi4/5 (default "8"). See eth_led0 for
                                 legal values.
 
         eth_max_speed           Set the maximum speed a link is allowed
                                 to negotiate. Legal values are 10, 100 and
                                 1000 (default 1000). Pi3B+ only.
+
+        fan_temp0               Temperature threshold (in millicelcius) for
+                                1st cooling level (default 50000). Pi5 only.
+        fan_temp0_hyst          Temperature hysteresis (in millicelcius) for
+                                1st cooling level (default 5000). Pi5 only.
+        fan_temp0_speed         Fan PWM setting for 1st cooling level (0-255,
+                                default 75). Pi5 only.
+        fan_temp1               Temperature threshold (in millicelcius) for
+                                2nd cooling level (default 60000). Pi5 only.
+        fan_temp1_hyst          Temperature hysteresis (in millicelcius) for
+                                2nd cooling level (default 5000). Pi5 only.
+        fan_temp1_speed         Fan PWM setting for 2nd cooling level (0-255,
+                                default 125). Pi5 only.
+        fan_temp2               Temperature threshold (in millicelcius) for
+                                3rd cooling level (default 67500). Pi5 only.
+        fan_temp2_hyst          Temperature hysteresis (in millicelcius) for
+                                3rd cooling level (default 5000). Pi5 only.
+        fan_temp2_speed         Fan PWM setting for 3rd cooling level (0-255,
+                                default 175). Pi5 only.
+        fan_temp3               Temperature threshold (in millicelcius) for
+                                4th cooling level (default 75000). Pi5 only.
+        fan_temp3_hyst          Temperature hysteresis (in millicelcius) for
+                                4th cooling level (default 5000). Pi5 only.
+        fan_temp3_speed         Fan PWM setting for 4th cooling level (0-255,
+                                default 250). Pi5 only.
 
         hdmi                    Set to "off" to disable the HDMI interface
                                 (default "on")
@@ -306,6 +331,9 @@ Params:
 
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
+
+        rtc                     Set to "off" to disable the onboard Real Time
+                                Clock (2712 only, default "on")
 
         rtc_bbat_vchg           Set the RTC backup battery charging voltage in
                                 microvolts. If set to 0 or not specified, the
@@ -489,6 +517,16 @@ Params: addr                    I2C bus address of device. Set based on how the
         cha_gain                Set the gain of the Programmable Gain
                                 Amplifier for this channel. (Default 1 sets the
                                 full scale of the channel to 4.096 Volts)
+        i2c0                    Choose the I2C0 bus on GPIOs 0&1
+        i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
+        i2c3                    Choose the I2C3 bus (configure with the i2c3
+                                overlay - BCM2711 only)
+        i2c4                    Choose the I2C4 bus (configure with the i2c4
+                                overlay - BCM2711 only)
+        i2c5                    Choose the I2C5 bus (configure with the i2c5
+                                overlay - BCM2711 only)
+        i2c6                    Choose the I2C6 bus (configure with the i2c6
+                                overlay - BCM2711 only)
 
         Channel parameters can be set for each enabled channel.
         A maximum of 4 channels can be enabled (letters a thru d).
@@ -807,6 +845,7 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam0-imx708             Select IMX708 for camera on port 0
         cam0-ov2311             Select OV2311 for camera on port 0
         cam0-ov5647             Select OV5647 for camera on port 0
+        cam0-ov64a40            Select OV64A40 for camera on port 0
         cam0-ov7251             Select OV7251 for camera on port 0
         cam0-ov9281             Select OV9281 for camera on port 0
         cam0-imx290-clk-freq    Set clock frequency for an IMX290 on port 0
@@ -819,9 +858,12 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam1-imx708             Select IMX708 for camera on port 1
         cam1-ov2311             Select OV2311 for camera on port 1
         cam1-ov5647             Select OV5647 for camera on port 1
+        cam1-ov64a40            Select OV64A40 for camera on port 1
         cam1-ov7251             Select OV7251 for camera on port 1
         cam1-ov9281             Select OV9281 for camera on port 1
         cam1-imx290-clk-freq    Set clock frequency for an IMX290 on port 1
+
+        cam0                    Connect the mux to CAM0 port (default is CAM1)
 
 
 Name:   camera-mux-4port
@@ -838,6 +880,7 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam0-imx708             Select IMX708 for camera on port 0
         cam0-ov2311             Select OV2311 for camera on port 0
         cam0-ov5647             Select OV5647 for camera on port 0
+        cam0-ov64a40            Select OV64A40 for camera on port 0
         cam0-ov7251             Select OV7251 for camera on port 0
         cam0-ov9281             Select OV9281 for camera on port 0
         cam0-imx290-clk-freq    Set clock frequency for an IMX290 on port 0
@@ -850,6 +893,7 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam1-imx708             Select IMX708 for camera on port 1
         cam1-ov2311             Select OV2311 for camera on port 1
         cam1-ov5647             Select OV5647 for camera on port 1
+        cam1-ov64a40            Select OV64A40 for camera on port 1
         cam1-ov7251             Select OV7251 for camera on port 1
         cam1-ov9281             Select OV9281 for camera on port 1
         cam1-imx290-clk-freq    Set clock frequency for an IMX290 on port 1
@@ -862,6 +906,7 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam2-imx708             Select IMX708 for camera on port 2
         cam2-ov2311             Select OV2311 for camera on port 2
         cam2-ov5647             Select OV5647 for camera on port 2
+        cam2-ov64a40            Select OV64A40 for camera on port 2
         cam2-ov7251             Select OV7251 for camera on port 2
         cam2-ov9281             Select OV9281 for camera on port 2
         cam2-imx290-clk-freq    Set clock frequency for an IMX290 on port 2
@@ -874,9 +919,12 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam3-imx708             Select IMX708 for camera on port 3
         cam3-ov2311             Select OV2311 for camera on port 3
         cam3-ov5647             Select OV5647 for camera on port 3
+        cam3-ov64a40            Select OV64A40 for camera on port 3
         cam3-ov7251             Select OV7251 for camera on port 3
         cam3-ov9281             Select OV9281 for camera on port 3
         cam3-imx290-clk-freq    Set clock frequency for an IMX290 on port 3
+
+        cam0                    Connect the mux to CAM0 port (default is CAM1)
 
 
 Name:   cap1106
@@ -1112,10 +1160,6 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
 
         g-np-tx-fifo-size       Size of non-periodic tx fifo size in gadget
                                 mode
-
-
-Name:   dwc2-pi5
-Info:   See dwc2 (this is the Pi 5 version)
 
 
 [ The ds1307-rtc overlay has been deleted. See i2c-rtc. ]
@@ -2148,10 +2192,14 @@ Name:   i2c-sensor
 Info:   Adds support for a number of I2C barometric pressure, temperature,
         light level and chemical sensors on i2c_arm
 Load:   dtoverlay=i2c-sensor,<param>=<val>
-Params: addr                    Set the address for the BH1750, BME280, BME680,
-                                BMP280, BMP380, CCS811, DS1621, HDC100X, JC42,
-                                LM75, MCP980x, MPU6050, MPU9250, MS5637, MS5803,
-                                MS5805, MS5837, MS8607, SHT3x or TMP102
+Params: addr                    Set the address for the ADT7410, BH1750, BME280,
+                                BME680, BMP280, BMP380, CCS811, DS1621, HDC100X,
+                                JC42, LM75, MCP980x, MPU6050, MPU9250, MS5637,
+                                MS5803, MS5805, MS5837, MS8607, SHT3x or TMP102
+
+        adt7410                 Select the Analog Devices ADT7410 and ADT7420
+                                temperature sensors
+                                Valid address 0x48-0x4b, default 0x48
 
         aht10                   Select the Aosong AHT10 temperature and humidity
                                 sensor
@@ -2500,6 +2548,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         clock-frequency         Sets the clock frequency to match that used on
                                 the board, which should be one of 54000000
                                 (the default), 37125000 or 74250000.
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XTRIG to 0V.
 
 
 Name:   imx327
@@ -2538,6 +2588,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XVS to 0V.
 
 
 Name:   imx462
@@ -2576,6 +2628,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
+        always-on               Leave the regulator powered up, to stop the
+                                camera clamping I/Os such as XVS to 0V.
 
 
 Name:   imx519
@@ -3206,6 +3260,25 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
         vcm                     Configure a VCM focus drive on the sensor.
+
+
+Name:   ov64a40
+Info:   Arducam OV64A40 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=ov64a40,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+        vcm                     Select lens driver state. Default is enabled,
+                                but vcm=off will disable.
+        link-frequency          Allowable link frequency values to use in Hz:
+                                456000000 (default), 360000000
 
 
 Name:   ov7251
@@ -4779,6 +4852,37 @@ Params: sizex                   Touchscreen size x (default 800)
         disable_touch           Disables the touch screen overlay driver
         dsi0                    Use DSI0 and i2c_csi_dsi0 (rather than
                                 the default DSI1 and i2c_csi_dsi).
+
+
+Name:   vc4-kms-dsi-generic
+Info:   Enable a generic DSI display under KMS.
+        Default timings are for a 840x480 RGB888 panel.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-generic,<param>=<val>
+Params: clock-frequency         Display clock frequency (Hz)
+        hactive                 Horizontal active pixels
+        hfp                     Horizontal front porch
+        hsync                   Horizontal sync pulse width
+        hbp                     Horizontal back porch
+        vactive                 Vertical active lines
+        vfp                     Vertical front porch
+        vsync                   Vertical sync pulse width
+        vbp                     Vertical back porch
+        width-mm                Define the screen width in mm
+        height-mm               Define the screen height in mm
+        rgb565                  Change to RGB565 output
+        rgb666                  Change to RGB666 output
+        rgb666p                 Change to RGB666 output with pixel packing
+        rgb888                  Change to RGB888 output, this is the default
+        one-lane                Use one DSI lane for data transmission
+                                This is the default
+        two-lane                Use two DSI lanes for data transmission
+        three-lane              Use three DSI lanes for data transmission
+                                Only supported on Pi5 and CM
+        four-lane               Use four DSI lanes for data transmission
+                                Only supported on Pi5 and CM
+        dsi0                    Switch DSI port to DSI0
+                                Only supported on Pi5 and CM
 
 
 Name:   vc4-kms-dsi-lt070me05000
