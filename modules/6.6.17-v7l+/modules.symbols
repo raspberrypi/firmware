@@ -244,6 +244,7 @@ alias symbol:arizona_in_dmic_osr snd_soc_arizona
 alias symbol:free_candev can_dev
 alias symbol:rt2x00lib_probe_dev rt2x00lib
 alias symbol:atm_dev_register atm
+alias symbol:crypto_sha512_update sha512_generic
 alias symbol:mt76_connac_mcu_bss_basic_tlv mt76_connac_lib
 alias symbol:ppp_register_net_channel ppp_generic
 alias symbol:drm_fb_helper_set_suspend_unlocked drm_kms_helper
@@ -523,6 +524,7 @@ alias symbol:rndis_signal_disconnect usb_f_rndis
 alias symbol:snd_request_card snd
 alias symbol:tpmm_chip_alloc tpm
 alias symbol:xillybus_init_chrdev xillybus_class
+alias symbol:crypto_aes_sbox libaes
 alias symbol:dm_btree_lookup_next dm_persistent_data
 alias symbol:ip_vs_proto_name ip_vs
 alias symbol:p9_req_put 9pnet
@@ -1468,6 +1470,7 @@ alias symbol:__ovs_vport_ops_register openvswitch
 alias symbol:rfkill_blocked rfkill
 alias symbol:ubi_register_volume_notifier ubi
 alias symbol:__ip6_datagram_connect ipv6
+alias symbol:aes_expandkey libaes
 alias symbol:ata_sff_tf_read libata
 alias symbol:fuse_request_end fuse
 alias symbol:rtl92c_phy_set_io_cmd rtl8192c_common
@@ -1947,6 +1950,7 @@ alias symbol:ath9k_hw_stopdmarecv ath9k_hw
 alias symbol:cfg80211_defragment_element cfg80211
 alias symbol:drm_mode_config_helper_resume drm_kms_helper
 alias symbol:bt_sock_link bluetooth
+alias symbol:sha384_zero_message_hash sha512_generic
 alias symbol:synth_putws speakup
 alias symbol:LZ4_saveDict lz4_compress
 alias symbol:ath9k_hw_disable ath9k_hw
@@ -2155,6 +2159,7 @@ alias symbol:snd_soc_component_read snd_soc_core
 alias symbol:dm_bitset_cursor_get_value dm_persistent_data
 alias symbol:ecc_free_point ecc
 alias symbol:vb2_poll videobuf2_v4l2
+alias symbol:aes_decrypt libaes
 alias symbol:ata_get_cmd_name libata
 alias symbol:lbs_suspend libertas
 alias symbol:nft_reject_init nft_reject
@@ -4578,6 +4583,7 @@ alias symbol:ip6_frag_init ipv6
 alias symbol:md_new_event md_mod
 alias symbol:ssb_pcicore_dev_irqvecs_enable ssb
 alias symbol:ubi_flush ubi
+alias symbol:aes_encrypt libaes
 alias symbol:ath9k_hw_write_associd ath9k_hw
 alias symbol:__drm_dev_dbg drm
 alias symbol:backlight_device_get_by_name backlight
@@ -4889,6 +4895,7 @@ alias symbol:drm_plane_get_damage_clips_count drm
 alias symbol:em28xx_find_led em28xx
 alias symbol:mt76u_alloc_mcu_queue mt76_usb
 alias symbol:usb_serial_deregister_drivers usbserial
+alias symbol:crypto_it_tab aes_generic
 alias symbol:dm_table_get_size dm_mod
 alias symbol:drm_connector_set_path_property drm
 alias symbol:mt76_queues_read mt76
@@ -5001,6 +5008,7 @@ alias symbol:dm_array_walk dm_persistent_data
 alias symbol:ieee80211_get_8023_tunnel_proto cfg80211
 alias symbol:snd_soc_put_volsw_range snd_soc_core
 alias symbol:drm_sched_job_arm gpu_sched
+alias symbol:crypto_aes_set_key aes_generic
 alias symbol:drm_mode_get_tile_group drm
 alias symbol:flexcop_sram_ctrl b2c2_flexcop
 alias symbol:rtlwifi_rate_mapping rtlwifi
@@ -5517,6 +5525,7 @@ alias symbol:mt76_mcu_skb_send_and_get_msg mt76
 alias symbol:snd_power_wait snd
 alias symbol:drm_gem_shmem_unpin drm_shmem_helper
 alias symbol:rtl_efuse_ops_init rtlwifi
+alias symbol:sha512_zero_message_hash sha512_generic
 alias symbol:dib0090_pwm_gain_reset dib0090
 alias symbol:snd_jack_add_new_kctl snd
 alias symbol:ip6_datagram_send_ctl ipv6
@@ -5871,6 +5880,7 @@ alias symbol:snd_pcm_hw_constraint_ranges snd_pcm
 alias symbol:snd_seq_client_ioctl_lock snd_seq
 alias symbol:usb_composite_overwrite_options libcomposite
 alias symbol:bt_sock_unlink bluetooth
+alias symbol:crypto_ft_tab aes_generic
 alias symbol:em28xx_read_reg em28xx
 alias symbol:raid6_datap_recov raid6_pq
 alias symbol:snd_seq_set_queue_tempo snd_seq
@@ -6085,6 +6095,7 @@ alias symbol:u_audio_get_playback_srate u_audio
 alias symbol:vb2_ioctl_expbuf videobuf2_v4l2
 alias symbol:arizona_clk32k_enable arizona
 alias symbol:arpt_unregister_table arp_tables
+alias symbol:crypto_sha512_finup sha512_generic
 alias symbol:efuse_power_switch rtlwifi
 alias symbol:nfnl_unlock nfnetlink
 alias symbol:video_device_pipeline_stop videodev
@@ -6502,6 +6513,7 @@ alias symbol:xt_data_to_user x_tables
 alias symbol:__gameport_register_driver gameport
 alias symbol:__tracepoint_vb2_v4l2_dqbuf videodev
 alias symbol:ip_set_get_extensions ip_set
+alias symbol:crypto_aes_inv_sbox libaes
 alias symbol:rt2x00queue_flush_queues rt2x00lib
 alias symbol:nf_ct_tmpl_alloc nf_conntrack
 alias symbol:ata_port_freeze libata

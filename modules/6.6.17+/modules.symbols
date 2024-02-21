@@ -450,7 +450,6 @@ alias symbol:bno055_regmap_config bno055
 alias symbol:mt792xu_copy mt792x_usb
 alias symbol:snd_seq_dump_var_event snd_seq
 alias symbol:dib7000p_attach dib7000p
-alias symbol:sha224_final libsha256
 alias symbol:snd_timer_start snd_timer
 alias symbol:cx2341x_handler_init cx2341x
 alias symbol:tda9887_attach tda9887
@@ -1962,7 +1961,6 @@ alias symbol:cx231xx_init_vbi_isoc cx231xx
 alias symbol:ieee80211_rate_control_register mac80211
 alias symbol:snd_ctl_register_ioctl snd
 alias symbol:snd_ctl_rename_id snd
-alias symbol:crypto_sha256_finup sha256_generic
 alias symbol:drm_atomic_helper_commit_modeset_disables drm_kms_helper
 alias symbol:ip6_output ipv6
 alias symbol:nft_meta_set_init nf_tables
@@ -2004,7 +2002,6 @@ alias symbol:drm_gpuva_find_first drm
 alias symbol:ip6_tnl_change_mtu ip6_tunnel
 alias symbol:rtl92c_phy_sw_chnl rtl8192c_common
 alias symbol:rtw_ops rtw88_core
-alias symbol:sha256_update libsha256
 alias symbol:snd_ctl_notify_one snd
 alias symbol:snd_dmaengine_pcm_request_channel snd_pcm_dmaengine
 alias symbol:register_ip_vs_app_inc ip_vs
@@ -3552,7 +3549,6 @@ alias symbol:cma3000_resume cma3000_d0x
 alias symbol:dm_hold dm_mod
 alias symbol:mt76x02_mac_reset_counters mt76x02_lib
 alias symbol:ar9003_paprd_enable ath9k_hw
-alias symbol:sha224_zero_message_hash sha256_generic
 alias symbol:snd_pcm_hw_constraint_msbits snd_pcm
 alias symbol:crc8_populate_lsb crc8
 alias symbol:ieee80211_txq_schedule_start mac80211
@@ -3654,7 +3650,6 @@ alias symbol:mtd_get_fact_prot_info mtd
 alias symbol:tveeprom_hauppauge_analog tveeprom
 alias symbol:ath9k_hw_abortpcurecv ath9k_hw
 alias symbol:drm_gem_dma_create drm_dma_helper
-alias symbol:sha256 libsha256
 alias symbol:dm_region_hash_destroy dm_region_hash
 alias symbol:drm_connector_attach_max_bpc_property drm
 alias symbol:mt7921_usb_sdio_tx_complete_skb mt7921_common
@@ -4299,7 +4294,6 @@ alias symbol:smscore_set_board_id smsmdtv
 alias symbol:unregister_mtd_chip_driver chipreg
 alias symbol:arizona_anc_input_src snd_soc_arizona
 alias symbol:ceph_auth_handle_svc_reply_done libceph
-alias symbol:crypto_sha256_update sha256_generic
 alias symbol:o2hb_setup_callback ocfs2_nodemanager
 alias symbol:ata_bmdma_setup libata
 alias symbol:arizona_isrc_fsl snd_soc_arizona
@@ -5119,7 +5113,6 @@ alias symbol:snd_soc_find_dai snd_soc_core
 alias symbol:u_audio_get_volume u_audio
 alias symbol:ceph_osdc_start_request libceph
 alias symbol:drm_dev_unregister drm
-alias symbol:sha256_final libsha256
 alias symbol:snd_soc_get_pcm_runtime snd_soc_core
 alias symbol:nf_ct_helper_log nf_conntrack
 alias symbol:snd_pcm_format_silence_64 snd_pcm
@@ -5896,7 +5889,6 @@ alias symbol:p9_show_client_options 9pnet
 alias symbol:v4l2_m2m_ioctl_querybuf v4l2_mem2mem
 alias symbol:brcmu_pktq_peek_tail brcmutil
 alias symbol:ieee80211_key_mic_failure mac80211
-alias symbol:sha256_zero_message_hash sha256_generic
 alias symbol:si470x_ctrl_ops radio_si470x_common
 alias symbol:drm_atomic_state_default_release drm
 alias symbol:drm_fb_helper_deferred_io drm_kms_helper

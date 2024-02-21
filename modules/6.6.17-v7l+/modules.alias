@@ -108,6 +108,14 @@ alias crypto-md4 md4
 alias md4 md4
 alias crypto-md5 md5
 alias md5 md5
+alias crypto-sha512-generic sha512_generic
+alias sha512-generic sha512_generic
+alias crypto-sha512 sha512_generic
+alias sha512 sha512_generic
+alias crypto-sha384-generic sha512_generic
+alias sha384-generic sha512_generic
+alias crypto-sha384 sha512_generic
+alias sha384 sha512_generic
 alias crypto-sha3-512-generic sha3_generic
 alias sha3-512-generic sha3_generic
 alias crypto-sha3-512 sha3_generic
@@ -182,6 +190,10 @@ alias crypto-twofish-generic twofish_generic
 alias twofish-generic twofish_generic
 alias crypto-twofish twofish_generic
 alias twofish twofish_generic
+alias crypto-aes-generic aes_generic
+alias aes-generic aes_generic
+alias crypto-aes aes_generic
+alias aes aes_generic
 alias crypto-cast5-generic cast5_generic
 alias cast5-generic cast5_generic
 alias crypto-cast5 cast5_generic

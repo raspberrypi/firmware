@@ -241,6 +241,7 @@ alias symbol:arizona_in_dmic_osr snd_soc_arizona
 alias symbol:free_candev can_dev
 alias symbol:rt2x00lib_probe_dev rt2x00lib
 alias symbol:atm_dev_register atm
+alias symbol:crypto_sha512_update sha512_generic
 alias symbol:mt76_connac_mcu_bss_basic_tlv mt76_connac_lib
 alias symbol:ppp_register_net_channel ppp_generic
 alias symbol:drm_fb_helper_set_suspend_unlocked drm_kms_helper
@@ -1917,6 +1918,7 @@ alias symbol:ath9k_hw_stopdmarecv ath9k_hw
 alias symbol:cfg80211_defragment_element cfg80211
 alias symbol:drm_mode_config_helper_resume drm_kms_helper
 alias symbol:bt_sock_link bluetooth
+alias symbol:sha384_zero_message_hash sha512_generic
 alias symbol:synth_putws speakup
 alias symbol:LZ4_saveDict lz4_compress
 alias symbol:ath9k_hw_disable ath9k_hw
@@ -1964,7 +1966,6 @@ alias symbol:cx231xx_init_vbi_isoc cx231xx
 alias symbol:ieee80211_rate_control_register mac80211
 alias symbol:snd_ctl_register_ioctl snd
 alias symbol:snd_ctl_rename_id snd
-alias symbol:crypto_sha256_finup sha256_generic
 alias symbol:drm_atomic_helper_commit_modeset_disables drm_kms_helper
 alias symbol:ip6_output ipv6
 alias symbol:nft_meta_set_init nf_tables
@@ -3553,7 +3554,6 @@ alias symbol:cma3000_resume cma3000_d0x
 alias symbol:dm_hold dm_mod
 alias symbol:mt76x02_mac_reset_counters mt76x02_lib
 alias symbol:ar9003_paprd_enable ath9k_hw
-alias symbol:sha224_zero_message_hash sha256_generic
 alias symbol:snd_pcm_hw_constraint_msbits snd_pcm
 alias symbol:crc8_populate_lsb crc8
 alias symbol:ieee80211_txq_schedule_start mac80211
@@ -4300,7 +4300,6 @@ alias symbol:smscore_set_board_id smsmdtv
 alias symbol:unregister_mtd_chip_driver chipreg
 alias symbol:arizona_anc_input_src snd_soc_arizona
 alias symbol:ceph_auth_handle_svc_reply_done libceph
-alias symbol:crypto_sha256_update sha256_generic
 alias symbol:o2hb_setup_callback ocfs2_nodemanager
 alias symbol:ata_bmdma_setup libata
 alias symbol:arizona_isrc_fsl snd_soc_arizona
@@ -5412,6 +5411,7 @@ alias symbol:mt76_mcu_skb_send_and_get_msg mt76
 alias symbol:snd_power_wait snd
 alias symbol:drm_gem_shmem_unpin drm_shmem_helper
 alias symbol:rtl_efuse_ops_init rtlwifi
+alias symbol:sha512_zero_message_hash sha512_generic
 alias symbol:dib0090_pwm_gain_reset dib0090
 alias symbol:snd_jack_add_new_kctl snd
 alias symbol:ip6_datagram_send_ctl ipv6
@@ -5893,7 +5893,6 @@ alias symbol:p9_show_client_options 9pnet
 alias symbol:v4l2_m2m_ioctl_querybuf v4l2_mem2mem
 alias symbol:brcmu_pktq_peek_tail brcmutil
 alias symbol:ieee80211_key_mic_failure mac80211
-alias symbol:sha256_zero_message_hash sha256_generic
 alias symbol:si470x_ctrl_ops radio_si470x_common
 alias symbol:drm_atomic_state_default_release drm
 alias symbol:drm_fb_helper_deferred_io drm_kms_helper
@@ -5976,6 +5975,7 @@ alias symbol:u_audio_get_playback_srate u_audio
 alias symbol:vb2_ioctl_expbuf videobuf2_v4l2
 alias symbol:arizona_clk32k_enable arizona
 alias symbol:arpt_unregister_table arp_tables
+alias symbol:crypto_sha512_finup sha512_generic
 alias symbol:efuse_power_switch rtlwifi
 alias symbol:nfnl_unlock nfnetlink
 alias symbol:video_device_pipeline_stop videodev

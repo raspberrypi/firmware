@@ -84,17 +84,16 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko.xz: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.k
 kernel/fs/btrfs/btrfs.ko.xz: kernel/crypto/xor.ko.xz kernel/lib/raid6/raid6_pq.ko.xz
 kernel/fs/gfs2/gfs2.ko.xz:
 kernel/fs/ceph/ceph.ko.xz: kernel/net/ceph/libceph.ko.xz
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko.xz:
 kernel/crypto/geniv.ko.xz: kernel/crypto/crypto_null.ko.xz
 kernel/crypto/seqiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/echainiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/crypto_user.ko.xz:
 kernel/crypto/cmac.ko.xz:
-kernel/crypto/hmac.ko.xz:
 kernel/crypto/xcbc.ko.xz:
 kernel/crypto/crypto_null.ko.xz:
 kernel/crypto/md4.ko.xz:
 kernel/crypto/md5.ko.xz:
-kernel/crypto/sha256_generic.ko.xz: kernel/lib/crypto/libsha256.ko.xz
 kernel/crypto/sha512_generic.ko.xz:
 kernel/crypto/sha3_generic.ko.xz:
 kernel/crypto/wp512.ko.xz:
@@ -149,7 +148,6 @@ kernel/lib/crypto/libchacha20poly1305.ko.xz: kernel/arch/arm/crypto/chacha-neon.
 kernel/lib/crypto/libcurve25519-generic.ko.xz:
 kernel/lib/crypto/libcurve25519.ko.xz:
 kernel/lib/crypto/libpoly1305.ko.xz:
-kernel/lib/crypto/libsha256.ko.xz:
 kernel/lib/lz4/lz4_compress.ko.xz:
 kernel/lib/crc-ccitt.ko.xz:
 kernel/lib/crc7.ko.xz:

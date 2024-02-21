@@ -35,10 +35,13 @@ kernel/crypto/crypto_hash.ko
 kernel/crypto/akcipher.ko
 kernel/crypto/sig.ko
 kernel/crypto/kpp.ko
+kernel/crypto/dh_generic.ko
 kernel/crypto/rsa_generic.ko
 kernel/crypto/crypto_acompress.ko
 kernel/crypto/cryptomgr.ko
+kernel/crypto/hmac.ko
 kernel/crypto/sha1_generic.ko
+kernel/crypto/sha256_generic.ko
 kernel/crypto/cbc.ko
 kernel/crypto/des_generic.ko
 kernel/crypto/crc32c_generic.ko
@@ -52,6 +55,7 @@ kernel/crypto/rng.ko
 kernel/crypto/asymmetric_keys/public_key.ko
 kernel/crypto/asymmetric_keys/x509_key_parser.ko
 kernel/crypto/asymmetric_keys/pkcs7_message.ko
+kernel/crypto/kdf_sp800108.ko
 kernel/block/bsg.ko
 kernel/block/mq-deadline.ko
 kernel/block/kyber-iosched.ko
@@ -61,6 +65,7 @@ kernel/lib/math/rational.ko
 kernel/lib/crypto/libcryptoutils.ko
 kernel/lib/crypto/libdes.ko
 kernel/lib/crypto/libsha1.ko
+kernel/lib/crypto/libsha256.ko
 kernel/lib/crypto/mpi/mpi.ko
 kernel/lib/bitrev.ko
 kernel/lib/linear_ranges.ko

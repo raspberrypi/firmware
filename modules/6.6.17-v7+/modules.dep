@@ -87,6 +87,7 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko.xz: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.k
 kernel/fs/btrfs/btrfs.ko.xz: kernel/crypto/xor.ko.xz kernel/arch/arm/lib/xor-neon.ko.xz kernel/lib/raid6/raid6_pq.ko.xz
 kernel/fs/gfs2/gfs2.ko.xz:
 kernel/fs/ceph/ceph.ko.xz: kernel/net/ceph/libceph.ko.xz
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko.xz:
 kernel/crypto/geniv.ko.xz: kernel/crypto/crypto_null.ko.xz
 kernel/crypto/seqiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/echainiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
@@ -96,7 +97,7 @@ kernel/crypto/xcbc.ko.xz:
 kernel/crypto/crypto_null.ko.xz:
 kernel/crypto/md4.ko.xz:
 kernel/crypto/md5.ko.xz:
-kernel/crypto/sha256_generic.ko.xz:
+kernel/crypto/sha512_generic.ko.xz:
 kernel/crypto/sha3_generic.ko.xz:
 kernel/crypto/wp512.ko.xz:
 kernel/crypto/blake2b_generic.ko.xz:

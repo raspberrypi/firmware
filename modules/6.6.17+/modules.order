@@ -84,17 +84,16 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko
 kernel/fs/btrfs/btrfs.ko
 kernel/fs/gfs2/gfs2.ko
 kernel/fs/ceph/ceph.ko
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko
 kernel/crypto/geniv.ko
 kernel/crypto/seqiv.ko
 kernel/crypto/echainiv.ko
 kernel/crypto/crypto_user.ko
 kernel/crypto/cmac.ko
-kernel/crypto/hmac.ko
 kernel/crypto/xcbc.ko
 kernel/crypto/crypto_null.ko
 kernel/crypto/md4.ko
 kernel/crypto/md5.ko
-kernel/crypto/sha256_generic.ko
 kernel/crypto/sha512_generic.ko
 kernel/crypto/sha3_generic.ko
 kernel/crypto/wp512.ko
@@ -149,7 +148,6 @@ kernel/lib/crypto/libchacha20poly1305.ko
 kernel/lib/crypto/libcurve25519-generic.ko
 kernel/lib/crypto/libcurve25519.ko
 kernel/lib/crypto/libpoly1305.ko
-kernel/lib/crypto/libsha256.ko
 kernel/lib/lz4/lz4_compress.ko
 kernel/lib/crc-ccitt.ko
 kernel/lib/crc7.ko

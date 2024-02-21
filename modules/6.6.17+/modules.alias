@@ -76,8 +76,6 @@ alias echainiv echainiv
 alias net-pf-16-proto-21 crypto_user
 alias crypto-cmac cmac
 alias cmac cmac
-alias crypto-hmac hmac
-alias hmac hmac
 alias crypto-xcbc xcbc
 alias xcbc xcbc
 alias crypto-cipher_null crypto_null
@@ -90,14 +88,6 @@ alias crypto-md4 md4
 alias md4 md4
 alias crypto-md5 md5
 alias md5 md5
-alias crypto-sha256-generic sha256_generic
-alias sha256-generic sha256_generic
-alias crypto-sha256 sha256_generic
-alias sha256 sha256_generic
-alias crypto-sha224-generic sha256_generic
-alias sha224-generic sha256_generic
-alias crypto-sha224 sha256_generic
-alias sha224 sha256_generic
 alias crypto-sha512-generic sha512_generic
 alias sha512-generic sha512_generic
 alias crypto-sha512 sha512_generic

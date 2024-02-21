@@ -253,6 +253,7 @@ alias symbol:arizona_in_dmic_osr snd_soc_arizona
 alias symbol:free_candev can_dev
 alias symbol:rt2x00lib_probe_dev rt2x00lib
 alias symbol:atm_dev_register atm
+alias symbol:crypto_sha512_update sha512_generic
 alias symbol:mt76_connac_mcu_bss_basic_tlv mt76_connac_lib
 alias symbol:ppp_register_net_channel ppp_generic
 alias symbol:drm_fb_helper_set_suspend_unlocked drm_kms_helper
@@ -2023,6 +2024,7 @@ alias symbol:cfg80211_defragment_element cfg80211
 alias symbol:drm_mode_config_helper_resume drm_kms_helper
 alias symbol:vhost_dev_cleanup vhost
 alias symbol:bt_sock_link bluetooth
+alias symbol:sha384_zero_message_hash sha512_generic
 alias symbol:synth_putws speakup
 alias symbol:LZ4_saveDict lz4_compress
 alias symbol:ath9k_hw_disable ath9k_hw
@@ -5718,6 +5720,7 @@ alias symbol:mt76_mcu_skb_send_and_get_msg mt76
 alias symbol:snd_power_wait snd
 alias symbol:drm_gem_shmem_unpin drm_shmem_helper
 alias symbol:rtl_efuse_ops_init rtlwifi
+alias symbol:sha512_zero_message_hash sha512_generic
 alias symbol:dib0090_pwm_gain_reset dib0090
 alias symbol:snd_jack_add_new_kctl snd
 alias symbol:ip6_datagram_send_ctl ipv6
@@ -6308,6 +6311,7 @@ alias symbol:u_audio_get_playback_srate u_audio
 alias symbol:vb2_ioctl_expbuf videobuf2_v4l2
 alias symbol:arizona_clk32k_enable arizona
 alias symbol:arpt_unregister_table arp_tables
+alias symbol:crypto_sha512_finup sha512_generic
 alias symbol:efuse_power_switch rtlwifi
 alias symbol:nfnl_unlock nfnetlink
 alias symbol:video_device_pipeline_stop videodev

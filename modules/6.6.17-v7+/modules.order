@@ -87,6 +87,7 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko
 kernel/fs/btrfs/btrfs.ko
 kernel/fs/gfs2/gfs2.ko
 kernel/fs/ceph/ceph.ko
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko
 kernel/crypto/geniv.ko
 kernel/crypto/seqiv.ko
 kernel/crypto/echainiv.ko
@@ -96,7 +97,7 @@ kernel/crypto/xcbc.ko
 kernel/crypto/crypto_null.ko
 kernel/crypto/md4.ko
 kernel/crypto/md5.ko
-kernel/crypto/sha256_generic.ko
+kernel/crypto/sha512_generic.ko
 kernel/crypto/sha3_generic.ko
 kernel/crypto/wp512.ko
 kernel/crypto/blake2b_generic.ko

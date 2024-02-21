@@ -98,16 +98,17 @@ kernel/fs/btrfs/btrfs.ko.xz: kernel/crypto/xor.ko.xz kernel/arch/arm64/lib/xor-n
 kernel/fs/gfs2/gfs2.ko.xz:
 kernel/fs/ceph/ceph.ko.xz: kernel/net/ceph/libceph.ko.xz
 kernel/fs/efivarfs/efivarfs.ko.xz:
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko.xz:
 kernel/crypto/geniv.ko.xz: kernel/crypto/crypto_null.ko.xz
 kernel/crypto/seqiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/echainiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/crypto_user.ko.xz:
 kernel/crypto/cmac.ko.xz:
-kernel/crypto/hmac.ko.xz:
 kernel/crypto/xcbc.ko.xz:
 kernel/crypto/crypto_null.ko.xz:
 kernel/crypto/md4.ko.xz:
 kernel/crypto/md5.ko.xz:
+kernel/crypto/sha512_generic.ko.xz:
 kernel/crypto/sha3_generic.ko.xz:
 kernel/crypto/sm3.ko.xz:
 kernel/crypto/wp512.ko.xz:

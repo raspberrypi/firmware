@@ -87,6 +87,7 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko
 kernel/fs/btrfs/btrfs.ko
 kernel/fs/gfs2/gfs2.ko
 kernel/fs/ceph/ceph.ko
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko
 kernel/crypto/geniv.ko
 kernel/crypto/seqiv.ko
 kernel/crypto/echainiv.ko
@@ -96,6 +97,7 @@ kernel/crypto/xcbc.ko
 kernel/crypto/crypto_null.ko
 kernel/crypto/md4.ko
 kernel/crypto/md5.ko
+kernel/crypto/sha512_generic.ko
 kernel/crypto/sha3_generic.ko
 kernel/crypto/wp512.ko
 kernel/crypto/blake2b_generic.ko
@@ -108,6 +110,7 @@ kernel/crypto/chacha20poly1305.ko
 kernel/crypto/cryptd.ko
 kernel/crypto/twofish_generic.ko
 kernel/crypto/twofish_common.ko
+kernel/crypto/aes_generic.ko
 kernel/crypto/cast_common.ko
 kernel/crypto/cast5_generic.ko
 kernel/crypto/chacha_generic.ko
@@ -140,6 +143,7 @@ kernel/crypto/crypto_simd.ko
 kernel/arch/arm/lib/xor-neon.ko
 kernel/lib/math/cordic.ko
 kernel/lib/crypto/libchacha.ko
+kernel/lib/crypto/libaes.ko
 kernel/lib/crypto/libarc4.ko
 kernel/lib/crypto/gf128mul.ko
 kernel/lib/crypto/libchacha20poly1305.ko

@@ -1,5 +1,5 @@
-kernel/arch/arm/crypto/aes-arm.ko.xz:
-kernel/arch/arm/crypto/aes-arm-bs.ko.xz: kernel/crypto/crypto_simd.ko.xz kernel/crypto/cryptd.ko.xz
+kernel/arch/arm/crypto/aes-arm.ko.xz: kernel/crypto/aes_generic.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/arch/arm/crypto/aes-arm-bs.ko.xz: kernel/crypto/crypto_simd.ko.xz kernel/crypto/cryptd.ko.xz kernel/lib/crypto/libaes.ko.xz
 kernel/arch/arm/crypto/sha1-arm.ko.xz:
 kernel/arch/arm/crypto/sha1-arm-neon.ko.xz: kernel/arch/arm/crypto/sha1-arm.ko.xz
 kernel/arch/arm/crypto/chacha-neon.ko.xz:
@@ -87,6 +87,7 @@ kernel/fs/ocfs2/dlm/ocfs2_dlm.ko.xz: kernel/fs/ocfs2/cluster/ocfs2_nodemanager.k
 kernel/fs/btrfs/btrfs.ko.xz: kernel/crypto/xor.ko.xz kernel/arch/arm/lib/xor-neon.ko.xz kernel/lib/raid6/raid6_pq.ko.xz
 kernel/fs/gfs2/gfs2.ko.xz:
 kernel/fs/ceph/ceph.ko.xz: kernel/net/ceph/libceph.ko.xz
+kernel/crypto/asymmetric_keys/pkcs8_key_parser.ko.xz:
 kernel/crypto/geniv.ko.xz: kernel/crypto/crypto_null.ko.xz
 kernel/crypto/seqiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
 kernel/crypto/echainiv.ko.xz: kernel/crypto/geniv.ko.xz kernel/crypto/crypto_null.ko.xz
@@ -96,6 +97,7 @@ kernel/crypto/xcbc.ko.xz:
 kernel/crypto/crypto_null.ko.xz:
 kernel/crypto/md4.ko.xz:
 kernel/crypto/md5.ko.xz:
+kernel/crypto/sha512_generic.ko.xz:
 kernel/crypto/sha3_generic.ko.xz:
 kernel/crypto/wp512.ko.xz:
 kernel/crypto/blake2b_generic.ko.xz:
@@ -108,6 +110,7 @@ kernel/crypto/chacha20poly1305.ko.xz:
 kernel/crypto/cryptd.ko.xz:
 kernel/crypto/twofish_generic.ko.xz: kernel/crypto/twofish_common.ko.xz
 kernel/crypto/twofish_common.ko.xz:
+kernel/crypto/aes_generic.ko.xz: kernel/lib/crypto/libaes.ko.xz
 kernel/crypto/cast_common.ko.xz:
 kernel/crypto/cast5_generic.ko.xz: kernel/crypto/cast_common.ko.xz
 kernel/crypto/chacha_generic.ko.xz: kernel/lib/crypto/libchacha.ko.xz
@@ -140,6 +143,7 @@ kernel/crypto/crypto_simd.ko.xz: kernel/crypto/cryptd.ko.xz
 kernel/arch/arm/lib/xor-neon.ko.xz:
 kernel/lib/math/cordic.ko.xz:
 kernel/lib/crypto/libchacha.ko.xz:
+kernel/lib/crypto/libaes.ko.xz:
 kernel/lib/crypto/libarc4.ko.xz:
 kernel/lib/crypto/gf128mul.ko.xz:
 kernel/lib/crypto/libchacha20poly1305.ko.xz: kernel/arch/arm/crypto/chacha-neon.ko.xz kernel/arch/arm/crypto/poly1305-arm.ko.xz
@@ -1214,18 +1218,18 @@ kernel/drivers/w1/slaves/w1_ds2781.ko.xz: kernel/drivers/w1/wire.ko.xz kernel/dr
 kernel/drivers/w1/slaves/w1_ds28e04.ko.xz: kernel/drivers/w1/wire.ko.xz kernel/drivers/connector/cn.ko.xz
 kernel/drivers/w1/slaves/w1_ds28e17.ko.xz: kernel/drivers/w1/wire.ko.xz kernel/drivers/connector/cn.ko.xz
 kernel/drivers/w1/wire.ko.xz: kernel/drivers/connector/cn.ko.xz
-kernel/drivers/bluetooth/hci_vhci.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/hci_uart.ko.xz: kernel/drivers/bluetooth/btbcm.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/bcm203x.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/bpa10x.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/bfusb.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btusb.ko.xz: kernel/drivers/bluetooth/btrtl.ko.xz kernel/drivers/bluetooth/btintel.ko.xz kernel/drivers/bluetooth/btbcm.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btintel.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/ath3k.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btmrvl.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btmrvl_sdio.ko.xz: kernel/drivers/bluetooth/btmrvl.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btbcm.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/drivers/bluetooth/btrtl.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
+kernel/drivers/bluetooth/hci_vhci.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/hci_uart.ko.xz: kernel/drivers/bluetooth/btbcm.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/bcm203x.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/bpa10x.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/bfusb.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btusb.ko.xz: kernel/drivers/bluetooth/btrtl.ko.xz kernel/drivers/bluetooth/btintel.ko.xz kernel/drivers/bluetooth/btbcm.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btintel.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/ath3k.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btmrvl.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btmrvl_sdio.ko.xz: kernel/drivers/bluetooth/btmrvl.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btbcm.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/drivers/bluetooth/btrtl.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
 kernel/drivers/ssb/ssb.ko.xz:
 kernel/drivers/bcma/bcma.ko.xz:
 kernel/drivers/iio/adc/mcp320x.ko.xz: kernel/drivers/iio/industrialio.ko.xz
@@ -1715,11 +1719,11 @@ kernel/net/can/can-bcm.ko.xz: kernel/net/can/can.ko.xz
 kernel/net/can/can-gw.ko.xz: kernel/net/can/can.ko.xz
 kernel/net/can/j1939/can-j1939.ko.xz: kernel/net/can/can.ko.xz
 kernel/net/can/can-isotp.ko.xz: kernel/net/can/can.ko.xz
-kernel/net/bluetooth/bluetooth.ko.xz: kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/net/bluetooth/rfcomm/rfcomm.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/net/bluetooth/bnep/bnep.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/net/bluetooth/hidp/hidp.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz
-kernel/net/bluetooth/bluetooth_6lowpan.ko.xz: kernel/net/6lowpan/6lowpan.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/ipv6/ipv6.ko.xz kernel/net/rfkill/rfkill.ko.xz
+kernel/net/bluetooth/bluetooth.ko.xz: kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/net/bluetooth/rfcomm/rfcomm.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/net/bluetooth/bnep/bnep.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/net/bluetooth/hidp/hidp.ko.xz: kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
+kernel/net/bluetooth/bluetooth_6lowpan.ko.xz: kernel/net/6lowpan/6lowpan.ko.xz kernel/net/bluetooth/bluetooth.ko.xz kernel/crypto/ecdh_generic.ko.xz kernel/crypto/ecc.ko.xz kernel/net/ipv6/ipv6.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libaes.ko.xz
 kernel/net/atm/atm.ko.xz:
 kernel/net/atm/pppoatm.ko.xz: kernel/net/atm/atm.ko.xz kernel/drivers/net/ppp/ppp_generic.ko.xz kernel/drivers/net/slip/slhc.ko.xz
 kernel/net/l2tp/l2tp_core.ko.xz: kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz kernel/net/ipv6/ipv6.ko.xz
