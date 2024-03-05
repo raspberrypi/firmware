@@ -12328,6 +12328,8 @@ alias of:N*T*Crpi,rpi-dacC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Crpi,rpi-dac snd_soc_rpi_simple_soundcard
 alias of:N*T*Cdionaudio,dionaudio-kiwiC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Cdionaudio,dionaudio-kiwi snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberry,hifiberry-dac8xC* snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberry,hifiberry-dac8x snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-dacC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-dac snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-amp3C* snd_soc_rpi_simple_soundcard
