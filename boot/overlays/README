@@ -826,6 +826,12 @@ Load:   dtoverlay=balena-fin
 Params: <None>
 
 
+Name:   bcm2712d0
+Info:   Overlay encapsulating the BCM2712 C0->D0 differences
+Load:   dtoverlay=bcm2712d0
+Params: <None>
+
+
 Name:   bmp085_i2c-sensor
 Info:   This overlay is now deprecated - see i2c-sensor
 Load:   <Deprecated>
@@ -1738,9 +1744,43 @@ Load:   dtoverlay=hifiberry-amp3
 Params: <None>
 
 
+Name:   hifiberry-amp4pro
+Info:   Configures the HifiBerry AMP4 Pro audio card
+Load:   dtoverlay=hifiberry-amp4pro,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the TAS5756
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-amp4pro,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        slave                   Force the amp into slave mode, using Pi as
+                                master for bit clock and frame clock.
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
+        auto_mute               If set to 'true' the amplifier is automatically
+                                muted when it is not playing.
+        mute_ext_ctl            The amplifier's HW mute control is enabled
+                                in ALSA mixer and set to <val>.
+                                Will be overwritten by ALSA user settings.
+
+
 Name:   hifiberry-dac
 Info:   Configures the HifiBerry DAC audio cards
 Load:   dtoverlay=hifiberry-dac
+Params: <None>
+
+
+Name:   hifiberry-dac8x
+Info:   Configures the HifiBerry DAC8X audio cards (only on PI5)
+Load:   dtoverlay=hifiberry-dac8x
 Params: <None>
 
 
@@ -2106,7 +2146,13 @@ Params: abx80x                  Select one of the ABx80x family:
                                 source
 
         backup-switchover-mode  Backup power supply switch mode. Must be 0 for
-                                off or 1 for Vdd < VBackup (RV3028, RV3032)
+                                "Switchover disabled", 1 for "Direct Switching"
+                                (if Vdd < VBackup), 2 for "Standby
+                                Mode" (if Vdd < Vbackup,
+                                does not draw current) or 3 for
+                                "Level Switching" (if Vdd < Vbackup
+                                and Vdd < Vddsw and Vbackup > Vddsw)
+                                (RV3028, RV3032)
 
 
 Name:   i2c-rtc-gpio
@@ -2178,7 +2224,13 @@ Params: abx80x                  Select one of the ABx80x family:
                                 source
 
         backup-switchover-mode  Backup power supply switch mode. Must be 0 for
-                                off or 1 for Vdd < VBackup (RV3028, RV3032)
+                                "Switchover disabled", 1 for "Direct Switching"
+                                (if Vdd < VBackup), 2 for "Standby
+                                Mode" (if Vdd < Vbackup,
+                                does not draw current) or 3 for
+                                "Level Switching" (if Vdd < Vbackup
+                                and Vdd < Vddsw and Vbackup > Vddsw)
+                                (RV3028, RV3032)
 
         i2c_gpio_sda            GPIO used for I2C data (default "23")
 
@@ -2666,6 +2718,18 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
         link-frequency          Allowable link frequency values to use in Hz:
                                 450000000 (default), 447000000, 453000000.
+
+
+Name:   interludeaudio-analog
+Info:   Configures Interlude Audio Analog Hat audio card
+Load:   dtoverlay=interludeaudio-analog,<param>=<val>
+Params: gpiopin                 GPIO pin for codec reset
+
+
+Name:   interludeaudio-digital
+Info:   Configures Interlude Audio Digital Hat audio card
+Load:   dtoverlay=interludeaudio-digital
+Params: <None>
 
 
 Name:   iqaudio-codec
@@ -3376,6 +3440,12 @@ Load:   dtoverlay=pcie-32bit-dma
 Params: <None>
 
 
+Name:   pcie-32bit-dma-pi5
+Info:   Force PCIe config to support 32bit DMA addresses at the expense of
+        having to bounce buffers (on the Pi 5).
+Load:   dtoverlay=pcie-32bit-dma-pi5
+Params: <None>
+
 [ The pcf2127-rtc overlay has been deleted. See i2c-rtc. ]
 
 
@@ -3486,8 +3556,14 @@ Params: speed                   Display SPI bus speed
 
 
 Name:   pisound
-Info:   Configures the Blokas Labs pisound card
+Info:   Configures the Blokas Labs Pisound card
 Load:   dtoverlay=pisound
+Params: <None>
+
+
+Name:   pisound-pi5
+Info:   Pi 5 specific overlay override for Blokas Labs Pisound card, see pisound
+Load:   dtoverlay=pisound-pi5
 Params: <None>
 
 
@@ -3502,6 +3578,10 @@ Params: speed                   Display SPI bus speed
 
         debug                   Debug output level {0-7}
 
+        drm                     Force the use of the mi0283qt DRM driver (by
+                                default the ili9340 framebuffer driver will
+                                be used in preference if available)
+
 
 Name:   pitft28-capacitive
 Info:   Adafruit PiTFT 2.8" capacitive touch screen
@@ -3513,6 +3593,10 @@ Params: speed                   Display SPI bus speed
         fps                     Delay between frame updates
 
         debug                   Debug output level {0-7}
+
+        drm                     Force the use of the mi0283qt DRM driver (by
+                                default the ili9340 framebuffer driver will
+                                be used in preference if available)
 
         touch-sizex             Touchscreen size x (default 240)
 
@@ -3540,6 +3624,12 @@ Params: speed                   Display SPI bus speed
                                 default the ili9340 framebuffer driver will
                                 be used in preference if available)
 
+        touch-invx              Touchscreen inverted x axis
+
+        touch-invy              Touchscreen inverted y axis
+
+        touch-swapxy            Touchscreen swapped x y axis
+
 
 Name:   pitft35-resistive
 Info:   Adafruit PiTFT 3.5" resistive touch screen
@@ -3555,6 +3645,12 @@ Params: speed                   Display SPI bus speed
         drm                     Force the use of the hx8357d DRM driver (by
                                 default the fb_hx8357d framebuffer driver will
                                 be used in preference if available)
+
+        touch-invx              Touchscreen inverted x axis
+
+        touch-invy              Touchscreen inverted y axis
+
+        touch-swapxy            Touchscreen swapped x y axis
 
 
 Name:   pps-gpio
@@ -5026,6 +5122,10 @@ Params: gpiopin                 GPIO for I/O (default "4")
         pullup                  Now enabled by default (ignored)
 
 
+Name:   w1-gpio-pi5
+Info:   See w1-gpio (this is the Pi 5 version)
+
+
 Name:   w1-gpio-pullup
 Info:   Configures the w1-gpio Onewire interface module.
         Use this overlay if you *do* need a GPIO to drive an external pullup.
@@ -5033,6 +5133,10 @@ Load:   dtoverlay=w1-gpio-pullup,<param>=<val>
 Params: gpiopin                 GPIO for I/O (default "4")
         extpullup               GPIO for external pullup (default "5")
         pullup                  Now enabled by default (ignored)
+
+
+Name:   w1-gpio-pullup-pi5
+Info:   See w1-gpio-pullup (this is the Pi 5 version)
 
 
 Name:   w5500
