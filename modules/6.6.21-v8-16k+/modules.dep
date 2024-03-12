@@ -198,6 +198,7 @@ kernel/drivers/clk/clk-hifiberry-dachd.ko.xz: kernel/drivers/base/regmap/regmap-
 kernel/drivers/regulator/arizona-ldo1.ko.xz:
 kernel/drivers/regulator/arizona-micsupp.ko.xz: kernel/sound/soc/snd-soc-core.ko.xz kernel/sound/core/snd-compress.ko.xz kernel/sound/core/snd-pcm-dmaengine.ko.xz kernel/sound/core/snd-pcm.ko.xz kernel/sound/core/snd-timer.ko.xz kernel/sound/core/snd.ko.xz
 kernel/drivers/regulator/rpi-panel-attiny-regulator.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
+kernel/drivers/regulator/rpi-panel-v2-regulator.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/tty/serial/sc16is7xx.ko.xz: kernel/drivers/base/regmap/regmap-spi.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko.xz: kernel/drivers/misc/bcm2835_smi.ko.xz
 kernel/drivers/char/tpm/tpm.ko.xz:

@@ -502,6 +502,8 @@ alias platform:madera-micsupp arizona_micsupp
 alias platform:arizona-micsupp arizona_micsupp
 alias of:N*T*Craspberrypi,7inch-touchscreen-panel-regulatorC* rpi_panel_attiny_regulator
 alias of:N*T*Craspberrypi,7inch-touchscreen-panel-regulator rpi_panel_attiny_regulator
+alias of:N*T*Craspberrypi,v2-touchscreen-panel-regulatorC* rpi_panel_v2_regulator
+alias of:N*T*Craspberrypi,v2-touchscreen-panel-regulator rpi_panel_v2_regulator
 alias spi:sc16is7xx sc16is7xx
 alias of:N*T*Cnxp,sc16is762C* sc16is7xx
 alias of:N*T*Cnxp,sc16is762 sc16is7xx
@@ -869,6 +871,10 @@ alias of:N*T*Ctxw,txw397017s2 panel_ilitek_ili9806e
 alias spi:hyperpixel4 panel_ilitek_ili9806e
 alias spi:ili9806e panel_ilitek_ili9806e
 alias spi:txw397017s2 panel_ilitek_ili9806e
+alias of:N*T*Craspberrypi,dsi-7inchC* panel_ilitek_ili9881c
+alias of:N*T*Craspberrypi,dsi-7inch panel_ilitek_ili9881c
+alias of:N*T*Craspberrypi,dsi-5inchC* panel_ilitek_ili9881c
+alias of:N*T*Craspberrypi,dsi-5inch panel_ilitek_ili9881c
 alias of:N*T*Ccrystalfontz,cfaf7201280a0_050txC* panel_ilitek_ili9881c
 alias of:N*T*Ccrystalfontz,cfaf7201280a0_050tx panel_ilitek_ili9881c
 alias of:N*T*Cwanchanglong,w552946abaC* panel_ilitek_ili9881c
@@ -906,6 +912,8 @@ alias of:N*T*Ctdo,tl040hds20ct panel_tdo_y17p
 alias spi:y17p panel_tdo_y17p
 alias spi:hyperpixel4square panel_tdo_y17p
 alias spi:tl040hds20ct panel_tdo_y17p
+alias of:N*T*Cwaveshare,4inch-panelC* panel_waveshare_dsi
+alias of:N*T*Cwaveshare,4inch-panel panel_waveshare_dsi
 alias of:N*T*Cwaveshare,11.9inch-panelC* panel_waveshare_dsi
 alias of:N*T*Cwaveshare,11.9inch-panel panel_waveshare_dsi
 alias of:N*T*Cwaveshare,10.1inch-panelC* panel_waveshare_dsi

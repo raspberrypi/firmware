@@ -184,6 +184,7 @@ kernel/drivers/regulator/fixed.ko
 kernel/drivers/regulator/arizona-ldo1.ko
 kernel/drivers/regulator/arizona-micsupp.ko
 kernel/drivers/regulator/rpi-panel-attiny-regulator.ko
+kernel/drivers/regulator/rpi-panel-v2-regulator.ko
 kernel/drivers/tty/serial/sc16is7xx.ko
 kernel/drivers/char/broadcom/bcm2835_smi_dev.ko
 kernel/drivers/char/tpm/tpm.ko
