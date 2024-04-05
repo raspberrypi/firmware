@@ -333,6 +333,7 @@ kernel/drivers/hid/usbhid/usbhid.ko
 kernel/drivers/staging/vc04_services/vchiq.ko
 kernel/drivers/mailbox/bcm2835-mailbox.ko
 kernel/drivers/extcon/extcon-core.ko
+kernel/drivers/nvmem/nvmem-raspberrypi-otp.ko
 kernel/sound/soundcore.ko
 kernel/net/core/selftests.ko
 kernel/net/ipv4/tcp_cubic.ko

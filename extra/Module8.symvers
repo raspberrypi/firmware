@@ -8,7 +8,6 @@
 0x8946ea72	fpsimd_context_busy	vmlinux	EXPORT_SYMBOL	
 0x8fd180e7	kernel_neon_begin	vmlinux	EXPORT_SYMBOL_GPL	
 0xa8a8110c	kernel_neon_end	vmlinux	EXPORT_SYMBOL_GPL	
-0x8f678b07	__stack_chk_guard	vmlinux	EXPORT_SYMBOL	
 0x60a32ea9	pm_power_off	vmlinux	EXPORT_SYMBOL_GPL	
 0xb3a82019	profile_pc	vmlinux	EXPORT_SYMBOL	
 0x5d112304	__memcpy_fromio	vmlinux	EXPORT_SYMBOL	
