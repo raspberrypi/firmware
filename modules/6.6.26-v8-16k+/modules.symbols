@@ -1346,6 +1346,7 @@ alias symbol:ceph_wait_for_latest_osdmap libceph
 alias symbol:cfg80211_unlink_bss cfg80211
 alias symbol:drm_crtc_vblank_reset drm
 alias symbol:ieee80211_get_tx_rates mac80211
+alias symbol:mdio_mii_ioctl mdio
 alias symbol:rt2x00mac_remove_interface rt2x00lib
 alias symbol:virtio_transport_notify_buffer_size vmw_vsock_virtio_transport_common
 alias symbol:bt_sock_recvmsg bluetooth
@@ -1450,6 +1451,7 @@ alias symbol:vb2_request_queue videobuf2_v4l2
 alias symbol:drm_get_connector_type_name drm
 alias symbol:fuse_simple_background fuse
 alias symbol:gserial_resume u_serial
+alias symbol:i40e_client_device_register i40e
 alias symbol:nf_defrag_ipv4_enable nf_defrag_ipv4
 alias symbol:tpm_try_get_ops tpm
 alias symbol:v4l_enable_media_source videodev
@@ -2578,6 +2580,7 @@ alias symbol:__mt7921_start mt7921_common
 alias symbol:asoc_simple_canonicalize_platform snd_soc_simple_card_utils
 alias symbol:fbtft_framebuffer_alloc fbtft
 alias symbol:btrtl_shutdown_realtek btrtl
+alias symbol:mdio_set_flag mdio
 alias symbol:raid6_gfexi raid6_pq
 alias symbol:snd_card_disconnect_sync snd
 alias symbol:v4l2_fwnode_endpoint_parse v4l2_fwnode
@@ -3098,6 +3101,7 @@ alias symbol:mt76x0_chip_onoff mt76x0_common
 alias symbol:snd_card_file_remove snd
 alias symbol:ax25_linkfail_register ax25
 alias symbol:fbtft_write_spi fbtft
+alias symbol:mdio45_nway_restart mdio
 alias symbol:mt792x_mcu_fw_pmctrl mt792x_lib
 alias symbol:nf_conntrack_lock nf_conntrack
 alias symbol:v4l2_ctrl_subdev_log_status videodev
@@ -3729,6 +3733,7 @@ alias symbol:is_fw_load cx231xx
 alias symbol:media_device_register_entity_notify mc
 alias symbol:tcpv6_prot ipv6
 alias symbol:v4l2_fwnode_connector_add_link v4l2_fwnode
+alias symbol:mdio45_ethtool_gset_npage mdio
 alias symbol:xillybus_cleanup_chrdev xillybus_class
 alias symbol:__lbs_cmd libertas
 alias symbol:mt76_connac_mcu_set_channel_domain mt76_connac_lib
@@ -4185,6 +4190,7 @@ alias symbol:mt76_connac_mcu_add_nested_tlv mt76_connac_lib
 alias symbol:usb_wwan_dtr_rts usb_wwan
 alias symbol:ata_pio_need_iordy libata
 alias symbol:btbcm_set_bdaddr btbcm
+alias symbol:i40e_client_device_unregister i40e
 alias symbol:__cfg80211_alloc_reply_skb cfg80211
 alias symbol:bcm2835_smi_set_regs_from_settings bcm2835_smi
 alias symbol:drm_connector_set_panel_orientation drm
@@ -4574,6 +4580,7 @@ alias symbol:drm_encoder_cleanup drm
 alias symbol:drm_format_info_min_pitch drm
 alias symbol:drm_i2c_encoder_init drm_kms_helper
 alias symbol:ieee80211_rx_ba_timer_expired mac80211
+alias symbol:ixgbe_xdp_locking_key ixgbe
 alias symbol:ceph_cls_lock libceph
 alias symbol:ocfs2_dlm_lvb_valid ocfs2_stackglue
 alias symbol:drm_gem_vram_simple_display_pipe_cleanup_fb drm_vram_helper
@@ -4686,6 +4693,7 @@ alias symbol:sata_scr_write libata
 alias symbol:usb_wwan_resume usb_wwan
 alias symbol:ath_key_config ath
 alias symbol:iio_write_channel_raw industrialio
+alias symbol:mdio45_probe mdio
 alias symbol:mtd_unlock mtd
 alias symbol:nf_ct_l4proto_find nf_conntrack
 alias symbol:ata_sff_data_xfer32 libata
@@ -4756,6 +4764,7 @@ alias symbol:ssb_pcicore_dev_irqvecs_enable ssb
 alias symbol:ubi_flush ubi
 alias symbol:aes_encrypt libaes
 alias symbol:ath9k_hw_write_associd ath9k_hw
+alias symbol:mdio45_ethtool_ksettings_get_npage mdio
 alias symbol:__drm_dev_dbg drm
 alias symbol:backlight_device_get_by_name backlight
 alias symbol:dib9000_firmware_post_pll_init dib9000
@@ -4877,6 +4886,7 @@ alias symbol:lib80211_unregister_crypto_ops lib80211
 alias symbol:__ip_tunnel_change_mtu ip_tunnel
 alias symbol:dm_rh_delay dm_region_hash
 alias symbol:ieee80211_radiotap_iterator_init cfg80211
+alias symbol:mdio45_links_ok mdio
 alias symbol:arizona_init_dvfs snd_soc_arizona
 alias symbol:dib9000_get_slave_frontend dib9000
 alias symbol:drm_gem_prime_fd_to_handle drm

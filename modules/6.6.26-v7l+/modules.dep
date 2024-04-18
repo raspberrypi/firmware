@@ -261,6 +261,10 @@ kernel/drivers/net/phy/phylink.ko.xz:
 kernel/drivers/net/phy/ax88796b.ko.xz:
 kernel/drivers/net/phy/realtek.ko.xz:
 kernel/drivers/net/mdio/mdio-bitbang.ko.xz:
+kernel/drivers/net/ethernet/intel/igb/igb.ko.xz: kernel/drivers/i2c/algos/i2c-algo-bit.ko.xz
+kernel/drivers/net/ethernet/intel/igc/igc.ko.xz:
+kernel/drivers/net/ethernet/intel/ixgbe/ixgbe.ko.xz: kernel/drivers/net/mdio.ko.xz
+kernel/drivers/net/ethernet/intel/i40e/i40e.ko.xz:
 kernel/drivers/net/ethernet/microchip/enc28j60.ko.xz:
 kernel/drivers/net/ethernet/microchip/lan743x.ko.xz:
 kernel/drivers/net/ethernet/qualcomm/qca_7k_common.ko.xz:
@@ -381,6 +385,7 @@ kernel/drivers/net/dummy.ko.xz:
 kernel/drivers/net/wireguard/wireguard.ko.xz: kernel/arch/arm/crypto/curve25519-neon.ko.xz kernel/lib/crypto/libcurve25519-generic.ko.xz kernel/lib/crypto/libchacha20poly1305.ko.xz kernel/arch/arm/crypto/chacha-neon.ko.xz kernel/arch/arm/crypto/poly1305-arm.ko.xz kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz kernel/net/ipv6/ipv6.ko.xz
 kernel/drivers/net/ifb.ko.xz:
 kernel/drivers/net/macvlan.ko.xz:
+kernel/drivers/net/mdio.ko.xz:
 kernel/drivers/net/netconsole.ko.xz:
 kernel/drivers/net/tun.ko.xz:
 kernel/drivers/net/veth.ko.xz:

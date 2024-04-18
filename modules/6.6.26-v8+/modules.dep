@@ -281,6 +281,10 @@ kernel/drivers/spi/spi-gpio.ko.xz: kernel/drivers/spi/spi-bitbang.ko.xz
 kernel/drivers/net/phy/ax88796b.ko.xz:
 kernel/drivers/net/phy/realtek.ko.xz:
 kernel/drivers/net/mdio/mdio-bitbang.ko.xz:
+kernel/drivers/net/ethernet/intel/igb/igb.ko.xz: kernel/drivers/i2c/algos/i2c-algo-bit.ko.xz
+kernel/drivers/net/ethernet/intel/igc/igc.ko.xz:
+kernel/drivers/net/ethernet/intel/ixgbe/ixgbe.ko.xz: kernel/drivers/net/mdio.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz
+kernel/drivers/net/ethernet/intel/i40e/i40e.ko.xz:
 kernel/drivers/net/ethernet/microchip/enc28j60.ko.xz:
 kernel/drivers/net/ethernet/microchip/lan743x.ko.xz:
 kernel/drivers/net/ethernet/qualcomm/qca_7k_common.ko.xz:
@@ -402,6 +406,7 @@ kernel/drivers/net/wireguard/wireguard.ko.xz: kernel/lib/crypto/libchacha20poly1
 kernel/drivers/net/ifb.ko.xz:
 kernel/drivers/net/macvlan.ko.xz:
 kernel/drivers/net/macvtap.ko.xz: kernel/drivers/net/macvlan.ko.xz kernel/drivers/net/tap.ko.xz
+kernel/drivers/net/mdio.ko.xz:
 kernel/drivers/net/netconsole.ko.xz:
 kernel/drivers/net/tun.ko.xz:
 kernel/drivers/net/tap.ko.xz:
@@ -1704,10 +1709,10 @@ kernel/net/ipv6/netfilter/ip6t_NPT.ko.xz: kernel/net/netfilter/x_tables.ko.xz
 kernel/net/ipv6/netfilter/ip6t_REJECT.ko.xz: kernel/net/ipv6/netfilter/nf_reject_ipv6.ko.xz kernel/net/netfilter/x_tables.ko.xz kernel/net/ipv6/ipv6.ko.xz
 kernel/net/ipv6/netfilter/ip6t_SYNPROXY.ko.xz: kernel/net/netfilter/nf_synproxy_core.ko.xz kernel/net/netfilter/nf_conntrack.ko.xz kernel/net/ipv6/netfilter/nf_defrag_ipv6.ko.xz kernel/net/ipv4/netfilter/nf_defrag_ipv4.ko.xz kernel/net/netfilter/x_tables.ko.xz
 kernel/net/ipv6/ipv6.ko.xz:
-kernel/net/ipv6/ah6.ko.xz: kernel/net/xfrm/xfrm_algo.ko.xz kernel/net/ipv6/ipv6.ko.xz
-kernel/net/ipv6/esp6.ko.xz: kernel/net/xfrm/xfrm_algo.ko.xz kernel/net/ipv6/ipv6.ko.xz
-kernel/net/ipv6/esp6_offload.ko.xz: kernel/net/ipv6/esp6.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz kernel/net/ipv6/ipv6.ko.xz
-kernel/net/ipv6/ipcomp6.ko.xz: kernel/net/ipv6/xfrm6_tunnel.ko.xz kernel/net/ipv6/tunnel6.ko.xz kernel/net/xfrm/xfrm_ipcomp.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz kernel/net/ipv6/ipv6.ko.xz
+kernel/net/ipv6/ah6.ko.xz: kernel/net/ipv6/ipv6.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz
+kernel/net/ipv6/esp6.ko.xz: kernel/net/ipv6/ipv6.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz
+kernel/net/ipv6/esp6_offload.ko.xz: kernel/net/ipv6/esp6.ko.xz kernel/net/ipv6/ipv6.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz
+kernel/net/ipv6/ipcomp6.ko.xz: kernel/net/ipv6/xfrm6_tunnel.ko.xz kernel/net/ipv6/tunnel6.ko.xz kernel/net/xfrm/xfrm_ipcomp.ko.xz kernel/net/ipv6/ipv6.ko.xz kernel/net/xfrm/xfrm_algo.ko.xz
 kernel/net/ipv6/xfrm6_tunnel.ko.xz: kernel/net/ipv6/tunnel6.ko.xz kernel/net/ipv6/ipv6.ko.xz
 kernel/net/ipv6/tunnel6.ko.xz:
 kernel/net/ipv6/ila/ila.ko.xz: kernel/net/ipv6/ipv6.ko.xz

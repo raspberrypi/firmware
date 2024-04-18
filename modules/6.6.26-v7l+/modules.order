@@ -261,6 +261,10 @@ kernel/drivers/net/phy/phylink.ko
 kernel/drivers/net/phy/ax88796b.ko
 kernel/drivers/net/phy/realtek.ko
 kernel/drivers/net/mdio/mdio-bitbang.ko
+kernel/drivers/net/ethernet/intel/igb/igb.ko
+kernel/drivers/net/ethernet/intel/igc/igc.ko
+kernel/drivers/net/ethernet/intel/ixgbe/ixgbe.ko
+kernel/drivers/net/ethernet/intel/i40e/i40e.ko
 kernel/drivers/net/ethernet/microchip/enc28j60.ko
 kernel/drivers/net/ethernet/microchip/lan743x.ko
 kernel/drivers/net/ethernet/qualcomm/qca_7k_common.ko
@@ -381,6 +385,7 @@ kernel/drivers/net/dummy.ko
 kernel/drivers/net/wireguard/wireguard.ko
 kernel/drivers/net/ifb.ko
 kernel/drivers/net/macvlan.ko
+kernel/drivers/net/mdio.ko
 kernel/drivers/net/netconsole.ko
 kernel/drivers/net/tun.ko
 kernel/drivers/net/veth.ko
