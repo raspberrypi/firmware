@@ -130,11 +130,11 @@ Name:   <The base DTB>
 Info:   Configures the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
-        ant1                    Select antenna 1 (default). CM4 only.
+        ant1                    Select antenna 1 (default). CM4/5 only.
 
-        ant2                    Select antenna 2. CM4 only.
+        ant2                    Select antenna 2. CM4/5 only.
 
-        noant                   Disable both antennas. CM4 only.
+        noant                   Disable both antennas. CM4/5 only.
 
         audio                   Set to "on" to enable the onboard ALSA audio
                                 interface (default "off")
@@ -300,6 +300,12 @@ Params:
 
         nvme                    Alias for "pciex1" (2712 only)
 
+        nvmem_cust_rw           Allow read/write access to customer otp
+
+        nvmem_mac_rw            Allow read/write access to mac addresses otp
+
+        nvmem_priv_rw           Allow read/write access to customer private otp
+
         pcie                    Set to "off" to disable the PCIe interface
                                 (default "on")
                                 (2711 only, but not applicable on CM4S)
@@ -343,6 +349,10 @@ Params:
         sd                      Set to "off" to disable the SD card (or eMMC on
                                 non-lite SKU of CM4).
                                 (default "on")
+
+        sd_cqe                  Use to enable Command Queueing on the SD
+                                interface for faster Class A2 card performance
+                                (Pi 5 only, default "off")
 
         sd_overclock            Clock (in MHz) to use when the MMC framework
                                 requests 50MHz
@@ -868,6 +878,10 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam1-ov7251             Select OV7251 for camera on port 1
         cam1-ov9281             Select OV9281 for camera on port 1
         cam1-imx290-clk-freq    Set clock frequency for an IMX290 on port 1
+        cam0-sync-source        Set camera on port 0 as vsync source
+        cam0-sync-sink          Set camera on port 0 as vsync sink
+        cam1-sync-source        Set camera on port 1 as vsync source
+        cam1-sync-sink          Set camera on port 1 as vsync sink
 
         cam0                    Connect the mux to CAM0 port (default is CAM1)
 
@@ -929,6 +943,14 @@ Params: cam0-arducam-64mp       Select Arducam64MP for camera on port 0
         cam3-ov7251             Select OV7251 for camera on port 3
         cam3-ov9281             Select OV9281 for camera on port 3
         cam3-imx290-clk-freq    Set clock frequency for an IMX290 on port 3
+        cam0-sync-source        Set camera on port 0 as vsync source
+        cam0-sync-sink          Set camera on port 0 as vsync sink
+        cam1-sync-source        Set camera on port 1 as vsync source
+        cam1-sync-sink          Set camera on port 1 as vsync sink
+        cam2-sync-source        Set camera on port 2 as vsync source
+        cam2-sync-sink          Set camera on port 2 as vsync sink
+        cam3-sync-source        Set camera on port 3 as vsync source
+        cam3-sync-sink          Set camera on port 3 as vsync sink
 
         cam0                    Connect the mux to CAM0 port (default is CAM1)
 
@@ -1779,7 +1801,7 @@ Params: <None>
 
 
 Name:   hifiberry-dac8x
-Info:   Configures the HifiBerry DAC8X audio cards (only on PI5)
+Info:   Configures the HifiBerry DAC8X audio cards (only on Pi5)
 Load:   dtoverlay=hifiberry-dac8x
 Params: <None>
 
@@ -1807,6 +1829,48 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 are switched off at all times.
 
 
+Name:   hifiberry-dacplus-pro
+Info:   Configures the HifiBerry DAC+ PRO audio card (onboard clocks)
+Load:   dtoverlay=hifiberry-dacplus-pro,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-dacplus,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
+
+
+Name:   hifiberry-dacplus-std
+Info:   Configures the HifiBerry DAC+ standard audio card (no onboard clocks)
+Load:   dtoverlay=hifiberry-dacplus-std,<param>=<val>
+Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
+                                Digital volume control. Enable with
+                                "dtoverlay=hifiberry-dacplus,24db_digital_gain"
+                                (The default behaviour is that the Digital
+                                volume control is limited to a maximum of
+                                0dB. ie. it can attenuate but not provide
+                                gain. For most users, this will be desired
+                                as it will prevent clipping. By appending
+                                the 24dB_digital_gain parameter, the Digital
+                                volume control will allow up to 24dB of
+                                gain. If this parameter is enabled, it is the
+                                responsibility of the user to ensure that
+                                the Digital volume control is set to a value
+                                that does not result in clipping/distortion!)
+        leds_off                If set to 'true' the onboard indicator LEDs
+                                are switched off at all times.
+
+
 Name:   hifiberry-dacplusadc
 Info:   Configures the HifiBerry DAC+ADC audio card
 Load:   dtoverlay=hifiberry-dacplusadc,<param>=<val>
@@ -1824,8 +1888,6 @@ Params: 24db_digital_gain       Allow gain to be applied via the PCM512x codec
                                 responsibility of the user to ensure that
                                 the Digital volume control is set to a value
                                 that does not result in clipping/distortion!)
-        slave                   Force DAC+ADC into slave mode, using Pi as
-                                master for bit clock and frame clock.
         leds_off                If set to 'true' the onboard indicator LEDs
                                 are switched off at all times.
 
@@ -2026,6 +2088,9 @@ Params: pca9542                 Select the NXP PCA9542 device
 
         addr                    Change I2C address of the device (default 0x70)
 
+        base                    Set an explicit base value for the channel bus
+                                numbers
+
         i2c0                    Choose the I2C0 bus on GPIOs 0&1
 
         i2c_csi_dsi             Choose the I2C0 bus on GPIOs 44&45
@@ -2041,6 +2106,9 @@ Params: pca9542                 Select the NXP PCA9542 device
 
         i2c6                    Choose the I2C6 bus (configure with the i2c6
                                 overlay - BCM2711 only)
+
+        disconnect_on_idle      Force the mux to disconnect all child buses
+                                after every transaction.
 
 
 [ The i2c-mux-pca9548a overlay has been deleted. See i2c-mux. ]
@@ -2088,6 +2156,8 @@ Params: abx80x                  Select one of the ABx80x family:
         pcf2127                 Select the PCF2127 device
 
         pcf2129                 Select the PCF2129 device
+
+        pcf2131                 Select the PCF2131 device
 
         pcf85063                Select the PCF85063 device
 
@@ -2182,6 +2252,8 @@ Params: abx80x                  Select one of the ABx80x family:
         pcf2127                 Select the PCF2127 device
 
         pcf2129                 Select the PCF2129 device
+
+        pcf2131                 Select the PCF2131 device
 
         pcf85063                Select the PCF85063 device
 
@@ -2642,6 +2714,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
         always-on               Leave the regulator powered up, to stop the
                                 camera clamping I/Os such as XVS to 0V.
+        sync-source             Configure as vsync source
+        sync-sink               Configure as vsync sink
 
 
 Name:   imx462
@@ -2682,6 +2756,8 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
         always-on               Leave the regulator powered up, to stop the
                                 camera clamping I/Os such as XVS to 0V.
+        sync-source             Configure as vsync source
+        sync-sink               Configure as vsync sink
 
 
 Name:   imx519
@@ -4573,6 +4649,13 @@ Params: speed                   SPI bus speed (default 4500000)
         reset_pin               GPIO pin for RESET (default 25)
 
 
+Name:   sunfounder-pironman5
+Info:   Overlay for SunFounder Pironman 5
+Load:   dtoverlay=sunfounder-pironman5,<param>=<val>
+Params: ir                      Enable IR or not (on or off, default on)
+        ir_pins                 Change IR receiver pin (default 12)
+
+
 Name:   superaudioboard
 Info:   Configures the SuperAudioBoard sound card
 Load:   dtoverlay=superaudioboard,<param>=<val>
@@ -4981,6 +5064,34 @@ Params: clock-frequency         Display clock frequency (Hz)
                                 Only supported on Pi5 and CM
 
 
+Name:   vc4-kms-dsi-ili9881-5inch
+Info:   Enable the Raspberry Pi 5" ILI9881 based touchscreen panel.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-ili9881-5inch,<param>
+Params: sizex                   Touchscreen size x (default 720)
+        sizey                   Touchscreen size y (default 1280)
+        invx                    Touchscreen inverted x axis
+        invy                    Touchscreen inverted y axis
+        swapxy                  Touchscreen swapped x y axis
+        disable_touch           Disables the touch screen overlay driver
+        dsi0                    Use DSI0 and i2c_csi_dsi0 (rather than
+                                the default DSI1 and i2c_csi_dsi).
+
+
+Name:   vc4-kms-dsi-ili9881-7inch
+Info:   Enable the Raspberry Pi 7" ILI9881 based touchscreen panel.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-ili9881-7inch,<param>
+Params: sizex                   Touchscreen size x (default 720)
+        sizey                   Touchscreen size y (default 1280)
+        invx                    Touchscreen inverted x axis
+        invy                    Touchscreen inverted y axis
+        swapxy                  Touchscreen swapped x y axis
+        disable_touch           Disables the touch screen overlay driver
+        dsi0                    Use DSI0 and i2c_csi_dsi0 (rather than
+                                the default DSI1 and i2c_csi_dsi).
+
+
 Name:   vc4-kms-dsi-lt070me05000
 Info:   Enable a JDI LT070ME05000 DSI display on DSI1.
         Note that this is a 4 lane DSI device, so it will only work on a Compute
@@ -5017,6 +5128,7 @@ Load:   dtoverlay=vc4-kms-dsi-waveshare-panel,<param>=<val>
 Params: 2_8_inch                2.8" 480x640
         3_4_inch                3.4" 800x800 round
         4_0_inch                4.0" 480x800
+        4_0_inchC               4.0" 720x720
         7_0_inchC               7.0" C 1024x600
         7_9_inch                7.9" 400x1280
         8_0_inch                8.0" 1280x800
