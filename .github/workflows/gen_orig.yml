@@ -1,0 +1,26 @@
+name: Generate release tarball for Raspberry Pi OS
+run-name: Generating release tarball for Raspberry Pi OS
+on:
+  push:
+    tags: # 1.YYYYMMDD
+      - '1.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+  workflow_dispatch:
+jobs:
+  publish_tarball:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Generate tarball
+        run: |
+          git archive --format=tar \
+            --prefix="raspi-firmware-$GITHUB_REF_NAME/" "$GITHUB_REF_NAME" \
+            boot/LICENCE.broadcom 'boot/*.elf' 'boot/*.dat' 'boot/*.bin' \
+            -o "raspi-firmware_$GITHUB_REF_NAME.orig.tar"
+            xz -T0 -9 "raspi-firmware_$GITHUB_REF_NAME.orig.tar"
+      - name: Release tarball
+        uses: softprops/action-gh-release@v2
+        with:
+          files: raspi-firmware_*.orig.tar.xz
