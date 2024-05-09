@@ -195,6 +195,7 @@ kernel/drivers/char/raspberrypi-gpiomem.ko.xz:
 kernel/drivers/gpu/drm/display/drm_display_helper.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-simple.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-ilitek-ili9806e.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
+kernel/drivers/gpu/drm/panel/panel-ilitek-ili9881c.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-jdi-lt070me05000.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/gpu/drm/panel/panel-sitronix-st7701.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz

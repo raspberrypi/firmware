@@ -195,6 +195,7 @@ kernel/drivers/char/raspberrypi-gpiomem.ko
 kernel/drivers/gpu/drm/display/drm_display_helper.ko
 kernel/drivers/gpu/drm/panel/panel-simple.ko
 kernel/drivers/gpu/drm/panel/panel-ilitek-ili9806e.ko
+kernel/drivers/gpu/drm/panel/panel-ilitek-ili9881c.ko
 kernel/drivers/gpu/drm/panel/panel-jdi-lt070me05000.ko
 kernel/drivers/gpu/drm/panel/panel-raspberrypi-touchscreen.ko
 kernel/drivers/gpu/drm/panel/panel-sitronix-st7701.ko
