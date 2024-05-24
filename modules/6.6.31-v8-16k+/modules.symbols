@@ -4657,6 +4657,7 @@ alias symbol:rt2x00usb_watchdog rt2x00usb
 alias symbol:v4l_vb2q_enable_media_source videodev
 alias symbol:ceph_osdc_watch libceph
 alias symbol:af_alg_accept af_alg
+alias symbol:backlight_set_display_name backlight
 alias symbol:dm_bufio_write_dirty_buffers dm_bufio
 alias symbol:drm_atomic_helper_check_plane_damage drm_kms_helper
 alias symbol:gspca_frame_add gspca_main
