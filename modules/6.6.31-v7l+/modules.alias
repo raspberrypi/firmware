@@ -8342,6 +8342,9 @@ alias of:N*T*Cbrcm,bcm2835-unicamC* bcm2835_unicam
 alias of:N*T*Cbrcm,bcm2835-unicam bcm2835_unicam
 alias of:N*T*Cvideo-muxC* video_mux
 alias of:N*T*Cvideo-mux video_mux
+alias pci:v00001E60d000043A2sv*sd*bc*sc*i* hailo_pci
+alias pci:v00001E60d000045C4sv*sd*bc*sc*i* hailo_pci
+alias pci:v00001E60d00002864sv*sd*bc*sc*i* hailo_pci
 alias usb:v0AF7p0101d*dc*dsc*dp*ic*isc*ip*in* b2c2_flexcop_usb
 alias usb:v13D3p3224d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_vp7045
 alias usb:v13D3p3223d*dc*dsc*dp*ic*isc*ip*in* dvb_usb_vp7045

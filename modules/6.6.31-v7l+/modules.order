@@ -748,6 +748,7 @@ kernel/drivers/media/common/cx2341x.ko
 kernel/drivers/media/common/tveeprom.ko
 kernel/drivers/media/platform/bcm2835/bcm2835-unicam.ko
 kernel/drivers/media/platform/video-mux.ko
+kernel/drivers/media/pci/hailo/hailo_pci.ko
 kernel/drivers/media/usb/b2c2/b2c2-flexcop-usb.ko
 kernel/drivers/media/usb/dvb-usb/dvb-usb.ko
 kernel/drivers/media/usb/dvb-usb/dvb-usb-vp7045.ko
