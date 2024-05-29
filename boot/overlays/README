@@ -130,6 +130,23 @@ Name:   <The base DTB>
 Info:   Configures the base Raspberry Pi hardware
 Load:   <loaded automatically>
 Params:
+        act_led_trigger         Choose which activity the LED tracks.
+                                Use "heartbeat" for a nice load indicator.
+                                (default "mmc")
+
+        act_led_activelow       Set to "on" to invert the sense of the LED
+                                (default "off")
+                                N.B. For Pi 3B, 3B+, 3A+ and 4B, use the act-led
+                                overlay.
+
+        act_led_gpio            Set which GPIO to use for the activity LED
+                                (in case you want to connect it to an external
+                                device)
+                                (default "16" on a non-Plus board, "47" on a
+                                Plus or Pi 2)
+                                N.B. For Pi 3B, 3B+, 3A+ and 4B, use the act-led
+                                overlay.
+
         ant1                    Select antenna 1 (default). CM4/5 only.
 
         ant2                    Select antenna 2. CM4/5 only.
@@ -169,6 +186,18 @@ Params:
                                 Default 3 on CM1, 3, and 4S.
                                 Default of GPIO expander 5 on CM4, but override
                                 switches to normal GPIO.
+
+        cam0_sync               Enable a GPIO to reflect frame sync from CSI0,
+                                going high on frame start, and low on frame end.
+
+        cam0_sync_inverted      Enable a GPIO to reflect frame sync from CSI0
+                                going low on frame start, and high on frame end.
+
+        cam1_sync               Enable a GPIO to reflect frame sync from CSI1,
+                                going high on frame start, and low on frame end.
+
+        cam1_sync_inverted      Enable a GPIO to reflect frame sync from CSI1
+                                going low on frame start, and high on frame end.
 
         cooling_fan             Enables the Pi 5 cooling fan (enabled
                                 automatically by the firmware)
@@ -328,12 +357,11 @@ Params:
         pciex1_tperst_clk_ms    Alias for pcie_tperst_clk_ms
                                 (2712 only, default "0")
 
-        spi                     Set to "on" to enable the spi interfaces
-                                (default "off")
-
-        spi_dma4                Use to enable 40-bit DMA on spi interfaces
-                                (the assigned value doesn't matter)
-                                (2711 only)
+        pwr_led_trigger
+        pwr_led_activelow
+        pwr_led_gpio
+                                As for act_led_*, but using the PWR LED.
+                                Not available on Model A/B boards.
 
         random                  Set to "on" to enable the hardware random
                                 number generator (default "on")
@@ -374,6 +402,19 @@ Params:
         sdio_overclock          Clock (in MHz) to use when the MMC framework
                                 requests 50MHz for the SDIO/WLAN interface.
 
+        spi                     Set to "on" to enable the spi interfaces
+                                (default "off")
+
+        spi_dma4                Use to enable 40-bit DMA on spi interfaces
+                                (the assigned value doesn't matter)
+                                (2711 only)
+
+        strict_gpiod            Return GPIOs to inputs when they are released.
+                                If using the gpiod utilities, it is necessary
+                                to keep a gpioset running (e.g. with
+                                --mode=wait) in order for an output value to
+                                persist.
+
         suspend                 Make the power button trigger a suspend rather
                                 than a power-off (2712 only, default "off")
 
@@ -397,29 +438,6 @@ Params:
                                 The value should be a 6-byte hexadecimal value,
                                 with or without colon separators, written in the
                                 natural (big-endian) order.
-
-        act_led_trigger         Choose which activity the LED tracks.
-                                Use "heartbeat" for a nice load indicator.
-                                (default "mmc")
-
-        act_led_activelow       Set to "on" to invert the sense of the LED
-                                (default "off")
-                                N.B. For Pi 3B, 3B+, 3A+ and 4B, use the act-led
-                                overlay.
-
-        act_led_gpio            Set which GPIO to use for the activity LED
-                                (in case you want to connect it to an external
-                                device)
-                                (default "16" on a non-Plus board, "47" on a
-                                Plus or Pi 2)
-                                N.B. For Pi 3B, 3B+, 3A+ and 4B, use the act-led
-                                overlay.
-
-        pwr_led_trigger
-        pwr_led_activelow
-        pwr_led_gpio
-                                As for act_led_*, but using the PWR LED.
-                                Not available on Model A/B boards.
 
         N.B. It is recommended to only enable those interfaces that are needed.
         Leaving all interfaces enabled can lead to unwanted behaviour (i2c_vc
@@ -3522,6 +3540,18 @@ Info:   Force PCIe config to support 32bit DMA addresses at the expense of
 Load:   dtoverlay=pcie-32bit-dma-pi5
 Params: <None>
 
+
+Name:   pciex1-compat-pi5
+Info:   Compatibility features for pciex1 on Pi 5.
+Load:   dtoverlay=pciex1-compat-pi5,<param>=<val>
+Params: l1ss                    Enable ASPM L1 sub-state support
+        no-l0s                  Disable ASPM L0s
+        no-mip                  Revert to the MSI target in the RC, instead of
+                                the MSI-MIP peripheral. Use if a) more than 8
+                                interrupt vectors are required or b) the EP
+                                requires DMA and MSI addresses to be 32bit.
+
+
 [ The pcf2127-rtc overlay has been deleted. See i2c-rtc. ]
 
 
@@ -3597,6 +3627,12 @@ Params: <None>
 Name:   piglow
 Info:   Configures the PiGlow by pimoroni.com
 Load:   dtoverlay=piglow
+Params: <None>
+
+
+Name:   pineboards-hat-ai
+Info:   Pineboards Hat Ai! overlay for the Google Coral Edge TPU
+Load:   dtoverlay=pineboards-hat-ai
 Params: <None>
 
 
@@ -3820,7 +3856,7 @@ Params: clock                   PWM clock frequency (informational)
 
 
 Name:   qca7000
-Info:   in-tech's Evaluation Board for PLC Stamp micro
+Info:   Evaluation Board for PLC Stamp micro
         This uses spi0 and a separate GPIO interrupt to connect the QCA7000.
 Load:   dtoverlay=qca7000,<param>=<val>
 Params: int_pin                 GPIO pin for interrupt signal (default 23)
@@ -3829,7 +3865,7 @@ Params: int_pin                 GPIO pin for interrupt signal (default 23)
 
 
 Name:   qca7000-uart0
-Info:   in-tech's Evaluation Board for PLC Stamp micro (UART)
+Info:   Evaluation Board for PLC Stamp micro (UART)
         This uses uart0/ttyAMA0 over GPIOs 14 & 15 to connect the QCA7000.
         But it requires disabling of onboard Bluetooth on
         Pi 3B, 3B+, 3A+, 4B and Zero W.
@@ -4101,6 +4137,14 @@ Info:   Overlay for the NXP SC16IS750 UART with I2C Interface
 Load:   dtoverlay=sc16is750-i2c,<param>=<val>
 Params: int_pin                 GPIO used for IRQ (default 24)
         addr                    Address (default 0x48)
+        xtal                    On-board crystal frequency (default 14745600)
+
+
+Name:   sc16is750-spi0
+Info:   Overlay for the NXP SC16IS750 UART with SPI Interface
+        Enables the chip on SPI0.
+Load:   dtoverlay=sc16is750-spi0,<param>=<val>
+Params: int_pin                 GPIO used for IRQ (default 24)
         xtal                    On-board crystal frequency (default 14745600)
 
 
@@ -4864,8 +4908,10 @@ Params: <None>
 
 
 Name:   vc4-fkms-v3d
-Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
+Info:   Enable the kernel DRM VC4 V3D driver on top of the dispmanx
         display stack.
+        NB The firmware will not allow this overlay to load on a Pi with less
+        than 512MB as memory is too tight.
 Load:   dtoverlay=vc4-fkms-v3d,<param>
 Params: cma-512                 CMA is 512MB (needs 1GB)
         cma-448                 CMA is 448MB (needs 1GB)
@@ -4881,7 +4927,7 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
 
 
 Name:   vc4-fkms-v3d-pi4
-Info:   Enable Eric Anholt's DRM VC4 V3D driver on top of the dispmanx
+Info:   Enable the kernel DRM VC4 V3D driver on top of the dispmanx
         display stack.
 Load:   dtoverlay=vc4-fkms-v3d-pi4,<param>
 Params: cma-512                 CMA is 512MB (needs 1GB)
@@ -4954,6 +5000,10 @@ Params: clock-frequency         Display clock frequency (Hz)
                                 Set the default brightness. Normal range 1-16.
                                 (default 16).
         rotate                  Display rotation {0,90,180,270} (default 0)
+        rgb-order               Allow override of RGB order from DPI.
+                                Options for vc4 are "rgb", "bgr", "grb", and
+                                "brg". Other values will be ignored.
+
 
 
 Name:   vc4-kms-dpi-hyperpixel2r
@@ -5150,7 +5200,9 @@ Load:   <Deprecated>
 
 
 Name:   vc4-kms-v3d
-Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver.
+Info:   Enable the kernel DRM VC4 HDMI/HVS/V3D driver.
+        NB The firmware will not allow this overlay to load on a Pi with less
+        than 512MB as memory is too tight.
 Load:   dtoverlay=vc4-kms-v3d,<param>
 Params: cma-512                 CMA is 512MB (needs 1GB)
         cma-448                 CMA is 448MB (needs 1GB)
@@ -5171,7 +5223,7 @@ Params: cma-512                 CMA is 512MB (needs 1GB)
 
 
 Name:   vc4-kms-v3d-pi4
-Info:   Enable Eric Anholt's DRM VC4 HDMI/HVS/V3D driver for Pi4.
+Info:   Enable the kernel DRM VC4 HDMI/HVS/V3D driver for Pi4.
 Load:   dtoverlay=vc4-kms-v3d-pi4,<param>
 Params: cma-512                 CMA is 512MB
         cma-448                 CMA is 448MB
