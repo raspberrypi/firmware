@@ -1771,6 +1771,13 @@ Params: gpio_pin                GPIO pin used (default 17)
                                 expects a high to switch it on.
 
 
+Name:   hifiberry-adc
+Info:   Configures the HifiBerry ADC audio card
+Load:   dtoverlay=hifiberry-adc,<param>=<val>
+Params: leds_off                If set to 'true' the onboard indicator LED
+                                is switched off at all times.
+
+
 Name:   hifiberry-amp
 Info:   Configures the HifiBerry Amp and Amp+ audio cards
 Load:   dtoverlay=hifiberry-amp
@@ -2630,6 +2637,12 @@ Params: <None>
 Name:   i2s-gpio28-31
 Info:   move I2S function block to GPIO 28 to 31
 Load:   dtoverlay=i2s-gpio28-31
+Params: <None>
+
+
+Name:   i2s-master-dac
+Info:   Configures a generic I2S DAC soundcard that acts as a clock master.
+Load:   dtoverlay=i2s-master-dac
 Params: <None>
 
 
