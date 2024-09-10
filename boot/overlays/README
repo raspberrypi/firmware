@@ -2818,6 +2818,27 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         sync-sink               Configure as vsync sink
 
 
+Name:   imx500
+Info:   Sony IMX500 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=imx500,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+        bypass-cache            Do save blocks of data to flash when using
+                                rp2040-gpio-bridge for SPI transfers.
+
+
+Name:   imx500-pi5
+Info:   See imx500 (this is the Pi 5 version)
+
+
 Name:   imx519
 Info:   Sony IMX519 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
@@ -3693,6 +3714,12 @@ Params: speed                   Display SPI bus speed
 
         drm                     Select the DRM/KMS driver instead of the FBTFT
                                 one
+
+        invx                    Touchscreen inverted x axis
+
+        invy                    Touchscreen inverted y axis
+
+        swapxy                  Touchscreen swapped x y axis
 
 
 Name:   piscreen2r
@@ -5227,6 +5254,9 @@ Params: 2_8_inch                2.8" 480x640
         3_4_inch                3.4" 800x800 round
         4_0_inch                4.0" 480x800
         4_0_inchC               4.0" 720x720
+        5_0_inch                5.0" 720x1280
+        6_25_inch               6.25" 720x1560
+        8_8_inch                8.8" 480x1920
         7_0_inchC               7.0" C 1024x600
         7_9_inch                7.9" 400x1280
         8_0_inch                8.0" 1280x800
