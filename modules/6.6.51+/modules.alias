@@ -11988,6 +11988,8 @@ alias of:N*T*Chifiberry,hifiberry-amp3C* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-amp3 snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-ampC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberry,hifiberry-amp snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberry,hifiberry-adc8xC* snd_soc_rpi_simple_soundcard
+alias of:N*T*Chifiberry,hifiberry-adc8x snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberrydacplusdsp,hifiberrydacplusdsp-soundcardC* snd_soc_rpi_simple_soundcard
 alias of:N*T*Chifiberrydacplusdsp,hifiberrydacplusdsp-soundcard snd_soc_rpi_simple_soundcard
 alias of:N*T*Cgooglevoicehat,googlevoicehat-soundcardC* snd_soc_rpi_simple_soundcard
