@@ -1052,6 +1052,7 @@ kernel/drivers/md/dm-log-userspace.ko.xz: kernel/drivers/md/dm-log.ko.xz kernel/
 kernel/drivers/md/dm-zero.ko.xz: kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-raid.ko.xz: kernel/drivers/md/raid456.ko.xz kernel/crypto/async_tx/async_raid6_recov.ko.xz kernel/crypto/async_tx/async_memcpy.ko.xz kernel/crypto/async_tx/async_pq.ko.xz kernel/crypto/async_tx/async_xor.ko.xz kernel/crypto/async_tx/async_tx.ko.xz kernel/drivers/md/dm-mod.ko.xz kernel/drivers/md/md-mod.ko.xz kernel/crypto/xor.ko.xz kernel/lib/raid6/raid6_pq.ko.xz
 kernel/drivers/md/dm-thin-pool.ko.xz: kernel/drivers/md/persistent-data/dm-persistent-data.ko.xz kernel/drivers/md/dm-bio-prison.ko.xz kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
+kernel/drivers/md/dm-verity.ko.xz: kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-cache.ko.xz: kernel/drivers/md/persistent-data/dm-persistent-data.ko.xz kernel/drivers/md/dm-bio-prison.ko.xz kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-cache-smq.ko.xz: kernel/drivers/md/dm-cache.ko.xz kernel/drivers/md/persistent-data/dm-persistent-data.ko.xz kernel/drivers/md/dm-bio-prison.ko.xz kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz
 kernel/drivers/md/dm-integrity.ko.xz: kernel/crypto/async_tx/async_xor.ko.xz kernel/crypto/async_tx/async_tx.ko.xz kernel/drivers/md/dm-bufio.ko.xz kernel/drivers/md/dm-mod.ko.xz kernel/crypto/xor.ko.xz

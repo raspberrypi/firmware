@@ -1052,6 +1052,7 @@ kernel/drivers/md/dm-log-userspace.ko
 kernel/drivers/md/dm-zero.ko
 kernel/drivers/md/dm-raid.ko
 kernel/drivers/md/dm-thin-pool.ko
+kernel/drivers/md/dm-verity.ko
 kernel/drivers/md/dm-cache.ko
 kernel/drivers/md/dm-cache-smq.ko
 kernel/drivers/md/dm-integrity.ko
