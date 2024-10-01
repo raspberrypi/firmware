@@ -237,6 +237,7 @@ kernel/drivers/mfd/arizona.ko
 kernel/drivers/mfd/arizona-i2c.ko
 kernel/drivers/mfd/arizona-spi.ko
 kernel/drivers/mfd/wl1273-core.ko
+kernel/drivers/mfd/rpisense-core.ko
 kernel/drivers/mfd/simple-mfd-i2c.ko
 kernel/drivers/scsi/libiscsi.ko
 kernel/drivers/scsi/libiscsi_tcp.ko
@@ -549,8 +550,8 @@ kernel/drivers/input/joystick/fsia6b.ko
 kernel/drivers/input/joystick/iforce/iforce.ko
 kernel/drivers/input/joystick/iforce/iforce-usb.ko
 kernel/drivers/input/joystick/psxpad-spi.ko
-kernel/drivers/input/joystick/sensehat-joystick.ko
 kernel/drivers/input/joystick/xpad.ko
+kernel/drivers/input/joystick/rpisense-js.ko
 kernel/drivers/input/touchscreen/ads7846.ko
 kernel/drivers/input/touchscreen/edt-ft5x06.ko
 kernel/drivers/input/touchscreen/egalax_ts.ko
