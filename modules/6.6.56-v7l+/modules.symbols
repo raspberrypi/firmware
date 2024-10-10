@@ -2600,7 +2600,6 @@ alias symbol:mt792x_pm_power_save_work mt792x_lib
 alias symbol:drm_connector_update_privacy_screen drm
 alias symbol:drm_edid_raw drm
 alias symbol:p9_tag_lookup 9pnet
-alias symbol:rpisense_reg_read rpisense_core
 alias symbol:__traceiter_ata_exec_command libata
 alias symbol:drm_atomic_bridge_chain_pre_enable drm
 alias symbol:drm_property_destroy drm
@@ -3568,7 +3567,6 @@ alias symbol:nf_conncount_count nf_conncount
 alias symbol:garp_request_leave garp
 alias symbol:nf_ct_tcp_seqadj_set nf_conntrack
 alias symbol:__SCK__tp_func_bcache_btree_node_alloc_fail bcache
-alias symbol:rpisense_block_write rpisense_core
 alias symbol:devm_backlight_device_unregister backlight
 alias symbol:drm_fb_xrgb8888_to_rgba5551 drm_kms_helper
 alias symbol:vchiq_mmal_component_finalise bcm2835_mmal_vchiq
@@ -5207,7 +5205,6 @@ alias symbol:aic3x_probe snd_soc_tlv320aic3x
 alias symbol:dm_cell_visit_release dm_bio_prison
 alias symbol:dlm_posix_lock dlm
 alias symbol:nl802154_scan_event ieee802154
-alias symbol:rpisense_get_dev rpisense_core
 alias symbol:qtree_get_next_id quota_tree
 alias symbol:rndis_msg_parser usb_f_rndis
 alias symbol:mt76_connac_sta_state_dp mt76_connac_lib

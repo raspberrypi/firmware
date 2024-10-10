@@ -483,9 +483,8 @@ alias i2c:ssd1309fb ssd1307fb
 alias i2c:ssd1307fb ssd1307fb
 alias i2c:ssd1306fb ssd1307fb
 alias i2c:ssd1305fb ssd1307fb
-alias of:N*T*Crpi,rpi-sense-fbC* rpisense_fb
-alias of:N*T*Crpi,rpi-sense-fb rpisense_fb
-alias platform:rpi-sense-fb rpisense_fb
+alias of:N*T*Craspberrypi,rpi-sense-fbC* rpisense_fb
+alias of:N*T*Craspberrypi,rpi-sense-fb rpisense_fb
 alias platform:clk-hifiberry-dacpro clk_hifiberry_dacpro
 alias of:N*T*Callo,dac-clkC* clk_hifiberry_dacpro
 alias of:N*T*Callo,dac-clk clk_hifiberry_dacpro
@@ -1146,9 +1145,6 @@ alias of:N*T*Cwlf,wm5110 arizona_spi
 alias of:N*T*Cwlf,wm5102C* arizona_spi
 alias of:N*T*Cwlf,wm5102 arizona_spi
 alias i2c:wl1273-fm wl1273_core
-alias i2c:rpi-sense rpisense_core
-alias of:N*T*Crpi,rpi-senseC* rpisense_core
-alias of:N*T*Crpi,rpi-sense rpisense_core
 alias of:N*T*Craspberrypi,sensehatC* simple_mfd_i2c
 alias of:N*T*Craspberrypi,sensehat simple_mfd_i2c
 alias of:N*T*Craspberrypi,poe-coreC* simple_mfd_i2c
@@ -7570,6 +7566,8 @@ alias usb:v046DpC291d*dc*dsc*dp*ic*isc*ip*in* iforce_usb
 alias usb:v046DpC281d*dc*dsc*dp*ic*isc*ip*in* iforce_usb
 alias usb:v044FpA01Cd*dc*dsc*dp*ic*isc*ip*in* iforce_usb
 alias spi:psxpad-spi psxpad_spi
+alias of:N*T*Craspberrypi,sensehat-joystickC* sensehat_joystick
+alias of:N*T*Craspberrypi,sensehat-joystick sensehat_joystick
 alias usb:v3537p*d*dc*dsc*dp*icFFisc47ipD0in* xpad
 alias usb:v3537p*d*dc*dsc*dp*icFFisc5Dip81in* xpad
 alias usb:v3537p*d*dc*dsc*dp*icFFisc5Dip01in* xpad
@@ -7660,9 +7658,6 @@ alias usb:v03EBp*d*dc*dsc*dp*icFFisc5Dip01in* xpad
 alias usb:v0079p*d*dc*dsc*dp*icFFisc5Dip81in* xpad
 alias usb:v0079p*d*dc*dsc*dp*icFFisc5Dip01in* xpad
 alias usb:v*p*d*dc*dsc*dp*ic58isc42ip00in* xpad
-alias of:N*T*Crpi,rpi-sense-jsC* rpisense_js
-alias of:N*T*Crpi,rpi-sense-js rpisense_js
-alias platform:rpi-sense-js rpisense_js
 alias of:N*T*Cti,ads7873C* ads7846
 alias of:N*T*Cti,ads7873 ads7846
 alias of:N*T*Cti,ads7846C* ads7846

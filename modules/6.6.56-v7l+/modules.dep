@@ -178,7 +178,7 @@ kernel/drivers/video/backlight/lm3630a_bl.ko.xz: kernel/drivers/video/backlight/
 kernel/drivers/video/backlight/pwm_bl.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/video/backlight/rpi_backlight.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/video/fbdev/ssd1307fb.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz
-kernel/drivers/video/fbdev/rpisense-fb.ko.xz: kernel/drivers/mfd/rpisense-core.ko.xz
+kernel/drivers/video/fbdev/rpisense-fb.ko.xz:
 kernel/drivers/clk/clk-hifiberry-dacpro.ko.xz:
 kernel/drivers/clk/clk-hifiberry-dachd.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/regulator/arizona-ldo1.ko.xz:
@@ -243,7 +243,6 @@ kernel/drivers/mfd/arizona.ko.xz:
 kernel/drivers/mfd/arizona-i2c.ko.xz: kernel/drivers/mfd/arizona.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/mfd/arizona-spi.ko.xz: kernel/drivers/mfd/arizona.ko.xz kernel/drivers/base/regmap/regmap-spi.ko.xz
 kernel/drivers/mfd/wl1273-core.ko.xz:
-kernel/drivers/mfd/rpisense-core.ko.xz:
 kernel/drivers/mfd/simple-mfd-i2c.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/scsi/libiscsi.ko.xz:
 kernel/drivers/scsi/libiscsi_tcp.ko.xz: kernel/drivers/scsi/libiscsi.ko.xz
@@ -562,8 +561,8 @@ kernel/drivers/input/joystick/fsia6b.ko.xz: kernel/drivers/input/serio/serio.ko.
 kernel/drivers/input/joystick/iforce/iforce.ko.xz:
 kernel/drivers/input/joystick/iforce/iforce-usb.ko.xz: kernel/drivers/input/joystick/iforce/iforce.ko.xz
 kernel/drivers/input/joystick/psxpad-spi.ko.xz: kernel/drivers/input/ff-memless.ko.xz
+kernel/drivers/input/joystick/sensehat-joystick.ko.xz:
 kernel/drivers/input/joystick/xpad.ko.xz: kernel/drivers/input/ff-memless.ko.xz
-kernel/drivers/input/joystick/rpisense-js.ko.xz: kernel/drivers/mfd/rpisense-core.ko.xz
 kernel/drivers/input/touchscreen/ads7846.ko.xz:
 kernel/drivers/input/touchscreen/edt-ft5x06.ko.xz: kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/input/touchscreen/egalax_ts.ko.xz:
