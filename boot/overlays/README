@@ -5274,7 +5274,7 @@ Params: ctsrts                  Enable CTS/RTS on GPIOs 6-7 (default off)
 
 
 Name:   uart3
-Info:   Enable uart 3 on GPIOs 4-7. BCM2711 only.
+Info:   Enable uart 3 on GPIOs 4-5. BCM2711 only.
 Load:   dtoverlay=uart3,<param>
 Params: ctsrts                  Enable CTS/RTS on GPIOs 6-7 (default off)
         rs485                   Enable RS485 mode for using the RTS line to
