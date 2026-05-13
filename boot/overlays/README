@@ -234,7 +234,7 @@ Params:
 
         eee                     Enable Energy Efficient Ethernet support for
                                 compatible devices (default "on"). See also
-                                "tx_lpi_timer". Pi3B+, Pi4 and CM4 only.
+                                "tx_lpi_timer". Pi3B+, Pi4, CM4, Pi5 and CM5.
 
         enable_eeprom           Set to "on" to enable the onboard bootloader
                                 EEPROM by driving GPIO 57 low
@@ -273,27 +273,27 @@ Params:
                                 1000 (default set by the platform). Pi3B+,
                                 Pi4, Pi400, CM4, Pi5, Pi500, and CM5 only.
 
-        fan_temp0               Temperature threshold (in millicelcius) for
+        fan_temp0               Temperature threshold (in millicelsius) for
                                 1st cooling level (default 50000). Pi5 only.
-        fan_temp0_hyst          Temperature hysteresis (in millicelcius) for
+        fan_temp0_hyst          Temperature hysteresis (in millicelsius) for
                                 1st cooling level (default 5000). Pi5 only.
         fan_temp0_speed         Fan PWM setting for 1st cooling level (0-255,
                                 default 75). Pi5 only.
-        fan_temp1               Temperature threshold (in millicelcius) for
+        fan_temp1               Temperature threshold (in millicelsius) for
                                 2nd cooling level (default 60000). Pi5 only.
-        fan_temp1_hyst          Temperature hysteresis (in millicelcius) for
+        fan_temp1_hyst          Temperature hysteresis (in millicelsius) for
                                 2nd cooling level (default 5000). Pi5 only.
         fan_temp1_speed         Fan PWM setting for 2nd cooling level (0-255,
                                 default 125). Pi5 only.
-        fan_temp2               Temperature threshold (in millicelcius) for
+        fan_temp2               Temperature threshold (in millicelsius) for
                                 3rd cooling level (default 67500). Pi5 only.
-        fan_temp2_hyst          Temperature hysteresis (in millicelcius) for
+        fan_temp2_hyst          Temperature hysteresis (in millicelsius) for
                                 3rd cooling level (default 5000). Pi5 only.
         fan_temp2_speed         Fan PWM setting for 3rd cooling level (0-255,
                                 default 175). Pi5 only.
-        fan_temp3               Temperature threshold (in millicelcius) for
+        fan_temp3               Temperature threshold (in millicelsius) for
                                 4th cooling level (default 75000). Pi5 only.
-        fan_temp3_hyst          Temperature hysteresis (in millicelcius) for
+        fan_temp3_hyst          Temperature hysteresis (in millicelsius) for
                                 4th cooling level (default 5000). Pi5 only.
         fan_temp3_speed         Fan PWM setting for 4th cooling level (0-255,
                                 default 250). Pi5 only.
@@ -1532,8 +1532,8 @@ Info:   Configure a GPIO pin to control a cooling fan.
 Load:   dtoverlay=gpio-fan,<param>=<val>
 Params: gpiopin                 GPIO used to control the fan (default 12)
         temp                    Temperature at which the fan switches on, in
-                                millicelcius (default 55000)
-        hyst                    Temperature delta (in millicelcius) below
+                                millicelsius (default 55000)
+        hyst                    Temperature delta (in millicelsius) below
                                 temp at which the fan will drop to minrpm
                                 (default 10000)
 
@@ -2194,17 +2194,17 @@ Params: addr                    Sets the address for the fan controller. Note
                                 mintemp (range 0-255. default 0)
         maxpwm                  PWM setting for the fan when the SoC is above
                                 maxtemp (range 0-255. default 255)
-        midtemp                 Temperature (in millicelcius) at which the fan
+        midtemp                 Temperature (in millicelsius) at which the fan
                                 begins to speed up (default 50000)
 
-        midtemp_hyst            Temperature delta (in millicelcius) below
+        midtemp_hyst            Temperature delta (in millicelsius) below
                                 mintemp at which the fan will drop to minrpm
                                 (default 2000)
 
-        maxtemp                 Temperature (in millicelcius) at which the fan
+        maxtemp                 Temperature (in millicelsius) at which the fan
                                 will be held at maxrpm (default 70000)
 
-        maxtemp_hyst            Temperature delta (in millicelcius) below
+        maxtemp_hyst            Temperature delta (in millicelsius) below
                                 maxtemp at which the fan begins to slow down
                                 (default 2000)
 
@@ -2444,7 +2444,8 @@ Params: addr                    Set the address for the AD799X, ADS7828,
                                 BME280, BME680, BMP280, BMP380, BMP58x, CCS811,
                                 DS1621, HDC100X, HDC3020, JC42, LM75, MCP980x,
                                 MPU6050, MPU9250, MS5637, MS5803, MS5805,
-                                MS5837, MS8607, SHT3x, TMP102 or VEML6030.
+                                MS5837, MS8607, SHT3x, STS3X, TMP102 or
+                                VEML6030.
 
         i2c-bus                 Supports all the standard I2C bus selection
                                 parameters - see "dtoverlay -h i2c-bus"
@@ -2554,8 +2555,8 @@ Params: addr                    Set the address for the AD799X, ADS7828,
                                 ti,shunt-gain for configuration
 
         int_pin                 Set the GPIO to use for interrupts (as73211,
-                                as7331, hdc3020, hts221, max30102, mpu6050 and
-                                mpu9250 only)
+                                as7331, hdc3020, hts221, max30102, mpu6050,
+                                mpu9250, veml6030, veml6035 only)
 
         jc42                    Select any of the many JEDEC JC42.4-compliant
                                 temperature sensors, including:
@@ -2620,6 +2621,9 @@ Params: addr                    Set the address for the AD799X, ADS7828,
 
         scd4x                   Select the Sensirion SCD40/41 CO2 sensors.
 
+        sgp30                   Select the Sensirion SGP30 VOC sensor.
+                                Fixed address 0x58.
+
         sht3x                   Select the Sensirion SHT3x temperature and
                                 humidity sensors. Valid addresses 0x44-0x45,
                                 default 0x44
@@ -2627,6 +2631,9 @@ Params: addr                    Set the address for the AD799X, ADS7828,
         sht4x                   Select the Sensirion SHT4x temperature and
                                 humidity sensors. Valid addresses 0x44-0x45,
                                 default 0x44
+
+        sht85                   Select the Sensirion SHT85 temperature and
+                                humidity sensors. Fixed address 0x44.
 
         shtc3                   Select the Sensirion SHTC3 temperature and
                                 humidity sensors.
@@ -2637,8 +2644,8 @@ Params: addr                    Set the address for the AD799X, ADS7828,
         sps30                   Select the Sensirion SPS30 particulate matter
                                 sensor. Fixed address 0x69.
 
-        sgp30                   Select the Sensirion SGP30 VOC sensor.
-                                Fixed address 0x58.
+        sts3x                   Select the Sensirion STS3X temperature sensors.
+                                Valid addresses 0x4a-0x4b, default 0x4a
 
         tcs3472                 Select the AMS TAOS TCS3472 family of RGBW light
                                 sensors.
@@ -2653,7 +2660,13 @@ Params: addr                    Set the address for the AD799X, ADS7828,
         tsl4531                 Select the AMS TSL4531 digital ambient light
                                 sensor
 
+        veml3235                Select the Vishay VEML3235 ambient light sensor
+
         veml6030                Select the Vishay VEML6030 ambient light sensor
+
+        veml6035                Select the Vishay VEML6035 ambient light sensor
+
+        veml7700                Select the Vishay VEML7700 ambient light sensor
 
         veml6040                Select the Vishay VEML6040 RGBW light sensor
 
@@ -3854,10 +3867,19 @@ Params: addr                    I2C address of expander. Default
                                 depends on model selected.
         i2c-bus                 Supports all the standard I2C bus selection
                                 parameters - see "dtoverlay -h i2c-bus"
+        max7328                 Select the Maxim MAX7328 (8 bit)
+        max7329                 Select the Maxim MAX7329 (8 bit)
         pcf8574                 Select the NXP PCF8574 (8 bit)
         pcf8574a                Select the NXP PCF8574A (8 bit)
         pcf8575                 Select the NXP PCF8575 (16 bit)
         pca8574                 Select the NXP PCA8574 (8 bit)
+        pca8575                 Select the NXP PCA8575 (16 bit)
+        pca9670                 Select the NXP PCA9670 (8 bit)
+        pca9671                 Select the NXP PCA9671 (16 bit)
+        pca9672                 Select the NXP PCA9672 (8 bit)
+        pca9673                 Select the NXP PCA9673 (16 bit)
+        pca9674                 Select the NXP PCA9674 (8 bit)
+        pca9675                 Select the NXP PCA9675 (16 bit)
 
 
 Name:   pcie-32bit-dma
@@ -4274,16 +4296,16 @@ Params: fan_gpio                BCM number of the pin driving the fan,
         fan_temp3               CPU temperature at which fan is switched
                                 to max speed in millicelsius,
                                 default 75000 (75 °C)
-        fan_temp0_hyst          Temperature hysteris at which fan is stopped
+        fan_temp0_hyst          Temperature hysteresis at which fan is stopped
                                 in millicelsius,default 5000 (resulting
                                 in 50 °C)
-        fan_temp1_hyst          Temperature hysteris at which fan is switched
+        fan_temp1_hyst          Temperature hysteresis at which fan is switched
                                 back to low speed in millicelsius,
                                 default 5000 (resulting in 55 °C)
-        fan_temp2_hyst          Temperature hysteris at which fan is switched
+        fan_temp2_hyst          Temperature hysteresis at which fan is switched
                                 back to medium speed in millicelsius,
                                 default 5000 (resulting in 62.5 °C)
-        fan_temp3_hyst          Temperature hysteris at which fan is switched
+        fan_temp3_hyst          Temperature hysteresis at which fan is switched
                                 back to high speed in millicelsius,
                                 default 5000 (resulting in 70 °C)
         fan_temp0_speed         Fan speed for low cooling state in range
@@ -4538,21 +4560,21 @@ Params: txd0_pin                GPIO pin for TXD0 (any free - default 20)
 Name:   rpi-poe
 Info:   Raspberry Pi PoE HAT fan
 Load:   dtoverlay=rpi-poe,<param>[=<val>]
-Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
+Params: poe_fan_temp0           Temperature (in millicelsius) at which the fan
                                 turns on (default 40000)
-        poe_fan_temp0_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp0_hyst      Temperature delta (in millicelsius) at which
                                 the fan turns off (default 2000)
-        poe_fan_temp1           Temperature (in millicelcius) at which the fan
+        poe_fan_temp1           Temperature (in millicelsius) at which the fan
                                 speeds up (default 45000)
-        poe_fan_temp1_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp1_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 2000)
-        poe_fan_temp2           Temperature (in millicelcius) at which the fan
+        poe_fan_temp2           Temperature (in millicelsius) at which the fan
                                 speeds up (default 50000)
-        poe_fan_temp2_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp2_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 2000)
-        poe_fan_temp3           Temperature (in millicelcius) at which the fan
+        poe_fan_temp3           Temperature (in millicelsius) at which the fan
                                 speeds up (default 55000)
-        poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp3_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 5000)
         i2c                     Control the fan via Linux I2C drivers instead of
                                 the firmware.
@@ -4561,21 +4583,21 @@ Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
 Name:   rpi-poe-plus
 Info:   Raspberry Pi PoE+ HAT fan
 Load:   dtoverlay=rpi-poe-plus,<param>[=<val>]
-Params: poe_fan_temp0           Temperature (in millicelcius) at which the fan
+Params: poe_fan_temp0           Temperature (in millicelsius) at which the fan
                                 turns on (default 40000)
-        poe_fan_temp0_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp0_hyst      Temperature delta (in millicelsius) at which
                                 the fan turns off (default 2000)
-        poe_fan_temp1           Temperature (in millicelcius) at which the fan
+        poe_fan_temp1           Temperature (in millicelsius) at which the fan
                                 speeds up (default 45000)
-        poe_fan_temp1_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp1_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 2000)
-        poe_fan_temp2           Temperature (in millicelcius) at which the fan
+        poe_fan_temp2           Temperature (in millicelsius) at which the fan
                                 speeds up (default 50000)
-        poe_fan_temp2_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp2_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 2000)
-        poe_fan_temp3           Temperature (in millicelcius) at which the fan
+        poe_fan_temp3           Temperature (in millicelsius) at which the fan
                                 speeds up (default 55000)
-        poe_fan_temp3_hyst      Temperature delta (in millicelcius) at which
+        poe_fan_temp3_hyst      Temperature delta (in millicelsius) at which
                                 the fan slows down (default 5000)
         i2c                     Control the fan via Linux I2C drivers instead of
                                 the firmware.
@@ -5865,6 +5887,20 @@ Load:   dtoverlay=vc4-kms-dsi-lt070me05000-v2
 Params: <None>
 
 
+Name:   vc4-kms-dsi-tdo-panel
+Info:   Enable the Tdo DSI screen,keep adding.
+        Requires vc4-kms-v3d to be loaded.
+Load:   dtoverlay=vc4-kms-dsi-tdo-panel,<param>=<val>
+Params: tl034wvs03              4.0" 480x480 2lane
+        tl040wvs17              4.0" 480x480 2lane
+        tl040hds31              4.0" 720x720 2lane
+        rotation                Display rotation {0,90,180,270}
+        dsi0                    Use DSI0 and i2c_csi_dsi0 (rather than
+                                the default DSI1 and i2c_csi_dsi).
+        reset_pin               GPIO pin for RESET (required if reset
+                                functionality is needed)
+
+
 Name:   vc4-kms-dsi-waveshare-800x480
 Info:   Enable the Waveshare 4.3" 800x480 DSI screen.
         It tries to look like the Pi 7" display, but won't accept some of the
@@ -6013,6 +6049,66 @@ Load:   dtoverlay=vc4-kms-vga666,<param>
 Params: ddc                     Enables GPIOs 0&1 as the I2C to read the EDID
                                 from the display. NB These are NOT 5V tolerant
                                 GPIOs, therefore level shifters are required.
+
+
+Name:   vd55g1
+Info:   ST VD55G1 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=vd55g1,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
+Name:   vd56g3
+Info:   ST VD56G3 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=vd56g3,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
+Name:   vd65g4
+Info:   ST VD65G4 camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=vd65g4,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
+
+
+Name:   vd66gy
+Info:   ST VD66GY camera module.
+        Uses Unicam 1, which is the standard camera connector on most Pi
+        variants.
+Load:   dtoverlay=vd66gy,<param>=<val>
+Params: rotation                Mounting rotation of the camera sensor (0 or
+                                180, default 0)
+        orientation             Sensor orientation (0 = front, 1 = rear,
+                                2 = external, default external)
+        media-controller        Configure use of Media Controller API for
+                                configuring the sensor (default on)
+        cam0                    Adopt the default configuration for CAM0 on a
+                                Compute Module (CSI0, i2c_vc, and cam0_reg).
 
 
 Name:   vec-gpio-pi5
