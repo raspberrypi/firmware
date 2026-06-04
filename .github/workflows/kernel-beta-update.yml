@@ -27,6 +27,17 @@ on:
     branches: [master]
     paths:
       - extra/git_hash
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Kernel ref to build (SHA, tag, or origin/branch). Blank = read extra/git_hash.'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run (no rpi/update, no GitLab push)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -82,12 +93,16 @@ jobs:
           sparse-checkout-cone-mode: false
           path: firmware
 
-      - name: Read git_hash
+      - name: Resolve kernel ref
         id: kernel
         run: |
-          sha=$(tr -d '[:space:]' < firmware/extra/git_hash)
-          [ -n "$sha" ] || { echo "firmware/extra/git_hash is empty" >&2; exit 1; }
-          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          if [ -n "${{ inputs.ref }}" ]; then
+            ref="${{ inputs.ref }}"
+          else
+            ref=$(tr -d '[:space:]' < firmware/extra/git_hash)
+          fi
+          [ -n "$ref" ] || { echo "no kernel ref resolved" >&2; exit 1; }
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
       - name: Sync linux-packaging from GitLab
         run: |
@@ -100,7 +115,8 @@ jobs:
           git config --global --add safe.directory "$LINUX_SRC"
           git -C "$LINUX_SRC" fetch --all --tags --prune
           ./bridge beta \
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
             --packaging ./linux-packaging \
             --linux "$LINUX_SRC" \
             --codename trixie \
-            "${{ steps.kernel.outputs.sha }}"
+            "${{ steps.kernel.outputs.ref }}"
