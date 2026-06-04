@@ -74,7 +74,8 @@ jobs:
             devscripts \
             git \
             git-buildpackage \
-            python3-minimal
+            python3-minimal \
+            quilt
 
       - name: Sync bridge from GitLab
         env:
