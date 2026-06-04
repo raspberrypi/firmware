@@ -66,6 +66,7 @@ jobs:
       GIT_COMMITTER_EMAIL: ${{ vars.CI_AUTHOR_EMAIL }}
       DEBFULLNAME: ${{ vars.CI_AUTHOR_NAME }}
       DEBEMAIL: ${{ vars.CI_AUTHOR_EMAIL }}
+      QUILT_PATCHES: debian/patches
     steps:
       - name: Install dependencies
         run: |
