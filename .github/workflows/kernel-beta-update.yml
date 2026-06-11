@@ -25,8 +25,6 @@ name: kernel beta update
 on:
   push:
     branches: [master]
-    paths:
-      - extra/git_hash
   workflow_dispatch:
     inputs:
       ref:
@@ -47,7 +45,56 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Gate the heavy trixie job on whether extra/git_hash actually moved.
+  # The on.push trigger has no paths: filter because GitHub's path filter
+  # silently drops matches outside the first 300 changed files in a diff
+  # (kernel bumps routinely change 18k+ files via modules/), so a
+  # workflow-level filter would miss real kernel-shipping commits.
+  detect:
+    runs-on: [self-hosted, linux, linux-bridge]
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - if: github.event_name == 'push'
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          sparse-checkout: extra/git_hash
+          sparse-checkout-cone-mode: false
+      - id: check
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # First push to the branch -> no previous state to compare.
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "first push to branch; treating as changed"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Fetch just the previous tip, shallow. If it isn't reachable
+          # (force-push, history rewrite, etc.) fall back to running.
+          if ! git fetch --depth=1 origin "$BEFORE" 2>/dev/null; then
+            echo "before SHA $BEFORE unreachable; treating as changed"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          before_blob=$(git ls-tree FETCH_HEAD -- extra/git_hash | awk '{print $3}')
+          after_blob=$(git ls-tree HEAD -- extra/git_hash | awk '{print $3}')
+          if [ "$before_blob" = "$after_blob" ]; then
+            echo "extra/git_hash unchanged across this push; skipping"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "extra/git_hash changed; proceeding"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   trixie:
+    needs: [detect]
+    if: needs.detect.outputs.run == 'true'
     runs-on: [self-hosted, linux, linux-bridge]
     timeout-minutes: 30
     environment: beta-release
