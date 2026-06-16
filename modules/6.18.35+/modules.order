@@ -419,6 +419,7 @@ kernel/drivers/net/netconsole.ko
 kernel/drivers/net/tun.ko
 kernel/drivers/net/veth.ko
 kernel/drivers/net/vxlan/vxlan.ko
+kernel/drivers/net/gtp.ko
 kernel/drivers/net/vrf.ko
 kernel/drivers/net/can/dev/can-dev.ko
 kernel/drivers/net/can/spi/mcp251xfd/mcp251xfd.ko

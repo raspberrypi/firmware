@@ -348,6 +348,7 @@ kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bca/brcmfmac-bca.ko.xz: 
 kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.xz: kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz
 kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko.xz: kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.xz kernel/net/mac80211/mac80211.ko.xz kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libarc4.ko.xz
 kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko.xz: kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.xz kernel/net/mac80211/mac80211.ko.xz kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libarc4.ko.xz
+kernel/drivers/net/wireless/intel/iwlwifi/mld/iwlmld.ko.xz: kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.xz kernel/net/mac80211/mac80211.ko.xz kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crypto/libarc4.ko.xz
 kernel/drivers/net/wireless/intersil/p54/p54common.ko.xz: kernel/net/mac80211/mac80211.ko.xz kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crc/crc-ccitt.ko.xz kernel/lib/crypto/libarc4.ko.xz
 kernel/drivers/net/wireless/intersil/p54/p54usb.ko.xz: kernel/drivers/net/wireless/intersil/p54/p54common.ko.xz kernel/net/mac80211/mac80211.ko.xz kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz kernel/lib/crc/crc-ccitt.ko.xz kernel/lib/crypto/libarc4.ko.xz
 kernel/drivers/net/wireless/marvell/libertas/libertas.ko.xz: kernel/net/wireless/cfg80211.ko.xz kernel/net/rfkill/rfkill.ko.xz
@@ -478,6 +479,7 @@ kernel/drivers/net/tun.ko.xz:
 kernel/drivers/net/tap.ko.xz:
 kernel/drivers/net/veth.ko.xz:
 kernel/drivers/net/vxlan/vxlan.ko.xz: kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz
+kernel/drivers/net/gtp.ko.xz: kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz
 kernel/drivers/net/vrf.ko.xz: kernel/net/ipv6/ipv6.ko.xz kernel/lib/crypto/libsha1.ko.xz
 kernel/drivers/net/vsockmon.ko.xz: kernel/net/vmw_vsock/vsock.ko.xz
 kernel/drivers/net/can/dev/can-dev.ko.xz:

@@ -414,6 +414,7 @@ kernel/drivers/net/netconsole.ko.xz:
 kernel/drivers/net/tun.ko.xz:
 kernel/drivers/net/veth.ko.xz:
 kernel/drivers/net/vxlan/vxlan.ko.xz: kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz
+kernel/drivers/net/gtp.ko.xz: kernel/net/ipv6/ip6_udp_tunnel.ko.xz kernel/net/ipv4/udp_tunnel.ko.xz
 kernel/drivers/net/vrf.ko.xz: kernel/net/ipv6/ipv6.ko.xz kernel/lib/crypto/libsha1.ko.xz
 kernel/drivers/net/can/dev/can-dev.ko.xz:
 kernel/drivers/net/can/spi/mcp251xfd/mcp251xfd.ko.xz: kernel/drivers/net/can/dev/can-dev.ko.xz

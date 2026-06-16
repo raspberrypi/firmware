@@ -4532,6 +4532,8 @@ alias devname:net/tun tun
 alias char-major-10-200 tun
 alias rtnl-link-veth veth
 alias rtnl-link-vxlan vxlan
+alias net-pf-16-proto-16-family-gtp gtp
+alias rtnl-link-gtp gtp
 alias rtnl-link-vrf vrf
 alias rtnl-link-vsockmon vsockmon
 alias rtnl-link-can can_dev

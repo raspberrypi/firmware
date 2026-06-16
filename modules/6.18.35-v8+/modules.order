@@ -348,6 +348,7 @@ kernel/drivers/net/wireless/broadcom/brcm80211/brcmfmac/bca/brcmfmac-bca.ko
 kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko
 kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko
 kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko
+kernel/drivers/net/wireless/intel/iwlwifi/mld/iwlmld.ko
 kernel/drivers/net/wireless/intersil/p54/p54common.ko
 kernel/drivers/net/wireless/intersil/p54/p54usb.ko
 kernel/drivers/net/wireless/marvell/libertas/libertas.ko
@@ -478,6 +479,7 @@ kernel/drivers/net/tun.ko
 kernel/drivers/net/tap.ko
 kernel/drivers/net/veth.ko
 kernel/drivers/net/vxlan/vxlan.ko
+kernel/drivers/net/gtp.ko
 kernel/drivers/net/vrf.ko
 kernel/drivers/net/vsockmon.ko
 kernel/drivers/net/can/dev/can-dev.ko
