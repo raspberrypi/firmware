@@ -59,26 +59,30 @@ jobs:
       - id: check
         env:
           BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends curl
+          apt-get install -y -qq --no-install-recommends ca-certificates curl
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "workflow_dispatch; proceeding"
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            echo "first push to branch; treating as changed"
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          url="https://raw.githubusercontent.com/${{ github.repository }}"
-          before=$(curl -fsSL "$url/$BEFORE/extra/git_hash" 2>/dev/null | tr -d '[:space:]')
-          after=$(curl -fsSL "$url/${{ github.sha }}/extra/git_hash" 2>/dev/null | tr -d '[:space:]')
-          if [ -n "$after" ] && [ "$before" = "$after" ]; then
-            echo "extra/git_hash unchanged across this push; skipping"
+          api="https://api.github.com/repos/$REPO/contents/extra/git_hash"
+          gh="-H Authorization:Bearer $GH_TOKEN -H Accept:application/vnd.github.raw"
+          before=$(curl -fsSL $gh "$api?ref=$BEFORE" | tr -d '[:space:]')
+          after=$(curl -fsSL $gh "$api?ref=$AFTER" | tr -d '[:space:]')
+          echo "before='$before' after='$after'"
+          if [ -z "$before" ] || [ -z "$after" ]; then
+            echo "could not determine extra/git_hash; skipping (re-run manually if needed)"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          elif [ "$before" = "$after" ]; then
+            echo "extra/git_hash unchanged; skipping"
             echo "run=false" >> "$GITHUB_OUTPUT"
           else
-            echo "extra/git_hash changed (or could not be fetched); proceeding"
+            echo "extra/git_hash changed; proceeding"
             echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
