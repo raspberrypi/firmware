@@ -46,49 +46,39 @@ concurrency:
 
 jobs:
   # Gate the heavy trixie job on whether extra/git_hash actually moved.
-  # The on.push trigger has no paths: filter because GitHub's path filter
-  # silently drops matches outside the first 300 changed files in a diff
-  # (kernel bumps routinely change 18k+ files via modules/), so a
-  # workflow-level filter would miss real kernel-shipping commits.
+  # Compares the file's content at the push's parent and tip via
+  # raw.githubusercontent.com - no checkout needed, nothing touches the
+  # workspace.
   detect:
     runs-on: [self-hosted, linux, linux-bridge]
+    container:
+      image: debian:stable
     outputs:
       run: ${{ steps.check.outputs.run }}
     steps:
-      - if: github.event_name == 'push'
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 1
-          sparse-checkout: extra/git_hash
-          sparse-checkout-cone-mode: false
       - id: check
         env:
           BEFORE: ${{ github.event.before }}
         run: |
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends curl
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # First push to the branch -> no previous state to compare.
           if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
             echo "first push to branch; treating as changed"
             echo "run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # Fetch just the previous tip, shallow. If it isn't reachable
-          # (force-push, history rewrite, etc.) fall back to running.
-          if ! git fetch --depth=1 origin "$BEFORE" 2>/dev/null; then
-            echo "before SHA $BEFORE unreachable; treating as changed"
-            echo "run=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          before_blob=$(git ls-tree FETCH_HEAD -- extra/git_hash | awk '{print $3}')
-          after_blob=$(git ls-tree HEAD -- extra/git_hash | awk '{print $3}')
-          if [ "$before_blob" = "$after_blob" ]; then
+          url="https://raw.githubusercontent.com/${{ github.repository }}"
+          before=$(curl -fsSL "$url/$BEFORE/extra/git_hash" 2>/dev/null | tr -d '[:space:]')
+          after=$(curl -fsSL "$url/${{ github.sha }}/extra/git_hash" 2>/dev/null | tr -d '[:space:]')
+          if [ -n "$after" ] && [ "$before" = "$after" ]; then
             echo "extra/git_hash unchanged across this push; skipping"
             echo "run=false" >> "$GITHUB_OUTPUT"
           else
-            echo "extra/git_hash changed; proceeding"
+            echo "extra/git_hash changed (or could not be fetched); proceeding"
             echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -114,55 +104,58 @@ jobs:
       DEBFULLNAME: ${{ vars.CI_AUTHOR_NAME }}
       DEBEMAIL: ${{ vars.CI_AUTHOR_EMAIL }}
     steps:
+      # All file work happens under /build (container-local). The bind-mounted
+      # workspace stays empty so host-side cleanup never has to fight
+      # root-owned files left behind by the container.
       - name: Install dependencies
         run: |
           apt-get update -qq
           apt-get install -y -qq --no-install-recommends \
+            curl \
             devscripts \
             git \
             git-buildpackage \
             python3-minimal \
             quilt
+          mkdir -p /build
 
       - name: Sync bridge from GitLab
+        working-directory: /build
         env:
           BRIDGE_PROJECT: ${{ secrets.BRIDGE_PROJECT }}
           BRIDGE_TOKEN: ${{ secrets.BRIDGE_TOKEN }}
         run: |
           host="${GITLAB_BASE#https://}"
           clone_url="https://oauth2:${BRIDGE_TOKEN}@${host}/${BRIDGE_PROJECT}.git"
-          find . -mindepth 1 -delete 2>/dev/null || true
-          git clone --depth 1 "$clone_url" .
-
-      - name: Checkout extra/git_hash
-        uses: actions/checkout@v6
-        with:
-          sparse-checkout: extra/git_hash
-          sparse-checkout-cone-mode: false
-          path: firmware
+          git clone --depth 1 "$clone_url" bridge
 
       - name: Resolve kernel ref
         id: kernel
+        working-directory: /build
         run: |
           if [ -n "${{ inputs.ref }}" ]; then
             ref="${{ inputs.ref }}"
           else
-            ref=$(tr -d '[:space:]' < firmware/extra/git_hash)
+            ref=$(curl -fsSL \
+              "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/extra/git_hash" \
+              | tr -d '[:space:]')
           fi
           [ -n "$ref" ] || { echo "no kernel ref resolved" >&2; exit 1; }
           echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
       - name: Sync linux-packaging from GitLab
+        working-directory: /build
         run: |
           host="${GITLAB_BASE#https://}"
           clone_url="https://oauth2:${GITLAB_TOKEN}@${host}/${GITLAB_PROJECT}.git"
           git clone "$clone_url" linux-packaging
 
       - name: Run bridge
+        working-directory: /build
         run: |
           git config --global --add safe.directory "$LINUX_SRC"
           git -C "$LINUX_SRC" fetch --all --tags --prune
-          ./bridge beta \
+          ./bridge/bridge beta \
             ${{ inputs.dry_run && '--dry-run' || '' }} \
             --packaging ./linux-packaging \
             --linux "$LINUX_SRC" \
