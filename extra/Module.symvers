@@ -8262,6 +8262,7 @@
 0xf1b0ddf0	netdev_features_change	vmlinux	EXPORT_SYMBOL	
 0xf68f13d7	__netdev_notify_peers	vmlinux	EXPORT_SYMBOL	
 0xd3bb6a5b	netdev_notify_peers	vmlinux	EXPORT_SYMBOL	
+0x4efa5877	netif_open	vmlinux	EXPORT_SYMBOL	
 0x5c628b67	netif_close_many	vmlinux	EXPORT_SYMBOL_GPL	NETDEV_INTERNAL
 0x7783215e	netif_close	vmlinux	EXPORT_SYMBOL	
 0x8cc13c2d	netif_disable_lro	vmlinux	EXPORT_SYMBOL	
