@@ -71,9 +71,14 @@ jobs:
             exit 0
           fi
           api="https://api.github.com/repos/$REPO/contents/extra/git_hash"
-          gh="-H Authorization:Bearer $GH_TOKEN -H Accept:application/vnd.github.raw"
-          before=$(curl -fsSL $gh "$api?ref=$BEFORE" | tr -d '[:space:]')
-          after=$(curl -fsSL $gh "$api?ref=$AFTER" | tr -d '[:space:]')
+          fetch() {
+            curl -fsSL \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github.raw" \
+              "$api?ref=$1" | tr -d '[:space:]'
+          }
+          before=$(fetch "$BEFORE")
+          after=$(fetch "$AFTER")
           echo "before='$before' after='$after'"
           if [ -z "$before" ] || [ -z "$after" ]; then
             echo "could not determine extra/git_hash; skipping (re-run manually if needed)"
