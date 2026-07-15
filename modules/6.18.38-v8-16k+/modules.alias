@@ -13998,8 +13998,13 @@ alias of:N*T*Chifiberry,hifiberry-dacplusadcproC* snd_soc_hifiberry_dacplusadcpr
 alias of:N*T*Chifiberry,hifiberry-dacplusadcpro snd_soc_hifiberry_dacplusadcpro
 alias of:N*T*Chifiberry,dacplusdspC* snd_soc_hifiberry_dacplusdsp
 alias of:N*T*Chifiberry,dacplusdsp snd_soc_hifiberry_dacplusdsp
-alias of:N*T*Chifiberry,hifiberry-studio-dac8xC* snd_soc_hifiberry_studio_dac8x
-alias of:N*T*Chifiberry,hifiberry-studio-dac8x snd_soc_hifiberry_studio_dac8x
+alias i2c:hb-studio-ctrl snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hb-studio-ctrlC* snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hb-studio-ctrl snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hifiberry-studioC* snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hifiberry-studio snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hifiberry-studio-dac8xC* snd_soc_hifiberry_studio
+alias of:N*T*Chifiberry,hifiberry-studio-dac8x snd_soc_hifiberry_studio
 alias of:N*T*Cjustboom,justboom-bothC* snd_soc_justboom_both
 alias of:N*T*Cjustboom,justboom-both snd_soc_justboom_both
 alias of:N*T*Cjustboom,justboom-dacC* snd_soc_justboom_dac

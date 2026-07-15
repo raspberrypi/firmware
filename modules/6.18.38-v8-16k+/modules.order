@@ -1517,7 +1517,7 @@ kernel/sound/soc/bcm/snd-soc-hifiberry-dacplushd.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusadc.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusadcpro.ko
 kernel/sound/soc/bcm/snd-soc-hifiberry-dacplusdsp.ko
-kernel/sound/soc/bcm/snd-soc-hifiberry-studio-dac8x.ko
+kernel/sound/soc/bcm/snd-soc-hifiberry-studio.ko
 kernel/sound/soc/bcm/snd-soc-justboom-both.ko
 kernel/sound/soc/bcm/snd-soc-justboom-dac.ko
 kernel/sound/soc/bcm/snd-soc-rpi-cirrus.ko
