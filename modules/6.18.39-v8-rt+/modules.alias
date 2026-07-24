@@ -637,6 +637,8 @@ alias of:N*T*Cedatec,disp-regulatorC* edatec_panel_regulator
 alias of:N*T*Cedatec,disp-regulator edatec_panel_regulator
 alias of:N*T*Craspberrypi,firmware-uartC* rpi_fw_uart
 alias of:N*T*Craspberrypi,firmware-uart rpi_fw_uart
+alias of:N*T*Craspberrypi,rp1-pio-uartC* rp1_pio_uart
+alias of:N*T*Craspberrypi,rp1-pio-uart rp1_pio_uart
 alias of:N*T*Cnxp,sc16is762C* sc16is7xx
 alias of:N*T*Cnxp,sc16is762 sc16is7xx
 alias of:N*T*Cnxp,sc16is760C* sc16is7xx

@@ -209,6 +209,7 @@ kernel/drivers/regulator/rpi-panel-attiny-regulator.ko.xz: kernel/drivers/video/
 kernel/drivers/regulator/rpi-panel-v2-regulator.ko.xz: kernel/drivers/gpio/gpio-regmap.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/regulator/waveshare-panel-regulator.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
 kernel/drivers/regulator/edatec-panel-regulator.ko.xz: kernel/drivers/video/backlight/backlight.ko.xz kernel/drivers/gpio/gpio-regmap.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz
+kernel/drivers/tty/serial/rp1-pio-uart.ko.xz: kernel/drivers/misc/rp1-pio.ko.xz kernel/drivers/firmware/rp1-fw.ko.xz
 kernel/drivers/tty/serial/sc16is7xx.ko.xz:
 kernel/drivers/tty/serial/sc16is7xx_spi.ko.xz: kernel/drivers/base/regmap/regmap-spi.ko.xz kernel/drivers/tty/serial/sc16is7xx.ko.xz
 kernel/drivers/tty/serial/sc16is7xx_i2c.ko.xz: kernel/drivers/tty/serial/sc16is7xx.ko.xz kernel/drivers/base/regmap/regmap-i2c.ko.xz

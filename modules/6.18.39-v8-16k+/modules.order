@@ -209,6 +209,7 @@ kernel/drivers/regulator/rpi-panel-attiny-regulator.ko
 kernel/drivers/regulator/rpi-panel-v2-regulator.ko
 kernel/drivers/regulator/waveshare-panel-regulator.ko
 kernel/drivers/regulator/edatec-panel-regulator.ko
+kernel/drivers/tty/serial/rp1-pio-uart.ko
 kernel/drivers/tty/serial/sc16is7xx.ko
 kernel/drivers/tty/serial/sc16is7xx_spi.ko
 kernel/drivers/tty/serial/sc16is7xx_i2c.ko
