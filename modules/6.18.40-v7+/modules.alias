@@ -1116,6 +1116,8 @@ alias of:N*T*Cwaveshare,5.0-dsi-touch-aC* panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,5.0-dsi-touch-a panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,5.5-dsi-touch-aC* panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,5.5-dsi-touch-a panel_waveshare_dsi_v2
+alias of:N*T*Cwaveshare,6.25-dsi-touch-aC* panel_waveshare_dsi_v2
+alias of:N*T*Cwaveshare,6.25-dsi-touch-a panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,7.0-dsi-touch-cC* panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,7.0-dsi-touch-c panel_waveshare_dsi_v2
 alias of:N*T*Cwaveshare,7.0-dsi-touch-bC* panel_waveshare_dsi_v2
@@ -8166,6 +8168,9 @@ alias usb:v3823p0002d*dc*dsc*dp*ic*isc*ip*in* usbtouchscreen
 alias usb:v3823p0001d*dc*dsc*dp*ic*isc*ip*in* usbtouchscreen
 alias usb:v0EEFp0002d*dc*dsc*dp*ic03isc*ip*in* usbtouchscreen
 alias usb:v0EEFp0001d*dc*dsc*dp*ic03isc*ip*in* usbtouchscreen
+alias i2c:st7123 st7123
+alias of:N*T*Csitronix,st7123C* st7123
+alias of:N*T*Csitronix,st7123 st7123
 alias platform:stmpe-ts stmpe_ts
 alias i2c:tsc2007 tsc2007
 alias of:N*T*Cti,tsc2007C* tsc2007

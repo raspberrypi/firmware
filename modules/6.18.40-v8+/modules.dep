@@ -664,6 +664,7 @@ kernel/drivers/input/touchscreen/ili210x.ko.xz: kernel/lib/crc/crc-ccitt.ko.xz
 kernel/drivers/input/touchscreen/ilitek_ts_i2c.ko.xz:
 kernel/drivers/input/touchscreen/ilitek_v3_ts_i2c.ko.xz: kernel/drivers/gpu/drm/drm.ko.xz kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko.xz kernel/drivers/video/backlight/backlight.ko.xz
 kernel/drivers/input/touchscreen/usbtouchscreen.ko.xz:
+kernel/drivers/input/touchscreen/st7123.ko.xz:
 kernel/drivers/input/touchscreen/stmpe-ts.ko.xz:
 kernel/drivers/input/touchscreen/tsc2007.ko.xz: kernel/drivers/iio/industrialio.ko.xz
 kernel/drivers/input/touchscreen/raspberrypi-ts.ko.xz:

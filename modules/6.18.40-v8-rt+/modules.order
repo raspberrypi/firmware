@@ -662,6 +662,7 @@ kernel/drivers/input/touchscreen/goodix_ts.ko
 kernel/drivers/input/touchscreen/ili210x.ko
 kernel/drivers/input/touchscreen/ilitek_ts_i2c.ko
 kernel/drivers/input/touchscreen/usbtouchscreen.ko
+kernel/drivers/input/touchscreen/st7123.ko
 kernel/drivers/input/touchscreen/stmpe-ts.ko
 kernel/drivers/input/touchscreen/tsc2007.ko
 kernel/drivers/input/touchscreen/raspberrypi-ts.ko
