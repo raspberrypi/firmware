@@ -1278,6 +1278,20 @@ Params: dr_mode                 Dual role mode: "host", "peripheral" or "otg"
                                 mode
 
 
+Name:   ed-backlight-pwm
+Info:   Configures the EDATEC PWM backlight for CM4 based boards
+        (BCM2711). Creates a pwm-backlight device with a 16-step gamma
+        brightness table and an optional pca9535 GPIO expander at 0x20
+        for the backlight enable signal.
+Load:   dtoverlay=ed-backlight-pwm,<param>=<val>
+Params: sg215                   Invert the brightness curve for 21.5"
+                                SG215 panels
+
+
+Name:   ed-backlight-pwm-pi5
+Info:   See ed-backlight-pwm (this is the CM5 version)
+
+
 Name:   ed-ipc
 Info:   Configures the EDATEC IPC/EXP series hardware peripherals.
         This overlay provides support for PCA9535 GPIO expanders on
@@ -4738,6 +4752,14 @@ Load:   dtoverlay=rra-digidac1-wm8741-audio
 Params: <None>
 
 
+Name:   rt5616
+Info:   Overlay for the Realtek RT5616 I2S audio codec (HAT with the RT5616
+        codec on I2C1 at 0x1b, MCLK 12.288 MHz, I2S connected to the I2S
+        consumer controller on GPIO 18-21).
+Load:   dtoverlay=rt5616,<param>=<val>
+Params: alsaname                Changes the card name in ALSA
+
+
 Name:   sainsmart18
 Info:   Overlay for the SPI-connected Sainsmart 1.8" display (based on the
         ST7735R chip).
@@ -6379,6 +6401,13 @@ Info:   Overlay for the Waveshare wm8960 soundcard
 Load:   dtoverlay=wm8960-soundcard,<param>=<val>
 Params: alsaname                Changes the card name in ALSA
         compatible              Changes the codec compatibility
+        mclk                    Sets the MCLK clock frequency in Hz (default
+                                12.288 MHz for the standard Waveshare HAT,
+                                24 MHz when the media parameter is used)
+        media                   Uses the media board configuration: 24 MHz
+                                MCLK, enables headphone jack detection
+                                (wlf,hp-cfg) and an on-board microphone /
+                                dual speaker sound card
 
 
 Name:   ws2812-pio
