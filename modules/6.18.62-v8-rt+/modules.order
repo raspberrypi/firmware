@@ -1844,7 +1844,9 @@ kernel/net/mptcp/mptcp_diag.ko
 kernel/net/llc/llc.ko
 kernel/net/tls/tls.ko
 kernel/net/key/af_key.ko
+kernel/net/bridge/netfilter/nft_meta_bridge.ko
 kernel/net/bridge/netfilter/nft_reject_bridge.ko
+kernel/net/bridge/netfilter/nf_conntrack_bridge.ko
 kernel/net/bridge/netfilter/ebt_802_3.ko
 kernel/net/bridge/netfilter/ebt_among.ko
 kernel/net/bridge/netfilter/ebt_arp.ko
