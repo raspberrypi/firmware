@@ -4873,6 +4873,8 @@
 0xfe02cde2	pinctrl_count_index_with_args	vmlinux	EXPORT_SYMBOL_GPL	
 0xf7d865f7	pinctrl_parse_index_with_args	vmlinux	EXPORT_SYMBOL_GPL	
 0x0852db80	brcmstb_pinctrl_probe	vmlinux	EXPORT_SYMBOL	
+0xc707d277	brcmstb_pinctrl_suspend	vmlinux	EXPORT_SYMBOL	
+0x344e0605	brcmstb_pinctrl_resume	vmlinux	EXPORT_SYMBOL	
 0xe60acdec	gpio_to_desc	vmlinux	EXPORT_SYMBOL_GPL	
 0xb68b518a	gpio_device_get_desc	vmlinux	EXPORT_SYMBOL_GPL	
 0x9f761bed	desc_to_gpio	vmlinux	EXPORT_SYMBOL_GPL	
@@ -7906,11 +7908,11 @@
 0x00d889ed	DWC_WORKQ_SCHEDULE	vmlinux	EXPORT_SYMBOL	
 0x60ff8262	DWC_WORKQ_SCHEDULE_DELAYED	vmlinux	EXPORT_SYMBOL	
 0x172ec730	DWC_WORKQ_PENDING	vmlinux	EXPORT_SYMBOL	
-0x5aee0cb9	dwc3_core_probe	vmlinux	EXPORT_SYMBOL_GPL	
-0xcb6d6a60	dwc3_core_remove	vmlinux	EXPORT_SYMBOL_GPL	
-0x65cb461f	dwc3_runtime_suspend	vmlinux	EXPORT_SYMBOL_GPL	
-0xf2d24ea0	dwc3_runtime_resume	vmlinux	EXPORT_SYMBOL_GPL	
-0x5976cc18	dwc3_runtime_idle	vmlinux	EXPORT_SYMBOL_GPL	
+0xd386cdcc	dwc3_core_probe	vmlinux	EXPORT_SYMBOL_GPL	
+0xba725b76	dwc3_core_remove	vmlinux	EXPORT_SYMBOL_GPL	
+0x2c7c68ff	dwc3_runtime_suspend	vmlinux	EXPORT_SYMBOL_GPL	
+0x8af8c426	dwc3_runtime_resume	vmlinux	EXPORT_SYMBOL_GPL	
+0x3b7550f8	dwc3_runtime_idle	vmlinux	EXPORT_SYMBOL_GPL	
 0xd8c682ba	dwc2_pci_ids	vmlinux	EXPORT_SYMBOL_GPL	
 0x31df88be	usb_stor_host_template_init	vmlinux	EXPORT_SYMBOL_GPL	USB_STORAGE
 0x1bc3edc2	usb_stor_sense_invalidCDB	vmlinux	EXPORT_SYMBOL_GPL	USB_STORAGE

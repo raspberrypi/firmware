@@ -14,6 +14,7 @@ alias symbol:v4l2_m2m_buf_remove v4l2_mem2mem
 alias symbol:vsock_addr_bound vsock
 alias symbol:ieee80211_chandef_to_operating_class cfg80211
 alias symbol:iscsi_session_free libiscsi
+alias symbol:ksz_switch_resume ksz_switch
 alias symbol:rp1_pio_sm_restart rp1_pio
 alias symbol:__drmm_mutex_release drm
 alias symbol:_rtl92c_phy_bb8192c_config_parafile rtl8192c_common
@@ -632,6 +633,7 @@ alias symbol:flow_offload_add nf_flow_table
 alias symbol:iwl_trans_set_q_ptrs iwlwifi
 alias symbol:p9_is_proto_dotl 9pnet
 alias symbol:drm_gem_dma_print_info drm_dma_helper
+alias symbol:hts221_pm_ops hts221
 alias symbol:rate_control_set_rates mac80211
 alias symbol:usb_interface_id libcomposite
 alias symbol:LZ4_loadDict lz4_compress
@@ -734,6 +736,7 @@ alias symbol:rt2800_config_pairwise_key rt2800lib
 alias symbol:rtw89_phy_gen_ax rtw89_core
 alias symbol:cfg80211_chandef_dfs_required cfg80211
 alias symbol:v4l2_format_info videodev
+alias symbol:ksz_switch_suspend ksz_switch
 alias symbol:arizona_init_fll snd_soc_arizona
 alias symbol:ata_ncq_prio_supported libata
 alias symbol:ata_sff_drain_fifo libata
@@ -1739,6 +1742,7 @@ alias symbol:rc_map_dibusb_table dvb_usb_dibusb_common
 alias symbol:drm_plane_create_alpha_property drm
 alias symbol:rtw89_phy_read32_idx rtw89_core
 alias symbol:snd_soc_component_compr_get_codec_caps snd_soc_core
+alias symbol:snd_soc_suspend snd_soc_core
 alias symbol:usb_ep_autoconfig_release libcomposite
 alias symbol:vb2_core_streamoff videobuf2_common
 alias symbol:wpan_phy_new ieee802154
@@ -2231,6 +2235,7 @@ alias symbol:cec_queue_pin_cec_event cec
 alias symbol:dm_tm_open_with_sm dm_persistent_data
 alias symbol:inv_sensors_timestamp_interrupt inv_sensors_timestamp
 alias symbol:mt76x02_mac_setaddr mt76x02_lib
+alias symbol:tpm_tis_resume tpm_tis_core
 alias symbol:drm_sched_init gpu_sched
 alias symbol:ath_hw_keyreset ath
 alias symbol:cec_transmit_attempt_done_ts cec
@@ -2378,6 +2383,7 @@ alias symbol:wl1271_cmd_send wlcore
 alias symbol:drm_atomic_check_only drm
 alias symbol:mt76_connac_mcu_wtbl_smps_tlv mt76_connac_lib
 alias symbol:radio_tea5777_init shark2
+alias symbol:st_lsm6dsx_pm_ops st_lsm6dsx
 alias symbol:ata_std_end_eh libata
 alias symbol:ip6_tnl_change_mtu ip6_tunnel
 alias symbol:rtl92c_phy_sw_chnl rtl8192c_common
@@ -3534,6 +3540,7 @@ alias symbol:bt_sock_stream_recvmsg bluetooth
 alias symbol:btmtk_usb_recv_acl btmtk
 alias symbol:media_request_object_find mc
 alias symbol:mt76x02u_mac_start mt76x02_usb
+alias symbol:snd_soc_resume snd_soc_core
 alias symbol:cfg80211_background_cac_abort cfg80211
 alias symbol:drm_of_lvds_get_dual_link_pixel_order drm
 alias symbol:mt76_connac_mcu_cancel_hw_scan mt76_connac_lib
@@ -5033,6 +5040,7 @@ alias symbol:iio_validate_scan_mask_onehot industrialio
 alias symbol:ip_vs_conn_put ip_vs
 alias symbol:nf_ct_gre_keymap_add nf_conntrack
 alias symbol:qtree_entry_unused quota_tree
+alias symbol:adxl34x_pm adxl34x
 alias symbol:bt_err bluetooth
 alias symbol:cfg80211_crit_proto_stopped cfg80211
 alias symbol:dibusb_dib3000mc_frontend_attach dvb_usb_dibusb_mc_common
@@ -5660,6 +5668,7 @@ alias symbol:crypto_nhpoly1305_init nhpoly1305
 alias symbol:mt76x02_init_beacon_config mt76x02_lib
 alias symbol:regulatory_hint cfg80211
 alias symbol:vb2_verify_memory_type videobuf2_common
+alias symbol:ad714x_pm ad714x
 alias symbol:media_pipeline_alloc_start mc
 alias symbol:vc_sm_cma_int_handle vc_sm_cma
 alias symbol:drm_atomic_helper_dirtyfb drm_kms_helper
@@ -7525,6 +7534,7 @@ alias symbol:rtl92ce_phy_set_rf_on rtl8192c_common
 alias symbol:snd_soc_dai_set_clkdiv snd_soc_core
 alias symbol:snd_soc_dapm_to_dev snd_soc_core
 alias symbol:dm_rh_inc_pending dm_region_hash
+alias symbol:dsa_switch_suspend dsa_core
 alias symbol:media_create_pad_link mc
 alias symbol:rtl92c_set_fw_pwrmode_cmd rtl8192c_common
 alias symbol:v4l2_m2m_streamoff v4l2_mem2mem
@@ -7725,6 +7735,7 @@ alias symbol:drm_gem_plane_helper_prepare_fb drm_kms_helper
 alias symbol:drm_gem_simple_kms_begin_shadow_fb_access drm_kms_helper
 alias symbol:ieee80211_get_num_supported_channels cfg80211
 alias symbol:usbip_pack_pdu usbip_core
+alias symbol:adt7x10_dev_pm_ops adt7x10
 alias symbol:drm_mm_scan_init_with_range drm
 alias symbol:iscsi_eh_session_reset libiscsi
 alias symbol:drm_get_format_info drm
@@ -7827,6 +7838,7 @@ alias symbol:ata_tport_add libata
 alias symbol:tua6100_attach tua6100
 alias symbol:v4l2_m2m_prepare_buf v4l2_mem2mem
 alias symbol:devm_sigmadsp_init snd_soc_sigmadsp
+alias symbol:dsa_switch_resume dsa_core
 alias symbol:_mwifiex_dbg mwifiex
 alias symbol:snd_soc_component_write_field snd_soc_core
 alias symbol:typec_unregister_altmode typec
